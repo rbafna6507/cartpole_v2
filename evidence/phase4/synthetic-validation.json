@@ -1,0 +1,471 @@
+{
+  "kind": "offline mathematical/software validation; no physical identification",
+  "generator": "tests/test_identification.py::trial",
+  "generator_sha256": "a8d30be40fa092579b9cfcad97662e42b002addde12ada3aa9ef423348d1438a",
+  "known_parameters": {
+    "effective_length_m": 0.32,
+    "input_gain": 0.87,
+    "angular_damping_per_s": 0.12,
+    "delay_s": 0.03
+  },
+  "sampling": {
+    "dt_s": 0.005,
+    "duration_s": 20.0,
+    "theta_noise_std_rad": 0.0003,
+    "invalid_training_interval_s": [
+      8.0,
+      8.3
+    ]
+  },
+  "fit": {
+    "accepted": true,
+    "parameters": {
+      "effective_length_m": 0.31967403509373155,
+      "input_gain": 0.8699909603943569,
+      "angular_damping_per_s": 0.12016931959736873,
+      "damping_ratio": 0.010846329265646935,
+      "delay_s": 0.03
+    },
+    "uncertainty": {
+      "coefficient_standard_errors": {
+        "alpha_per_s2": 0.0024918031376077593,
+        "gamma_per_s": 0.0004328727217697324,
+        "beta_per_m": 0.0009342054616437071
+      },
+      "delay_profile_near_optimal_s": [
+        0.03
+      ],
+      "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+      "effective_length_standard_error_m": 2.5957295842215213e-05
+    },
+    "training": {
+      "segment_count": 2,
+      "sample_count": 3942,
+      "delay_profile": [
+        {
+          "delay_s": 0.0,
+          "mean_squared_integral_residual": 1.2222842194372258e-05
+        },
+        {
+          "delay_s": 0.005,
+          "mean_squared_integral_residual": 8.481167891481248e-06
+        },
+        {
+          "delay_s": 0.01,
+          "mean_squared_integral_residual": 5.413708633215577e-06
+        },
+        {
+          "delay_s": 0.015,
+          "mean_squared_integral_residual": 3.02790793419985e-06
+        },
+        {
+          "delay_s": 0.02,
+          "mean_squared_integral_residual": 1.329248773166383e-06
+        },
+        {
+          "delay_s": 0.025,
+          "mean_squared_integral_residual": 3.212357153614611e-07
+        },
+        {
+          "delay_s": 0.03,
+          "mean_squared_integral_residual": 5.396545980818762e-09
+        },
+        {
+          "delay_s": 0.035,
+          "mean_squared_integral_residual": 3.8130318690488717e-07
+        },
+        {
+          "delay_s": 0.04,
+          "mean_squared_integral_residual": 1.4466113063469112e-06
+        },
+        {
+          "delay_s": 0.045,
+          "mean_squared_integral_residual": 3.1971176856522907e-06
+        },
+        {
+          "delay_s": 0.05,
+          "mean_squared_integral_residual": 5.6268340884572056e-06
+        },
+        {
+          "delay_s": 0.055,
+          "mean_squared_integral_residual": 8.728076092652053e-06
+        },
+        {
+          "delay_s": 0.06,
+          "mean_squared_integral_residual": 1.2491565101574036e-05
+        },
+        {
+          "delay_s": 0.065,
+          "mean_squared_integral_residual": 1.6906541552505267e-05
+        },
+        {
+          "delay_s": 0.07,
+          "mean_squared_integral_residual": 2.1960887191067363e-05
+        },
+        {
+          "delay_s": 0.075,
+          "mean_squared_integral_residual": 2.7641254180872204e-05
+        },
+        {
+          "delay_s": 0.08,
+          "mean_squared_integral_residual": 3.3933198768649606e-05
+        },
+        {
+          "delay_s": 0.085,
+          "mean_squared_integral_residual": 4.082131722415176e-05
+        },
+        {
+          "delay_s": 0.09,
+          "mean_squared_integral_residual": 4.828938181840838e-05
+        },
+        {
+          "delay_s": 0.095,
+          "mean_squared_integral_residual": 5.632047468906914e-05
+        },
+        {
+          "delay_s": 0.1,
+          "mean_squared_integral_residual": 6.489711756257781e-05
+        }
+      ],
+      "angle_zero_diagnostic": {
+        "rank": 5,
+        "condition": 1.619930682012835,
+        "identifiable": true,
+        "gravity_offset_rad": -4.518540854529494e-05,
+        "input_offset_rad": 0.00014729830873657257
+      },
+      "window_count": 55,
+      "rank": 3,
+      "condition": 1.0597964950742484,
+      "integral_nrmse": 0.0005691875033271337,
+      "angle_span_rad": 1.86996693538513,
+      "acceleration_std_m_s2": 1.047465704657474
+    },
+    "validation": {
+      "prediction_windows": 39,
+      "prediction_samples": 3900,
+      "prediction_rmse_rad": 0.0005570455966813401,
+      "prediction_p95_rad": 0.0011322375234175785,
+      "horizon_s": 0.5,
+      "segment_count": 1,
+      "integral_nrmse": 0.0005871354182454075
+    },
+    "reasons": [],
+    "provenance": {
+      "source": "magnetic",
+      "acceleration_kind": "commanded",
+      "training_sha256": "bf8904a27b643e9d00f221d9e5d8d3a195325bc760f5b2ad4b125e10ef77669d",
+      "validation_sha256": "fef1733ef54305ed8e89d19bcf9cf782b195b322fe775e81bf5b0e33e87d83cf",
+      "training_run_ids": [
+        "synthetic-training"
+      ],
+      "validation_run_ids": [
+        "synthetic-heldout"
+      ],
+      "config": {
+        "gravity_m_s2": 9.81,
+        "length_bounds_m": [
+          0.05,
+          1.5
+        ],
+        "gain_bounds": [
+          0.05,
+          3.0
+        ],
+        "max_damping_per_s": 5.0,
+        "angle_offset_rad": 0.0,
+        "max_angle_zero_bias_rad": 0.02,
+        "max_gap_s": 0.05,
+        "window_s": 0.35,
+        "delay_candidates_s": [
+          0.0,
+          0.005,
+          0.01,
+          0.015,
+          0.02,
+          0.025,
+          0.03,
+          0.035,
+          0.04,
+          0.045,
+          0.05,
+          0.055,
+          0.06,
+          0.065,
+          0.07,
+          0.075,
+          0.08,
+          0.085,
+          0.09,
+          0.095,
+          0.1
+        ],
+        "min_windows": 20,
+        "max_condition": 1000.0,
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05,
+        "prediction_horizon_s": 0.5,
+        "max_prediction_rmse_rad": 0.08,
+        "max_prediction_p95_rad": 0.15,
+        "max_integral_nrmse": 0.15
+      },
+      "supplied": {}
+    },
+    "assumptions": [
+      "upright theta=0; positive theta follows cart +x rotation",
+      "rigid planar pendulum; constant effective length; linear viscous angular damping",
+      "sampling captures less than pi angular motion per valid interval",
+      "acceleration and angle share a calibrated monotonic clock",
+      "commanded input gain/delay include actuator, estimator and clock effects",
+      "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+    ],
+    "unidentifiable": [
+      "cart_mass_kg",
+      "pole_mass_kg",
+      "force_gain_N_per_command",
+      "hinge_damping_N_m_s"
+    ],
+    "recommended_model": {
+      "effective_length_m": 0.31967403509373155
+    }
+  },
+  "angle_bias_013_rad_rejection": {
+    "accepted": false,
+    "parameters": {
+      "effective_length_m": 0.35482263790590624,
+      "input_gain": 1.0545332976311823,
+      "angular_damping_per_s": 0.19163023126004902,
+      "damping_ratio": 0.018222383589912124,
+      "delay_s": 0.015
+    },
+    "uncertainty": {
+      "coefficient_standard_errors": {
+        "alpha_per_s2": 1.3219135493979361,
+        "gamma_per_s": 0.24040266621684173,
+        "beta_per_m": 0.5131361774576502
+      },
+      "delay_profile_near_optimal_s": [
+        0.0,
+        0.005,
+        0.01,
+        0.015,
+        0.02,
+        0.025,
+        0.03,
+        0.035,
+        0.04,
+        0.045,
+        0.05,
+        0.055,
+        0.06,
+        0.065,
+        0.07,
+        0.075,
+        0.08
+      ],
+      "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+      "effective_length_standard_error_m": 0.016965110287914028
+    },
+    "training": {
+      "segment_count": 2,
+      "sample_count": 3942,
+      "delay_profile": [
+        {
+          "delay_s": 0.0,
+          "mean_squared_integral_residual": 0.001669950565377907
+        },
+        {
+          "delay_s": 0.005,
+          "mean_squared_integral_residual": 0.0016679793926889193
+        },
+        {
+          "delay_s": 0.01,
+          "mean_squared_integral_residual": 0.001666953685310934
+        },
+        {
+          "delay_s": 0.015,
+          "mean_squared_integral_residual": 0.0016668743668050402
+        },
+        {
+          "delay_s": 0.02,
+          "mean_squared_integral_residual": 0.0016677396965681529
+        },
+        {
+          "delay_s": 0.025,
+          "mean_squared_integral_residual": 0.001669545301883304
+        },
+        {
+          "delay_s": 0.03,
+          "mean_squared_integral_residual": 0.0016722842331591836
+        },
+        {
+          "delay_s": 0.035,
+          "mean_squared_integral_residual": 0.001675947041280462
+        },
+        {
+          "delay_s": 0.04,
+          "mean_squared_integral_residual": 0.0016805218755974775
+        },
+        {
+          "delay_s": 0.045,
+          "mean_squared_integral_residual": 0.0016859946007300535
+        },
+        {
+          "delay_s": 0.05,
+          "mean_squared_integral_residual": 0.001692348930053639
+        },
+        {
+          "delay_s": 0.055,
+          "mean_squared_integral_residual": 0.0016995665734832483
+        },
+        {
+          "delay_s": 0.06,
+          "mean_squared_integral_residual": 0.0017076273969760156
+        },
+        {
+          "delay_s": 0.065,
+          "mean_squared_integral_residual": 0.0017165095910393125
+        },
+        {
+          "delay_s": 0.07,
+          "mean_squared_integral_residual": 0.0017261898454585052
+        },
+        {
+          "delay_s": 0.075,
+          "mean_squared_integral_residual": 0.0017366435274452693
+        },
+        {
+          "delay_s": 0.08,
+          "mean_squared_integral_residual": 0.0017478448604506286
+        },
+        {
+          "delay_s": 0.085,
+          "mean_squared_integral_residual": 0.0017597671009821716
+        },
+        {
+          "delay_s": 0.09,
+          "mean_squared_integral_residual": 0.00177238271090632
+        },
+        {
+          "delay_s": 0.095,
+          "mean_squared_integral_residual": 0.0017856635228977117
+        },
+        {
+          "delay_s": 0.1,
+          "mean_squared_integral_residual": 0.0017995808969115672
+        }
+      ],
+      "angle_zero_diagnostic": {
+        "rank": 5,
+        "condition": 1.3568979916259007,
+        "identifiable": true,
+        "gravity_offset_rad": 0.12999531851771234,
+        "input_offset_rad": 0.06898797920429567
+      },
+      "window_count": 55,
+      "rank": 3,
+      "condition": 1.0465989724406992,
+      "integral_nrmse": 0.3163361681374495,
+      "angle_span_rad": 1.8699669353851291,
+      "acceleration_std_m_s2": 1.047465704657474
+    },
+    "validation": {
+      "prediction_windows": 39,
+      "prediction_samples": 3900,
+      "prediction_rmse_rad": 0.13115131970796864,
+      "prediction_p95_rad": 0.2647880384553451,
+      "horizon_s": 0.5,
+      "segment_count": 1,
+      "integral_nrmse": 0.2864928917367165
+    },
+    "reasons": [
+      "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+      "training integral residual exceeds threshold",
+      "held-out prediction or integral residual exceeds threshold/coverage"
+    ],
+    "provenance": {
+      "source": "magnetic",
+      "acceleration_kind": "commanded",
+      "training_sha256": "3cf895a1cdea421d70504944e871c34e1c6f194eb680bd37768223fa0ee11a07",
+      "validation_sha256": "dce4f36a42e57e35b33709ab76ad70849cad15ba7951f273ef1259fa6ea23e40",
+      "training_run_ids": [
+        "synthetic-training"
+      ],
+      "validation_run_ids": [
+        "synthetic-heldout"
+      ],
+      "config": {
+        "gravity_m_s2": 9.81,
+        "length_bounds_m": [
+          0.05,
+          1.5
+        ],
+        "gain_bounds": [
+          0.05,
+          3.0
+        ],
+        "max_damping_per_s": 5.0,
+        "angle_offset_rad": 0.0,
+        "max_angle_zero_bias_rad": 0.02,
+        "max_gap_s": 0.05,
+        "window_s": 0.35,
+        "delay_candidates_s": [
+          0.0,
+          0.005,
+          0.01,
+          0.015,
+          0.02,
+          0.025,
+          0.03,
+          0.035,
+          0.04,
+          0.045,
+          0.05,
+          0.055,
+          0.06,
+          0.065,
+          0.07,
+          0.075,
+          0.08,
+          0.085,
+          0.09,
+          0.095,
+          0.1
+        ],
+        "min_windows": 20,
+        "max_condition": 1000.0,
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05,
+        "prediction_horizon_s": 0.5,
+        "max_prediction_rmse_rad": 0.08,
+        "max_prediction_p95_rad": 0.15,
+        "max_integral_nrmse": 0.15
+      },
+      "supplied": {}
+    },
+    "assumptions": [
+      "upright theta=0; positive theta follows cart +x rotation",
+      "rigid planar pendulum; constant effective length; linear viscous angular damping",
+      "sampling captures less than pi angular motion per valid interval",
+      "acceleration and angle share a calibrated monotonic clock",
+      "commanded input gain/delay include actuator, estimator and clock effects",
+      "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+    ],
+    "unidentifiable": [
+      "cart_mass_kg",
+      "pole_mass_kg",
+      "force_gain_N_per_command",
+      "hinge_damping_N_m_s"
+    ],
+    "recommended_model": null
+  },
+  "vision_fixture": {
+    "path": "archive/vision3/evidence/live-measurement-samples.json",
+    "sha256": "836ac99cbe0a735f48390d9ee4a7604347d507a69b881567fc2d1c471af58406",
+    "calibration_sha256": "dfa29bf1ca29ec4711879428d26d7dcdc24dcaad8dbc28d32dc76482d7aa1ac6"
+  },
+  "physical_identification": {
+    "performed": false,
+    "reason": "Synthetic result only. Separate actual preliminary traces assessed/rejected in preliminary-physical-assessment.json; no accepted physical model."
+  }
+}

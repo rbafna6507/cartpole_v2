@@ -1,0 +1,72 @@
+{
+  "focused": {
+    "command": "PYTHONPATH=src /Users/rbafna/.pyenv/versions/3.11.7/bin/python3 -m pytest tests/test_identification.py tests/test_sensing.py -q",
+    "passed": 25,
+    "failed": 0
+  },
+  "active_sdk_suite": {
+    "command": "PYTHONPATH=src /Users/rbafna/.pyenv/versions/3.11.7/bin/python3 -m pytest tests -q",
+    "passed": 177,
+    "failed": 6,
+    "skipped": 20,
+    "subtests_passed": 133,
+    "failure_reason": "system interpreter lacks installed cartpole-v2 sibling entrypoint",
+    "failures": [
+      "test_cli.py::CliTests::test_console_import_preserves_unknown_health_and_creates_segment_files",
+      "test_cli.py::CliTests::test_deeply_nested_json_has_line_context_and_creates_no_output (replay)",
+      "test_cli.py::CliTests::test_deeply_nested_json_has_line_context_and_creates_no_output (import-vision)",
+      "test_cli.py::CliTests::test_example_script_runs_a_user_editable_policy",
+      "test_cli.py::CliTests::test_import_inspect_and_replay_are_available_outside_checkout",
+      "test_cli.py::CliTests::test_invalid_recording_errors_cleanly_without_trace"
+    ]
+  },
+  "archive_wide_suite": {
+    "command": "PYTHONPATH=src /Users/rbafna/.pyenv/versions/3.11.7/bin/python3 -m pytest -q",
+    "status": "collection aborted",
+    "errors": 20,
+    "reason": "archived console import raises SystemExit for missing pyserial; archive collection is outside active SDK test scope",
+    "log": "/tmp/cartpole-next/identification-full-pytest.txt"
+  },
+  "physical_calibration_modified": false,
+  "hardware_access_performed": false,
+  "limitations": [
+    "4x TRAIN-pretrial-offset sensitivity passes heldout checks but rejects training angle span, training integral residual and input zero consistency; independent reference/motion and passive-decay measurements required",
+    "No calibrated independent metric cart truth yet",
+    "No fused control estimator",
+    "Conditional regression uncertainty excludes calibration/model/clock bias",
+    "No live HTTP/vision server commissioning"
+  ],
+  "packaged_focused": {
+    "command": ".venv/bin/python -m pytest tests/test_identification.py tests/test_sensing.py -q",
+    "passed": 25,
+    "failed": 0
+  },
+  "packaged_active_suite": {
+    "command": ".venv/bin/python -m pytest tests -q",
+    "passed": 216,
+    "failed": 0,
+    "subtests_passed": 135,
+    "duration_s": 14.21,
+    "exit_code": 0
+  },
+  "preliminary_physical_data_assessed": true,
+  "accepted_physical_model": false,
+  "physical_fit_attempts_performed": 8,
+  "fuller_physical_data_assessed": true,
+  "fuller_physical_assessment": "evidence/phase4/fuller-physical-assessment.json",
+  "next_excitation_protocol": "evidence/phase4/next-excitation-protocol.md",
+  "executor_characterization_assessed": true,
+  "executor_assessment": "evidence/phase4/executor-characterization-assessment.json",
+  "executor_original_source_preserved": "evidence/phase4/executor-identification-report.json.gz",
+  "executor_waveform_verified_without_hardware": true,
+  "executor_source_and_canonical_hashes_verified": true,
+  "executor4_characterization_assessed": true,
+  "executor4_assessment": "evidence/phase4/executor4-characterization-assessment.json",
+  "executor4_original_source_preserved": "evidence/phase4/executor4-identification-report.json.gz",
+  "executor4_waveform_verified_without_hardware": true,
+  "executor4_source_and_canonical_hashes_verified": true,
+  "executor4_train_pretrial_only_offset_verified": true,
+  "physical_identification_attempted": true,
+  "physical_identification_completed": false,
+  "physical_characterization_trials_recorded": 4
+}

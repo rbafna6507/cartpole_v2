@@ -1,0 +1,1024 @@
+{
+  "schema_version": 1,
+  "inspected_at": "2026-10-13",
+  "status": "design_verified_hardware_uncommissioned",
+  "sources": {
+    "kicad_sch": {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/inverted_pendulum_pcb.kicad_sch",
+      "sha256": "626485e285222bbd7bc98648beb623992914892f87ff8f3a3db5e3788d14a0dd"
+    },
+    "kicad_pcb": {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/inverted_pendulum_pcb.kicad_pcb",
+      "sha256": "e6a553a1dbf9d083714320ac7c2041e86fb6fa22565279a781ffeb1e46213ee7"
+    }
+  },
+  "method": {
+    "schematic": "KiCad CLI 10.0.6 exported netlist; parsed complete net nodes",
+    "pcb": "Parsed all component pad net assignments; compared with schematic; selected copper endpoint/via/pad chains including annular-ring overlap",
+    "gerbers": "KiCad CLI exported F.Cu/B.Cu to /tmp; exact geometry-command equality after removing G04 comments and TF/TA/TD/TO metadata attributes"
+  },
+  "switches": [
+    {
+      "gpio": 26,
+      "connector": "J8",
+      "signal_pad": "1",
+      "ground_pad": "2",
+      "carrier": "U3.J6_4",
+      "parallel_terminal": "J5.9",
+      "signal_net": "Net-(J5-D26)",
+      "signal_net_nodes": [
+        {
+          "ref": "J5",
+          "pin": "9",
+          "function": "D26_9"
+        },
+        {
+          "ref": "J8",
+          "pin": "1",
+          "function": "Pin_1_1"
+        },
+        {
+          "ref": "R5",
+          "pin": "1",
+          "function": null
+        },
+        {
+          "ref": "U3",
+          "pin": "J6_4",
+          "function": "D26_J6_4"
+        }
+      ],
+      "pullup": {
+        "ref": "R5",
+        "value_ohm": 1000,
+        "signal_pin": "1",
+        "rail_pin": "2",
+        "rail_net": "Net-(J12-3.3V)",
+        "nominal_v": 3.3
+      },
+      "switch_nc_terminal": "signal_pad_1",
+      "switch_com_terminal": "ground_pad_2",
+      "healthy_raw": "LOW",
+      "triggered_or_unplugged_raw": "HIGH",
+      "recommended_role": "cart_negative"
+    },
+    {
+      "gpio": 27,
+      "connector": "J11",
+      "signal_pad": "1",
+      "ground_pad": "2",
+      "carrier": "U3.J6_3",
+      "parallel_terminal": "J5.10",
+      "signal_net": "Net-(J11-Pin_1)",
+      "signal_net_nodes": [
+        {
+          "ref": "J11",
+          "pin": "1",
+          "function": "Pin_1_1"
+        },
+        {
+          "ref": "J5",
+          "pin": "10",
+          "function": "D27_10"
+        },
+        {
+          "ref": "R6",
+          "pin": "1",
+          "function": null
+        },
+        {
+          "ref": "U3",
+          "pin": "J6_3",
+          "function": "D27_J6_3"
+        }
+      ],
+      "pullup": {
+        "ref": "R6",
+        "value_ohm": 1000,
+        "signal_pin": "1",
+        "rail_pin": "2",
+        "rail_net": "Net-(J12-3.3V)",
+        "nominal_v": 3.3
+      },
+      "switch_nc_terminal": "signal_pad_1",
+      "switch_com_terminal": "ground_pad_2",
+      "healthy_raw": "LOW",
+      "triggered_or_unplugged_raw": "HIGH",
+      "recommended_role": "cart_positive"
+    },
+    {
+      "gpio": 28,
+      "connector": "J10",
+      "signal_pad": "1",
+      "ground_pad": "2",
+      "carrier": "U3.J6_2",
+      "parallel_terminal": "J5.11",
+      "signal_net": "Net-(J10-Pin_1)",
+      "signal_net_nodes": [
+        {
+          "ref": "J10",
+          "pin": "1",
+          "function": "Pin_1_1"
+        },
+        {
+          "ref": "J5",
+          "pin": "11",
+          "function": "D28_11"
+        },
+        {
+          "ref": "R7",
+          "pin": "1",
+          "function": null
+        },
+        {
+          "ref": "U3",
+          "pin": "J6_2",
+          "function": "D28_J6_2"
+        }
+      ],
+      "pullup": {
+        "ref": "R7",
+        "value_ohm": 1000,
+        "signal_pin": "1",
+        "rail_pin": "2",
+        "rail_net": "Net-(J12-3.3V)",
+        "nominal_v": 3.3
+      },
+      "switch_nc_terminal": "signal_pad_1",
+      "switch_com_terminal": "ground_pad_2",
+      "healthy_raw": "LOW",
+      "triggered_or_unplugged_raw": "HIGH",
+      "recommended_role": "z1_reference"
+    },
+    {
+      "gpio": 29,
+      "connector": "J9",
+      "signal_pad": "1",
+      "ground_pad": "2",
+      "carrier": "U3.J6_1",
+      "parallel_terminal": "J5.12",
+      "signal_net": "Net-(J5-D29)",
+      "signal_net_nodes": [
+        {
+          "ref": "J5",
+          "pin": "12",
+          "function": "D29_12"
+        },
+        {
+          "ref": "J9",
+          "pin": "1",
+          "function": "Pin_1_1"
+        },
+        {
+          "ref": "R8",
+          "pin": "1",
+          "function": null
+        },
+        {
+          "ref": "U3",
+          "pin": "J6_1",
+          "function": "D29_J6_1"
+        }
+      ],
+      "pullup": {
+        "ref": "R8",
+        "value_ohm": 1000,
+        "signal_pin": "1",
+        "rail_pin": "2",
+        "rail_net": "Net-(J12-3.3V)",
+        "nominal_v": 3.3
+      },
+      "switch_nc_terminal": "signal_pad_1",
+      "switch_com_terminal": "ground_pad_2",
+      "healthy_raw": "LOW",
+      "triggered_or_unplugged_raw": "HIGH",
+      "recommended_role": "z2_reference"
+    }
+  ],
+  "rail_nodes": [
+    {
+      "ref": "J12",
+      "pin": "1",
+      "function": "3.3V_1"
+    },
+    {
+      "ref": "J4",
+      "pin": "2",
+      "function": "3V3_OUT_2"
+    },
+    {
+      "ref": "R5",
+      "pin": "2",
+      "function": null
+    },
+    {
+      "ref": "R6",
+      "pin": "2",
+      "function": null
+    },
+    {
+      "ref": "R7",
+      "pin": "2",
+      "function": null
+    },
+    {
+      "ref": "R8",
+      "pin": "2",
+      "function": null
+    },
+    {
+      "ref": "U1",
+      "pin": "1",
+      "function": "VCC_1"
+    },
+    {
+      "ref": "U3",
+      "pin": "J7_2",
+      "function": "3V3_OUT_J7_2"
+    }
+  ],
+  "ground_nodes": [
+    {
+      "ref": "J10",
+      "pin": "2",
+      "function": "Pin_2_2"
+    },
+    {
+      "ref": "J11",
+      "pin": "2",
+      "function": "Pin_2_2"
+    },
+    {
+      "ref": "J12",
+      "pin": "2",
+      "function": "GND_2"
+    },
+    {
+      "ref": "J12",
+      "pin": "6",
+      "function": "AD0_6"
+    },
+    {
+      "ref": "J4",
+      "pin": "3",
+      "function": "GND_3"
+    },
+    {
+      "ref": "J5",
+      "pin": "1",
+      "function": "GND_1"
+    },
+    {
+      "ref": "J7",
+      "pin": "1",
+      "function": "Pin_1_1"
+    },
+    {
+      "ref": "J8",
+      "pin": "2",
+      "function": "Pin_2_2"
+    },
+    {
+      "ref": "J9",
+      "pin": "2",
+      "function": "Pin_2_2"
+    },
+    {
+      "ref": "U1",
+      "pin": "2",
+      "function": "GND_2"
+    },
+    {
+      "ref": "U1",
+      "pin": "5",
+      "function": "DIR_5"
+    },
+    {
+      "ref": "U2",
+      "pin": "12",
+      "function": "GND_POWER_12"
+    },
+    {
+      "ref": "U2",
+      "pin": "8",
+      "function": "GND_LOGIC_8"
+    },
+    {
+      "ref": "U3",
+      "pin": "J7_3",
+      "function": "GND_J7_3"
+    },
+    {
+      "ref": "U4",
+      "pin": "12",
+      "function": "GND_POWER_12"
+    },
+    {
+      "ref": "U4",
+      "pin": "8",
+      "function": "GND_LOGIC_8"
+    },
+    {
+      "ref": "U5",
+      "pin": "12",
+      "function": "GND_POWER_12"
+    },
+    {
+      "ref": "U5",
+      "pin": "8",
+      "function": "GND_LOGIC_8"
+    }
+  ],
+  "enable": {
+    "gpio": 8,
+    "net": "Net-(J4-D8)",
+    "nodes": [
+      {
+        "ref": "J4",
+        "pin": "10",
+        "function": "D8_10"
+      },
+      {
+        "ref": "U2",
+        "pin": "1",
+        "function": "Enable_1"
+      },
+      {
+        "ref": "U3",
+        "pin": "J7_10",
+        "function": "D8_J7_10"
+      },
+      {
+        "ref": "U4",
+        "pin": "1",
+        "function": "Enable_1"
+      },
+      {
+        "ref": "U5",
+        "pin": "1",
+        "function": "Enable_1"
+      }
+    ],
+    "low": "all_three_drivers_enabled",
+    "high": "all_three_drivers_disabled",
+    "switch_hardware_inhibit": false,
+    "gate_components": [],
+    "pcb_enable_bias_resistor": false,
+    "module_local_bias_and_logic_voltage": "not_physically_verified"
+  },
+  "filtering": {
+    "series_resistors": false,
+    "rc_filter": false,
+    "capacitors": false,
+    "switch_debounce": "software_required"
+  },
+  "parity": {
+    "all_component_pad_net_mismatches": [],
+    "selected_copper_connectivity": [
+      {
+        "net": "Net-(J5-D26)",
+        "segments": 13,
+        "vias": 2,
+        "pad_connection_groups": [
+          [
+            "J8.1",
+            "U3.J6_4",
+            "J5.9",
+            "R5.1"
+          ]
+        ],
+        "segment_uuids": [
+          "090fa4da-56ff-4c51-a6e6-df3b83f770d5",
+          "3adb8171-7536-4083-97e1-854a270892d3",
+          "4912fdd2-0cf4-433d-b00b-d924789842dd",
+          "586afae2-79f0-4353-96d0-53bd60d590f1",
+          "6a94368f-3d51-4d20-b672-e6c2dd8ad40e",
+          "183e9a94-5767-489a-890a-fbf392b5ede9",
+          "197d4f04-8afb-49b3-8872-9d3d86fa19b3",
+          "23beabe6-441e-4d4f-8ef6-6404fca1313e",
+          "4f5a8448-9023-4bd8-af4d-029b268ad920",
+          "6e01f362-33dd-4d97-a692-5271d70ce8ba",
+          "c0d2aebc-f88a-45a7-9c7e-4280abc0f6a2",
+          "c36f8958-8662-4142-a8db-32efd13e279c",
+          "c882bf89-9471-42ce-aa62-faa2f6a55880"
+        ],
+        "pads": [
+          {
+            "ref": "J8",
+            "pin": "1",
+            "net": "Net-(J5-D26)",
+            "xy": [
+              123.0,
+              25.76
+            ],
+            "radius": 1.0,
+            "uuid": "07b42eba-9188-4d62-85f3-2fe6b72869df"
+          },
+          {
+            "ref": "U3",
+            "pin": "J6_4",
+            "net": "Net-(J5-D26)",
+            "xy": [
+              138.11,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "1cd93c84-1967-4a5d-9df6-e0da99ab3dd6"
+          },
+          {
+            "ref": "J5",
+            "pin": "9",
+            "net": "Net-(J5-D26)",
+            "xy": [
+              23.2,
+              99.6064
+            ],
+            "radius": 1.016,
+            "uuid": "a5ec2651-45d6-4a64-9aa5-ebc82d9b670b"
+          },
+          {
+            "ref": "R5",
+            "pin": "1",
+            "net": "Net-(J5-D26)",
+            "xy": [
+              123.2,
+              36.5
+            ],
+            "radius": 0.9398,
+            "uuid": "44834a1b-47fe-4456-b396-4373298ef016"
+          }
+        ]
+      },
+      {
+        "net": "Net-(J11-Pin_1)",
+        "segments": 14,
+        "vias": 2,
+        "pad_connection_groups": [
+          [
+            "U3.J6_3",
+            "R6.1",
+            "J11.1",
+            "J5.10"
+          ]
+        ],
+        "segment_uuids": [
+          "192c0143-a35e-48b6-9fe7-211fe6af9977",
+          "28ddde2e-3ada-4733-bf64-4439c13cd43c",
+          "e18a0daa-8dae-41f9-a54f-d44959db0e94",
+          "ec7f5db7-99c6-4936-be6e-2b79ae389822",
+          "ef60d5dc-5650-487b-a7d9-80fc624c603c",
+          "1ff07a31-6ea1-4ac6-820c-0eabaf4b5c1d",
+          "5cef8722-4c55-4d16-a2d9-9703c1c651f0",
+          "6ed1d011-17f5-499d-bafd-cc8cb51c7089",
+          "76508f8e-5755-465d-b691-48a032de7ccb",
+          "81e4a3d4-c4fc-437e-bcd8-6949c560297e",
+          "9ae91c0f-db98-4248-a683-26d84fbdb228",
+          "e3c79f00-f226-489b-89d3-811e61d9981f",
+          "eb435606-0b87-4f07-a14b-dd7a5301c98f",
+          "ed79328c-cc55-4dfc-9dd4-8b2f52a49de7"
+        ],
+        "pads": [
+          {
+            "ref": "U3",
+            "pin": "J6_3",
+            "net": "Net-(J11-Pin_1)",
+            "xy": [
+              135.57,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "5e08d707-301a-4545-bc67-d11bf9bd32c5"
+          },
+          {
+            "ref": "R6",
+            "pin": "1",
+            "net": "Net-(J11-Pin_1)",
+            "xy": [
+              110.2,
+              36.5
+            ],
+            "radius": 0.9398,
+            "uuid": "ce2b029b-d416-4c9c-9bfd-a47319bff618"
+          },
+          {
+            "ref": "J11",
+            "pin": "1",
+            "net": "Net-(J11-Pin_1)",
+            "xy": [
+              110.0,
+              25.76
+            ],
+            "radius": 1.0,
+            "uuid": "33d1151b-b8a5-4f5b-be68-f38d3d8e9308"
+          },
+          {
+            "ref": "J5",
+            "pin": "10",
+            "net": "Net-(J11-Pin_1)",
+            "xy": [
+              23.2,
+              96.1064
+            ],
+            "radius": 1.016,
+            "uuid": "2d5f925f-f74b-4e3f-afb6-1909a535ab64"
+          }
+        ]
+      },
+      {
+        "net": "Net-(J10-Pin_1)",
+        "segments": 13,
+        "vias": 2,
+        "pad_connection_groups": [
+          [
+            "R7.1",
+            "J10.1",
+            "U3.J6_2",
+            "J5.11"
+          ]
+        ],
+        "segment_uuids": [
+          "376f7e0d-b973-4c37-a4f6-72943c7c5b51",
+          "7047c7ec-ede4-41c0-94c6-4e5c63ca7595",
+          "aab8d048-ae40-4758-b2c9-7acf8f0eabe1",
+          "f3204362-3d9f-4a42-a4cb-95e4bf9f41d5",
+          "f92a0f3d-d981-4428-b068-ae5e8def4050",
+          "2be84382-e944-478d-90eb-fc747f74cab7",
+          "581c8f36-634b-4b06-9025-d9f1f35ef20d",
+          "761057c3-acf0-4768-aa7e-ee61580798e0",
+          "7c22b91c-38ab-4936-9def-86c5cfa10f73",
+          "86e4e48b-4edb-478f-bdc1-e5dc715b52f3",
+          "bf0c262d-05ee-4a1d-a18e-9e91c49ca3f7",
+          "d226645a-256e-4168-99bb-32828588e8f4",
+          "d6015ecd-b8a3-4a8e-adc8-f75b895fe65e"
+        ],
+        "pads": [
+          {
+            "ref": "R7",
+            "pin": "1",
+            "net": "Net-(J10-Pin_1)",
+            "xy": [
+              97.2,
+              36.5
+            ],
+            "radius": 0.9398,
+            "uuid": "d38c56db-d06a-457c-ab62-61593c019279"
+          },
+          {
+            "ref": "J10",
+            "pin": "1",
+            "net": "Net-(J10-Pin_1)",
+            "xy": [
+              97.0,
+              25.76
+            ],
+            "radius": 1.0,
+            "uuid": "ba64bac8-c532-40fb-a912-da86a61c13d0"
+          },
+          {
+            "ref": "U3",
+            "pin": "J6_2",
+            "net": "Net-(J10-Pin_1)",
+            "xy": [
+              133.03,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "3e4d6306-6fe3-4a1f-aa8f-6adbb3d40107"
+          },
+          {
+            "ref": "J5",
+            "pin": "11",
+            "net": "Net-(J10-Pin_1)",
+            "xy": [
+              23.2,
+              92.6064
+            ],
+            "radius": 1.016,
+            "uuid": "9697fdeb-28a7-4b97-9975-be263fcf4fd0"
+          }
+        ]
+      },
+      {
+        "net": "Net-(J5-D29)",
+        "segments": 13,
+        "vias": 2,
+        "pad_connection_groups": [
+          [
+            "R8.1",
+            "U3.J6_1",
+            "J9.1",
+            "J5.12"
+          ]
+        ],
+        "segment_uuids": [
+          "001ee646-301f-4871-84f7-3e19560f8760",
+          "6c97fd69-dd87-49db-a1d2-6e841a8e89c7",
+          "8b0ab9d7-3a42-4483-8c7e-9dcff405873f",
+          "a3199cf0-b842-41a8-aaf1-ad8651fdd9a5",
+          "dd3cc81c-36a5-4255-bf89-f91d00facff9",
+          "3341515b-943e-4546-a630-be6b642b6960",
+          "3b4ef400-3347-4651-90dc-3d2beb3271cd",
+          "3b72dcde-471c-4042-a812-ffc8545c3dd5",
+          "5bee7df4-04fc-44b5-8a42-9ef5ba4b024e",
+          "5f907d8e-9beb-45a1-9038-aa8537c11e4c",
+          "6e17b583-058a-4bb8-9c4f-04d81bc61527",
+          "ebfd77e3-6961-4e34-9575-109ccd4d40c8",
+          "f94f6b1d-e300-48f0-b27c-b86729a84673"
+        ],
+        "pads": [
+          {
+            "ref": "R8",
+            "pin": "1",
+            "net": "Net-(J5-D29)",
+            "xy": [
+              84.2,
+              36.32
+            ],
+            "radius": 0.9398,
+            "uuid": "394bf8b6-9227-447f-b300-50200b36e05f"
+          },
+          {
+            "ref": "U3",
+            "pin": "J6_1",
+            "net": "Net-(J5-D29)",
+            "xy": [
+              130.49,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "9e56d412-c747-4480-8cb7-0d2ef18d8619"
+          },
+          {
+            "ref": "J9",
+            "pin": "1",
+            "net": "Net-(J5-D29)",
+            "xy": [
+              84.0,
+              25.58
+            ],
+            "radius": 1.0,
+            "uuid": "676082f1-46bd-48ac-8ae0-bdbe3e142bc3"
+          },
+          {
+            "ref": "J5",
+            "pin": "12",
+            "net": "Net-(J5-D29)",
+            "xy": [
+              23.2,
+              89.1064
+            ],
+            "radius": 1.016,
+            "uuid": "fc67305c-5a1d-4ed4-a852-7a4d640103a9"
+          }
+        ]
+      },
+      {
+        "net": "Net-(J12-3.3V)",
+        "segments": 25,
+        "vias": 2,
+        "pad_connection_groups": [
+          [
+            "J12.1",
+            "R7.2",
+            "U1.1",
+            "R8.2",
+            "U3.J7_2",
+            "R6.2",
+            "J4.2",
+            "R5.2"
+          ]
+        ],
+        "segment_uuids": [
+          "0fcdaf99-ba2c-4b21-a36c-b43f243cb449",
+          "1face1c2-d892-4819-9e02-387b7e1efc6d",
+          "210b931f-6faa-4b07-a003-0a7de269f03e",
+          "2790d7a4-7f69-42e6-b63b-32520d4a0ecc",
+          "6392e89e-7e2d-481c-9925-e6c22c8a4060",
+          "6779a7db-4b6f-4d2e-8697-1953170006fc",
+          "6801d788-eae9-4f5b-9796-ed4f111b9804",
+          "7a94f3ff-b0a7-48dd-a0aa-1c9478b9d8db",
+          "85ea2a43-4599-4ebd-9ea4-1f951b2defa8",
+          "a0a749a5-5a00-4c76-8962-4262e1348729",
+          "a63a0bf7-948e-4c0f-a932-3a8518fa83be",
+          "c1856948-9bca-49ef-8ccd-ed6a670bf012",
+          "d0f9a4aa-e9bd-41bf-be78-5d318a278815",
+          "d44be812-b5b4-4fd6-916c-72fccf8e7c60",
+          "d70146eb-98ce-4ce2-9441-31381df837b2",
+          "d74db824-2b90-4386-9239-17476ccd1026",
+          "e5605122-71ea-4234-b96d-355aede6e3a4",
+          "ff6c038e-6769-4dc2-b1d2-9c5b27713d78",
+          "0dfb4721-09c5-407d-a7ba-c1d7d6168f47",
+          "2c2007a4-3ed2-4d3b-9d18-18da627f489f",
+          "2d22fc2a-8c94-452b-a7ff-6811eeaf6c9a",
+          "3e2fb633-29d0-405b-b599-83faa25b622b",
+          "643fe7d5-f08c-4c0d-b0c4-ba4e4ce0658b",
+          "b6b6e2ae-5f72-4a54-9778-99e0b36215df",
+          "c442ebf2-8c3b-4ec7-91c7-9e273babb05e"
+        ],
+        "pads": [
+          {
+            "ref": "J12",
+            "pin": "1",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              146.08,
+              25.3
+            ],
+            "radius": 0.9398,
+            "uuid": "7a981ffb-aac1-41af-9ac0-bc2a7e21bedf"
+          },
+          {
+            "ref": "R7",
+            "pin": "2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              97.2,
+              44.12
+            ],
+            "radius": 0.9398,
+            "uuid": "064bdae0-36d9-48a7-be79-2a0b9853b083"
+          },
+          {
+            "ref": "U1",
+            "pin": "1",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              183.36,
+              25.25
+            ],
+            "radius": 0.9398,
+            "uuid": "ac26ac58-59ca-40aa-b450-ea185fec7140"
+          },
+          {
+            "ref": "R8",
+            "pin": "2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              84.2,
+              43.94
+            ],
+            "radius": 0.9398,
+            "uuid": "63dca3db-e56e-456c-ae39-4910da597d82"
+          },
+          {
+            "ref": "U3",
+            "pin": "J7_2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              181.29,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "af711911-cec8-44d0-b4a4-e07a1f6fe915"
+          },
+          {
+            "ref": "R6",
+            "pin": "2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              110.2,
+              44.12
+            ],
+            "radius": 0.9398,
+            "uuid": "dde278a3-739e-480a-9a20-ad43c2aa45c9"
+          },
+          {
+            "ref": "J4",
+            "pin": "2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              23.0,
+              171.4934
+            ],
+            "radius": 1.016,
+            "uuid": "7db0903b-1e57-41e9-adf0-deb17323fda6"
+          },
+          {
+            "ref": "R5",
+            "pin": "2",
+            "net": "Net-(J12-3.3V)",
+            "xy": [
+              123.2,
+              44.12
+            ],
+            "radius": 0.9398,
+            "uuid": "166127e0-1e13-42c3-b9e8-f9f914aa6647"
+          }
+        ]
+      },
+      {
+        "net": "Net-(J4-D8)",
+        "segments": 24,
+        "vias": 6,
+        "pad_connection_groups": [
+          [
+            "U5.1",
+            "U3.J7_10",
+            "U2.1",
+            "U4.1",
+            "J4.10"
+          ]
+        ],
+        "segment_uuids": [
+          "06d3deb1-882b-46c1-acbb-4daa2c6d816c",
+          "0ecab4d8-5196-4efc-b1a2-d67cc2bdf311",
+          "26c3dcb2-d8dc-426b-bfeb-657f6dadaf47",
+          "2ef7369f-1102-4d19-9b32-5b757a5c7a30",
+          "3615882a-8035-4013-9236-78d28865a8f5",
+          "6ac6087a-0dcf-44d1-aa89-81dba29abcd5",
+          "6b1be890-6c17-4c78-9352-c285b06a032b",
+          "6d3d0c57-4bc1-44bd-94a1-538760ab3772",
+          "76788628-0226-4d2c-a121-62a2c1b5674c",
+          "78d17b9c-a5c3-4776-b232-b20c9c9d5832",
+          "98bb694f-854d-443c-91b2-4b8b48c70d78",
+          "a05aa1af-7c7e-46af-a371-34108e607f61",
+          "a076cf21-6fea-43df-9f11-66e57850a067",
+          "cf14fb2e-267a-47bb-a83c-2f137bad937f",
+          "d528e33b-7c23-4d16-b0d2-3c686e06231a",
+          "e458dc69-85a2-49b3-9dc0-74ecebce21c8",
+          "3d240b56-cc1d-4c35-bde8-115de805c9aa",
+          "4c990953-18ea-414d-8bb3-6c436726a122",
+          "8499889c-af91-43d1-9975-ec756ac2cd6a",
+          "9b93cd05-e6e0-4390-bf62-1730ceb458cd",
+          "bacaecd5-813e-4336-bc20-a57a893290b5",
+          "be15412a-1ce9-43e3-af96-1593922ce8df",
+          "beda0090-af8f-4505-8153-9aa90b8cbd6d",
+          "e035bf4d-903e-45c1-999f-bee148bdaebc"
+        ],
+        "pads": [
+          {
+            "ref": "U5",
+            "pin": "1",
+            "net": "Net-(J4-D8)",
+            "xy": [
+              211.92,
+              115.92
+            ],
+            "radius": 0.9,
+            "uuid": "7e8067fa-62a0-4010-8e85-f9889fad8b2b"
+          },
+          {
+            "ref": "U3",
+            "pin": "J7_10",
+            "net": "Net-(J4-D8)",
+            "xy": [
+              160.97,
+              80.97
+            ],
+            "radius": 0.9,
+            "uuid": "e9ce4e3a-4c5c-4603-9ddf-41c892a79187"
+          },
+          {
+            "ref": "U2",
+            "pin": "1",
+            "net": "Net-(J4-D8)",
+            "xy": [
+              211.68,
+              23.36
+            ],
+            "radius": 0.9,
+            "uuid": "ceee3bff-b2cd-4fcd-93b3-ff2d6c593cbf"
+          },
+          {
+            "ref": "U4",
+            "pin": "1",
+            "net": "Net-(J4-D8)",
+            "xy": [
+              212.08,
+              70.3
+            ],
+            "radius": 0.9,
+            "uuid": "2b8af8de-8850-4264-9225-5ec114914247"
+          },
+          {
+            "ref": "J4",
+            "pin": "10",
+            "net": "Net-(J4-D8)",
+            "xy": [
+              23.0,
+              143.4934
+            ],
+            "radius": 1.016,
+            "uuid": "c7b36f03-2c32-4f86-ae7f-73e3749b3530"
+          }
+        ]
+      }
+    ]
+  },
+  "gerber_comparisons": [
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/inverted_pendulum_pcb-Front.gtl",
+      "sha256": "e8eeb58275d2025f8e6e415ed18e95e8def187446db82ce5784bec9b18a3f315",
+      "geometry_commands_match_current": false,
+      "normalized_sha256": "3148d02f2d3b0997c16ef5bef7a81f7c412bd5c075a0dc0b110ad9a913dd5dbc"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers/inverted_pendulum_pcb-Front.gtl",
+      "sha256": "3ac0fa5a072af5aee0c3eab23a3a64a1027bc7a813cea939f72e42c94533ad9a",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "6cd2941155172fcc6f601c053b91c1f34bdbc28b4cfd8463c34b8411f328ceed"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers/gerbers_final/inverted_pendulum_pcb-Front.gtl",
+      "sha256": "9dca48ab1d5ef7e6d2fa2ccbc6bb1fceef81af6457e8970167084650f65867b3",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "6cd2941155172fcc6f601c053b91c1f34bdbc28b4cfd8463c34b8411f328ceed"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers 2/inverted_pendulum_pcb-Front.gtl",
+      "sha256": "3ac0fa5a072af5aee0c3eab23a3a64a1027bc7a813cea939f72e42c94533ad9a",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "6cd2941155172fcc6f601c053b91c1f34bdbc28b4cfd8463c34b8411f328ceed"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/inverted_pendulum_pcb-Back.gbl",
+      "sha256": "2e7e81afaa717c2764511a0906bdeaff8ff5fdc606372d118430fd9e76b32bf4",
+      "geometry_commands_match_current": false,
+      "normalized_sha256": "3b98454062d9a7dcf27406ce65161d88a56d86c05068df9727304d8f5c6febf9"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers/inverted_pendulum_pcb-Back.gbl",
+      "sha256": "b62516bb957a3a8e988fa650c314110c7d7286beb7762bb1177c784bb34a0420",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "248f7183767f3607ef8678a76e453b48df6b21657f4d29594f8b238e07e8e1dc"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers/gerbers_final/inverted_pendulum_pcb-Back.gbl",
+      "sha256": "e229898cabbbef2ab27e35b31cd7cfb4040fbc587952fdddcaf9eef834b3bb29",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "248f7183767f3607ef8678a76e453b48df6b21657f4d29594f8b238e07e8e1dc"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole/inverted_pendulum_pcb/gerbers 2/inverted_pendulum_pcb-Back.gbl",
+      "sha256": "b62516bb957a3a8e988fa650c314110c7d7286beb7762bb1177c784bb34a0420",
+      "geometry_commands_match_current": true,
+      "normalized_sha256": "248f7183767f3607ef8678a76e453b48df6b21657f4d29594f8b238e07e8e1dc"
+    }
+  ],
+  "drc": {
+    "attempted": true,
+    "command": "kicad-cli pcb drc --schematic-parity --format json --output /tmp/cartpole-pcb-drc.json inverted_pendulum_pcb.kicad_pcb",
+    "exit_code": 134,
+    "report_produced": false,
+    "passed": false
+  },
+  "pin_conflicts": {
+    "switches": [
+      26,
+      27,
+      28,
+      29
+    ],
+    "cart_step_dir": [
+      2,
+      3
+    ],
+    "z1_step_dir": [
+      4,
+      5
+    ],
+    "z2_step_dir": [
+      6,
+      7
+    ],
+    "shared_enable": 8,
+    "encoder_sda_scl": [
+      17,
+      16
+    ],
+    "mpu_sda_scl_int": [
+      25,
+      24,
+      38
+    ],
+    "lcd_cs_dc_mosi_sclk_reset_backlight": [
+      10,
+      9,
+      11,
+      13,
+      32,
+      33
+    ],
+    "overlap": []
+  },
+  "limitations": [
+    "No physical switches installed per user; no continuity/voltage/polarity/stop-latency/homing-repeatability tests performed",
+    "Assembled PCB revision not identified",
+    "Role assignment to cart ends and Z references is recommended software/install policy, not inferred from labels",
+    "No cart linear encoder; counted-pulse position cannot detect lost steps",
+    "No hardware switch inhibit path; software inhibition is required",
+    "HIGH input cannot distinguish pressed contact from broken wire; short to ground resembles healthy LOW",
+    "Driver module-local EN bias and logic jumpers not verified; high-impedance reset safety not established",
+    "No full DRC result because KiCad process exited 134"
+  ],
+  "primary_references": [
+    {
+      "url": "https://www.pjrc.com/teensy/card11b_rev3_web.pdf",
+      "supports": "Teensy 4.1 GPIO not 5 V tolerant; max 3.3 V except VIN/VUSB"
+    },
+    {
+      "url": "https://learn.sparkfun.com/tutorials/big-easy-driver-hookup-guide/hardware-overview",
+      "supports": "Big Easy Driver enable convention and module logic jumper context"
+    }
+  ]
+}

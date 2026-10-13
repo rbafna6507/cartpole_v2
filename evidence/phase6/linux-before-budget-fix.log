@@ -1,0 +1,65 @@
+Using CPython 3.11.17
+Creating virtual environment at: .venv
+Resolved 22 packages in 3ms
+   Building cartpole-sdk @ file:///home/rbafna/cartpole-v2-live/releases/platform-20261013
+Downloading pygments (1.2MiB)
+ Downloaded pygments
+      Built cartpole-sdk @ file:///home/rbafna/cartpole-v2-live/releases/platform-20261013
+Prepared 5 packages in 2.27s
+Installed 20 packages in 125ms
+ + absl-py==2.5.1
+ + cartpole-sdk==0.2.0 (from file:///home/rbafna/cartpole-v2-live/releases/platform-20261013)
+ + cloudpickle==3.1.2
+ + etils==1.14.0
+ + farama-notifications==0.0.6
+ + fsspec==2026.9.0
+ + glfw==2.10.2
+ + gymnasium==1.4.0
+ + iniconfig==2.3.1
+ + mujoco==3.15.0
+ + numpy==2.4.6
+ + packaging==26.3
+ + pluggy==1.6.0
+ + pygments==2.21.0
+ + pyopengl==3.1.10
+ + pyserial==3.5
+ + pytest==9.1.1
+ + typing-extensions==4.16.0
+ + websockets==17.2
+ + zipp==4.1.1
+test_idle_child_wall_deadline_is_independently_enforced (test_portal_sandbox.IPCTests.test_idle_child_wall_deadline_is_independently_enforced) ... ok
+test_invalid_nonfinite_bool_wrong_sequence_and_oversize_rejected (test_portal_sandbox.IPCTests.test_invalid_nonfinite_bool_wrong_sequence_and_oversize_rejected) ... ok
+test_missing_runtime_fails_before_policy_import (test_portal_sandbox.IPCTests.test_missing_runtime_fails_before_policy_import) ... skipped 'tests absent-runtime fail-closed path'
+test_output_flood_bounded_and_child_reaped (test_portal_sandbox.IPCTests.test_output_flood_bounded_and_child_reaped) ... ok
+test_policy_output_cannot_override_trusted_channel_ceiling (test_portal_sandbox.IPCTests.test_policy_output_cannot_override_trusted_channel_ceiling) ... ok
+test_reset_then_numeric_action_uses_actual_sdk_objects (test_portal_sandbox.IPCTests.test_reset_then_numeric_action_uses_actual_sdk_objects) ... ok
+test_stderr_diagnostic_is_bounded_and_separate_from_actions (test_portal_sandbox.IPCTests.test_stderr_diagnostic_is_bounded_and_separate_from_actions) ... ok
+test_timeout_and_cleanup_terminate_real_process (test_portal_sandbox.IPCTests.test_timeout_and_cleanup_terminate_real_process) ... ok
+test_trusted_channel_ceiling_accepts_range_and_rejects_excess (test_portal_sandbox.IPCTests.test_trusted_channel_ceiling_accepts_range_and_rejects_excess) ... ok
+test_cpu_memory_and_output_abuse_fail_bounded (test_portal_sandbox.LinuxSandboxTests.test_cpu_memory_and_output_abuse_fail_bounded) ... ok
+test_file_hosthome_serial_network_fork_exec_are_denied (test_portal_sandbox.LinuxSandboxTests.test_file_hosthome_serial_network_fork_exec_are_denied) ... ok
+test_sdk_mount_excludes_unrelated_site_package_files (test_portal_sandbox.LinuxSandboxTests.test_sdk_mount_excludes_unrelated_site_package_files) ... ok
+test_valid_policy_runs_inside_actual_sandbox (test_portal_sandbox.LinuxSandboxTests.test_valid_policy_runs_inside_actual_sandbox) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 3.887s
+
+OK (skipped=1)
+test_real_isolated_simulation_queue_worker (test_portal_worker.WorkerTests.test_real_isolated_simulation_queue_worker) ... ok
+test_real_isolated_learned_simulation_queue_worker (test_portal_worker.WorkerTests.test_real_isolated_learned_simulation_queue_worker) ... FAIL
+
+======================================================================
+FAIL: test_real_isolated_learned_simulation_queue_worker (test_portal_worker.WorkerTests.test_real_isolated_learned_simulation_queue_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/cartpole-v2-live/releases/platform-20261013/tests/test_portal_worker.py", line 200, in test_real_isolated_learned_simulation_queue_worker
+    self.assertEqual(result['status'],'succeeded',result['result'])
+AssertionError: 'failed' != 'succeeded'
+- failed
++ succeeded
+ : {'action_semantics': 'raw acceleration; binary32 cart_motion governor at 1000 Hz', 'actions': 873, 'backend': 'simulation', 'elapsed_wall_s': 10.785960051001894, 'error': 'worker_guard_failure', 'executor': {'active_request_sequence': 873, 'enabled': True, 'executed_acceleration_m_s2': 3.42672274200595e-06, 'expires_at_ns': 8740000000, 'fault_reason': None, 'force_saturated': False, 'rail_braking': False, 'raw_acceleration_m_s2': 3.4267227237446005e-06}, 'ground_truth': {'omega': -1.422575895719405e-05, 'theta': 6.096853497078256e-07, 'time_ns': 8730000000, 'v': 1.0491759619093657e-05, 'x': -2.381202736698379e-06}, 'max_abs_requested_acceleration_m_s2': 16.825294021060536, 'max_acceleration_m_s2': 25.0, 'max_inference_s': 0.00275079499988351, 'observations': 873, 'physical_acceptance': False, 'sim_config': {'cart_damping': 0.05, 'cart_mass_kg': 0.35, 'control_steps': 10, 'effective_length_m': 0.124, 'hinge_damping': 0.0001, 'max_acceleration_m_s2': 25.0, 'max_action_ttl_ns': 1000000000, 'max_force_n': 20.0, 'max_steps': 1001, 'physics_dt_ns': 1000000, 'pole_mass_kg': 0.02275, 'rail_half_m': 0.26}, 'simulation_fault': None, 'simulation_time_ns': 8730000000, 'stopped': True}
+
+----------------------------------------------------------------------
+Ran 2 tests in 12.250s
+
+FAILED (failures=1)

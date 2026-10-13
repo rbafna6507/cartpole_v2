@@ -1,0 +1,528 @@
+{
+  "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+  "hardware_accepted": false,
+  "parameters": {
+    "approach_angle_rad": 0.8,
+    "capture_angle_rad": 0.45,
+    "capture_rate_rad_s": 3.0,
+    "effective_length_m": 0.124,
+    "energy_gain": 4.5848495632431705,
+    "kick_acceleration_m_s2": 0.8154883146625066,
+    "kick_duration_s": 0.10578885010741838,
+    "max_acceleration_m_s2": 25.0,
+    "omega_gain": 2.1328208724788156,
+    "phase_softness": 1.1049939714314958,
+    "position_gain": 3.909292421396718,
+    "release_angle_rad": 0.8,
+    "swing_position_gain": 35.75631532605368,
+    "swing_velocity_gain": 2.3481845039313445,
+    "theta_gain": 19.03211872572644,
+    "velocity_gain": 2.853298667749982
+  },
+  "policy_family": "structured_energy_linear_v1",
+  "provenance": {
+    "actuator": "1 kHz binary32 governor; perfect acceleration servo with force cap; no motor/slip/ISR/disabled coasting model",
+    "code_sha256": {
+      "contracts.py": "b17e1366ba4215e2dc5ed3adccf7df35f8ce5c403c0903fb3a6b5eae4734cc54",
+      "control/motion.py": "24bfb3adb5fa884e6c660c602048a4954945b97437925a8481ea3b42ba65fb10",
+      "control/parameters.py": "bb03d17fc50d1d32b038ff6c694224fcefa8e30037cf0f44f9690e9f855b38cb",
+      "control/tuned_parameters.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+      "learning/__init__.py": "5d9158d09f19d2799530a6abea916487d3e3b20e1f3bbaac502554eca4fb0b7a",
+      "learning/artifact.py": "77793377c16d6736fe5f81fcb6fd989a9b66aba9fbf81fc3db1a69c7b4619c6a",
+      "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+      "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+      "policies/__init__.py": "53ee2b630300d08d2ca6585b4ccdc38b39201059ce8c11d3b9399137a1737ba5",
+      "policies/host.py": "bcb160afa45b6cb6f4f06732dad1464931ec387be03ec9c34e0a7d381188a977",
+      "sim/backend.py": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+      "sim/config.py": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+      "sim/executor.py": "6b775473241b32a3b1c0cff669067226ba32f491ef3e51726e7ac9c1570b814f",
+      "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62"
+    },
+    "command": [
+      "examples/train_policy.py",
+      "--output",
+      "evidence/phase5/learned-policy.json",
+      "--seed",
+      "20261013",
+      "--training-seeds",
+      "11",
+      "12",
+      "13",
+      "--generations",
+      "5",
+      "--population",
+      "10",
+      "--seconds",
+      "10",
+      "--rate",
+      "100",
+      "--sensor-period-ms",
+      "10"
+    ],
+    "dependencies": {
+      "mujoco": "3.15.0",
+      "numpy": "2.4.6"
+    },
+    "model_sha256": "ef1c567d69d201548b915b57552cd4e45536ad0a5b291eaeb218f993bfadf7e6",
+    "model_status": "provisional, not physically identified or accepted",
+    "prior": "handwritten energy shaping and linear balance feedback initialized from saved gains; all structure disclosed",
+    "python": "3.11.7"
+  },
+  "rate_hz": 100,
+  "schema": 1,
+  "training": {
+    "algorithm": "cross_entropy_policy_search",
+    "baseline_parameters": {
+      "approach_angle_rad": 0.8,
+      "capture_angle_rad": 0.45,
+      "capture_rate_rad_s": 3.0,
+      "effective_length_m": 0.124,
+      "energy_gain": 4.0,
+      "kick_acceleration_m_s2": 1.0,
+      "kick_duration_s": 0.12,
+      "max_acceleration_m_s2": 25.0,
+      "omega_gain": 2.1826616513761468,
+      "phase_softness": 2.0,
+      "position_gain": 3.071559633027523,
+      "release_angle_rad": 0.8,
+      "swing_position_gain": 40.0,
+      "swing_velocity_gain": 2.0,
+      "theta_gain": 20.830073394495415,
+      "velocity_gain": 2.952110091743119
+    },
+    "best_score": 3.706169241959017,
+    "generations": 5,
+    "history": [
+      {
+        "best_score": 3.597891643566657,
+        "candidate_scores": [
+          3.597891643566657,
+          2.5222396621911534,
+          3.5352720311404258,
+          2.3958083625599693,
+          3.173749694512763,
+          3.431843303242486,
+          0.1673674165950624,
+          1.8416477641675681,
+          2.201904459905158,
+          2.671385106170803
+        ],
+        "elite_indices": [
+          0,
+          2
+        ],
+        "generation": 1,
+        "parameters": {
+          "approach_angle_rad": 0.8,
+          "capture_angle_rad": 0.45,
+          "capture_rate_rad_s": 3.0,
+          "effective_length_m": 0.124,
+          "energy_gain": 4.0,
+          "kick_acceleration_m_s2": 1.0,
+          "kick_duration_s": 0.12,
+          "max_acceleration_m_s2": 25.0,
+          "omega_gain": 2.1826616513761468,
+          "phase_softness": 2.0,
+          "position_gain": 3.071559633027523,
+          "release_angle_rad": 0.8,
+          "swing_position_gain": 40.0,
+          "swing_velocity_gain": 2.0,
+          "theta_gain": 20.830073394495415,
+          "velocity_gain": 2.952110091743119
+        }
+      },
+      {
+        "best_score": 3.6841654233310366,
+        "candidate_scores": [
+          3.597891643566657,
+          2.0171593641806407,
+          3.034673644109677,
+          2.444199979429301,
+          3.18398692519526,
+          3.6229905331005923,
+          1.8105665297719018,
+          3.6841654233310366,
+          3.088025315627154,
+          3.0409279076141758
+        ],
+        "elite_indices": [
+          7,
+          5
+        ],
+        "generation": 2,
+        "parameters": {
+          "approach_angle_rad": 0.8,
+          "capture_angle_rad": 0.45,
+          "capture_rate_rad_s": 3.0,
+          "effective_length_m": 0.124,
+          "energy_gain": 5.205571618164793,
+          "kick_acceleration_m_s2": 0.8478964145780161,
+          "kick_duration_s": 0.1157935221022485,
+          "max_acceleration_m_s2": 25.0,
+          "omega_gain": 2.278385130915725,
+          "phase_softness": 1.0281852552170414,
+          "position_gain": 3.991152126580065,
+          "release_angle_rad": 0.8,
+          "swing_position_gain": 31.609771300119604,
+          "swing_velocity_gain": 2.3593138804725573,
+          "theta_gain": 18.51295140040437,
+          "velocity_gain": 2.6631044204255367
+        }
+      },
+      {
+        "best_score": 3.6841654233310366,
+        "candidate_scores": [
+          3.6841654233310366,
+          3.0937622872635604,
+          3.5761415805357823,
+          1.8991583692621246,
+          3.5732944890758787,
+          3.531082948368267,
+          3.6355503828503095,
+          3.640016965664179,
+          3.6756580225569375,
+          3.4697710114770643
+        ],
+        "elite_indices": [
+          0,
+          8
+        ],
+        "generation": 3,
+        "parameters": {
+          "approach_angle_rad": 0.8,
+          "capture_angle_rad": 0.45,
+          "capture_rate_rad_s": 3.0,
+          "effective_length_m": 0.124,
+          "energy_gain": 5.205571618164793,
+          "kick_acceleration_m_s2": 0.8478964145780161,
+          "kick_duration_s": 0.1157935221022485,
+          "max_acceleration_m_s2": 25.0,
+          "omega_gain": 2.278385130915725,
+          "phase_softness": 1.0281852552170414,
+          "position_gain": 3.991152126580065,
+          "release_angle_rad": 0.8,
+          "swing_position_gain": 31.609771300119604,
+          "swing_velocity_gain": 2.3593138804725573,
+          "theta_gain": 18.51295140040437,
+          "velocity_gain": 2.6631044204255367
+        }
+      },
+      {
+        "best_score": 3.6853849383939945,
+        "candidate_scores": [
+          3.6841654233310366,
+          3.5903575435336137,
+          3.6392294766767486,
+          3.6853849383939945,
+          3.5981042746922056,
+          3.6238327606324887,
+          3.1339258421206826,
+          3.6714068918398914,
+          3.64396737274553,
+          3.66936251750526
+        ],
+        "elite_indices": [
+          3,
+          0
+        ],
+        "generation": 4,
+        "parameters": {
+          "approach_angle_rad": 0.8,
+          "capture_angle_rad": 0.45,
+          "capture_rate_rad_s": 3.0,
+          "effective_length_m": 0.124,
+          "energy_gain": 3.2611005310459653,
+          "kick_acceleration_m_s2": 0.7613261748485207,
+          "kick_duration_s": 0.10936660058804476,
+          "max_acceleration_m_s2": 25.0,
+          "omega_gain": 2.2966520875466347,
+          "phase_softness": 1.189659129726789,
+          "position_gain": 3.3355381701162434,
+          "release_angle_rad": 0.8,
+          "swing_position_gain": 33.704448157497204,
+          "swing_velocity_gain": 2.4052764282008976,
+          "theta_gain": 20.835932166825256,
+          "velocity_gain": 2.9300046019240864
+        }
+      },
+      {
+        "best_score": 3.706169241959017,
+        "candidate_scores": [
+          3.6853849383939945,
+          3.676346614955913,
+          3.5950404291575637,
+          3.706169241959017,
+          3.6973529098528135,
+          3.6936455101021006,
+          3.652166185233625,
+          3.6893161026366665,
+          3.653570861830694,
+          3.646387940674462
+        ],
+        "elite_indices": [
+          3,
+          4
+        ],
+        "generation": 5,
+        "parameters": {
+          "approach_angle_rad": 0.8,
+          "capture_angle_rad": 0.45,
+          "capture_rate_rad_s": 3.0,
+          "effective_length_m": 0.124,
+          "energy_gain": 4.5848495632431705,
+          "kick_acceleration_m_s2": 0.8154883146625066,
+          "kick_duration_s": 0.10578885010741838,
+          "max_acceleration_m_s2": 25.0,
+          "omega_gain": 2.1328208724788156,
+          "phase_softness": 1.1049939714314958,
+          "position_gain": 3.909292421396718,
+          "release_angle_rad": 0.8,
+          "swing_position_gain": 35.75631532605368,
+          "swing_velocity_gain": 2.3481845039313445,
+          "theta_gain": 19.03211872572644,
+          "velocity_gain": 2.853298667749982
+        }
+      }
+    ],
+    "objective": "time mean of cos(theta) - .3*(x/rail)^2 - .001*omega^2 - .0002*raw_accel^2 + 2 if abs(theta)<.15 and abs(omega)<1 and abs(x)<.12; uncompleted horizon reward=-3; + final continuous balance seconds/horizon",
+    "population": 10,
+    "pretraining_episodes": [
+      {
+        "balanced_fraction": 0.706,
+        "fault_reason": null,
+        "final_balance_dwell_s": 7.059999999999894,
+        "final_state": {
+          "omega": -4.504944258128413e-09,
+          "theta": 1.8068166733745065e-09,
+          "time_ns": 10000000000,
+          "v": -6.68514469333529e-09,
+          "x": 2.699028571852916e-09
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.011142893916924012,
+          -3.6106877994251944e-05,
+          3.155802423657063,
+          -0.14139329748841664
+        ],
+        "max_abs_speed_m_s": 1.1417771490747453,
+        "max_abs_x_m": 0.2449999158938007,
+        "rail_braking_control_steps": 53,
+        "score": 2.8959879515672164,
+        "seed": 11,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": -1.0032427563533608e-11,
+          "theta": 4.036211849551688e-12,
+          "time_ns": 10000000000,
+          "v": -1.492717945358973e-11,
+          "x": 6.013264097050085e-12
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.008928277744054384,
+          0.02110987816975751,
+          0.058956803754438326,
+          0.035808162874826334
+        ],
+        "max_abs_speed_m_s": 0.14627106993088762,
+        "max_abs_x_m": 0.04780220085266503,
+        "rail_braking_control_steps": 0,
+        "score": 3.999256938540523,
+        "seed": 11,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 0.808,
+        "fault_reason": null,
+        "final_balance_dwell_s": 8.079999999999872,
+        "final_state": {
+          "omega": -4.823503423253691e-10,
+          "theta": 1.9491139745225234e-10,
+          "time_ns": 10000000000,
+          "v": -7.239790153209331e-10,
+          "x": 2.9217204984103576e-10
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.0074752662567466165,
+          0.02233764714297123,
+          3.0980975074253596,
+          -0.09621257687456772
+        ],
+        "max_abs_speed_m_s": 1.1505323443234325,
+        "max_abs_x_m": 0.17278530004489714,
+        "rail_braking_control_steps": 0,
+        "score": 3.2325059831802356,
+        "seed": 12,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": 8.756279851071306e-12,
+          "theta": -3.5228064866848123e-12,
+          "time_ns": 10000000000,
+          "v": 1.302859064197896e-11,
+          "x": -5.2484865835651685e-12
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          0.003864875952307739,
+          -0.004742450937268778,
+          -0.0698001081404718,
+          0.10037942927907785
+        ],
+        "max_abs_speed_m_s": 0.12148719540947463,
+        "max_abs_x_m": 0.04216556546960017,
+        "rail_braking_control_steps": 0,
+        "score": 3.9994115137495045,
+        "seed": 12,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 0.871,
+        "fault_reason": null,
+        "final_balance_dwell_s": 8.709999999999859,
+        "final_state": {
+          "omega": -5.896241713773807e-11,
+          "theta": 2.3732770623447218e-11,
+          "time_ns": 10000000000,
+          "v": -8.767767933435161e-11,
+          "x": 3.527841165832067e-11
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          0.010943927610497594,
+          0.01776512574660295,
+          3.185135929419601,
+          -0.07156609157505701
+        ],
+        "max_abs_speed_m_s": 1.047670083011266,
+        "max_abs_x_m": 0.17530217572358447,
+        "rail_braking_control_steps": 0,
+        "score": 3.4603959374451754,
+        "seed": 13,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": 4.846161503332112e-12,
+          "theta": -1.9498226522485586e-12,
+          "time_ns": 10000000000,
+          "v": 7.2118868128004944e-12,
+          "x": -2.9054563665345572e-12
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.006495599637441039,
+          0.0007943386056538161,
+          -0.017965587664032927,
+          -0.08521499880401626
+        ],
+        "max_abs_speed_m_s": 0.052286691815305264,
+        "max_abs_x_m": 0.024889262577217294,
+        "rail_braking_control_steps": 0,
+        "score": 3.999791536917291,
+        "seed": 13,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      }
+    ],
+    "pretraining_score": 3.597891643566657,
+    "search_bounds": {
+      "energy_gain": [
+        0.5,
+        12.0
+      ],
+      "kick_acceleration_m_s2": [
+        0.2,
+        4.0
+      ],
+      "kick_duration_s": [
+        0.06,
+        0.3
+      ],
+      "omega_gain": [
+        0.8,
+        5.0
+      ],
+      "phase_softness": [
+        0.3,
+        5.0
+      ],
+      "position_gain": [
+        0.5,
+        10.0
+      ],
+      "swing_position_gain": [
+        5.0,
+        100.0
+      ],
+      "swing_velocity_gain": [
+        0.2,
+        12.0
+      ],
+      "theta_gain": [
+        12.0,
+        40.0
+      ],
+      "velocity_gain": [
+        0.5,
+        10.0
+      ]
+    },
+    "seed": 20261013,
+    "sensor_config": {
+      "angle_noise_std": 0.0,
+      "angular_velocity_noise_std": 0.0,
+      "delay_steps": 0,
+      "dropout_probability": 0.0,
+      "frame_id": "sim:upright+x",
+      "position_noise_std": 0.0,
+      "sample_every_steps": 10,
+      "velocity_noise_std": 0.0
+    },
+    "simulation_config": {
+      "cart_damping": 0.05,
+      "cart_mass_kg": 0.35,
+      "control_steps": 10,
+      "effective_length_m": 0.124,
+      "hinge_damping": 0.0001,
+      "max_acceleration_m_s2": 25.0,
+      "max_action_ttl_ns": 1000000000,
+      "max_force_n": 20.0,
+      "max_steps": 1000,
+      "physics_dt_ns": 1000000,
+      "pole_mass_kg": 0.02275,
+      "rail_half_m": 0.26
+    },
+    "success_definition": "last >=1 s continuously abs(theta)<.15 rad, abs(omega)<1 rad/s, abs(x)<.12 m; full horizon; no fault",
+    "training_seeds": [
+      11,
+      12,
+      13
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "environment": {
+    "python": "3.11.7",
+    "mujoco": "3.15.0",
+    "macOS": "26.1",
+    "architecture": "arm64"
+  },
+  "root_cause": "Overlay set_texts waited for rendering thread while holding the mutex needed by that thread.",
+  "fix": "Submit both initial and per-frame text overlays outside viewer.lock; retain camera/scene/data locks.",
+  "regression_tests_passed": 14,
+  "native_before": "faulthandler timeout while set_texts called from locked overlay",
+  "native_after": "GUI_COMPLETED exit0 with identical dependency versions",
+  "interactive_verification": [
+    "Native window rendered actual SDK swing-up/balance",
+    "Space paused at9.653s mode3",
+    "R reset and resumed at.587s mode2"
+  ],
+  "display_open_for_owner": true
+}

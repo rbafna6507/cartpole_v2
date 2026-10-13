@@ -1,0 +1,188 @@
+{
+  "action_semantics": "already-governed reference output sent directly to unchanged MujocoBackend; no second governor",
+  "episodes": [
+    {
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "final_balance_dwell_s": 0.0,
+      "final_state": {
+        "omega": -10.552690723127125,
+        "theta": 1.9066319796186908,
+        "time_ns": 10000000000,
+        "v": -0.7580795978858127,
+        "x": -0.06493230671070148
+      },
+      "initial_state": [
+        0.01489279075688162,
+        0.0069783254460425385,
+        3.130240243837444,
+        0.01780105498717043
+      ],
+      "max_abs_x_m": 0.20425244565258416,
+      "seed": 501,
+      "start": "hanging",
+      "steps": 10000,
+      "success": false
+    },
+    {
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "final_balance_dwell_s": 9.999999999999897,
+      "final_state": {
+        "omega": 5.740537602451436e-08,
+        "theta": -1.1148023835987256e-08,
+        "time_ns": 10000000000,
+        "v": -9.238427575484265e-09,
+        "x": -0.006694543794703939
+      },
+      "initial_state": [
+        -0.01347253096235969,
+        -0.006965594742154874,
+        0.06249014609290225,
+        0.0280142047779955
+      ],
+      "max_abs_x_m": 0.03574394411903646,
+      "seed": 501,
+      "start": "upright",
+      "steps": 10000,
+      "success": true
+    },
+    {
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "final_balance_dwell_s": 8.62300000000066,
+      "final_state": {
+        "omega": -7.094830700091637e-09,
+        "theta": -2.2325454886202272e-10,
+        "time_ns": 10000000000,
+        "v": 2.7209757978104353e-08,
+        "x": -0.005863568851742116
+      },
+      "initial_state": [
+        -0.010812159886982062,
+        -0.006101070107653778,
+        3.185672327250158,
+        -0.01020108024340367
+      ],
+      "max_abs_x_m": 0.1322383804635592,
+      "seed": 502,
+      "start": "hanging",
+      "steps": 10000,
+      "success": true
+    },
+    {
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "final_balance_dwell_s": 9.999999999999897,
+      "final_state": {
+        "omega": -2.8634654164639395e-09,
+        "theta": 9.723459043404873e-09,
+        "time_ns": 10000000000,
+        "v": 1.2890686524590303e-08,
+        "x": -0.013443433073094101
+      },
+      "initial_state": [
+        0.005171993712154652,
+        -0.013986802107403985,
+        -0.053808607784069165,
+        -0.11735055953531691
+      ],
+      "max_abs_x_m": 0.055791988068760186,
+      "seed": 502,
+      "start": "upright",
+      "steps": 10000,
+      "success": true
+    }
+  ],
+  "parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.8,
+    "approach_v": 0.3,
+    "bal_pw": 4.0,
+    "bw": 30.0,
+    "catch_a": 0.6,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.3,
+    "giveup": 0.8,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.124,
+    "pc1": -3.0,
+    "pc2": -4.0,
+    "phase_soft": 2.0,
+    "pw": 4.5,
+    "pz": 0.85,
+    "rail": 0.26,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.05,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "policy": "unchanged strict ReferencePolicy at1000Hz",
+  "provenance": {
+    "actuator": "1 kHz binary32 governor; perfect acceleration servo with force cap; no motor/slip/ISR/disabled coasting model",
+    "code_sha256": {
+      "contracts.py": "b17e1366ba4215e2dc5ed3adccf7df35f8ce5c403c0903fb3a6b5eae4734cc54",
+      "control/motion.py": "24bfb3adb5fa884e6c660c602048a4954945b97437925a8481ea3b42ba65fb10",
+      "control/parameters.py": "bb03d17fc50d1d32b038ff6c694224fcefa8e30037cf0f44f9690e9f855b38cb",
+      "control/policy.py": "2173b5f5eaafb8c9eb32cdf65584ee690131109595ecce5ea630efbe6c3d0a3c",
+      "control/reference.py": "ba3213a0024b6ad46e6cd51942662441956512e99f000a92b14ba0c69627ff68",
+      "control/tuned_parameters.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+      "learning/__init__.py": "5d9158d09f19d2799530a6abea916487d3e3b20e1f3bbaac502554eca4fb0b7a",
+      "learning/artifact.py": "77793377c16d6736fe5f81fcb6fd989a9b66aba9fbf81fc3db1a69c7b4619c6a",
+      "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+      "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+      "policies/__init__.py": "53ee2b630300d08d2ca6585b4ccdc38b39201059ce8c11d3b9399137a1737ba5",
+      "policies/host.py": "bcb160afa45b6cb6f4f06732dad1464931ec387be03ec9c34e0a7d381188a977",
+      "sim/backend.py": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+      "sim/config.py": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+      "sim/executor.py": "6b775473241b32a3b1c0cff669067226ba32f491ef3e51726e7ac9c1570b814f",
+      "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+      "simulation.py": "1c32358336577d14c45130db084ad3ef028e5e9753a8f9038ab92323547aa63b"
+    },
+    "command": [
+      "-"
+    ],
+    "dependencies": {
+      "mujoco": "3.15.0",
+      "numpy": "2.4.6"
+    },
+    "model_sha256": "ef1c567d69d201548b915b57552cd4e45536ad0a5b291eaeb218f993bfadf7e6",
+    "model_status": "provisional, not physically identified or accepted",
+    "prior": "handwritten energy shaping and linear balance feedback initialized from saved gains; all structure disclosed",
+    "python": "3.11.7"
+  },
+  "sensor_config": {
+    "angle_noise_std": 0.0,
+    "angular_velocity_noise_std": 0.0,
+    "delay_steps": 0,
+    "dropout_probability": 0.0,
+    "frame_id": "sim:upright+x",
+    "position_noise_std": 0.0,
+    "sample_every_steps": 1,
+    "velocity_noise_std": 0.0
+  },
+  "simulation_config": {
+    "cart_damping": 0.05,
+    "cart_mass_kg": 0.35,
+    "control_steps": 1,
+    "effective_length_m": 0.124,
+    "hinge_damping": 0.0001,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 1000000000,
+    "max_force_n": 20.0,
+    "max_steps": 10000,
+    "physics_dt_ns": 1000000,
+    "pole_mass_kg": 0.02275,
+    "rail_half_m": 0.26
+  },
+  "success_definition": "last >=1 s continuously abs(theta)<.15 rad, abs(omega)<1 rad/s, abs(x)<.12 m; full horizon; no fault"
+}

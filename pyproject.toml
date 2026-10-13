@@ -12,12 +12,23 @@ dependencies = []
 
 [project.scripts]
 cartpole-v2 = "cartpole_sdk.cli:main"
+cartpole-console = "cartpole_sdk.rig.console:main"
+cartpole-v2-view = "cartpole_sdk.sim.viewer:launch"
+cartpole-portal = "cartpole_sdk.portal.server:main"
+cartpole-worker = "cartpole_sdk.portal.worker:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [project.optional-dependencies]
+hardware = ["pyserial>=3.5,<4"]
 sim = ["mujoco>=3.15,<4", "gymnasium>=1.0,<2", "numpy>=1.26,<3"]
 
 [tool.setuptools.package-data]
-cartpole_sdk = ["control/*.json", "sim/*.json", "sim/*.xml"]
+cartpole_sdk = ["control/*.json", "sim/*.json", "sim/*.xml", "portal/web/*.html", "portal/web/*.js", "portal/web/*.css"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

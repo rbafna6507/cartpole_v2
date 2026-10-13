@@ -1,0 +1,653 @@
+{
+  "kind": "actual low-amplitude executor characterization identification assessment",
+  "datasets": [
+    {
+      "name": "train1",
+      "sample_count": 4998,
+      "duration_s": 19.995993,
+      "max_gap_s": 0.007999999999924512,
+      "min_gap_s": 0.003993000000036773,
+      "gaps_over_005_s": 0,
+      "angle_unwrapped_span_rad": 0.047553999999999874,
+      "angle_std_rad": 0.006894370364052347,
+      "theta_rad_range": [
+        3.01734,
+        3.064894
+      ],
+      "median_hanging_pi_difference_rad": -0.10891265358979307,
+      "early_ramp_hanging_pi_difference_rad": -0.10584465358979323,
+      "command_acceleration_std_m_s2": 0.06407606861849309,
+      "command_acceleration_range_m_s2": [
+        -0.1274124,
+        0.1270368
+      ],
+      "requested_demand_std_m_s2": 0.06407940465946925,
+      "requested_demand_range_m_s2": [
+        -0.12741242102738548,
+        0.12703678355155537
+      ],
+      "request_at_clip_count": 0,
+      "step_cart_peak_abs_m": 0.0013125,
+      "step_cart_velocity_peak_abs_m_s": 0.01338909,
+      "final_disabled": true,
+      "final_fault": 0,
+      "final_misses": 0,
+      "amplitude_m": 0.0005,
+      "frequencies_hz": [
+        0.8,
+        1.3,
+        2.1
+      ],
+      "canonical_file": "evidence/phase4/executor-train1-rows.jsonl",
+      "canonical_sha256": "3a208e784a6342891c2b36463d8e14aadd9d628f2bcbfc53ea74b162bf6d6a7a",
+      "omega_omitted": "filtered firmware omega effective timestamp is unknown",
+      "acceleration_basis": "sampled MCU commanded/profile acceleration; not subsequently sent demand; not independent cart measurement"
+    },
+    {
+      "name": "validation1",
+      "sample_count": 5000,
+      "duration_s": 19.996000000000095,
+      "max_gap_s": 0.004000000000019099,
+      "min_gap_s": 0.0039999999999054126,
+      "gaps_over_005_s": 0,
+      "angle_unwrapped_span_rad": 0.03988399999999981,
+      "angle_std_rad": 0.005607765530079921,
+      "theta_rad_range": [
+        3.020408,
+        3.060292
+      ],
+      "median_hanging_pi_difference_rad": -0.110446653589793,
+      "early_ramp_hanging_pi_difference_rad": -0.10737865358979315,
+      "command_acceleration_std_m_s2": 0.06349997829869287,
+      "command_acceleration_range_m_s2": [
+        -0.128814,
+        0.128561
+      ],
+      "requested_demand_std_m_s2": 0.06349697473892184,
+      "requested_demand_range_m_s2": [
+        -0.12881400579551236,
+        0.1285610396652471
+      ],
+      "request_at_clip_count": 0,
+      "step_cart_peak_abs_m": 0.0010875,
+      "step_cart_velocity_peak_abs_m_s": 0.01185393,
+      "final_disabled": true,
+      "final_fault": 0,
+      "final_misses": 0,
+      "amplitude_m": 0.0004,
+      "frequencies_hz": [
+        0.7,
+        1.6,
+        2.3
+      ],
+      "canonical_file": "evidence/phase4/executor-validation1-rows.jsonl",
+      "canonical_sha256": "df6c5744411d532eb324fd1f460962260f861edfb2907b87bfceda91770561af",
+      "omega_omitted": "filtered firmware omega effective timestamp is unknown",
+      "acceleration_basis": "sampled MCU commanded/profile acceleration; not subsequently sent demand; not independent cart measurement"
+    }
+  ],
+  "provenance": {
+    "source_gzip_sha256": "892fad8152ba2a352a009a9c74618159da8dec7d7c58b58ff970c08af511e75c",
+    "decoded_json_sha256": "7fb6ff7274d2508a226938d284ef7c3a162ec9fb004696fd178b36a17c6c27ef",
+    "command_procedure_sha256": "36dc9bbdd8559f81203fe94e80eb2818e224bea6c07f45546f7db100551437df",
+    "run_log_sha256": "9059863952e6eb9c2f2774fa046e895830047ac7013e107a19cd5cda03050ff5",
+    "generator_sha256": "0f6d136f5b0a6648f3593dce5e73d19793767f9bb357e0e586bc8fe7811ca6e3",
+    "hardware_access": false,
+    "calibration_modified": false,
+    "source_position_basis": "step-derived only; no independent metric cart signal",
+    "source_info": {
+      "sid": 44714543,
+      "firmware": "executor-v1",
+      "encoder_upright_raw": 3485,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 0,
+      "home_epoch": 3,
+      "measured_span_steps": 0,
+      "rail_half_m": 0.26,
+      "received_ns": 28921378023336
+    },
+    "planned_bounds": {
+      "train1": {
+        "max_target_x_m": 0.0012979772177315033,
+        "max_target_v_m_s": 0.013194689145077133,
+        "max_feedforward_a_m_s2": 0.12322158312082343
+      },
+      "validation1": {
+        "max_target_x_m": 0.0010331453178119869,
+        "max_target_v_m_s": 0.011561060965210437,
+        "max_feedforward_a_m_s2": 0.12500341514937116
+      }
+    },
+    "hard_host_guards": {
+      "abs_x_m": 0.015,
+      "abs_v_m_s": 0.03,
+      "abs_a_m_s2": 0.25,
+      "abs_omega_rad_s": 10
+    }
+  },
+  "unmodified_encoder_fit": {
+    "accepted": false,
+    "parameters": {},
+    "uncertainty": {
+      "coefficient_standard_errors": {
+        "alpha_per_s2": 0.1960495026887577,
+        "gamma_per_s": 0.5405168731092475,
+        "beta_per_m": 0.5054300141913836
+      },
+      "delay_profile_near_optimal_s": [
+        0.0,
+        0.005,
+        0.01,
+        0.015
+      ],
+      "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+      "effective_length_standard_error_m": null
+    },
+    "training": {
+      "segment_count": 1,
+      "sample_count": 4998,
+      "delay_profile": [
+        {
+          "delay_s": 0.0,
+          "mean_squared_integral_residual": 3.2628098672379614e-06
+        },
+        {
+          "delay_s": 0.005,
+          "mean_squared_integral_residual": 3.1699071444178786e-06
+        },
+        {
+          "delay_s": 0.01,
+          "mean_squared_integral_residual": 3.1805381102949714e-06
+        },
+        {
+          "delay_s": 0.015,
+          "mean_squared_integral_residual": 3.3046144877384203e-06
+        },
+        {
+          "delay_s": 0.02,
+          "mean_squared_integral_residual": 3.5547640703503563e-06
+        },
+        {
+          "delay_s": 0.025,
+          "mean_squared_integral_residual": 3.943860864692108e-06
+        },
+        {
+          "delay_s": 0.03,
+          "mean_squared_integral_residual": 4.492907894249204e-06
+        },
+        {
+          "delay_s": 0.035,
+          "mean_squared_integral_residual": 5.225287350505897e-06
+        },
+        {
+          "delay_s": 0.04,
+          "mean_squared_integral_residual": 6.169189321582258e-06
+        },
+        {
+          "delay_s": 0.045,
+          "mean_squared_integral_residual": 7.352180751123964e-06
+        },
+        {
+          "delay_s": 0.05,
+          "mean_squared_integral_residual": 8.815926716295186e-06
+        },
+        {
+          "delay_s": 0.055,
+          "mean_squared_integral_residual": 1.0600438410727618e-05
+        },
+        {
+          "delay_s": 0.06,
+          "mean_squared_integral_residual": 1.274444060953463e-05
+        },
+        {
+          "delay_s": 0.065,
+          "mean_squared_integral_residual": 1.5271553931488342e-05
+        },
+        {
+          "delay_s": 0.07,
+          "mean_squared_integral_residual": 1.8195420794392858e-05
+        },
+        {
+          "delay_s": 0.075,
+          "mean_squared_integral_residual": 2.147898514264494e-05
+        },
+        {
+          "delay_s": 0.08,
+          "mean_squared_integral_residual": 2.501183492198023e-05
+        },
+        {
+          "delay_s": 0.085,
+          "mean_squared_integral_residual": 2.857842819140483e-05
+        },
+        {
+          "delay_s": 0.09,
+          "mean_squared_integral_residual": 3.1861480250757184e-05
+        },
+        {
+          "delay_s": 0.095,
+          "mean_squared_integral_residual": 3.445765205724383e-05
+        },
+        {
+          "delay_s": 0.1,
+          "mean_squared_integral_residual": 3.5977898637698296e-05
+        }
+      ],
+      "angle_zero_diagnostic": {
+        "rank": 5,
+        "condition": 74.23115788367642,
+        "identifiable": true,
+        "gravity_offset_rad": -0.10869937297256585,
+        "input_offset_rad": 1.186756324540227
+      },
+      "window_count": 56,
+      "rank": 3,
+      "condition": 1.4525937612145678,
+      "integral_nrmse": 0.29567814218190275,
+      "angle_span_rad": 0.047553999999999874,
+      "acceleration_std_m_s2": 0.06407606861849309
+    },
+    "validation": {
+      "prediction_windows": 39,
+      "prediction_samples": 4875,
+      "prediction_rmse_rad": 0.05027477896094413,
+      "prediction_p95_rad": 0.11130652401524248,
+      "horizon_s": 0.5,
+      "segment_count": 1,
+      "integral_nrmse": 0.2645063961018727
+    },
+    "reasons": [
+      "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+      "gravity coefficient is nonpositive",
+      "insufficient angle/input excitation",
+      "training integral residual exceeds threshold",
+      "held-out prediction or integral residual exceeds threshold/coverage"
+    ],
+    "provenance": {
+      "source": "magnetic",
+      "acceleration_kind": "commanded",
+      "training_sha256": "0ae52b09239dfb48536743ec3924cd8ab209f35032bf1c6fb99752a1eb0b930e",
+      "validation_sha256": "ca779549cc6e60b196562bea9e39582e886007361b1088bce8f7a84f8730e58a",
+      "training_run_ids": [
+        "train1"
+      ],
+      "validation_run_ids": [
+        "validation1"
+      ],
+      "config": {
+        "gravity_m_s2": 9.81,
+        "length_bounds_m": [
+          0.05,
+          1.5
+        ],
+        "gain_bounds": [
+          0.05,
+          3.0
+        ],
+        "max_damping_per_s": 5.0,
+        "angle_offset_rad": 0.0,
+        "max_angle_zero_bias_rad": 0.02,
+        "max_gap_s": 0.05,
+        "window_s": 0.35,
+        "delay_candidates_s": [
+          0.0,
+          0.005,
+          0.01,
+          0.015,
+          0.02,
+          0.025,
+          0.03,
+          0.035,
+          0.04,
+          0.045,
+          0.05,
+          0.055,
+          0.06,
+          0.065,
+          0.07,
+          0.075,
+          0.08,
+          0.085,
+          0.09,
+          0.095,
+          0.1
+        ],
+        "min_windows": 20,
+        "max_condition": 1000.0,
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05,
+        "prediction_horizon_s": 0.5,
+        "max_prediction_rmse_rad": 0.08,
+        "max_prediction_p95_rad": 0.15,
+        "max_integral_nrmse": 0.15
+      },
+      "supplied": {
+        "source_gzip_sha256": "892fad8152ba2a352a009a9c74618159da8dec7d7c58b58ff970c08af511e75c",
+        "decoded_json_sha256": "7fb6ff7274d2508a226938d284ef7c3a162ec9fb004696fd178b36a17c6c27ef",
+        "command_procedure_sha256": "36dc9bbdd8559f81203fe94e80eb2818e224bea6c07f45546f7db100551437df",
+        "run_log_sha256": "9059863952e6eb9c2f2774fa046e895830047ac7013e107a19cd5cda03050ff5",
+        "generator_sha256": "0f6d136f5b0a6648f3593dce5e73d19793767f9bb357e0e586bc8fe7811ca6e3",
+        "hardware_access": false,
+        "calibration_modified": false,
+        "source_position_basis": "step-derived only; no independent metric cart signal",
+        "source_info": {
+          "sid": 44714543,
+          "firmware": "executor-v1",
+          "encoder_upright_raw": 3485,
+          "reference_saved": true,
+          "mag_status": 103,
+          "i2c_errors": 0,
+          "home_epoch": 3,
+          "measured_span_steps": 0,
+          "rail_half_m": 0.26,
+          "received_ns": 28921378023336
+        },
+        "planned_bounds": {
+          "train1": {
+            "max_target_x_m": 0.0012979772177315033,
+            "max_target_v_m_s": 0.013194689145077133,
+            "max_feedforward_a_m_s2": 0.12322158312082343
+          },
+          "validation1": {
+            "max_target_x_m": 0.0010331453178119869,
+            "max_target_v_m_s": 0.011561060965210437,
+            "max_feedforward_a_m_s2": 0.12500341514937116
+          }
+        },
+        "hard_host_guards": {
+          "abs_x_m": 0.015,
+          "abs_v_m_s": 0.03,
+          "abs_a_m_s2": 0.25,
+          "abs_omega_rad_s": 10
+        }
+      }
+    },
+    "assumptions": [
+      "upright theta=0; positive theta follows cart +x rotation",
+      "rigid planar pendulum; constant effective length; linear viscous angular damping",
+      "sampling captures less than pi angular motion per valid interval",
+      "acceleration and angle share a calibrated monotonic clock",
+      "commanded input gain/delay include actuator, estimator and clock effects",
+      "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+    ],
+    "unidentifiable": [
+      "cart_mass_kg",
+      "pole_mass_kg",
+      "force_gain_N_per_command",
+      "hinge_damping_N_m_s"
+    ],
+    "recommended_model": null
+  },
+  "fixed_prior_offset_sensitivity": {
+    "assumed_offset_rad": -0.11159265358979331,
+    "physical_acceptance_allowed": false,
+    "report": {
+      "accepted": false,
+      "parameters": {
+        "effective_length_m": 0.48351501438893707,
+        "input_gain": 4.7864292501196015,
+        "angular_damping_per_s": 3.796265996459138,
+        "damping_ratio": 0.42140250981201366,
+        "delay_s": 0.01
+      },
+      "uncertainty": {
+        "coefficient_standard_errors": {
+          "alpha_per_s2": 3.0737453782169815,
+          "gamma_per_s": 0.4382689115745822,
+          "beta_per_m": 0.5081921660680369
+        },
+        "delay_profile_near_optimal_s": [
+          0.005,
+          0.01,
+          0.015
+        ],
+        "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+        "effective_length_standard_error_m": 0.0732518859460676
+      },
+      "training": {
+        "segment_count": 1,
+        "sample_count": 4998,
+        "delay_profile": [
+          {
+            "delay_s": 0.0,
+            "mean_squared_integral_residual": 1.9304401212513853e-06
+          },
+          {
+            "delay_s": 0.005,
+            "mean_squared_integral_residual": 1.814604052242919e-06
+          },
+          {
+            "delay_s": 0.01,
+            "mean_squared_integral_residual": 1.769300488477495e-06
+          },
+          {
+            "delay_s": 0.015,
+            "mean_squared_integral_residual": 1.7999364572723468e-06
+          },
+          {
+            "delay_s": 0.02,
+            "mean_squared_integral_residual": 1.912128312137613e-06
+          },
+          {
+            "delay_s": 0.025,
+            "mean_squared_integral_residual": 2.111011346341308e-06
+          },
+          {
+            "delay_s": 0.03,
+            "mean_squared_integral_residual": 2.4036729714069606e-06
+          },
+          {
+            "delay_s": 0.035,
+            "mean_squared_integral_residual": 2.7965763392114993e-06
+          },
+          {
+            "delay_s": 0.04,
+            "mean_squared_integral_residual": 3.295800302969873e-06
+          },
+          {
+            "delay_s": 0.045,
+            "mean_squared_integral_residual": 3.904578899578728e-06
+          },
+          {
+            "delay_s": 0.05,
+            "mean_squared_integral_residual": 4.62769299660933e-06
+          },
+          {
+            "delay_s": 0.055,
+            "mean_squared_integral_residual": 5.4650584814466185e-06
+          },
+          {
+            "delay_s": 0.06,
+            "mean_squared_integral_residual": 6.411434570220967e-06
+          },
+          {
+            "delay_s": 0.065,
+            "mean_squared_integral_residual": 7.452213392394861e-06
+          },
+          {
+            "delay_s": 0.07,
+            "mean_squared_integral_residual": 8.568046178615033e-06
+          },
+          {
+            "delay_s": 0.075,
+            "mean_squared_integral_residual": 9.725495722142908e-06
+          },
+          {
+            "delay_s": 0.08,
+            "mean_squared_integral_residual": 1.0878354113727688e-05
+          },
+          {
+            "delay_s": 0.085,
+            "mean_squared_integral_residual": 1.1967661042495239e-05
+          },
+          {
+            "delay_s": 0.09,
+            "mean_squared_integral_residual": 1.2929369159324575e-05
+          },
+          {
+            "delay_s": 0.095,
+            "mean_squared_integral_residual": 1.3696280384402408e-05
+          },
+          {
+            "delay_s": 0.1,
+            "mean_squared_integral_residual": 1.4209678937275216e-05
+          }
+        ],
+        "angle_zero_diagnostic": {
+          "rank": 5,
+          "condition": 4.318107359375394,
+          "identifiable": true,
+          "gravity_offset_rad": 0.002990290495404671,
+          "input_offset_rad": 1.3637258303521886
+        },
+        "window_count": 56,
+        "rank": 3,
+        "condition": 2.4821062379614243,
+        "integral_nrmse": 0.22090052556018966,
+        "angle_span_rad": 0.047553999999999874,
+        "acceleration_std_m_s2": 0.06407606861849309
+      },
+      "validation": {
+        "prediction_windows": 39,
+        "prediction_samples": 4875,
+        "prediction_rmse_rad": 0.03501651513601991,
+        "prediction_p95_rad": 0.07553568926402061,
+        "horizon_s": 0.5,
+        "segment_count": 1,
+        "integral_nrmse": 0.25291552133698497
+      },
+      "reasons": [
+        "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+        "input gain outside prior bounds",
+        "insufficient angle/input excitation",
+        "training integral residual exceeds threshold",
+        "held-out prediction or integral residual exceeds threshold/coverage"
+      ],
+      "provenance": {
+        "source": "magnetic",
+        "acceleration_kind": "commanded",
+        "training_sha256": "0ae52b09239dfb48536743ec3924cd8ab209f35032bf1c6fb99752a1eb0b930e",
+        "validation_sha256": "ca779549cc6e60b196562bea9e39582e886007361b1088bce8f7a84f8730e58a",
+        "training_run_ids": [
+          "train1"
+        ],
+        "validation_run_ids": [
+          "validation1"
+        ],
+        "config": {
+          "gravity_m_s2": 9.81,
+          "length_bounds_m": [
+            0.05,
+            1.5
+          ],
+          "gain_bounds": [
+            0.05,
+            3.0
+          ],
+          "max_damping_per_s": 5.0,
+          "angle_offset_rad": -0.11159265358979331,
+          "max_angle_zero_bias_rad": 0.02,
+          "max_gap_s": 0.05,
+          "window_s": 0.35,
+          "delay_candidates_s": [
+            0.0,
+            0.005,
+            0.01,
+            0.015,
+            0.02,
+            0.025,
+            0.03,
+            0.035,
+            0.04,
+            0.045,
+            0.05,
+            0.055,
+            0.06,
+            0.065,
+            0.07,
+            0.075,
+            0.08,
+            0.085,
+            0.09,
+            0.095,
+            0.1
+          ],
+          "min_windows": 20,
+          "max_condition": 1000.0,
+          "min_angle_span_rad": 0.15,
+          "min_acceleration_rms_m_s2": 0.05,
+          "prediction_horizon_s": 0.5,
+          "max_prediction_rmse_rad": 0.08,
+          "max_prediction_p95_rad": 0.15,
+          "max_integral_nrmse": 0.15
+        },
+        "supplied": {
+          "source_gzip_sha256": "892fad8152ba2a352a009a9c74618159da8dec7d7c58b58ff970c08af511e75c",
+          "decoded_json_sha256": "7fb6ff7274d2508a226938d284ef7c3a162ec9fb004696fd178b36a17c6c27ef",
+          "command_procedure_sha256": "36dc9bbdd8559f81203fe94e80eb2818e224bea6c07f45546f7db100551437df",
+          "run_log_sha256": "9059863952e6eb9c2f2774fa046e895830047ac7013e107a19cd5cda03050ff5",
+          "generator_sha256": "0f6d136f5b0a6648f3593dce5e73d19793767f9bb357e0e586bc8fe7811ca6e3",
+          "hardware_access": false,
+          "calibration_modified": false,
+          "source_position_basis": "step-derived only; no independent metric cart signal",
+          "source_info": {
+            "sid": 44714543,
+            "firmware": "executor-v1",
+            "encoder_upright_raw": 3485,
+            "reference_saved": true,
+            "mag_status": 103,
+            "i2c_errors": 0,
+            "home_epoch": 3,
+            "measured_span_steps": 0,
+            "rail_half_m": 0.26,
+            "received_ns": 28921378023336
+          },
+          "planned_bounds": {
+            "train1": {
+              "max_target_x_m": 0.0012979772177315033,
+              "max_target_v_m_s": 0.013194689145077133,
+              "max_feedforward_a_m_s2": 0.12322158312082343
+            },
+            "validation1": {
+              "max_target_x_m": 0.0010331453178119869,
+              "max_target_v_m_s": 0.011561060965210437,
+              "max_feedforward_a_m_s2": 0.12500341514937116
+            }
+          },
+          "hard_host_guards": {
+            "abs_x_m": 0.015,
+            "abs_v_m_s": 0.03,
+            "abs_a_m_s2": 0.25,
+            "abs_omega_rad_s": 10
+          },
+          "offset_basis": "prior parent-reported hanging equilibrium3.03rad; sensitivity only; not commissioned correction"
+        }
+      },
+      "assumptions": [
+        "upright theta=0; positive theta follows cart +x rotation",
+        "rigid planar pendulum; constant effective length; linear viscous angular damping",
+        "sampling captures less than pi angular motion per valid interval",
+        "acceleration and angle share a calibrated monotonic clock",
+        "commanded input gain/delay include actuator, estimator and clock effects",
+        "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+      ],
+      "unidentifiable": [
+        "cart_mass_kg",
+        "pole_mass_kg",
+        "force_gain_N_per_command",
+        "hinge_damping_N_m_s"
+      ],
+      "recommended_model": null
+    }
+  },
+  "accepted_physical_model": false,
+  "recommended_physical_model": null,
+  "limitations": [
+    "Both cart displacement/velocity and sampled acceleration derive from executor step/profile state",
+    "PD40/8 feedback on step-derived cart state contributes to commanded input; gain/delay are composite quantities",
+    "Reported hanging bias may be angle dependent; a local hanging offset is not a calibrated global upright correction",
+    "One pair of low-amplitude trials does not replace repeated trials and independent cart/angle measurements",
+    "No known-rate timestamp for filtered omega; angle-only heldout initialization",
+    "Sensitivity result cannot establish physical calibration or commission a model"
+  ]
+}

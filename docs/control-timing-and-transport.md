@@ -1,8 +1,11 @@
 # Control timing, language, and Jetson–Teensy transport
 
-Assessment: 2026-10-13. Recommendations below are design targets, not measured
-capabilities of the new host control path. Phase 0 does not raise telemetry rates
-or change firmware/controller behavior.
+The Phase 0 design assessment below is retained as historical context. The new
+executor now supports 100/250/500/1000 Hz USB telemetry and bounded external
+acceleration. Current measured results appear in the final section; these short
+checks do not establish hard real-time host control.
+
+## Phase 0 design assessment (2026-10-13)
 
 ## Can 100 Hz be increased?
 
@@ -98,3 +101,20 @@ contract, and changing one must not change policy semantics.
 Limit switches are not yet implemented. Add them to the future Teensy safety
 executor and commission stopping behavior separately; increasing telemetry rate
 does not establish physical containment.
+
+## Later live executor measurements (2026-10-13)
+
+The new executor removes the archived 100 Hz ceiling. With vision running and the
+motor supply off, two-second stopped measurements delivered all board snapshots
+at 100/250/500/1000 Hz with zero new MCU deadline misses or active-reader drops.
+The serial adapter now drains available bytes rather than waiting for a 512-byte
+buffer to fill. At 250 Hz its host-arrival median was 3.99 ms, p99 7.28 ms, max 9.08 ms;
+at 1000 Hz median 0.933 ms, p99 4.18 ms, max 7.00 ms. These intervals include host scheduling
+and parser effects; they are not sensor-to-action latency or hard real-time bounds.
+The before/after records are under `evidence/phase3`.
+
+A live 250 Hz zero-command loop and 20 ms action-expiry test passed. The preserved
+onboard 1 kHz controller also completed a 10 s SDK-commanded swing-up/balance trial.
+Neither establishes full host-controller stability at 250 Hz. USB remains the
+implemented new transport; the archived Ethernet path was not benchmarked or
+ported into the new executor in this phase.

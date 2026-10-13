@@ -1,0 +1,538 @@
+{
+  "kind": "preliminary actual rig data sufficiency/fit assessment",
+  "datasets": [
+    {
+      "input_file": "/tmp/cartpole-next/baseline-runs/baseline-20261013T223445Z/telemetry.json",
+      "input_sha256": "95a744d35afee59e5567ec9ed1bce25f034af2ef79a304e42769d89c92cccbe5",
+      "canonical_file": "evidence/phase4/baseline-20261013T223445Z-rows.jsonl",
+      "explicit_columns": [
+        "t_ms",
+        "mode",
+        "theta",
+        "theta_dot",
+        "x",
+        "v",
+        "accel",
+        "energy",
+        "z1",
+        "z2",
+        "agc",
+        "loop_us"
+      ],
+      "sample_count": 159,
+      "duration_s": 1.5799999999999272,
+      "max_gap_s": 0.010000000000218279,
+      "angle_unwrapped_span_rad": 5.075885307179586,
+      "command_acceleration_std_m_s2": 5.258609250698589,
+      "commanded_nonzero_samples": 138,
+      "mode_counts": {
+        "0": 21,
+        "2": 138
+      },
+      "step_cart_start_m": 0.0,
+      "step_cart_end_m": 0.18251,
+      "step_cart_max_abs_m": 0.18251,
+      "idle_median_hanging_pi_error_rad": -0.11809265358979326,
+      "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+      "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+    },
+    {
+      "input_file": "/tmp/cartpole-next/baseline-runs/recenter-20261013T223550Z/telemetry.json",
+      "input_sha256": "51a394a84ad7c9276860661f44ee8d2b6dca274bb9552c770e176c26aaa1b229",
+      "canonical_file": "evidence/phase4/recenter-20261013T223550Z-rows.jsonl",
+      "explicit_columns": [
+        "t_ms",
+        "mode",
+        "theta",
+        "theta_dot",
+        "x",
+        "v",
+        "accel",
+        "energy",
+        "z1",
+        "z2",
+        "agc",
+        "loop_us"
+      ],
+      "sample_count": 1602,
+      "duration_s": 16.01300000000083,
+      "max_gap_s": 0.011000000000422006,
+      "angle_unwrapped_span_rad": 0.2301853071795863,
+      "command_acceleration_std_m_s2": 0.05098922051178979,
+      "commanded_nonzero_samples": 29,
+      "mode_counts": {
+        "0": 1226,
+        "1": 376
+      },
+      "step_cart_start_m": 0.18304,
+      "step_cart_end_m": 0.00203,
+      "step_cart_max_abs_m": 0.18304,
+      "idle_median_hanging_pi_error_rad": -0.12579265358979308,
+      "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+      "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+    }
+  ],
+  "baseline_train_recenter_holdout": {
+    "accepted": false,
+    "parameters": {},
+    "uncertainty": {},
+    "training": {
+      "segment_count": 1,
+      "sample_count": 159,
+      "delay_profile": []
+    },
+    "validation": {},
+    "reasons": [
+      "insufficient windows, rank or excitation"
+    ],
+    "provenance": {
+      "source": "magnetic",
+      "acceleration_kind": "commanded",
+      "training_sha256": "944293aba47cee37f9eb3e8cfb0f469c9df63f4e1187d3ae96d37844037dc2d1",
+      "validation_sha256": "cadb5360656bfa310b026060ea10297186e619489021b6603b2928bdba1bc0c3",
+      "training_run_ids": [
+        "baseline-20261013T223445Z"
+      ],
+      "validation_run_ids": [
+        "recenter-20261013T223550Z"
+      ],
+      "config": {
+        "gravity_m_s2": 9.81,
+        "length_bounds_m": [
+          0.05,
+          1.5
+        ],
+        "gain_bounds": [
+          0.05,
+          3.0
+        ],
+        "max_damping_per_s": 5.0,
+        "angle_offset_rad": 0.0,
+        "max_angle_zero_bias_rad": 0.02,
+        "max_gap_s": 0.05,
+        "window_s": 0.35,
+        "delay_candidates_s": [
+          0.0,
+          0.005,
+          0.01,
+          0.015,
+          0.02,
+          0.025,
+          0.03,
+          0.035,
+          0.04,
+          0.045,
+          0.05,
+          0.055,
+          0.06,
+          0.065,
+          0.07,
+          0.075,
+          0.08,
+          0.085,
+          0.09,
+          0.095,
+          0.1
+        ],
+        "min_windows": 20,
+        "max_condition": 1000.0,
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05,
+        "prediction_horizon_s": 0.5,
+        "max_prediction_rmse_rad": 0.08,
+        "max_prediction_p95_rad": 0.15,
+        "max_integral_nrmse": 0.15
+      },
+      "supplied": {
+        "datasets": [
+          {
+            "input_file": "/tmp/cartpole-next/baseline-runs/baseline-20261013T223445Z/telemetry.json",
+            "input_sha256": "95a744d35afee59e5567ec9ed1bce25f034af2ef79a304e42769d89c92cccbe5",
+            "canonical_file": "evidence/phase4/baseline-20261013T223445Z-rows.jsonl",
+            "explicit_columns": [
+              "t_ms",
+              "mode",
+              "theta",
+              "theta_dot",
+              "x",
+              "v",
+              "accel",
+              "energy",
+              "z1",
+              "z2",
+              "agc",
+              "loop_us"
+            ],
+            "sample_count": 159,
+            "duration_s": 1.5799999999999272,
+            "max_gap_s": 0.010000000000218279,
+            "angle_unwrapped_span_rad": 5.075885307179586,
+            "command_acceleration_std_m_s2": 5.258609250698589,
+            "commanded_nonzero_samples": 138,
+            "mode_counts": {
+              "0": 21,
+              "2": 138
+            },
+            "step_cart_start_m": 0.0,
+            "step_cart_end_m": 0.18251,
+            "step_cart_max_abs_m": 0.18251,
+            "idle_median_hanging_pi_error_rad": -0.11809265358979326,
+            "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+            "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+          },
+          {
+            "input_file": "/tmp/cartpole-next/baseline-runs/recenter-20261013T223550Z/telemetry.json",
+            "input_sha256": "51a394a84ad7c9276860661f44ee8d2b6dca274bb9552c770e176c26aaa1b229",
+            "canonical_file": "evidence/phase4/recenter-20261013T223550Z-rows.jsonl",
+            "explicit_columns": [
+              "t_ms",
+              "mode",
+              "theta",
+              "theta_dot",
+              "x",
+              "v",
+              "accel",
+              "energy",
+              "z1",
+              "z2",
+              "agc",
+              "loop_us"
+            ],
+            "sample_count": 1602,
+            "duration_s": 16.01300000000083,
+            "max_gap_s": 0.011000000000422006,
+            "angle_unwrapped_span_rad": 0.2301853071795863,
+            "command_acceleration_std_m_s2": 0.05098922051178979,
+            "commanded_nonzero_samples": 29,
+            "mode_counts": {
+              "0": 1226,
+              "1": 376
+            },
+            "step_cart_start_m": 0.18304,
+            "step_cart_end_m": 0.00203,
+            "step_cart_max_abs_m": 0.18304,
+            "idle_median_hanging_pi_error_rad": -0.12579265358979308,
+            "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+            "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+          }
+        ]
+      }
+    },
+    "assumptions": [
+      "upright theta=0; positive theta follows cart +x rotation",
+      "rigid planar pendulum; constant effective length; linear viscous angular damping",
+      "sampling captures less than pi angular motion per valid interval",
+      "acceleration and angle share a calibrated monotonic clock",
+      "commanded input gain/delay include actuator, estimator and clock effects",
+      "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+    ],
+    "unidentifiable": [
+      "cart_mass_kg",
+      "pole_mass_kg",
+      "force_gain_N_per_command",
+      "hinge_damping_N_m_s"
+    ],
+    "recommended_model": null
+  },
+  "recenter_train_baseline_holdout": {
+    "accepted": false,
+    "parameters": {
+      "effective_length_m": 29.462941998941368,
+      "input_gain": 343.2848081205472,
+      "angular_damping_per_s": 11.311924579522545,
+      "damping_ratio": 9.801895247716876,
+      "delay_s": 0.1
+    },
+    "uncertainty": {
+      "coefficient_standard_errors": {
+        "alpha_per_s2": 0.1970978361099777,
+        "gamma_per_s": 0.8826463880436746,
+        "beta_per_m": 1.1885014507291192
+      },
+      "delay_profile_near_optimal_s": [
+        0.1
+      ],
+      "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+      "effective_length_standard_error_m": 17.440746533224697
+    },
+    "training": {
+      "segment_count": 1,
+      "sample_count": 1602,
+      "delay_profile": [
+        {
+          "delay_s": 0.0,
+          "mean_squared_integral_residual": 9.177141331217936e-06
+        },
+        {
+          "delay_s": 0.005,
+          "mean_squared_integral_residual": 9.07494324768322e-06
+        },
+        {
+          "delay_s": 0.01,
+          "mean_squared_integral_residual": 8.965023523485382e-06
+        },
+        {
+          "delay_s": 0.015,
+          "mean_squared_integral_residual": 8.82200952738503e-06
+        },
+        {
+          "delay_s": 0.02,
+          "mean_squared_integral_residual": 8.66655081581973e-06
+        },
+        {
+          "delay_s": 0.025,
+          "mean_squared_integral_residual": 8.467821066781456e-06
+        },
+        {
+          "delay_s": 0.03,
+          "mean_squared_integral_residual": 8.250863736123886e-06
+        },
+        {
+          "delay_s": 0.035,
+          "mean_squared_integral_residual": 7.981639846299639e-06
+        },
+        {
+          "delay_s": 0.04,
+          "mean_squared_integral_residual": 7.689056310991147e-06
+        },
+        {
+          "delay_s": 0.045,
+          "mean_squared_integral_residual": 7.3426456814041844e-06
+        },
+        {
+          "delay_s": 0.05,
+          "mean_squared_integral_residual": 6.972683447203944e-06
+        },
+        {
+          "delay_s": 0.055,
+          "mean_squared_integral_residual": 6.562357239106014e-06
+        },
+        {
+          "delay_s": 0.06,
+          "mean_squared_integral_residual": 6.137874850964223e-06
+        },
+        {
+          "delay_s": 0.065,
+          "mean_squared_integral_residual": 5.703577701068763e-06
+        },
+        {
+          "delay_s": 0.07,
+          "mean_squared_integral_residual": 5.273046826173859e-06
+        },
+        {
+          "delay_s": 0.075,
+          "mean_squared_integral_residual": 4.869926976687387e-06
+        },
+        {
+          "delay_s": 0.08,
+          "mean_squared_integral_residual": 4.487299339295164e-06
+        },
+        {
+          "delay_s": 0.085,
+          "mean_squared_integral_residual": 4.157762831467249e-06
+        },
+        {
+          "delay_s": 0.09,
+          "mean_squared_integral_residual": 3.854828133587484e-06
+        },
+        {
+          "delay_s": 0.095,
+          "mean_squared_integral_residual": 3.6097154018482724e-06
+        },
+        {
+          "delay_s": 0.1,
+          "mean_squared_integral_residual": 3.3871140773178206e-06
+        }
+      ],
+      "angle_zero_diagnostic": {
+        "rank": 5,
+        "condition": 735.1665458347569,
+        "identifiable": true,
+        "gravity_offset_rad": 3.0087138517538388,
+        "input_offset_rad": -1.6994715289330595
+      },
+      "window_count": 45,
+      "rank": 3,
+      "condition": 1.9610741285849962,
+      "integral_nrmse": 0.43929964286441664,
+      "angle_span_rad": 0.2301853071795863,
+      "acceleration_std_m_s2": 0.05098922051178979
+    },
+    "validation": {
+      "prediction_windows": 3,
+      "prediction_samples": 146,
+      "prediction_rmse_rad": 1.2758916765318302,
+      "prediction_p95_rad": 2.856380751407454,
+      "horizon_s": 0.5,
+      "segment_count": 1,
+      "integral_nrmse": 1.3434369559814434
+    },
+    "reasons": [
+      "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+      "effective length outside prior bounds",
+      "input gain outside prior bounds",
+      "angular damping outside nonnegative bounds",
+      "training integral residual exceeds threshold",
+      "delay hits maximum search boundary",
+      "held-out prediction or integral residual exceeds threshold/coverage"
+    ],
+    "provenance": {
+      "source": "magnetic",
+      "acceleration_kind": "commanded",
+      "training_sha256": "cadb5360656bfa310b026060ea10297186e619489021b6603b2928bdba1bc0c3",
+      "validation_sha256": "944293aba47cee37f9eb3e8cfb0f469c9df63f4e1187d3ae96d37844037dc2d1",
+      "training_run_ids": [
+        "recenter-20261013T223550Z"
+      ],
+      "validation_run_ids": [
+        "baseline-20261013T223445Z"
+      ],
+      "config": {
+        "gravity_m_s2": 9.81,
+        "length_bounds_m": [
+          0.05,
+          1.5
+        ],
+        "gain_bounds": [
+          0.05,
+          3.0
+        ],
+        "max_damping_per_s": 5.0,
+        "angle_offset_rad": 0.0,
+        "max_angle_zero_bias_rad": 0.02,
+        "max_gap_s": 0.05,
+        "window_s": 0.35,
+        "delay_candidates_s": [
+          0.0,
+          0.005,
+          0.01,
+          0.015,
+          0.02,
+          0.025,
+          0.03,
+          0.035,
+          0.04,
+          0.045,
+          0.05,
+          0.055,
+          0.06,
+          0.065,
+          0.07,
+          0.075,
+          0.08,
+          0.085,
+          0.09,
+          0.095,
+          0.1
+        ],
+        "min_windows": 20,
+        "max_condition": 1000.0,
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05,
+        "prediction_horizon_s": 0.5,
+        "max_prediction_rmse_rad": 0.08,
+        "max_prediction_p95_rad": 0.15,
+        "max_integral_nrmse": 0.15
+      },
+      "supplied": {
+        "datasets": [
+          {
+            "input_file": "/tmp/cartpole-next/baseline-runs/baseline-20261013T223445Z/telemetry.json",
+            "input_sha256": "95a744d35afee59e5567ec9ed1bce25f034af2ef79a304e42769d89c92cccbe5",
+            "canonical_file": "evidence/phase4/baseline-20261013T223445Z-rows.jsonl",
+            "explicit_columns": [
+              "t_ms",
+              "mode",
+              "theta",
+              "theta_dot",
+              "x",
+              "v",
+              "accel",
+              "energy",
+              "z1",
+              "z2",
+              "agc",
+              "loop_us"
+            ],
+            "sample_count": 159,
+            "duration_s": 1.5799999999999272,
+            "max_gap_s": 0.010000000000218279,
+            "angle_unwrapped_span_rad": 5.075885307179586,
+            "command_acceleration_std_m_s2": 5.258609250698589,
+            "commanded_nonzero_samples": 138,
+            "mode_counts": {
+              "0": 21,
+              "2": 138
+            },
+            "step_cart_start_m": 0.0,
+            "step_cart_end_m": 0.18251,
+            "step_cart_max_abs_m": 0.18251,
+            "idle_median_hanging_pi_error_rad": -0.11809265358979326,
+            "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+            "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+          },
+          {
+            "input_file": "/tmp/cartpole-next/baseline-runs/recenter-20261013T223550Z/telemetry.json",
+            "input_sha256": "51a394a84ad7c9276860661f44ee8d2b6dca274bb9552c770e176c26aaa1b229",
+            "canonical_file": "evidence/phase4/recenter-20261013T223550Z-rows.jsonl",
+            "explicit_columns": [
+              "t_ms",
+              "mode",
+              "theta",
+              "theta_dot",
+              "x",
+              "v",
+              "accel",
+              "energy",
+              "z1",
+              "z2",
+              "agc",
+              "loop_us"
+            ],
+            "sample_count": 1602,
+            "duration_s": 16.01300000000083,
+            "max_gap_s": 0.011000000000422006,
+            "angle_unwrapped_span_rad": 0.2301853071795863,
+            "command_acceleration_std_m_s2": 0.05098922051178979,
+            "commanded_nonzero_samples": 29,
+            "mode_counts": {
+              "0": 1226,
+              "1": 376
+            },
+            "step_cart_start_m": 0.18304,
+            "step_cart_end_m": 0.00203,
+            "step_cart_max_abs_m": 0.18304,
+            "idle_median_hanging_pi_error_rad": -0.12579265358979308,
+            "omega_omitted_reason": "filtered firmware omega effective time unknown; angle-only forecast initialization",
+            "valid_basis": "parent reports healthy magnetic state; records finite; no independent camera/cart truth"
+          }
+        ]
+      }
+    },
+    "assumptions": [
+      "upright theta=0; positive theta follows cart +x rotation",
+      "rigid planar pendulum; constant effective length; linear viscous angular damping",
+      "sampling captures less than pi angular motion per valid interval",
+      "acceleration and angle share a calibrated monotonic clock",
+      "commanded input gain/delay include actuator, estimator and clock effects",
+      "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+    ],
+    "unidentifiable": [
+      "cart_mass_kg",
+      "pole_mass_kg",
+      "force_gain_N_per_command",
+      "hinge_damping_N_m_s"
+    ],
+    "recommended_model": null
+  },
+  "accepted_physical_model": false,
+  "calibration_preserved": true,
+  "limitations": [
+    "Short auto trace cannot supply minimum independent regression windows",
+    "Recenter/passive trace has limited independent actuation excitation",
+    "Parent visually observes hanging pole but magnetic idle values are approximately 0.1\u20130.13rad from pi",
+    "Commands/step counts are not independently measured cart acceleration/travel",
+    "Vision angle invalid; cart template/metric calibration absent",
+    "No actual training/heldout model accepted; full bounded characterization after calibration investigation is required"
+  ]
+}

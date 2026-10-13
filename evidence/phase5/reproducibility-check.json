@@ -1,0 +1,226 @@
+{
+  "artifact_sha256": "eb5bb1102986e775161338d5c5954ed67c21102bf706b2431d0f0bfae8db6936",
+  "loaded_policy_example_raw_acceleration": 0.7612847490290576,
+  "pretraining_score": 3.597891643566657,
+  "source_hash_matches": {
+    "contracts.py": true,
+    "control/motion.py": true,
+    "control/parameters.py": true,
+    "control/tuned_parameters.json": true,
+    "learning/__init__.py": true,
+    "learning/artifact.py": true,
+    "learning/rollout.py": true,
+    "learning/search.py": true,
+    "policies/__init__.py": true,
+    "policies/host.py": true,
+    "sim/backend.py": true,
+    "sim/config.py": true,
+    "sim/executor.py": true,
+    "sim/model.py": true
+  },
+  "training_episodes": 6,
+  "training_replay": {
+    "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+    "episodes": [
+      {
+        "balanced_fraction": 0.853,
+        "fault_reason": null,
+        "final_balance_dwell_s": 8.529999999999863,
+        "final_state": {
+          "omega": 8.322670830284423e-07,
+          "theta": 5.592626017467582e-07,
+          "time_ns": 10000000000,
+          "v": -1.8634728649083665e-06,
+          "x": -9.303838631610143e-08
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.011142893916924012,
+          -3.6106877994251944e-05,
+          3.155802423657063,
+          -0.14139329748841664
+        ],
+        "max_abs_speed_m_s": 1.1495503255511028,
+        "max_abs_x_m": 0.23877331193660725,
+        "rail_braking_control_steps": 0,
+        "score": 3.4175138546351276,
+        "seed": 11,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": 2.165200831448863e-07,
+          "theta": -4.44493756302859e-08,
+          "time_ns": 10000000000,
+          "v": -8.581185643527588e-08,
+          "x": 4.9977304441834814e-08
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.008928277744054384,
+          0.02110987816975751,
+          0.058956803754438326,
+          0.035808162874826334
+        ],
+        "max_abs_speed_m_s": 0.1521405763778953,
+        "max_abs_x_m": 0.05195596924871622,
+        "rail_braking_control_steps": 0,
+        "score": 3.99926494974035,
+        "seed": 11,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 0.853,
+        "fault_reason": null,
+        "final_balance_dwell_s": 8.529999999999863,
+        "final_state": {
+          "omega": 7.918536091809356e-07,
+          "theta": 5.535396155169538e-07,
+          "time_ns": 10000000000,
+          "v": -1.818005906686614e-06,
+          "x": -9.689270657436682e-08
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.0074752662567466165,
+          0.02233764714297123,
+          3.0980975074253596,
+          -0.09621257687456772
+        ],
+        "max_abs_speed_m_s": 1.148947908934986,
+        "max_abs_x_m": 0.23855886474561638,
+        "rail_braking_control_steps": 0,
+        "score": 3.4184550916908494,
+        "seed": 12,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": -1.9015327938688513e-07,
+          "theta": 3.9975557152970743e-08,
+          "time_ns": 10000000000,
+          "v": 7.33899050565023e-08,
+          "x": -4.4258179226531086e-08
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          0.003864875952307739,
+          -0.004742450937268778,
+          -0.0698001081404718,
+          0.10037942927907785
+        ],
+        "max_abs_speed_m_s": 0.12806338922457147,
+        "max_abs_x_m": 0.0465949061930065,
+        "rail_braking_control_steps": 0,
+        "score": 3.9993957539007865,
+        "seed": 12,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 0.86,
+        "fault_reason": null,
+        "final_balance_dwell_s": 8.229999999999869,
+        "final_state": {
+          "omega": -2.088915231007801e-06,
+          "theta": 7.229676945094921e-07,
+          "time_ns": 10000000000,
+          "v": 2.0986380074711612e-07,
+          "x": -5.969209457475964e-07
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          0.010943927610497594,
+          0.01776512574660295,
+          3.185135929419601,
+          -0.07156609157505701
+        ],
+        "max_abs_speed_m_s": 1.2082174487758919,
+        "max_abs_x_m": 0.2334220977292047,
+        "rail_braking_control_steps": 0,
+        "score": 3.4025757534324512,
+        "seed": 13,
+        "start": "hanging",
+        "steps": 1000,
+        "success": true
+      },
+      {
+        "balanced_fraction": 1.0,
+        "fault_reason": null,
+        "final_balance_dwell_s": 9.999999999999831,
+        "final_state": {
+          "omega": -9.681454827786819e-08,
+          "theta": 1.7012934119774403e-08,
+          "time_ns": 10000000000,
+          "v": 4.438236316350312e-08,
+          "x": -2.1229413714043732e-08
+        },
+        "force_saturated_control_steps": 0,
+        "initial_state": [
+          -0.006495599637441039,
+          0.0007943386056538161,
+          -0.017965587664032927,
+          -0.08521499880401626
+        ],
+        "max_abs_speed_m_s": 0.05413544294675038,
+        "max_abs_x_m": 0.0258499218576085,
+        "rail_braking_control_steps": 0,
+        "score": 3.9998100483545365,
+        "seed": 13,
+        "start": "upright",
+        "steps": 1000,
+        "success": true
+      }
+    ],
+    "episodes_count": 6,
+    "mean_score": 3.706169241959017,
+    "model_status": "provisional; hardware unvalidated",
+    "objective": "time mean of cos(theta) - .3*(x/rail)^2 - .001*omega^2 - .0002*raw_accel^2 + 2 if abs(theta)<.15 and abs(omega)<1 and abs(x)<.12; uncompleted horizon reward=-3; + final continuous balance seconds/horizon",
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "sensor_config": {
+      "angle_noise_std": 0.0,
+      "angular_velocity_noise_std": 0.0,
+      "delay_steps": 0,
+      "dropout_probability": 0.0,
+      "frame_id": "sim:upright+x",
+      "position_noise_std": 0.0,
+      "sample_every_steps": 10,
+      "velocity_noise_std": 0.0
+    },
+    "simulation_config": {
+      "cart_damping": 0.05,
+      "cart_mass_kg": 0.35,
+      "control_steps": 10,
+      "effective_length_m": 0.124,
+      "hinge_damping": 0.0001,
+      "max_acceleration_m_s2": 25.0,
+      "max_action_ttl_ns": 1000000000,
+      "max_force_n": 20.0,
+      "max_steps": 1000,
+      "physics_dt_ns": 1000000,
+      "pole_mass_kg": 0.02275,
+      "rail_half_m": 0.26
+    },
+    "success_definition": "last >=1 s continuously abs(theta)<.15 rad, abs(omega)<1 rad/s, abs(x)<.12 m; full horizon; no fault",
+    "successes": 6
+  },
+  "training_score_reproduced": 3.706169241959017,
+  "training_successes": 6
+}

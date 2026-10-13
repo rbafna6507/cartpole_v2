@@ -1,10 +1,60 @@
 # Cartpole v2
 
-The SDK now includes the saved 1 kHz controller in Python, an independent native
-firmware comparison harness, and optional MuJoCo/Gymnasium simulation. Sensor
-channels, recordings and replay share the same policy contract. The working
-controller and vision3 remain preserved in `archive/`. Live control, the new
-Teensy executor and rig identification are next.
+The SDK now connects to a new Teensy safety executor, runs the preserved controller
+on hardware, and supports Python policies, MuJoCo simulation, policy training,
+recordings, source-specific sensing, and an isolated submission queue. The working
+controller and vision3 remain unchanged in `archive/`.
+
+The real SDK/Teensy path completed a ten-second swing-up/balance trial and a slow
+return to center. USB telemetry delivered up to 1,000 Hz in stopped tests; a
+250 Hz zero-command loop and action expiry were also verified. This does not
+establish hard real-time host control or hardware acceptance of learned policies.
+
+## Open the interactive demo
+
+```bash
+uv run --locked --extra sim cartpole-v2-view
+```
+
+Space pauses, R resets, and Esc exits. The command selects `mjpython` on macOS.
+The initial overlay deadlock is fixed and native rendering/pause/reset have been
+verified. Episodes intentionally freeze at 30 simulated seconds until R.
+See [viewer controls and verification](docs/viewer.md).
+
+## Use the new firmware and SDK
+
+With the executor already installed, inspect the stopped board on the Jetson:
+
+```bash
+uv run --locked --extra hardware cartpole-console \
+  --port /dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00 --command info
+```
+
+The console also provides `auto`, `bal`, external policies, homing, and explicit
+switchless commissioning. Read [rig usage](docs/rig-usage.md) before motion and
+[executor protocol and programming](docs/executor.md) before uploading firmware.
+**Motor power must be off during every flash, bootloader entry, or board reset.**
+The existing PCB does not hold the shared enable input disabled without firmware;
+clicking was observed during programming and the board was recovered with motor
+power off. A hardware default-disable circuit remains necessary.
+
+[PCB switch wiring](docs/pcb-switches.md) specifies normally-closed contacts and
+finite cart homing. Switches are implemented in software but are not physically
+installed/commissioned. D28/D29 remain interlocks; Z homing awaits mechanical
+switch-role confirmation. Every boot defaults to the switch interlock enabled.
+
+## Policies, identification and the portal
+
+- [Host-rate Python control and reproducible RL](docs/policies.md): separate
+  100/250 Hz controllers, raw-demand executor simulation, training and held-out
+  evaluation. The learned artifact is numeric JSON; hardware transfer is unproven.
+- [Sensing and physical identification](docs/identification.md): explicit clocks,
+  calibration, validity and held-out rejection. The MuJoCo plant remains provisional.
+- [Portal and isolated worker](docs/portal.md): authenticated immutable uploads,
+  durable single-rig queue, results and a Linux sandbox. The service defaults to
+  loopback. Public hosting and physical-switch commissioning remain deployment gates.
+- [Current implementation and acceptance state](docs/platform-status.md).
+- [Detailed execution plan](docs/live-rig-plan.md).
 
 ## Try the controller in simulation
 
@@ -36,12 +86,17 @@ The example is an illustrative mapping, not the tuned balancing controller.
 Outputs are never overwritten; choose fresh paths when repeating commands.
 
 See [SDK usage, data semantics and next integrations](docs/phase1-usage.md).
-Run all tests with `uv run --locked --extra sim python -m unittest discover -s tests`
-(C++17 compiler required for native parity tests).
+Run maintained tests with
+`uv run --locked --extra sim --extra hardware --group dev python -m pytest`
+(C++17 compiler required for native firmware tests). Archived projects retain
+their own separate environments and test commands.
 
 ## Run the baseline
 
-On the Jetson, from this repository's root, with `uv` installed:
+The archived console requires the original v33 firmware. The currently installed
+executor uses the new console above; the two wire protocols are different. Restore
+an archived firmware only with motor power off. With v33 installed, run from the
+repository root on the Jetson:
 
 ```bash
 uv run --project archive/good_balancing_jetson cartpole-console --rate 100
@@ -91,5 +146,5 @@ commands are intended to run from an editable repository checkout; this archive
 is not a standalone wheel distribution. Do not copy `.venv` between computers.
 
 No Jetson access, camera capture, firmware upload, or physical motion was performed
-during Phase 0. Limit switches are not implemented yet. New control or vision
-work must use new directories outside the preserved archived baselines.
+during Phase 0. New control and vision work uses directories outside the preserved archived
+baselines; later physical work is recorded under `evidence/phase3` and `phase4`.

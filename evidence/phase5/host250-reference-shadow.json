@@ -1,0 +1,69 @@
+{
+  "board_duration_s": 10.0,
+  "board_interval_us": {
+    "max": 4000,
+    "median": 4000.0,
+    "min": 4000
+  },
+  "channels": [
+    {
+      "entity": "cart",
+      "frame_id": "cart-step-home",
+      "quantity": "position",
+      "source": "step"
+    },
+    {
+      "entity": "cart",
+      "frame_id": "cart-step-home",
+      "quantity": "velocity",
+      "source": "step"
+    },
+    {
+      "entity": "pole",
+      "frame_id": "encoder-zero",
+      "quantity": "angle",
+      "source": "magnetic"
+    },
+    {
+      "entity": "pole",
+      "frame_id": "encoder-zero",
+      "quantity": "angular_velocity",
+      "source": "magnetic"
+    }
+  ],
+  "counterfactual_control_quality_assessed": false,
+  "first_fault": null,
+  "host_receipt_interval_ms": {
+    "max": 7.581926,
+    "median": 3.9954305,
+    "min": 1.265239
+  },
+  "input_path": "evidence/phase3/live-recordings/executor-reference-20261013T231602Z/rig-1791933362677431132-3601744890.jsonl.gz",
+  "input_sha256": "e891e01d266266f0716f87865feeb1810b07495c1cae6fa315db861a622e2345",
+  "intents": 2501,
+  "max_abs_shadow_raw_acceleration_m_s2": 25.0,
+  "mode": "offline shadow only; recorded MCU reference trajectory",
+  "notes": [
+    "Effective/available board timestamps retain the SDK acquisition-snapshot proxy; they do not measure sensor filter or USB latency.",
+    "Magnetic angle is decoded; magnetic angular velocity is the recorded MCU filtered estimate.",
+    "Cart position and velocity are step/command estimates, not independent physical travel measurements.",
+    "Only timing/source compatibility is tested. No shadow output was sent to hardware."
+  ],
+  "physical_acceptance": false,
+  "policy_source_sha256": "bcb160afa45b6cb6f4f06732dad1464931ec387be03ec9c34e0a7d381188a977",
+  "rate_hz": 250,
+  "saturated_intents": 5,
+  "selection": "all recorded states from first through last MCU mode2/3 inclusive; no resampling/filtering/reset after faults",
+  "session": {
+    "clock_id": "teensy:3601744890",
+    "session_id": "3601744890",
+    "topology": {
+      "cart": "cart",
+      "joints": [
+        "pole"
+      ]
+    }
+  },
+  "shadow_source_sha256": "a6124874afe5ddd50026871d5dce4ae55a94feda67f6071030e2fabfd8025da9",
+  "states": 2501
+}

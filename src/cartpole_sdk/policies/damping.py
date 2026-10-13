@@ -1,7 +1,7 @@
 """Small offline teaching policies, not commissioned rig controllers."""
 from __future__ import annotations
 
-from .contracts import (
+from cartpole_sdk.contracts import (
     Acceleration, Channel, Observation, SelectionError, Session, ValidationError,
     _finite, _integer, select_channels,
 )

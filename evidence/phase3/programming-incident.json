@@ -1,0 +1,19 @@
+{
+  "recorded_utc": "2026-10-13T23:12:08.043224+00:00",
+  "firmware_hex_sha256": "a53a2f2ab41661a090f36a479e7d68be6d9029d346b73fb54f61da6ad90da964",
+  "recovery_hex_sha256": "58b50f106416f20e4e3690d39cec0f37439dd5fe7b2a908f6134eb992c4f69ba",
+  "observations": [
+    "Initial soft-reboot path denied normal USB vendor interface access; original stayed IDLE disabled.",
+    "CDC134-baud core reboot entered HalfKay bootloader.",
+    "Loader2.2 reached bootloader but failed first flash write.",
+    "Owner reported clicking while board remained in HalfKay bootloader.",
+    "Owner instructed to switch off motor supply, keep USB; owner confirmed done.",
+    "Current official Loader2.3 compiled in separate user directory, programmed verified image, booted successfully.",
+    "SDK INFO confirmed3485saved, magnet103, zeroI2Cerrors; stateIDLEdisabled; switchprofileenabled and allopen, unhomed."
+  ],
+  "interpretation": "Missing hardware default-disable pull-up on shared D8 makes floating enable/step inputs during bootloader plausible; no electrical measurement confirms cause.",
+  "subsequent_upload_requirement": "Motor power off before all reset/bootloader/flash operations; firmware cannot enforce safety while absent.",
+  "motion_after_new_flash": false,
+  "uploader_source": "https://raw.githubusercontent.com/PaulStoffregen/teensy_loader_cli/master/teensy_loader_cli.c",
+  "uploader_source_sha256": "8e10e19d51244699b003a0a8614bc7bb9cf5d21938748c05efd8fd79e54efa7d"
+}

@@ -1,0 +1,14 @@
+MuJoCo SDK simulation; simulation channels; provisional surrogate.
+Space: pause/resume | R: reset same seed | Esc/window close: exit.
+Rail, fault or 30 s horizon freezes until R.
+Timeout (0:00:05)!
+Thread 0x00000002025fa080 (most recent call first):
+  File "/Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages/mujoco/viewer.py", line 525 in _launch_internal
+  File "<string>", line 37 in _mjpython_main
+  File "<string>", line 51 in <module>
+
+Thread 0x000000016cc5b000 (most recent call first):
+  File "/Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages/mujoco/viewer.py", line 168 in set_texts
+  File "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/sim/viewer.py", line 135 in _set_overlay
+  File "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/sim/viewer.py", line 188 in run_viewer
+  File "/tmp/cartpole-next/viewer_hang_probe.py", line 4 in <module>
