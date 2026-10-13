@@ -1,0 +1,93 @@
+.......................E......sE.................usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+..................................
+======================================================================
+ERROR: test_console_publisher (unittest.loader._FailedTest.test_console_publisher)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_console_publisher
+Traceback (most recent call last):
+  File "/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/unittest/loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/unittest/loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "/Users/rbafna/projects/cartpole_v2/vision3/tests/test_console_publisher.py", line 6, in <module>
+    console=importlib.util.module_from_spec(spec);spec.loader.exec_module(console)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/rbafna/projects/cartpole_v2/vision3/console/cartpole.py'
+
+
+======================================================================
+ERROR: test_encoder_feed (unittest.loader._FailedTest.test_encoder_feed)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_encoder_feed
+Traceback (most recent call last):
+  File "/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/unittest/loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/unittest/loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "/Users/rbafna/projects/cartpole_v2/vision3/tests/test_encoder_feed.py", line 4, in <module>
+    from vision_telemetry import Publisher
+ModuleNotFoundError: No module named 'vision_telemetry'
+
+
+----------------------------------------------------------------------
+Ran 83 tests in 1.396s
+
+FAILED (errors=2, skipped=1)

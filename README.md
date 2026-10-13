@@ -1,37 +1,51 @@
 # Cartpole v2
 
-A shared Python interface for simulated and physical cart-pendulum experiments,
-with selectable observations and owner-controlled safety enforcement.
+Phase 0 packages the known-working controller and vision3 for repeatable launches.
+The Python SDK, new Teensy executor, and MuJoCo backend are the next development
+steps; they are not implemented here yet.
 
-**Current status:** architecture and first-milestone design for review. The user
-selected the offline measurement foundation on 2026-10-12. Product implementation
-has not started. Existing software remains in `../cartpole`.
+## Run the baseline
 
-- [Roadmap and system boundaries](docs/roadmap.md)
-- [Assessment of the existing software](docs/assessment.md)
-- [First milestone: offline measurement foundation](docs/specs/2026-10-12-measurement-foundation.md)
-- [Source fingerprints](evidence/source-inventory.json)
-- [Fresh offline replay](evidence/replay-baseline/summary.json)
+On the Jetson, from this repository's root, with `uv` installed:
 
-The intended location is `/Users/rbafna/projects/cartpole_v2`, interpreting
-`/projects/cartpole_v2` as a sibling of the existing project.
+```bash
+uv run --project archive/good_balancing_jetson cartpole-console --rate 100
+```
 
-## Current working boundary
+The console restores the saved tuning while stopped, verifies 33 parameters and
+8 computed gains, and opens the terminal interface. It does not start motion or
+restore an old home/upright reference. Close any other Teensy console first.
 
-Another session owns the Jetson and rig. This project currently uses local files
-and local tests only. Do not launch processes on the Jetson, open its Teensy
-connection, send even `stop` or telemetry configuration, claim the camera, change
-device controls, flash firmware, or alter the active `cartpole` working tree.
-Read-only SSH inspection was permitted, but was unnecessary for this assessment.
+In a separate Jetson terminal, with no other camera owner:
 
-The first milestone has no hardware backend. Existing recordings from different
-dates are independent datasets, not synchronized encoder/vision ground truth.
+```bash
+cd archive/vision3
+uv run vision3 --camera /dev/video0 --calibration-file last_calibration.json
+```
 
-## Implementation direction
+On the Mac, from the repository root:
 
-Preserve useful source and tests with provenance, then port components in small
-reviewable slices. The initial package will be `cartpole_v2`, with optional vision
-and simulation dependencies. The public policy interface will be separate from
-the trusted operator interface that arms, homes, resets, and calibrates the rig.
+```bash
+./archive/vision-tunnel.sh
+```
 
-This directory is a design handoff, not a commissioned hardware release.
+After SSH connects, open **http://127.0.0.1:3095/**. Keep the tunnel terminal open.
+The tunnel uses the native IPv6 destination and public host key recorded on
+October 13; both are configurable. It does not start software on the Jetson.
+
+- [Jetson setup and testing](docs/jetson-testing.md)
+- [Archive contents and recovery](archive/README.md)
+- [Console, gains, and firmware](archive/good_balancing_jetson/README.md)
+- [Vision, calibration, and system dependencies](archive/vision3/README.md)
+- [Control rates, languages, and transport choice](docs/control-timing-and-transport.md)
+- [Revised v2 architecture](docs/architecture.md)
+- [Phase 0 plan and decisions](docs/phase0-plan.md)
+- [Local verification](evidence/phase0/verification.json)
+
+Both projects pin Python 3.11 for `uv` and include a universal `uv.lock`. Their
+commands are intended to run from an editable repository checkout; this archive
+is not a standalone wheel distribution. Do not copy `.venv` between computers.
+
+No Jetson access, camera capture, firmware upload, or physical motion was performed
+during Phase 0. Limit switches are not implemented yet. New control or vision
+work must use new directories outside the preserved archived baselines.

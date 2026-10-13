@@ -1,0 +1,24 @@
+✔ native encoder samples survive a vision outage and incremental repeats (1.394167ms)
+✔ wrap crossing shares a branch between encoder and vision without erasing their difference (0.374083ms)
+✔ visibility persists and does not delete sensor history (0.513792ms)
+✔ long outage is not joined and stale histories expire (0.200292ms)
+✔ measured camera delay shifts blue samples onto the common timeline (0.162458ms)
+✔ skipped camera frames remain visible as dashed gaps (0.131375ms)
+✔ clock probe bounds and source-to-canvas age use the same clock (1.430458ms)
+✔ missing origin and expired probes cannot report a latency (0.166917ms)
+✔ angle crossing +/-180 remains continuous while raw measurements are unchanged (2.615792ms)
+✔ single valid points remain visible and short missing runs are dashed only (0.391916ms)
+✔ long gaps and ambiguous large angle changes are not bridged (0.558833ms)
+✔ skipped capture frames are marked as gaps even if both endpoints are valid (0.238084ms)
+✔ history batches deduplicate, expire, and clear on calibration/session changes (0.426917ms)
+✔ null cart values stay absent and real cart positions retain their scale (0.105375ms)
+✔ angle branch stays fixed when the rolling buffer drops its oldest anchor (4.021667ms)
+✔ a camera stall is dashed even if sequence numbers are consecutive (0.886291ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 115.036

@@ -1,0 +1,92 @@
+{
+  "verified_at_utc": "2026-10-13T20:37:36.322654+00:00",
+  "baseline_commit": "1d48532c4987e6e12b40ddeb2a78931ff701c3e0",
+  "scope": "Local Phase 0 packaging and preservation; no Jetson access, camera capture, flashing or physical motion.",
+  "preserved_sources": {
+    "count": 70,
+    "sha256_match": true,
+    "manifest": "preserved-source-check.json"
+  },
+  "console": {
+    "command": "uv run --locked --group dev python -m unittest discover -s tests",
+    "cwd": "archive/good_balancing_jetson",
+    "passed": 38,
+    "failed": 0,
+    "log": "console-tests.log"
+  },
+  "vision_python": {
+    "command": "uv run --locked --group dev python -m unittest discover -s tests",
+    "cwd": "archive/vision3",
+    "run": 89,
+    "passed": 88,
+    "failed": 0,
+    "skipped": 1,
+    "skip_reason": "Opt-in real Jetson GStreamer test",
+    "log": "vision-tests.log"
+  },
+  "vision_javascript": {
+    "command": "node --test tests/*.test.cjs",
+    "cwd": "archive/vision3",
+    "passed": 16,
+    "failed": 0,
+    "log": "vision-js-tests.log"
+  },
+  "tunnel": {
+    "command": "python3 archive/tests/test_tunnel.py",
+    "passed": 4,
+    "failed": 0,
+    "log": "tunnel-tests.log",
+    "real_ssh_parser": true,
+    "network_connection": false
+  },
+  "shell_syntax": {
+    "command": "bash -n archive/vision-tunnel.sh archive/good_balancing_jetson/run_console.sh",
+    "exit_code": 0
+  },
+  "relocation": {
+    "passed": true,
+    "fresh_environments": true,
+    "checkout_path_contains_spaces": true,
+    "working_directory": "/",
+    "console_uv_entrypoint_verified_against_fake_board": true,
+    "restored_parameters": 33,
+    "encoder_reference_preserved": true,
+    "vision_uv_entrypoint_and_packaged_assets_verified": true,
+    "log": "relocation-check.log",
+    "harness": "relocation_check.py",
+    "note": "One-off harness retains actual scratch path used for this run. Copy both packages, excluding environments/cache/recordings, to that path or edit the harness root before rerunning."
+  },
+  "firmware": {
+    "command": "arduino-cli compile --fqbn teensy:avr:teensy41:usb=serial,speed=600,opt=o2std --output-dir /tmp/cartpole-phase0/firmware-build teensy_firmware/teensy_swingup",
+    "cwd": "archive/good_balancing_jetson",
+    "exit_code": 0,
+    "flashed": false,
+    "teensy_core": "1.62.0",
+    "qnethernet": "0.37.0",
+    "warnings": {
+      "count": 7,
+      "description": "Existing snprintf display_fault status-message truncation warnings at teensy_swingup.ino:478; preserved source unchanged."
+    },
+    "log": "firmware-build.log"
+  },
+  "review": {
+    "critical_findings": 0,
+    "important_findings": 1,
+    "important_findings_resolved": 1,
+    "resolution": "SSH option-parser quoting fixed after a failing real ssh -G regression; all four tunnel tests now pass. Reviewer also independently verified source and retained measurement hashes.",
+    "relocation_gap_addressed": "Fresh relocated uv entrypoint test is recorded separately from the source-level launcher unit test."
+  },
+  "pending_on_jetson": [
+    "Dependency installation on Jetson architecture",
+    "Camera capture and system GStreamer/H.264",
+    "SSH reachability and current host identity",
+    "Real Teensy firmware and preset readback",
+    "Supervised operation under existing physical commissioning procedure"
+  ],
+  "not_implemented": [
+    "New SDK/MuJoCo backend",
+    "Higher-rate external control protocol",
+    "New safety executor or limit-switch enforcement",
+    "Any new vision algorithm"
+  ]
+}

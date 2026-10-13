@@ -1,0 +1,28 @@
+FF......
+======================================================================
+FAIL: test_cli_applies_preset_before_console_and_exits_stopped (test_startup_preset.PresetTest.test_cli_applies_preset_before_console_and_exits_stopped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rbafna/projects/cartpole_v2/good_balancing_jetson/local_repository_snapshot/tests/test_startup_preset.py", line 154, in test_cli_applies_preset_before_console_and_exits_stopped
+    self.assertEqual([c for c in board.commands if c != 'ping'][-1], 'stop')
+AssertionError: 'enc' != 'stop'
+- enc
++ stop
+
+
+======================================================================
+FAIL: test_default_preset_is_loaded_relative_to_saved_console_from_any_cwd (test_startup_preset.PresetTest.test_default_preset_is_loaded_relative_to_saved_console_from_any_cwd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/rbafna/projects/cartpole_v2/good_balancing_jetson/local_repository_snapshot/tests/test_startup_preset.py", line 169, in test_default_preset_is_loaded_relative_to_saved_console_from_any_cwd
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/tmpy4p69ufo/local_repository_snapshot/cartpole.py", line 52, in <module>
+    from vision_telemetry import Publisher
+ModuleNotFoundError: No module named 'vision_telemetry'
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 11.873s
+
+FAILED (failures=2)
