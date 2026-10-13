@@ -57,7 +57,7 @@ Files: src/cartpole_sdk/control/policy.py, simulation runner/CLI integration, ex
 - [x] Write failing same-policy simulation/record/replay tests, cadence/invalid-source failures and CLI/wheel resource tests.
 - [x] Implement strict reference-policy adapter and runnable headless simulation/training examples, with configurable surrogate parameters and saved provenance.
 - [x] Run all core/sim/native/tunnel tests, preserved hash checks, wheel install/import/rollout and representative controller scenarios. Record actual failures/limitations without tuning gains to make a demo look good.
-- [ ] Obtain one independent final review, resolve findings with regressions and leave a clean committed local branch.
+- [x] Obtain one independent final review, resolve findings with regressions and leave a clean committed local branch.
 
 ## Progress and decisions
 
@@ -70,4 +70,5 @@ Files: src/cartpole_sdk/control/policy.py, simulation runner/CLI integration, ex
 - A real parity failure at rail handoff required binary32 governor arithmetic; no tolerance widening. Exact hard-rail and balance-start threshold behavior was also matched to native float32.
 - Integrated suite: 122 tests passed; archive tunnel regressions: 25 passed. External core wheel: 108 discovered, 101 passed, 7 optional skips. External sim wheel completed a 100-step upright rollout.
 - Two final 10-second provisional-model rollouts completed without faults or saturation: upright stayed in BALANCE; auto entered BALANCE after 1,275 swing-up ticks. This is local model evidence, not rig identification.
-- All 70 preserved source hashes remain unchanged. Independent whole-change review pending.
+- All 70 preserved source hashes remain unchanged. Independent whole-change review completed with no actionable findings; see evidence/phase2/review.md.
+- Final reviewer added 50,000 randomized discrete-parity ticks, 10,000 numerical-parity ticks and a mixed lease/sensor timing probe, all passing. No fix wave was needed. Local branch is retained under the owner's full-autonomy authorization; no push, merge or hardware deployment performed.

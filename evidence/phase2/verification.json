@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T22:03:38.436829+00:00",
+  "generated_at": "2026-10-13T22:08:06.014739+00:00",
   "base_commit": "29bc06a",
   "local_only": true,
   "archive_source_hashes": {
@@ -31,7 +31,9 @@
   },
   "wheel": {
     "name": "cartpole_sdk-0.2.0-py3-none-any.whl",
-    "sha256": "bbcd9a376330fef1ebdc03e8729e987a06bfa4301d4c060db5a7fb6d48dd9c0c"
+    "sha256": "fc13833dfc8db65a91b8c4ee3d96814dba1dfcc335aaadc77c78c23920a0b710",
+    "source_and_resource_files_matched": 20,
+    "final_rebuild": "Final wheel rebuilt to include late controller docstring clarification; executable implementation unchanged. Core preset import and 100-step external simulator rollout rechecked after reinstall."
   },
   "rollouts": "rollouts.json",
   "controller_parity": "controller-provenance.json",
@@ -43,5 +45,12 @@
     "MuJoCo uses provisional mass/damping/force parameters; no sim-to-real claim.",
     "Public policy isolation, live broker, firmware executor and limit switches remain subsequent work."
   ],
-  "review": "pending"
+  "review": {
+    "result": "no actionable findings",
+    "report": "review.md",
+    "reviewed_commit": "189a4c8a5f1ee644a1fecc52e6eb9e2c1f934606",
+    "supplemental_discrete_ticks": 50000,
+    "supplemental_numerical_ticks": 10000,
+    "mixed_sensor_lease_timing": "passed"
+  }
 }
