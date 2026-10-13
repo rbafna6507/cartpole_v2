@@ -1,0 +1,70 @@
+{
+  "status": "complete",
+  "source": "logs/run_20260915_201150.csv",
+  "source_sha256": {
+    "run_20260915_201150.csv": "2dbc137fd4bf2aa1d6adda6b3c63b0701c80b0e225a6e0a1b66bea07ab719d59",
+    "run_20260915_201150_events.jsonl": "5cf1eefbe87d67aea0be1feb31c5f09afd0caff4824f3ea2591cb6cbcf317565"
+  },
+  "firmware_messages": [
+    "# firmware swingup-175mm-v4"
+  ],
+  "start_snapshots": [
+    {
+      "host_time_s": 1789517522.935978,
+      "command": "auto",
+      "parameters": {
+        "leff": 0.166,
+        "pw": 7.0,
+        "pz": 0.85,
+        "pc1": -0.8,
+        "pc2": -1.2,
+        "vmax": 2.34375,
+        "amax_s": 6.0,
+        "amax_b": 6.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "phase_soft": 1.0,
+        "jmax": 120.0,
+        "ke": 2.0,
+        "kpx": 30.0,
+        "kdx": 0.5,
+        "catch_a": 0.45,
+        "catch_r": 3.0,
+        "giveup": 0.7,
+        "rail": 0.15,
+        "bw": 10.0,
+        "vman": 0.05,
+        "zvmax": 2.0,
+        "zamax": 20.0,
+        "ztravel": 100.0,
+        "k1": -22.18629,
+        "k2": -2.61477,
+        "k3": -0.79599,
+        "k4": -1.85162,
+        "cart_steps_per_m": 26666.67,
+        "z_steps_per_mm": 640.0,
+        "vmax_ceiling": 2.34375,
+        "rpm_ceiling": 1171.875
+      }
+    }
+  ],
+  "samples": 6462,
+  "active_duration_s": 52.43499999999924,
+  "max_lift_from_down_deg": 57.30681775068551,
+  "first_10s_max_lift_deg": 57.30681775068551,
+  "last_10s_max_lift_deg": 36.82357657475859,
+  "longest_balance_mode_s": 0.0,
+  "peak_commanded_speed_m_s": 1.1052,
+  "peak_commanded_accel_m_s2": 6.0,
+  "peak_inferred_position_m": 0.13328,
+  "fraction_inferred_position_over_100mm": 0.39669260700389103,
+  "max_telemetry_gap_s": 0.032,
+  "fault_mode_seen": false,
+  "diagnostic_errors": [],
+  "data_quality_notes": [
+    "4192 startup zeroing messages; inspect event timing before attributing resets"
+  ],
+  "measurement_note": "Only pendulum angle is measured. Cart x is pulse-inferred; v and accel are commands. Balance-mode duration alone is not proof of stable balance.",
+  "fraction_at_speed_cap": 0.0,
+  "fraction_at_accel_cap": 0.5077821011673151
+}

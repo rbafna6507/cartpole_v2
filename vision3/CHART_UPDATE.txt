@@ -1,0 +1,21 @@
+Vision3 chart update — 2026-10-13
+
+The dashboard now fetches every processed measurement between polls. A bounded
+15-second server buffer and cursor recover short browser/network interruptions.
+The visible trace covers12seconds. Calibration/session changes clear the trace.
+
+Angle traces unwrap the +/-180-degree crossing and retain the angle branch as
+old samples expire. Isolated measurements are drawn as dots. Solid lines join
+consecutive measurements; amber dashed lines mark skipped/invalid measurements
+or capture stalls over150ms, only across gaps up to250ms and angle changes no
+larger than90degrees. Longer gaps remain blank. Dashed connections are display
+only: no measurements, live readouts, validity rates or session logs are filled.
+This introduces no filtering delay and does not change the detector/estimator.
+
+Mac validation: 67 Python tests ran,66passed,1JetsonGStreamer-specificskip;
+10Node tests passed. Includes batch delivery, wrap crossing, bounded retention,
+calibration invalidation, isolated dots, missing frames, capture stalls and
+retaining the unwrapped angle branch while the buffer rolls over.
+
+The latest observed live camera connection was USB2/480M and delivered10FPS
+although80was requested. Display changes do not fix that capture limit.

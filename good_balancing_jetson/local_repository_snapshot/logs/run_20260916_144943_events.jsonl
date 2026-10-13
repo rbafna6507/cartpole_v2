@@ -1,0 +1,482 @@
+{"host_time_s": 1789584583.389604, "direction": "session", "text": "x is inferred from pulses; v/accel are commands, not measured cart motion"}
+{"host_time_s": 1789584583.389781, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584583.389844, "direction": "tx", "text": "stop"}
+{"host_time_s": 1789584583.389874, "direction": "tx", "text": "rate 25"}
+{"host_time_s": 1789584583.6949499, "direction": "tx", "text": "rate 25"}
+{"host_time_s": 1789584583.6954, "direction": "tx", "text": "params"}
+{"host_time_s": 1789584583.70187, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584583.960166, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584583.965491, "direction": "rx", "text": "# down reference recorded; fixed upright 3416 counts, theta = -3.089 rad"}
+{"host_time_s": 1789584583.973652, "direction": "rx", "text": "# balance target: absolute encoder count 3416; down-zero does not change this target"}
+{"host_time_s": 1789584583.9765592, "direction": "rx", "text": "# K = [-22.186 -2.615 -0.796 -1.852]"}
+{"host_time_s": 1789584583.9846988, "direction": "rx", "text": "# Cart defaults: leff=0.166 m, vmax=0.800 m/s, amax_s=12.0, amax_b=12.0 m/s^2, jmax=60.0 m/s^3"}
+{"host_time_s": 1789584583.992964, "direction": "rx", "text": "# Startup position is x=0: place cart at physical center before reset; no homing motion."}
+{"host_time_s": 1789584584.003801, "direction": "rx", "text": "# Travel 300 mm; normal range +/-135 mm. Predictive braking -> return inside range; fault +/-140 mm."}
+{"host_time_s": 1789584584.011966, "direction": "rx", "text": "# Full-turn overspeed >200 RPM: brake, center, then lower-half motion <30 RPM for 3s before resume."}
+{"host_time_s": 1789584584.017463, "direction": "rx", "text": "# Drivers DISABLED. Motion commands enable; stop disables all drivers."}
+{"host_time_s": 1789584584.020376, "direction": "rx", "text": "# ready. 'help' for commands."}
+{"host_time_s": 1789584584.022999, "direction": "rx", "text": "# STOP"}
+{"host_time_s": 1789584584.025791, "direction": "rx", "text": "# telemetry 25 Hz"}
+{"host_time_s": 1789584584.025813, "direction": "rx", "text": "# telemetry 25 Hz"}
+{"host_time_s": 1789584584.028488, "direction": "rx", "text": "= leff 0.16600"}
+{"host_time_s": 1789584584.031397, "direction": "rx", "text": "= pw 7.00000"}
+{"host_time_s": 1789584584.0314372, "direction": "rx", "text": "= pz 0.85000"}
+{"host_time_s": 1789584584.034063, "direction": "rx", "text": "= pc1 -0.80000"}
+{"host_time_s": 1789584584.0368378, "direction": "rx", "text": "= pc2 -1.20000"}
+{"host_time_s": 1789584584.0369081, "direction": "rx", "text": "= vmax 0.80000"}
+{"host_time_s": 1789584584.039555, "direction": "rx", "text": "= amax_s 12.00000"}
+{"host_time_s": 1789584584.0423129, "direction": "rx", "text": "= amax_b 12.00000"}
+{"host_time_s": 1789584584.042345, "direction": "rx", "text": "= amax_m 0.50000"}
+{"host_time_s": 1789584584.0452302, "direction": "rx", "text": "= jmax_m 10.00000"}
+{"host_time_s": 1789584584.047959, "direction": "rx", "text": "= phase_soft 1.00000"}
+{"host_time_s": 1789584584.050682, "direction": "rx", "text": "= jmax 60.00000"}
+{"host_time_s": 1789584584.0507252, "direction": "rx", "text": "= ke 2.00000"}
+{"host_time_s": 1789584584.0533838, "direction": "rx", "text": "= kpx 30.00000"}
+{"host_time_s": 1789584584.0561469, "direction": "rx", "text": "= kdx 0.50000"}
+{"host_time_s": 1789584584.056179, "direction": "rx", "text": "= catch_a 0.60000"}
+{"host_time_s": 1789584584.059038, "direction": "rx", "text": "= catch_r 3.00000"}
+{"host_time_s": 1789584584.0617118, "direction": "rx", "text": "= giveup 0.80000"}
+{"host_time_s": 1789584584.061729, "direction": "rx", "text": "= rail 0.15000"}
+{"host_time_s": 1789584584.0644941, "direction": "rx", "text": "= bw 10.00000"}
+{"host_time_s": 1789584584.067208, "direction": "rx", "text": "= vman 0.05000"}
+{"host_time_s": 1789584584.067229, "direction": "rx", "text": "= zvmax 2.00000"}
+{"host_time_s": 1789584584.069958, "direction": "rx", "text": "= zamax 20.00000"}
+{"host_time_s": 1789584584.072754, "direction": "rx", "text": "= ztravel 100.00000"}
+{"host_time_s": 1789584584.075562, "direction": "rx", "text": "= k1 -22.18629"}
+{"host_time_s": 1789584584.0755808, "direction": "rx", "text": "= k2 -2.61477"}
+{"host_time_s": 1789584584.0782452, "direction": "rx", "text": "= k3 -0.79599"}
+{"host_time_s": 1789584584.078263, "direction": "rx", "text": "= k4 -1.85162"}
+{"host_time_s": 1789584584.083853, "direction": "rx", "text": "# firmware swingup-175mm-20t-v16"}
+{"host_time_s": 1789584584.089344, "direction": "rx", "text": "# pins cart STEP=18 DIR=19; Z1 STEP=25 DIR=26; Z2 STEP=16 DIR=17"}
+{"host_time_s": 1789584584.0920808, "direction": "rx", "text": "= cart_steps_per_m 80000.00"}
+{"host_time_s": 1789584584.09477, "direction": "rx", "text": "= z_steps_per_mm 640.00"}
+{"host_time_s": 1789584584.097574, "direction": "rx", "text": "= vmax_ceiling 0.89286"}
+{"host_time_s": 1789584584.100375, "direction": "rx", "text": "= rpm_ceiling 1339.286"}
+{"host_time_s": 1789584584.103143, "direction": "rx", "text": "= host_timeout_ms 1500"}
+{"host_time_s": 1789584584.103161, "direction": "rx", "text": "= encoder_snapshot 1"}
+{"host_time_s": 1789584584.105875, "direction": "rx", "text": "= serial_crc16 1"}
+{"host_time_s": 1789584584.108526, "direction": "rx", "text": "= encoder_invert 0"}
+{"host_time_s": 1789584584.111409, "direction": "rx", "text": "= encoder_upright_raw 3416"}
+{"host_time_s": 1789584584.1142452, "direction": "rx", "text": "= spin_trip_rpm 200.0"}
+{"host_time_s": 1789584584.221408, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584584.5011241, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584584.7828212, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584585.064171, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584585.345424, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584585.626533, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584585.9081118, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584586.189395, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584586.471489, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584586.753244, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584587.034431, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584587.3154418, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584587.597077, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584587.878381, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584588.1603909, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584588.441422, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584588.723232, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584589.004384, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584589.286242, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584589.567368, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584589.849376, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584590.131127, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584590.4126132, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584590.6941838, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584590.975404, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584591.2564402, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584591.5386071, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584591.820388, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584592.102169, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584592.384296, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584592.665319, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584592.9463081, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584593.228297, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584593.509557, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584593.791477, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584594.072462, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584594.355277, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584594.635322, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584594.917255, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584595.19823, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584595.479769, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584595.761601, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584596.0432389, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584596.324366, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584596.606343, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584596.8873558, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584597.168282, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584597.450264, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584597.73215, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584598.013519, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584598.2944288, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584598.576499, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584598.858093, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584599.139458, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584599.4214458, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584599.703584, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584599.985342, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584600.266248, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584600.547505, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584600.82915, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584601.11041, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584601.3920362, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584601.673391, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584601.9550452, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584602.236505, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584602.5180411, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584602.800145, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584603.081384, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584603.362435, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584603.6444101, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584603.9254951, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584604.207435, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584604.4893062, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584604.770546, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584605.052554, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584605.334265, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584605.615294, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584605.897491, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584606.178638, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584606.460709, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584606.7417521, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584607.0233989, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584607.305307, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584607.587264, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584607.8693812, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584608.150532, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584608.43248, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584608.71463, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584608.995587, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584609.277398, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584609.5596569, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584609.841078, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584610.122623, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584610.365726, "direction": "tx", "text": "home"}
+{"host_time_s": 1789584610.371255, "direction": "rx", "text": "# x = 0 here"}
+{"host_time_s": 1789584610.404404, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584610.686551, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584610.968599, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584611.250129, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584611.531522, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584611.813212, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584612.095335, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584612.376531, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584612.65864, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584612.9396281, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584613.222448, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584613.502642, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584613.7836008, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584614.064606, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584614.235146, "direction": "tx", "text": "on"}
+{"host_time_s": 1789584614.240308, "direction": "rx", "text": "# energized"}
+{"host_time_s": 1789584614.347326, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584614.629461, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584614.911457, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584615.1929522, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584615.474493, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584615.7568269, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584616.03944, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584616.32163, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584616.603648, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584616.885319, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584617.166883, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584617.449476, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584617.731352, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584617.7902038, "direction": "tx", "text": "auto"}
+{"host_time_s": 1789584617.795605, "direction": "rx", "text": "# SWINGUP"}
+{"host_time_s": 1789584617.9838269, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584618.267922, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584618.54685, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584618.8305438, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584619.113204, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584619.395343, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584619.6751559, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584619.959363, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584620.241089, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584620.5225348, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584620.806147, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584620.8769212, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584621.029907, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584621.055576, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584621.086196, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584621.3216221, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584621.3662028, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584621.521158, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584621.544609, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584621.618664, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584621.896255, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584622.177597, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584622.460344, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584622.7431, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584622.9765491, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584623.024682, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584623.085498, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584623.305304, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584623.3126469, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584623.331678, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584623.556848, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584623.832075, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584624.1166022, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584624.3983061, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584624.6802611, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584624.9620988, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584625.2468941, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584625.309616, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584625.40922, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584625.4523451, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584625.525286, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584625.810186, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584626.0762408, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584626.078923, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584626.313832, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584626.324049, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584626.334288, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584626.61933, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584626.865331, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584626.8960042, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584627.1055849, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584627.181748, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584627.4632692, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584627.6060119, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584627.712446, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584627.7452219, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584628.027605, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584628.1154912, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584628.195877, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584628.307706, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584628.395343, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584628.413308, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584628.59493, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584628.876765, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584628.92151, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584629.0270321, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584629.154193, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584629.202711, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584629.242711, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584629.43919, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584629.5710762, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584629.6905658, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584629.690687, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584629.962087, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584630.175979, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584630.242261, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584630.407522, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584630.527144, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584630.546218, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584630.69156, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584630.717599, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584630.8090591, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584631.093318, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584631.373356, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584631.379508, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584631.6545038, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584631.6624398, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584631.938776, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584632.221257, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584632.4305909, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584632.501776, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584632.5724108, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584632.5959702, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584632.787734, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584632.917095, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584633.057371, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584633.058908, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584633.0885482, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584633.309497, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584633.3655438, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584633.527318, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584633.561291, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584633.561437, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584633.799436, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584633.81516, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584633.819093, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584633.982191, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584634.005883, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584634.074351, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584634.358609, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584634.640393, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584634.921212, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584635.206322, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584635.487654, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584635.771455, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584635.859037, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584636.01885, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584636.023179, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584636.0256379, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584636.292366, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584636.302298, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584636.462259, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584636.473665, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584636.542358, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584636.7454531, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584636.813489, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584636.905099, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584636.918995, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584637.10023, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584637.160928, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584637.1884968, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584637.349568, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584637.382986, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584637.39125, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584637.665528, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584637.8569422, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584637.945318, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584638.158386, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584638.1617339, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584638.228524, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584638.315608, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584638.3420951, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584638.5154428, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584638.797266, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584639.0811431, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584639.2904232, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584639.3506382, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584639.351966, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584639.406859, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584639.603219, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584639.886234, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584640.169149, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584640.2346072, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584640.395382, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584640.422225, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584640.423695, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584640.694327, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584640.975394, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584641.2289898, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584641.230675, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584641.346216, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584641.385035, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584641.500258, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584641.7832818, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584642.033483, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584642.034684, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584642.240501, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584642.272696, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584642.308005, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584642.590522, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584642.8719869, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584643.1554072, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584643.434577, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584643.716531, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584643.947516, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584643.995224, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584644.084741, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584644.102272, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584644.2453399, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584644.369312, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584644.52018, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584644.527554, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584644.54266, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584644.805036, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584644.814483, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584644.9712582, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584644.9898071, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584645.0874119, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584645.2572968, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584645.3660328, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584645.413771, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584645.435681, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584645.651489, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584645.678051, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584645.707996, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584645.8656461, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584645.901741, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584645.901949, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584646.177365, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584646.2653818, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584646.342231, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584646.3855412, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584646.459189, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584646.740177, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584646.8769531, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584647.019279, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584647.028246, "direction": "rx", "text": "# rail recovery -> BRAKING; pendulum control paused"}
+{"host_time_s": 1789584647.1633642, "direction": "rx", "text": "# rail stopped -> RETURN_INSIDE"}
+{"host_time_s": 1789584647.2038789, "direction": "rx", "text": "# back inside operating range -> SWINGUP"}
+{"host_time_s": 1789584647.303108, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584647.586241, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584647.7536309, "direction": "rx", "text": "# caught -> BALANCE"}
+{"host_time_s": 1789584647.856161, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584647.856232, "direction": "rx", "text": "# lost it -> SWINGUP"}
+{"host_time_s": 1789584648.111295, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584648.393088, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584648.448171, "direction": "tx", "text": "stop"}
+{"host_time_s": 1789584648.454289, "direction": "rx", "text": "# STOP"}
+{"host_time_s": 1789584648.6681411, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584648.949339, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584649.231025, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584649.512529, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584649.7940118, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584650.0764768, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584650.357331, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584650.638282, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584650.91995, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584651.20133, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584651.482267, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584651.764071, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584652.045297, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584652.326609, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584652.60799, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584652.8894231, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584653.171423, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584653.452893, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584653.7342248, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584654.01506, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584654.296427, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584654.57854, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584654.860136, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584655.14155, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584655.422133, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584655.705313, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584655.985158, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584656.2675068, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584656.5481422, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584656.830155, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584657.111756, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584657.3934221, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584657.674654, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584657.956705, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584658.238168, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584658.520146, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584658.801422, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584659.082517, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584659.364099, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584659.645799, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584659.927155, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584660.2083242, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584660.489423, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584660.771596, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584661.053378, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584661.334718, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584661.616338, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584661.898355, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584662.178504, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584662.459929, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584662.7420852, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584663.0232918, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584663.3054552, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584663.585825, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584663.867669, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584664.1491442, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584664.431024, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584664.712086, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584664.993423, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584665.275436, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584665.557029, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584665.83842, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584666.1201978, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584666.4021518, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584666.684202, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584666.9656389, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584667.169312, "direction": "tx", "text": "stop"}
+{"host_time_s": 1789584667.173228, "direction": "tx", "text": "stop"}
+{"host_time_s": 1789584667.173517, "direction": "rx", "text": "# STOP"}
+{"host_time_s": 1789584667.1773021, "direction": "rx", "text": "# STOP"}
+{"host_time_s": 1789584667.247197, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584667.5286899, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584667.810334, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584668.091213, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584668.372818, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584668.644078, "direction": "tx", "text": "stop"}
+{"host_time_s": 1789584668.6489248, "direction": "tx", "text": "ping"}
+{"host_time_s": 1789584668.64923, "direction": "rx", "text": "# STOP"}

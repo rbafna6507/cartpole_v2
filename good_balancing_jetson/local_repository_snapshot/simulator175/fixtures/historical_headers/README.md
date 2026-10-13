@@ -1,0 +1,1 @@
+These text fixtures preserve the exact header bytes cited by the September simulator dataset and its SHA-256 provenance checks. They are historical evidence, not a build target. Live firmware parity tests include the maintained Teensy headers.

@@ -1,0 +1,120 @@
+{
+  "kind": "paced synthetic source; no physical camera",
+  "seconds": 8.0,
+  "detector_width": 640,
+  "video_fps": 80,
+  "video_mode": "tracked",
+  "video": {
+    "delivered_fps": 64.68061705320244,
+    "arrival_interval_p95_ms": 26.833242998691272,
+    "target_rate_met": false,
+    "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency",
+    "mode": "tracked",
+    "frames_encoded": 499,
+    "error": null,
+    "bitrate_kbps": 4000,
+    "encoded_mbps": 3.210361004763146,
+    "clients": 1,
+    "slow_disconnects": 0,
+    "diagnostics": [],
+    "source_origin_s": 21271.124301446,
+    "requested_fps": 80,
+    "host_read_to_encode_ms": {
+      "p50": 43.01994249844032,
+      "p95": 71.14061454861829,
+      "p99": 88.32132655679452,
+      "max": 90.99457399816569
+    }
+  },
+  "packets_consumed": 499,
+  "all": {
+    "processed_frames": 510,
+    "skipped_camera_frames": 129,
+    "detected_frames": 510,
+    "angle_frames": 510,
+    "velocity_frames": 507,
+    "calibrated_camera_frames": 639,
+    "camera_frames_in_span": 639,
+    "geometry_coverage": 0.7981220657276995,
+    "angle_coverage_calibrated": 0.7981220657276995,
+    "velocity_coverage_calibrated": 0.7934272300469484,
+    "duration_s": 7.962876689998666,
+    "processed_fps": 63.92162277726861,
+    "angle_fps": 63.92162277726861,
+    "velocity_fps": 63.67045726537365,
+    "detection_reasons": {
+      "measured": 510
+    },
+    "processing_ms": {
+      "p50": 13.38866500009317,
+      "p95": 26.693502450143562,
+      "p99": 34.830736520088955,
+      "max": 62.9520419970504
+    },
+    "host_read_to_result_ms": {
+      "p50": 19.452627000646316,
+      "p95": 34.926569000890595,
+      "p99": 41.15593285976501,
+      "max": 64.7442970002885
+    },
+    "velocity_delay_ms": {
+      "p50": 24.828843834256986,
+      "p95": 37.415965478430735,
+      "p99": 46.751725018621066,
+      "max": 51.272144071845105
+    },
+    "processing_deadline_misses": 308,
+    "longest_rejected_run_frames": 0
+  },
+  "after_one_second_warmup": {
+    "processed_frames": 456,
+    "skipped_camera_frames": 103,
+    "detected_frames": 456,
+    "angle_frames": 456,
+    "velocity_frames": 456,
+    "calibrated_camera_frames": 559,
+    "camera_frames_in_span": 559,
+    "geometry_coverage": 0.815742397137746,
+    "angle_coverage_calibrated": 0.815742397137746,
+    "velocity_coverage_calibrated": 0.815742397137746,
+    "duration_s": 6.973583596998651,
+    "processed_fps": 65.2462243653072,
+    "angle_fps": 65.2462243653072,
+    "velocity_fps": 65.2462243653072,
+    "detection_reasons": {
+      "measured": 456
+    },
+    "processing_ms": {
+      "p50": 13.158677500541671,
+      "p95": 26.155319499594043,
+      "p99": 33.11904650199721,
+      "max": 62.9520419970504
+    },
+    "host_read_to_result_ms": {
+      "p50": 19.055580498388736,
+      "p95": 34.73946974918363,
+      "p99": 41.05811315057508,
+      "max": 64.7442970002885
+    },
+    "velocity_delay_ms": {
+      "p50": 24.792096748569747,
+      "p95": 36.76559673840529,
+      "p99": 44.45475722932315,
+      "max": 51.272144071845105
+    },
+    "processing_deadline_misses": 267,
+    "longest_rejected_run_frames": 0
+  },
+  "limitations": [
+    "Includes engine and optional software H.264 contention; excludes USB/camera capture, network, and browser.",
+    "Input cache is rendered before timing. Other existing Jetson processes are not stopped.",
+    "No velocity accuracy claim: discrete cached angles have jittery host-publish timestamps. Earlier constant-velocity reference removed during review."
+  ],
+  "synthetic_angle_accuracy": {
+    "samples": 510,
+    "rmse": 0.028156142442575284,
+    "bias": -0.0006052502801207922,
+    "abs_p95": 0.054744328573168764,
+    "abs_max": 0.06274132184250514
+  }
+}

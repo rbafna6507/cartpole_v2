@@ -1,0 +1,53 @@
+{
+  "configuration_id": "125mm_11p05g",
+  "physical_length_mm": 125.0,
+  "pendulum_mass_g": 11.05,
+  "end_mass_count": 2,
+  "end_mass_each_g": 5.85,
+  "total_pendulum_mass_g": 22.75,
+  "mass_convention": "Arm mass excludes the two end weights.",
+  "calibration_snapshot": {
+    "pendulum": {
+      "length_mm": 125.0,
+      "mass_g": 11.05,
+      "mass_status": "User confirmed original 100 mm label was incorrect: this is the 125 mm / 11.05 g arm"
+    },
+    "end_point_masses": {
+      "count": 2,
+      "mass_each_g": 5.85,
+      "status": "User confirmed same two 5.85 g end weights on 2026-09-17"
+    },
+    "si": {
+      "pendulum_length_m": 0.125,
+      "pendulum_mass_kg": 0.01105,
+      "end_point_mass_each_kg": 0.00585,
+      "cart_maximum_travel_m": 0.3,
+      "encoder_average_sample_interval_s": 0.002
+    },
+    "cart": {
+      "maximum_travel_mm": 300.0,
+      "pulley_teeth": 60,
+      "belt_pitch_mm": 2,
+      "motor_full_steps_per_rev": 200,
+      "microsteps": 16,
+      "travel_mm_per_rev": 120,
+      "steps_per_mm": 26.666666666666668
+    },
+    "encoder": {
+      "average_sample_interval_ms": 2.0
+    },
+    "dynamic_calibration": {
+      "effective_length_m": 0.12445488778245432,
+      "firmware_effective_length_m": 0.124,
+      "period_s": 0.7077035,
+      "equivalent_viscous_decay_per_s": 0.9133833709022565,
+      "status": "Measured from user-identified pre-175 mm captures",
+      "source_fit": "pendulum_characterization/125mm_11p05g/2026-09-15/controller_fit.json",
+      "geometry_label_correction": "Original 100 mm entry was a user labeling error; physical arm was 125 mm",
+      "total_moving_pendulum_mass_g": 22.75
+    }
+  },
+  "provenance": "User corrected original 100 mm label to 125 mm and identified pre-175 mm captures as this arm on 2026-09-17; same two end weights. Raw files remain at their historical paths.",
+  "raw_recording_paths_preserved": true,
+  "fit": "pendulum_characterization/125mm_11p05g/2026-09-15/controller_fit.json"
+}

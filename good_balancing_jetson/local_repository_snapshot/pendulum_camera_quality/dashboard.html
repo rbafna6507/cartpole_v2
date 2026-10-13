@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pendulum lab</title>
+<style>body{font:16px system-ui;background:#101820;color:#e5edf3;margin:24px;max-width:1200px}button,input{font:inherit;padding:8px;margin:4px;border-radius:5px}button{cursor:pointer}img{max-width:100%;max-height:55vh}canvas{width:100%;height:190px;background:#17242f;border-radius:8px}#status{padding:12px;color:#f4d579}small{color:#afc1cf}.readout{font-size:24px;margin:15px 0}section{margin-bottom:18px}</style></head><body>
+<h2>Pendulum lab · live tracking</h2><p><a href="/snapshot.png" target="_blank" style="color:#6cbdf5">Open lossless camera snapshot (no overlays)</a></p><p>Click the black pivot screw at the narrow end. Let the arm hang down before setting theta zero.</p>
+<button onclick="post('/home')">Set hanging zero</button><button onclick="post('/clear')">Clear theta zero</button><div id="status">Waiting for camera…</div>
+<img id="feed" src="/stream"><div class="readout" id="values">—</div>
+<section><h3>Cart position calibration</h3><p>Move slowly to a left reference mark and hold still. Record A. Move to a right reference mark, hold still, enter their measured separation and record B. No motor commands are sent.</p>
+<button onclick="post('/cart/a')">Record left A</button><input id="span" type="number" min="10" max="1000" placeholder="Separation (mm)"><button onclick="post('/cart/b',{span_mm:Number(document.getElementById('span').value)})">Record right B</button><button onclick="post('/cart/clear')">Clear cart calibration</button>
+<small>Cart zero is the midpoint; positive is A → B. Stay within these references. Recalibrate after moving the camera.</small></section>
+<h3>Theta from hanging down (degrees)</h3><canvas id="theta" width="1100" height="190"></canvas>
+<h3>Cart position from midpoint (mm)</h3><canvas id="cart" width="1100" height="190"></canvas>
+<h3>Estimated cart velocity (mm/s)</h3><canvas id="velocity" width="1100" height="190"></canvas>
+<h3>Estimated cart acceleration (mm/s²)</h3><canvas id="acceleration" width="1100" height="190"></canvas>
+<p><small>Last 20 seconds, browser sampled at up to10 Hz. Full processed-rate measurements are saved on the camera computer. Gaps indicate missing data. Theta wraps at ±180°.</small></p><details><summary>Latest state</summary><pre id="raw"></pre></details>
+<script>
+async function post(url,data={}){try{let r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}),x=await r.json();document.getElementById('status').textContent=x.error||JSON.stringify(x);if(r.ok)points=[]}catch(e){document.getElementById('status').textContent=String(e)}}
+document.getElementById('feed').onclick=e=>{let r=e.target.getBoundingClientRect();post('/pivot',{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height})};
+let points=[],lastSeq=-1;
+function draw(id,key,label,color){let c=document.getElementById(id),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);let now=performance.now()/1000,vals=points.map(p=>p[key]).filter(Number.isFinite),lo=vals.length?Math.min(...vals):-1,hi=vals.length?Math.max(...vals):1,pad=Math.max((hi-lo)*.15,1);lo-=pad;hi+=pad;
+ctx.fillStyle='#afc1cf';ctx.font='13px sans-serif';ctx.fillText(hi.toFixed(1),5,16);ctx.fillText(lo.toFixed(1),5,h-20);ctx.fillText('-20 s',55,h-3);ctx.fillText('now',w-35,h-3);
+ctx.strokeStyle='#334655';ctx.beginPath();ctx.moveTo(55,10);ctx.lineTo(55,h-25);ctx.lineTo(w-10,h-25);ctx.stroke();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.beginPath();let prev=null;
+for(let p of points){let v=p[key];if(!Number.isFinite(v)){prev=null;continue}let x=55+(p.t-now+20)/20*(w-65),y=10+(hi-v)/(hi-lo)*(h-35);if(!prev||p.t-prev.t>.3||(key==='theta'&&Math.abs(v-prev[key])>180))ctx.moveTo(x,y);else ctx.lineTo(x,y);prev=p}ctx.stroke()}
+async function poll(){try{let r=await fetch('/state'),s=await r.json(),t=performance.now()/1000;let fresh=s.seq!==lastSeq;lastSeq=s.seq;points.push({t,theta:fresh&&s.valid?s.theta_down_rad*180/Math.PI:null,cart:fresh&&s.cart_valid?s.cart_x_mm:null,velocity:fresh&&s.cart_valid?s.cart_v_mm_s:null,acceleration:fresh&&s.cart_valid?s.cart_a_mm_s2:null});points=points.filter(p=>t-p.t<20);
+const fmt=v=>Number.isFinite(v)?v.toFixed(2):'—';document.getElementById('values').textContent=`θ ${fmt(s.valid?s.theta_down_rad*180/Math.PI:null)}°   |   cart ${fmt(s.cart_valid?s.cart_x_mm:null)} mm`;
+document.getElementById('raw').textContent=JSON.stringify(s,null,2)}catch(e){points.push({t:performance.now()/1000,theta:null,cart:null});document.getElementById('values').textContent='Connection lost'}draw('theta','theta','deg','#58dca0');draw('cart','cart','mm','#6cbdf5');draw('velocity','velocity','mm/s','#f6c66c');draw('acceleration','acceleration','mm/s2','#d99af7');setTimeout(poll,100)}poll();
+</script></body></html>

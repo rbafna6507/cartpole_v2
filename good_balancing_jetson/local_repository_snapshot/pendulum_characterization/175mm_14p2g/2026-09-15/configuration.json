@@ -1,0 +1,31 @@
+{
+  "configuration_id": "175mm_14p2g",
+  "physical_length_mm": 175.0,
+  "pendulum_mass_g": 14.2,
+  "mass_convention": "Pendulum mass recorded separately from the existing end-point masses; end-weight values have not been remeasured in this session.",
+  "calibration_snapshot": {
+    "pendulum": {
+      "length_mm": 175.0,
+      "mass_g": 14.2
+    },
+    "end_point_masses": {
+      "count": 2,
+      "mass_each_g": 5.85
+    },
+    "si": {
+      "pendulum_length_m": 0.175,
+      "pendulum_mass_kg": 0.0142,
+      "end_point_mass_each_kg": 0.00585,
+      "cart_maximum_travel_m": 0.3,
+      "encoder_average_sample_interval_s": 0.002
+    },
+    "cart": {
+      "maximum_travel_mm": 300.0
+    },
+    "encoder": {
+      "average_sample_interval_ms": 2.0
+    }
+  },
+  "provenance": "User confirmed the 175 mm geometry was introduced after the earlier free-decay captures, and specified 14.2 g pendulum mass.",
+  "analysis_status": "Original aggregate metrics remain unchanged. controller_fit.json separately refits 33 low-angle cycles; its rounded effective length of 0.166 m is adopted by swingup-175mm-v3. Motor tracking remains unverified."
+}

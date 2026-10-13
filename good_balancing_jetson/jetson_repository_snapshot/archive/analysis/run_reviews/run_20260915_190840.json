@@ -1,0 +1,68 @@
+{
+  "status": "complete",
+  "source": "logs/run_20260915_190840.csv",
+  "source_sha256": {
+    "run_20260915_190840.csv": "df72d9e98091f5740933a5540960907c1baac05c301cb399a823e504a1114c2b",
+    "run_20260915_190840_events.jsonl": "710fecfa2660062bdf7be142f458c4fa73bb8c946a0cef4621bcbaf285e1e13b"
+  },
+  "firmware_messages": [
+    "# firmware swingup-175mm-v3"
+  ],
+  "start_snapshots": [
+    {
+      "host_time_s": 1789513729.3801441,
+      "command": "auto",
+      "parameters": {
+        "leff": 0.166,
+        "pw": 7.0,
+        "pz": 0.85,
+        "pc1": -0.8,
+        "pc2": -1.2,
+        "vmax": 1.5,
+        "amax_s": 6.0,
+        "amax_b": 6.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "phase_soft": 1.0,
+        "jmax": 150.0,
+        "ke": 2.0,
+        "kpx": 30.0,
+        "kdx": 0.5,
+        "catch_a": 0.45,
+        "catch_r": 3.0,
+        "giveup": 0.7,
+        "rail": 0.15,
+        "bw": 10.0,
+        "vman": 0.05,
+        "zvmax": 2.0,
+        "zamax": 20.0,
+        "ztravel": 100.0,
+        "k1": -22.18629,
+        "k2": -2.61477,
+        "k3": -0.79599,
+        "k4": -1.85162,
+        "cart_steps_per_m": 26666.67,
+        "z_steps_per_mm": 640.0
+      }
+    }
+  ],
+  "samples": 9588,
+  "active_duration_s": 84.31000000000452,
+  "max_lift_from_down_deg": 117.59916653230204,
+  "first_10s_max_lift_deg": 117.59916653230204,
+  "last_10s_max_lift_deg": 52.02987645753065,
+  "longest_balance_mode_s": 0.0,
+  "peak_commanded_speed_m_s": 1.1199,
+  "peak_commanded_accel_m_s2": 6.0,
+  "peak_inferred_position_m": 0.13406,
+  "fraction_inferred_position_over_100mm": 0.4057778315000604,
+  "max_telemetry_gap_s": 0.034,
+  "fault_mode_seen": false,
+  "diagnostic_errors": [],
+  "data_quality_notes": [
+    "4203 startup zeroing messages; inspect event timing before attributing resets"
+  ],
+  "measurement_note": "Only pendulum angle is measured. Cart x is pulse-inferred; v and accel are commands. Balance-mode duration alone is not proof of stable balance.",
+  "fraction_at_speed_cap": 0.0,
+  "fraction_at_accel_cap": 0.5051371932793425
+}

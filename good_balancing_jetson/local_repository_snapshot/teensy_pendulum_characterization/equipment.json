@@ -1,0 +1,45 @@
+{
+  "hardware": {
+    "pulley_teeth": 60,
+    "belt_pitch_mm": 2.0,
+    "motor_full_steps_per_rev": 200,
+    "microsteps": 16,
+    "nominal_steps_per_mm": 26.6666666667,
+    "cart_step": 2,
+    "cart_dir": 3,
+    "shared_enable": 8,
+    "sda": 17,
+    "scl": 16,
+    "i2c_bus": "Wire1",
+    "sample_hz": 1000,
+    "control_hz": 1000,
+    "pulse_period_us": 7,
+    "usable_cart_travel_mm": null,
+    "supply_voltage_v": null,
+    "driver_current_a": null
+  },
+  "pendulum_as_source": {
+    "arm_length_mm": 125,
+    "arm_mass_g": 11.05,
+    "tip_mass_each_g": 5.85,
+    "tip_count": 2,
+    "tip_mass_combined_g": 11.7,
+    "nominal_combined_mass_g": 22.75,
+    "confirmed_current_assembly": false,
+    "note": "Copied from supplied firmware comments; measure current assembly including hub. Do not reuse old 100 mm geometry silently."
+  },
+  "characterization_limits": {
+    "default_speed_mm_s": 30,
+    "default_accel_mm_s2": 300,
+    "default_jerk_mm_s3": 3000,
+    "ceiling_speed_mm_s": 250,
+    "ceiling_accel_mm_s2": 2000,
+    "ceiling_jerk_mm_s3": 20000
+  },
+  "source": "teensy_defaults_update.zip / teensy_swingup",
+  "notes": [
+    "Rail travel MUST be measured in guided homing, not taken from an old default.",
+    "Z pulse outputs remain LOW; shared ENABLE energizes/disables all three drivers. Secure vertical axes.",
+    "No encoder EEPROM writes, no swing-up/balance, no limit-switch inputs, no Ethernet transport in this build."
+  ]
+}

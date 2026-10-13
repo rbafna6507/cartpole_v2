@@ -1,0 +1,92 @@
+VISION3 ENCODER / VISION COMPARISON — 2026-10-13
+
+Purpose
+The dashboard plots independent vision (blue), encoder (orange), and fused
+estimate (purple) histories. Checkboxes hide/show each trace and persist in
+that browser. They never disable a sensor or change motor control.
+
+Run on the Jetson
+1. In the balancing-console terminal:
+   ~/good_balancing_jetson/run_console.sh --rate 100
+   Keep this console open. It is the only owner of the Teensy serial port.
+   No second serial reader is needed. The default publisher uses UDP
+   127.0.0.1:3096; --vision-telemetry-port 0 disables publishing.
+
+2. In a separate terminal, after stopping an existing vision camera owner:
+   cd ~/cartpole_inverted_pendulum/vision3
+   ../.venv/bin/python -u -m pendulum_vision.live --camera /dev/video0 --width 960 --height 600 --fps 80 --rotate 180 --port 3090 --video-bitrate 4000 --preview-fps 1 --calibration-file "$PWD/last_calibration.json"
+
+3. Open http://127.0.0.1:3095/ in Chrome through the existing native SSH
+   local forward to Jetson 127.0.0.1:3090. Refresh after a vision restart.
+   The Mac forward port may differ; use the port in your SSH -L command.
+   The native IPv6 route was the working route in this session. README.md
+   contains the command and host-key requirements.
+
+Calibration and timing
+- Console upright/home commands keep their normal authority. Successful
+  reference commands, a new publisher session, or a board reboot reset
+  the comparison history/filter; no old fused reference is carried over.
+- Vision's hanging zero is a separate reference. The optional calibration
+  file restores only matching resolution/rotation; moving the camera or
+  changing the rig still requires a fresh calibration.
+- Comparison timing and alignment offers encoder sign (+1/-1) and a
+  measured camera-delay correction (0..200 ms). Delay shifts the raw blue
+  trace and filter input together. These settings reset comparison history
+  and are saved in events; use launch arguments to repeat them next run.
+- Board time is mapped to Jetson monotonic time using serial receipt
+  timestamps. Camera time is host-read time minus the configured delay.
+  Absolute camera exposure/readout and serial delays have NOT been
+  calibrated. Agreement between these sensors is not absolute accuracy.
+
+Estimator and missing data
+A Kalman filter estimates unwrapped angle, angular velocity, and a slowly
+varying encoder-minus-vision offset. Delayed samples replay a bounded
+400 ms history. Vision outliers are gated. The encoder's firmware-derived
+velocity is not counted as an independent second measurement.
+The dashboard explicitly shows both, encoder only, vision only, prediction,
+stale, or unavailable. It permits a short prediction interval and returns
+no estimate after 300 ms without accepted observations. Raw gaps remain
+visible; short plot connections can be dashed. Shared 360-degree display
+branches remove wrap jumps without subtracting sensor disagreement.
+
+Encoder validity
+The console polls the firmware's read-only enc diagnostics at 10 Hz,
+through its existing serial owner. The receiver requires recent healthy
+diagnostics (at most 250 ms old), encoder valid/magnet status, and fresh
+telemetry. This is sampled health, NOT a guarantee for every 100 Hz sample.
+Fault-mode telemetry, stale/unknown health, or a missing publisher is not
+treated as a valid encoder measurement.
+
+Process isolation and recordings
+Encoder receive, fusion, and comparison logging run in a separate process.
+The camera enqueues small observations without blocking; bounded queue/RPC
+contention drops are reported as fusion_queue_drops. A failed comparison
+worker leaves the camera API available and reports unavailable.
+Each run includes states.jsonl (camera measurements), comparison.jsonl
+(raw encoder/vision input and corresponding fused estimates), events.jsonl,
+session.json, and a final report after a clean shutdown.
+
+Verification
+- Jetson Python suite: 89 tests run, 1 skipped, no failures.
+- JavaScript comparison tests: 6 passed.
+- Reviewed/tested generation barriers, worker failure, calibration reset,
+  stale health, clock wrapping, delayed observations, angular wrapping,
+  outliers, visibility persistence and dashed measurement gaps.
+- Earlier passive hardware check received 501 packets in 5 s (~100 Hz),
+  with reference 3475 and healthy diagnostics. Both sensors appeared on
+  the live dashboard. No gains, firmware or motor control were changed.
+- A later check with the console closed and no video viewer processed
+  about 79 FPS, with valid angle rates around 77 FPS. This does not prove
+  80 FPS with simultaneous encoder fusion and active H.264 viewing.
+  Streaming/load still lowers throughput; use the live valid-measurement
+  rates and coverage. Moving-arm physical accuracy remains unvalidated.
+
+Future SDK/control integration
+This display estimator is not an actuator input. A future local observation
+provider can export source, angle, velocity, timestamps/age, validity,
+calibration identity and sequence to a trusted Jetson broker before the
+public Python SDK exists. The SDK can consume that same contract.
+Browser/SSH transport must remain outside the balance loop. Current Teensy
+balancing would need an explicit external-observation mode, or the v2
+Jetson-policy / Teensy-safety-executor path. That work must define stale
+input behavior and observation-to-action deadlines before activation.

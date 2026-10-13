@@ -1,0 +1,252 @@
+test_encoder_zero_rollover_both_directions (test_angle_plot.CircularPlotTest.test_encoder_zero_rollover_both_directions) ... ok
+test_gaps_resets_and_invalid_samples_do_not_infer_turns (test_angle_plot.CircularPlotTest.test_gaps_resets_and_invalid_samples_do_not_infer_turns) ... ok
+test_shape_and_scale_checks (test_angle_plot.CircularPlotTest.test_shape_and_scale_checks) ... ok
+test_true_zero_crossing_is_continuous (test_angle_plot.CircularPlotTest.test_true_zero_crossing_is_continuous) ... ok
+test_wrapped_angle_seam_keeps_samples_but_breaks_line (test_angle_plot.CircularPlotTest.test_wrapped_angle_seam_keeps_samples_but_breaks_line) ... ok
+test_commands_parameters_faults_and_telemetry_survive_close (test_console_events.ConsoleEventsTest.test_commands_parameters_faults_and_telemetry_survive_close) ... ok
+test_corrupt_parameter_and_nonfinite_telemetry_do_not_kill_reader (test_console_events.ConsoleEventsTest.test_corrupt_parameter_and_nonfinite_telemetry_do_not_kill_reader) ...   # firmware swingup-175mm-v3
+  leff = 0.16600
+  ! no pendulum response to cart command -> FAULT
+
+  ! Damaged serial reply ignored (1 rejected). Type link for status.
+ok
+test_serial_error_is_visible_and_recorded (test_console_events.ConsoleEventsTest.test_serial_error_is_visible_and_recorded) ...   # STOP
+  jmax = 70
+
+  ! USB serial connection lost: OSError: device disconnected
+ok
+test_upright_requires_capability_and_snapshots_before_start (test_console_events.ConsoleEventsTest.test_upright_requires_capability_and_snapshots_before_start) ...   ! upright-only firmware not confirmed; upload v17 and refresh params before bal
+ok
+test_four_prompts_save_raw_mapping_without_angle_validation (test_encoder_calibration.CalibrationTest.test_four_prompts_save_raw_mapping_without_angle_validation) ... Close other serial programs. Drivers will be disabled; support the height assembly.
+Place the pendulum at each reference and press Enter to record its raw value.
+Recordings: /tmp/tmpnu32g9t2/capture.json
+  SAVED 0° = 4000.000 counts
+  SAVED 90° = 850.000 counts
+  SAVED 180° = 1940.000 counts
+  SAVED 270° = 3000.000 counts
+ok
+test_missing_replies_report_failure_without_fabricating_value (test_encoder_calibration.CalibrationTest.test_missing_replies_report_failure_without_fabricating_value) ... 
+Recorded calibration points:
+    0° = 4000.000 counts
+   90° = 850.000 counts
+  180° = 1940.000 counts
+  270° = 3000.000 counts
+Saved: /tmp/tmpnu32g9t2/capture.json
+These reference values are recorded; firmware correction is not automatically applied.
+  Unreadable/missing serial reply; retry 1/5.
+  Unreadable/missing serial reply; retry 2/5.
+  Unreadable/missing serial reply; retry 3/5.
+  Unreadable/missing serial reply; retry 4/5.
+  Unreadable/missing serial reply; retry 5/5.
+ok
+test_movement_and_sensor_flags_are_saved (test_encoder_calibration.CalibrationTest.test_movement_and_sensor_flags_are_saved) ... ok
+test_one_reading_and_wraparound_mean (test_encoder_calibration.CalibrationTest.test_one_reading_and_wraparound_mean) ... ok
+test_partial_report_preserves_raw_data (test_encoder_calibration.CalibrationTest.test_partial_report_preserves_raw_data) ... ok
+test_unreadable_reply_retried (test_encoder_calibration.CalibrationTest.test_unreadable_reply_retried) ...   Unreadable/missing serial reply; retry 1/5.
+ok
+test_reject_unstable_bandwidth_and_reset_in_control_task (test_encoder_filter_command.FilterCommandTest.test_reject_unstable_bandwidth_and_reset_in_control_task) ... ERROR
+test_live_reference_capture_and_persistence (test_encoder_reference.EncoderReferenceTest.test_live_reference_capture_and_persistence) ... ERROR
+test_command_framing_and_motion_timeout (test_firmware_serial.FirmwareSerialTest.test_command_framing_and_motion_timeout) ... ERROR
+test_busy_port_rejected (test_flash.FlashTests.test_busy_port_rejected) ... ok
+test_compile_failure_never_uploads (test_flash.FlashTests.test_compile_failure_never_uploads) ... Compiling example for esp32:esp32:esp32…
+Arduino CLI failed (exit 1). Flash did not complete.
+ok
+test_compile_only_never_discovers_device (test_flash.FlashTests.test_compile_only_never_discovers_device) ... Compiling example for esp32:esp32:esp32…
+ok
+test_port_discovery_requires_single_usb (test_flash.FlashTests.test_port_discovery_requires_single_usb) ... ok
+test_repo_name_and_ino_paths (test_flash.FlashTests.test_repo_name_and_ino_paths) ... ok
+test_upload_uses_fresh_compile_directory_and_handles_spaces (test_flash.FlashTests.test_upload_uses_fresh_compile_directory_and_handles_spaces) ... Compile succeeded. Nothing uploaded.
+Compiling example for vendor:core:board…
+Uploading example to /dev/example…
+ok
+test_agg_with_display_falls_back_without_stop (test_headless.HeadlessTest.test_agg_with_display_falls_back_without_stop) ... ERROR
+test_eof_still_stops (test_headless.HeadlessTest.test_eof_still_stops) ... Flash complete.
+  Text dashboard: stop + Enter; Space/Esc stop; q + Enter exits.
+plot> ok
+test_explicit_text (test_headless.HeadlessTest.test_explicit_text) ... ok
+test_linux_without_display (test_headless.HeadlessTest.test_linux_without_display) ... ok
+test_socket_transport_round_trip (test_host_socket.HostTransportTest.test_socket_transport_round_trip) ... ok
+test_usb_arguments_unchanged (test_host_socket.HostTransportTest.test_usb_arguments_unchanged) ... ok
+test_incomplete_phase_on_missing_samples_and_interrupt (test_passive_capture.CaptureFailureTest.test_incomplete_phase_on_missing_samples_and_interrupt) ... ok
+test_period_workflow_has_release_markers_and_both_baselines (test_passive_capture.CaptureFailureTest.test_period_workflow_has_release_markers_and_both_baselines) ... 
+Keep the cart fixed throughout. Release by hand without pushing; do not touch it during capture.
+Each trial records a down baseline, a timed release, and a final resting baseline.
+3
+2
+1
+RELEASE NOW — leave the pendulum untouched.
+Capture finished: 600 raw snapshots plus 100 Hz telemetry.
+3
+2
+1
+RELEASE NOW — leave the pendulum untouched.
+Capture finished: 600 raw snapshots plus 100 Hz telemetry.
+3
+2
+1
+RELEASE NOW — leave the pendulum untouched.
+Capture finished: 600 raw snapshots plus 100 Hz telemetry.
+ok
+test_repeated_backward_and_wrapped_board_time (test_passive_capture.CaptureFailureTest.test_repeated_backward_and_wrapped_board_time) ... ok
+test_eight_unique_poses_plus_closure_and_no_automatic_apply (test_passive_capture.GuidedWorkflowTest.test_eight_unique_poses_plus_closure_and_no_automatic_apply) ... 
+Choose one viewing side and keep it throughout. Angles increase CLOCKWISE from hanging DOWN.
+Use a physical angle guide/protractor; do not position from the encoder reading.
+Hold each pose still until SAVED appears. These measurements do not change firmware calibration.
+SAVED   0°: raw mean 500.00, spread 0.00°, 20 samples
+SAVED  45°: raw mean 4084.00, spread 0.00°, 20 samples
+SAVED  90°: raw mean 3572.00, spread 0.00°, 20 samples
+SAVED 135°: raw mean 3060.00, spread 0.00°, 20 samples
+SAVED 180°: raw mean 2548.00, spread 0.00°, 20 samples
+SAVED 225°: raw mean 2036.00, spread 0.00°, 20 samples
+SAVED 270°: raw mean 1524.00, spread 0.00°, 20 samples
+SAVED 315°: raw mean 1012.00, spread 0.00°, 20 samples
+SAVED 360°: raw mean 500.00, spread 0.00°, 20 samples
+ok
+test_fresh_snapshot_stop_handshake_and_incremental_files (test_passive_capture.GuidedWorkflowTest.test_fresh_snapshot_stop_handshake_and_incremental_files) ... Return-to-down difference: 0.00°
+Measured upright raw count: 2548.00; NOT applied.
+Output directory: /tmp/tmpsv6xraf9/result
+ok
+test_circular_mean_across_sensor_wrap (test_passive_capture.PassiveCaptureTest.test_circular_mean_across_sensor_wrap) ... ok
+test_commands_are_restricted_to_passive_acquisition (test_passive_capture.PassiveCaptureTest.test_commands_are_restricted_to_passive_acquisition) ... ok
+test_eight_positions_and_closure_report_both_directions (test_passive_capture.PassiveCaptureTest.test_eight_positions_and_closure_report_both_directions) ... ok
+test_invalid_or_enabled_samples_cannot_silently_qualify (test_passive_capture.PassiveCaptureTest.test_invalid_or_enabled_samples_cannot_silently_qualify) ... ok
+test_blocked_auto_does_not_open_plot (test_plot_commands.CommandsTest.test_blocked_auto_does_not_open_plot) ... ok
+test_immediate_stop_cancels_partial_line_and_quit_stops (test_plot_commands.CommandsTest.test_immediate_stop_cancels_partial_line_and_quit_stops) ... ok
+test_link_command_is_local_while_plotting (test_plot_commands.CommandsTest.test_link_command_is_local_while_plotting) ... ok
+test_parameters_spaces_editing_and_auto_command (test_plot_commands.CommandsTest.test_parameters_spaces_editing_and_auto_command) ... ok
+test_raw_reader_drains_pasted_line_and_eof (test_plot_commands.CommandsTest.test_raw_reader_drains_pasted_line_and_eof) ... ok
+test_readonly_plot_stop_keys_button_and_terminal (test_plot_commands.CommandsTest.test_readonly_plot_stop_keys_button_and_terminal) ... ERROR
+test_typed_stop_is_one_command_not_jog (test_plot_commands.CommandsTest.test_typed_stop_is_one_command_not_jog) ... ok
+test_controlled_release_rail_and_jerk_on_recorded_states (test_recorded_rail_recovery.RecordedRecoveryTest.test_controlled_release_rail_and_jerk_on_recorded_states) ... ERROR
+test_already_centered_completes_with_stop_only (test_rehome.RehomeIntegrationTest.test_already_centered_completes_with_stop_only) ...   connected: fake
+  logging:   fake.csv
+  events:    fake.jsonl
+  'help' for commands.
+
+  Returning to existing home at <=40 mm/s. Any key stops. Drivers disable at completion.
+  rehome complete: x=+0.00000 m (step-based)
+ok
+test_keyboard_cancel_sends_stop (test_rehome.RehomeIntegrationTest.test_keyboard_cancel_sends_stop) ...   Returning to existing home at <=40 mm/s. Any key stops. Drivers disable at completion.
+  rehome stopped: cancelled by keyboard/terminal close
+ok
+test_plot_does_not_forward_unknown_firmware_rehome (test_rehome.RehomeIntegrationTest.test_plot_does_not_forward_unknown_firmware_rehome) ... ok
+test_stale_mid_return_stops_without_home (test_rehome.RehomeIntegrationTest.test_stale_mid_return_stops_without_home) ...   Returning to existing home at <=40 mm/s. Any key stops. Drivers disable at completion.
+  rehome stopped: fresh, healthy telemetry required
+ok
+test_abort_on_reset_fault_speed_limit_and_timeout (test_rehome.RehomeTest.test_abort_on_reset_fault_speed_limit_and_timeout) ... ok
+test_both_directions_converge_without_redefining_home (test_rehome.RehomeTest.test_both_directions_converge_without_redefining_home) ... ok
+test_missing_or_invalid_rail_is_rejected (test_rehome.RehomeTest.test_missing_or_invalid_rail_is_rejected) ... ok
+test_refuses_moving_upright_faulted_or_outside_rail_start (test_rehome.RehomeTest.test_refuses_moving_upright_faulted_or_outside_rail_start) ... ok
+test_ack_uses_new_reply_after_transmit (test_run_review.RunReviewTests.test_ack_uses_new_reply_after_transmit) ... ok
+test_active_partial_reset_and_recent_logs_defer (test_run_review.RunReviewTests.test_active_partial_reset_and_recent_logs_defer) ... ok
+test_missing_parameters_do_not_invent_saturation (test_run_review.RunReviewTests.test_missing_parameters_do_not_invent_saturation) ... ok
+test_actual_firmware_formatter_and_crc_match_python (test_serial_checksum.ChecksumTest.test_actual_firmware_formatter_and_crc_match_python) ... ERROR
+test_disconnect_reconnect_stops_and_never_replays_auto (test_serial_recovery.RecoveryTest.test_disconnect_reconnect_stops_and_never_replays_auto) ... 
+  ! USB serial connection lost: OSError: Device not configured
+  ! Motion blocked: serial device unavailable: OSError: Device not configured. Type link for details.
+  USB reconnected; STOP and fresh telemetry verified. Check cart center before restarting.
+ok
+test_dropped_digit_or_minus_sign_cannot_refresh_data (test_serial_recovery.RecoveryTest.test_dropped_digit_or_minus_sign_cannot_refresh_data) ...   ! Motion blocked: waiting for a valid STOP acknowledgment. Type link for details.
+ok
+test_lost_stop_ack_retries_and_block_reason_is_logged (test_serial_recovery.RecoveryTest.test_lost_stop_ack_retries_and_block_reason_is_logged) ...   ! Motion blocked: waiting for a valid STOP acknowledgment. Type link for details.
+ok
+test_partial_and_combined_checked_lines_preserved (test_serial_recovery.RecoveryTest.test_partial_and_combined_checked_lines_preserved) ... ok
+test_stale_telemetry_stops_and_keepalive_does_not_need_params (test_serial_recovery.RecoveryTest.test_stale_telemetry_stops_and_keepalive_does_not_need_params) ...   ! Motion blocked: waiting for a valid STOP acknowledgment. Type link for details.
+  ! Motion blocked: waiting for a valid STOP acknowledgment. Type link for details.
+ok
+
+======================================================================
+ERROR: test_reject_unstable_bandwidth_and_reset_in_control_task (test_encoder_filter_command.FilterCommandTest.test_reject_unstable_bandwidth_and_reset_in_control_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_encoder_filter_command.py", line 88, in test_reject_unstable_bandwidth_and_reset_in_control_task
+    subprocess.run(['clang++','-std=c++11','-O2',str(source),'-o',str(binary)],check=True)
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'clang++'
+
+======================================================================
+ERROR: test_live_reference_capture_and_persistence (test_encoder_reference.EncoderReferenceTest.test_live_reference_capture_and_persistence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_encoder_reference.py", line 110, in test_live_reference_capture_and_persistence
+    subprocess.run(['clang++','-std=c++11','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)],check=True)
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'clang++'
+
+======================================================================
+ERROR: test_command_framing_and_motion_timeout (test_firmware_serial.FirmwareSerialTest.test_command_framing_and_motion_timeout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_firmware_serial.py", line 63, in test_command_framing_and_motion_timeout
+    subprocess.run(['clang++','-std=c++11','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)],check=True)
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'clang++'
+
+======================================================================
+ERROR: test_agg_with_display_falls_back_without_stop (test_headless.HeadlessTest.test_agg_with_display_falls_back_without_stop)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_headless.py", line 26, in test_agg_with_display_falls_back_without_stop
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+======================================================================
+ERROR: test_readonly_plot_stop_keys_button_and_terminal (test_plot_commands.CommandsTest.test_readonly_plot_stop_keys_button_and_terminal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_plot_commands.py", line 54, in test_readonly_plot_stop_keys_button_and_terminal
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+======================================================================
+ERROR: test_controlled_release_rail_and_jerk_on_recorded_states (test_recorded_rail_recovery.RecordedRecoveryTest.test_controlled_release_rail_and_jerk_on_recorded_states)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_recorded_rail_recovery.py", line 14, in test_controlled_release_rail_and_jerk_on_recorded_states
+    subprocess.run(['clang++','-std=c++11','-O2','-Wall','-Wextra','-Werror',str(ROOT/'tests/recorded_rail_recovery_test.cpp'),'-o',str(exe)],check=True)
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'clang++'
+
+======================================================================
+ERROR: test_actual_firmware_formatter_and_crc_match_python (test_serial_checksum.ChecksumTest.test_actual_firmware_formatter_and_crc_match_python)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/rbafna/good_balancing_jetson/local_repository_snapshot/tests/test_serial_checksum.py", line 49, in test_actual_firmware_formatter_and_crc_match_python
+    subprocess.run(['clang++','-std=c++11','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)],check=True)
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/rbafna/.local/share/uv/python/cpython-3.11.17-linux-aarch64-gnu/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'clang++'
+
+----------------------------------------------------------------------
+Ran 64 tests in 6.206s
+
+FAILED (errors=7)

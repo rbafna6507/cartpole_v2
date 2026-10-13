@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Compile and flash Teensy 4.1. macOS/Linux, Bash 3.2+.
+# Usage: flash_teensy [--compile-only] SKETCH_DIRECTORY [PORT]
+# Optional: TEENSY_PORT (fallback), ARDUINO_CLI (executable path), XDG_CONFIG_HOME.
+set -euo pipefail
+
+usage() {
+  printf 'Usage: flash_teensy [--compile-only] SKETCH_DIRECTORY [PORT]\nCompile only: flash_teensy --compile-only teensy_swingup\nSet saved default: flash_teensy --set-port PORT\nShow default: flash_teensy --show-port\nPort priority: explicit argument, saved default, TEENSY_PORT, usb:2100000\nExample: flash_teensy teensy_pendulum_characterization\n'
+}
+if [[ ${1:-} == --help || ${1:-} == -h ]]; then usage; exit 0; fi
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/flash_teensy"
+port_file="$config_dir/port"
+load_port() {
+  port=${TEENSY_PORT:-usb:2100000}
+  if [[ -f "$port_file" ]]; then
+    saved_port=$(cat "$port_file")
+    if [[ -n "$saved_port" ]]; then port=$saved_port; fi
+  fi
+}
+save_port() {
+  if [[ -z "$1" || "$1" == *$'\n'* || "$1" == *$'\r'* ]]; then
+    printf 'Port must be a nonempty single line.\n' >&2; exit 2
+  fi
+  mkdir -p "$config_dir"
+  port_tmp=$(mktemp "$config_dir/port.XXXXXXXX")
+  printf '%s\n' "$1" > "$port_tmp"
+  mv -f -- "$port_tmp" "$port_file"
+  printf 'Saved default port: %s\n' "$1"
+}
+if [[ ${1:-} == --set-port ]]; then
+  [[ $# -eq 2 ]] || { usage >&2; exit 2; }
+  save_port "$2"; exit 0
+fi
+if [[ ${1:-} == --show-port ]]; then
+  [[ $# -eq 1 ]] || { usage >&2; exit 2; }
+  load_port; printf '%s\n' "$port"; exit 0
+fi
+
+compile_only=false
+if [[ ${1:-} == --compile-only ]]; then compile_only=true; shift; fi
+if [[ $# -lt 1 || $# -gt 2 ]]; then usage >&2; exit 2; fi
+if [[ $compile_only == true && $# -ne 1 ]]; then usage >&2; exit 2; fi
+cli=${ARDUINO_CLI:-arduino-cli}
+command -v "$cli" >/dev/null 2>&1 || { printf 'Cannot find Arduino CLI: %s\n' "$cli" >&2; exit 127; }
+[[ -d "$1" ]] || { printf 'Sketch directory not found: %s\n' "$1" >&2; exit 2; }
+sketch=$(cd -- "$1" && pwd -P)
+name=$(basename "$sketch")
+[[ -f "$sketch/$name.ino" ]] || { printf 'Expected main sketch: %s/%s.ino\n' "$sketch" "$name" >&2; exit 2; }
+load_port
+if [[ $# -eq 2 ]]; then
+  port=$2
+  save_port "$port"
+fi
+fqbn='teensy:avr:teensy41:usb=serial,speed=600,opt=o2std'
+# Fresh output prevents uploading a binary from another sketch or failed build.
+build=$(mktemp -d "${TMPDIR:-/tmp}/flash_teensy.XXXXXXXX")
+cleanup() {
+  status=$?
+  if [[ $status -eq 0 && $compile_only == true ]]; then
+    printf '\nCompile completed. Build artifacts retained at: %s\n' "$build"
+  elif [[ $status -eq 0 ]]; then
+    rm -rf -- "$build"
+  else
+    printf '\nStopped; build artifacts (if any) retained at: %s\n' "$build" >&2
+  fi
+}
+trap cleanup EXIT
+printf 'Compiling %s\n' "$sketch"
+"$cli" compile --fqbn "$fqbn" --output-dir "$build" "$sketch"
+if [[ $compile_only == true ]]; then exit 0; fi
+printf '\nUploading to %s. Close serial monitors/lab.py first.\n' "$port"
+if "$cli" upload --fqbn "$fqbn" --port "$port" --input-dir "$build" --verbose "$sketch"; then
+  printf '\nFlash completed: %s\n' "$name"
+else
+  status=$?
+  printf '\nUpload failed. Check arduino-cli board list for the current USB port.\nIf automatic reboot fails, try the Teensy program button and retry.\n' >&2
+  exit "$status"
+fi

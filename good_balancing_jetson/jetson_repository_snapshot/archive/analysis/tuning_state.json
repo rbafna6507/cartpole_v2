@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "automation": {
+    "id": "review-cart-pole-runs-and-tune-limits",
+    "interval_minutes": 5,
+    "scope": "repository files and tests; no serial access, flashing or motion",
+    "status": "PAUSED",
+    "pause_reason": "User requested manual amplitude/frequency tests instead of continued swing-up tuning."
+  },
+  "initial_baseline_run": "run_20260915_190840",
+  "reviewed_runs": {
+    "logs/run_20260915_190840.csv": {
+      "source_sha256": {
+        "run_20260915_190840.csv": "df72d9e98091f5740933a5540960907c1baac05c301cb399a823e504a1114c2b",
+        "run_20260915_190840_events.jsonl": "710fecfa2660062bdf7be142f458c4fa73bb8c946a0cef4621bcbaf285e1e13b"
+      },
+      "decision": "Baseline v3: max lift 117.599 degrees, last 10s 52.03 degrees, no balance, no speed saturation. Lower jerk by 20 percent as an unverified tracking/phase trial; keep acceleration 6."
+    },
+    "logs/run_20260915_201150.csv": {
+      "source_sha256": {
+        "run_20260915_201150.csv": "2dbc137fd4bf2aa1d6adda6b3c63b0701c80b0e225a6e0a1b66bea07ab719d59",
+        "run_20260915_201150_events.jsonl": "5cf1eefbe87d67aea0be1feb31c5f09afd0caff4824f3ea2591cb6cbcf317565"
+      },
+      "decision": "Exact v4 settings, centered inferred start: 57.307 deg maximum lift, no balance, no software fault. Lower jerk has not shown an improvement over the v3 baseline.",
+      "action": "Hold repository settings; do not escalate limits in response to gross nonresponse."
+    },
+    "logs/run_20260915_201512.csv": {
+      "source_sha256": {
+        "run_20260915_201512.csv": "8ddb08df55a68c2079c0d40d60d97923148134fa871b43aefa89a7e3abcf89b1",
+        "run_20260915_201512_events.jsonl": "3fc14c2d45733a49e4e6bc44621966cdadddc874360b3e1e6bac135ad6568dcf"
+      },
+      "decision": "Exact v4 settings: first start at inferred x=-66.9 mm faulted after ~2 s with only 0.086 deg encoder span despite 460 mm cumulative pulse-inferred travel. Retry reached 179.209 deg lift and BALANCE for 0.234 s, with no sustained near-upright balance. Physical cart tracking remains unverified.",
+      "action": "Hold repository settings; do not escalate limits in response to gross nonresponse."
+    },
+    "logs/run_20260915_201752.csv": {
+      "source_sha256": {
+        "run_20260915_201752.csv": "6261905111b5056ce0b77b5738712911f2651ce2c45ed8f52fcb0a82652b98c9",
+        "run_20260915_201752_events.jsonl": "61d41a60ea0b3069bd4d0f0c852cce131342802e81e7c68079546a9c4c1e16d9"
+      },
+      "decision": "User runtime experiment: amax_s=5, amax_b=6, jmax=50, ke=2.5. First start at inferred x=-132.23 mm faulted with zero encoder change despite 643 mm cumulative inferred travel. Retry reached 105.292 deg lift, no balance. Multiple parameter changes and noncentered starts prevent attribution to jerk alone.",
+      "action": "Hold repository settings; do not escalate limits in response to gross nonresponse."
+    }
+  },
+  "pending_candidate": {
+    "firmware_id": "swingup-175mm-v4",
+    "status": "superseded_by_user_requested_v5_defaults",
+    "settings": {
+      "vmax": 2.34375,
+      "amax_s": 6.0,
+      "amax_b": 6.0,
+      "jmax": 120.0,
+      "ke": 2.0
+    },
+    "baseline_settings": {
+      "vmax": 1.5,
+      "amax_s": 6.0,
+      "amax_b": 6.0,
+      "jmax": 150.0,
+      "ke": 2.0
+    },
+    "reason": "Speed ceiling raised at user request. Lower jerk may reduce abrupt reversals; logs do not establish the cause of degraded swing. Change only jerk in the next tuning trial, with acceleration held constant.",
+    "validation": {
+      "closed_loop_cases_passed": 13,
+      "rail_limit_checks": "passed",
+      "log_review_tests_passed": 3,
+      "esp32_program_bytes": 334375,
+      "esp32_global_bytes": 22640,
+      "physical_trial": "Three new sessions reviewed: no sustained balance; two startup nonresponse faults. See 20260915_2023_episode_review.json."
+    },
+    "followup": "Verify physical motor/cart motion follows commands, establish physical center before resetting the reference, then compare one setting at a time. Do not stack new tuning candidates while nonresponse is unresolved."
+  },
+  "constraints": {
+    "total_travel_m": 0.3,
+    "startup": "physical center, no homing",
+    "max_speed_m_s": 0.8,
+    "max_rpm": 1200,
+    "motor_tracking_verified": false,
+    "acceleration_increase_requires_motor_tracking_confirmation": true,
+    "one_trial_change_per_new_run": true,
+    "do_not_reprocess_identical_source_hashes": true,
+    "max_acceleration_m_s2": 12
+  },
+  "history": [
+    {
+      "candidate": "swingup-175mm-v4",
+      "baseline_run": "logs/run_20260915_190840.csv",
+      "decision": "vmax 1.5 -> 2.34375 m/s; jmax 150 -> 120 m/s^3; amax_s/amax_b remain 6 m/s^2",
+      "physical_result": {
+        "reviewed_at_utc": "2026-09-16T00:23:38Z",
+        "sources": [
+          "logs/run_20260915_201150.csv",
+          "logs/run_20260915_201512.csv",
+          "logs/run_20260915_201752.csv"
+        ],
+        "outcome": "No sustained balance. Hold changes because startup nonresponse and mixed runtime experiments prevent a reliable tuning decision."
+      }
+    },
+    {
+      "reviewed_at_utc": "2026-09-16T00:23:38Z",
+      "decision": "No firmware or limit change. Record exact-v4 trials and user runtime experiment separately. Keep 300 mm travel and derived speed ceiling.",
+      "reason": "Two gross-response faults; near-upright crossing is not stable capture; motor tracking is not confirmed.",
+      "latest_observed_runtime_settings": {
+        "vmax": 2.34375,
+        "amax_s": 5.0,
+        "amax_b": 6.0,
+        "jmax": 50.0,
+        "ke": 2.5
+      },
+      "repository_settings_changed": false
+    },
+    {
+      "decision": "User requested cart on STEP12/DIR13 and vmax=1, jmax=50, amax_s=amax_b=5. Fast profile reads shared defaults.",
+      "firmware_id": "swingup-175mm-v5",
+      "physical_result": null
+    },
+    {
+      "date": "2026-09-15",
+      "decision": "User corrected the cart/Z1 swap: cart STEP=GPIO16 (RX2), DIR=GPIO17 (TX2); Z1 STEP=GPIO25, DIR=GPIO26. Requested motion limits remain vmax=1, jmax=50, amax_s=amax_b=5. Source updated; not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "20T pulley; use user-tested 600 RPM and 20,000 RPM/s (0.4 m/s and 13.333 m/s^2). Jerk 100 m/s^3. Cart STEP18/DIR19, Z2 STEP16/DIR17, Z1 STEP25/DIR26; 175 mm pendulum and 300 mm rail unchanged. Not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "User superseded the 16,000 RPM/s^2 request before installation and chose 400,000 RPM/s^2 (266.667 m/s^3); source defaults updated. Other v6 settings retained. Motion-limit tests pass; capture simulation still fails; not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "Reviewed seven new sessions (12 auto episodes). Recorded user-observed smooth 0.75/15/15/50 baseline; exact trial has a reproducible software speed-limit fault. Repeated upright passes but no sustained balance; next work is speed-limiter anticipation and capture feasibility. No firmware or live settings changed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "User requested disabled startup/stop, removal of fast mode, and 0.75/15/15/50 defaults. v8 also anticipates jerk ramp-down speed and opens capture at 0.60 rad with feasibility guards. Gains retained after comparisons; measured-state simulation still mismatches hardware. Not flashed.",
+      "assessment": "analysis/v8_assessment.md"
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "v9 fixes v8 ENABLE initialization: preload HIGH then Arduino pinMode registration. Add central 260 mm edge recovery trigger with earlier predictive braking, stop/recenter/resume, and GPIO output diagnostics. Tests and compile pass; not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "User requested usable stop while plotting, 270 mm operation with return just inside range, and 0.8/18/18/100 defaults. v10 updates console input and rail recovery; uses a 7 us pulse timer to accommodate 64000 steps/s. Not flashed.",
+      "assessment": "analysis/rail_recovery_v10.md"
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "User requested vmax=0.8, amax_s=amax_b=16, jmax=70. v11 changes those defaults; retains existing pulse generator, rail behavior and stop controls. Not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "Added full-turn overspeed recovery above 50 RPM, return cart to center then require 3 continuous quiet seconds. Defaults unchanged at 0.8/16/16/70; not flashed."
+    },
+    {
+      "date": "2026-09-16",
+      "decision": "User requested serial error fixes, 0.8/12/12/60 defaults and 0/90/180/270 encoder calibration. v13 adds stopped reconnect and host watchdog. Not flashed; no physical calibration collected."
+    },
+    {
+      "candidate": "swingup-175mm-20t-v14",
+      "decision": "Use recorded 180-degree raw count 3416 for balance target, independent of startup/manual down zero. No nonlinear remapping or gain/limit changes."
+    },
+    {
+      "candidate": "swingup-175mm-20t-v15",
+      "decision": "14:06\u201314:09 logs show corrupted replies and a USB disconnect. Add checksummed replies, 115200 baud/25 Hz, independent keepalive and stopped retry recovery. Preserve upright 3416, gains and motion limits; no flash/motion performed."
+    },
+    {
+      "candidate": "swingup-175mm-20t-v16",
+      "decision": "User reports serial resolved after removing motor-breakout feed to ESP32. Raise full-turn overspeed trip from 50 to 200 RPM; preserve centering, below-30-RPM three-second quiet wait and all motion limits."
+    },
+    {
+      "candidate": "swingup-175mm-20t-v18",
+      "decision": "Replace full-turn stopper with immediate filtered |theta_dot| >25 rad/s recovery; center, then resume strictly below 10 rad/s. No angle gate or dwell. Motion limits and gains unchanged."
+    },
+    {
+      "candidate": "swingup-175mm-20t-v19",
+      "decision": "User requested immediate direction flip after upright review. CART_INVERT 1 -> 0; encoder sign, absolute target, gains and limits retained. DIR written on first positive command; pending physical validation."
+    },
+    {
+      "candidate": "swingup-175mm-60t-v20",
+      "decision": "60T pulley; preserve linear 0.8/12/12/60 limits. Convert geometry to 26.666667 steps/mm; retain historical 20T logs and presets."
+    },
+    {
+      "candidate": "swingup-175mm-60t-v21",
+      "decision": "User requested cart STEP25/DIR26; swap Z1 to18/19 to keep all outputs unique. Preserve Z2 16/17 and all motion limits."
+    },
+    {
+      "candidate": "swingup-175mm-60t-v22",
+      "decision": "Implement controlled rail stop/return/handoff after repeated rail cycles in September 17 logs. Keep default gains and .8/12/12/60 limits. Compiled and software tested, not uploaded.",
+      "assessment": "analysis/rail_recovery_v22.md"
+    },
+    {
+      "candidate": "swingup-125mm-60t-v23",
+      "decision": "User corrected the arm to 125 mm, confirmed prior 100 mm mass 11.05 g belonged to this arm, and retained two 5.85 g end weights. Refit the pre-175 mm records: 20 cycles, leff=0.124455 m, firmware 0.124 m. Defaults .8/12/12/60 and v22 recovery retained.",
+      "assessment": "analysis/pendulum_125mm_v23.md"
+    },
+    {
+      "candidate": "swingup-125mm-60t-v24",
+      "decision": "User requested spin recovery above 35 rad/s. Resume remains below 10 rad/s once cart is centered/stopped. 125 mm calibration and motion limits retained; not uploaded."
+    },
+    {
+      "candidate": "swingup-125mm-60t-v25",
+      "decision": "Recalibration after hanging angle was about 48 degrees wrong. Apply reference-checked upright3953; preserve raw captures. No braking/gain change; nonlinear mapping not validated.",
+      "assessment": "analysis/encoder_recalibration_v25.md"
+    }
+  ],
+  "current_user_requested_settings": {
+    "firmware_id": "swingup-125mm-60t-v25",
+    "cart_step_gpio": 25,
+    "cart_dir_gpio": 26,
+    "vmax": 0.8,
+    "amax_s": 12,
+    "amax_b": 12,
+    "jmax": 60,
+    "ke": 2.0,
+    "physical_trial": "v25 uploaded; upright3953, limits and disabled idle verified. Motion not tested.",
+    "validation": "Encoder-reference and serial harnesses, 17 simulator groups, ESP32 compile and upload readback passed.",
+    "z1_step_gpio": 18,
+    "z1_dir_gpio": 19,
+    "pulley_teeth": 60,
+    "z2_step_gpio": 16,
+    "z2_dir_gpio": 17,
+    "jerk_rpm_per_s2": 30000,
+    "boot_drivers_enabled": false,
+    "stop_disables_all_drivers": true,
+    "spin_trip_rad_s": 35,
+    "spin_resume_rad_s": 10,
+    "cart_direction_inverted": false,
+    "speed_rpm": 400,
+    "acceleration_rpm_per_s": 6000,
+    "physical_length_mm": 125,
+    "arm_mass_g": 11.05,
+    "end_mass_count": 2,
+    "end_mass_each_g": 5.85,
+    "leff": 0.124,
+    "encoder_upright_raw": 3953
+  },
+  "latest_user_observed_baseline": {
+    "recorded_date": "2026-09-16",
+    "source": "logs/run_20260916_122300.csv",
+    "trial": 3,
+    "settings": {
+      "vmax": 0.75,
+      "amax_s": 15,
+      "amax_b": 15,
+      "jmax": 50
+    },
+    "user_observation": "Smooth motor motion, no perceived stepper glitches or errors.",
+    "logged_result": "16 balance entries, longest BALANCE 0.245 s, maximum lift 179.908 deg; software speed-limit fault at 44.729 s. No sustained balance.",
+    "motor_tracking_evidence": "User observation; no independent cart encoder.",
+    "review": "analysis/run_reviews/20260916_latest_runs.md",
+    "firmware_defaults_changed": false
+  },
+  "upright_only_trial": {
+    "firmware_id": "swingup-175mm-20t-v19",
+    "bal_pw": 8,
+    "baseline_bal_pw": 7,
+    "motion_limits_changed": false,
+    "fall_angle_deg": 50,
+    "restart": "explicit bal only",
+    "status": "v18 trials reviewed; v19 direction flip prepared, not uploaded",
+    "evidence": "analysis/upright_tuning.json",
+    "instructions": "analysis/upright_tuning.md"
+  },
+  "compact_swingup_comparison": {
+    "results": "analysis/compact_swingup_v22.json",
+    "trials": 39,
+    "physical_validation": false,
+    "default_gains_changed": false,
+    "conclusion": "Higher kdx/lower vmax reduce room but also lift. kpx=60 reaches upright in three sampled initial states, with one sustained model balance; peak rail use is not reduced. No compact reliable swing-up setting established.",
+    "applies_to": "Historical 175 mm v22 engine only; not evidence for current 125 mm arm"
+  }
+}

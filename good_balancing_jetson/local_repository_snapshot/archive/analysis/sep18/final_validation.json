@@ -1,0 +1,3797 @@
+{
+  "engine_sha256": "a32c9dcdea5e7cd40547fbc6abda27a2f8ab0e03f19685c39b3e72df54280f3b",
+  "duration_s": 60,
+  "case_count": 18,
+  "recent_plant": {
+    "leff": 0.11872161750496142,
+    "damping": 0.4221036700655802,
+    "coulomb": 0.012373878450657341
+  },
+  "results": [
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 8,
+        "kpx": 80,
+        "kdx": 2,
+        "phase_soft": 2,
+        "pw": 7
+      },
+      "passes": 11,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1335965619314085,
+            "peakPulseX": 0.13357499999999986,
+            "peakV": 0.7999404038278418,
+            "peakA": 9.729803675528235,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.729803675528235,
+            "peakHz": 21331.744102075783,
+            "saturatedSeconds": 1.4469999999999514,
+            "brakingSeconds": 0.3070000000000002,
+            "recoverySeconds": 0.3870000000000003,
+            "recoveries": 1,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 57.79999999995599,
+            "longestStable": 57.79999999995599,
+            "firstCatch": 2.044,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13407361916855817,
+            "peakPulseX": 0.1338374999999997,
+            "peakV": 0.7999667246707397,
+            "peakA": 9.76989693947406,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.76989693947406,
+            "peakHz": 21332.445991219727,
+            "saturatedSeconds": 7.2130000000007435,
+            "brakingSeconds": 1.251999999999973,
+            "recoverySeconds": 1.614999999999933,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 51.54099999997058,
+            "longestStable": 51.54099999997058,
+            "firstCatch": 8.201,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13465963143069637,
+            "peakPulseX": 0.13477499999999912,
+            "peakV": 0.7999682510824142,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.486695531046,
+            "saturatedSeconds": 9.251000000000312,
+            "brakingSeconds": 1.3859999999999582,
+            "recoverySeconds": 1.841999999999908,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 48.3129999999781,
+            "longestStable": 48.3129999999781,
+            "firstCatch": 11.493,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13499230243844149,
+            "peakPulseX": 0.13471249999999943,
+            "peakV": 0.7999916957546268,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.111886790048,
+            "saturatedSeconds": 46.80699999998161,
+            "brakingSeconds": 7.317000000000778,
+            "recoverySeconds": 9.809000000000003,
+            "recoveries": 32,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 7,
+            "finalStable": 0,
+            "longestStable": 0.2820000000000002,
+            "firstCatch": 8.807,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13391556117153666,
+            "peakPulseX": 0.13401249999999926,
+            "peakV": 0.7999758936657876,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.690497754338,
+            "saturatedSeconds": 20.24500000000176,
+            "brakingSeconds": 3.240999999999754,
+            "recoverySeconds": 4.180999999999731,
+            "recoveries": 13,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 33.94900000001158,
+            "longestStable": 33.94900000001158,
+            "firstCatch": 6.134,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1348663296010549,
+            "peakPulseX": 0.13466250000000063,
+            "peakV": 0.7999858284279375,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.955424745003,
+            "saturatedSeconds": 26.844000000009824,
+            "brakingSeconds": 4.53799999999985,
+            "recoverySeconds": 5.91500000000031,
+            "recoveries": 18,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 14,
+            "finalStable": 23.539000000005785,
+            "longestStable": 23.539000000005785,
+            "firstCatch": 1.924,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.134751575169598,
+            "peakPulseX": 0.1346625000000005,
+            "peakV": 0.7999874232384242,
+            "peakA": 9.78053788783825,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78053788783825,
+            "peakHz": 21332.997953024646,
+            "saturatedSeconds": 31.16800000001511,
+            "brakingSeconds": 3.9289999999996783,
+            "recoverySeconds": 5.1170000000000435,
+            "recoveries": 16,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 16,
+            "finalStable": 18.21699999999928,
+            "longestStable": 18.21699999999928,
+            "firstCatch": 1.262,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13477562405673474,
+            "peakPulseX": 0.13481250000000086,
+            "peakV": 0.7999884759613477,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.02602563594,
+            "saturatedSeconds": 19.83500000000126,
+            "brakingSeconds": 2.3839999999998485,
+            "recoverySeconds": 3.2299999999997553,
+            "recoveries": 11,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 33.39900000001286,
+            "longestStable": 33.39900000001286,
+            "firstCatch": 1.2630000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1352744044524217,
+            "peakPulseX": 0.13468750000000002,
+            "peakV": 0.7999828401760193,
+            "peakA": 9.762018958570376,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.762018958570376,
+            "peakHz": 21332.87573802718,
+            "saturatedSeconds": 46.83299999998155,
+            "brakingSeconds": 5.738000000000251,
+            "recoverySeconds": 7.566000000000861,
+            "recoveries": 24,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 22,
+            "finalStable": 0,
+            "longestStable": 0.11800000000000009,
+            "firstCatch": 2.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13481337852565706,
+            "peakPulseX": 0.13489999999999952,
+            "peakV": 0.7999841265326456,
+            "peakA": 9.77699525771847,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.77699525771847,
+            "peakHz": 21332.91004087055,
+            "saturatedSeconds": 46.02199999998344,
+            "brakingSeconds": 6.589000000000535,
+            "recoverySeconds": 8.799000000000563,
+            "recoveries": 28,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 21,
+            "finalStable": 0,
+            "longestStable": 0.1340000000000001,
+            "firstCatch": 2.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1348822438548748,
+            "peakPulseX": 0.13484999999999817,
+            "peakV": 0.7999643085685729,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.575522794717706,
+            "peakHz": 21332.381561828613,
+            "saturatedSeconds": 7.425000000000814,
+            "brakingSeconds": 0.9340000000000007,
+            "recoverySeconds": 1.2739999999999705,
+            "recoveries": 4,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 48.55899999997753,
+            "longestStable": 48.55899999997753,
+            "firstCatch": 6.21,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13496174473316366,
+            "peakPulseX": 0.13496250000000057,
+            "peakV": 0.7999833664080298,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.889770880796,
+            "saturatedSeconds": 46.51599999998229,
+            "brakingSeconds": 9.611000000000113,
+            "recoverySeconds": 12.738999999998379,
+            "recoveries": 41,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 4.398999999999804,
+            "longestStable": 4.398999999999804,
+            "firstCatch": 4.442,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1345636765807699,
+            "peakPulseX": 0.13454999999999784,
+            "peakV": 0.7999925522782643,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.13472742038,
+            "saturatedSeconds": 47.09299999998095,
+            "brakingSeconds": 9.421000000000218,
+            "recoverySeconds": 12.439999999998545,
+            "recoveries": 39,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 0,
+            "longestStable": 1.1309999999999862,
+            "firstCatch": 2.751,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13441897682579756,
+            "peakPulseX": 0.1345125000000008,
+            "peakV": 0.7999861612106586,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.964298950898,
+            "saturatedSeconds": 47.449999999980115,
+            "brakingSeconds": 10.291999999999735,
+            "recoverySeconds": 13.451999999997984,
+            "recoveries": 42,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 15,
+            "finalStable": 0,
+            "longestStable": 1.0649999999999935,
+            "firstCatch": 1.949,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1338942745745848,
+            "peakPulseX": 0.13387499999999997,
+            "peakV": 0.7999594804885736,
+            "peakA": 9.753601238986326,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.753601238986326,
+            "peakHz": 21332.25281302863,
+            "saturatedSeconds": 7.6820000000009,
+            "brakingSeconds": 1.2309999999999752,
+            "recoverySeconds": 1.6259999999999317,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 50.3309999999734,
+            "longestStable": 50.3309999999734,
+            "firstCatch": 2.841,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13512046566795,
+            "peakPulseX": 0.13488749999999972,
+            "peakV": 0.7999853997063766,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.943992170043,
+            "saturatedSeconds": 28.627000000012004,
+            "brakingSeconds": 3.2089999999997576,
+            "recoverySeconds": 4.488999999999834,
+            "recoveries": 16,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 13,
+            "finalStable": 20.104000000001587,
+            "longestStable": 20.104000000001587,
+            "firstCatch": 3.275,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13497397849125362,
+            "peakPulseX": 0.13481250000000125,
+            "peakV": 0.7999941244622634,
+            "peakA": 9.758970021470232,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.758970021470232,
+            "peakHz": 21333.176652327023,
+            "saturatedSeconds": 27.800000000010993,
+            "brakingSeconds": 3.8289999999996893,
+            "recoverySeconds": 5.185000000000066,
+            "recoveries": 17,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 16,
+            "finalStable": 20.42500000000198,
+            "longestStable": 20.42500000000198,
+            "firstCatch": 1.973,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13219433585939577,
+            "peakPulseX": 0.13488749999999938,
+            "peakV": 0.7999857627307722,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.584399999999993,
+            "peakHz": 21332.953672820593,
+            "saturatedSeconds": 47.68799999997956,
+            "brakingSeconds": 9.701000000000063,
+            "recoverySeconds": 12.912999999998283,
+            "recoveries": 41,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 0,
+            "longestStable": 0.03800000000000003,
+            "firstCatch": 1.883,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 8,
+        "kpx": 80,
+        "kdx": 2,
+        "phase_soft": 1,
+        "pw": 7
+      },
+      "passes": 10,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1333084707022044,
+            "peakPulseX": 0.13327500000000023,
+            "peakV": 0.7999441590967301,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21331.84424257947,
+            "saturatedSeconds": 7.445000000000821,
+            "brakingSeconds": 1.5389999999999413,
+            "recoverySeconds": 1.9809999999998926,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 50.81999999997226,
+            "longestStable": 50.81999999997226,
+            "firstCatch": 4.251,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13312154865832104,
+            "peakPulseX": 0.13312499999999983,
+            "peakV": 0.7999739170674082,
+            "peakA": 9.726617703513535,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.726617703513535,
+            "peakHz": 21332.637788464217,
+            "saturatedSeconds": 3.2349999999997547,
+            "brakingSeconds": 0.5450000000000004,
+            "recoverySeconds": 0.6930000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 55.74699999996078,
+            "longestStable": 55.74699999996078,
+            "firstCatch": 3.955,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13327930616395903,
+            "peakPulseX": 0.13331249999999958,
+            "peakV": 0.7999663412716148,
+            "peakA": 9.761835828497915,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.761835828497915,
+            "peakHz": 21332.435767243063,
+            "saturatedSeconds": 3.2759999999997502,
+            "brakingSeconds": 0.5450000000000004,
+            "recoverySeconds": 0.6970000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 53.585999999965814,
+            "longestStable": 53.585999999965814,
+            "firstCatch": 3.95,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13422346052584536,
+            "peakPulseX": 0.13423749999999976,
+            "peakV": 0.7999829765293841,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.87937411691,
+            "saturatedSeconds": 10.13799999999982,
+            "brakingSeconds": 1.6929999999999243,
+            "recoverySeconds": 2.2009999999998686,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 47.72999999997946,
+            "longestStable": 47.72999999997946,
+            "firstCatch": 2.851,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13510453339573772,
+            "peakPulseX": 0.13494999999999902,
+            "peakV": 0.7999895367298244,
+            "peakA": 9.78024239433101,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78024239433101,
+            "peakHz": 21333.05431279532,
+            "saturatedSeconds": 48.19099999997839,
+            "brakingSeconds": 9.430000000000213,
+            "recoverySeconds": 12.642999999998432,
+            "recoveries": 41,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 13,
+            "finalStable": 0,
+            "longestStable": 0.4200000000000003,
+            "firstCatch": 2.856,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1351881009254882,
+            "peakPulseX": 0.13466249999999963,
+            "peakV": 0.7999799341910867,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.798245095648,
+            "saturatedSeconds": 47.689999999979555,
+            "brakingSeconds": 6.6890000000005685,
+            "recoverySeconds": 8.866000000000525,
+            "recoveries": 29,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 16,
+            "finalStable": 0,
+            "longestStable": 0.09100000000000007,
+            "firstCatch": 2.443,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13400651022218954,
+            "peakPulseX": 0.1341000000000012,
+            "peakV": 0.799969298208214,
+            "peakA": 9.753319782261086,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.753319782261086,
+            "peakHz": 21332.51461888571,
+            "saturatedSeconds": 14.607999999997343,
+            "brakingSeconds": 2.1479999999998745,
+            "recoverySeconds": 2.8299999999997993,
+            "recoveries": 9,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 42.11899999999254,
+            "longestStable": 42.11899999999254,
+            "firstCatch": 1.6440000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13461593865782628,
+            "peakPulseX": 0.13481250000000028,
+            "peakV": 0.7999878050166062,
+            "peakA": 9.764675940059771,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.764675940059771,
+            "peakHz": 21333.008133776166,
+            "saturatedSeconds": 20.67800000000229,
+            "brakingSeconds": 3.0999999999997696,
+            "recoverySeconds": 4.215999999999743,
+            "recoveries": 14,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 12,
+            "finalStable": 32.527000000014894,
+            "longestStable": 32.527000000014894,
+            "firstCatch": 1.6500000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13488125619776117,
+            "peakPulseX": 0.13494999999999854,
+            "peakV": 0.7999948528556456,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.19607615055,
+            "saturatedSeconds": 47.294999999980476,
+            "brakingSeconds": 5.481000000000165,
+            "recoverySeconds": 7.403000000000807,
+            "recoveries": 25,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 16,
+            "finalStable": 0,
+            "longestStable": 0.026000000000000016,
+            "firstCatch": 10.008000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1346396533416669,
+            "peakPulseX": 0.13471249999999996,
+            "peakV": 0.7999888786038691,
+            "peakA": 9.771000508730783,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.771000508730783,
+            "peakHz": 21333.036762769843,
+            "saturatedSeconds": 47.67899999997958,
+            "brakingSeconds": 7.077000000000698,
+            "recoverySeconds": 9.38200000000024,
+            "recoveries": 30,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 24,
+            "finalStable": 0,
+            "longestStable": 0.33300000000000024,
+            "firstCatch": 2.963,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1340501834031321,
+            "peakPulseX": 0.13421249999999926,
+            "peakV": 0.7999582941439881,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.575540082504384,
+            "peakHz": 21332.221177173018,
+            "saturatedSeconds": 19.482000000000827,
+            "brakingSeconds": 2.616999999999823,
+            "recoverySeconds": 3.4929999999997263,
+            "recoveries": 11,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 33.95800000001156,
+            "longestStable": 33.95800000001156,
+            "firstCatch": 2.821,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13468227679178882,
+            "peakPulseX": 0.1348124999999998,
+            "peakV": 0.7999754609647479,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.678959059944,
+            "saturatedSeconds": 19.348000000000663,
+            "brakingSeconds": 4.260999999999758,
+            "recoverySeconds": 5.6800000000002315,
+            "recoveries": 18,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 33.40800000001284,
+            "longestStable": 33.40800000001284,
+            "firstCatch": 1.8840000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1351504249998585,
+            "peakPulseX": 0.13488750000000116,
+            "peakV": 0.7999773667629153,
+            "peakA": 9.782381443870282,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782381443870282,
+            "peakHz": 21332.72978034441,
+            "saturatedSeconds": 49.52899999997527,
+            "brakingSeconds": 8.132000000000932,
+            "recoverySeconds": 10.60899999999956,
+            "recoveries": 33,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 12,
+            "finalStable": 0,
+            "longestStable": 0.17500000000000013,
+            "firstCatch": 4.819,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13486239532095942,
+            "peakPulseX": 0.13484999999999991,
+            "peakV": 0.7999797364672898,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.792972461062,
+            "saturatedSeconds": 48.35399999997801,
+            "brakingSeconds": 11.34699999999915,
+            "recoverySeconds": 14.994999999997129,
+            "recoveries": 47,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 23,
+            "finalStable": 0,
+            "longestStable": 1.0289999999999975,
+            "firstCatch": 4.731,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1345041275232972,
+            "peakPulseX": 0.13451249999999654,
+            "peakV": 0.7999780322476471,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.747526603922,
+            "saturatedSeconds": 46.79099999998165,
+            "brakingSeconds": 7.336000000000785,
+            "recoverySeconds": 9.655000000000088,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 22,
+            "finalStable": 0,
+            "longestStable": 0.08700000000000006,
+            "firstCatch": 4.0120000000000005,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13205646856146416,
+            "peakPulseX": 0.1320374999999999,
+            "peakV": 0.7982508417377865,
+            "peakA": 9.76521654139062,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.76521654139062,
+            "peakHz": 21286.68911300764,
+            "saturatedSeconds": 1.7879999999999139,
+            "brakingSeconds": 0.3060000000000002,
+            "recoverySeconds": 0.36800000000000027,
+            "recoveries": 1,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 57.24899999995728,
+            "longestStable": 57.24899999995728,
+            "firstCatch": 2.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13514865715545288,
+            "peakPulseX": 0.1349249999999996,
+            "peakV": 0.7999904915417244,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.079774445985,
+            "saturatedSeconds": 47.65299999997964,
+            "brakingSeconds": 6.709000000000575,
+            "recoverySeconds": 9.05500000000042,
+            "recoveries": 30,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 26,
+            "finalStable": 0,
+            "longestStable": 0.1440000000000001,
+            "firstCatch": 2.841,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13062642979603076,
+            "peakPulseX": 0.13331250000000014,
+            "peakV": 0.7999681926510079,
+            "peakA": 9.771650877047255,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.57621785950631,
+            "peakHz": 21332.485137360214,
+            "saturatedSeconds": 4.630999999999881,
+            "brakingSeconds": 1.0050000000000001,
+            "recoverySeconds": 1.2989999999999677,
+            "recoveries": 4,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 53.80999999996529,
+            "longestStable": 53.80999999996529,
+            "firstCatch": 1.93,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 10,
+        "kpx": 30,
+        "kdx": 4,
+        "phase_soft": 3,
+        "pw": 7
+      },
+      "passes": 10,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13491413702765578,
+            "peakPulseX": 0.13481250000000009,
+            "peakV": 0.7999527300752205,
+            "peakA": 9.777897908349079,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.777897908349079,
+            "peakHz": 21332.07280200588,
+            "saturatedSeconds": 5.684000000000233,
+            "brakingSeconds": 1.7549999999999175,
+            "recoverySeconds": 2.261999999999862,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 49.55599999997521,
+            "longestStable": 49.55599999997521,
+            "firstCatch": 2.495,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13473163768347998,
+            "peakPulseX": 0.1348874999999995,
+            "peakV": 0.7999464479352372,
+            "peakA": 9.773885217095655,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.773885217095655,
+            "peakHz": 21331.905278272992,
+            "saturatedSeconds": 6.81400000000061,
+            "brakingSeconds": 1.540999999999941,
+            "recoverySeconds": 2.1029999999998794,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 5,
+            "finalStable": 48.24099999997827,
+            "longestStable": 48.24099999997827,
+            "firstCatch": 1.596,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1342807832981436,
+            "peakPulseX": 0.13432500000000033,
+            "peakV": 0.7999472521339508,
+            "peakA": 9.717765624026828,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.717765624026828,
+            "peakHz": 21331.92672357202,
+            "saturatedSeconds": 7.867000000000962,
+            "brakingSeconds": 2.0399999999998863,
+            "recoverySeconds": 2.668999999999817,
+            "recoveries": 8,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 5,
+            "finalStable": 47.281999999980506,
+            "longestStable": 47.281999999980506,
+            "firstCatch": 1.596,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13489058712274327,
+            "peakPulseX": 0.13486249999999958,
+            "peakV": 0.7999866580614449,
+            "peakA": 9.755494845239966,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.755494845239966,
+            "peakHz": 21332.977548305196,
+            "saturatedSeconds": 31.926000000016035,
+            "brakingSeconds": 8.817000000000553,
+            "recoverySeconds": 11.548999999999038,
+            "recoveries": 37,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 22,
+            "finalStable": 5.94400000000032,
+            "longestStable": 5.94400000000032,
+            "firstCatch": 1.619,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13426244470827692,
+            "peakPulseX": 0.13426249999999995,
+            "peakV": 0.7999563760937635,
+            "peakA": 9.77426668097504,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.77426668097504,
+            "peakHz": 21332.170029167028,
+            "saturatedSeconds": 4.278999999999764,
+            "brakingSeconds": 0.9580000000000007,
+            "recoverySeconds": 1.260999999999972,
+            "recoveries": 4,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 52.72599999996782,
+            "longestStable": 52.72599999996782,
+            "firstCatch": 1.62,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13471447774675385,
+            "peakPulseX": 0.13458749999999994,
+            "peakV": 0.7987071514445736,
+            "peakA": 9.752012898671602,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.752012898671602,
+            "peakHz": 21298.857371855298,
+            "saturatedSeconds": 26.412000000009296,
+            "brakingSeconds": 6.1800000000003985,
+            "recoverySeconds": 8.80400000000056,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 28,
+            "finalStable": 0,
+            "longestStable": 0.17300000000000013,
+            "firstCatch": 3.5220000000000002,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13481160060895545,
+            "peakPulseX": 0.13477500000000012,
+            "peakV": 0.7999641357006175,
+            "peakA": 9.773028996201406,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.773028996201406,
+            "peakHz": 21332.376952016468,
+            "saturatedSeconds": 27.33200000001042,
+            "brakingSeconds": 6.631000000000549,
+            "recoverySeconds": 9.289000000000291,
+            "recoveries": 32,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 28,
+            "finalStable": 0,
+            "longestStable": 0.1240000000000001,
+            "firstCatch": 3.25,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1348836558712129,
+            "peakPulseX": 0.13473750000000012,
+            "peakV": 0.7973599887912212,
+            "peakA": 9.718840235577936,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.718840235577936,
+            "peakHz": 21262.933034432564,
+            "saturatedSeconds": 26.79000000000976,
+            "brakingSeconds": 6.221000000000412,
+            "recoverySeconds": 8.836000000000542,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 28,
+            "finalStable": 0,
+            "longestStable": 0.1360000000000001,
+            "firstCatch": 3.253,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13475961694992827,
+            "peakPulseX": 0.13471249999999996,
+            "peakV": 0.7977359576695598,
+            "peakA": 9.77210633182673,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.77210633182673,
+            "peakHz": 21272.958871188264,
+            "saturatedSeconds": 4.857999999999957,
+            "brakingSeconds": 1.632999999999931,
+            "recoverySeconds": 2.062999999999884,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 52.14599999996917,
+            "longestStable": 52.14599999996917,
+            "firstCatch": 3.2680000000000002,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13477310558953848,
+            "peakPulseX": 0.13474999999999995,
+            "peakV": 0.7977359576695627,
+            "peakA": 9.719999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.719999999999992,
+            "peakHz": 21272.95887118834,
+            "saturatedSeconds": 26.58600000000951,
+            "brakingSeconds": 6.212000000000409,
+            "recoverySeconds": 8.770000000000579,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 28,
+            "finalStable": 0,
+            "longestStable": 0.1410000000000001,
+            "firstCatch": 3.2680000000000002,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13487329701819226,
+            "peakPulseX": 0.13485000000000008,
+            "peakV": 0.7995002077932959,
+            "peakA": 9.770928603607176,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.570508506912528,
+            "peakHz": 21320.005541154558,
+            "saturatedSeconds": 3.9279999999996784,
+            "brakingSeconds": 1.396999999999957,
+            "recoverySeconds": 1.676999999999926,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 52.06899999996935,
+            "longestStable": 52.06899999996935,
+            "firstCatch": 3.6310000000000002,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13436058012304336,
+            "peakPulseX": 0.13432500000000028,
+            "peakV": 0.7999672554584011,
+            "peakA": 9.737011289345077,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.737011289345077,
+            "peakHz": 21332.460145557365,
+            "saturatedSeconds": 16.476999999997155,
+            "brakingSeconds": 4.015999999999676,
+            "recoverySeconds": 5.217000000000077,
+            "recoveries": 16,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 30.897000000014778,
+            "longestStable": 30.897000000014778,
+            "firstCatch": 1.887,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13500239842500433,
+            "peakPulseX": 0.13496249999999912,
+            "peakV": 0.7999680408890488,
+            "peakA": 9.775192411233169,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.775192411233169,
+            "peakHz": 21332.481090374637,
+            "saturatedSeconds": 34.59200000001008,
+            "brakingSeconds": 8.538000000000707,
+            "recoverySeconds": 11.584999999999019,
+            "recoveries": 39,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 20,
+            "finalStable": 0,
+            "longestStable": 1.1749999999999814,
+            "firstCatch": 1.7870000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13484573330024702,
+            "peakPulseX": 0.13466249999999935,
+            "peakV": 0.7999818620632999,
+            "peakA": 9.770437934112893,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.770437934112893,
+            "peakHz": 21332.84965502133,
+            "saturatedSeconds": 34.13200000001115,
+            "brakingSeconds": 8.918000000000497,
+            "recoverySeconds": 11.749999999998927,
+            "recoveries": 37,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 20,
+            "finalStable": 0,
+            "longestStable": 1.151999999999984,
+            "firstCatch": 1.788,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13487068913609862,
+            "peakPulseX": 0.13481250000000297,
+            "peakV": 0.7999696137132478,
+            "peakA": 9.736792135254946,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.736792135254946,
+            "peakHz": 21332.523032353278,
+            "saturatedSeconds": 20.84400000000249,
+            "brakingSeconds": 6.809000000000609,
+            "recoverySeconds": 8.657000000000641,
+            "recoveries": 26,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 21,
+            "finalStable": 23.299000000005492,
+            "longestStable": 23.299000000005492,
+            "firstCatch": 3.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13487292956132474,
+            "peakPulseX": 0.1347374999999997,
+            "peakV": 0.7999651328272739,
+            "peakA": 9.771284462885175,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.771284462885175,
+            "peakHz": 21332.403542060638,
+            "saturatedSeconds": 28.688000000012078,
+            "brakingSeconds": 8.290000000000845,
+            "recoverySeconds": 11.168999999999249,
+            "recoveries": 37,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 29,
+            "finalStable": 0,
+            "longestStable": 0.46100000000000035,
+            "firstCatch": 4.073,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13482143064201169,
+            "peakPulseX": 0.13473750000000007,
+            "peakV": 0.7977927153700927,
+            "peakA": 9.758062178244472,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.758062178244472,
+            "peakHz": 21274.47240986914,
+            "saturatedSeconds": 26.173000000009004,
+            "brakingSeconds": 6.598000000000538,
+            "recoverySeconds": 9.195000000000343,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 29,
+            "finalStable": 0,
+            "longestStable": 0.11200000000000009,
+            "firstCatch": 3.531,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13168493372410156,
+            "peakPulseX": 0.13432499999999994,
+            "peakV": 0.7996142497416706,
+            "peakA": 9.740787964787122,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.54597220549138,
+            "peakHz": 21323.046659777883,
+            "saturatedSeconds": 2.6909999999998147,
+            "brakingSeconds": 0.8080000000000006,
+            "recoverySeconds": 1.0409999999999962,
+            "recoveries": 3,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 53.413999999966215,
+            "longestStable": 53.413999999966215,
+            "firstCatch": 1.872,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 10,
+        "kpx": 80,
+        "kdx": 4,
+        "phase_soft": 1,
+        "pw": 6
+      },
+      "passes": 10,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13491667867415,
+            "peakPulseX": 0.13485000000000008,
+            "peakV": 0.7999677842081749,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.474245551333,
+            "saturatedSeconds": 19.333000000000645,
+            "brakingSeconds": 4.167999999999727,
+            "recoverySeconds": 5.7160000000002436,
+            "recoveries": 19,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 36.70800000000515,
+            "longestStable": 36.70800000000515,
+            "firstCatch": 4.174,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1338757662448766,
+            "peakPulseX": 0.13394999999999965,
+            "peakV": 0.7999636693862653,
+            "peakA": 9.778212330387209,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.778212330387209,
+            "peakHz": 21332.364516967074,
+            "saturatedSeconds": 7.7160000000009115,
+            "brakingSeconds": 1.259999999999972,
+            "recoverySeconds": 1.6469999999999294,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 50.684999999972575,
+            "longestStable": 50.684999999972575,
+            "firstCatch": 5.4350000000000005,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13371135989782962,
+            "peakPulseX": 0.1336874999999997,
+            "peakV": 0.7999653190773169,
+            "peakA": 9.750590432832462,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.750590432832462,
+            "peakHz": 21332.40850872845,
+            "saturatedSeconds": 3.4929999999997263,
+            "brakingSeconds": 0.5450000000000004,
+            "recoverySeconds": 0.6990000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 55.78899999996068,
+            "longestStable": 55.78899999996068,
+            "firstCatch": 3.9290000000000003,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13438242827212157,
+            "peakPulseX": 0.13420000000000207,
+            "peakV": 0.7999685507924283,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.49468779809,
+            "saturatedSeconds": 24.441000000006888,
+            "brakingSeconds": 6.112000000000376,
+            "recoverySeconds": 8.035000000000986,
+            "recoveries": 25,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 30.920000000014806,
+            "longestStable": 30.920000000014806,
+            "firstCatch": 7.7330000000000005,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1349427976037306,
+            "peakPulseX": 0.13483749999999964,
+            "peakV": 0.7999830111271801,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.8802967248,
+            "saturatedSeconds": 48.908999999976714,
+            "brakingSeconds": 8.085000000000958,
+            "recoverySeconds": 10.724999999999495,
+            "recoveries": 34,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 0,
+            "longestStable": 0.10900000000000008,
+            "firstCatch": 9.767,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13483612143003654,
+            "peakPulseX": 0.13462500000000063,
+            "peakV": 0.7999903681701314,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.076484536836,
+            "saturatedSeconds": 48.68499999997724,
+            "brakingSeconds": 7.810000000000943,
+            "recoverySeconds": 10.486999999999627,
+            "recoveries": 34,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 17,
+            "finalStable": 0,
+            "longestStable": 0.09400000000000007,
+            "firstCatch": 2.923,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13475583861336035,
+            "peakPulseX": 0.13470000000000254,
+            "peakV": 0.7999771647925864,
+            "peakA": 9.78191920277241,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78191920277241,
+            "peakHz": 21332.724394468973,
+            "saturatedSeconds": 47.59899999997977,
+            "brakingSeconds": 6.203000000000406,
+            "recoverySeconds": 8.356000000000808,
+            "recoveries": 27,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 21,
+            "finalStable": 0,
+            "longestStable": 0.3120000000000002,
+            "firstCatch": 2.609,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13374328520225798,
+            "peakPulseX": 0.13383750000000033,
+            "peakV": 0.7999694320228183,
+            "peakA": 9.766445535946355,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.766445535946355,
+            "peakHz": 21332.518187275156,
+            "saturatedSeconds": 7.510000000000843,
+            "brakingSeconds": 1.7039999999999231,
+            "recoverySeconds": 2.2559999999998626,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 4,
+            "finalStable": 50.60099999997277,
+            "longestStable": 50.60099999997277,
+            "firstCatch": 2.613,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13474569768892258,
+            "peakPulseX": 0.1345374999999995,
+            "peakV": 0.799971337470075,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.568999202,
+            "saturatedSeconds": 39.35199999999899,
+            "brakingSeconds": 4.250999999999754,
+            "recoverySeconds": 5.6350000000002165,
+            "recoveries": 18,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 11,
+            "finalStable": 10.800999999999453,
+            "longestStable": 10.800999999999453,
+            "firstCatch": 2.566,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13466378974309037,
+            "peakPulseX": 0.13461249999999933,
+            "peakV": 0.7999872268532242,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.99271608598,
+            "saturatedSeconds": 49.40499999997556,
+            "brakingSeconds": 6.276000000000431,
+            "recoverySeconds": 8.362000000000805,
+            "recoveries": 27,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 13,
+            "finalStable": 0,
+            "longestStable": 0.20700000000000016,
+            "firstCatch": 2.548,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13396133493069765,
+            "peakPulseX": 0.13394999999999985,
+            "peakV": 0.7983961327523071,
+            "peakA": 9.769481942961454,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.565549599942237,
+            "peakHz": 21290.563540061525,
+            "saturatedSeconds": 1.4679999999999491,
+            "brakingSeconds": 0.3070000000000002,
+            "recoverySeconds": 0.3900000000000003,
+            "recoveries": 1,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 57.98899999995555,
+            "longestStable": 57.98899999995555,
+            "firstCatch": 2.007,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13437430801046252,
+            "peakPulseX": 0.13436249999999977,
+            "peakV": 0.7999732806336091,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.620816896244,
+            "saturatedSeconds": 18.941000000000166,
+            "brakingSeconds": 3.9259999999996786,
+            "recoverySeconds": 5.282000000000099,
+            "recoveries": 17,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 36.749000000005054,
+            "longestStable": 36.749000000005054,
+            "firstCatch": 1.907,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13455305429057207,
+            "peakPulseX": 0.13466249999999982,
+            "peakV": 0.7999932926971302,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.154471923473,
+            "saturatedSeconds": 47.87799999997912,
+            "brakingSeconds": 7.500000000000839,
+            "recoverySeconds": 9.919999999999941,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 0,
+            "longestStable": 0.9490000000000007,
+            "firstCatch": 1.643,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13458777699717545,
+            "peakPulseX": 0.13454999999999911,
+            "peakV": 0.7999877227191093,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.00593917625,
+            "saturatedSeconds": 45.724999999984135,
+            "brakingSeconds": 7.972000000000997,
+            "recoverySeconds": 10.501999999999619,
+            "recoveries": 33,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 12,
+            "finalStable": 0,
+            "longestStable": 1.0389999999999964,
+            "firstCatch": 1.637,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13502551725989095,
+            "peakPulseX": 0.13496249999999924,
+            "peakV": 0.7999845329374206,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.920878331217,
+            "saturatedSeconds": 48.81199999997694,
+            "brakingSeconds": 5.848000000000288,
+            "recoverySeconds": 7.89100000000097,
+            "recoveries": 26,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 20,
+            "finalStable": 0,
+            "longestStable": 0.21300000000000016,
+            "firstCatch": 2.512,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1349910428422034,
+            "peakPulseX": 0.13484999999999916,
+            "peakV": 0.7999744500509469,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.652001358587,
+            "saturatedSeconds": 47.573999999979826,
+            "brakingSeconds": 5.6260000000002135,
+            "recoverySeconds": 7.685000000000901,
+            "recoveries": 26,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 14,
+            "finalStable": 0,
+            "longestStable": 0.3010000000000002,
+            "firstCatch": 2.524,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1339798008401281,
+            "peakPulseX": 0.13391250000000002,
+            "peakV": 0.7999649557410631,
+            "peakA": 9.771650877047255,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.771650877047255,
+            "peakHz": 21332.39881976168,
+            "saturatedSeconds": 8.639000000000651,
+            "brakingSeconds": 1.2159999999999769,
+            "recoverySeconds": 1.6019999999999344,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 4,
+            "finalStable": 48.191999999978385,
+            "longestStable": 48.191999999978385,
+            "firstCatch": 2.836,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13189641278541053,
+            "peakPulseX": 0.13439999999999921,
+            "peakV": 0.7999716655848629,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.584399999999992,
+            "peakHz": 21332.577748929678,
+            "saturatedSeconds": 31.93800000001605,
+            "brakingSeconds": 6.899000000000639,
+            "recoverySeconds": 9.079000000000407,
+            "recoveries": 29,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 19.39500000000072,
+            "longestStable": 19.39500000000072,
+            "firstCatch": 1.913,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 8,
+        "kpx": 30,
+        "kdx": 2,
+        "phase_soft": 2,
+        "pw": 6
+      },
+      "passes": 8,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13447251424016352,
+            "peakPulseX": 0.13443749999999996,
+            "peakV": 0.7980039924029216,
+            "peakA": 9.773741866062517,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.773741866062517,
+            "peakHz": 21280.10646407791,
+            "saturatedSeconds": 1.6439999999999297,
+            "brakingSeconds": 0.46000000000000035,
+            "recoverySeconds": 0.5960000000000004,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 55.18299999996209,
+            "longestStable": 55.18299999996209,
+            "firstCatch": 2.341,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13444377479458064,
+            "peakPulseX": 0.13440000000000007,
+            "peakV": 0.7971642896097395,
+            "peakA": 9.736580570808112,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.736580570808112,
+            "peakHz": 21257.714389593053,
+            "saturatedSeconds": 1.650999999999929,
+            "brakingSeconds": 0.46700000000000036,
+            "recoverySeconds": 0.6190000000000004,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 57.6679999999563,
+            "longestStable": 57.6679999999563,
+            "firstCatch": 2.057,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1348188761843544,
+            "peakPulseX": 0.13477499999999912,
+            "peakV": 0.7999640697966621,
+            "peakA": 9.719999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.719999999999992,
+            "peakHz": 21332.375194577657,
+            "saturatedSeconds": 5.299000000000104,
+            "brakingSeconds": 1.3649999999999605,
+            "recoverySeconds": 1.8179999999999106,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 50.64399999997267,
+            "longestStable": 50.64399999997267,
+            "firstCatch": 2.048,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13477789056374576,
+            "peakPulseX": 0.13476250000000065,
+            "peakV": 0.7999615700046471,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.308533457257,
+            "saturatedSeconds": 26.62000000000955,
+            "brakingSeconds": 2.1299999999998764,
+            "recoverySeconds": 2.8079999999998018,
+            "recoveries": 9,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0.16500000000000012,
+            "firstCatch": 28.961000000000002,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13482893178417238,
+            "peakPulseX": 0.13487500000000086,
+            "peakV": 0.7999706367432821,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.55031315419,
+            "saturatedSeconds": 28.91000000001235,
+            "brakingSeconds": 3.760999999999697,
+            "recoverySeconds": 4.998000000000004,
+            "recoveries": 16,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 0,
+            "longestStable": 0.19400000000000014,
+            "firstCatch": 9.242,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1346651120908645,
+            "peakPulseX": 0.13470000000000004,
+            "peakV": 0.7999803804262481,
+            "peakA": 9.698885616880572,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.698885616880572,
+            "peakHz": 21332.81014469995,
+            "saturatedSeconds": 21.98100000000388,
+            "brakingSeconds": 6.7640000000005935,
+            "recoverySeconds": 8.964000000000471,
+            "recoveries": 28,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 11,
+            "finalStable": 21.663000000003493,
+            "longestStable": 21.663000000003493,
+            "firstCatch": 2.314,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13474141841885004,
+            "peakPulseX": 0.13470000000000054,
+            "peakV": 0.7999748054026738,
+            "peakA": 9.711990088726875,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.711990088726875,
+            "peakHz": 21332.661477404636,
+            "saturatedSeconds": 26.626000000009558,
+            "brakingSeconds": 7.281000000000766,
+            "recoverySeconds": 9.61700000000011,
+            "recoveries": 31,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 5,
+            "finalStable": 13.401999999998012,
+            "longestStable": 13.401999999998012,
+            "firstCatch": 2.165,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13498771531601442,
+            "peakPulseX": 0.13488750000000174,
+            "peakV": 0.7999841469964595,
+            "peakA": 9.71565949180374,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.71565949180374,
+            "peakHz": 21332.910586572252,
+            "saturatedSeconds": 36.152000000006446,
+            "brakingSeconds": 9.857999999999976,
+            "recoverySeconds": 13.162999999998144,
+            "recoveries": 43,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 2.173,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1349817528305873,
+            "peakPulseX": 0.13486249999999952,
+            "peakV": 0.7999918460356445,
+            "peakA": 9.607601042592048,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.607601042592048,
+            "peakHz": 21333.115894283856,
+            "saturatedSeconds": 35.52300000000791,
+            "brakingSeconds": 9.674000000000078,
+            "recoverySeconds": 12.842999999998321,
+            "recoveries": 42,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 0,
+            "longestStable": 0.21300000000000016,
+            "firstCatch": 2.078,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1349643709191319,
+            "peakPulseX": 0.13491249999999666,
+            "peakV": 0.7999848466953458,
+            "peakA": 9.591365427836918,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.591365427836916,
+            "peakHz": 21332.92924520922,
+            "saturatedSeconds": 35.41700000000816,
+            "brakingSeconds": 9.815,
+            "recoverySeconds": 13.290999999998073,
+            "recoveries": 44,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 0,
+            "longestStable": 0.012000000000000004,
+            "firstCatch": 2.076,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13466294583651903,
+            "peakPulseX": 0.1347000000000001,
+            "peakV": 0.7999271411829003,
+            "peakA": 9.77075005342279,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.57052883649047,
+            "peakHz": 21331.39043154401,
+            "saturatedSeconds": 26.222000000009064,
+            "brakingSeconds": 1.5209999999999433,
+            "recoverySeconds": 1.995999999999891,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 34.406,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1344634869409349,
+            "peakPulseX": 0.13443750000000007,
+            "peakV": 0.7999522649242262,
+            "peakA": 9.704142404179656,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.704142404179656,
+            "peakHz": 21332.060397979367,
+            "saturatedSeconds": 26.69400000000964,
+            "brakingSeconds": 1.940999999999897,
+            "recoverySeconds": 2.5749999999998274,
+            "recoveries": 8,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0.07900000000000006,
+            "firstCatch": 31.39,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13500573358428491,
+            "peakPulseX": 0.13484999999999742,
+            "peakV": 0.7999700449845826,
+            "peakA": 9.771331773286365,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.771331773286365,
+            "peakHz": 21332.534532922204,
+            "saturatedSeconds": 31.03800000001495,
+            "brakingSeconds": 6.12400000000038,
+            "recoverySeconds": 8.142000000000927,
+            "recoveries": 26,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 9,
+            "finalStable": 0,
+            "longestStable": 0.8810000000000007,
+            "firstCatch": 2.13,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13518067789050814,
+            "peakPulseX": 0.1348125000000029,
+            "peakV": 0.7999910840290043,
+            "peakA": 9.771331773286349,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.771331773286349,
+            "peakHz": 21333.09557410678,
+            "saturatedSeconds": 30.31700000001407,
+            "brakingSeconds": 5.829000000000281,
+            "recoverySeconds": 7.796000000000938,
+            "recoveries": 25,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 0,
+            "longestStable": 0.7830000000000006,
+            "firstCatch": 2.13,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13470953883339368,
+            "peakPulseX": 0.13454999999999934,
+            "peakV": 0.7999927194167387,
+            "peakA": 9.53999999999999,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.539999999999992,
+            "peakHz": 21333.139184446365,
+            "saturatedSeconds": 25.44900000000812,
+            "brakingSeconds": 6.809000000000609,
+            "recoverySeconds": 8.777000000000575,
+            "recoveries": 27,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 13,
+            "finalStable": 15.105999999997067,
+            "longestStable": 15.105999999997067,
+            "firstCatch": 4.915,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1349963182566716,
+            "peakPulseX": 0.13488749999999997,
+            "peakV": 0.7999756615225955,
+            "peakA": 9.719999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.719999999999992,
+            "peakHz": 21332.684307269214,
+            "saturatedSeconds": 33.14800000001345,
+            "brakingSeconds": 7.226000000000748,
+            "recoverySeconds": 9.72400000000005,
+            "recoveries": 33,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 7,
+            "finalStable": 0,
+            "longestStable": 0.4940000000000004,
+            "firstCatch": 2.353,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13498399296149213,
+            "peakPulseX": 0.13488750000000127,
+            "peakV": 0.7999915257580014,
+            "peakA": 9.737515781674764,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.737515781674764,
+            "peakHz": 21333.107353546704,
+            "saturatedSeconds": 28.727000000012126,
+            "brakingSeconds": 7.538000000000852,
+            "recoverySeconds": 10.225999999999772,
+            "recoveries": 34,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 7,
+            "finalStable": 9.68900000000007,
+            "longestStable": 9.68900000000007,
+            "firstCatch": 2.353,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13191674220266467,
+            "peakPulseX": 0.13454999999999998,
+            "peakV": 0.7999704621649046,
+            "peakA": 9.761180055223587,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.565956454119114,
+            "peakHz": 21332.545657730792,
+            "saturatedSeconds": 3.0119999999997793,
+            "brakingSeconds": 0.7950000000000006,
+            "recoverySeconds": 1.0349999999999968,
+            "recoveries": 3,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 54.4929999999637,
+            "longestStable": 54.4929999999637,
+            "firstCatch": 1.86,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "duration": 30,
+        "rail": 0.15,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "vmax": 0.8,
+        "encoderMs": 1,
+        "ke": 8,
+        "kpx": 80,
+        "kdx": 2,
+        "phase_soft": 2,
+        "pw": 6
+      },
+      "passes": 8,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1335965619314085,
+            "peakPulseX": 0.13357499999999986,
+            "peakV": 0.7999404038278418,
+            "peakA": 9.729803675528235,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.729803675528235,
+            "peakHz": 21331.744102075783,
+            "saturatedSeconds": 1.4389999999999523,
+            "brakingSeconds": 0.3070000000000002,
+            "recoverySeconds": 0.3870000000000003,
+            "recoveries": 1,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 57.76999999995606,
+            "longestStable": 57.76999999995606,
+            "firstCatch": 2.044,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13407361916855817,
+            "peakPulseX": 0.1338374999999997,
+            "peakV": 0.7999667246707397,
+            "peakA": 9.76989693947406,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.76989693947406,
+            "peakHz": 21332.445991219727,
+            "saturatedSeconds": 7.2100000000007425,
+            "brakingSeconds": 1.251999999999973,
+            "recoverySeconds": 1.614999999999933,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 49.57699999997516,
+            "longestStable": 49.57699999997516,
+            "firstCatch": 8.201,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1353136131814202,
+            "peakPulseX": 0.13488749999999908,
+            "peakV": 0.7999893722304938,
+            "peakA": 9.782490149908613,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782490149908613,
+            "peakHz": 21333.0499261465,
+            "saturatedSeconds": 46.84799999998152,
+            "brakingSeconds": 8.76700000000058,
+            "recoverySeconds": 11.705999999998951,
+            "recoveries": 38,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 0,
+            "longestStable": 0.6310000000000004,
+            "firstCatch": 11.493,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13484708569989298,
+            "peakPulseX": 0.13482500000000233,
+            "peakV": 0.7999921858309277,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.124955491407,
+            "saturatedSeconds": 45.39099999998491,
+            "brakingSeconds": 8.187000000000902,
+            "recoverySeconds": 10.871999999999414,
+            "recoveries": 35,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 8,
+            "finalStable": 2.0389999999998865,
+            "longestStable": 2.0389999999998865,
+            "firstCatch": 8.807,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.134773782154943,
+            "peakPulseX": 0.13487499999999983,
+            "peakV": 0.7999886302371705,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.03013965788,
+            "saturatedSeconds": 30.35900000001412,
+            "brakingSeconds": 5.031000000000015,
+            "recoverySeconds": 6.69300000000057,
+            "recoveries": 21,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 18.938000000000162,
+            "longestStable": 18.938000000000162,
+            "firstCatch": 6.134,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1351450950158653,
+            "peakPulseX": 0.1349625000000007,
+            "peakV": 0.7999758883355127,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.69035561367,
+            "saturatedSeconds": 29.298000000012824,
+            "brakingSeconds": 4.334999999999782,
+            "recoverySeconds": 5.7130000000002426,
+            "recoveries": 18,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 12,
+            "finalStable": 21.291000000003038,
+            "longestStable": 21.291000000003038,
+            "firstCatch": 1.924,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13482988824183104,
+            "peakPulseX": 0.13499999999999715,
+            "peakV": 0.7999880888906175,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.0157037498,
+            "saturatedSeconds": 36.59100000000542,
+            "brakingSeconds": 5.2860000000001,
+            "recoverySeconds": 7.077000000000698,
+            "recoveries": 23,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 20,
+            "finalStable": 8.811000000000556,
+            "longestStable": 8.811000000000556,
+            "firstCatch": 1.262,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13484005797964066,
+            "peakPulseX": 0.13485000000000283,
+            "peakV": 0.7999755240074716,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.680640199243,
+            "saturatedSeconds": 46.44899999998245,
+            "brakingSeconds": 6.826000000000614,
+            "recoverySeconds": 9.192000000000345,
+            "recoveries": 30,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 24,
+            "finalStable": 0,
+            "longestStable": 0.09400000000000007,
+            "firstCatch": 1.2630000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1354334901025619,
+            "peakPulseX": 0.13489999999999994,
+            "peakV": 0.7999913845754716,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.10358867924,
+            "saturatedSeconds": 46.50499999998232,
+            "brakingSeconds": 5.906000000000307,
+            "recoverySeconds": 8.06500000000097,
+            "recoveries": 27,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 17,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 2.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13512451864077688,
+            "peakPulseX": 0.13487499999999933,
+            "peakV": 0.799986975433221,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.98601155256,
+            "saturatedSeconds": 42.780999999990996,
+            "brakingSeconds": 6.188000000000401,
+            "recoverySeconds": 8.448000000000757,
+            "recoveries": 28,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 22,
+            "finalStable": 2.8099999999998015,
+            "longestStable": 2.8099999999998015,
+            "firstCatch": 2.492,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.134793566353243,
+            "peakPulseX": 0.13451250000000023,
+            "peakV": 0.7999777472363215,
+            "peakA": 9.781079624903173,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.576376987786741,
+            "peakHz": 21332.739926301907,
+            "saturatedSeconds": 48.054999999978705,
+            "brakingSeconds": 9.053000000000422,
+            "recoverySeconds": 12.121999999998721,
+            "recoveries": 39,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 11,
+            "finalStable": 0,
+            "longestStable": 0.2810000000000002,
+            "firstCatch": 6.21,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13480612566229894,
+            "peakPulseX": 0.13492499999999913,
+            "peakV": 0.7999864360241061,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.971627309496,
+            "saturatedSeconds": 49.44299999997547,
+            "brakingSeconds": 9.807000000000004,
+            "recoverySeconds": 13.113999999998171,
+            "recoveries": 43,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 11,
+            "finalStable": 0,
+            "longestStable": 0.04900000000000004,
+            "firstCatch": 4.442,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13473429595998732,
+            "peakPulseX": 0.13466250000000046,
+            "peakV": 0.7999906914857015,
+            "peakA": 9.78112483113196,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78112483113196,
+            "peakHz": 21333.085106285373,
+            "saturatedSeconds": 44.00099999998815,
+            "brakingSeconds": 6.57300000000053,
+            "recoverySeconds": 8.909000000000502,
+            "recoveries": 29,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 12,
+            "finalStable": 0,
+            "longestStable": 0.7300000000000005,
+            "firstCatch": 2.751,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13498909849489066,
+            "peakPulseX": 0.1345874999999986,
+            "peakV": 0.7999876296686245,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21333.003457829986,
+            "saturatedSeconds": 47.715999999979495,
+            "brakingSeconds": 8.387000000000791,
+            "recoverySeconds": 11.082999999999297,
+            "recoveries": 35,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 10,
+            "finalStable": 0,
+            "longestStable": 0.1460000000000001,
+            "firstCatch": 1.949,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.1338942745745848,
+            "peakPulseX": 0.13387499999999997,
+            "peakV": 0.7999594804885736,
+            "peakA": 9.753601238986326,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.753601238986326,
+            "peakHz": 21332.25281302863,
+            "saturatedSeconds": 7.625000000000881,
+            "brakingSeconds": 1.2309999999999752,
+            "recoverySeconds": 1.6259999999999317,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 50.3309999999734,
+            "longestStable": 50.3309999999734,
+            "firstCatch": 2.841,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13432594407188944,
+            "peakPulseX": 0.13443750000000138,
+            "peakV": 0.7999830861648615,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.88229772964,
+            "saturatedSeconds": 23.525000000005768,
+            "brakingSeconds": 3.4379999999997324,
+            "recoverySeconds": 4.56699999999986,
+            "recoveries": 15,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 13,
+            "finalStable": 27.859000000011065,
+            "longestStable": 27.859000000011065,
+            "firstCatch": 3.275,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13477316148908147,
+            "peakPulseX": 0.13477500000000087,
+            "peakV": 0.7999797659476423,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.779999999999992,
+            "peakHz": 21332.793758603795,
+            "saturatedSeconds": 45.06999999998566,
+            "brakingSeconds": 5.387000000000134,
+            "recoverySeconds": 7.208000000000742,
+            "recoveries": 23,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 20,
+            "finalStable": 0,
+            "longestStable": 0.5750000000000004,
+            "firstCatch": 1.973,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "balanced",
+            "fault": null,
+            "peakX": 0.13230753303808568,
+            "peakPulseX": 0.1349249999999981,
+            "peakV": 0.7999882517915237,
+            "peakA": 9.779999999999992,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.584399999999993,
+            "peakHz": 21333.020047773964,
+            "saturatedSeconds": 43.094999999990264,
+            "brakingSeconds": 8.987000000000458,
+            "recoverySeconds": 11.800999999998899,
+            "recoveries": 37,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 6.612000000000543,
+            "longestStable": 6.612000000000543,
+            "firstCatch": 1.883,
+            "duration": 60
+          }
+        }
+      ]
+    },
+    {
+      "p": {
+        "ke": 8,
+        "kpx": 150,
+        "kdx": 4.4,
+        "phase_soft": 0.2,
+        "pw": 7,
+        "vmax": 0.8,
+        "amax_s": 12,
+        "amax_b": 12,
+        "jmax": 60,
+        "rail": 0.15
+      },
+      "passes": 0,
+      "checks": [
+        {
+          "name": "old fit / centered",
+          "variant": {},
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1337570272711043,
+            "peakPulseX": 0.1338374999999999,
+            "peakV": 0.7999914165223341,
+            "peakA": 9.781205326991905,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.781205326991905,
+            "peakHz": 21333.104440595576,
+            "saturatedSeconds": 57.665999999956306,
+            "brakingSeconds": 1.7039999999999231,
+            "recoverySeconds": 2.242999999999864,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 1.905,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / +5deg",
+          "variant": {
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13438448105147982,
+            "peakPulseX": 0.13447499999999937,
+            "peakV": 0.7999890327455765,
+            "peakA": 9.782440767107603,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782440767107603,
+            "peakHz": 21333.040873215374,
+            "saturatedSeconds": 57.64599999995635,
+            "brakingSeconds": 1.6099999999999335,
+            "recoverySeconds": 2.1829999999998706,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 0,
+            "longestStable": 0.025000000000000015,
+            "firstCatch": 4.062,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / -5deg",
+          "variant": {
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13357032720278383,
+            "peakPulseX": 0.13342500000000082,
+            "peakV": 0.7999885595295765,
+            "peakA": 9.78229198415676,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78229198415676,
+            "peakHz": 21333.02825412204,
+            "saturatedSeconds": 58.08799999995532,
+            "brakingSeconds": 1.3589999999999611,
+            "recoverySeconds": 1.7359999999999196,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 8.368,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x+10mm",
+          "variant": {
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13353818662536007,
+            "peakPulseX": 0.1335249999999997,
+            "peakV": 0.7999894745334569,
+            "peakA": 9.782617672301042,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782617672301042,
+            "peakHz": 21333.052654225517,
+            "saturatedSeconds": 58.429999999954525,
+            "brakingSeconds": 0.5530000000000004,
+            "recoverySeconds": 0.7060000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / x-10mm",
+          "variant": {
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13324692794398815,
+            "peakPulseX": 0.1332999999999996,
+            "peakV": 0.7999890183640453,
+            "peakA": 9.782150619323778,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782150619323778,
+            "peakHz": 21333.040489707877,
+            "saturatedSeconds": 58.38199999995464,
+            "brakingSeconds": 0.5530000000000004,
+            "recoverySeconds": 0.7030000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / centered",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13355217056161187,
+            "peakPulseX": 0.13365000000000082,
+            "peakV": 0.7999877025048855,
+            "peakA": 9.782423089737723,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782423089737723,
+            "peakHz": 21333.00540013028,
+            "saturatedSeconds": 57.858999999955856,
+            "brakingSeconds": 1.6919999999999245,
+            "recoverySeconds": 2.0589999999998843,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 0,
+            "longestStable": 0.022000000000000013,
+            "firstCatch": 11.809000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / +5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1335551676490727,
+            "peakPulseX": 0.13361250000000013,
+            "peakV": 0.799990250393773,
+            "peakA": 9.782377285059468,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782377285059468,
+            "peakHz": 21333.07334383395,
+            "saturatedSeconds": 58.373999999954655,
+            "brakingSeconds": 1.1099999999999886,
+            "recoverySeconds": 1.4199999999999544,
+            "recoveries": 4,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0.008,
+            "firstCatch": 1.6400000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / -5deg",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialAngle": -5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13355159670643643,
+            "peakPulseX": 0.1336125000000001,
+            "peakV": 0.7999936171132914,
+            "peakA": 9.782302517282329,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782302517282329,
+            "peakHz": 21333.163123021106,
+            "saturatedSeconds": 57.7529999999561,
+            "brakingSeconds": 1.8039999999999121,
+            "recoverySeconds": 2.205999999999868,
+            "recoveries": 6,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 3,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 1.6400000000000001,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x+10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": 0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1330516063652946,
+            "peakPulseX": 0.13302499999999975,
+            "peakV": 0.799991962382334,
+            "peakA": 9.781589905227891,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.781589905227891,
+            "peakHz": 21333.118996862242,
+            "saturatedSeconds": 58.58199999995417,
+            "brakingSeconds": 0.6610000000000005,
+            "recoverySeconds": 0.7900000000000006,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0.017000000000000008,
+            "firstCatch": 1.993,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / x-10mm",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.012373878450657341,
+            "initialX": -0.01
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1330516063652946,
+            "peakPulseX": 0.13302499999999975,
+            "peakV": 0.799991962382334,
+            "peakA": 9.781589905227891,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.781589905227891,
+            "peakHz": 21333.118996862242,
+            "saturatedSeconds": 58.58199999995417,
+            "brakingSeconds": 0.6610000000000005,
+            "recoverySeconds": 0.7900000000000006,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0.017000000000000008,
+            "firstCatch": 1.993,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / lag5ms",
+          "variant": {
+            "lagMs": 5
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13396133493069765,
+            "peakPulseX": 0.13394999999999985,
+            "peakV": 0.7999800768237525,
+            "peakA": 9.782192114802957,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.576369262224736,
+            "peakHz": 21332.802048633403,
+            "saturatedSeconds": 58.08999999995532,
+            "brakingSeconds": 1.704999999999923,
+            "recoverySeconds": 2.2549999999998627,
+            "recoveries": 7,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 2,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 2.992,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / delay2ms",
+          "variant": {
+            "delayMs": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13322312947413348,
+            "peakPulseX": 0.13319999999999987,
+            "peakV": 0.7999870283391142,
+            "peakA": 9.782701525421693,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782701525421693,
+            "peakHz": 21332.98742237638,
+            "saturatedSeconds": 58.21199999995503,
+            "brakingSeconds": 0.3070000000000002,
+            "recoverySeconds": 0.3830000000000003,
+            "recoveries": 1,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder+2deg",
+          "variant": {
+            "encoderOffsetDeg": 2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13294579774656112,
+            "peakPulseX": 0.13301249999999967,
+            "peakV": 0.7999913890067987,
+            "peakA": 9.78255143635582,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.78255143635582,
+            "peakHz": 21333.103706847967,
+            "saturatedSeconds": 58.41999999995455,
+            "brakingSeconds": 0.5420000000000004,
+            "recoverySeconds": 0.6610000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / encoder-2deg",
+          "variant": {
+            "encoderOffsetDeg": -2
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13334425530704802,
+            "peakPulseX": 0.13338749999999955,
+            "peakV": 0.7999871807039604,
+            "peakA": 9.782673449603518,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782673449603518,
+            "peakHz": 21332.991485438943,
+            "saturatedSeconds": 58.45399999995447,
+            "brakingSeconds": 0.5420000000000004,
+            "recoverySeconds": 0.6650000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .25",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.25,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13382562101132178,
+            "peakPulseX": 0.13372499999999915,
+            "peakV": 0.7999927742044597,
+            "peakA": 9.781703401687567,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.781703401687567,
+            "peakHz": 21333.14064545226,
+            "saturatedSeconds": 58.36899999995467,
+            "brakingSeconds": 1.222999999999976,
+            "recoverySeconds": 1.5939999999999352,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 5,
+            "finalStable": 0,
+            "longestStable": 0.03400000000000002,
+            "firstCatch": 3.827,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / damping .6",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.6,
+            "coulomb": 0.012373878450657341
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1332418765163353,
+            "peakPulseX": 0.13327499999999937,
+            "peakV": 0.7999886138812733,
+            "peakA": 9.781015565975194,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.781015565975194,
+            "peakHz": 21333.029703500622,
+            "saturatedSeconds": 58.18799999995509,
+            "brakingSeconds": 0.5390000000000004,
+            "recoverySeconds": 0.6780000000000005,
+            "recoveries": 2,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 0,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": null,
+            "duration": 60
+          }
+        },
+        {
+          "name": "recent fit / friction .45",
+          "variant": {
+            "leff": 0.11872161750496142,
+            "damping": 0.4221036700655802,
+            "coulomb": 0.45
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.1336248971867944,
+            "peakPulseX": 0.13364999999999935,
+            "peakV": 0.7999842485190517,
+            "peakA": 9.782281182423716,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.782281182423716,
+            "peakHz": 21332.91329384138,
+            "saturatedSeconds": 56.9819999999579,
+            "brakingSeconds": 2.1499999999998742,
+            "recoverySeconds": 2.6559999999998185,
+            "recoveries": 8,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 6,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 4.191,
+            "duration": 60
+          }
+        },
+        {
+          "name": "old fit / tracking98%",
+          "variant": {
+            "tracking": 0.98
+          },
+          "summary": {
+            "status": "not settled",
+            "fault": null,
+            "peakX": 0.13085169325659393,
+            "peakPulseX": 0.13361250000000024,
+            "peakV": 0.7999914432860863,
+            "peakA": 9.782544701884005,
+            "peakJ": 60.0000000000005,
+            "peakActualA": 9.586893807846323,
+            "peakHz": 21333.105154295634,
+            "saturatedSeconds": 57.506999999956676,
+            "brakingSeconds": 1.3309999999999642,
+            "recoverySeconds": 1.6929999999999243,
+            "recoveries": 5,
+            "spinRecoveries": 0,
+            "spinRecoverySeconds": 0,
+            "catches": 1,
+            "finalStable": 0,
+            "longestStable": 0,
+            "firstCatch": 1.923,
+            "duration": 60
+          }
+        }
+      ]
+    }
+  ]
+}

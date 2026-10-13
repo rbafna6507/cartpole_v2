@@ -1,0 +1,917 @@
+{
+  "note": "Six-second balance recoveries initialized at recorded first-BALANCE telemetry states. Settled means final continuous stable interval >2 s, not hardware success. Inputs are approximate states; none of these physical attempts held balance.",
+  "source": "logs/run_20260916_122300.csv",
+  "source_snapshot_sha256": {
+    "run_20260916_122300.csv": "5dacf439348b044df1ffacead3fa3cb32b6c664d87829cc35a05f498b64490be",
+    "run_20260916_122300_events.jsonl": "ac7ea0c124c1396ad1472b9b6051f5c31c6530b4bcdddc219f67b9ed419dc124"
+  },
+  "engine_sha256": "509ad737b838dbc77858a295150cc5750e8a946acce936cdf224178d49146e06",
+  "summaries": {
+    "v7_recorded_limits": {
+      "training": 6,
+      "training_n": 16,
+      "comparison": 2,
+      "comparison_n": 15,
+      "faults": 5
+    },
+    "swingup-175mm-20t-v10_recorded_limits": {
+      "training": 5,
+      "training_n": 16,
+      "comparison": 2,
+      "comparison_n": 15,
+      "faults": 0
+    },
+    "swingup-175mm-20t-v10_new_defaults": {
+      "training": 5,
+      "training_n": 16,
+      "comparison": 4,
+      "comparison_n": 15,
+      "faults": 0
+    },
+    "swingup-175mm-20t-v10_new_defaults_assumed_10ms_lag": {
+      "training": 5,
+      "training_n": 16,
+      "comparison": 4,
+      "comparison_n": 15,
+      "faults": 0
+    }
+  },
+  "runs": {
+    "v7_recorded_limits": [
+      {
+        "trial": 2,
+        "board_ms": 412753,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 417598,
+        "settled": true,
+        "finalStable": 6.000000000000338,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 446262,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 447065,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 479672,
+        "settled": false,
+        "finalStable": 0,
+        "fault": "Command speed limit"
+      },
+      {
+        "trial": 3,
+        "board_ms": 481704,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 482385,
+        "settled": true,
+        "finalStable": 5.747000000000254,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 483916,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 484517,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 485615,
+        "settled": false,
+        "finalStable": 0,
+        "fault": "Command speed limit"
+      },
+      {
+        "trial": 3,
+        "board_ms": 486631,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487277,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487801,
+        "settled": true,
+        "finalStable": 5.760000000000258,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 488880,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489451,
+        "settled": false,
+        "finalStable": 0,
+        "fault": "Command speed limit"
+      },
+      {
+        "trial": 3,
+        "board_ms": 489924,
+        "settled": false,
+        "finalStable": 0,
+        "fault": "Command speed limit"
+      },
+      {
+        "trial": 3,
+        "board_ms": 490501,
+        "settled": true,
+        "finalStable": 5.726000000000247,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 495133,
+        "settled": true,
+        "finalStable": 4.992000000000002,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 499629,
+        "settled": true,
+        "finalStable": 2.752999999999808,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 500776,
+        "settled": true,
+        "finalStable": 5.364000000000126,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 593825,
+        "settled": false,
+        "finalStable": 0,
+        "fault": "Command speed limit"
+      },
+      {
+        "trial": 5,
+        "board_ms": 598045,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598814,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 602796,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 610251,
+        "settled": true,
+        "finalStable": 3.5919999999997154,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611185,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611950,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 613201,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 617248,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 618043,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 619276,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      }
+    ],
+    "swingup-175mm-20t-v10_recorded_limits": [
+      {
+        "trial": 2,
+        "board_ms": 412753,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 417598,
+        "settled": true,
+        "finalStable": 6.000000000000338,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 446262,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 447065,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 479672,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 481704,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 482385,
+        "settled": true,
+        "finalStable": 5.747000000000254,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 483916,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 484517,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 485615,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 486631,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487277,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487801,
+        "settled": true,
+        "finalStable": 5.760000000000258,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 488880,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489451,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489924,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 490501,
+        "settled": true,
+        "finalStable": 5.726000000000247,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 495133,
+        "settled": true,
+        "finalStable": 4.992000000000002,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 499629,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 500776,
+        "settled": true,
+        "finalStable": 5.364000000000126,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 593825,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598045,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598814,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 602796,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 610251,
+        "settled": true,
+        "finalStable": 3.5919999999997154,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611185,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611950,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 613201,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 617248,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 618043,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 619276,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      }
+    ],
+    "swingup-175mm-20t-v10_new_defaults": [
+      {
+        "trial": 2,
+        "board_ms": 412753,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 417598,
+        "settled": true,
+        "finalStable": 6.000000000000338,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 446262,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 447065,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 479672,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 481704,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 482385,
+        "settled": true,
+        "finalStable": 5.837000000000284,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 483916,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 484517,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 485615,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 486631,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487277,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487801,
+        "settled": true,
+        "finalStable": 5.760000000000258,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 488880,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489451,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489924,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 490501,
+        "settled": true,
+        "finalStable": 5.726000000000247,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 495133,
+        "settled": true,
+        "finalStable": 4.701999999999905,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 499629,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 500776,
+        "settled": true,
+        "finalStable": 5.362000000000125,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 593825,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598045,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598814,
+        "settled": true,
+        "finalStable": 4.933999999999982,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 602796,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 610251,
+        "settled": true,
+        "finalStable": 5.790000000000268,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611185,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611950,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 613201,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 617248,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 618043,
+        "settled": true,
+        "finalStable": 5.430000000000148,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 619276,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      }
+    ],
+    "swingup-175mm-20t-v10_new_defaults_assumed_10ms_lag": [
+      {
+        "trial": 2,
+        "board_ms": 412753,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 417598,
+        "settled": true,
+        "finalStable": 6.000000000000338,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 446262,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 2,
+        "board_ms": 447065,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 479672,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 481704,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 482385,
+        "settled": true,
+        "finalStable": 5.819000000000278,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 483916,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 484517,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 485615,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 486631,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487277,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 487801,
+        "settled": true,
+        "finalStable": 5.751000000000255,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 488880,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489451,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 489924,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 490501,
+        "settled": true,
+        "finalStable": 5.737000000000251,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 495133,
+        "settled": true,
+        "finalStable": 4.5989999999998705,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 499629,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 3,
+        "board_ms": 500776,
+        "settled": true,
+        "finalStable": 5.369000000000128,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 593825,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598045,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 598814,
+        "settled": true,
+        "finalStable": 5.0210000000000115,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 602796,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 610251,
+        "settled": true,
+        "finalStable": 5.79400000000027,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611185,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 611950,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 613201,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 617248,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 618043,
+        "settled": true,
+        "finalStable": 5.455000000000156,
+        "fault": null
+      },
+      {
+        "trial": 5,
+        "board_ms": 619276,
+        "settled": false,
+        "finalStable": 0,
+        "fault": null
+      }
+    ]
+  }
+}

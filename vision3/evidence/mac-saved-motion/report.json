@@ -1,0 +1,105 @@
+{
+  "kind": "saved video",
+  "source": "../vision/evidence/live-motion/raw.avi",
+  "started_unix": 1791871541.803338,
+  "opencv_threads": 2,
+  "detector_width": 640,
+  "results": {
+    "vision2": {
+      "processed_frames": 650,
+      "skipped_camera_frames": 6,
+      "detected_frames": 498,
+      "angle_frames": 498,
+      "velocity_frames": 448,
+      "calibrated_camera_frames": 656,
+      "camera_frames_in_span": 656,
+      "geometry_coverage": 0.7591463414634146,
+      "angle_coverage_calibrated": 0.7591463414634146,
+      "velocity_coverage_calibrated": 0.6829268292682927,
+      "duration_s": 8.376420374959707,
+      "detection_reasons": {
+        "measured": 498,
+        "no reliable arm geometry": 152
+      },
+      "processing_ms": {
+        "p50": 5.122166126966476,
+        "p95": 13.910245988517996,
+        "p99": 29.175203624181446,
+        "max": 79.92533408105373
+      },
+      "host_read_to_result_ms": {
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "max": null
+      },
+      "velocity_delay_ms": {
+        "p50": 37.600798160454694,
+        "p95": 38.13951658113526,
+        "p99": 39.08508433760488,
+        "max": 117.81857943109175
+      },
+      "processing_deadline_misses": 38,
+      "longest_rejected_run_frames": 108,
+      "source_timeline_processed_fps": 77.47939703934951,
+      "source_timeline_angle_fps": 59.33322084523375,
+      "source_timeline_velocity_fps": 53.4834666773938,
+      "serial_compute_capacity_fps": 152.06332422467676
+    },
+    "vision3": {
+      "processed_frames": 650,
+      "skipped_camera_frames": 6,
+      "detected_frames": 507,
+      "angle_frames": 507,
+      "velocity_frames": 491,
+      "calibrated_camera_frames": 656,
+      "camera_frames_in_span": 656,
+      "geometry_coverage": 0.7728658536585366,
+      "angle_coverage_calibrated": 0.7728658536585366,
+      "velocity_coverage_calibrated": 0.7484756097560976,
+      "duration_s": 8.376420374959707,
+      "detection_reasons": {
+        "measured": 507,
+        "no reliable arm geometry": 143
+      },
+      "processing_ms": {
+        "p50": 2.2973748855292797,
+        "p95": 6.542572518810628,
+        "p99": 17.37800505477934,
+        "max": 47.626292100176215
+      },
+      "host_read_to_result_ms": {
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "max": null
+      },
+      "velocity_delay_ms": {
+        "p50": 19.16785418571454,
+        "p95": 24.998544602923722,
+        "p99": 47.01417512631655,
+        "max": 58.891423490747385
+      },
+      "processing_deadline_misses": 10,
+      "longest_rejected_run_frames": 108,
+      "source_timeline_processed_fps": 77.47939703934951,
+      "source_timeline_angle_fps": 60.40766548830639,
+      "source_timeline_velocity_fps": 58.61692441651866,
+      "serial_compute_capacity_fps": 316.45261072309137
+    }
+  },
+  "paired_angle_difference_deg": {
+    "samples": 495,
+    "rmse": 0.1072164695816362,
+    "bias": -0.014077382234246327,
+    "abs_p95": 0.14123346172159246,
+    "abs_max": 1.0254271429705473
+  },
+  "limitations": [
+    "Offline service time excludes camera capture, video encoding, network and browser.",
+    "Saved-video detection coverage is not physical accuracy.",
+    "Synthetic accuracy is against rendered geometry, not an independent physical reference."
+  ],
+  "time_basis": "unpaced source timeline; use service time or paced benchmark for throughput",
+  "reporting_correction": "Camera seq restored from authoritative raw_times.jsonl into *-states-corrected.jsonl. Detector outputs/times unchanged; original uncorrected logs retained."
+}

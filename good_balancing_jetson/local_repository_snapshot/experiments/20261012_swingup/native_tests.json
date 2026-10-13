@@ -1,0 +1,44 @@
+[
+  {
+    "test": "cart_motion_test.cpp",
+    "exit_code": 0,
+    "stdout": "scenario 0: max |x|=135.000 mm, max |v|=0.866 m/s\nscenario 1: max |x|=135.000 mm, max |v|=0.866 m/s\nscenario 2: max |x|=134.995 mm, max |v|=1.199 m/s\nscenario 3: max |x|=131.861 mm, max |v|=0.866 m/s\nscenario 4: max |x|=134.999 mm, max |v|=1.031 m/s\nscenario 5: max |x|=135.000 mm, max |v|=0.066 m/s\nscenario 6: max |x|=135.000 mm, max |v|=1.354 m/s\nscenario 7: max |x|=135.000 mm, max |v|=1.354 m/s\nscenario 0: max |x|=135.000 mm, max |v|=0.247 m/s\nscenario 1: max |x|=135.000 mm, max |v|=0.247 m/s\nscenario 2: max |x|=135.000 mm, max |v|=0.200 m/s\nscenario 3: max |x|=37.503 mm, max |v|=0.125 m/s\nscenario 4: max |x|=134.998 mm, max |v|=0.044 m/s\nscenario 5: max |x|=135.000 mm, max |v|=0.028 m/s\nscenario 6: max |x|=135.000 mm, max |v|=0.352 m/s\nscenario 7: max |x|=135.000 mm, max |v|=0.352 m/s\nscenario 0: max |x|=134.999 mm, max |v|=1.140 m/s\nscenario 1: max |x|=134.999 mm, max |v|=1.140 m/s\nscenario 2: max |x|=134.980 mm, max |v|=0.830 m/s\nscenario 3: max |x|=134.859 mm, max |v|=1.140 m/s\nscenario 4: max |x|=134.998 mm, max |v|=0.778 m/s\nscenario 5: max |x|=134.998 mm, max |v|=0.098 m/s\nscenario 6: max |x|=134.999 mm, max |v|=1.499 m/s\nscenario 7: max |x|=134.999 mm, max |v|=1.499 m/s\nscenario 0: max |x|=134.999 mm, max |v|=1.242 m/s\nscenario 1: max |x|=134.999 mm, max |v|=1.242 m/s\nscenario 2: max |x|=134.990 mm, max |v|=1.479 m/s\nscenario 3: max |x|=134.720 mm, max |v|=1.242 m/s\nscenario 4: max |x|=134.998 mm, max |v|=0.796 m/s\nscenario 5: max |x|=134.998 mm, max |v|=0.098 m/s\nscenario 6: max |x|=134.999 mm, max |v|=1.500 m/s\nscenario 7: max |x|=134.999 mm, max |v|=1.500 m/s\nscenario 0: max |x|=135.000 mm, max |v|=0.050 m/s\nscenario 1: max |x|=135.000 mm, max |v|=0.050 m/s\nscenario 2: max |x|=135.000 mm, max |v|=0.041 m/s\nscenario 3: max |x|=12.486 mm, max |v|=0.050 m/s\nscenario 4: max |x|=135.000 mm, max |v|=0.050 m/s\nscenario 5: max |x|=135.000 mm, max |v|=0.039 m/s\nscenario 6: max |x|=135.000 mm, max |v|=0.050 m/s\nscenario 7: max |x|=135.000 mm, max |v|=0.050 m/s\nMotion checks passed: jerk, acceleration, speed, reversals, rail braking.\n",
+    "stderr": ""
+  },
+  {
+    "test": "rail_recovery_test.cpp",
+    "exit_code": 0,
+    "stdout": "x0=-0.010 v0=-0.800: return complete at -129.967 mm; peak |x|=133.757 mm\nx0=-0.130 v0=-0.100: return complete at -129.954 mm; peak |x|=134.759 mm\nx0=-0.136 v0=+0.000: return complete at -129.979 mm; peak |x|=136.000 mm\nx0=-0.136 v0=+0.400: return complete at -111.025 mm; peak |x|=136.000 mm\nx0=-0.137 v0=+0.000: return complete at -129.976 mm; peak |x|=137.000 mm\nx0=+0.010 v0=+0.800: return complete at +129.967 mm; peak |x|=133.757 mm\nx0=+0.130 v0=+0.100: return complete at +129.954 mm; peak |x|=134.759 mm\nx0=+0.136 v0=+0.000: return complete at +129.979 mm; peak |x|=136.000 mm\nx0=+0.136 v0=-0.400: return complete at +111.025 mm; peak |x|=136.000 mm\nx0=+0.137 v0=+0.000: return complete at +129.976 mm; peak |x|=137.000 mm\n",
+    "stderr": ""
+  },
+  {
+    "test": "encoder_filter_test.cpp",
+    "exit_code": 0,
+    "stdout": "1 Hz: rate lag 30.24 -> 9.11 ms, gain 0.991 -> 0.999\n3 Hz: rate lag 29.51 -> 9.09 ms, gain 0.922 -> 0.992\n5 Hz: rate lag 28.21 -> 9.04 ms, gain 0.811 -> 0.978\nSynthetic one-count jitter rate RMS 0.0102 -> 0.0596 rad/s\nPASS: phase delay, rate amplitude, rotation wrap, bandwidth boundaries, and stationary jitter\n",
+    "stderr": ""
+  },
+  {
+    "test": "upright_session_test.cpp",
+    "exit_code": 0,
+    "stdout": "Upright start, signed fall boundary, gain isolation, jerk-limited center, timeout and reset passed.\n",
+    "stderr": ""
+  },
+  {
+    "test": "spin_recovery_test.cpp",
+    "exit_code": 0,
+    "stdout": "PASS center then immediate low-rate release; peak |x| 115.10 mm\nPASS center then immediate low-rate release; peak |x| 136.00 mm\nPASS center then immediate low-rate release; peak |x| 100.00 mm\nPASS center then immediate low-rate release; peak |x| 115.10 mm\nPASS center then immediate low-rate release; peak |x| 136.00 mm\nPASS center then immediate low-rate release; peak |x| 100.00 mm\nRate recovery checks passed.\n",
+    "stderr": ""
+  },
+  {
+    "test": "startup_kick_test.cpp",
+    "exit_code": 0,
+    "stdout": "Startup kick: bounded duration, angle offsets, no edge/upright/moving rearm, acceleration and jerk limits passed\n",
+    "stderr": ""
+  },
+  {
+    "test": "capture_gate_test.cpp",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

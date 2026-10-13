@@ -1,0 +1,24 @@
+{
+  "027_tight_bw40": {
+    "external_disturbance": true,
+    "source": "User: current run included a human disturbance to knock the pendulum over; message arrived after 027 result and as 028 began.",
+    "interpretation": "Do not attribute the observed loss after 9.566 s of qualified hold solely to bandwidth. The exact disturbance time was not logged."
+  },
+  "035_jerk150_ke3": {
+    "external_disturbance": true,
+    "source": "User confirmed: I knocked it over after the approximately 17-second hold.",
+    "interpretation": "Do not count the fall as an unforced balance failure. Capture time and span before first hold remain usable."
+  },
+  "036_jerk150_kdx3": {
+    "possible_external_disturbance": true,
+    "source": "User additionally reported inducing a disturbance in the most recent run while 036 was active; exact timing was not supplied.",
+    "interpretation": "Treat interruptions as disturbance-confounded; do not label them spontaneous gain failures. Report initial capture separately."
+  },
+  "052_compact_validation": {
+    "invalid_for_gain_comparison": true,
+    "reason": "No pendulum response fault after roughly two seconds. Commanded position span 28.69 mm; encoder changed about 0.09 degree. Actual cart motion/power awaiting user report.",
+    "serial_error": false,
+    "user_report": "Cart did not move; motor supply was off. User has now switched it on.",
+    "interpretation": "Exclude this unpowered attempt from controller/gain comparisons; physical center unchanged."
+  }
+}

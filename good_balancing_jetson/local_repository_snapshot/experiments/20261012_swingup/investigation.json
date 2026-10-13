@@ -1,0 +1,190 @@
+{
+  "status": "Same user-confirmed physical down pose measured 3882 then 45 raw counts (22.76 degree wrap-aware shift), with upright 1802 between. Awaiting witnessed mechanical coupling check; no powered agent trials.",
+  "date_local": "2026-10-12",
+  "board": "Teensy 4.1",
+  "usb_serial": "20242870",
+  "firmware_id": "swingup-125mm-60t-v33-teensy41",
+  "firmware_modified_or_flashed": false,
+  "calibration_written_by_agent": false,
+  "saved_upright_count_observed": 1637,
+  "user_confirmed_rail_total_m": 0.3,
+  "planned_powered_trial_limits": "Use a smaller virtual rail and lower motion limits only after physical angle repeatability and small cart displacement are verified. Not yet applied.",
+  "static_checks": [
+    {
+      "capture": "upright_check_01",
+      "user_reported_pose": "upright",
+      "raw_median": 150.0,
+      "raw_min": 150,
+      "raw_max": 151,
+      "latest": {
+        "board_ms": 1590593,
+        "raw": 150,
+        "zero_raw": 3685,
+        "agc": 35,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "down_check_02",
+      "user_reported_pose": "down",
+      "raw_median": 2690.0,
+      "raw_min": 2689,
+      "raw_max": 2690,
+      "latest": {
+        "board_ms": 1711603,
+        "raw": 2690,
+        "zero_raw": 3685,
+        "agc": 24,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "upright_check_02",
+      "user_reported_pose": "upright",
+      "raw_median": 3739.0,
+      "raw_min": 3738,
+      "raw_max": 3739,
+      "latest": {
+        "board_ms": 1755962,
+        "raw": 3739,
+        "zero_raw": 3685,
+        "agc": 45,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "upright_check_04",
+      "user_reported_pose": "upright",
+      "raw_median": 567.5,
+      "raw_min": 553,
+      "raw_max": 570,
+      "latest": {
+        "board_ms": 1907643,
+        "raw": 559,
+        "zero_raw": 3685,
+        "agc": 5,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "down_check_04",
+      "user_reported_pose": "down",
+      "raw_median": 55.0,
+      "raw_min": 54,
+      "raw_max": 55,
+      "latest": {
+        "board_ms": 1957167,
+        "raw": 55,
+        "zero_raw": 3685,
+        "agc": 42,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "down_check_06",
+      "user_reported_pose": "down",
+      "raw_median": 3882.0,
+      "raw_min": 3881,
+      "raw_max": 3883,
+      "latest": {
+        "board_ms": 2852174,
+        "raw": 3882,
+        "zero_raw": 3685,
+        "agc": 48,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "upright_check_06",
+      "user_reported_pose": "upright",
+      "raw_median": 1802.0,
+      "raw_min": 1802,
+      "raw_max": 1803,
+      "latest": {
+        "board_ms": 2930657,
+        "raw": 1803,
+        "zero_raw": 3685,
+        "agc": 54,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    },
+    {
+      "capture": "down_repeat_06",
+      "user_reported_pose": "down",
+      "raw_median": 45.0,
+      "raw_min": 45,
+      "raw_max": 45,
+      "latest": {
+        "board_ms": 2976689,
+        "raw": 45,
+        "zero_raw": 3685,
+        "agc": 45,
+        "status": 103,
+        "i2c_errors": 0,
+        "valid": 1,
+        "enabled": 0
+      }
+    }
+  ],
+  "passive_period_status": "Provisional 0.81\u20130.82 s; rejected for control tuning pending repeatable angle mapping and an unambiguous clean release.",
+  "baseline_failed_run": {
+    "file": "baseline/run_20261012_202739.csv",
+    "rail_recovery_entries": 63,
+    "capture_events": 19,
+    "max_abs_commanded_x_m": 0.1347,
+    "max_abs_commanded_v_m_s": 1.3133,
+    "max_abs_commanded_acceleration_m_s2": 14.906,
+    "note": "Cart x/v/a are inferred or commanded, not independent measured motion."
+  },
+  "source_sha256": {
+    "serial_frame.h": "88eddb8cfb400af0346de9a5e98e456c741b5161fb8a304a7c595c07047cd36c",
+    "upright_session.h": "7f387f845dd7a122e2d692e32f40ad6737910d6de50df7b5309ac35829af6818",
+    "swing_controller.h": "5bc0787d861aec4c50a7149a454465b8b53046d6f2341f8e9218f54376f76c5a",
+    "teensy_reference_store.h": "3f271a9d5441f6337668c68b1d5e2467aa602c8977dc98b1badc54f603dd6e4d",
+    "rail_recovery.h": "339c9106a6376e0213af2f5cce7f796c5a9492c282599cc87281e38ca227fd4c",
+    "spin_recovery.h": "571cbbd6c5171e2f9c3aa291fbf20f128abefbe759ce2628511ee9b361b8d12f",
+    "cart_motion.h": "bba693c6f651731b51032d76e8f2b66cfbf3016f2048b6a4648a6d1f8042ab6f",
+    "cart_mechanics.h": "04d5d54363baaaeb0e1df9827e06ef3c2a4be3fcb9b967e8a2c48d6b94e442b6",
+    "ethernet_transport.h": "c142475c384314adb116262c1813740c5b19f930d1c57b4c5167adbc8841e1b2",
+    "ethernet_config.h": "18943b67065cc1c46148a129476482e6c1d19f5a7ddb3f7588183a8cb6434841",
+    "teensy_swingup.ino": "a2c27e9b4a5aa70bc589b32eaacdd0a0c4b5003dcde47f48cd0e86eaee3e5d52",
+    "encoder_reference.h": "80c6da8ba4612fd3cbccdd4f55d574c582f066117697738ad7e292a2fbcd2a37",
+    "status_display.h": "8c00048762de0b478a63b133ab429c20574f7b21dbc5ac39f35091df97c736bf"
+  },
+  "software_validation": {
+    "active_python_tests": 47,
+    "active_python_tests_result": "pass",
+    "native_controller_tests": 7,
+    "native_controller_tests_result": "pass",
+    "teensy_port_and_display_harnesses": "pass",
+    "baseline_teensy_compile": "pass with pre-existing controlLog snprintf truncation warnings",
+    "legacy_test_failures_observed": [
+      "ESP32 frequency GUI test_serial_handshake_center_run_and_lease_stop failed before being retired with legacy firmware tests."
+    ],
+    "cleanup_note": "Retired ESP32-only fixtures, consolidated root host, restored optional plotting API used by archived analysis, and retargeted native tests to maintained Teensy headers. Existing user deletions preserved.",
+    "full_swing_regression": "FAIL: maintained firmware gains fail native swing_controller_test at model length 0.166 m and initial tilt 0; kept failing regression for investigation.",
+    "simulator175": "Pending repair of historical provenance paths after archive reorganization; current source parity not yet verified."
+  },
+  "encoder_frame_note": "E.zero_raw is encZeroRaw(), the relative tick origin, not encoder_upright_raw. Its value 3685 does not imply a changed saved upright calibration."
+}

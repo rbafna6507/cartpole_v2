@@ -1,0 +1,51 @@
+{
+  "powered_trials_completed": 8,
+  "serial_or_firmware_faults": 0,
+  "fixed_limits": {
+    "spin_trip_rad_s": 150,
+    "jmax": 150,
+    "amax_s": 25,
+    "amax_b": 25,
+    "vmax": 1.5,
+    "vmax_s": 1.5,
+    "vmax_b": 1.5
+  },
+  "full_span_reference": {
+    "normal_span_mm": 270,
+    "hold_30s_trials": [
+      "032_jerk150_bw30",
+      "033_repeat_jerk150_bw30",
+      "061_full_span_reference"
+    ],
+    "time_to_hold_s": [
+      13.852,
+      4.526,
+      31.545
+    ]
+  },
+  "compact_240": {
+    "successful_trial": "044_span240_ke3",
+    "measured_span_mm": 239.44,
+    "time_to_hold_s": 14.195,
+    "hold_s": 10.011,
+    "powered_repeat": "056_powered_compact_validation",
+    "repeat_longest_hold_s": 0.02
+  },
+  "compact_255": {
+    "successful_trial": "062_span255_ke3",
+    "measured_span_mm": 254.52,
+    "time_to_hold_s": 13.288,
+    "hold_s": 10.006,
+    "powered_repeat": "063_span255_ke3_long",
+    "repeat_longest_hold_s": 0
+  },
+  "conclusion": "Full-span reference has repeated sustained holds; smaller envelopes have isolated successes and failed powered repeats. No repeatable space improvement established in this batch.",
+  "final_state": {
+    "center_result": "064_center.result",
+    "inferred_x_m": 0.00139,
+    "mode": "IDLE",
+    "drivers": "disabled, GPIO27 HIGH verified",
+    "shutdown_result": "065_shutdown.result",
+    "serial_session": "closed"
+  }
+}

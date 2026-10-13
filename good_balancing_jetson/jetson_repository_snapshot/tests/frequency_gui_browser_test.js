@@ -1,0 +1,43 @@
+'use strict';
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ try {
+  const page=await browser.newPage({viewport:{width:1450,height:1120}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(process.env.FREQUENCY_URL||'http://127.0.0.1:8766');
+  await page.waitForFunction(()=>document.querySelector('#speed').textContent.includes('m/s'));
+  assert.equal(await page.title(),'Cart frequency bench');
+  assert.ok(await page.locator('#run').isDisabled());
+  await page.screenshot({path:'/tmp/frequency-bench-preview.png',fullPage:true});
+  await page.locator('#connect').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='IDLE');
+  await page.locator('#centerConfirm').check();await page.locator('#center').click();
+  await page.waitForFunction(()=>!document.querySelector('#run').disabled);
+  await page.locator('#travel').fill('300');
+  await page.waitForFunction(()=>document.querySelector('#alert').textContent.includes('270 mm'));
+  assert.ok(await page.locator('#run').isDisabled());
+  await page.locator('#travel').fill('100');await page.locator('#hz').fill('1');
+  await page.waitForFunction(()=>!document.querySelector('#run').disabled);
+  await page.locator('#run').click();
+  await page.waitForFunction(()=>document.querySelector('#plotTitle').textContent==='Live signal');
+  assert.ok(await page.locator('#travel').isDisabled());
+  await page.waitForFunction(()=>document.querySelectorAll('#x path').length===2);
+  await page.screenshot({path:'/tmp/frequency-bench-running.png',fullPage:true});
+  await page.locator('#finish').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='IDLE',{},{timeout:8000});
+  assert.match(await page.locator('#centerState').textContent(),/confirmed/);
+  await page.locator('#run').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='RAMP UP');
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='IDLE');
+  assert.ok(await page.locator('#run').isDisabled());
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  await page.screenshot({path:'/tmp/frequency-bench-mobile.png',fullPage:true});
+  await page.locator('#connect').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='DISCONNECTED');
+  assert.deepEqual(errors,[]);
+  console.log('PASS UI: preview, 300 mm rejection, center, run, live curves, smooth finish, Escape stop, disconnect, mobile; no JS errors.');
+ } finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

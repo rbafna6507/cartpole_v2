@@ -1,0 +1,18 @@
+Preset autoload verification, 2026-10-13
+Live launcher applied 33 tunables and verified 8 derived gains against final_state.json.
+Drivers disabled, mode IDLE, commanded velocity zero. No home, calibration or motion command.
+Original reference 2384 retained. Earlier live pw6 and bal_pw8 restored to pw4.5 and bal_pw4.
+Mac: 64 existing host regression tests passed. New integration tests: 8 passed on Mac and Jetson.
+Jetson existing host suite: 57 passed, 7 environment errors:
+Missing clang++:
+- test_reject_unstable_bandwidth_and_reset_in_control_task
+- test_live_reference_capture_and_persistence
+- test_command_framing_and_motion_timeout
+- test_controlled_release_rail_and_jerk_on_recorded_states
+- test_actual_firmware_formatter_and_crc_match_python
+Missing matplotlib:
+- test_agg_with_display_falls_back_without_stop
+- test_readonly_plot_stop_keys_button_and_terminal
+All seven passed on the Mac. No dependencies installed and no firmware flashed.
+Automatic restore occurs on console launch; restart console after a board reset.
+settings.json is authoritative. restore_parameters.txt is a manual reference.

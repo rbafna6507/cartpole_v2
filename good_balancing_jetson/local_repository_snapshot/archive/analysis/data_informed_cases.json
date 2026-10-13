@@ -1,0 +1,361 @@
+{
+  "source": "logs/run_20260916_122300.csv",
+  "snapshot_sha256": {
+    "run_20260916_122300.csv": "5dacf439348b044df1ffacead3fa3cb32b6c664d87829cc35a05f498b64490be",
+    "run_20260916_122300_events.jsonl": "ac7ea0c124c1396ad1472b9b6051f5c31c6530b4bcdddc219f67b9ed419dc124"
+  },
+  "measurement_note": "Capture seeds use raw encoder angle, filtered angular rate and pulse-derived cart state at first BALANCE telemetry sample (up to ~13 ms after handoff), not exact controller state. Jerk saturation estimated from telemetry differences, not per-tick diagnostics.",
+  "clipping": [
+    {
+      "trial": 1,
+      "settings": {
+        "vmax": 0.75,
+        "amax_s": 20.0,
+        "amax_b": 20.0,
+        "jmax": 266.0
+      },
+      "speed_near_cap_percent": 3.2060899038729196,
+      "speed_longest_plateau_s": 0.17400000000000002,
+      "accel_near_cap_percent": 0.0,
+      "jerk_near_cap_percent": 44.48519197644081,
+      "peak_accel": 19.152
+    },
+    {
+      "trial": 2,
+      "settings": {
+        "vmax": 0.75,
+        "amax_s": 15.0,
+        "amax_b": 15.0,
+        "jmax": 100.0
+      },
+      "speed_near_cap_percent": 9.184446127121214,
+      "speed_longest_plateau_s": 0.21500000000000005,
+      "accel_near_cap_percent": 0.0,
+      "jerk_near_cap_percent": 44.63943699612547,
+      "peak_accel": 12.1
+    },
+    {
+      "trial": 3,
+      "settings": {
+        "vmax": 0.75,
+        "amax_s": 15.0,
+        "amax_b": 15.0,
+        "jmax": 50.0
+      },
+      "speed_near_cap_percent": 11.514893997673894,
+      "speed_longest_plateau_s": 0.164,
+      "accel_near_cap_percent": 0.0,
+      "jerk_near_cap_percent": 49.107701941138934,
+      "peak_accel": 8.65
+    },
+    {
+      "trial": 4,
+      "settings": {
+        "vmax": 0.5,
+        "amax_s": 15.0,
+        "amax_b": 15.0,
+        "jmax": 50.0
+      },
+      "speed_near_cap_percent": 52.24446286864878,
+      "speed_longest_plateau_s": 0.3890000000000002,
+      "accel_near_cap_percent": 0.0,
+      "jerk_near_cap_percent": 33.44782660191891,
+      "peak_accel": 7.05
+    },
+    {
+      "trial": 5,
+      "settings": {
+        "vmax": 0.75,
+        "amax_s": 10.0,
+        "amax_b": 10.0,
+        "jmax": 50.0
+      },
+      "speed_near_cap_percent": 9.701349586416907,
+      "speed_longest_plateau_s": 0.165,
+      "accel_near_cap_percent": 0.0,
+      "jerk_near_cap_percent": 52.58859381802467,
+      "peak_accel": 8.65
+    }
+  ],
+  "capture_seeds": [
+    {
+      "trial": 2,
+      "board_ms": 412753.0,
+      "initialAngle": -17.154356386216847,
+      "initialOmega": 2.852,
+      "initialX": -0.03929,
+      "initialV": -0.6366,
+      "initialA": 1.083
+    },
+    {
+      "trial": 2,
+      "board_ms": 417598.0,
+      "initialAngle": -4.852952524758073,
+      "initialOmega": 2.726,
+      "initialX": -0.04922,
+      "initialV": -0.2548,
+      "initialA": 1.931
+    },
+    {
+      "trial": 2,
+      "board_ms": 446262.0,
+      "initialAngle": -0.790681757280536,
+      "initialOmega": 2.505,
+      "initialX": 0.04245,
+      "initialV": 0.1553,
+      "initialA": -1.005
+    },
+    {
+      "trial": 2,
+      "board_ms": 447065.0,
+      "initialAngle": -21.35986660247709,
+      "initialOmega": 0.113,
+      "initialX": -0.11966,
+      "initialV": 0.2079,
+      "initialA": 3.393
+    },
+    {
+      "trial": 3,
+      "board_ms": 479672.0,
+      "initialAngle": -25.93206980762106,
+      "initialOmega": 1.724,
+      "initialX": 0.01422,
+      "initialV": -0.5628,
+      "initialA": -0.48
+    },
+    {
+      "trial": 3,
+      "board_ms": 481704.0,
+      "initialAngle": 12.920198280200065,
+      "initialOmega": -2.738,
+      "initialX": 0.09604,
+      "initialV": -0.2487,
+      "initialA": -2.99
+    },
+    {
+      "trial": 3,
+      "board_ms": 482385.0,
+      "initialAngle": 2.985110112631589,
+      "initialOmega": -2.73,
+      "initialX": -0.03431,
+      "initialV": 0.7482,
+      "initialA": -0.396
+    },
+    {
+      "trial": 3,
+      "board_ms": 483916.0,
+      "initialAngle": 29.616188430312253,
+      "initialOmega": -1.022,
+      "initialX": 0.06816,
+      "initialV": -0.1542,
+      "initialA": -1.52
+    },
+    {
+      "trial": 3,
+      "board_ms": 484517.0,
+      "initialAngle": -5.890006133944863,
+      "initialOmega": -2.766,
+      "initialX": -0.06293,
+      "initialV": 0.1805,
+      "initialA": 1.58
+    },
+    {
+      "trial": 3,
+      "board_ms": 485615.0,
+      "initialAngle": 2.813222774092342,
+      "initialOmega": -2.442,
+      "initialX": -0.03834,
+      "initialV": 0.0021,
+      "initialA": 0.856
+    },
+    {
+      "trial": 3,
+      "board_ms": 486631.0,
+      "initialAngle": 26.453461401190108,
+      "initialOmega": -2.784,
+      "initialX": 0.01446,
+      "initialV": -0.109,
+      "initialA": -0.252
+    },
+    {
+      "trial": 3,
+      "board_ms": 487277.0,
+      "initialAngle": -2.1084846860814292,
+      "initialOmega": -2.251,
+      "initialX": -0.01339,
+      "initialV": 0.2188,
+      "initialA": 0.029
+    },
+    {
+      "trial": 3,
+      "board_ms": 487801.0,
+      "initialAngle": 22.84955686981723,
+      "initialOmega": -3.106,
+      "initialX": -0.00306,
+      "initialV": 0.0012,
+      "initialA": 0.255
+    },
+    {
+      "trial": 3,
+      "board_ms": 488880.0,
+      "initialAngle": 23.20479070279834,
+      "initialOmega": -0.48,
+      "initialX": 0.10288,
+      "initialV": -0.1363,
+      "initialA": -2.635
+    },
+    {
+      "trial": 3,
+      "board_ms": 489451.0,
+      "initialAngle": -14.851066049790937,
+      "initialOmega": -2.829,
+      "initialX": -0.1142,
+      "initialV": 0.1201,
+      "initialA": 3.003
+    },
+    {
+      "trial": 3,
+      "board_ms": 489924.0,
+      "initialAngle": 24.167359798618126,
+      "initialOmega": -2.048,
+      "initialX": 0.09287,
+      "initialV": 0.3975,
+      "initialA": -2.696
+    },
+    {
+      "trial": 3,
+      "board_ms": 490501.0,
+      "initialAngle": 24.522593631599232,
+      "initialOmega": -1.764,
+      "initialX": -0.09481,
+      "initialV": -0.2827,
+      "initialA": 3.212
+    },
+    {
+      "trial": 3,
+      "board_ms": 495133.0,
+      "initialAngle": 3.0767833598525205,
+      "initialOmega": -2.481,
+      "initialX": 0.07124,
+      "initialV": 0.5548,
+      "initialA": -2.736
+    },
+    {
+      "trial": 3,
+      "board_ms": 499629.0,
+      "initialAngle": -17.75596207110421,
+      "initialOmega": 2.703,
+      "initialX": 0.0046,
+      "initialV": -0.5261,
+      "initialA": 0.151
+    },
+    {
+      "trial": 3,
+      "board_ms": 500776.0,
+      "initialAngle": 25.049714803119592,
+      "initialOmega": -2.262,
+      "initialX": -0.07515,
+      "initialV": -0.4189,
+      "initialA": 2.267
+    },
+    {
+      "trial": 5,
+      "board_ms": 593825.0,
+      "initialAngle": 24.50540489774531,
+      "initialOmega": -1.803,
+      "initialX": -0.00164,
+      "initialV": 0.7466,
+      "initialA": 0.096
+    },
+    {
+      "trial": 5,
+      "board_ms": 598045.0,
+      "initialAngle": 26.178441659527312,
+      "initialOmega": -2.583,
+      "initialX": 0.07896,
+      "initialV": 0.4333,
+      "initialA": -2.446
+    },
+    {
+      "trial": 5,
+      "board_ms": 598814.0,
+      "initialAngle": 7.545854161872943,
+      "initialOmega": -1.469,
+      "initialX": -0.11794,
+      "initialV": 0.1248,
+      "initialA": 3.027
+    },
+    {
+      "trial": 5,
+      "board_ms": 602796.0,
+      "initialAngle": 7.018732990352585,
+      "initialOmega": -2.481,
+      "initialX": 0.08162,
+      "initialV": 0.4814,
+      "initialA": -3.017
+    },
+    {
+      "trial": 5,
+      "board_ms": 610251.0,
+      "initialAngle": -13.200947599814167,
+      "initialOmega": 0.382,
+      "initialX": 0.02609,
+      "initialV": 0.2888,
+      "initialA": 0.109
+    },
+    {
+      "trial": 5,
+      "board_ms": 611185.0,
+      "initialAngle": 11.40758970105469,
+      "initialOmega": -1.937,
+      "initialX": 0.01769,
+      "initialV": 0.7056,
+      "initialA": -0.839
+    },
+    {
+      "trial": 5,
+      "board_ms": 611950.0,
+      "initialAngle": 7.981302086172368,
+      "initialOmega": -2.456,
+      "initialX": -0.11535,
+      "initialV": 0.035,
+      "initialA": 3.21
+    },
+    {
+      "trial": 5,
+      "board_ms": 613201.0,
+      "initialAngle": 16.770474663479195,
+      "initialOmega": -2.999,
+      "initialX": -0.11909,
+      "initialV": 0.0625,
+      "initialA": 3.448
+    },
+    {
+      "trial": 5,
+      "board_ms": 617248.0,
+      "initialAngle": 27.8400192654067,
+      "initialOmega": -2.368,
+      "initialX": -0.02421,
+      "initialV": 0.7127,
+      "initialA": 0.552
+    },
+    {
+      "trial": 5,
+      "board_ms": 618043.0,
+      "initialAngle": 18.43778184730989,
+      "initialOmega": -2.688,
+      "initialX": -0.1137,
+      "initialV": 0.0455,
+      "initialA": 3.228
+    },
+    {
+      "trial": 5,
+      "board_ms": 619276.0,
+      "initialAngle": -5.993138537068411,
+      "initialOmega": 2.363,
+      "initialX": -0.08207,
+      "initialV": 0.3654,
+      "initialA": 3.178
+    }
+  ]
+}

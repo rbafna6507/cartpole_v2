@@ -1,0 +1,148 @@
+test_camera_dimensions_change_invalidates_calibration (test_app.AppTests.test_camera_dimensions_change_invalidates_calibration) ... ok
+test_disagreeing_cart_template_stays_disabled_during_occlusion (test_app.AppTests.test_disagreeing_cart_template_stays_disabled_during_occlusion) ... ok
+test_live_calibration_and_reset (test_app.AppTests.test_live_calibration_and_reset) ... ok
+test_malformed_selection_fails_without_server_error (test_app.AppTests.test_malformed_selection_fails_without_server_error) ... ok
+test_measurement_quality_clock_and_latency_are_exposed (test_app.AppTests.test_measurement_quality_clock_and_latency_are_exposed) ... ok
+test_preview_page_and_finite_json (test_app.AppTests.test_preview_page_and_finite_json) ... ok
+test_stale_camera_cannot_calibrate (test_app.AppTests.test_stale_camera_cannot_calibrate) ... ok
+test_wrong_cart_span_returns_error (test_app.AppTests.test_wrong_cart_span_returns_error) ... ok
+test_invalid_calibration_never_partially_applies (test_calibration_restore.CalibrationRestoreTests.test_invalid_calibration_never_partially_applies) ... ok
+test_restore_preserves_latest_saved_reference_and_rejects_wrong_geometry (test_calibration_restore.CalibrationRestoreTests.test_restore_preserves_latest_saved_reference_and_rejects_wrong_geometry) ... ok
+test_actual_rate_not_requested_rate (test_capture.CaptureTests.test_actual_rate_not_requested_rate) ... ok
+test_buffered_recorder_drains_on_close (test_capture.CaptureTests.test_buffered_recorder_drains_on_close) ... ok
+test_raw_recording_has_matching_timestamps (test_capture.CaptureTests.test_raw_recording_has_matching_timestamps) ... ok
+test_stalls_show_up_in_tail_interval (test_capture.CaptureTests.test_stalls_show_up_in_tail_interval) ... ok
+test_low_texture_and_bad_rectangle_rejected (test_cart.CartTests.test_low_texture_and_bad_rectangle_rejected) ... ok
+test_occlusion_and_ambiguity_are_not_measurements (test_cart.CartTests.test_occlusion_and_ambiguity_are_not_measurements) ... ok
+test_translation_uses_fixed_anchor_without_arm (test_cart.CartTests.test_translation_uses_fixed_anchor_without_arm) ... ok
+test_encoder_is_served_without_camera_and_cursor_does_not_repeat (test_comparison_api.ComparisonApiTests.test_encoder_is_served_without_camera_and_cursor_does_not_repeat) ... ok
+test_reset_starts_new_comparison_epoch (test_comparison_api.ComparisonApiTests.test_reset_starts_new_comparison_epoch) ... ok
+test_direction_and_delay_are_explicit_validated_display_settings (test_comparison_api.ComparisonSettingsTests.test_direction_and_delay_are_explicit_validated_display_settings) ... ok
+test_failed_worker_does_not_break_vision_state (test_comparison_process.ProcessTests.test_failed_worker_does_not_break_vision_state) ... ok
+test_late_queued_sample_from_old_calibration_is_discarded (test_comparison_process.ProcessTests.test_late_queued_sample_from_old_calibration_is_discarded) ... ok
+test_separate_process_tracks_without_camera_and_shuts_down (test_comparison_process.ProcessTests.test_separate_process_tracks_without_camera_and_shuts_down) ... ok
+test_checked_serial_telemetry_reaches_udp_and_home_resets_generation (test_console_publisher.ConsolePublisherTests.test_checked_serial_telemetry_reaches_udp_and_home_resets_generation) ... ok
+test_blank_and_occlusion_recover_without_click (test_detector.DetectorTests.test_blank_and_occlusion_recover_without_click) ... ok
+test_bright_rim_and_weight_holes_do_not_move_endpoints (test_detector.DetectorTests.test_bright_rim_and_weight_holes_do_not_move_endpoints) ... ok
+test_known_live_still (test_detector.DetectorTests.test_known_live_still) ... ok
+test_rotations_and_background (test_detector.DetectorTests.test_rotations_and_background) ... ok
+test_selection_does_not_limit_cart_travel (test_detector.DetectorTests.test_selection_does_not_limit_cart_travel) ... ok
+test_two_plausible_arms_are_ambiguous (test_detector.DetectorTests.test_two_plausible_arms_are_ambiguous) ... ok
+test_encode_preserves_frame_count_timing_and_decodes (test_encoder.EncoderTests.test_encode_preserves_frame_count_timing_and_decodes) ... skipped 'Requires Jetson system GStreamer; set VISION2_GST_TESTS=1'
+test_encoder_history_advances_without_camera_and_invalid_packets_rejected (test_encoder_feed.FeedTests.test_encoder_history_advances_without_camera_and_invalid_packets_rejected) ... ok
+test_health_age_advances_when_console_stops_and_backlogged_health_is_rejected (test_encoder_feed.FeedTests.test_health_age_advances_when_console_stops_and_backlogged_health_is_rejected) ... ok
+test_health_is_required_and_expires_even_if_telemetry_continues (test_encoder_feed.FeedTests.test_health_is_required_and_expires_even_if_telemetry_continues) ... ok
+test_real_udp_publisher_and_no_receiver (test_encoder_feed.FeedTests.test_real_udp_publisher_and_no_receiver) ... ok
+test_reference_and_session_changes_reset_filter (test_encoder_feed.FeedTests.test_reference_and_session_changes_reset_filter) ... ok
+test_stale_and_future_datagrams_rejected (test_encoder_feed.FeedTests.test_stale_and_future_datagrams_rejected) ... ok
+test_vision_is_optional_and_fusion_logs_both_sources (test_encoder_feed.FeedTests.test_vision_is_optional_and_fusion_logs_both_sources) ... ok
+test_baseline_package_loads_independently (test_evaluate.EvaluationTests.test_baseline_package_loads_independently) ... ok
+test_reference_angle_wrap_and_velocity_use_effective_time (test_evaluate.EvaluationTests.test_reference_angle_wrap_and_velocity_use_effective_time) ... ok
+test_reference_does_not_extrapolate_across_missing_truth (test_evaluate.EvaluationTests.test_reference_does_not_extrapolate_across_missing_truth) ... ok
+test_saved_camera_sequence_gaps_survive_benchmark (test_evaluate.EvaluationTests.test_saved_camera_sequence_gaps_survive_benchmark) ... ok
+test_synthetic_known_motion_detects_across_rotation (test_evaluate.EvaluationTests.test_synthetic_known_motion_detects_across_rotation) ... ok
+test_clock_tracks_board_time_despite_receipt_jitter_and_reboot (test_fusion.FusionTests.test_clock_tracks_board_time_despite_receipt_jitter_and_reboot) ... ok
+test_constant_motion_wrap_and_vision_bias_correction (test_fusion.FusionTests.test_constant_motion_wrap_and_vision_bias_correction) ... ok
+test_delayed_vision_replays_at_measurement_time (test_fusion.FusionTests.test_delayed_vision_replays_at_measurement_time) ... ok
+test_late_and_nonfinite_samples_cannot_corrupt_state (test_fusion.FusionTests.test_late_and_nonfinite_samples_cannot_corrupt_state) ... ok
+test_outlier_does_not_drag_estimate_and_dropout_is_labelled (test_fusion.FusionTests.test_outlier_does_not_drag_estimate_and_dropout_is_labelled) ... ok
+test_reset_discards_old_reference (test_fusion.FusionTests.test_reset_discards_old_reference) ... ok
+test_bad_history_cursor_is_rejected_and_script_is_served (test_history.HistoryTests.test_bad_history_cursor_is_rejected_and_script_is_served) ... ok
+test_buffer_is_bounded_and_reconnect_returns_retained_measurements (test_history.HistoryTests.test_buffer_is_bounded_and_reconnect_returns_retained_measurements) ... ok
+test_calibration_reset_clears_history_and_changes_epoch (test_history.HistoryTests.test_calibration_reset_clears_history_and_changes_epoch) ... ok
+test_dashboard_receives_every_processed_frame_between_polls (test_history.HistoryTests.test_dashboard_receives_every_processed_frame_between_polls) ... ok
+test_null_measurements_and_skipped_capture_sequences_are_preserved (test_history.HistoryTests.test_null_measurements_and_skipped_capture_sequences_are_preserved) ... ok
+test_measurement_and_video_rates_can_be_selected_independently (test_live_options.LiveOptionsTests.test_measurement_and_video_rates_can_be_selected_independently) ... ok
+test_video_defaults_follow_capture_and_bad_values_fail_before_camera (test_live_options.LiveOptionsTests.test_video_defaults_follow_capture_and_bad_values_fail_before_camera) ... usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+usage: python -m unittest [-h] [--camera CAMERA] [--width WIDTH]
+                          [--height HEIGHT] [--fps FPS]
+                          [--rotate {0,90,180,270}] [--port PORT]
+                          [--preview-fps PREVIEW_FPS]
+                          [--detector-width DETECTOR_WIDTH]
+                          [--opencv-threads OPENCV_THREADS]
+                          [--video-fps VIDEO_FPS] [--no-video]
+                          [--video-bitrate VIDEO_BITRATE]
+                          [--gst-python GST_PYTHON]
+                          [--calibration-file CALIBRATION_FILE]
+                          [--encoder-port ENCODER_PORT]
+                          [--encoder-sign {-1,1}]
+                          [--vision-delay-ms VISION_DELAY_MS] [--out OUT]
+                          [--record] [--duration DURATION]
+                          [--exposure-raw EXPOSURE_RAW]
+                          [--auto-exposure-raw AUTO_EXPOSURE_RAW]
+                          [--gain-raw GAIN_RAW]
+python -m unittest: error: Dimensions and rates must be positive
+ok
+test_skips_invalid_geometry_and_velocity_warmup_are_separate (test_metrics.MetricsTests.test_skips_invalid_geometry_and_velocity_warmup_are_separate) ... ok
+test_stale_recent_rates_are_zero_and_history_is_bounded (test_metrics.MetricsTests.test_stale_recent_rates_are_zero_and_history_is_bounded) ... ok
+test_uncalibrated_and_empty_are_not_velocity_failures (test_metrics.MetricsTests.test_uncalibrated_and_empty_are_not_velocity_failures) ... ok
+test_80fps_velocity_delay_is_at_most_30ms (test_motion.MotionTests.test_80fps_velocity_delay_is_at_most_30ms) ... ok
+test_exact_25fps_window_boundary_is_stable (test_motion.MotionTests.test_exact_25fps_window_boundary_is_stable) ... ok
+test_long_loss_and_bad_geometry_restart_velocity (test_motion.MotionTests.test_long_loss_and_bad_geometry_restart_velocity) ... ok
+test_one_missing_frame_is_invalid_then_recovers_without_warmup (test_motion.MotionTests.test_one_missing_frame_is_invalid_then_recovers_without_warmup) ... ok
+test_velocity_remains_available_at_30_40_and_80_fps (test_motion.MotionTests.test_velocity_remains_available_at_30_40_and_80_fps) ... ok
+test_preview_encodes_latest_bundle_outside_tracking_thread (test_preview.PreviewTests.test_preview_encodes_latest_bundle_outside_tracking_thread) ... ok
+test_nonexistent_source_fails (test_replay.ReplayTests.test_nonexistent_source_fails) ... ok
+test_video_creates_finite_measurements_and_summary (test_replay.ReplayTests.test_video_creates_finite_measurements_and_summary) ... ok
+test_full_resolution_geometry_preserves_saved_fixture_reference (test_segmentation.SegmentationTests.test_full_resolution_geometry_preserves_saved_fixture_reference) ... ok
+test_native_mask_is_exactly_equivalent_at_threshold_boundaries (test_segmentation.SegmentationTests.test_native_mask_is_exactly_equivalent_at_threshold_boundaries) ... ok
+test_gap_duplicate_and_loss_reset_derivative (test_state.StateTests.test_gap_duplicate_and_loss_reset_derivative) ... ok
+test_home_requires_consecutive_stationary_samples (test_state.StateTests.test_home_requires_consecutive_stationary_samples) ... ok
+test_irregular_time_velocity_across_wrap (test_state.StateTests.test_irregular_time_velocity_across_wrap) ... ok
+test_length_outlier_and_stale_clear_values (test_state.StateTests.test_length_outlier_and_stale_clear_values) ... ok
+test_missing_arm_independent_cart_still_valid (test_state.StateTests.test_missing_arm_independent_cart_still_valid) ... ok
+test_nonfinite_times_rejected (test_state.StateTests.test_nonfinite_times_rejected) ... ok
+test_position_scale_and_velocity (test_state.StateTests.test_position_scale_and_velocity) ... ok
+test_rejected_geometry_cannot_calibrate_or_measure_cart (test_state.StateTests.test_rejected_geometry_cannot_calibrate_or_measure_cart) ... ok
+test_source_change_restarts_cart_velocity (test_state.StateTests.test_source_change_restarts_cart_velocity) ... ok
+test_velocity_effective_time_is_exposed_for_acceleration (test_state.StateTests.test_velocity_effective_time_is_exposed_for_acceleration) ... ok
+test_wrong_cart_reference_is_rejected (test_state.StateTests.test_wrong_cart_reference_is_rejected) ... ok
+test_missing_encoder_returns_service_unavailable (test_stream.StreamApiTests.test_missing_encoder_returns_service_unavailable) ... ok
+test_route_sends_binary_frames_and_rejects_invalid_mode (test_stream.StreamApiTests.test_route_sends_binary_frames_and_rejects_invalid_mode) ... ok
+test_closed_broadcast_wakes_viewer (test_stream.StreamTests.test_closed_broadcast_wakes_viewer) ... ok
+test_mask_matches_encoder_dimensions_and_duplicate_work_is_skipped (test_stream.StreamTests.test_mask_matches_encoder_dimensions_and_duplicate_work_is_skipped) ... ok
+test_new_viewer_waits_for_keyframe_and_slow_viewer_is_disconnected (test_stream.StreamTests.test_new_viewer_waits_for_keyframe_and_slow_viewer_is_disconnected) ... ok
+test_oversized_frame_is_rejected_before_allocating (test_stream.StreamTests.test_oversized_frame_is_rejected_before_allocating) ... ok
+test_packet_parser_handles_partial_reads_and_preserves_frame_time (test_stream.StreamTests.test_packet_parser_handles_partial_reads_and_preserves_frame_time) ... ok
+test_video_frame_selection_never_reuses_pose_on_a_new_camera_frame (test_stream.StreamTests.test_video_frame_selection_never_reuses_pose_on_a_new_camera_frame) ... ok
+test_video_rate_limit_tolerates_camera_jitter (test_stream.StreamTests.test_video_rate_limit_tolerates_camera_jitter) ... ok
+
+----------------------------------------------------------------------
+Ran 89 tests in 5.315s
+
+OK (skipped=1)

@@ -1,0 +1,58 @@
+'use strict';
+// Optional UI smoke test; requires Playwright and a Chrome/Chromium installation.
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ try{
+ const page=await browser.newPage({viewport:{width:1450,height:1050}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(process.env.SIM_URL||'http://127.0.0.1:8765/simulator175/');
+ assert.equal(await page.title(),'125 mm • Pendulum Lab');
+ assert.equal(await page.locator('#runs tr').count(),1);
+ assert.equal(await page.locator('#pulleyTeeth').inputValue(),'60');
+ assert.equal(await page.locator('#vmax').inputValue(),'0.8');
+ for(const [key,value] of [['vmax_s','0.8'],['vmax_b','0.8'],['approach_v','0.3'],['catch_v','0.3'],['approach_angle','0.8'],['catch_da','4']])assert.equal(await page.locator('#'+key).inputValue(),value);
+ await page.locator('#play').click();
+ const initialCommands=page.waitForEvent('download');await page.locator('#exportCommands').click();await initialCommands;
+ assert.match(await page.locator('#terminalCommands').textContent(),/set vmax_s 0.8/);
+ assert.match(await page.locator('#terminalCommands').textContent(),/set catch_v 0.3/);
+ await page.screenshot({path:'/tmp/pendulum175-desktop.png',fullPage:true});
+ await page.locator('#preset').selectOption('recorded');
+ assert.equal(await page.locator('#pulleyTeeth').inputValue(),'20');
+ assert.equal(await page.locator('#microsteps').inputValue(),'16');
+ await page.locator('#preset').selectOption('current');
+ assert.equal(await page.locator('#pulleyTeeth').inputValue(),'60');
+ assert.equal(await page.locator('#microsteps').inputValue(),'16');
+ await page.locator('#compare').click();await page.waitForFunction(()=>document.querySelectorAll('#runs tr').length===5);
+ await page.locator('#sweep').click();await page.waitForFunction(()=>document.querySelectorAll('#runs tr').length===32);
+ await page.locator('[data-tab="calibration"]').click();
+ assert.match(await page.locator('#calInfo').textContent(),/RMSE/);
+ await page.locator('#capture').selectOption('2');await page.screenshot({path:'/tmp/pendulum175-calibration.png',fullPage:true});
+ await page.locator('[data-tab="recording"]').click();assert.match(await page.locator('#logInfo').textContent(),/Sep 18/);
+ await page.locator('#recordingSelect').selectOption('2');assert.match(await page.locator('#logInfo').textContent(),/67.9%/);
+ await page.locator('#recordingSelect').selectOption('archive');assert.match(await page.locator('#logInfo').textContent(),/179.9/);
+ await page.locator('#replay').click();assert.equal(await page.locator('#scenario').inputValue(),'replay');
+ await page.locator('#scenario').selectOption('balance');await page.locator('#initialAngle').fill('5');await page.locator('#style').selectOption('jerk');await page.locator('#duration').fill('20');await page.locator('#run').click();
+ await page.locator('#jmax').fill('0');await page.locator('#run').click();assert.match(await page.locator('#error').textContent(),/jmax/);
+ await page.locator('#reset').click();assert.equal(await page.locator('#error').textContent(),'');
+ const dl=page.waitForEvent('download');await page.locator('#exportJson').click();const download=await dl;assert.equal(download.suggestedFilename(),'pendulum-experiments.json');
+ await page.locator('#preset').selectOption('current');assert.equal(await page.locator('#jmax').inputValue(),'60');
+ await page.locator('#preset').selectOption('sep18-1');assert.equal(await page.locator('#ke').inputValue(),'8');assert.equal(await page.locator('#amax_s').inputValue(),'14');
+ await page.locator('#run').click();const cmdDownload=page.waitForEvent('download');await page.locator('#exportCommands').click();await cmdDownload;assert.match(await page.locator('#terminalCommands').textContent(),/set kpx 150/);
+ await page.locator('#preset').selectOption('sep18-candidate');assert.equal(await page.locator('#kpx').inputValue(),'80');assert.equal(await page.locator('#phase_soft').inputValue(),'2');
+ await page.locator('#preset').selectOption('sep18-recent-plant');assert.ok(Math.abs(Number(await page.locator('#leff').inputValue())-.11872)<.00001);await page.locator('#run').click();assert.match(await page.locator('#terminalCommands').textContent(),/set kpx 80/);await page.locator('#play').click();await page.screenshot({path:'/tmp/pendulum-sep18-candidate.png',fullPage:true});
+ await page.goto((process.env.SIM_URL||'http://127.0.0.1:8765/simulator175/')+'?preset=settling');
+ assert.equal(await page.locator('#preset').inputValue(),'settling');
+ assert.equal(await page.locator('#amax_s').inputValue(),'3');
+ assert.equal(await page.locator('#amax_b').inputValue(),'5');
+ assert.equal(await page.locator('#ke').inputValue(),'3.5');
+ assert.ok((await page.locator('#metrics').textContent()).length>0);
+ await page.locator('#play').click();
+ await page.locator('#scrub').fill('300');await page.locator('#scrub').dispatchEvent('input');
+ await page.screenshot({path:'/tmp/pendulum175-settling-desktop.png',fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:'/tmp/pendulum175-mobile.png',fullPage:true});
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Page must fit mobile width');
+ assert.deepEqual(errors,[]);console.log('PASS browser: default run, four styles, 27-case sweep, calibration, recording/replay, inputs, export, current and settling presets, mobile layout; no JavaScript errors.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

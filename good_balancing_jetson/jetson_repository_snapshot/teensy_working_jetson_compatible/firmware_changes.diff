@@ -1,0 +1,106 @@
+--- original/swing_controller.h
++++ updated/swing_controller.h
+@@ -12,9 +12,9 @@
+ 
+ struct Parameters {
+   float leff = 0.124f;              // 125 mm arm: 20 low-angle cycles in three prior captures
+-  float pw = 7.0f, pz = 0.85f;
++  float pw = 6.0f, pz = 0.85f;
+   float bal_pw = 8.0f;             // upright-only trial; auto retains pw
+-  float pc1 = -0.8f, pc2 = -1.2f;
++  float pc1 = -3.0f, pc2 = -4.0f;
+   float vmax = cart_hardware::default_speed; // 750 RPM = 1.5 m/s on 60T
+   // vmax is a hard command ceiling; these are independent policy limits.
+   float vmax_s = 1.5f, vmax_b = 1.5f;
+@@ -22,13 +22,13 @@
+   float approach_angle = 0.8f, catch_da = 4.0f;
+   float amax_s = cart_hardware::default_acceleration; // 12,500 RPM/s on 60T
+   float amax_b = cart_hardware::default_acceleration; // 25 m/s^2
+-  float jmax = cart_hardware::default_jerk; // 50,000 RPM/s^2 = 100 m/s^3 on 60T
++  float jmax = 150.0f; // user-tuned default, m/s^3
+   float amax_m = 0.5f, jmax_m = 10.0f;
+-  float ke = 8.0f, kpx = 80.0f, kdx = 2.0f;
++  float ke = 4.0f, kpx = 40.0f, kdx = 2.0f;
+   float phase_soft = 2.0f;          // rad/s scale of smooth phase feedback
+   float catch_a = 0.60f, catch_r = 3.0f, giveup = 0.80f;
+   float spin_trip_rad_s=spin_recovery::trip_rad_s, spin_resume_rad_s=spin_recovery::resume_rad_s;
+-  float rail = 0.150f, bw = 50.0f, vman = 0.05f;
++  float rail = 0.150f, bw = 30.0f, vman = 0.05f;
+ };
+ struct Gains { float k1, k2, k3, k4; };
+ inline Gains gains(const Parameters &p) {
+--- original/teensy_swingup.ino
++++ updated/teensy_swingup.ino
+@@ -75,6 +75,7 @@
+ #include "swing_controller.h"
+ #include "encoder_reference.h"
+ #include "serial_frame.h"
++#include "ethernet_transport.h"
+ #include <cstdarg>
+ #include "status_display.h"
+ 
+@@ -108,6 +109,8 @@
+   char frame[272];
+   const int n=snprintf(frame,sizeof(frame),"@%.*s*%04X\n",(int)length,text,
+                       serial_frame::checksum(text,length));
++  if(n<0 || n>=(int)sizeof(frame)){++dropped_serial_frames;return;}
++  pendulum_net::enqueue(frame,(size_t)n);
+   const size_t used=(tx_head+sizeof(tx_buffer)-tx_tail)%sizeof(tx_buffer);
+   if(n<0 || n>=(int)sizeof(frame) || (size_t)n>=sizeof(tx_buffer)-used){
+     ++dropped_serial_frames;return;
+@@ -1029,6 +1032,19 @@
+   else checkedPrintln(F("! unknown command (try 'help')"));
+ }
+ 
++// USB stop/off remains available even while TCP owns control. Other USB
++// commands cannot refresh the TCP controller's existing host watchdog.
++void handleUsbLine(char *line) {
++  const char *p=line;while(*p==' ' || *p=='\t')++p;
++  const bool stop=(!strncmp(p,"stop",4) && (!p[4] || p[4]==' ' || p[4]=='\t'));
++  const bool off=(!strncmp(p,"off",3) && (!p[3] || p[3]==' ' || p[3]=='\t'));
++  if(pendulum_net::active){
++    if(!stop && !off){checkedPrintln("! TCP owns control; USB stop/off only");return;}
++    eStop();pendulum_net::close();
++  }
++  handleLine(line);
++}
++void ethernetLost(){eStop();host_seen=false;}
+ void pollSerial() {
+   static char buf[96];static uint8_t n=0;static bool overflow=false;
+   unsigned budget=96;
+@@ -1036,7 +1052,7 @@
+     const char c=Serial.read();
+     if(c=='\n' || c=='\r'){
+       if(overflow)checkedPrintln(F("! command too long; discarded"));
+-      else if(n){buf[n]=0;handleLine(buf);}
++      else if(n){buf[n]=0;handleUsbLine(buf);}
+       n=0;overflow=false;
+       return; // process at most one complete command per scheduler pass
+     }else if(!overflow){if(n<sizeof(buf)-1)buf[n++]=c;else overflow=true;}
+@@ -1089,6 +1105,9 @@
+   if (as5600FastFilter()) checkedPrintln(F("# AS5600 slow filter -> 2x (0.29 ms lag)"));
+   else                    checkedPrintln(F("! AS5600 CONF write failed"));
+   enc_ticks = 0;
++
++  if(pendulum_net::begin())checkedPrintln("# Ethernet TCP listening; see ethernet_config.h for IP/port");
++  else checkedPrintln("! Ethernet initialization failed; USB remains available");
+ 
+   steppersInit();
+ 
+@@ -1163,12 +1182,16 @@
+   serviceControl();
+   pollSerial();
+   serviceControl();
++  pendulum_net::poll(!g_energized && !encoderCalibrationBusy(),handleLine,ethernetLost);
++  serviceControl();
+   if(diag_done){diag_done=false;encPrintMagnet();}
+   saveEncoderReference(); // only after calibration disabled all motion
+   static uint32_t last=0;
+   if(tele_hz && uint32_t(micros()-last)>=1000000UL/tele_hz){last=micros();emitTelemetry();}
+   serviceControl();
+   serviceSerialTx();
++  serviceControl();
++  pendulum_net::serviceTx();
+   serviceControl();
+   serviceDisplay();
+ }
