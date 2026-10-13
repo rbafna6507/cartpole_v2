@@ -55,6 +55,32 @@ class TunnelTests(unittest.TestCase):
                         if line.startswith('userknownhostsfile '))
         self.assertTrue(key_line.endswith('/' + key_name), key_line)
 
+    def test_default_uses_jetson_alias_and_ssh_config_host_keys(self):
+        result, argv = self.run_script(JETSON_SSH_TARGET='', JETSON_KNOWN_HOSTS='')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with tempfile.TemporaryDirectory() as tmp:
+            config = Path(tmp) / 'config'
+            config.write_text('Host jetson\n  HostName 127.0.0.123\n'
+                              '  User fixture-user\n  UserKnownHostsFile /tmp/fixture-host-keys\n')
+            parsed = subprocess.run([shutil.which('ssh'), '-G', '-F', str(config), *argv],
+                                    text=True, capture_output=True, timeout=5)
+        self.assertEqual(parsed.returncode, 0, parsed.stderr)
+        self.assertIn('hostname 127.0.0.123\n', parsed.stdout)
+        self.assertIn('user fixture-user\n', parsed.stdout)
+        self.assertIn('userknownhostsfile /tmp/fixture-host-keys\n', parsed.stdout)
+
+    def test_connection_attempt_has_a_short_finite_timeout(self):
+        result, argv = self.run_script()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        parsed = subprocess.run([shutil.which('ssh'), '-G', '-F', '/dev/null', *argv],
+                                text=True, capture_output=True, timeout=5)
+        self.assertEqual(parsed.returncode, 0, parsed.stderr)
+        options = dict(line.split(' ', 1) for line in parsed.stdout.splitlines())
+        self.assertNotEqual(options['connecttimeout'], 'none')
+        self.assertGreater(int(options['connecttimeout']), 0)
+        self.assertLessEqual(int(options['connecttimeout']), 15)
+        self.assertEqual(options['connectionattempts'], '1')
+
     def test_override_ports_and_propagate_ssh_failure(self):
         result, argv = self.run_script('operator@other-device', LOCAL_PORT='4001',
                                        REMOTE_PORT='4002', SSH_RESULT='23')

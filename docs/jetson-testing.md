@@ -48,9 +48,10 @@ runtime; use the prerequisite check in the vision README.
    ./archive/vision-tunnel.sh
    ```
 
-   Open http://127.0.0.1:3095/ after SSH connects. If the native IPv6 address changed,
-   supply the current destination and a verified known-hosts file as documented
-   in `archive/README.md`. Do not disable host verification to work around a mismatch.
+   Open http://127.0.0.1:3095/ after SSH connects. The default destination is
+   `jetson`, using your normal SSH configuration and trusted host keys. If you
+   connect using a different name, pass that destination as documented in
+   `archive/README.md`. Do not disable host verification to work around a mismatch.
 
 5. Confirm the separate camera, valid-angle, valid-velocity and encoder counters;
    inspect raw and fused traces while the rig remains stopped. Smooth video alone

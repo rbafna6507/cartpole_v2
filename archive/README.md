@@ -47,17 +47,22 @@ pre-cleanup inventory is [`source-inventory.json`](../evidence/phase0/source-inv
 ./archive/vision-tunnel.sh
 ```
 
-The default target is the previously used native IPv6 endpoint. A changed network
-may require a new address. Keep host-key verification enabled and verify a new
-host key independently before updating it. Do not copy a private SSH key here.
+The default target is `jetson`, using your existing SSH configuration and known
+hosts, just like `ssh jetson`. This follows your configured/DNS-resolved route
+instead of a hardcoded historical IPv6 address. Connection attempts time out
+after 10 seconds. The initial message is not confirmation that SSH has connected.
+Keep host-key verification enabled and verify a new host key independently before
+updating it. Do not copy a private SSH key here.
 
 ```bash
 JETSON_KNOWN_HOSTS="$HOME/.ssh/known_hosts" ./archive/vision-tunnel.sh rbafna@jetson
 LOCAL_PORT=4095 ./archive/vision-tunnel.sh
 ```
 
-The first command uses your ordinary verified SSH host entries. The second opens
-the viewer on port 4095 if 3095 is busy. `REMOTE_PORT` defaults to 3090.
+`JETSON_KNOWN_HOSTS` explicitly overrides the configured host-key file; omit it
+to honor your SSH configuration. The bundled `jetson_known_hosts` file contains
+historical IPv6 entries and is available for explicit legacy connections.
+The second command opens the viewer on port 4095 if 3095 is busy. `REMOTE_PORT` defaults to 3090.
 Forwarding failure is an error; the script never kills another tunnel or server.
 Ctrl-C closes the foreground tunnel. The website stays bound to loopback.
 

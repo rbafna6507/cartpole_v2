@@ -30,8 +30,9 @@ On the Mac, from the repository root:
 ```
 
 After SSH connects, open **http://127.0.0.1:3095/**. Keep the tunnel terminal open.
-The tunnel uses the native IPv6 destination and public host key recorded on
-October 13; both are configurable. It does not start software on the Jetson.
+The tunnel defaults to `jetson`, using the same SSH configuration and verified
+host keys as `ssh jetson`. The destination is configurable; a connection attempt
+times out after 10 seconds. It does not start software on the Jetson.
 
 - [Jetson setup and testing](docs/jetson-testing.md)
 - [Archive contents and recovery](archive/README.md)

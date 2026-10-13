@@ -1,0 +1,79 @@
+{
+  "observed_at_utc": "2026-10-13T20:55:32.108992+00:00",
+  "issue": "Vision dashboard could not be reached through the Phase 0 tunnel; camera opens but frame reads time out.",
+  "tunnel_root_cause": {
+    "old_target": "2601:408:c402:c85f:acc2:faf9:770:a44",
+    "socket_state": "SYN_SENT",
+    "local_port_3095_listening": false,
+    "working_ssh_alias": "jetson",
+    "working_peer": "100.126.59.18:22",
+    "existing_alias_host_key_matches_archived_fingerprint": true
+  },
+  "fix": "Default to jetson and normal SSH configuration/known hosts; preserve explicit overrides and strict host verification; bound connection attempts to 10 seconds.",
+  "validation": {
+    "red_before_fix": [
+      "Default target honors jetson SSH config and host-key settings",
+      "Finite short connection timeout"
+    ],
+    "tunnel_suite_passed": 6,
+    "shell_syntax_passed": true,
+    "temporary_local_port": 3097,
+    "dashboard_http_status": 200,
+    "api_state_received": true
+  },
+  "camera_observation": {
+    "camera": {
+      "arrival_interval_p95_ms": null,
+      "delivered_fps": null,
+      "error": null,
+      "frames_delivered": 0,
+      "latest_age_s": null,
+      "read_failures": 20,
+      "settings": {
+        "backend": "V4L2",
+        "controls": {
+          "buffer": {
+            "accepted": true,
+            "readback": 1.0,
+            "requested": 1
+          },
+          "fourcc": {
+            "accepted": true,
+            "readback": 1448695129.0,
+            "requested": 1448695129
+          },
+          "fps": {
+            "accepted": true,
+            "readback": 80.0,
+            "requested": 80
+          },
+          "height": {
+            "accepted": true,
+            "readback": 600.0,
+            "requested": 600
+          },
+          "width": {
+            "accepted": true,
+            "readback": 960.0,
+            "requested": 960
+          }
+        },
+        "driver_exposure_raw": 5.0,
+        "driver_fps": 80.0,
+        "driver_gain_raw": 168.0,
+        "requested_fps": 80,
+        "requested_height": 600,
+        "requested_width": 960,
+        "rotation": 180
+      },
+      "target_rate_met": false,
+      "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+    },
+    "processed_frames": 0,
+    "worker_error": null,
+    "stale": true,
+    "status": "camera stale"
+  },
+  "camera_root_cause": "Unresolved; requested lsusb -t and recent kernel messages from the owner.",
+  "boundaries": "Read-only HTTP through SSH forwarding only. No remote shell command, application restart, camera-setting change, firmware operation, or motion command was executed. Archived vision and controller source unchanged."
+}
