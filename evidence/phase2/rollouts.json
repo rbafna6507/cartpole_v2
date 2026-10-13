@@ -1,0 +1,100 @@
+{
+  "model_status": "provisional, not rig validation",
+  "scenarios": [
+    {
+      "scenario": "upright",
+      "steps": 10000,
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "modes": {
+        "3": 10000
+      },
+      "max_abs_x": 0.03324934392870214,
+      "final_truth": {
+        "x": 9.291465293315904e-09,
+        "v": -3.041302902582566e-10,
+        "theta": 7.347636529605129e-11,
+        "omega": -1.2710074678198053e-10,
+        "time_ns": 10000000000
+      },
+      "saturation_steps": 0,
+      "config": {
+        "physics_dt_ns": 1000000,
+        "control_steps": 1,
+        "max_steps": 10000,
+        "rail_half_m": 0.26,
+        "effective_length_m": 0.124,
+        "cart_mass_kg": 0.35,
+        "pole_mass_kg": 0.02275,
+        "cart_damping": 0.05,
+        "hinge_damping": 0.0001,
+        "max_force_n": 20.0,
+        "max_acceleration_m_s2": 25.0,
+        "max_action_ttl_ns": 1000000000
+      },
+      "seed": 0,
+      "initial_truth": {
+        "x": 0.0,
+        "v": 0.0,
+        "theta": 0.04,
+        "omega": 0.0,
+        "time_ns": 0
+      },
+      "environment": {
+        "cartpole-sdk": "0.2.0",
+        "mujoco": "3.15.0",
+        "numpy": "2.4.6",
+        "gymnasium": "1.4.0",
+        "python": "3.11.7"
+      }
+    },
+    {
+      "scenario": "swingup",
+      "steps": 10000,
+      "end_reason": "horizon",
+      "fault_reason": null,
+      "modes": {
+        "2": 1275,
+        "3": 8725
+      },
+      "max_abs_x": 0.14852210302984886,
+      "final_truth": {
+        "x": -1.0798771957819006e-06,
+        "v": -4.308043737406783e-09,
+        "theta": 9.019254003508839e-10,
+        "omega": -1.4618814030504324e-09,
+        "time_ns": 10000000000
+      },
+      "saturation_steps": 0,
+      "config": {
+        "physics_dt_ns": 1000000,
+        "control_steps": 1,
+        "max_steps": 10000,
+        "rail_half_m": 0.26,
+        "effective_length_m": 0.124,
+        "cart_mass_kg": 0.35,
+        "pole_mass_kg": 0.02275,
+        "cart_damping": 0.05,
+        "hinge_damping": 0.0001,
+        "max_force_n": 20.0,
+        "max_acceleration_m_s2": 25.0,
+        "max_action_ttl_ns": 1000000000
+      },
+      "seed": 0,
+      "initial_truth": {
+        "x": 0.0,
+        "v": 0.0,
+        "theta": 3.141592653589793,
+        "omega": 0.0,
+        "time_ns": 0
+      },
+      "environment": {
+        "cartpole-sdk": "0.2.0",
+        "mujoco": "3.15.0",
+        "numpy": "2.4.6",
+        "gymnasium": "1.4.0",
+        "python": "3.11.7"
+      }
+    }
+  ]
+}

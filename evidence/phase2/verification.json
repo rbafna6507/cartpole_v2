@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-10-13T22:03:38.436829+00:00",
+  "base_commit": "29bc06a",
+  "local_only": true,
+  "archive_source_hashes": {
+    "checked": 70,
+    "unchanged": 70
+  },
+  "tests": {
+    "integrated": {
+      "command": ".venv/bin/python -m unittest discover -s tests -v",
+      "total": 122,
+      "passed": 122
+    },
+    "archive_tunnel": {
+      "command": ".venv/bin/python -m unittest discover -s archive/tests -v",
+      "passed": 25
+    },
+    "installed_core_wheel": {
+      "environment": "fresh virtualenv outside checkout, no optional dependencies",
+      "discovered": 108,
+      "passed": 101,
+      "optional_skipped": 7
+    },
+    "installed_sim_wheel": {
+      "environment": "separate fresh virtualenv outside checkout with [sim] extra",
+      "scenario": "upright",
+      "steps": 100,
+      "end_reason": "horizon"
+    }
+  },
+  "wheel": {
+    "name": "cartpole_sdk-0.2.0-py3-none-any.whl",
+    "sha256": "bbcd9a376330fef1ebdc03e8729e987a06bfa4301d4c060db5a7fb6d48dd9c0c"
+  },
+  "rollouts": "rollouts.json",
+  "controller_parity": "controller-provenance.json",
+  "oracle": "oracle-provenance.json",
+  "model": "model-provenance.json",
+  "limitations": [
+    "No Jetson or hardware operation, flashing, or physical validation.",
+    "Controller core is fixed 1ms; no hard real-time Python timing guarantee.",
+    "MuJoCo uses provisional mass/damping/force parameters; no sim-to-real claim.",
+    "Public policy isolation, live broker, firmware executor and limit switches remain subsequent work."
+  ],
+  "review": "pending"
+}

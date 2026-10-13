@@ -32,8 +32,10 @@ The root `cartpole_sdk` package supplies immutable scalar observations, explicit
 source/frame selection, acceleration intents, validated expiring requests,
 versioned recording/import adapters and deterministic replay. The executable
 example is local only. See [Phase 1 usage](phase1-usage.md) for commands and the
-precise limitations of legacy data. Images, live transport, fusion, simulator
-physics and reference-controller behavior remain backend work.
+precise limitations of legacy data. Phase 2 adds the 1 kHz reference controller, native firmware oracle, provisional
+MuJoCo physics, simulated sensor timing and Gymnasium interface. See
+[Phase 2 usage](phase2-usage.md). Images, live transport and fusion remain backend
+work; the single-pole model still requires physical identification.
 
 ## Order
 

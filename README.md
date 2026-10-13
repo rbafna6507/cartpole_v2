@@ -1,9 +1,24 @@
 # Cartpole v2
 
-The Python SDK now supports explicit sensor channels, validated acceleration
-intents, recordings and deterministic local replay. The known-working controller
-and vision3 remain preserved under `archive/`. Live SDK control, the new Teensy
-executor and MuJoCo are subsequent milestones.
+The SDK now includes the saved 1 kHz controller in Python, an independent native
+firmware comparison harness, and optional MuJoCo/Gymnasium simulation. Sensor
+channels, recordings and replay share the same policy contract. The working
+controller and vision3 remain preserved in `archive/`. Live control, the new
+Teensy executor and rig identification are next.
+
+## Try the controller in simulation
+
+```bash
+mkdir -p runs/demo
+uv run --locked --extra sim cartpole-v2 simulate runs/demo/swingup --steps 10000
+uv run --locked --extra sim cartpole-v2 simulate runs/demo/upright --start upright --steps 10000
+uv run --locked --extra sim python examples/gym_rollout.py --steps 200 --seed 7
+```
+
+The first two commands save observations, action/plant traces, model and parameters
+in new directories. The model uses provisional physical parameters; successful
+simulation does not establish hardware transfer. See [Phase 2 usage](docs/phase2-usage.md)
+for custom Python policies, Gymnasium, sensor timing, model configuration and limits.
 
 ## Try the Python SDK locally
 
@@ -21,7 +36,8 @@ The example is an illustrative mapping, not the tuned balancing controller.
 Outputs are never overwritten; choose fresh paths when repeating commands.
 
 See [SDK usage, data semantics and next integrations](docs/phase1-usage.md).
-Run tests with `uv run --locked python -m unittest discover -s tests`.
+Run all tests with `uv run --locked --extra sim python -m unittest discover -s tests`
+(C++17 compiler required for native parity tests).
 
 ## Run the baseline
 
@@ -63,6 +79,8 @@ It does not start the camera or control the rig.
 - [Vision, calibration, and system dependencies](archive/vision3/README.md)
 - [Control rates, languages, and transport choice](docs/control-timing-and-transport.md)
 - [Revised v2 architecture](docs/architecture.md)
+- [Phase 2 implementation plan](docs/phase2-plan.md)
+- [Phase 2 verification](evidence/phase2/verification.json)
 - [Phase 1 implementation plan](docs/phase1-plan.md)
 - [Phase 0 plan and decisions](docs/phase0-plan.md)
 - [Phase 1 verification](evidence/phase1/verification.json)

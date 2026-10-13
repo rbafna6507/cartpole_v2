@@ -1,0 +1,93 @@
+{
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)",
+  "compiler_flags": [
+    "-std=c++17",
+    "-O2",
+    "-fno-fast-math"
+  ],
+  "generated_source_sha256": "4addde86fe9e3770706be89716fefe657fb8a8b2c37416c199f53832c5942164",
+  "native_support_sha256": {
+    "tests/native/Arduino.h": "bb678041c03423d8bff67484f6c5fd43e6b8e0343611566752b33c2ce1d0cb0c",
+    "tests/native/EEPROM.h": "cc8408b9c9048b921eff367d109781a2e834067c8af3f98321ac07e1d47e1169",
+    "tests/native/IntervalTimer.h": "e956da1615ef5ae09ff968b3f1b8357fd0c91ef3e56e4377cbad75e5a58363e0",
+    "tests/native/QNEthernet.h": "d7be4c4098ae41e5d702bbea0b66d3ca73fd2f7b485c803ad79e6c2250f2c47d",
+    "tests/native/README.md": "1af9c67cc24b46b2642d06274e06d2b6f26dcc8d6f4ac1abbe22009294077996",
+    "tests/native/SPI.h": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+    "tests/native/ST7735_t3.h": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+    "tests/native/ST7789_t3.h": "e1b34310ac172e9357fe987c153c5220b93941176cd7a3cb9b50f664891b762e",
+    "tests/native/Wire.h": "d59dcceb1fb44843a0434f4edba1886a9ff903987a24e277f7b8bf5d8138834d",
+    "tests/native/harness.cpp": "969435de85e75174fa05dd9e7f2c0917b17735659521df89d27d76702d0561ea"
+  },
+  "oracle": "whole archived .ino included in C++17 translation unit; original math and state-machine headers",
+  "original_headers_sha256": {
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/cart_mechanics.h": "04d5d54363baaaeb0e1df9827e06ef3c2a4be3fcb9b967e8a2c48d6b94e442b6",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/cart_motion.h": "bba693c6f651731b51032d76e8f2b66cfbf3016f2048b6a4648a6d1f8042ab6f",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/encoder_reference.h": "80c6da8ba4612fd3cbccdd4f55d574c582f066117697738ad7e292a2fbcd2a37",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/ethernet_config.h": "18943b67065cc1c46148a129476482e6c1d19f5a7ddb3f7588183a8cb6434841",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/ethernet_transport.h": "c142475c384314adb116262c1813740c5b19f930d1c57b4c5167adbc8841e1b2",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/rail_recovery.h": "339c9106a6376e0213af2f5cce7f796c5a9492c282599cc87281e38ca227fd4c",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/serial_frame.h": "88eddb8cfb400af0346de9a5e98e456c741b5161fb8a304a7c595c07047cd36c",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/spin_recovery.h": "571cbbd6c5171e2f9c3aa291fbf20f128abefbe759ce2628511ee9b361b8d12f",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/status_display.h": "8c00048762de0b478a63b133ab429c20574f7b21dbc5ac39f35091df97c736bf",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/swing_controller.h": "5bc0787d861aec4c50a7149a454465b8b53046d6f2341f8e9218f54376f76c5a",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/teensy_reference_store.h": "3f271a9d5441f6337668c68b1d5e2467aa602c8977dc98b1badc54f603dd6e4d",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/upright_session.h": "7f387f845dd7a122e2d692e32f40ad6737910d6de50df7b5309ac35829af6818"
+  },
+  "python_support_sha256": "36ccbceb39f85be40277fe8ee04ff81862e804c53fcd09329e2d2f582fe5a84b",
+  "reset": "fresh native controller state, wrapped decoded theta/estimate, zero command motion/recoveries/watch, IDLE, energy=-1, healthy encoder, ready timer; parameters persist",
+  "schema": 1,
+  "scope_exclusions": [
+    "I2C electrical and bus timing",
+    "encoder count decoding/calibration",
+    "step pulse ISR and actual cart tracking",
+    "serviceControl scheduling and deadline faults",
+    "EEPROM persistence",
+    "Ethernet/USB transport",
+    "LCD rendering",
+    "Z-axis physical motion"
+  ],
+  "source": "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/teensy_swingup.ino",
+  "source_sha256": "a2c27e9b4a5aa70bc589b32eaacdd0a0c4b5003dcde47f48cd0e86eaee3e5d52",
+  "substitutions": [
+    {
+      "after": "  return 0;",
+      "before": "  uint32_t mask;asm volatile(\"mrs %0, primask\" : \"=r\"(mask) :: \"memory\");return mask;",
+      "count": 1,
+      "purpose": "native interrupt mask"
+    },
+    {
+      "after": "  return oracle_theta;",
+      "before": "  return encoder_reference::angle_from_upright(enc_last_raw, ENC_INVERT != 0, enc_upright_raw);",
+      "count": 1,
+      "purpose": "decoded angle input"
+    },
+    {
+      "after": "    xc = oracle_x;",
+      "before": "    xc = (ax_pos[AX_CART] - home_steps) / CART_STEPS_PER_M;",
+      "count": 1,
+      "purpose": "calibrated cart position input"
+    },
+    {
+      "after": "      oracle_demand = a;\n      motion = cart_motion::advance(motion, xc, a, mode_speed, drive_amax,",
+      "before": "      motion = cart_motion::advance(motion, xc, a, mode_speed, drive_amax,",
+      "count": 1,
+      "purpose": "observe pre-governor demand"
+    }
+  ],
+  "tick": "command handleLine with supplied health, optional host refresh, original encUpdate via Wire1 stub, original controlTick; fixed original DT=0.001; uint32 micros/millis derived from unwrapped supplied clock",
+  "verification": {
+    "command": ".venv/bin/python -m unittest discover -s tests -p test_native_oracle.py -v",
+    "interim_full_suite": {
+      "failures": [
+        "test_reference_parity.ParityTests.test_auto_rail_handoff_and_timeout",
+        "test_reference_parity.ParityTests.test_upright_reject_return_stop_and_timeout"
+      ],
+      "note": "controller track active; failure details delivered to controller worker and parent, final integrated verification owned by parent",
+      "passed": 106,
+      "tests": 108
+    },
+    "native_result": "pass",
+    "native_tests": 12,
+    "tdd_initial_result": "test_native_oracle import failure: oracle_support not yet implemented"
+  }
+}

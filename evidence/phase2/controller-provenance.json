@@ -1,0 +1,135 @@
+{
+  "boundaries": [
+    "startup kick",
+    "wrapped estimator",
+    "capture and balance loss",
+    "manual250ms expiry including millis rollover",
+    "both rail directions/handoff and8s timeout",
+    "spin brake/center/wait/resume and10s timeout",
+    "upright rejection/brake/center/stop and10s timeout",
+    "response watch fault",
+    "encoder hold and failure5 fault; failure50 bus counter reset",
+    "host1500ms exact deadline and micros/millis rollover",
+    "hard rail and upright start at exact and +/-1e-6 thresholds"
+  ],
+  "control_step_seconds": 0.001,
+  "controller": "offline Python reference of archived controlTick",
+  "numeric_representation": {
+    "angles": "binary32 rounded input/sin/cos/atan2, float64 estimator innovation and rate update",
+    "clock": "public unwrapped integer now_us, internal uint32 micros/millis differences",
+    "elapsed_guards": "binary32 counters (pump, rail, response watch)",
+    "gains_feedback_rate_estimator": "Python binary64",
+    "motion": "explicit stdlib binary32 scalar arithmetic and sqrt rounded from Python libm",
+    "public_output": "builtin float numerical fields; original integer modes0..11"
+  },
+  "packaged_preset": "src/cartpole_sdk/control/tuned_parameters.json",
+  "packaged_preset_sha256": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+  "parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.8,
+    "approach_v": 0.3,
+    "bal_pw": 4.0,
+    "bw": 30.0,
+    "catch_a": 0.6,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.3,
+    "giveup": 0.8,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.124,
+    "pc1": -3.0,
+    "pc2": -4.0,
+    "phase_soft": 2.0,
+    "pw": 4.5,
+    "pz": 0.85,
+    "rail": 0.26,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.05,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "parity": {
+    "command": "uv run --locked --extra sim python -m unittest discover -s tests -p test_reference_parity.py",
+    "covered_mode_codes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "maximum_absolute_errors": {
+      "acceleration": 6.727877282716732e-06,
+      "angle_hat": 2.3891198708270167e-07,
+      "demand": 8.583530760830627e-06,
+      "energy": 4.127039154866452e-06,
+      "rate_hat": 5.930787866371273e-05,
+      "theta": 4.0600589557016065e-10,
+      "velocity": 2.160672930599447e-07
+    },
+    "primitive_maximum_absolute_errors": {
+      "estimator_angle": 2.3891308575940684e-07,
+      "estimator_rate": 1.5196719871823916e-05,
+      "gains": 1.2069418922067143e-06,
+      "motion_acceleration": 0,
+      "motion_velocity": 7.450580596923828e-09,
+      "stopping_distance": 1.1920928955078125e-07
+    },
+    "primitive_tolerances": {
+      "discrete": "exact equality, including exact hard-rail/start boundaries",
+      "estimator_angle_rad": 2e-06,
+      "estimator_rate_rad_s": 3e-05,
+      "gains": "5 decimal places",
+      "motion_acceleration_m_s2": "5 decimal places",
+      "motion_velocity_m_s": "6 decimal places",
+      "stopping_distance_m": "6 decimal places"
+    },
+    "status": "passed",
+    "tests": 10,
+    "trajectory_tolerance": {
+      "absolute": 0.0002,
+      "angular_difference": "atan2(sin(delta),cos(delta))",
+      "relative": 2e-05
+    }
+  },
+  "rounding_regressions": {
+    "governor": "Pure float64 caused a settled-velocity branch difference at tick503 of auto rail handoff: acceleration3.804498350 vs native4.028260231. Binary32 motion fixed this without widening tolerance.",
+    "hard_rail": "At x=+/-0.25, native .26f-.01f faults while float64 expression .26-.01 does not; binary32 operands preserve native guard.",
+    "upright_start": "At exactly10*pi/180, repeated binary32 sin/cos/atan2 wrapping advances estimated angle one ULP; native rejects start. Guard and wrapped-angle rounding preserve this."
+  },
+  "schema": 1,
+  "scope_exclusions": [
+    "physical rig safety or validation",
+    "pulse ISR and independent motor tracking",
+    "encoder count decoding/calibration",
+    "I2C bus timing/electrical behavior",
+    "Z-axis control",
+    "EEPROM persistence",
+    "display and network transport",
+    "serviceControl scheduler and deadline faults",
+    "changing parameters while active"
+  ],
+  "source_sha256": {
+    "archive/good_balancing_jetson/settings.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/cart_motion.h": "bba693c6f651731b51032d76e8f2b66cfbf3016f2048b6a4648a6d1f8042ab6f",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/rail_recovery.h": "339c9106a6376e0213af2f5cce7f796c5a9492c282599cc87281e38ca227fd4c",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/spin_recovery.h": "571cbbd6c5171e2f9c3aa291fbf20f128abefbe759ce2628511ee9b361b8d12f",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/swing_controller.h": "5bc0787d861aec4c50a7149a454465b8b53046d6f2341f8e9218f54376f76c5a",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/teensy_swingup.ino": "a2c27e9b4a5aa70bc589b32eaacdd0a0c4b5003dcde47f48cd0e86eaee3e5d52",
+    "archive/good_balancing_jetson/teensy_firmware/teensy_swingup/upright_session.h": "7f387f845dd7a122e2d692e32f40ad6737910d6de50df7b5309ac35829af6818"
+  }
+}
