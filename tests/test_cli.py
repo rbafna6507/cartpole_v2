@@ -75,3 +75,24 @@ class CliTests(unittest.TestCase):
                 capture_output=True, text=True, timeout=10)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertTrue(trace.exists())
+
+    def test_deeply_nested_json_has_line_context_and_creates_no_output(self):
+        from dataclasses import asdict
+        from cartpole_sdk import Session
+        header = json.dumps({'type':'session', 'version':1,
+                             'session':asdict(Session('nested', 'clock'))})
+        vision_first = (FIXTURES/'vision-real.jsonl').read_text().splitlines()[0]
+        deep = '[' * 2000 + '0' + ']' * 2000
+        with tempfile.TemporaryDirectory() as tmp:
+            source, target = Path(tmp)/'nested.jsonl', Path(tmp)/'output.jsonl'
+            for command, first, extra in (
+                ('replay', header, ['--frame-id', 'cal']),
+                ('import-vision', vision_first, ['--frame-id', 'cal', '--session-id', 'nested']),
+            ):
+                with self.subTest(command=command):
+                    source.write_text(first+'\n'+deep+'\n')
+                    result = self.run_cli(command, source, target, *extra)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn('line 2', result.stderr)
+                    self.assertNotIn('Traceback', result.stderr)
+                    self.assertFalse(target.exists())

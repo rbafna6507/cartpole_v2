@@ -1,9 +1,9 @@
 {
-  "verified_at_utc": "2026-10-13T21:31:09.748201+00:00",
+  "verified_at_utc": "2026-10-13T21:35:48.938390+00:00",
   "scope": "Phase 1 local SDK, record import/replay, and read-only tunnel discovery. No motor commands, camera control, flash or live policy.",
   "sdk": {
-    "tests": 67,
-    "passed": 67,
+    "tests": 68,
+    "passed": 68,
     "command": "uv run --locked python -m unittest discover -s tests",
     "log": "sdk-tests.log"
   },
@@ -29,7 +29,8 @@
   "packaging": {
     "wheel_and_sdist_built": true,
     "isolated_wheel_cli_help": true,
-    "runtime_dependencies": []
+    "runtime_dependencies": [],
+    "isolated_wheel_import_and_replay": true
   },
   "live_discovery": {
     "command": "./archive/vision-tunnel.sh --print-command",
@@ -42,7 +43,13 @@
     "remote_command": "ip -j -6 addr show scope global"
   },
   "review": {
-    "status": "pending independent whole-change review"
+    "status": "independent review complete; no blocking findings",
+    "critical_findings": 0,
+    "important_findings": 0,
+    "minor_findings": 2,
+    "minor_findings_resolved": 2,
+    "detail": "review.md",
+    "regression": "test_deeply_nested_json_has_line_context_and_creates_no_output RED then GREEN for replay and import-vision"
   },
   "limitations": [
     "Replay is open-loop and models zero policy execution time",
@@ -51,5 +58,20 @@
     "Vision imports require caller-verified calibration epoch; detectable reset rejected",
     "Scalar states only; images and real fusion pending",
     "SDK validators do not replace broker/MCU safety enforcement"
-  ]
+  ],
+  "archived_imports": {
+    "console": {
+      "accepted_files": 101,
+      "observations": 1043366,
+      "rejected_files": 0
+    },
+    "vision": {
+      "accepted_files": 23,
+      "observations": 560592,
+      "rejected_files": 1,
+      "rejection": "Known calibration-epoch transition at line 7102; requires splitting verified epochs"
+    },
+    "detail": "archived-import-results.json"
+  },
+  "fixture_bytes_preserved": true
 }

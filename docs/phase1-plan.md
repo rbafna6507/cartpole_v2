@@ -60,7 +60,7 @@ Interfaces: Policy.reset(Session), Policy.act(Observation) -> Acceleration|None;
 - [x] Run SDK suite; expected missing replay/CLI failures.
 - [x] Implement replay and a conservative vision damping example that emits no request for unavailable channels. Add import/inspect/replay CLI and documented commands.
 - [x] Run all SDK/tunnel suites plus installed CLI smoke tests, archive hash checks and git diff checks; expected pass.
-- [ ] Obtain one independent whole-change review, fix important findings with regressions, record final evidence and leave local branch for user testing.
+- [x] Obtain one independent whole-change review, fix important findings with regressions, record final evidence and leave local branch for user testing.
 
 ## Progress and rulings
 
@@ -90,3 +90,16 @@ Interfaces: Policy.reset(Session), Policy.act(Observation) -> Acceleration|None;
 - Ruling: parallel ownership supersedes the original inline-only sequencing at
   the owner's request — contracts were pinned before adapter work; integration
   testing and one independent final review cover shared boundaries.
+
+- Task 3 full-file validation: 101 console files / 1,043,366 observations and
+  23 vision files / 560,592 observations accepted. One multi-epoch vision file
+  intentionally rejected at line 7102, with reason recorded in evidence.
+- Original CSV CRLF bytes preserved with scoped .gitattributes; the fixture
+  provenance remains byte-exact and Git whitespace checks pass.
+
+- Independent final review: no critical/important findings. Two small findings
+  resolved in one pass: deep JSON nesting now yields contextual input errors
+  (CLI regression RED→GREEN), and unusual SSH configuration limits are documented.
+  Final SDK suite: 68 passed; tunnel suite: 25 passed. See evidence/phase1/review.md.
+- Final integration choice: retain the completed local branch for the owner's
+  iteration, consistent with the local-only request; no push, merge or deployment.

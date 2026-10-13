@@ -61,6 +61,14 @@ routing for the direct connection. Strict host-key verification stays enabled;
 no key scanning, automatic key acceptance or host-key updates are performed.
 Keep your private SSH keys outside this repository.
 
+Two uncommon SSH configurations need care: paths using `%h` (such as an
+`IdentityFile` or `UserKnownHostsFile`) expand against the selected IPv6 rather
+than the original hostname; use fixed trusted paths or an explicit destination.
+Host certificates on a nonstandard port may also need an explicit trusted
+`HostKeyAlias` that matches the certificate identity. These cases fail without
+weakening verification; `./archive/vision-tunnel.sh jetson` remains the escape
+hatch using your original route.
+
 Bootstrap discovery is noninteractive and requires an available key/agent. If it
 fails, check that `ssh jetson` works and load/unlock the key if needed. The final
 tunnel may prompt for your normal SSH password. Discovery has a 15-second SSH

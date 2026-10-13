@@ -38,7 +38,10 @@ def _float(value):
 
 def strict_json_loads(text: str):
     """Decode JSON while rejecting duplicate fields and all non-finite numbers."""
-    return json.loads(text, object_pairs_hook=_pairs, parse_constant=_constant, parse_float=_float)
+    try:
+        return json.loads(text, object_pairs_hook=_pairs, parse_constant=_constant, parse_float=_float)
+    except RecursionError as exc:
+        raise ValueError('JSON nesting exceeds the parser limit') from exc
 
 
 def canonical_json(obj) -> str:
