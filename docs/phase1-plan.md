@@ -26,41 +26,41 @@
 
 Files: archive/vision_tunnel.py, archive/vision-tunnel.sh, archive/tests/test_tunnel.py, archive/tests/test_tunnel_discovery.py; README and tunnel instructions.
 Interfaces: candidates(ip_json) -> list[str]; prepare(argv, env) -> SSH argv; main() execs SSH. Existing destination/port/key-file overrides remain supported.
-- [ ] Write failing offline tests using captured SSH invocations and real `ssh -G`: stable/temporary ranking, excluded addresses, timeout/unreachable behavior, retained alias/keys, explicit bypass, malformed input and hostile destination.
-- [ ] Run `python3 -m unittest discover -s archive/tests`; expected missing helper/new default failures.
-- [ ] Implement bounded read-only discovery, address validation, probing and strict identity reuse behind the Bash wrapper.
-- [ ] Run tunnel suite and shell syntax; expected all pass. Probe real discovery without opening a camera or issuing hardware commands if authentication permits.
-- [ ] Commit the tunnel feature and update ledger.
+- [x] Write failing offline tests using captured SSH invocations and real `ssh -G`: stable/temporary ranking, excluded addresses, timeout/unreachable behavior, retained alias/keys, explicit bypass, malformed input and hostile destination.
+- [x] Run `python3 -m unittest discover -s archive/tests`; expected missing helper/new default failures.
+- [x] Implement bounded read-only discovery, address validation, probing and strict identity reuse behind the Bash wrapper.
+- [x] Run tunnel suite and shell syntax; expected all pass. Probe real discovery without opening a camera or issuing hardware commands if authentication permits.
+- [x] Commit the tunnel feature and update ledger.
 
 ### Task 2: Immutable observation and action contracts
 
 Files: pyproject.toml, .python-version, uv.lock, src/cartpole_sdk/{__init__,contracts}.py, tests/test_contracts.py.
 Interfaces: Session, Topology, Sample, Observation, Channel, Acceleration, ActionRequest, ActionLimits, validate_action; select_channels returns explicitly requested usable samples.
-- [ ] Write tests for valid multi-joint metadata, missing/null/invalid channels, source/frame selection, separate times, non-finite/bool values, expiration/session/clock/sequence and magnitude rejection.
-- [ ] Run `PYTHONPATH=src python3 -m unittest discover -s tests`; expected missing package failure.
-- [ ] Implement frozen dataclasses, strict validation and protocol without device imports.
-- [ ] Run full SDK suite; expected pass. Create locked root uv project; verify import and no hardware dependencies.
-- [ ] Commit contracts and ledger result.
+- [x] Write tests for valid multi-joint metadata, missing/null/invalid channels, source/frame selection, separate times, non-finite/bool values, expiration/session/clock/sequence and magnitude rejection.
+- [x] Run `PYTHONPATH=src python3 -m unittest discover -s tests`; expected missing package failure.
+- [x] Implement frozen dataclasses, strict validation and protocol without device imports.
+- [x] Run full SDK suite; expected pass. Create locked root uv project; verify import and no hardware dependencies.
+- [x] Commit contracts and ledger result.
 
 ### Task 3: Strict recording and legacy importers
 
 Files: src/cartpole_sdk/{recording,adapters}.py; tests/test_recording.py, tests/test_adapters.py, tests/fixtures; evidence/phase1 fixture provenance.
 Interfaces: write_recording(path, session, observations); read_recording(path) -> (Session, tuple[Observation,...]); import_console(path, session_id, frame_id) yields session segments; import_vision(path, session_id, frame_id) returns session and observations.
-- [ ] Write round-trip/deterministic tests, footer truncation/order/schema/malformed data tests; import real baseline snippets and assert honest quality/timestamp/source/frame semantics. Cover wrap/reset and invalid vision numeric remnants.
-- [ ] Run SDK suite; expected missing recording/adapters failures.
-- [ ] Implement strict JSONL and streaming importers with line-context errors, no clock alignment and exclusive output creation.
-- [ ] Run complete SDK suite; expected pass. Exercise whole archived CSV and vision recordings to detect assumptions fixtures miss.
-- [ ] Commit importers and ledger result.
+- [x] Write round-trip/deterministic tests, footer truncation/order/schema/malformed data tests; import real baseline snippets and assert honest quality/timestamp/source/frame semantics. Cover wrap/reset and invalid vision numeric remnants.
+- [x] Run SDK suite; expected missing recording/adapters failures.
+- [x] Implement strict JSONL and streaming importers with line-context errors, no clock alignment and exclusive output creation.
+- [x] Run complete SDK suite; expected pass. Exercise whole archived CSV and vision recordings to detect assumptions fixtures miss.
+- [x] Commit importers and ledger result.
 
 ### Task 4: Deterministic replay and runnable examples
 
 Files: src/cartpole_sdk/{replay,cli}.py, examples/replay_policy.py, tests/test_replay.py, tests/test_cli.py, README, docs/phase1-usage.md, evidence/phase1/verification.json.
 Interfaces: Policy.reset(Session), Policy.act(Observation) -> Acceleration|None; replay(session, observations, policy, limits) -> trace records; CLI imports and inspects recordings and runs a built-in example.
-- [ ] Write tests proving repeatability, once-per-session reset, no wall-clock sleep, missing intent vs zero, ordering/action validation and CLI execution from another directory.
-- [ ] Run SDK suite; expected missing replay/CLI failures.
-- [ ] Implement replay and a conservative vision damping example that emits no request for unavailable channels. Add import/inspect/replay CLI and documented commands.
-- [ ] Run all SDK/tunnel suites plus installed CLI smoke tests, archive hash checks and git diff checks; expected pass.
-- [ ] Commit implementation, obtain one independent whole-change review, fix important findings with regressions, record evidence and leave local branch for user testing.
+- [x] Write tests proving repeatability, once-per-session reset, no wall-clock sleep, missing intent vs zero, ordering/action validation and CLI execution from another directory.
+- [x] Run SDK suite; expected missing replay/CLI failures.
+- [x] Implement replay and a conservative vision damping example that emits no request for unavailable channels. Add import/inspect/replay CLI and documented commands.
+- [x] Run all SDK/tunnel suites plus installed CLI smoke tests, archive hash checks and git diff checks; expected pass.
+- [ ] Obtain one independent whole-change review, fix important findings with regressions, record final evidence and leave local branch for user testing.
 
 ## Progress and rulings
 
@@ -68,3 +68,25 @@ Interfaces: Policy.reset(Session), Policy.act(Observation) -> Acceleration|None;
 - Reuse the requested checkout on codex/phase1-foundation; no duplicate worktree.
 - Phase 1 scope follows architecture items 2 only; controller port/MuJoCo are Phase 2.
 - The earlier blanket remote-code restriction is superseded only for the requested read-only IP discovery; no remote control or camera operations are authorized here.
+
+- Execution update (2026-10-13): owner explicitly authorized chunked parallel work.
+  Tunnel and recorder/importers delegated with disjoint file ownership; parent
+  implements contracts, runner and CLI. Shared interface pinned before dispatch.
+- Task 2: contracts implemented; 22 contract/selection/action tests RED (missing
+  package) then GREEN. Frozen SI types and source/frame/timestamp checks in place.
+- Pre-flight interfaces: Tasks 2→3 use exact Session/Observation/Sample fields;
+  Tasks 2→4 use Policy and validated acceleration requests; Tasks 3→4 use strict
+  read_recording returning a session and immutable observation tuple. No conflicts.
+
+- Tasks 1–4 implemented and integrated: 67 SDK tests and 25 tunnel tests pass.
+  Wheel/sdist built; isolated wheel entry point and end-to-end example verified.
+  All 70 preserved source hashes match; no archived algorithm/firmware edits.
+- Tunnel live preflight succeeded using only authenticated IP discovery and bounded
+  TCP probing, without opening the final tunnel or touching camera/control.
+- Ruling: reject detectable calibrated→uncalibrated transitions in a vision import,
+  while allowing initial calibration — protects a single frame identity from a
+  known reset; callers must split such files, and true→true recalibration remains
+  a caller verification obligation.
+- Ruling: parallel ownership supersedes the original inline-only sequencing at
+  the owner's request — contracts were pinned before adapter work; integration
+  testing and one independent final review cover shared boundaries.

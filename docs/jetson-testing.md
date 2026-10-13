@@ -48,10 +48,19 @@ runtime; use the prerequisite check in the vision README.
    ./archive/vision-tunnel.sh
    ```
 
-   Open http://127.0.0.1:3095/ after SSH connects. The default destination is
-   `jetson`, using your normal SSH configuration and trusted host keys. If you
-   connect using a different name, pass that destination as documented in
-   `archive/README.md`. Do not disable host verification to work around a mismatch.
+   Open http://127.0.0.1:3095/ after SSH connects. With no destination, the helper
+   discovers the current direct IPv6 through authenticated `ssh jetson` using
+   only `ip -j -6 addr show scope global`, then probes candidate SSH addresses.
+   It retains your configured user, keys and bootstrap host-key identity, with
+   strict verification enabled. Bootstrap discovery needs an available SSH
+   key/agent; the final tunnel can prompt for your normal password.
+
+   To check the selected command without opening the tunnel, run
+   `./archive/vision-tunnel.sh --print-command`. If discovery is unavailable,
+   `./archive/vision-tunnel.sh jetson` explicitly uses your configured route
+   (which can have poor video performance), or pass a current destination using
+   `JETSON_SSH_TARGET`. See `archive/README.md` for overrides. Do not disable host
+   verification to work around a mismatch.
 
 5. Confirm the separate camera, valid-angle, valid-velocity and encoder counters;
    inspect raw and fused traces while the rig remains stopped. Smooth video alone

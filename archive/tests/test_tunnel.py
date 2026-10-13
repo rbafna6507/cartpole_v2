@@ -55,8 +55,8 @@ class TunnelTests(unittest.TestCase):
                         if line.startswith('userknownhostsfile '))
         self.assertTrue(key_line.endswith('/' + key_name), key_line)
 
-    def test_default_uses_jetson_alias_and_ssh_config_host_keys(self):
-        result, argv = self.run_script(JETSON_SSH_TARGET='', JETSON_KNOWN_HOSTS='')
+    def test_explicit_jetson_uses_alias_and_ssh_config_host_keys(self):
+        result, argv = self.run_script('jetson', JETSON_SSH_TARGET='', JETSON_KNOWN_HOSTS='')
         self.assertEqual(result.returncode, 0, result.stderr)
         with tempfile.TemporaryDirectory() as tmp:
             config = Path(tmp) / 'config'
@@ -87,6 +87,13 @@ class TunnelTests(unittest.TestCase):
         self.assertEqual(result.returncode, 23)
         self.assertIn('127.0.0.1:4001:127.0.0.1:4002', argv)
         self.assertEqual(argv[-1], 'operator@other-device')
+
+    def test_print_command_does_not_execute_tunnel(self):
+        result, argv = self.run_script('--print-command', 'operator@test-device')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIsNone(argv)
+        self.assertIn('StrictHostKeyChecking=yes', result.stdout)
+        self.assertIn('operator@test-device', result.stdout)
 
     def test_reject_invalid_ports_and_option_like_destinations(self):
         for overrides in ({'LOCAL_PORT': '0'}, {'LOCAL_PORT': '65536'},

@@ -1,8 +1,27 @@
 # Cartpole v2
 
-Phase 0 packages the known-working controller and vision3 for repeatable launches.
-The Python SDK, new Teensy executor, and MuJoCo backend are the next development
-steps; they are not implemented here yet.
+The Python SDK now supports explicit sensor channels, validated acceleration
+intents, recordings and deterministic local replay. The known-working controller
+and vision3 remain preserved under `archive/`. Live SDK control, the new Teensy
+executor and MuJoCo are subsequent milestones.
+
+## Try the Python SDK locally
+
+```bash
+mkdir -p runs/sdk-demo
+uv run --locked cartpole-v2 import-vision tests/fixtures/vision-real.jsonl runs/sdk-demo/vision.jsonl --session-id demo-vision --frame-id vision:demo-calibration
+uv run --locked cartpole-v2 inspect runs/sdk-demo/vision.jsonl
+uv run --locked python examples/replay_policy.py runs/sdk-demo/vision.jsonl runs/sdk-demo/my-policy.jsonl --frame-id vision:demo-calibration
+```
+
+Edit `MyPolicy` in `examples/replay_policy.py` to experiment. The example receives
+real recorded vision observations and writes acceleration requests to a local
+trace. Replay uses fixed inputs; it does not simulate the resulting rig motion.
+The example is an illustrative mapping, not the tuned balancing controller.
+Outputs are never overwritten; choose fresh paths when repeating commands.
+
+See [SDK usage, data semantics and next integrations](docs/phase1-usage.md).
+Run tests with `uv run --locked python -m unittest discover -s tests`.
 
 ## Run the baseline
 
@@ -30,9 +49,13 @@ On the Mac, from the repository root:
 ```
 
 After SSH connects, open **http://127.0.0.1:3095/**. Keep the tunnel terminal open.
-The tunnel defaults to `jetson`, using the same SSH configuration and verified
-host keys as `ssh jetson`. The destination is configurable; a connection attempt
-times out after 10 seconds. It does not start software on the Jetson.
+The tunnel discovers the current direct IPv6 address through a read-only query
+using `ssh jetson`, then verifies reachability and reuses the trusted host identity.
+It needs a working bootstrap SSH key/agent; the final connection can still ask for
+your normal password. To preview the selection, use
+`./archive/vision-tunnel.sh --print-command`. An explicit destination bypasses
+discovery: `./archive/vision-tunnel.sh jetson` uses the configured route.
+It does not start the camera or control the rig.
 
 - [Jetson setup and testing](docs/jetson-testing.md)
 - [Archive contents and recovery](archive/README.md)
@@ -40,8 +63,10 @@ times out after 10 seconds. It does not start software on the Jetson.
 - [Vision, calibration, and system dependencies](archive/vision3/README.md)
 - [Control rates, languages, and transport choice](docs/control-timing-and-transport.md)
 - [Revised v2 architecture](docs/architecture.md)
+- [Phase 1 implementation plan](docs/phase1-plan.md)
 - [Phase 0 plan and decisions](docs/phase0-plan.md)
-- [Local verification](evidence/phase0/verification.json)
+- [Phase 1 verification](evidence/phase1/verification.json)
+- [Phase 0 verification](evidence/phase0/verification.json)
 
 Both projects pin Python 3.11 for `uv` and include a universal `uv.lock`. Their
 commands are intended to run from an editable repository checkout; this archive

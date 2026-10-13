@@ -26,6 +26,15 @@ times, sequence/epoch, validity, calibration identity and measured/predicted
 status. Use named joints and topology for later double/triple pendulums, while
 commissioning single-link behavior first.
 
+## Implemented foundation
+
+The root `cartpole_sdk` package supplies immutable scalar observations, explicit
+source/frame selection, acceleration intents, validated expiring requests,
+versioned recording/import adapters and deterministic replay. The executable
+example is local only. See [Phase 1 usage](phase1-usage.md) for commands and the
+precise limitations of legacy data. Images, live transport, fusion, simulator
+physics and reference-controller behavior remain backend work.
+
 ## Order
 
 1. Phase 0: portable archived baseline, launchers, dependency locks, provenance.

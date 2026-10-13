@@ -1,0 +1,55 @@
+{
+  "verified_at_utc": "2026-10-13T21:31:09.748201+00:00",
+  "scope": "Phase 1 local SDK, record import/replay, and read-only tunnel discovery. No motor commands, camera control, flash or live policy.",
+  "sdk": {
+    "tests": 67,
+    "passed": 67,
+    "command": "uv run --locked python -m unittest discover -s tests",
+    "log": "sdk-tests.log"
+  },
+  "tunnel": {
+    "tests": 25,
+    "passed": 25,
+    "command": "python3 -m unittest discover -s archive/tests",
+    "log": "tunnel-tests.log",
+    "shell_syntax": true
+  },
+  "preserved_baseline": {
+    "files": 70,
+    "mismatches": 0,
+    "detail": "preservation-check.json"
+  },
+  "sdk_smoke": {
+    "real_vision_frames": 4,
+    "example_policy_requests": 1,
+    "no_requests": 3,
+    "repeat_trace_bytes_equal": true,
+    "installed_cli_from_outside_checkout": true
+  },
+  "packaging": {
+    "wheel_and_sdist_built": true,
+    "isolated_wheel_cli_help": true,
+    "runtime_dependencies": []
+  },
+  "live_discovery": {
+    "command": "./archive/vision-tunnel.sh --print-command",
+    "exit_code": 0,
+    "bootstrap": "jetson",
+    "selected_ipv6": "2601:408:c402:4f4d:7c33:6ac0:e348:c35",
+    "trusted_host_identity": "jetson",
+    "tcp22_reachable": true,
+    "tunnel_started": false,
+    "remote_command": "ip -j -6 addr show scope global"
+  },
+  "review": {
+    "status": "pending independent whole-change review"
+  },
+  "limitations": [
+    "Replay is open-loop and models zero policy execution time",
+    "No live SDK backend, MuJoCo or reference-controller port yet",
+    "Legacy console health/calibration unknown",
+    "Vision imports require caller-verified calibration epoch; detectable reset rejected",
+    "Scalar states only; images and real fusion pending",
+    "SDK validators do not replace broker/MCU safety enforcement"
+  ]
+}
