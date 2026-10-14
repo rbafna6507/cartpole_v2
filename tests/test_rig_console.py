@@ -50,6 +50,19 @@ class PolicyAndConsoleTests(unittest.TestCase):
         self.assertGreaterEqual(self.fw.ticks()-self.fw.home_started,50)
         self.assertEqual(self.fw.mode,0)
 
+    def test_status_decodes_installed_cart_and_unused_open_inputs(self):
+        self.fw.flags=201
+        with self.rig() as rig:
+            output=io.StringIO()
+            execute_command(rig,'status',output=output)
+            data=json.loads(output.getvalue())
+            self.assertEqual(data['switch_inputs'],{
+                '1_left':'closed', '2_right':'closed', '3':'open', '4':'open'})
+            self.assertTrue(data['switch_checking_enabled'])
+            self.assertTrue(data['encoder_healthy'])
+            self.assertFalse(data['homed'])
+            self.assertFalse(data['drivers_enabled'])
+
     def test_policy_exception_stops_in_finally(self):
         with self.rig() as rig:
             with self.assertRaises(ValueError):

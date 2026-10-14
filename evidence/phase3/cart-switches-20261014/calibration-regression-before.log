@@ -1,0 +1,102 @@
+.....F.............FFFFFF.......................                         [100%]
+=================================== FAILURES ===================================
+____________________ ExecutorTests.test_calibration_guards _____________________
+
+self = <test_executor_native.ExecutorTests testMethod=test_calibration_guards>
+name = 'calibration_guards'
+
+>   setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                   ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (send(c,"V2 CALIBRATE 7 upright").kind==OK), function calibration_guards, file core.cpp, line 42.
+____________________ SketchTests.test_calibrate_fail_magnet ____________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_fail_magnet>
+name = 'calibrate_fail_magnet'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_failure, file sketch.cpp, line 64.
+____________________ SketchTests.test_calibrate_fail_moving ____________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_fail_moving>
+name = 'calibrate_fail_moving'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_failure, file sketch.cpp, line 64.
+_____________________ SketchTests.test_calibrate_fail_save _____________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_fail_save>
+name = 'calibrate_fail_save'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_failure, file sketch.cpp, line 64.
+___________________ SketchTests.test_calibrate_fail_watchdog ___________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_fail_watchdog>
+name = 'calibrate_fail_watchdog'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_failure, file sketch.cpp, line 64.
+______________________ SketchTests.test_calibrate_hanging ______________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_hanging>
+name = 'calibrate_hanging'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_capture, file sketch.cpp, line 42.
+______________________ SketchTests.test_calibrate_upright ______________________
+
+self = <test_executor_native.SketchTests testMethod=test_calibrate_upright>
+name = 'calibrate_upright'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (encoderCalibrationBusy()), function calibration_capture, file sketch.cpp, line 42.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::ExecutorTests::test_calibration_guards
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_fail_magnet
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_fail_moving
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_fail_save
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_fail_watchdog
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_hanging - A...
+FAILED tests/test_executor_native.py::SketchTests::test_calibrate_upright - A...
+7 failed, 41 passed in 3.35s

@@ -43,7 +43,7 @@ class ExecutorTests(unittest.TestCase):
         result = subprocess.run([str(self.binary), case], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-for name in ['info_guards','homing_more_faults','stable_switches','framing','boot_session','actions','wrap','guards','watchdogs','switches','homing_success','homing_faults']:
+for name in ['calibration_guards','cart_only_switches','info_guards','homing_more_faults','stable_switches','framing','boot_session','actions','wrap','guards','watchdogs','switches','homing_success','homing_faults']:
     setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
 
 class SketchTests(ExecutorTests):
@@ -62,9 +62,9 @@ class SketchTests(ExecutorTests):
             raise AssertionError(result.stdout + result.stderr)
 
 # Do not inherit the pure-header case names into the separate whole-sketch binary.
-for name in ['info_guards','homing_more_faults','stable_switches','framing','boot_session','actions','wrap','guards','watchdogs','switches','homing_success','homing_faults']:
+for name in ['calibration_guards','cart_only_switches','info_guards','homing_more_faults','stable_switches','framing','boot_session','actions','wrap','guards','watchdogs','switches','homing_success','homing_faults']:
     setattr(SketchTests, 'test_' + name, None)
-for name in ['lcd_health','magnet_stale','whole_homing_info','magnet_healthy','magnet_weak','magnet_strong','magnet_absent','magnet_readfailure','magnet_anglefailure','info_snapshot','info_homed','edge_consume_race','hello_partial','bounced_isr_edge','isr_center','calibration','reference_watchdog','motion','timing','isr_homing_stall','isr_limits','telemetry']:
+for name in ['calibrate_cancel_commit_stop','calibrate_cancel_commit_hello','calibrate_upright','calibrate_hanging','calibrate_cancel','calibrate_fail_moving','calibrate_fail_magnet','calibrate_fail_save','calibrate_fail_watchdog','cart_only_pulses','lcd_health','magnet_stale','whole_homing_info','magnet_healthy','magnet_weak','magnet_strong','magnet_absent','magnet_readfailure','magnet_anglefailure','info_snapshot','info_homed','edge_consume_race','hello_partial','bounced_isr_edge','isr_center','calibration','reference_watchdog','motion','timing','isr_homing_stall','isr_limits','telemetry']:
     setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
 
 

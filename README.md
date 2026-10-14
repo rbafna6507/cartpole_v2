@@ -39,8 +39,10 @@ clicking was observed during programming and the board was recovered with motor
 power off. A hardware default-disable circuit remains necessary.
 
 [PCB switch wiring](docs/pcb-switches.md) specifies normally-closed contacts and
-finite cart homing. Switches are implemented in software but are not physically
-installed/commissioned. D28/D29 remain interlocks; Z homing awaits mechanical
+finite cart homing. The owner installed switch 1 at the left and switch 2 at the
+right on 2026-10-14; their first physical homing still needs commissioning.
+Only these two switches are required by `executor-v2-cart2`. Uninstalled D28/D29
+remain diagnostic inputs and Z pulses are disabled. Z homing awaits mechanical
 switch-role confirmation. Every boot defaults to the switch interlock enabled.
 
 ## Policies, identification and the portal

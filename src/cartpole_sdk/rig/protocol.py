@@ -129,7 +129,7 @@ class ExecutorInfo:
 
 def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
     parts = payload.split(' ')
-    if len(parts) != 11 or parts[:2] != ['V2', 'INFO'] or parts[3] != 'executor-v1':
+    if len(parts) != 11 or parts[:2] != ['V2', 'INFO'] or parts[3] not in ('executor-v1', 'executor-v2-cart2'):
         raise ProtocolError('invalid diagnostic identity or field count')
     sid = uint32(parts[2])
     reference, saved, status, errors, epoch, span = map(uint32, parts[4:10])

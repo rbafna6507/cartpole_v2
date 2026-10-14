@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-14",
+  "deployed_firmware": "executor-v1",
+  "deployed_source_manifest_differences": [],
+  "saved_upright_reference_before_and_after": 3485,
+  "yesterday_rest_angle_rad": 3.04035,
+  "today_stopped_angle_rad": -1.814699,
+  "today_stopped_frames": 301,
+  "today_stopped_i2c_errors": 0,
+  "today_stopped_missed_deadline_delta": 0,
+  "today_stopped_dropped_delta": 0,
+  "reported_physical_pose": "Owner says pole hung straight down during tiny-step runs; encoder/magnet untouched.",
+  "first_tiny_step_run": {
+    "log": "rig-1791995127504457879-311258081.jsonl",
+    "enabled_frames": 3731,
+    "max_abs_velocity_m_s": 0.0003225268,
+    "x_range_m": [
+      -3.75e-05,
+      3.75e-05
+    ],
+    "fault": 0,
+    "misses_delta": 0
+  },
+  "controller_probe": {
+    "source": "firmware/teensy_executor/swing_controller.h (unchanged from preserved controller)",
+    "conditions": "zero angular velocity, centered cart, zero cart velocity, first 1ms tick",
+    "yesterday_angle": {
+      "startup_kick": true,
+      "requested_acceleration": 1.0
+    },
+    "today_angle": {
+      "startup_kick": false,
+      "requested_acceleration": 0.0
+    }
+  },
+  "conclusion": "The reported resting angle is outside the controller's hanging startup-kick window, explaining tiny demands. Physical origin of changed angle/count relation remains unverified; not claimed fixed by retuning or switch profile changes.",
+  "historical_i2c_note": "Earlier pre-reset stopped INFO had187210 cumulative I2C errors and3403 misses; subsequent boot and observed auto runs had0 I2C errors and0misses.",
+  "remote_evidence_archive": "/home/rbafna/cartpole-v2-live/jumpy-evidence-20261014.tar.gz"
+}

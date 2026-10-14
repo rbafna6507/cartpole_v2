@@ -1,0 +1,100 @@
+.....F............F...F................FF........... [ 96%]
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ ExecutorTests.test_cart_only_switches _____________________
+
+self = <test_executor_native.ExecutorTests testMethod=test_cart_only_switches>
+name = 'cart_only_switches'
+
+>   setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                   ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (send(c,"V2 HOME 7").kind==OK), function cart_only_switches, file core.cpp, line 44.
+______________________ SketchTests.test_cart_only_pulses _______________________
+
+self = <test_executor_native.SketchTests testMethod=test_cart_only_pulses>
+name = 'cart_only_pulses'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (g_energized&&executor_state.enabled), function cart_only_pulses, file sketch.cpp, line 40.
+________________________ SketchTests.test_info_snapshot ________________________
+
+self = <test_executor_native.SketchTests testMethod=test_info_snapshot>
+name = 'info_snapshot'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (Serial.output.find("@V2 INFO 7 executor-v2-cart2 3485 1 32 0 1 0 0.26*")!=std::string::npos), function info_snapshot, file sketch.cpp, line 29.
+______________________ SketchTests.test_whole_homing_info ______________________
+
+self = <test_executor_native.SketchTests testMethod=test_whole_homing_info>
+name = 'whole_homing_info'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (mode==M_HOMING), function whole_homing_info, file sketch.cpp, line 32.
+__________ RigInfoTests.test_cart_only_firmware_identity_is_supported __________
+
+self = <test_rig_info.RigInfoTests testMethod=test_cart_only_firmware_identity_is_supported>
+
+    def test_cart_only_firmware_identity_is_supported(self):
+>       info=parse_info(PAYLOAD.replace('executor-v1','executor-v2-cart2'),received_ns=123)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_info.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = 'V2 INFO 7 executor-v2-cart2 3485 1 103 0 2 13867 0.255'
+received_ns = 123
+
+    def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
+        parts = payload.split(' ')
+        if len(parts) != 11 or parts[:2] != ['V2', 'INFO'] or parts[3] != 'executor-v1':
+>           raise ProtocolError('invalid diagnostic identity or field count')
+E           cartpole_sdk.rig.protocol.ProtocolError: invalid diagnostic identity or field count
+
+src/cartpole_sdk/rig/protocol.py:133: ProtocolError
+_ PolicyAndConsoleTests.test_status_decodes_installed_cart_and_unused_open_inputs _
+
+self = <test_rig_console.PolicyAndConsoleTests testMethod=test_status_decodes_installed_cart_and_unused_open_inputs>
+
+    def test_status_decodes_installed_cart_and_unused_open_inputs(self):
+        self.fw.flags=201
+        with self.rig() as rig:
+            output=io.StringIO()
+            execute_command(rig,'status',output=output)
+            data=json.loads(output.getvalue())
+>           self.assertEqual(data['switch_inputs'],{
+                             ^^^^^^^^^^^^^^^^^^^^^
+                '1_left':'closed', '2_right':'closed', '3':'open', '4':'open'})
+E           KeyError: 'switch_inputs'
+
+tests/test_rig_console.py:59: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::ExecutorTests::test_cart_only_switches
+FAILED tests/test_executor_native.py::SketchTests::test_cart_only_pulses - As...
+FAILED tests/test_executor_native.py::SketchTests::test_info_snapshot - Asser...
+FAILED tests/test_executor_native.py::SketchTests::test_whole_homing_info - A...
+FAILED tests/test_rig_info.py::RigInfoTests::test_cart_only_firmware_identity_is_supported
+FAILED tests/test_rig_console.py::PolicyAndConsoleTests::test_status_decodes_installed_cart_and_unused_open_inputs
+6 failed, 48 passed, 20 subtests passed in 3.26s

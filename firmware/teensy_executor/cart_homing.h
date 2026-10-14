@@ -2,8 +2,8 @@
 #include <stdint.h>
 #include <math.h>
 #include <stdlib.h>
-// Candidate installation profile: cart - D26, cart + D27; Z D28/D29
-// required healthy but never driven. Bounds need physical commissioning.
+// Installed profile: left D26, right D27. Caller passes required inputs only.
+// Direction and travel bounds still need physical commissioning.
 namespace cart_homing {
 constexpr float steps_per_m=26666.6666667f;
 struct Machine {

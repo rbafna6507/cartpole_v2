@@ -10,6 +10,10 @@
 // One production implementation for the board and native fault tests. No heap,
 // peripheral calls, or host-time assumptions. All deadlines use 1 ms board ticks.
 namespace executor {
+// Installed cart profile: switch 1/D26 left, switch 2/D27 right.
+// Uninstalled 3/4 remain raw telemetry only. Z pulse output is disabled in sketch.
+constexpr uint8_t REQUIRED_LIMIT_MASK=0x03;
+inline uint8_t requiredLimits(uint8_t raw){return raw&REQUIRED_LIMIT_MASK;}
 enum Fault : uint8_t { NONE=0,ACTION_EXPIRED=1,HOST_TIMEOUT=2,DURATION=3,ENCODER=4,LIMIT=5,DEADLINE=6,RAIL=7,CONTROLLER=8,HOMING=9 };
 enum ReplyKind : uint8_t { SILENT,OK,ERROR,HELLO,STATE,INFO };
 struct Reply {ReplyKind kind;const char* text;};
@@ -35,12 +39,12 @@ struct Core {
  uint32_t host_at=0,end_at=0,action_end=0;uint16_t rate=100;
  bool enabled=false,homed=false,healthy=false;volatile bool switches=true;
  uint32_t healthy_since=0;
- uint8_t limits=0,mode=0;Fault fault=NONE;float demand=0;
- void stop(){enabled=false;mode=fault==NONE?0:4;demand=0;last_seq=0;action_end=0;}
+ uint8_t limits=0,mode=0,calibration=0;Fault fault=NONE;float demand=0;
+ void stop(){enabled=false;calibration=0;mode=fault==NONE?0:4;demand=0;last_seq=0;action_end=0;}
  void trip(Fault f){if(fault==NONE)fault=f;if(f==ENCODER||f==LIMIT||f==DEADLINE||f==RAIL||f==CONTROLLER||f==HOMING)homed=false;stop();}
- void sample(bool health,uint8_t raw){if(!health||raw||!healthy||limits)healthy_since=tick;healthy=health;limits=raw&15;if(enabled){if(!healthy)trip(ENCODER);else if(switches && limits && mode!=13)trip(LIMIT);}}
+ void sample(bool health,uint8_t raw){if(!health||requiredLimits(raw)||!healthy||requiredLimits(limits))healthy_since=tick;healthy=health;limits=raw&15;if(enabled){if(!healthy)trip(ENCODER);else if(switches && requiredLimits(limits) && mode!=13)trip(LIMIT);}}
  void advance(uint32_t us){++tick;acquisition_us=us;if(!enabled)return;if(reached(tick,end_at))trip(DURATION);else if(uint32_t(tick-host_at)>=200)trip(HOST_TIMEOUT);else if((mode==12||mode==1)&&reached(tick,action_end))trip(ACTION_EXPIRED);}
- bool canStart()const{return !enabled && mode==0 && fault==NONE && homed && healthy && (!switches||(limits==0 && uint32_t(tick-healthy_since)>=5));}
+ bool canStart()const{return !enabled && !calibration && mode==0 && fault==NONE && homed && healthy && (!switches||(requiredLimits(limits)==0 && uint32_t(tick-healthy_since)>=5));}
  Reply command(const char* line){
   if(!strcmp(line,"stop")){stop();return {OK,"STOP"};}
   const size_t size=strlen(line);if(size>255||size<7||line[0]!='@')return {ERROR,"frame"};
@@ -59,11 +63,17 @@ struct Core {
   if(!strcmp(cmd,"INFO")){if(count!=3)return {ERROR,"args"};if(enabled)return {ERROR,"enabled"};return {INFO,"INFO"};}
   if(!strcmp(cmd,"STATUS")){if(count!=3)return {ERROR,"args"};return {STATE,"STATUS"};}
   if(!strcmp(cmd,"STOP")){if(count!=3)return {ERROR,"args"};stop();return {OK,"STOP"};}
-  if(!strcmp(cmd,"CLEAR")){if(count!=3)return {ERROR,"args"};if(enabled)return {ERROR,"enabled"};if(!healthy||(switches&&(limits||uint32_t(tick-healthy_since)<5)))return {ERROR,"health"};fault=NONE;stop();return {OK,"CLEAR"};}
+  if(!strcmp(cmd,"CLEAR")){if(count!=3)return {ERROR,"args"};if(enabled)return {ERROR,"enabled"};if(!healthy||(switches&&(requiredLimits(limits)||uint32_t(tick-healthy_since)<5)))return {ERROR,"health"};fault=NONE;stop();return {OK,"CLEAR"};}
   if(!strcmp(cmd,"RATE")){uint32_t hz;if(count!=4||!uintValue(tokens[3],hz))return {ERROR,"args"};if(hz!=0&&hz!=100&&hz!=250&&hz!=500&&hz!=1000)return {ERROR,"rate"};rate=uint16_t(hz);return {OK,"RATE"};}
   if(!strcmp(cmd,"SWITCHES")){uint32_t on;if(count!=4||!uintValue(tokens[3],on)||on>1)return {ERROR,"args"};if(enabled)return {ERROR,"enabled"};if(on&&!switches)homed=false;switches=on;return {OK,"SWITCHES"};}
-  if(!strcmp(cmd,"CENTER")){if(count!=3)return {ERROR,"args"};if(enabled||mode!=0||fault!=NONE||!healthy)return {ERROR,"health"};if(switches)return {ERROR,"switches"};homed=true;return {OK,"CENTER"};}
-  if(!strcmp(cmd,"HOME")){if(count!=3)return {ERROR,"args"};if(enabled||mode!=0||fault!=NONE||!healthy||limits||uint32_t(tick-healthy_since)<5)return {ERROR,"health"};if(!switches)return {ERROR,"switches"};homed=false;enabled=true;mode=13;host_at=tick;end_at=tick+60000;return {OK,"HOME"};}
+  if(!strcmp(cmd,"CALIBRATE")){
+   if(count!=4 || (strcmp(tokens[3],"upright") && strcmp(tokens[3],"hanging")))return {ERROR,"args"};
+   if(enabled||calibration||mode!=0||fault!=NONE||!healthy)return {ERROR,"health"};
+   calibration=!strcmp(tokens[3],"upright")?2:1;host_at=tick;
+   return {OK,"CALIBRATE"}; // Sketch defers wire ACK until capture and verified save.
+  }
+  if(!strcmp(cmd,"CENTER")){if(count!=3)return {ERROR,"args"};if(enabled||calibration||mode!=0||fault!=NONE||!healthy)return {ERROR,"health"};if(switches)return {ERROR,"switches"};homed=true;return {OK,"CENTER"};}
+  if(!strcmp(cmd,"HOME")){if(count!=3)return {ERROR,"args"};if(enabled||calibration||mode!=0||fault!=NONE||!healthy||requiredLimits(limits)||uint32_t(tick-healthy_since)<5)return {ERROR,"health"};if(!switches)return {ERROR,"switches"};homed=false;enabled=true;mode=13;host_at=tick;end_at=tick+60000;return {OK,"HOME"};}
   if(!strcmp(cmd,"ARM")||!strcmp(cmd,"MODE")){
    const bool arm=!strcmp(cmd,"ARM");uint32_t duration;
    if(count!=(arm?4u:5u)||!uintValue(tokens[arm?3:4],duration)||duration<1||duration>60000)return {ERROR,"duration"};

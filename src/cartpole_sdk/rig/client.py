@@ -76,6 +76,8 @@ class Rig:
         self._history = OrderedDict()
         self._sequence = 0
         self._active = False
+        self._calibrating = False
+        self._calibration_cancelled = False
         self._deadline_ns = None
         self.error = None
         self.records = deque(maxlen=record_capacity)
@@ -151,15 +153,17 @@ class Rig:
             raise error from exc
         self._record('command', payload=payload)
 
-    def _command(self, command, *args, reply='OK', allow_error=False):
+    def _command(self, command, *args, reply='OK', allow_error=False, timeout_s=None):
         self._require(allow_error=allow_error)
         with self._command_lock:
             with self._condition:
                 self._replies.clear()
             self._send(' '.join(map(str, ('V2', command, self._sid, *args))))
-            deadline = time.monotonic()+self._timeout
+            deadline = time.monotonic()+(self._timeout if timeout_s is None else timeout_s)
             with self._condition:
                 while True:
+                    if command == 'CALIBRATE' and self._calibration_cancelled:
+                        raise RigError('encoder calibration cancelled by STOP')
                     for response in self._replies:
                         if response[1] == 'ERR':
                             raise RigError(f'executor rejected {command}: {response[3]}')
@@ -375,6 +379,8 @@ class Rig:
         if time.monotonic_ns()-state.received_ns>self._max_host_age_ns:
             state=self._snapshot()
         self._fresh(state)
+        if self._calibrating or state.flags & 256:
+            raise RigError('encoder calibration is in progress; wait or stop to cancel')
         if state.enabled or state.mode != 0 or not state.healthy:
             raise RigError('operation requires stopped healthy executor')
         return state
@@ -416,6 +422,45 @@ class Rig:
         if state.switch_profile:
             raise RigError('CENTER requires explicit no-switch commissioning profile')
         self._command_state('CENTER', predicate=lambda s:s.homed)
+
+    def calibrate_encoder(self, pose='upright'):
+        """Capture and save the magnetic reference from a stationary known pose.
+
+        Hold the pole straight up for ``upright`` or let it hang fully down for
+        ``hanging``. The board acknowledges only after its stable capture and
+        EEPROM verification finish. No motion, home, switch or fault change is
+        requested. Ctrl-C or any failure requests STOP to cancel capture.
+        """
+        if pose not in ('upright', 'hanging'):
+            raise ValidationError('encoder calibration pose must be upright or hanging')
+        self._stopped_healthy()
+        if self.get_info().firmware != 'executor-v2-cart2':
+            raise RigError('update firmware to executor-v2-cart2 before encoder calibration')
+        with self._condition:
+            self._stopped_healthy()
+            self._calibrating = True
+            self._calibration_cancelled = False
+        try:
+            # Firmware has a 5 s capture deadline; ordinary commands retain
+            # their shorter transport timeout.
+            self._command('CALIBRATE', pose, timeout_s=6.)
+            state = self._snapshot()
+            if state.enabled or state.mode != 0 or not state.healthy or state.flags & 256:
+                raise RigError('calibration did not confirm a stopped healthy executor')
+            info = self.get_info()
+            if not info.reference_saved:
+                raise RigError('encoder calibration was not confirmed saved')
+            with self._condition:
+                if self._calibration_cancelled:
+                    raise RigError('encoder calibration cancelled by STOP')
+            return info
+        except BaseException:
+            self._emergency_stop()
+            raise
+        finally:
+            with self._condition:
+                self._calibrating = False
+                self._condition.notify_all()
 
     def configure_switches(self, enabled: bool):
         if type(enabled) is not bool:
@@ -534,6 +579,12 @@ class Rig:
 
     def stop(self):
         self._require(allow_error=True)
+        with self._condition:
+            if self._calibrating:
+                # Wake the deferred ACK wait before taking the command lock.
+                # Its exception path sends STOP without waiting for an ACK.
+                self._calibration_cancelled = True
+                self._condition.notify_all()
         self._command_state('STOP',predicate=lambda s:not s.enabled and s.mode in (0,4),allow_error=True)
         self._active = False
         self._deadline_ns = None

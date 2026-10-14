@@ -1,6 +1,6 @@
 # PCB switch wiring and bounded homing
 
-Electrical inspection performed 2026-10-13 against the current original design, read-only. Source hashes, net nodes, pad UUIDs, routed segment UUIDs, and Gerber comparisons are recorded in `evidence/phase3/pcb-switches.json`. This establishes design intent and connectivity; it does not establish which revision was assembled or commission the hardware. The user reports no switches installed and the cart physically centered.
+Electrical inspection performed 2026-10-13 against the current original design, read-only. Source hashes, net nodes, pad UUIDs, routed segment UUIDs, and Gerber comparisons are recorded in `evidence/phase3/pcb-switches.json`. This establishes design intent and connectivity; it does not establish which revision was assembled or commission the hardware. On 2026-10-14 the owner confirmed switches 1 and 2 are installed, with 1 at the left and 2 at the right. Switches 3 and 4 are not installed. Electrical polarity, disconnect response and homing direction still need physical commissioning.
 
 ## Verified wiring
 
@@ -38,12 +38,12 @@ Switch GPIOs do not overlap these functions. Carrier J6_* and J7_* identifiers a
 
 All exported schematic component pad nets match corresponding PCB pad nets, with zero mismatches. Routed segment/via chains join each switch signal to its pull-up, Teensy pad, and J5 pin; the pull-up rail joins U3 3.3 V. D8 joins all three driver enable pads. GND is assigned to every switch pad 2 and represented by filled copper zones on both board layers. No electrical gates occur in the component inventory.
 
-The PCB labels only `limit_switch_1` through `limit_switch_4`. It does **not** identify cart negative/positive ends, Z reference locations, motor positive direction, switch trigger positions, mechanical travel, homing order, or gravity behavior. The following assignment is an implementation/installation recommendation, not a deduction from the design:
+The PCB labels only `limit_switch_1` through `limit_switch_4`. It does **not** identify cart negative/positive ends, Z reference locations, motor positive direction, switch trigger positions, mechanical travel, homing order, or gravity behavior. The cart assignment below is now confirmed by the owner; the Z assignment remains a recommendation, not a deduction from the design:
 
 | GPIO | Recommended installation role |
 |---|---|
-| 26 / J8 | Cart negative end |
-| 27 / J11 | Cart positive end |
+| 26 / J8 | Cart left / negative end (installed) |
+| 27 / J11 | Cart right / positive end (installed) |
 | 28 / J10 | Z1 reference |
 | 29 / J9 | Z2 reference |
 
@@ -53,17 +53,17 @@ This mapping must be the same in firmware, console labels, harness labels, and p
 
 Production starts disabled and unhomed, samples all configured required channels, and refuses motion when any NC channel is HIGH outside an expected homing contact phase. Treat raw HIGH as an immediate pulse-inhibit condition. Do not delay a normal-operation stop for debounce. Latch faults, raise shared enable, invalidate homed state, and require an explicit reset and new homing request; clearing an input must never automatically restart motion. A production reset requires healthy stable inputs.
 
-Because no switches are installed now, the production profile intentionally fails closed. A separate explicit switchless commissioning profile may permit previously bounded operator motion from the operator-declared center with conservative software limits. It must expose that limits are absent, expire with the motion lease/watchdog, and never report physical homing or use missing inputs as evidence of end position. It must not silently select itself from all-HIGH inputs or persist as the default after reset. Physical limit events or any unexpected opening of channels that are installed still stop motion.
+The `executor-v2-cart2` build requires the two installed cart switches by a fixed compile-time mask `0x03`. Uninstalled D28/D29 remain raw telemetry only, and both Z step outputs are blocked. It never infers installation from levels or bypasses a missing cart input. The former all-four-input profile rejected HOME when uninstalled 3/4 read HIGH. A separate explicit switchless commissioning profile may permit previously bounded operator motion from the operator-declared center with conservative software limits. It must expose that limits are absent, expire with the motion lease/watchdog, and never report physical homing or use missing inputs as evidence of end position. It must not silently select itself from all-HIGH inputs or persist as the default after reset. Physical limit events or any unexpected opening of channels that are installed still stop motion.
 
 ## Recommended cart homing state machine
 
 A homing request owns motion exclusively. Other move, auto, and external-policy commands are rejected until it finishes or cancels. Configure direction, maximum seek steps/distance, elapsed-time deadline, slow approach speed, backoff distance, release deadline, acceptable measured stroke interval, and chatter budget explicitly. Direction and stroke are installation parameters, not PCB facts. Use finite bounds for every phase and the entire operation; a step budget alone cannot detect an unpowered/stalled motor and a time budget alone cannot contain a wrong speed.
 
-1. **Precheck:** require commissioned mapping/direction, no commissioning bypass, healthy fresh samples, zero commanded speed, drivers disabled, and both cart contacts stable LOW. Reject an already-HIGH contact because the input cannot distinguish a pressed switch from a disconnected wire. The operator must release/repair it before a fresh request. Z inputs required by the production profile must also be stable LOW.
-2. **Seek negative:** emit bounded negative cart steps at the configured seek speed. Stop pulses immediately on raw D26 HIGH. Any D27/Z opening is an unexpected-limit fault. While stopped, require D26 to remain HIGH for the debounce interval (5 ms is a recommended starting value); excess chatter or deadline expiry faults.
-3. **Back off negative:** permit only bounded positive recovery steps while the expected D26 contact is HIGH. Require stable LOW within the release budget, then continue to the configured clearance. An opposite/Z opening always faults. Backoff is allowed only by this state; arbitrary motion into an open circuit is prohibited.
+1. **Precheck:** require commissioned mapping/direction, no commissioning bypass, healthy fresh samples, zero commanded speed, drivers disabled, and both cart contacts stable LOW. Reject an already-HIGH contact because the input cannot distinguish a pressed switch from a disconnected wire. The operator must release/repair it before a fresh request. D28/D29 are not required by this cart-only build.
+2. **Seek negative:** emit bounded negative cart steps at the configured seek speed. Stop pulses immediately on raw D26 HIGH. Any D27 opening is an unexpected-limit fault. While stopped, require D26 to remain HIGH for the debounce interval (5 ms is a recommended starting value); excess chatter or deadline expiry faults.
+3. **Back off negative:** permit only bounded positive recovery steps while the expected D26 contact is HIGH. Require stable LOW within the release budget, then continue to the configured clearance. An opposite cart opening always faults. Backoff is allowed only by this state; arbitrary motion into an open circuit is prohibited.
 4. **Slow negative latch:** approach negative at the lower latch speed, stop immediately on HIGH, verify stable contact while stopped, and capture the negative edge step count. Back off until stable LOW plus clearance. Failure to reopen or reclose within budgets faults.
-5. **Seek and latch positive:** repeat the seek, release/backoff, and slow reapproach sequence for D27 with reversed directions. Capture the positive edge. D26 and Z contacts must remain healthy during the positive seek.
+5. **Seek and latch positive:** repeat the seek, release/backoff, and slow reapproach sequence for D27 with reversed directions. Capture the positive edge. D26 must remain healthy during the positive seek.
 6. **Validate span:** require positive edge > negative edge and a stroke inside the configured acceptable interval. Reject impossible, zero, reversed, or implausibly small/large spans. Store this as measured step span, not externally measured rail length.
 7. **Center:** move at a bounded speed to the step midpoint using counted pulses, with both cart contacts stable LOW and software margins inside the measured edges. Require the commanded center to be reached within the step/time budgets. Only then set the center coordinate to zero, publish a new homing epoch/span, mark the cart homed, and finish disabled.
 

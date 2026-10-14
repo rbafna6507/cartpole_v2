@@ -11,7 +11,7 @@ from .client import Rig, RigError
 from .policy import ZeroAccelerationPolicy, run_policy
 
 HELP = ('auto [seconds], bal [seconds], manual [seconds], velocity m/s [ttl_ms], '
-        'stop, center, home, switches on|off, status, info, clear, rate hz, quit')
+        'stop, center, home, upright, hanging, switches on|off, status, info, clear, rate hz, quit')
 
 def _status(rig, output):
     state=rig.state
@@ -21,6 +21,13 @@ def _status(rig, output):
     data['cart_velocity_basis']='commanded velocity'
     data['mode_basis']='external host policy' if state.mode==12 else 'board reference/operator'
     data['error']=None if rig.error is None else str(rig.error)
+    data['switch_inputs']={label:'open' if state.flags & (16 << i) else 'closed'
+                           for i,label in enumerate(('1_left','2_right','3','4'))}
+    data['switch_checking_enabled']=state.switch_profile
+    data['encoder_healthy']=bool(state.flags & 1)
+    data['drivers_enabled']=state.enabled
+    data['homed']=state.homed
+    data['calibrating_encoder']=bool(state.flags & 256)
     print(canonical_json(data),file=output)
 
 def execute_command(rig, line, *, output=None):
@@ -47,6 +54,13 @@ def execute_command(rig, line, *, output=None):
         if args not in (['on'],['off']):raise ValidationError('switches requires on or off')
         rig.configure_switches(args[0]=='on')
         print(f'physical switch profile {args[0]}',file=output)
+    elif command in ('upright','hanging'):
+        if args:raise ValidationError(f'{command} accepts no arguments')
+        rig._stopped_healthy()  # Check before asking the operator to touch the pole.
+        instruction='hold the pole straight up' if command=='upright' else 'let the pole hang fully down'
+        print(f'Encoder calibration: {instruction} and keep it still; waiting for capture and EEPROM verification (up to 5s).',file=output,flush=True)
+        info=rig.calibrate_encoder(command)
+        print(f'encoder calibration saved; upright raw reference {info.encoder_upright_raw}',file=output)
     elif command=='rate':
         if len(args)!=1:raise ValidationError('rate requires one Hz value')
         rig.set_rate(int(args[0]))
@@ -103,7 +117,7 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
     parser.add_argument('--port',required=True)
     parser.add_argument('--rate',type=int,default=100,choices=(0,100,250,500,1000))
     parser.add_argument('--log-dir',default='runs/rig')
-    parser.add_argument('--command',choices=('auto','bal','manual','velocity','stop','center','home','status','info','clear','policy-zero'))
+    parser.add_argument('--command',choices=('auto','bal','manual','velocity','stop','center','home','upright','hanging','status','info','clear','policy-zero'))
     parser.add_argument('--duration',type=float,default=None,help='motion duration (default 10s) or homing timeout (default 60s)')
     parser.add_argument('--switches',choices=('on','off'),help='explicit stopped physical switch profile selection')
     parser.add_argument('--center-confirmed',action='store_true',help='operator asserts cart is physically centered now')

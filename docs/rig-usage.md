@@ -14,7 +14,7 @@ python examples/cartpole.py --port /dev/serial/by-id/usb-Teensy_example --rate 1
 
 The interactive commands are `auto [seconds]`, `bal [seconds]`,
 `manual [seconds]`, `velocity m/s [ttl_ms]`, `stop`, `center`, `home`,
-`switches on|off`, `status`, `clear`, `rate hz`, and `quit`.
+`upright`, `hanging`, `switches on|off`, `status`, `info`, `clear`, `rate hz`, and `quit`.
 `balance` aliases `bal`. Durations are bounded to 1ms..60s. The board's watchdog
 and duration cutoff remain active while the prompt waits for input.
 
@@ -24,9 +24,8 @@ starts with zero demand; each `velocity` command is one expiring lease, limited
 to 0.15m/s during commissioning. The prompt does not silently renew that lease.
 
 The physical switch profile is enabled by default in firmware. `home` runs the
-bounded physical switch routine only with that profile enabled. For the current
-rig with no installed switches, `switches off` explicitly selects commissioning
-mode, and `center` asserts that the operator has physically centered the cart
+bounded physical switch routine only with that profile enabled. The current rig has cart switches 1/2 installed. Only for explicit
+switchless bench commissioning, `switches off` selects commissioning mode, and `center` asserts that the operator has physically centered the cart
 **now**. It sets a step origin without commanding a homing movement. `center`
 is rejected while the switch profile is enabled. A reference invalidated by a
 hard fault requires a new physical home or centering after `clear`.
@@ -63,7 +62,7 @@ with Rig(port='/dev/serial/by-id/usb-Teensy_example', rate_hz=100,
 
 `RealRig` aliases `Rig`. The public API includes `session`, immutable `state`,
 `observation()`, `wait_state(after_tick=None, timeout=1)`, `center()`, `home()`,
-`configure_switches(bool)`, `start(mode='auto', duration_s=10)`,
+`configure_switches(bool)`, `calibrate_encoder(pose='upright')`, `get_info()`, `start(mode='auto', duration_s=10)`,
 `arm(duration_s=10)`, `set_acceleration(value, ttl_ms=20)`,
 `set_velocity(value, ttl_ms=50)`, `step(ActionRequest | None)`, `stop()`,
 `clear_fault()`, `set_rate(hz)`, and `close()`.
@@ -179,3 +178,79 @@ physical motion. Run `python -m unittest discover -s tests -p 'test_rig*.py'`.
 These tests establish software behavior only. Real stopped rate measurements,
 physical stop behavior, on-board reference runs, and external-policy hardware
 commissioning are separate acceptance gates.
+
+## Installed cart switches (2026-10-14)
+
+The `executor-v2-cart2` firmware expects switch 1/D26 at the left end and
+switch 2/D27 at the right. Both use NC-to-SIG and COM-to-GND: `closed` while
+released, `open` when pressed or disconnected. Inputs 3/4 are uninstalled and
+may read `open`; this build reports them but does not require them. Z pulses
+are disabled. Use `info` to distinguish this build from `executor-v1`, which
+incorrectly required the two uninstalled inputs for this rig.
+
+`status` now expands the raw flags into `switch_inputs`, `homed`,
+`drivers_enabled`, `encoder_healthy`, and `switch_checking_enabled`.
+With switches enabled, `center` is deliberately rejected: it only declares
+an operator-selected origin in explicit switchless commissioning. Physical
+`home` measures both cart ends and moves to the midpoint, then stops disabled.
+First validate input transitions with motor power off, and confirm direction
+and usable travel before the first powered homing attempt.
+
+A rejected firmware command latches the SDK error and sends STOP even when
+`fault` is zero. After correcting the cause, `stop` then `clear` recovers the
+session; `clear` still requires healthy required inputs and does not home or
+start motion. Do not use `switches off` to work around an installed cart switch.
+Firmware uploads and Teensy resets require motor power off (see `executor.md`).
+
+## Encoder calibration
+
+The updated firmware and console support two explicit stopped-only commands:
+
+- `upright`: hold the pole physically vertical **up**, then enter the command.
+- `hanging`: let the pole settle freely vertical **down**, then enter the command.
+
+Either command needs 400 consecutive healthy samples spanning at most four
+encoder counts (about 0.35 degrees) and allows up to five seconds to obtain them.
+The console waits for the firmware to verify the EEPROM save, then prints the
+new upright raw reference. It does not start a controller, move the cart, change
+switch checking, clear a fault, or replace cart homing. A hanging capture stores
+the opposite encoder count as upright. `status` should subsequently show theta
+near zero when up and near plus/minus pi when down. Verify both poses before a
+powered run; a save acknowledgement alone does not establish physical alignment.
+
+Use `stop` first. If a previous rejection is latched, correct its cause and use
+`clear`. Keep the selected pose still until the console reports the saved count.
+Ctrl-C or SDK `stop()` cancels an unfinished capture; loss of heartbeat, encoder
+health, failure to settle, or EEPROM verification failure does not report success.
+The new reference survives reboot, and `info` reports it and `reference_saved`.
+The previous live reference remains in use until the new save verifies. A failed
+EEPROM write can invalidate the persistent record and is reported as an error.
+
+The same commands work noninteractively with `--command upright` or
+`--command hanging`, and through `rig.calibrate_encoder('upright'|'hanging')`.
+No ordinary motion command's transport timeout is extended. Calibration has a
+six-second host wait for the board's bounded five-second operation. Old
+`executor-v1` boards are rejected locally with an update instruction.
+
+The combined release is `~/cartpole-v2-live/releases/platform-20261014-cart-switches`.
+With motor supply OFF, USB left connected, and all serial consoles closed:
+
+```sh
+cd ~/cartpole-v2-live/releases/platform-20261014-cart-switches
+~/cartpole-v2-live/tools/loader-2.3/teensy_loader_cli \
+  --mcu=TEENSY41 -w -v artifacts/executor-v2-cart2.hex
+```
+
+Press the Teensy program button when the uploader waits for the board. Keep
+motor supply off through programming and verify the disabled state afterward.
+Then start the new console from the same release directory:
+
+```sh
+uv run --locked --extra hardware cartpole-console \
+  --port /dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00 --rate 100
+```
+
+Confirm `info` shows `executor-v2-cart2`, perform one of the calibration commands,
+and check both physical poses. Commission the left/right switch transitions and
+homing direction before powered `home` and `auto` tests. The archived firmware
+and the previous release remain unchanged.

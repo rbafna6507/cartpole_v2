@@ -24,6 +24,11 @@ class RigInfoTests(unittest.TestCase):
         self.assertAlmostEqual(info.rail_half_m,.255)
         self.assertEqual(info.received_ns,123)
 
+    def test_cart_only_firmware_identity_is_supported(self):
+        info=parse_info(PAYLOAD.replace('executor-v1','executor-v2-cart2'),received_ns=123)
+        self.assertEqual(info.firmware,'executor-v2-cart2')
+        self.assertEqual(info.encoder_upright_raw,3485)
+
     def test_invalid_diagnostic_payloads_are_rejected(self):
         bad=[PAYLOAD+' extra', PAYLOAD.replace('INFO','S')]
         for index,values in ((2,['0','-1']), (3,['unknown']), (4,['4096','-1','nan']),

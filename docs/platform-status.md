@@ -16,9 +16,26 @@ software: the learned policy has not controlled the physical rig.
 | Vision adapter | Separate new provider with explicit clocks, frames, calibration and validity | Independent angle/cart calibration; fused estimator and physical vision control |
 | Physical identification | Separate train/held-out recordings and strict rejection reports | No accepted model: training excitation, residual and calibration consistency still fail |
 | Upload/queue/worker | Authentication, immutable artifacts, bounded queue ownership, real Linux namespace/seccomp tests | Public TLS/accounts, quotas/retention/monitoring, physical switch commissioning |
-| Switches and cart homing | Verified PCB nets, NC wiring map, bounded two-end sequence and native fault tests | Soldering, wiring/direction/stop-distance/homing checks; Z mechanical mapping |
+| Switches and cart homing | Verified PCB nets, NC wiring map, bounded two-end sequence and native fault tests | Installed cart switches need wiring/direction/stop-distance/homing checks; Z mechanical mapping |
 
-## Hardware left by this task
+## Cart switch update, 2026-10-14
+
+The owner has installed switch 1 at the left cart end and switch 2 at the right;
+3/4 are uninstalled. The `executor-v2-cart2` update requires those two cart
+inputs consistently at every start, clear, homing and ISR gate, reports all four
+raw inputs, and prohibits Z pulse output. The previous all-four profile explains
+`HOME: health` with flags 201. Local regression tests and the Teensy build pass;
+upload and physical switch/direction/homing acceptance remain pending. See
+`evidence/phase3/cart-switches-20261014/verification.json` for build provenance.
+The new console also decodes raw switch inputs in `status` and adds explicit
+`upright`/`hanging` stable encoder capture with verified EEPROM persistence.
+Today's tiny-step runs had a resting angle near -104 degrees versus yesterday's
+174 degrees, with the same saved reference and no new runtime misses or I2C
+errors. The preserved controller therefore omitted its near-hanging startup
+kick. Why the physical angle/count relationship changed remains unverified;
+calibration and both-pose checks are required before further control tests.
+
+## Historical hardware state after the 2026-10-13 build
 
 The motor supply was last confirmed on by the owner. The executor is idle with
 all drivers disabled, zero fault, default switch checking enabled and no valid
@@ -62,7 +79,7 @@ wire protocol and does not control the newly installed executor.
 
 ## Next physical work
 
-Install and commission the normally-closed switches using the
+Commission the installed normally-closed cart switches using the
 [PCB map](pcb-switches.md), and provide a verified hardware default-disable state
 through reset. Before changing the simulation, establish an independent angle
 reference and calibrated cart displacement, then collect passive-decay and new

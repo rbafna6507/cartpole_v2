@@ -175,7 +175,7 @@ void onStepTimer(){
   }
   // Sample raw NC channels on every 7 us pulse interrupt. Normal trips raise
   // the shared EN; expected homing edges inhibit cart pulses before debounce.
-  const uint8_t raw=executor_state.switches?rawLimits():0;
+  const uint8_t raw=executor_state.switches?executor::requiredLimits(rawLimits()):0;
   if(raw){
     if(!homing_active || (raw & ~homing_expected)){
       digitalWriteFast(PIN_EN_ALL,HIGH);g_energized=false;
@@ -189,19 +189,17 @@ void onStepTimer(){
   // with the first ISR trip. Only the stopped debounce owner consumes it.
   if(homing_edge_pending){ax_inc[AX_CART]=0;return;}
   if(homing_centering && ax_pos[AX_CART]==homing_center_target)ax_inc[AX_CART]=0;
-  uint8_t set=0;
-  for(int i=0;i<N_AX;++i){
-    const uint32_t inc=ax_inc[i];
-    if(!inc)continue;
-    const uint32_t prev=ax_acc[i];ax_acc[i]=prev+inc;
-    if(ax_acc[i]<prev){ax_pos[i]+=ax_dir[i];set|=1u<<i;}
+  // Cart-only installation: never emit Z pulses, even from a stale rate.
+  const uint32_t inc=ax_inc[AX_CART];
+  if(inc){
+    const uint32_t prev=ax_acc[AX_CART];ax_acc[AX_CART]=prev+inc;
+    if(ax_acc[AX_CART]<prev){
+      ax_pos[AX_CART]+=ax_dir[AX_CART];digitalWriteFast(PIN_CART_STEP,HIGH);
+    }
   }
-  if(set&1)digitalWriteFast(PIN_CART_STEP,HIGH);
-  if(set&2)digitalWriteFast(PIN_Z1_STEP,HIGH);
-  if(set&4)digitalWriteFast(PIN_Z2_STEP,HIGH);
 }
 void axSetRate(int i,float steps_per_sec,bool invert){
-  if(!g_energized){ax_inc[i]=0;return;}
+  if(i!=AX_CART || !g_energized){ax_inc[i]=0;return;}
   const int8_t d=steps_per_sec>=0?1:-1;
   if(!direction_initialized[i] || ax_dir[i]!=d){
     ax_inc[i]=0;
@@ -412,7 +410,7 @@ constexpr float SAVED_RAIL_HALF=.26f;
 // only thing allowed to act on them, because it is the sole owner of the I2C
 // bus once it exists. This is the whole fix for 'mag' returning nothing.
 volatile bool req_diag = false, req_encoder = false;
-// 0 none, 1 hanging capture, 2 upright capture, 3 explicit upright count.
+// 0 none, 1 hanging capture, 2 upright capture. Operator-only V2 command.
 volatile int calibration_request=0;
 volatile int32_t requested_upright_raw=0;
 volatile bool reference_save_pending=false;
@@ -427,29 +425,45 @@ static volatile bool zeroing = false;
 static bool capture_upright=false;
 static encoder_reference::StillCapture reference_capture;
 static uint32_t zero_t0=0;
+static uint32_t calibration_sid=0;
+void queueReply(const char* payload);
 bool encoderCalibrationBusy(){return calibration_request!=0 || zeroing || reference_save_pending;}
-void cancelEncoderCalibration(){calibration_request=0;zeroing=false;}
+void cancelEncoderCalibration(){
+  calibration_request=0;zeroing=false;reference_save_pending=false;
+  executor_state.calibration=0;calibration_sid=0;
+}
+void finishEncoderCalibration(const char* error){
+  const uint32_t sid=calibration_sid;
+  cancelEncoderCalibration();
+  if(sid){
+    char payload[100];
+    snprintf(payload,sizeof payload,"V2 %s %lu %s",error?"ERR":"OK",
+      (unsigned long)sid,error?error:"CALIBRATE");
+    queueReply(payload);
+  }
+}
 void applyEncoderReference(int32_t raw){
-  // The pending request or zeroing flag keeps motion blocked during this update.
-  reference_saved=false;
+  // Called only after persistence has been verified, with every driver disabled.
   enc_upright_raw=encoder_reference::normalize(raw);
   enc_zero=enc_ticks+encoder_reference::difference(encoder_reference::opposite(enc_upright_raw),enc_last_raw);
   th=th_hat=encTheta();thd=thd_hat=0;energy_n=cosf(th);
   pump.reset();response_watch.armed=false;
-  char message[120];snprintf(message,sizeof(message),"# upright reference applied: %ld counts, theta=%.2fdeg; saving",(long)enc_upright_raw,th*180/M_PI);
+  char message[120];snprintf(message,sizeof(message),"# upright reference applied: %ld counts, theta=%.2fdeg; saved",(long)enc_upright_raw,th*180/M_PI);
   controlLog(message);
-  reference_save_pending=true; // Publish only after the complete reference is ready.
 }
 // Non-real-time persistence. All motion commands remain blocked until finished.
 void saveEncoderReference(){
   if(!reference_save_pending)return;
-  const bool ok=teensy_reference_store::save((uint16_t)enc_upright_raw);
-  reference_saved=ok;
-  checkedPrintf("= encoder_upright_raw %ld\n",(long)enc_upright_raw);
-  checkedPrintf("= encoder_reference_saved %d\n",(int)ok);
-  checkedPrintln(ok?F("# encoder reference saved; drivers disabled. Ready for a new motion command."):
-                    F("! encoder reference active but SAVE FAILED; it will not survive reset"));
-  reference_save_pending=false;
+  if(g_energized || executor_state.enabled || !executor_state.calibration){
+    finishEncoderCalibration("calibration_state");return;
+  }
+  const bool ok=teensy_reference_store::save((uint16_t)requested_upright_raw);
+  if(ok){applyEncoderReference(requested_upright_raw);reference_saved=true;}
+  else{
+    uint16_t stored;
+    reference_saved=teensy_reference_store::load(stored) && stored==enc_upright_raw;
+  }
+  finishEncoderCalibration(ok?nullptr:"save");
 }
 
 static float v_manual=0;
@@ -573,25 +587,22 @@ void controlTick() {
     // Serve bus requests here, where we already own Wire1.
     if (req_diag) { req_diag = false; encDiagRead(); diag_done = true; }
     if(calibration_request){
-      const int request=calibration_request;
-      if(mode!=M_IDLE || g_energized){
-        calibration_request=0;controlLog("! encoder reference rejected: stop first");
-      }else if(request==3){
-        if(enc_ok && enc_consec_err==0)applyEncoderReference(requested_upright_raw);
-        else controlLog("! encoder reference rejected: no fresh encoder reading");
-        calibration_request=0;
-      }else{
-        zeroing=true;capture_upright=request==2;reference_capture.reset();zero_t0=millis();
-        calibration_request=0;
-      }
+      capture_upright=calibration_request==2;
+      calibration_request=0;zeroing=true;reference_capture.reset();zero_t0=millis();
     }
     if(zeroing){
-      if(reference_capture.add(enc_last_raw,enc_ok && enc_consec_err==0)){
+      if(!executor_state.calibration || mode!=M_IDLE || g_energized){
+        finishEncoderCalibration("calibration_state");
+      }else if(!encoderHealthy()){
+        finishEncoderCalibration("encoder");
+      }else if(uint32_t(executor_state.tick-executor_state.host_at)>=200){
+        finishEncoderCalibration("calibration_watchdog");
+      }else if(uint32_t(millis()-zero_t0)>=5000){
+        finishEncoderCalibration("calibration_timeout");
+      }else if(reference_capture.add(enc_last_raw,true)){
         const int32_t raw=reference_capture.mean();
-        applyEncoderReference(capture_upright?raw:encoder_reference::opposite(raw));
-        zeroing=false;
-      }else if(millis()-zero_t0>5000){
-        zeroing=false;controlLog("! calibration FAILED: need 0.4s still with fresh encoder readings; retry upright or zero");
+        requested_upright_raw=capture_upright?raw:encoder_reference::opposite(raw);
+        zeroing=false;reference_save_pending=true;
       }
     }
 
@@ -609,7 +620,7 @@ void controlTick() {
     // Homing owns only cart pulses, and never commands either Z axis.
     if(mode==M_HOMING){
       const uint32_t sample_irq=interruptMask();__disable_irq();
-      const uint8_t sampled=rawLimits() | homing_edge_pending;
+      const uint8_t sampled=executor::requiredLimits(rawLimits()) | homing_edge_pending;
       if(homing_edge_pending || (homing_approach && (sampled & homing_expected)))ax_inc[AX_CART]=0;
       homing_edge_pending=0;
       if(!sample_irq)__enable_irq();
@@ -850,7 +861,7 @@ void queueReply(const char* payload){
 void emitTelemetry(){
   if(!executor_state.sid)return;
   char payload[249];const uint8_t raw=executor_state.limits;
-  const unsigned flags=(executor_state.healthy?1:0)|(g_energized?2:0)|(executor_state.homed?4:0)|(executor_state.switches?8:0)|(unsigned(raw)<<4);
+  const unsigned flags=(executor_state.healthy?1:0)|(g_energized?2:0)|(executor_state.homed?4:0)|(executor_state.switches?8:0)|(unsigned(raw)<<4)|(executor_state.calibration?256:0);
   const int n=snprintf(payload,sizeof payload,"V2 S %lu %lu %lu %d %u %.7g %.7g %.7g %.7g %.7g %.7g %.7g %lu %u %lu %lu %d",
     (unsigned long)executor_state.sid,(unsigned long)executor_state.tick,(unsigned long)executor_state.acquisition_us,(int)mode,flags,
     (double)th,(double)th_hat,(double)thd,(double)xc,(double)vc,(double)acc_cmd,(double)executor_state.demand,
@@ -883,10 +894,15 @@ void handleV2(const char* line){
     executor_state.stop();reply={executor::ERROR,"upright"};
   }
   if(reply.kind==executor::OK){
+    if(!strcmp(reply.text,"CALIBRATE")){
+      calibration_sid=executor_state.sid;
+      calibration_request=executor_state.calibration;
+      return; // No success response until stable capture and verified EEPROM write.
+    }
     if(!strcmp(reply.text,"STOP") || !strcmp(reply.text,"CLEAR")){eStop();mode=executor_state.fault==executor::NONE?M_IDLE:M_FAULT;}
     else if(!strcmp(reply.text,"CENTER")){home_steps=ax_pos[AX_CART];p_rail=SAVED_RAIL_HALF;measured_home_span_steps=0;++home_epoch;xc=0;}
     else if(!strcmp(reply.text,"HOME")){
-      if(!homing.start(executor_state.tick,ax_pos[AX_CART],rawLimits())){executor_state.trip(executor::HOMING);reply={executor::ERROR,"homing"};}
+      if(!homing.start(executor_state.tick,ax_pos[AX_CART],executor::requiredLimits(rawLimits()))){executor_state.trip(executor::HOMING);reply={executor::ERROR,"homing"};}
       else{homing_edge_pending=0;homing_active=true;homing_expected=1;homing_approach=true;homing_verify=false;homing_centering=false;mode=M_HOMING;energize(true);}
     }else if(!strcmp(reply.text,"ARM") || !strcmp(reply.text,"MODE")){
       mode=(Mode)executor_state.mode;upright_only=mode==M_BALANCE;
@@ -900,7 +916,7 @@ void handleV2(const char* line){
   if(executor_state.enabled&&!g_energized){executor_state.trip(executor::DEADLINE);eStop();mode=M_FAULT;reply={executor::ERROR,"timer"};}
   if(reply.kind==executor::INFO){
     char payload[160];
-    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v1 %ld %u %u %lu %lu %ld %.7g",
+    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v2-cart2 %ld %u %u %lu %lu %ld %.7g",
       (unsigned long)executor_state.sid,(long)enc_upright_raw,(unsigned)reference_saved,(unsigned)enc_status,
       (unsigned long)enc_errors,(unsigned long)home_epoch,(long)measured_home_span_steps,(double)p_rail);
     queueReply(payload);return;
@@ -1004,7 +1020,7 @@ void setup() {
   delay(300);
   loadEncoderReference();
   enc_zero=enc_ticks+encoder_reference::difference(encoder_reference::opposite(enc_upright_raw),enc_last_raw);
-  checkedPrintf("# upright reference %ld counts (%s); startup retains it\n",(long)enc_upright_raw,reference_saved?"saved":"fallback; use upright or zero to calibrate");
+  checkedPrintf("# upright reference %ld counts (%s); startup retains it\n",(long)enc_upright_raw,reference_saved?"saved":"fallback; use upright or hanging to calibrate");
   th = th_hat = encTheta();
   home_steps = ax_pos[AX_CART];
   zhome_steps = ax_pos[AX_Z1];
@@ -1070,6 +1086,7 @@ void serviceDisplay(){
 
 void loop(){
   serviceControl();pollSerial();serviceControl();
+  saveEncoderReference(); // Disabled-only persistence, outside the control tick.
   const uint32_t tick=executor_state.tick;
   if(status_requested || (executor_state.rate && uint32_t(tick-last_emitted_tick)>=CTRL_HZ/executor_state.rate)){
     status_requested=false;last_emitted_tick=tick;emitTelemetry();
