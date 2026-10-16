@@ -1,0 +1,46 @@
+{
+  "status": "frozen_prepared_offline_no_physical_fit",
+  "frozen_utc": "2026-10-16T20:25:07.976161+00:00",
+  "dynamic_passive_data_read": false,
+  "static_manual_record_fitted": false,
+  "model_promoted": false,
+  "tests": {
+    "count": 8,
+    "passed": true,
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s evidence/system-id-20261016/analysis -p test_passive_fit.py -v",
+    "output": "test_constant_speed_hand_motion_cannot_produce_an_infinite_length_model (test_passive_fit.PassiveFitTests.test_constant_speed_hand_motion_cannot_produce_an_infinite_length_model) ... ok\ntest_independent_damped_pendulum_recovers_length_friction_and_bias (test_passive_fit.PassiveFitTests.test_independent_damped_pendulum_recovers_length_friction_and_bias) ... ok\ntest_passive_forecast_sticks_below_coulomb_threshold (test_passive_fit.PassiveFitTests.test_passive_forecast_sticks_below_coulomb_threshold) ... ok\ntest_raw_camera_pixels_detect_translation_without_claiming_metric_calibration (test_passive_fit.PassiveFitTests.test_raw_camera_pixels_detect_translation_without_claiming_metric_calibration) ... ok\ntest_reused_recording_and_identical_measurements_are_rejected (test_passive_fit.PassiveFitTests.test_reused_recording_and_identical_measurements_are_rejected) ... ok\ntest_static_or_short_data_cannot_pass_by_small_prediction_error (test_passive_fit.PassiveFitTests.test_static_or_short_data_cannot_pass_by_small_prediction_error) ... ok\ntest_time_gaps_never_create_cross_gap_weak_windows (test_passive_fit.PassiveFitTests.test_time_gaps_never_create_cross_gap_weak_windows) ... ok\ntest_validation_cannot_change_training_parameters_and_bad_holdout_rejects (test_passive_fit.PassiveFitTests.test_validation_cannot_change_training_parameters_and_bad_holdout_rejects) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 1.165s\n\nOK\n"
+  },
+  "prior_training_diagnostics_reproduced_byte_for_byte": true,
+  "artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 5587,
+      "sha256": "f1d0f075ee0b9bfffd625db768143b55a01c1e5c2ae25d24dd780c84e761b821"
+    },
+    {
+      "path": "existing-characterization-diagnostics.json",
+      "bytes": 7871,
+      "sha256": "b1709a7d1c4e9cb515c90ca3045a516729b134eb10175b400582e4b248d42c10"
+    },
+    {
+      "path": "existing_characterization_diagnostics.py",
+      "bytes": 5391,
+      "sha256": "bddb2609b685811579cfa7809650888677ea8edfeb72c504da96908eb0d899b3"
+    },
+    {
+      "path": "passive-plan.json",
+      "bytes": 3417,
+      "sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4"
+    },
+    {
+      "path": "passive_fit.py",
+      "bytes": 11326,
+      "sha256": "98914ac35dc986907edcea843e587a81cc674afcfd2643e6e20cd5ec4684d600"
+    },
+    {
+      "path": "test_passive_fit.py",
+      "bytes": 5680,
+      "sha256": "ec67019fb68011be6273e3f0307b3ee87658d4731e10533b23097a8b3fac296c"
+    }
+  ]
+}

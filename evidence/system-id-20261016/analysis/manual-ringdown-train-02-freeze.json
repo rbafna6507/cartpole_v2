@@ -1,0 +1,86 @@
+{
+  "frozen_at_utc": "2026-10-16T20:37:37.819644+00:00",
+  "status": "training candidate frozen; no independent validation or physical model promotion",
+  "heldout_read": false,
+  "selected_model": "viscous",
+  "candidate_parameters": {
+    "effective_length_m": 0.16073596568158666,
+    "gravity_coefficient_per_s2": 61.03176696268046,
+    "angular_damping_per_s": 0.4631556778357131,
+    "coulomb_rad_per_s2": 0.0,
+    "angle_offset_rad": -0.11310915597373176,
+    "linear_coefficients": [
+      60.64177253375597,
+      0.4631556778357131,
+      6.8885413950367065
+    ]
+  },
+  "rejected_primary": {
+    "effective_length_m": 0.16049873073394127,
+    "gravity_coefficient_per_s2": 61.121978691918976,
+    "angular_damping_per_s": -0.15334390446676427,
+    "coulomb_rad_per_s2": 2.1248699344276534,
+    "angle_offset_rad": -0.11236603096224441,
+    "linear_coefficients": [
+      60.73651765237396,
+      -0.15334390446676427,
+      6.853590495372735,
+      2.1248699344276534
+    ]
+  },
+  "gates_source": "passive-plan.json (unchanged initial plan)",
+  "admission_correction": "Before any heldout read, apply existing min_angle_span_rad=0.15 to heldout as well; static validation cannot pass error-only checks.",
+  "source_export": {
+    "sha256": "47cac6f910a794cbae30a4c3e90a3a0036beacb65f26b7deee7bf7fcd068b37e",
+    "bytes": 939500,
+    "original_remote": "/home/rbafna/cartpole-v2-runs/system-id-20261016/manual-ringdown-train-02/columns.json.gz",
+    "source_hashes": {
+      "rig-1792182247276281695-187204064.jsonl": "fc3f5cd4cb663f2f6e518a5b98f2738b3e173ad0bf6aeec5d5ede69fc0261229",
+      "vision.ndjson": "1e764ceece29240740925a53400dcb94a465343fadbfc11d7dbe4b7631c61852",
+      "report.json": "287003c3acc8ae4782ac918ad8f965295d777d4ef73a60686a58bcf0ffeef8af",
+      "vision-report.json": "0a18b030ae69df447215461164cbe34b9f4e9574c823613ca8344f97fe07d908"
+    }
+  },
+  "artifacts": {
+    "passive-plan.json": {
+      "sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+      "bytes": 3417
+    },
+    "passive_fit.py": {
+      "sha256": "5b8c42c450fb43cad78499af287c09def094c7e62ce64c799ab5faf8de96d3d9",
+      "bytes": 12118
+    },
+    "test_passive_fit.py": {
+      "sha256": "d44e33e0f15be1219f6c8b3270109f938b0775d7b6d82a556d3b1404c7d70394",
+      "bytes": 7391
+    },
+    "analyze_manual_train_02.py": {
+      "sha256": "63b09341b1005a9d492d70b4c4c39788472332cea23135cf28c91034df029fb5",
+      "bytes": 8739
+    },
+    "manual-ringdown-train-02-summary.json": {
+      "sha256": "b1a7bd946b928e77dadc5218def70e6e2269a498dd033fbf68e47efaaaae7723",
+      "bytes": 21671
+    },
+    "manual-ringdown-train-02-selected.json.gz": {
+      "sha256": "9e95d088526ab9d8535a668188e74f432595ff1d7c875ce28ef47ca8efd7bd8c",
+      "bytes": 27012
+    },
+    "manual-ringdown-train-02-report.md": {
+      "sha256": "f10d584d3f476ea1f33dd488a293e7b4fb0961e6af011ce9c5e83ab2db609e47",
+      "bytes": 10310
+    },
+    "README.md": {
+      "sha256": "58d6ada88d6f72839ef2659288504ebea4b5815bdd933eca9e2e7eb75d3e5182",
+      "bytes": 6207
+    }
+  },
+  "verification": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s evidence/system-id-20261016/analysis -p test_passive_fit.py -v",
+    "tests": 11,
+    "status": "passed",
+    "hardware_access": false,
+    "training_coefficients_unchanged_after_guard_fixes": true
+  },
+  "source_mutation_rule": "Do not modify frozen files after heldout is read. Store heldout results separately and verify these hashes first."
+}

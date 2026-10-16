@@ -1,0 +1,127 @@
+{
+  "purpose": "numerical mapping check only; no physical validation",
+  "thresholds": {
+    "acceleration_rad_s2": 1e-09,
+    "angle_rad": 0.01,
+    "cart_acceleration_m_s2": 1e-09
+  },
+  "horizon_s": 0.5,
+  "mujoco_step_s": 0.001,
+  "reference_rk4_step_s": 0.00025,
+  "checks": {
+    "instantaneous_equation": true,
+    "half_second_trajectory": true,
+    "fixed_cart": true,
+    "unsaturated": true
+  },
+  "trials": [
+    {
+      "excursion_rad": -1.1,
+      "initial_omega_rad_s": -1.3,
+      "first_acceleration_error_rad_s2": 0.0,
+      "maximum_angle_difference_rad": 0.004341110367966028,
+      "maximum_cart_acceleration_m_s2": 8.598411583402922e-17,
+      "maximum_applied_force_n": 0.14325911157697083,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": -1.1,
+      "initial_omega_rad_s": 0.0,
+      "first_acceleration_error_rad_s2": 7.105427357601002e-15,
+      "maximum_angle_difference_rad": 0.004086910228354945,
+      "maximum_cart_acceleration_m_s2": 9.953848431368418e-17,
+      "maximum_applied_force_n": 0.14075614587116644,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": -1.1,
+      "initial_omega_rad_s": 1.3,
+      "first_acceleration_error_rad_s2": 0.0,
+      "maximum_angle_difference_rad": 0.0038847006842177793,
+      "maximum_cart_acceleration_m_s2": 8.820785275473074e-17,
+      "maximum_applied_force_n": 0.1435158146118716,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": -0.3,
+      "initial_omega_rad_s": -1.3,
+      "first_acceleration_error_rad_s2": 0.0,
+      "maximum_angle_difference_rad": 0.0012395914261111862,
+      "maximum_cart_acceleration_m_s2": 3.567493417104986e-17,
+      "maximum_applied_force_n": 0.05310553026604143,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": -0.3,
+      "initial_omega_rad_s": 0.0,
+      "first_acceleration_error_rad_s2": 3.552713678800501e-15,
+      "maximum_angle_difference_rad": 0.001167065298934844,
+      "maximum_cart_acceleration_m_s2": 4.1021077932726065e-17,
+      "maximum_applied_force_n": 0.047255810852295195,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": -0.3,
+      "initial_omega_rad_s": 1.3,
+      "first_acceleration_error_rad_s2": 0.0,
+      "maximum_angle_difference_rad": 0.0011043539882644956,
+      "maximum_cart_acceleration_m_s2": 3.665546892614553e-17,
+      "maximum_applied_force_n": 0.049336874487425415,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 0.3,
+      "initial_omega_rad_s": -1.3,
+      "first_acceleration_error_rad_s2": 3.552713678800501e-15,
+      "maximum_angle_difference_rad": 0.0011043539882655828,
+      "maximum_cart_acceleration_m_s2": 3.82857224182476e-17,
+      "maximum_applied_force_n": 0.04933687448742537,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 0.3,
+      "initial_omega_rad_s": 0.0,
+      "first_acceleration_error_rad_s2": 3.552713678800501e-15,
+      "maximum_angle_difference_rad": 0.001167065298934599,
+      "maximum_cart_acceleration_m_s2": 3.854759219192099e-17,
+      "maximum_applied_force_n": 0.047255810852295146,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 0.3,
+      "initial_omega_rad_s": 1.3,
+      "first_acceleration_error_rad_s2": 3.552713678800501e-15,
+      "maximum_angle_difference_rad": 0.0012395914261113853,
+      "maximum_cart_acceleration_m_s2": 4.282176428652533e-17,
+      "maximum_applied_force_n": 0.05310553026604141,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 1.1,
+      "initial_omega_rad_s": -1.3,
+      "first_acceleration_error_rad_s2": 7.105427357601002e-15,
+      "maximum_angle_difference_rad": 0.0038847006842201988,
+      "maximum_cart_acceleration_m_s2": 9.10060175775437e-17,
+      "maximum_applied_force_n": 0.14351581461187174,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 1.1,
+      "initial_omega_rad_s": 0.0,
+      "first_acceleration_error_rad_s2": 7.105427357601002e-15,
+      "maximum_angle_difference_rad": 0.004086910228351148,
+      "maximum_cart_acceleration_m_s2": 9.338223383105252e-17,
+      "maximum_applied_force_n": 0.14075614587116703,
+      "force_saturated": false
+    },
+    {
+      "excursion_rad": 1.1,
+      "initial_omega_rad_s": 1.3,
+      "first_acceleration_error_rad_s2": 0.0,
+      "maximum_angle_difference_rad": 0.004341110367966227,
+      "maximum_cart_acceleration_m_s2": 9.24108413008185e-17,
+      "maximum_applied_force_n": 0.14325911157697097,
+      "force_saturated": false
+    }
+  ]
+}

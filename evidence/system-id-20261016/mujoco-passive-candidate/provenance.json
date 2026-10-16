@@ -1,0 +1,50 @@
+{
+  "status": "offline training candidate; independent physical validation pending",
+  "accepted_physical_model": false,
+  "recommended_for_hardware_rl": false,
+  "source_summary_sha256": "b1a7bd946b928e77dadc5218def70e6e2269a498dd033fbf68e47efaaaae7723",
+  "script_sha256": "b66744697eabd37c99cffc9a9ec9980742657746f7db1e153d24caa80424d5d7",
+  "mujoco_version": "3.15.0",
+  "simulator_sources": {
+    "cartpole_sdk.sim.backend": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+    "cartpole_sdk.sim.config": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+    "cartpole_sdk.sim.model": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62"
+  },
+  "full_simulation_config": {
+    "physics_dt_ns": 1000000,
+    "control_steps": 1,
+    "max_steps": 10000,
+    "rail_half_m": 0.26,
+    "effective_length_m": 0.16073596568158666,
+    "cart_mass_kg": 0.35,
+    "pole_mass_kg": 0.02275,
+    "cart_damping": 0.05,
+    "hinge_damping": 0.00020417181257815172,
+    "max_force_n": 20.0,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 1000000000
+  },
+  "inferred_parameters": {
+    "effective_length_m": 0.16073596568158666,
+    "gravity_coefficient_per_s2": 61.03176696268046,
+    "angular_damping_per_s": 0.4631556778357131,
+    "coulomb_rad_per_s2": 0.0,
+    "angle_offset_rad": -0.11310915597373176,
+    "linear_coefficients": [
+      60.64177253375597,
+      0.4631556778357131,
+      6.8885413950367065
+    ]
+  },
+  "hinge_mapping": "hinge_damping = gamma * I_pivot; I_pivot = 0.75 * assumed_pole_mass * L_eff**2",
+  "pivot_inertia_kg_m2": 0.000440827614447542,
+  "local_measurement_comparison": "physical_theta = raw_encoder_theta - training_angle_offset; offline down-region assumption only",
+  "exclusions": [
+    "No sensor-bias or live encoder calibration change.",
+    "Masses, force authority, cart damping and actuator behavior remain assumed.",
+    "The displayed uniform-rod length is 1.5*L_eff, not measured physical pole length.",
+    "No Coulomb/stiction component; the primary viscous+Coulomb fit was rejected.",
+    "Camera geometry coverage failed for the second training episode.",
+    "No inference of full-swing, upright or driven-cart validity from passive training."
+  ]
+}

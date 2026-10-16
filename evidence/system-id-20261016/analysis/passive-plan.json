@@ -1,0 +1,29 @@
+{
+  "status": "frozen before new passive training or heldout data are read",
+  "scope": "Offline passive pole dynamics only; no input gain, actuator model, mass, force or live calibration updates.",
+  "primary_model": "qddot = A*sin(q) + B*cos(q) - gamma*qdot - c*sign(qdot), with static friction at zero speed; q is raw magnetic angle. Viscous-only model is a declared comparison.",
+  "parameters": "gravity=sqrt(A*A+B*B), L=9.81/gravity, training angle offset=atan2(-B,A), gamma per second, Coulomb angular acceleration c per second squared.",
+  "data_split": "Distinct raw recording hashes for training and heldout. Explicit hand-clear free-release episode boundaries are required. Neither handling nor quiescent tails count as free decay. No heldout parameter, offset or threshold selection.",
+  "selection": "Episode boundaries are source annotations, not optimized fit windows. Preserve original source clock/timestamps and raw hashes. Separate episodes never share integration or initialization windows.",
+  "weak_form": "0.35 second nonoverlapping windows; polynomial boundary test function shared with unchanged existing fitter. Coulomb sign from centered local quadratic raw-angle derivative over at most 0.024 seconds each side, deadband 0.02 rad/s. Derivative is an offline diagnostic, not a control signal.",
+  "gates": {
+    "min_windows": 20,
+    "min_angle_span_rad": 0.15,
+    "max_condition": 1000,
+    "length_bounds_m": [0.05, 1.5],
+    "angular_damping_bounds_per_s": [0, 5],
+    "coulomb_bounds_rad_per_s2": [0, 20],
+    "max_fitted_offset_abs_rad": 0.35,
+    "max_gap_s": 0.05,
+    "max_integral_nrmse": 0.15,
+    "prediction_horizon_s": 0.5,
+    "max_prediction_rmse_rad": 0.08,
+    "max_prediction_p95_rad": 0.15,
+    "min_prediction_windows": 3
+  },
+  "gate_semantics": "Residual, prediction, coverage, conditioning and common physical bounds retain existing thresholds. This separate passive model has no forced-input excitation or input-offset diagnostic because zero cart input cannot identify them. It does not replace or relax the existing forced-input fitter.",
+  "validation": "Freeze each declared model from training only; evaluate both on disjoint heldout recordings without choosing a winner or retuning from heldout. Forecast initialization uses only past raw angle samples within the same episode. No filtered executor omega used.",
+  "physical_admission": "Driver disabled and healthy throughout; operator physically restrains cart. Raw camera pivot/cart pixel motion may support stationarity. Old camera metric calibration is invalid and cannot establish meters or independent angle validity. Global angle linearity remains unvalidated unless new geometric evidence is supplied.",
+  "camera_pixel_check": "Raw arm pivot only, confidence >=0.5, at least80 unique frames and90 percent valid geometry coverage. Relative-to-median radial displacement p95<=2pixels and maximum<=4pixels, monotonic unique camera timestamps, maximum gap<=0.1seconds. Report only image-plane stability, never physical meters. Thresholds are a diagnostic fixed before new dynamic recordings are read, not calibration.",
+  "promotion": "No automatic MuJoCo or controller change. Even passing passive statistical gates is conditional on fixed physical cart, free release and angle mapping. Full acceleration-input model acceptance remains separate. All rejected candidates remain explicitly rejected."
+}

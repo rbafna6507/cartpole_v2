@@ -1,0 +1,26 @@
+{
+  "status": "declared before heldout collection",
+  "recording": "manual-ringdown-heldout-01",
+  "maximum_recording_seconds": 180,
+  "driver": "disabled throughout; no ARM, MODE, HOME or calibration writes",
+  "physical_condition": "operator holds cart stationary by hand; both green markers visible; console closed",
+  "requested_releases": [
+    {
+      "amplitude_degrees_approx": 25,
+      "side": "right in camera view"
+    },
+    {
+      "amplitude_degrees_approx": 45,
+      "side": "left in camera view"
+    },
+    {
+      "amplitude_degrees_approx": 60,
+      "side": "right in camera view"
+    }
+  ],
+  "procedure": "Hold each pose still for2seconds, release without pushing, allow complete settling before next release. Do not touch pole during free decay.",
+  "selection": "Annotate free-release boundaries from handling/hold transitions, before fit residuals or forecasts are scored. Exclude initial release transient and final static suffix; record exact boundaries and all excluded episodes. Never optimize boundaries against model errors.",
+  "parameters": "Use frozen training candidates unchanged; no fitting to heldout or selecting offsets from heldout. Retain rejected models and all existing gates.",
+  "camera": "Independent raw pivot/angle diagnostic only; current geometry calibration absent. Use unchanged pixel stationarity gates.",
+  "powered_motion": "None during manual recording or while operator holds rig."
+}

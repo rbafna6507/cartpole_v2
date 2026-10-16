@@ -1,0 +1,219 @@
+{
+  "status": "exploratory_only_existing_model_rejected",
+  "heldout_used_for_new_model_selection": false,
+  "training_offset_rad": -0.10262626147569875,
+  "source_files": {
+    "pilot": {
+      "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-pilot-01/report.json",
+      "report_sha256": "9362569b3cca18c236432bdc1313ad0a59eb457dff5be7088122b471058112ab",
+      "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-pilot-01/rig-1792177833920197606-1674609980.jsonl.gz",
+      "compressed_sha256": "9970f53c229dca38ec5e8606fe6e947e7e2a98d559288d7ce32eb5956d2ac756",
+      "raw_sha256": "9abedc08fc3145c3e694cd45e32ba6a519b3b191a52c72f16179f1f539b77ffc",
+      "raw_bytes": 2807108,
+      "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-pilot-01/rig-1792177833920197606-1674609980.jsonl",
+      "raw_hash_matches_report": true
+    },
+    "train": {
+      "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/report.json",
+      "report_sha256": "72d805b434d51025c041ce156f82d74232fb5c94439dd222837f2e167f8150f1",
+      "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/rig-1792177943062493208-841516289.jsonl.gz",
+      "compressed_sha256": "4b9951064b5e2a161410ef6807e6cbe3fe57f7662f65d1be19e6bbbef76188cd",
+      "raw_sha256": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+      "raw_bytes": 5260304,
+      "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-train-01/rig-1792177943062493208-841516289.jsonl",
+      "raw_hash_matches_report": true
+    }
+  },
+  "source_modules": {
+    "fit": {
+      "path": "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/identification/fit.py",
+      "sha256": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76"
+    },
+    "rig_logs": {
+      "path": "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/identification/rig_logs.py",
+      "sha256": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc"
+    }
+  },
+  "harmonics": {
+    "pilot": {
+      "angle": {
+        "offset": 3.140729790097395,
+        "harmonic_explained_variance": 0.9287864640683601,
+        "residual_rms": 0.005511255636371636
+      },
+      "acceleration": {
+        "offset": 4.593133496218807e-06,
+        "harmonic_explained_variance": 0.9999410808128283,
+        "residual_rms": 0.001374137124350709
+      },
+      "frequencies": [
+        {
+          "frequency_hz": 0.8,
+          "angle_amplitude_rad": 0.006507938205218963,
+          "acceleration_amplitude_m_s2": 0.03188452734039177,
+          "gain_rad_per_m_s2": 0.2041096026214136,
+          "phase_rad": -0.1571546362906966
+        },
+        {
+          "frequency_hz": 1.3,
+          "angle_amplitude_rad": 0.020436799780795278,
+          "acceleration_amplitude_m_s2": 0.08643265981989634,
+          "gain_rad_per_m_s2": 0.23644765558968522,
+          "phase_rad": -1.179627197206684
+        },
+        {
+          "frequency_hz": 2.1,
+          "angle_amplitude_rad": 0.018039817044565247,
+          "acceleration_amplitude_m_s2": 0.23440412640161948,
+          "gain_rad_per_m_s2": 0.07696032199389051,
+          "phase_rad": -2.2980832335186565
+        }
+      ]
+    },
+    "train": {
+      "angle": {
+        "offset": 3.122666272394774,
+        "harmonic_explained_variance": 0.9623392565332831,
+        "residual_rms": 0.00905690227529921
+      },
+      "acceleration": {
+        "offset": 0.00010302369392296823,
+        "harmonic_explained_variance": 0.9999732558293705,
+        "residual_rms": 0.0018514288188235088
+      },
+      "frequencies": [
+        {
+          "frequency_hz": 0.8,
+          "angle_amplitude_rad": 0.01257767390689942,
+          "acceleration_amplitude_m_s2": 0.06340461634073827,
+          "gain_rad_per_m_s2": 0.19837157974912473,
+          "phase_rad": -0.016811170869368938
+        },
+        {
+          "frequency_hz": 1.3,
+          "angle_amplitude_rad": 0.053710382941166465,
+          "acceleration_amplitude_m_s2": 0.17299433572339412,
+          "gain_rad_per_m_s2": 0.31047480668410793,
+          "phase_rad": -1.460999289367546
+        },
+        {
+          "frequency_hz": 2.1,
+          "angle_amplitude_rad": 0.033725013325446467,
+          "acceleration_amplitude_m_s2": 0.46877134835607065,
+          "gain_rad_per_m_s2": 0.07194341856369073,
+          "phase_rad": -2.623188254492082
+        }
+      ]
+    }
+  },
+  "training_residual_diagnostics": {
+    "baseline_3term": {
+      "coefficients": [
+        55.11280510619751,
+        4.339309295720149,
+        9.753987343866696
+      ],
+      "rank": 3,
+      "condition": 2.141600121532821,
+      "training_integral_nrmse": 0.34829840659357136,
+      "parameter_count": 3,
+      "accepted": false,
+      "promoted": false
+    },
+    "coulomb_diagnostic": {
+      "coefficients": [
+        54.234215016655725,
+        0.5478064072909308,
+        10.34085207716522,
+        2.214015462254865
+      ],
+      "rank": 4,
+      "condition": 5.73610791700113,
+      "training_integral_nrmse": 0.3142496143725351,
+      "parameter_count": 4,
+      "accepted": false,
+      "promoted": false
+    },
+    "constant_torque_diagnostic": {
+      "coefficients": [
+        68.20275881932609,
+        4.070312895418329,
+        8.99933051581822,
+        -1.1479484183749518
+      ],
+      "rank": 4,
+      "condition": 2.239062106705208,
+      "training_integral_nrmse": 0.18491110829170335,
+      "parameter_count": 4,
+      "accepted": false,
+      "promoted": false
+    },
+    "coulomb_plus_constant_diagnostic": {
+      "coefficients": [
+        66.8370896953387,
+        2.119384314353498,
+        9.35661578860853,
+        1.1501389530971726,
+        -1.0682092827832474
+      ],
+      "rank": 5,
+      "condition": 5.9479020129696005,
+      "training_integral_nrmse": 0.16889256650041315,
+      "parameter_count": 5,
+      "accepted": false,
+      "promoted": false
+    },
+    "five_term_offset_diagnostic": {
+      "coefficients": [
+        67.37469251923108,
+        4.158184328368251,
+        9.006374489521924,
+        1.1787312600836952,
+        -8.228950609976303
+      ],
+      "rank": 5,
+      "condition": 2.919102178637362,
+      "training_integral_nrmse": 0.18420491779443743,
+      "parameter_count": 5,
+      "accepted": false,
+      "promoted": false
+    },
+    "baseline_residual_correlation": {
+      "coulomb_feature": 0.15298946729210225,
+      "integral_residual_mean": -0.010649773876702235,
+      "note": "In-sample correlation only, nonlinear diagnostic derivative is centered/noncausal; no heldout evaluation or model selection."
+    }
+  },
+  "static_means": {
+    "pilot": {
+      "preflight": {
+        "angle_offset_rad": -0.0813006535897931,
+        "circular_mean_theta_rad": 3.060292,
+        "samples": 51,
+        "duration_s": 0.5,
+        "circular_deviation_std_rad": 0.0,
+        "source": "training preflight only",
+        "independent_angle_calibration": false
+      },
+      "tail_mean_rad": null,
+      "tail_minus_preflight_rad": null
+    },
+    "train": {
+      "preflight": {
+        "angle_offset_rad": -0.10262626147569875,
+        "circular_mean_theta_rad": 3.0389663921140944,
+        "samples": 51,
+        "duration_s": 0.5,
+        "circular_deviation_std_rad": 0.0004561619973009609,
+        "source": "training preflight only",
+        "independent_angle_calibration": false
+      },
+      "tail_mean_rad": 3.0250005696721316,
+      "tail_minus_preflight_rad": -0.01396582244196276
+    }
+  },
+  "verification": {
+    "synthetic_harmonic_sign_and_scale": true,
+    "baseline_matches_frozen_rejected_fit": true
+  }
+}

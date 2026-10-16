@@ -1,0 +1,262 @@
+{
+  "harness": "ringdown_probe.py",
+  "status": "offline verified; no hardware execution or staging by this agent",
+  "tests": {
+    "command": ".venv/bin/python -m pytest evidence/system-id-20261016/test_ringdown_probe.py -q --tb=short -p no:cacheprovider",
+    "result": "46 passed in 1.58 s",
+    "covers": [
+      "analytic extrema and independent grid/derivatives",
+      "signed5/10/20/30 mm allowlist",
+      "same-source/snapshot freshness and coherence",
+      "board/host20ms cadence and replay rejection",
+      "all runtime guard boundaries",
+      "complete live41-parameter catalog",
+      "reference330/homeepoch14/released switches",
+      "realSDK20ms request leases and finallySTOP",
+      "original failure preserved when STOP also fails",
+      "dropped logger records invalidate evidence"
+    ]
+  },
+  "review": "id_current_runs read-only review found no new blocker in preflight/runtime guards and analysis provenance",
+  "design": {
+    "rate_hz": 100,
+    "pulse_s": 0.65,
+    "hold_s": 12,
+    "completion_pad_s": 0.04,
+    "amplitudes_mm": [
+      "-30",
+      "-20",
+      "-10",
+      "-5",
+      "5",
+      "10",
+      "20",
+      "30"
+    ],
+    "formula": "x=A*sin(pi*t/T)^4",
+    "feedback": "a_ref+80*(x_ref-x)+14*(v_ref-v)",
+    "command_clamp_m_s2": 3,
+    "ttl_ms": 20,
+    "runtime_limits": {
+      "absolute_x_m": 0.05,
+      "absolute_v_m_s": 0.3,
+      "angle_departure_from_initial_down_rad": 1.0,
+      "absolute_omega_rad_s": 10.0
+    }
+  },
+  "simulation": {
+    "trials": [
+      {
+        "amplitude_mm": -30,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.03075595863197927,
+          "v": 0.19985252040252102,
+          "theta_departure": 0.3447399885402959,
+          "omega": 3.182419955886555,
+          "executed_acceleration": 2.9520130157470703,
+          "executed_jerk": 150.00009536743164
+        },
+        "residual_peak_rad": 0.3447399885402959,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 0.0002970270089805997,
+          "hold_max_abs_v_m_s": 0.005086023212410199,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": -20,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.020461627409628595,
+          "v": 0.13258052063919615,
+          "theta_departure": 0.2304570358722713,
+          "omega": 2.132895844505516,
+          "executed_acceleration": 1.9611971378326416,
+          "executed_jerk": 150.00003576278687
+        },
+        "residual_peak_rad": 0.2304570358722713,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 0.0001758389963657376,
+          "hold_max_abs_v_m_s": 0.0032341893594708946,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": -10,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.010211362729516357,
+          "v": 0.06599420266866207,
+          "theta_departure": 0.11529425173645035,
+          "omega": 1.0688213316630197,
+          "executed_acceleration": 0.9777889251708984,
+          "executed_jerk": 130.9376358985901
+        },
+        "residual_peak_rad": 0.11529425173645035,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 7.585689495838714e-05,
+          "hold_max_abs_v_m_s": 0.0015688257693546289,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": -5,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.005105681364758179,
+          "v": 0.03299710133433103,
+          "theta_departure": 0.05769528797682089,
+          "omega": 0.5350804095215889,
+          "executed_acceleration": 0.4888944625854492,
+          "executed_jerk": 65.46881794929504
+        },
+        "residual_peak_rad": 0.05769528797682089,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 3.79284474791898e-05,
+          "hold_max_abs_v_m_s": 0.0007844128846773196,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": 5,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.0051056813647581785,
+          "v": 0.032997101334331036,
+          "theta_departure": 0.05769528797682025,
+          "omega": 0.5350804095215761,
+          "executed_acceleration": 0.4888944625854492,
+          "executed_jerk": 65.46881794929504
+        },
+        "residual_peak_rad": 0.05769528797682025,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 3.792844747919357e-05,
+          "hold_max_abs_v_m_s": 0.0007844128846773144,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": 10,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.010211362729516357,
+          "v": 0.06599420266866207,
+          "theta_departure": 0.11529425173645015,
+          "omega": 1.0688213316630197,
+          "executed_acceleration": 0.9777889251708984,
+          "executed_jerk": 130.9376358985901
+        },
+        "residual_peak_rad": 0.11529425173645015,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 7.585689495838714e-05,
+          "hold_max_abs_v_m_s": 0.0015688257693546289,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": 20,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.02046162740962859,
+          "v": 0.13258052063919615,
+          "theta_departure": 0.2304570358722711,
+          "omega": 2.1328958445055117,
+          "executed_acceleration": 1.9611971378326416,
+          "executed_jerk": 150.00003576278687
+        },
+        "residual_peak_rad": 0.2304570358722711,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 0.00017583899636574107,
+          "hold_max_abs_v_m_s": 0.0032341893594708946,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      },
+      {
+        "amplitude_mm": 30,
+        "completed": true,
+        "policy_guard_fault": null,
+        "executor_fault": null,
+        "maxima": {
+          "x": 0.030755958631979274,
+          "v": 0.19985252040252102,
+          "theta_departure": 0.3447399885402958,
+          "omega": 3.1824199558865582,
+          "executed_acceleration": 2.9520130157470703,
+          "executed_jerk": 150.00009536743164
+        },
+        "residual_peak_rad": 0.3447399885402958,
+        "policy": {
+          "clamped_commands": 0,
+          "fit_protocol_deviation_clamped": false,
+          "hold_max_abs_x_m": 0.000297027008980597,
+          "hold_max_abs_v_m_s": 0.005086023212410192,
+          "elapsed_board_s": 12.68,
+          "hold_type": "feedback_cart_hold",
+          "physical_cart_fixed": false
+        }
+      }
+    ],
+    "lease_expiry": {
+      "fault": "action lease expired",
+      "board_ns": 20000000
+    }
+  },
+  "limitations": [
+    "Provisional MuJoCo dynamics and ideal step/sensor correspondence do not certify hardware motion or residual angle.",
+    "The hold applies cart position/velocity feedback. It is not a passive or independently fixed-cart experiment.",
+    "Continuous-reference jerk differs from sampled-command/governor jerk.20/30mm simulations reach the unchanged150m/s^3 governor limit; command clamping remains zero.",
+    "Full raw100Hz telemetry preserves MCU acceleration samples, not every1ms governor transition. Fitting fast forcing may require command/governor replay between telemetry samples.",
+    "Any3m/s^2 policy clamp is explicitly marked as a fitting protocol deviation. Lost logger records fail the invocation afterSTOP.",
+    "Pilot is5mm. Any escalation requires inspection of actual angle/cart/health/timing and feedback-hold behavior; amplitude allowlisting does not authorize automatic escalation.",
+    "No implicit home, clear, calibration, parameter write, nativeMODE, source blending or scheduler change."
+  ],
+  "sha256": {
+    "ringdown_probe.py": "b9e72da4008290ffbbc14096b8801c96dd0055fb8c81836ceb49dbac093945c8",
+    "test_ringdown_probe.py": "425af583bddde5023286b45dad3e93d9efb180f6fc3287ab814a948997428965",
+    "verify_ringdown.py": "82c2bf1c9e30f8a3fb6afcf702f6e80f9e3cd3e0eadc1fef10e9c57b8359c8af",
+    "ringdown-offline-verification.json": "c5945527e0eb8827ab32174fd0e13c0212708925555375d10140d4d99167b51b"
+  }
+}
