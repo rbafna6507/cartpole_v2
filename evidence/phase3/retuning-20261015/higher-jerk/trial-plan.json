@@ -1,0 +1,40 @@
+{
+  "objective": "Repeatable fast swing-up and sustained balance after the motor/fixture changes",
+  "status": "Pending verified firmware upload with motor supply off; no higher-jerk physical trial yet",
+  "working_reference": 351,
+  "reference_basis": "Owner-selected natural upright rest; absolute vertical accuracy unverified",
+  "jmax_default": 150,
+  "jmax_permitted_maximum": 600,
+  "initial_comparison": {
+    "jmax_values": [
+      150,
+      300
+    ],
+    "estimator_bandwidth": 30,
+    "pw": 4.5,
+    "bal_pw": 4.5,
+    "leff": 0.124,
+    "automatic_seconds": 8,
+    "repeats": "Sequential A-B-B-A, followed by independent confirmation if improved"
+  },
+  "per_trial": [
+    "Verify sole serial ownership, healthy required switches, encoder config and saved reference",
+    "Confirm saved center and record a settled hanging window without overwriting direct upright reference",
+    "Read back all changed parameters and save complete live profile",
+    "Record board telemetry and camera timestamps/validity throughout bounded auto and automatic rehome",
+    "Check counted and visual return location and stopped healthy state"
+  ],
+  "metrics": [
+    "Time to first capture from board timestamps",
+    "Longest contiguous balance episode and total balance time",
+    "Rail-brake exits, displacement and maximum speed",
+    "Requested vs governed acceleration and jerk saturation",
+    "Camera tracking and command response; deadlines, faults and dropped records"
+  ],
+  "followup": "If300 improves repeated results without new tracking or timing failures, test450/600 or optimize swing-up/capture gains; keep individual profiles and independent repeat trials",
+  "limitations": [
+    "Commanded acceleration and step-derived x are not independent physical measurements",
+    "Camera/encoder disagreement remains unresolved; no unvalidated calibration model or fused-control claim"
+  ],
+  "review_fix": "Automatic return initially brakes with max(150,p_jmax), then uses unchanged slow centering limits. New regression failed with original fixed150 and passed after fix."
+}

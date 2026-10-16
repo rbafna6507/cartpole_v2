@@ -57,6 +57,8 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
             observation=rig.observation()
             select_channels(observation,channels,now_ns=observation.available_ns,max_age_ns=20_000_000)
             intent=policy.act(observation)
+            if intent is None and getattr(policy, 'fault_reason', None):
+                raise ValidationError(f'host policy fault: {policy.fault_reason}')
             if intent is not None:
                 if not isinstance(intent,Acceleration) or abs(intent.acceleration_m_s2)>max_acceleration:
                     raise ValidationError('policy output exceeds commissioning bound or is not Acceleration')
@@ -87,3 +89,32 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
                 raise
         finally:
             rig._record('policy_end')
+
+
+def run_host_controller(rig, *, mode, duration_s=10.):
+    """Trusted experimental host auto/bal, using a stopped live v6 readback.
+
+    No calibration, parameter write, home or rehome is implicit. Native auto/bal
+    are separate commands. The MCU still owns its 1 kHz external-mode governor.
+    """
+    from dataclasses import asdict, fields
+    from cartpole_sdk.control.parameters import ControllerParameters
+    from cartpole_sdk.policies import HostPolicyParameters, HostRatePolicy
+    if mode not in ('auto', 'bal') or rig.rate_hz not in (100, 250):
+        raise ValidationError('host controller requires auto/bal and 100 or 250 Hz telemetry')
+    rig._duration(duration_s)
+    rig._stopped_healthy()
+    values = rig.get_parameters()
+    if set(values) != {f.name for f in fields(ControllerParameters)}:
+        raise ValidationError('host controller requires the complete v6 live parameter catalog')
+    settings = HostPolicyParameters.from_controller(ControllerParameters(**values), start_mode=mode)
+    channels = (Channel('cart','position','step','cart-step-home'),
+                Channel('cart','velocity','step','cart-step-home'),
+                Channel('pole','angle','magnetic','encoder-zero'),
+                Channel('pole','angular_velocity','magnetic','encoder-zero'))
+    rig._record('host_controller', mode=mode, rate_hz=rig.rate_hz,
+                controller_parameters=values, policy_parameters=asdict(settings),
+                hardware_validated=False)
+    run_policy(rig, lambda selected: HostRatePolicy(selected, rate_hz=rig.rate_hz,
+               parameters=settings, start_mode=mode), channels=channels,
+               duration_s=duration_s, ttl_ms=20, max_acceleration=settings.max_acceleration_m_s2)

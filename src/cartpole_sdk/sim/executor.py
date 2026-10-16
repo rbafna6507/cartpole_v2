@@ -7,6 +7,7 @@ noise/delay belong to the plant and are never bypassed for policy feedback.
 """
 from dataclasses import dataclass, replace
 from cartpole_sdk.contracts import ActionLimits, ActionRequest, ValidationError, validate_action
+from cartpole_sdk.control.parameters import ControllerParameters
 from cartpole_sdk.control.motion import State, advance, _Float32
 from .backend import MujocoBackend
 from .config import SimulationConfig, SensorConfig
@@ -32,9 +33,15 @@ class ExecutorSimulation:
     """
     action_semantics = 'raw acceleration; binary32 cart_motion governor at 1000 Hz'
 
-    def __init__(self, config: SimulationConfig | None = None, sensors: SensorConfig | None = None):
+    def __init__(self, config: SimulationConfig | None = None, sensors: SensorConfig | None = None,
+                 *, parameters: ControllerParameters | None = None):
         self.config = config if config is not None else SimulationConfig(control_steps=10)
         self.sensors = sensors if sensors is not None else SensorConfig()
+        self.parameters = parameters if parameters is not None else ControllerParameters(rail=self.config.rail_half_m)
+        if not isinstance(self.parameters, ControllerParameters) or abs(self.parameters.rail-self.config.rail_half_m)>1e-8:
+            raise ValidationError('executor parameters must match the simulated rail geometry')
+        if max(self.parameters.amax_s, self.parameters.amax_b) > 25.:
+            raise ValidationError('simulated external governor supports acceleration limits up to 25 m/s²')
         if self.config.physics_dt_ns != 1_000_000:
             raise ValidationError('executor governor requires 1 ms physics ticks')
         if self.config.max_acceleration_m_s2 > 25.:
@@ -76,18 +83,21 @@ class ExecutorSimulation:
             if request.issued_at_ns != now:
                 raise ValidationError('issue new actions at current simulation time')
             self._active, self._previous_action_sequence = request, request.sequence
+        p = self.parameters
+        vmax = min(p.vmax, max(p.vmax_s, p.vmax_b))
+        amax = max(p.amax_s, p.amax_b)
         for _ in range(self.config.control_steps):
             now = self.ground_truth.time_ns
             if self._active is None or now >= self._active.expires_at_ns:
                 self._fault('no action lease' if self._active is None else 'action lease expired')
                 break
-            if abs(_Float32(self.ground_truth.x)) > _Float32(self.config.rail_half_m)-_Float32(.01):
+            if abs(_Float32(self.ground_truth.x)) > _Float32(self.config.rail_half_m)-_Float32(p.rail_fault_margin):
                 self._fault('rail exceeded')
                 break
             raw = self._active.acceleration_m_s2
-            self.motion = advance(self.motion, self.ground_truth.x, raw, 1.5, 25., 25., 150.,
-                                  self.config.rail_half_m, .001)
-            if abs(_Float32(self.motion.velocity)) > _Float32(1.5)+_Float32(.002):
+            self.motion = advance(self.motion, self.ground_truth.x, raw, vmax, amax, amax, p.jmax,
+                                  self.config.rail_half_m, .001, rail_margin=p.rail_margin)
+            if abs(_Float32(self.motion.velocity)) > _Float32(p.vmax)+_Float32(.002):
                 self._fault('speed exceeded')
                 break
             inner = self.plant.observation
@@ -103,7 +113,7 @@ class ExecutorSimulation:
                 self._active.sequence, self._active.expires_at_ns, True, None,
                 bool(self.motion.brake_direction), self.plant.diagnostics.force_saturated)
             if (self.plant.terminated or abs(_Float32(self.ground_truth.x)) >
-                    _Float32(self.config.rail_half_m)-_Float32(.01)):
+                    _Float32(self.config.rail_half_m)-_Float32(p.rail_fault_margin)):
                 self._fault('rail exceeded')
                 break
         self._intervals += 1

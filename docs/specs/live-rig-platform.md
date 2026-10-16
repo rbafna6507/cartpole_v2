@@ -103,3 +103,23 @@ and live calibration before flashing. Never claim phases complete where an
 actual physical or deployment prerequisite remains unmet. Owner autonomy replaces
 repeated approval gates; missing physical facts are requested while independent
 work continues.
+
+
+## Sensing integration update, 15 October 2026
+
+`executor-v5-calmodel` retains v4 INFO/rehome and adds stopped-only
+`V2 CALIBRATE sid hanging offset_counts` with a bounded signed integer correction.
+Model capture quality and cancellation are specified in `docs/executor.md`.
+The physical board was updated to v5 with motor power off on 15 October. Stopped
+checks verified reference351 and the new 600 m/s³ jerk tuning ceiling. The default
+remains150; initial automatic-return braking retains max(150,p_jmax), then centers
+with the original gentle limits. See higher-jerk deployment evidence.
+
+`EncoderPublisher` mirrors the sole SDK serial reader over loopbackUDP3096.
+The maintained viewer and source-explicit shadow observer consume this feed;
+neither opens serial. Actual SDK fusion uses loopbackUDP3097 and is visibly
+separate from the legacy display comparison. Missing/stale sources invalidate
+the estimate. Explicit source/calibration/frame/clock identities are required;
+reference changes do not silently reset a running observer. Runtime capture,
+processing, encoding and browser display rates are measured separately. All
+current fusion packets remain uncommissioned and ineligible for control.

@@ -1,0 +1,46 @@
+{
+  "status": "flashed and stopped checks passed; slow physical HOME failed to produce cart travel and was stopped after5.13s; awaiting power-off connection inspection",
+  "source_run": "/home/rbafna/cartpole-v2-live/releases/platform-20261014-cart-switches/runs/rig/rig-1791998096956761701-3206829725.jsonl",
+  "source_vision": "/home/rbafna/cartpole-v2-runs/vision-encoder-check-30fps/20261014_131151_535631/states.jsonl",
+  "findings": [
+    "Angle updates now normally change each 10ms telemetry frame, unlike preceding ~100ms plateaus.",
+    "First auto commands reach1.5m/s and roughly16m/s^2; camera pivot moves initially then remains near455px while emitted-step position oscillates over roughly470mm.",
+    "Camera scale is fitted from slow first homing leg; uncalibrated delay/perspective make inferred millimetres approximate. Nearly stationary pixel position during large step oscillations independently shows tracking loss.",
+    "Original HOME finds left contact then reaches600mm seek cap without right contact. User estimates600+mm span and requests750mm cap.",
+    "Old SDK console rejects new17-token INFO; deploy matching SDK. Console later suspended with serial open, causing board host timeoutfault2. Suspended process terminated; stopped board verified.",
+    "Slow HOME now jitters with constant800step/s requests, no contact events, noI2C/deadlinefaults, and nearly stationary camera pivot. This does not use swing-up gains or jerk governor. Driver/power/motor wiring/mechanical/pulse-path fault remains unresolved."
+  ],
+  "controller_defaults_changed": false,
+  "firmware_hex_sha256": "4b78c057d629c734822c8047402da1747519ca1d639ddc086f52e24fd22b8881",
+  "planned_validation": [
+    "power off before upload",
+    "verify disabled board and all30liveparams",
+    "owner restores motorpower",
+    "physical two-contact HOME and measured span",
+    "slow camera-checked manual sweep",
+    "bounded acceleration/jerk comparisons before swing-up"
+  ],
+  "live_home": {
+    "commanded_velocity_m_s": -0.03,
+    "commanded_travel_m": -0.1539,
+    "attempted_steps": 4104,
+    "duration_s": 5.13,
+    "motor_power": "owner confirmed on",
+    "camera_pivot_x_range_approx_px": [
+      384,
+      388
+    ],
+    "deadline_misses": 0,
+    "encoder_errors": 0,
+    "switch_contacts_seen": [],
+    "stop_reason": "camera geometry lost >300ms; owner independently reported jitter"
+  },
+  "next_test": "After owner power-off inspection and explicit power-on confirmation: one0.5sHOME pulseprobe, nominal15mmtravel, active requiredswitches, camera/health guards, unconditionalSTOP; no gain changes.",
+  "unresolved": "No current/voltage/driver-input or motor-shaft instrumentation is available remotely. Cannot distinguish interrupted coil, supply/current-limit, damaged driver, mechanical bind, or electrical pulse delivery from telemetry alone.",
+  "test_verification": {
+    "full_local_suite_before_final_numeric_edgefix": "386passed6skipped301subtests",
+    "final_native_suite": "64passed",
+    "final_affected_jetson_suite": "77passed168subtests",
+    "stopped_hardware_parameter_profile_roundtrip": "passed; drivers remained disabled; original defaults restored"
+  }
+}

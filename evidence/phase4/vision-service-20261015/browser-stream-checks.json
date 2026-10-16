@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-15",
+  "viewer": "Codex in-app browser at http://127.0.0.1:13090/",
+  "method": "Read visible dashboard counters after configuration settled; these are individual UI samples, not long-run averages or sensor-to-display latency certification.",
+  "samples": [
+    {"profile":"2Mbps, MSS1000 and TCP_NODELAY, prior decoder", "mode":"camera", "capture_fps":79.09, "tracking_fps":48.86, "decode_fps":59, "paint_fps":55, "host_read_to_canvas_ms":56, "clock_uncertainty_ms":31},
+    {"profile":"2Mbps, MSS1000 and TCP_NODELAY, prior decoder", "mode":"tracked", "capture_fps":77.41, "tracking_fps":49.89, "decode_fps":48.9, "paint_fps":43.9, "host_read_to_canvas_ms":85, "clock_uncertainty_ms":27},
+    {"profile":"4Mbps, MSS1000 and TCP_NODELAY, prior decoder", "mode":"camera", "capture_fps":79.09, "tracking_fps":45.92, "decode_fps":36, "paint_fps":24, "host_read_to_canvas_ms":528, "clock_uncertainty_ms":28},
+    {"profile":"4Mbps, MSS1000 and TCP_NODELAY, bounded decoder pacing", "mode":"camera", "capture_fps":78.42, "tracking_fps":47.76, "decode_fps":59, "paint_fps":57, "host_read_to_canvas_ms":55, "clock_uncertainty_ms":30}
+  ],
+  "limits": ["Stationary hanging pole; powered motion was not used for these streaming checks.","Browser measurements depend on local scheduling/display refresh and this network path.","Host-read-to-canvas excludes sensor exposure/readout and physical display scanout.","Image quality visually improved at4Mbps; remaining source image noise requires separate camera testing."]
+}

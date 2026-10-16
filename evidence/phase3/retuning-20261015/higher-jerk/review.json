@@ -1,0 +1,14 @@
+{
+  "scope": "Higher stopped-only jmax bound and automatic return braking compatibility",
+  "reviewer": "independent jerk_review agent",
+  "finding": {
+    "severity": "P1",
+    "summary": "Changing auto jerk to300/600 while return braking remained150 made reachable transitions violate speed/rail envelope",
+    "reproduced_300": "near-rail negative return fault7 at x=-0.25035m; accelerating seed v=.7455 a=21 crosses speed1.502 at return43ms",
+    "reproduced_600": "accelerating seed v=.9666 a=25 crosses speed1.502 at return24ms"
+  },
+  "resolution": "Retain max(150,p_jmax) while initial BRAKING; CENTERING remains jerk10",
+  "regression": "8 whole-sketch/ISR transition cases300/600 \u00d7 both directions \u00d7 accelerating/near-rail states; complete return with bounds and final disable",
+  "review_result": "Resolved by inspection; no additional actionable findings; bounded physical trials require matching build/readback and motor-off flash",
+  "known_test_issue": "One post-fix full-suite run failed a PTY20ms action-lease scheduling test; unchanged module plus all affected tests passed132tests111subtests. The final clean fullsuite rerun passed662tests7skips358subtests. Production safety deadlines unchanged."
+}

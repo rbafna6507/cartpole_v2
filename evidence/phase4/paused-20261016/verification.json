@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "hardware_access": false,
+  "remote_deployment": false,
+  "final_full_suite": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 711,
+    "skipped": 7,
+    "subtests_passed": 381,
+    "seconds": 44.63
+  },
+  "repeated_host_console": {
+    "repetitions": 15,
+    "passed": 15
+  },
+  "code_review": "Independent read-only review: zero-gain mapping and simulator acceleration envelope findings fixed; targeted fixes independently verified; no remaining actionable findings.",
+  "intermediate_failures": [
+    {
+      "test": "PolicyAndConsoleTests.test_policy_exception_stops_in_finally",
+      "reason": "wall-clock PTY lease fault during ARM confirmation; exact rerun and final full suite passed; not independently isolated"
+    },
+    {
+      "test": "PythonConsoleTests.test_python_balance_uses_external_action_and_stops_without_native_mode",
+      "reason": "PTY did not restart publication interval after STATUS; reproduced 4 failures in15, corrected emulator to match firmware, then15/15 passed"
+    }
+  ],
+  "code_sha256": {
+    "src/cartpole_sdk/policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+    "src/cartpole_sdk/rig/policy.py": "51841069018c09b050bc3e5989799c83cb0a6882a9a38511202225e0f3ce456c",
+    "src/cartpole_sdk/rig/console.py": "59f9902a168e385c8af500238cacd79ca676b0942925b8e094573ea3fbe1271a",
+    "src/cartpole_sdk/sim/executor.py": "148192ed091bf629c41d85ad433f24ac0fac50494db38c271b8df227d1ef7bc7",
+    "src/cartpole_sdk/identification/rig_logs.py": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+    "src/cartpole_sdk/identification/fit.py": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+    "examples/identify_rig.py": "ae87db387f0810ca3df6c1a4dd53630f0a12f3e9f111e4c0f303ee7ffa671959",
+    "examples/host_cartpole.py": "bba30dc264371219f0380e37bcce509cd450c10451b149eb5c77d6542ebe9462"
+  },
+  "scope": "Software verification only; no physical host-policy, fusion, calibration or plant-model acceptance."
+}

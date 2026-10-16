@@ -1,0 +1,80 @@
+FF.F                                                                     [100%]
+=================================== FAILURES ===================================
+______ RigInfoTests.test_measured_rail_identity_accepts_wide_diagnostics _______
+
+self = <test_rig_info.RigInfoTests testMethod=test_measured_rail_identity_accepts_wide_diagnostics>
+
+    def test_measured_rail_identity_accepts_wide_diagnostics(self):
+        payload=GUARD_PAYLOAD.replace('executor-v3-encguard','executor-v6-measuredrail').replace('13867 0.255','16509 0.30904875')
+>       info=parse_info(payload, received_ns=123)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_info.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = 'V2 INFO 7 executor-v6-measuredrail 270 1 103 4 2 16509 0.30904875 65535 768 1 2318 105000 2'
+received_ns = 123
+
+    def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
+        parts = payload.split(' ')
+        field_counts = {'executor-v1': 11, 'executor-v2-cart2': 11, 'executor-v3-encguard': 17, 'executor-v4-rehome': 17, 'executor-v5-calmodel': 17}
+        if len(parts) < 4 or parts[:2] != ['V2', 'INFO'] or len(parts) != field_counts.get(parts[3]):
+>           raise ProtocolError('invalid diagnostic identity or field count')
+E           cartpole_sdk.rig.protocol.ProtocolError: invalid diagnostic identity or field count
+
+src/cartpole_sdk/rig/protocol.py:142: ProtocolError
+__ ParameterTests.test_explicit_unchanged_rail_profile_stores_the_preference ___
+
+self = <test_rig_parameters.ParameterTests testMethod=test_explicit_unchanged_rail_profile_stores_the_preference>
+
+    def test_explicit_unchanged_rail_profile_stores_the_preference(self):
+        with self.rig() as rig:
+            rig.load_parameters(self.profile({'rail':.26}))
+>           self.assertEqual(len(self.fw.writes), 1)
+E           AssertionError: 0 != 1
+
+tests/test_rig_parameters.py:311: AssertionError
+____ ParameterTests.test_measured_rail_accepts_wider_profile_without_arming ____
+
+self = <test_rig_parameters.ParameterTests testMethod=test_measured_rail_accepts_wider_profile_without_arming>
+
+    def test_measured_rail_accepts_wider_profile_without_arming(self):
+        self.fw.span=16509
+        with self.rig() as rig:
+>           self.assertAlmostEqual(rig.set_parameter('rail', .30904875), .30904875, places=7)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_parameters.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:776: in set_parameter
+    expected = parameter_value(name,value)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'rail', value = 0.30904875
+
+    def parameter_value(name,value):
+        parameter_name(name)
+        if isinstance(value,bool) or not isinstance(value,(int,float)):
+            raise ValidationError(f'{name} must be finite numeric, not boolean')
+        try:
+            rounded=float32(value)
+        except (OverflowError,struct.error):
+            raise ValidationError(f'{name} must fit a finite float32') from None
+        if not math.isfinite(rounded):
+            raise ValidationError(f'{name} must be finite numeric')
+        if value != 0 and (rounded == 0 or abs(rounded) < 2**-126):
+            raise ValidationError(f'{name} must not underflow float32')
+        lower,upper,inclusive=_BOUNDS[name]
+        lower,upper=float32(lower),float32(upper)
+        if rounded>upper or (rounded<lower if inclusive else rounded<=lower):
+            relation='<=' if inclusive else '<'
+>           raise ValidationError(f'{name} requires {lower:g} {relation} value <= {upper:g}')
+E           cartpole_sdk.contracts.ValidationError: rail requires 0.02 < value <= 0.26
+
+src/cartpole_sdk/rig/parameters.py:60: ValidationError
+=========================== short test summary info ============================
+FAILED tests/test_rig_info.py::RigInfoTests::test_measured_rail_identity_accepts_wide_diagnostics
+FAILED tests/test_rig_parameters.py::ParameterTests::test_explicit_unchanged_rail_profile_stores_the_preference
+FAILED tests/test_rig_parameters.py::ParameterTests::test_measured_rail_accepts_wider_profile_without_arming
+3 failed, 1 passed, 40 deselected in 0.23s

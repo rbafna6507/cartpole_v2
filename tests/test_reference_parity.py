@@ -10,7 +10,7 @@ from dataclasses import asdict, replace
 from cartpole_sdk.control import ReferenceController, load_tuned_parameters, gains
 from cartpole_sdk.control.motion import State, advance, stopping_distance
 from cartpole_sdk.control.reference import estimate, wrap
-from oracle_support import NativeOracle
+from oracle_support import NativeOracle, PARAMETERS as ARCHIVED_PARAMETERS
 
 ERRORS = {}
 PRIMITIVE_ERRORS = {}
@@ -23,7 +23,7 @@ class ParityTests(unittest.TestCase):
     def setUp(self):
         self.p = load_tuned_parameters()
         self.native = NativeOracle(); self.native.__enter__()
-        self.native.set_parameters(asdict(self.p))
+        self.native.set_parameters({k:v for k,v in asdict(self.p).items() if k in ARCHIVED_PARAMETERS})
         self.c = ReferenceController(self.p)
     def tearDown(self): self.native.__exit__(None,None,None)
     def reset(self,theta=0,now=0): self.native.reset(theta,now_us=now); self.c.reset(theta,now_us=now)
@@ -113,7 +113,7 @@ class ParityTests(unittest.TestCase):
         # Deliberately low configurable spin thresholds exercise all phases
         # without constructing a fake private state or injected estimated rate.
         self.p=replace(self.p,spin_trip_rad_s=2,spin_resume_rad_s=.5)
-        self.native.set_parameters(asdict(self.p)); self.c=ReferenceController(self.p)
+        self.native.set_parameters({k:v for k,v in asdict(self.p).items() if k in ARCHIVED_PARAMETERS}); self.c=ReferenceController(self.p)
         self.reset(math.pi)
         for i in range(600):
             theta=math.pi if i<5 else math.pi-.1

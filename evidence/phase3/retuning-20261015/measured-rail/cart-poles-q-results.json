@@ -1,0 +1,2669 @@
+{
+  "schema": "native-board-time-jerk-comparison-v1",
+  "analysis_script_sha256": "1f969f0f52d6cbee5ea485a9a2793204cbed84ab778ec01b4babfb85cd95856f",
+  "analysis_window": "Requested duration in actual unwrapped board-clock seconds after recorded motion-start STATE, without sample-count duration estimates.",
+  "episode_bounds": "Entry lies between previous and first selected mode sample; exit between last and next. Gaps >30ms split contiguous episodes.",
+  "actuation_caveat": "Commanded trajectory acceleration, not physical motor acceleration. Interval-average jerk fractions are duration weighted and use the trial recorded jmax.",
+  "camera_caveat": "Current working anchor retained; 19ms previously frozen effective delay is descriptive only; no camera map applied.",
+  "trials": [
+    {
+      "name": "cart-poles-q-jerk225-c1-1792095260255183784",
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 225.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "reference_raw": 351,
+      "reported_success": true,
+      "source_hashes": {
+        "report.json": "1b7431a1b84af90f230eee188940ec9e77273c90df3075d2daa6fbe6079a81fd",
+        "camera.json": "3cede3aa173997ee03b3315125a3acc9e1510809324b55b0e662011168f4ee37",
+        "rig-1792095260334579335-1652492725.jsonl": "338d764499948144a94fb9c867315f1a4fd91beaf1a7a4a7c04440ac9e7860f8"
+      },
+      "time": {
+        "board_window_start_s": 895.557637,
+        "board_window_end_s": 903.557637,
+        "source_state_n": 4142,
+        "deduplicated_n": 4134,
+        "duplicate_tick_n": 8,
+        "covered_interval_s": 8.0,
+        "active_gap_ms_p50_p95_max": [
+          4.000000000019099,
+          4.000000000019099,
+          4.000999999902888
+        ],
+        "health_invalid_n": 0
+      },
+      "mode_duration_left_hold_s": {
+        "0": 0.0030000000000427463,
+        "2": 6.1609999999999445,
+        "3": 1.5160000000000764,
+        "5": 0.15599999999994907,
+        "6": 0.16399999999998727
+      },
+      "balance": {
+        "episodes": [
+          {
+            "first_s": 5.006999999999948,
+            "last_s": 6.5190000000000055,
+            "lower_duration_s": 1.5120000000000573,
+            "upper_duration_s": 1.5199999999999818,
+            "entry_interval_s": [
+              5.003000000000043,
+              5.006999999999948
+            ],
+            "exit_interval_s": [
+              6.5190000000000055,
+              6.523000000000025
+            ],
+            "samples": 379,
+            "max_abs_theta_deg": 11.249997659503958,
+            "start_x": -0.0280875,
+            "exit_x": 0.238875,
+            "max_abs_x": 0.238875,
+            "last_100ms_demand_minus_accel_max_abs": 5.258552000000001,
+            "end_mode_next": 5
+          }
+        ],
+        "count": 1,
+        "total_lower_duration_s": 1.5120000000000573,
+        "total_upper_duration_s": 1.5199999999999818,
+        "longest_lower_s": 1.5120000000000573
+      },
+      "rail_brake": {
+        "episodes": [
+          {
+            "first_s": 6.523000000000025,
+            "last_s": 6.586999999999989,
+            "lower_duration_s": 0.06399999999996453,
+            "upper_duration_s": 0.07200000000000273,
+            "entry_interval_s": [
+              6.5190000000000055,
+              6.523000000000025
+            ],
+            "exit_interval_s": [
+              6.586999999999989,
+              6.591000000000008
+            ],
+            "samples": 17,
+            "max_abs_theta_deg": 6.767576940856988,
+            "start_x": 0.2393625,
+            "exit_x": 0.2448,
+            "max_abs_x": 0.2448,
+            "last_100ms_demand_minus_accel_max_abs": 9.543683999999999,
+            "end_mode_next": 6
+          },
+          {
+            "first_s": 6.7309999999999945,
+            "last_s": 6.815000000000055,
+            "lower_duration_s": 0.08400000000006003,
+            "upper_duration_s": 0.09199999999998454,
+            "entry_interval_s": [
+              6.726999999999975,
+              6.7309999999999945
+            ],
+            "exit_interval_s": [
+              6.815000000000055,
+              6.81899999999996
+            ],
+            "samples": 22,
+            "max_abs_theta_deg": 15.820310103923994,
+            "start_x": 0.2362875,
+            "exit_x": 0.2445,
+            "max_abs_x": 0.2445,
+            "last_100ms_demand_minus_accel_max_abs": 11.742386,
+            "end_mode_next": 6
+          }
+        ],
+        "count": 2,
+        "total_lower_duration_s": 0.14800000000002456,
+        "total_upper_duration_s": 0.16399999999998727,
+        "longest_lower_s": 0.08400000000006003
+      },
+      "rail_return": {
+        "episodes": [
+          {
+            "first_s": 6.591000000000008,
+            "last_s": 6.671000000000049,
+            "lower_duration_s": 0.08000000000004093,
+            "upper_duration_s": 0.08799999999996544,
+            "entry_interval_s": [
+              6.586999999999989,
+              6.591000000000008
+            ],
+            "exit_interval_s": [
+              6.671000000000049,
+              6.6749999999999545
+            ],
+            "samples": 21,
+            "max_abs_theta_deg": 2.1972656423525407,
+            "start_x": 0.2448,
+            "exit_x": 0.24,
+            "max_abs_x": 0.2448,
+            "last_100ms_demand_minus_accel_max_abs": 0.7491788,
+            "end_mode_next": 2
+          },
+          {
+            "first_s": 6.81899999999996,
+            "last_s": 6.894999999999982,
+            "lower_duration_s": 0.07600000000002183,
+            "upper_duration_s": 0.08399999999994634,
+            "entry_interval_s": [
+              6.815000000000055,
+              6.81899999999996
+            ],
+            "exit_interval_s": [
+              6.894999999999982,
+              6.899000000000001
+            ],
+            "samples": 20,
+            "max_abs_theta_deg": 26.630860593718513,
+            "start_x": 0.2445,
+            "exit_x": 0.240225,
+            "max_abs_x": 0.2445,
+            "last_100ms_demand_minus_accel_max_abs": 0.825,
+            "end_mode_next": 2
+          }
+        ],
+        "count": 2,
+        "total_lower_duration_s": 0.15600000000006276,
+        "total_upper_duration_s": 0.17199999999991178,
+        "longest_lower_s": 0.08000000000004093
+      },
+      "first_capture_board_s": [
+        5.003000000000043,
+        5.006999999999948
+      ],
+      "limits": {
+        "max_abs_x_m": 0.2448,
+        "max_abs_v_m_s": 1.209722,
+        "max_abs_accel_m_s2": 12.58919,
+        "max_abs_demand_m_s2": 20.77524,
+        "max_abs_omega_rad_s": 22.28364
+      },
+      "actuation": {
+        "swing": {
+          "demand_minus_acceleration": {
+            "duration_s": 6.1609999999999445,
+            "n": 1541,
+            "rms": 1.9158109552781009,
+            "mean": -0.04569608968260553,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              4.7629768250000675,
+              8.937935172500156
+            ],
+            "max_abs": 14.07194
+          },
+          "theta_deg": {
+            "duration_s": 6.1609999999999445,
+            "n": 1541,
+            "rms": 96.99504883124763,
+            "mean": 0.4879708281870344,
+            "abs_quantiles_p50_p95_p99": [
+              70.05983247015779,
+              173.84765633950755,
+              178.50586050970065
+            ],
+            "max_abs": 179.91212812206976
+          },
+          "demand": {
+            "duration_s": 6.1609999999999445,
+            "n": 1541,
+            "rms": 4.383543509038695,
+            "mean": 0.016275592035867585,
+            "abs_quantiles_p50_p95_p99": [
+              2.729798125000054,
+              9.136180562500078,
+              12.238862974999892
+            ],
+            "max_abs": 16.36749
+          },
+          "acceleration": {
+            "duration_s": 6.1609999999999445,
+            "n": 1541,
+            "rms": 3.86219429421809,
+            "mean": 0.06197168171847325,
+            "abs_quantiles_p50_p95_p99": [
+              2.5866290000004475,
+              7.831154450000764,
+              10.720491949995177
+            ],
+            "max_abs": 12.58919
+          },
+          "residual_abs_gt_catch_da_fraction": 0.06492452523947989,
+          "jerk_cap_m_s3": 225.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 6.152000000000044,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            51.85300000122007,
+            224.99999999892574,
+            225.00005000289048
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.16514954486352573,
+          "jerk_near_cap_and_toward_demand_fraction": 0.14694408322500283,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.12288686605992337,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 1.5160000000000764,
+            "n": 379,
+            "rms": 5.0549811613070466,
+            "mean": -0.23511754419289416,
+            "abs_quantiles_p50_p95_p99": [
+              2.7754116999993808,
+              11.059704750000517,
+              14.00321032100564
+            ],
+            "max_abs": 15.473255
+          },
+          "theta_deg": {
+            "duration_s": 1.5160000000000764,
+            "n": 379,
+            "rms": 6.717428763236015,
+            "mean": -2.9708890520719753,
+            "abs_quantiles_p50_p95_p99": [
+              5.668945265595059,
+              10.546875312475315,
+              10.829002022630487
+            ],
+            "max_abs": 11.249997659503958
+          },
+          "demand": {
+            "duration_s": 1.5160000000000764,
+            "n": 379,
+            "rms": 6.35698684568922,
+            "mean": -0.13502366076245653,
+            "abs_quantiles_p50_p95_p99": [
+              3.766986000000291,
+              13.343027000000468,
+              16.530965700005968
+            ],
+            "max_abs": 20.77524
+          },
+          "acceleration": {
+            "duration_s": 1.5160000000000764,
+            "n": 379,
+            "rms": 3.676969902104469,
+            "mean": 0.10009388343043767,
+            "abs_quantiles_p50_p95_p99": [
+              2.585008992749979,
+              7.103089299999466,
+              8.724189479999835
+            ],
+            "max_abs": 10.10318
+          },
+          "residual_abs_gt_catch_da_fraction": 0.3667546174145559,
+          "jerk_cap_m_s3": 225.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 1.5120000000000573,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            224.99999999892563,
+            225.00007499892567,
+            225.00030494141524
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.7989417989418992,
+          "jerk_near_cap_and_toward_demand_fraction": 0.7619047619048371,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.7380952380952005,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 1.268000000000029,
+            "n": 317,
+            "rms": 5.347118748707319,
+            "mean": -0.19060418353059733,
+            "abs_quantiles_p50_p95_p99": [
+              3.1130755000001087,
+              11.192360510002977,
+              14.198411183004744
+            ],
+            "max_abs": 15.473255
+          },
+          "theta_deg": {
+            "duration_s": 1.268000000000029,
+            "n": 317,
+            "rms": 6.695524211629372,
+            "mean": -2.382196815867761,
+            "abs_quantiles_p50_p95_p99": [
+              5.537109968767886,
+              10.546875312475315,
+              10.810544760216567
+            ],
+            "max_abs": 11.249997659503958
+          },
+          "demand": {
+            "duration_s": 1.268000000000029,
+            "n": 317,
+            "rms": 6.580577876009185,
+            "mean": 0.24744984208470333,
+            "abs_quantiles_p50_p95_p99": [
+              3.925677499999995,
+              13.606636000004878,
+              16.73753110000502
+            ],
+            "max_abs": 20.77524
+          },
+          "acceleration": {
+            "duration_s": 1.268000000000029,
+            "n": 317,
+            "rms": 3.643979630951677,
+            "mean": 0.4380540256153006,
+            "abs_quantiles_p50_p95_p99": [
+              2.4865576367494033,
+              7.10529989999978,
+              8.746936040000376
+            ],
+            "max_abs": 10.10318
+          },
+          "residual_abs_gt_catch_da_fraction": 0.4037854889593851,
+          "jerk_cap_m_s3": 225.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 1.268000000000029,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            224.99999999892563,
+            225.00007499892567,
+            225.0004574375145
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.8075709779182322,
+          "jerk_near_cap_and_toward_demand_fraction": 0.7697160883282367,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.7318611987382411,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.677000000000021,
+            "n": 1920,
+            "rms": 2.8269302231388793,
+            "mean": -0.08310170711618785,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              7.061690750000674,
+              11.317778605500372
+            ],
+            "max_abs": 15.473255
+          },
+          "theta_deg": {
+            "duration_s": 7.677000000000021,
+            "n": 1920,
+            "rms": 86.9431810174642,
+            "mean": -0.1950605093761957,
+            "abs_quantiles_p50_p95_p99": [
+              46.68091201525233,
+              172.70835984416954,
+              178.2252661751707
+            ],
+            "max_abs": 179.91212812206976
+          },
+          "demand": {
+            "duration_s": 7.677000000000021,
+            "n": 1920,
+            "rms": 4.837463885144982,
+            "mean": -0.013601920956482353,
+            "abs_quantiles_p50_p95_p99": [
+              2.9531061250000414,
+              9.720195312500586,
+              13.87792922500036
+            ],
+            "max_abs": 20.77524
+          },
+          "acceleration": {
+            "duration_s": 7.677000000000021,
+            "n": 1920,
+            "rms": 3.8263280285403893,
+            "mean": 0.06949978615970563,
+            "abs_quantiles_p50_p95_p99": [
+              2.588140007000121,
+              7.6903837749986605,
+              10.082771150000136
+            ],
+            "max_abs": 12.58919
+          },
+          "residual_abs_gt_catch_da_fraction": 0.12452781034270212,
+          "jerk_cap_m_s3": 225.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.664000000000101,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            76.43424999963712,
+            225.00000000532063,
+            225.00012499892566
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.29018789144057744,
+          "jerk_near_cap_and_toward_demand_fraction": 0.26826722338209213,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.2442588726514372,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.0090000000000146,
+            "n": 1753,
+            "rms": 2.7583454869238366,
+            "mean": -0.09241473844645945,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              6.986105637500356,
+              11.298001243499899
+            ],
+            "max_abs": 15.473255
+          },
+          "theta_deg": {
+            "duration_s": 7.0090000000000146,
+            "n": 1753,
+            "rms": 90.46883090891893,
+            "mean": -1.6007403308925776,
+            "abs_quantiles_p50_p95_p99": [
+              54.55810695385656,
+              173.2324142590961,
+              178.32612193049445
+            ],
+            "max_abs": 179.91212812206976
+          },
+          "demand": {
+            "duration_s": 7.0090000000000146,
+            "n": 1753,
+            "rms": 4.642178665399192,
+            "mean": 0.24337306557233773,
+            "abs_quantiles_p50_p95_p99": [
+              2.8129660000001446,
+              9.710465725002093,
+              13.959099174999974
+            ],
+            "max_abs": 20.77524
+          },
+          "acceleration": {
+            "duration_s": 7.0090000000000146,
+            "n": 1753,
+            "rms": 3.6765452531030767,
+            "mean": 0.3357878040187971,
+            "abs_quantiles_p50_p95_p99": [
+              2.479639084749793,
+              7.073056849998266,
+              10.123616999999927
+            ],
+            "max_abs": 12.58919
+          },
+          "residual_abs_gt_catch_da_fraction": 0.11756313311470637,
+          "jerk_cap_m_s3": 225.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.004000000000133,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            68.67061874965124,
+            225.00000000532063,
+            225.00012499892563
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.26499143346671455,
+          "jerk_near_cap_and_toward_demand_fraction": 0.24557395773849935,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.22786978869226948,
+          "demand_near_acceleration_cap_fraction": 0.0
+        }
+      },
+      "camera": {
+        "envelopes": 470,
+        "distinct_sequences": 470,
+        "duplicate_envelopes": 0,
+        "distinct_rate_hz": 58.71383819871353,
+        "valid_distinct": 407,
+        "valid_fraction": 0.8659574468085106,
+        "stale_distinct_n": 0,
+        "camera_gap_ms_p50_p95_max": [
+          13.054921000730246,
+          26.331098820082843,
+          38.22418101481162
+        ],
+        "read_to_observer_ms_p50_p95_max": [
+          26.719433008111082,
+          34.18375961337006,
+          43.15676400437951
+        ],
+        "source_read_to_result_ms_p50_p95_max": [
+          21.124843508005142,
+          28.343308296462055,
+          36.21709198341705
+        ],
+        "valid_confidence_p5_p50_p95": [
+          0.8456508115108802,
+          0.8922135476215437,
+          0.9041894562860986
+        ],
+        "camera_anchor_rad": -0.009445365634260372,
+        "source_host_read_window_s": [
+          190557.37075585,
+          190565.37075585
+        ],
+        "source_clock_mapping": "native board plus per-run 1st percentile serial-receipt offset; camera t is host-read, not exposure",
+        "receipt_age_over100ms_n": 0,
+        "valid_receipt_age_over100ms_n": 0,
+        "valid_source_gap_ms_p95_max": [
+          37.205061998975,
+          163.59949597972445
+        ],
+        "calibration_identities": [
+          "{\"cart_a_px\": null, \"cart_b_px\": null, \"cart_span_mm\": null, \"home_angle_rad\": -0.006486665936711519, \"home_length_px\": 150.33427350884477}"
+        ],
+        "alignment_effective_delay_ms": 19,
+        "angle_map_applied": false,
+        "balance_aligned": {
+          "n": 80,
+          "camera_working_theta_rms_deg": 6.546854516184857,
+          "camera_working_abs_theta_p95_deg": 11.887556438307254,
+          "camera_minus_encoder_median_deg": 3.663500166502774,
+          "camera_minus_encoder_p5_p95_deg": [
+            -0.496851215137751,
+            7.050378387670239
+          ]
+        }
+      },
+      "final": {
+        "mode": 0,
+        "flags": 205,
+        "x": 0.0,
+        "fault": 0,
+        "reference_raw": 351,
+        "i2c_errors": 0
+      },
+      "firmware_provenance": {
+        "reported_version": "executor-v5-calmodel",
+        "final_reported_version": "executor-v5-calmodel",
+        "hex_sha256": "baf8b176fcb026c9d76cdc8a75f27698845f4e34a98e3733810c4103765f6e26",
+        "reference_initial_raw": 351,
+        "reference_final_raw": 351,
+        "source": "Explicit release-manifest association, matched to INFO version; not a device hash readback.",
+        "hex_artifact": "artifacts/executor-v5-calmodel-jerk600.hex",
+        "manifest_path": "/tmp/cartpole-retune-20261015/jerk-release-manifest.json",
+        "manifest_sha256": "aef770da042fb4e14a3f349358b5c437021fac81db17f360abf53d5a2685c7f4",
+        "release": "platform-20261015-v5-jerk600"
+      },
+      "source_report": {
+        "records_dropped": 0,
+        "error": null,
+        "reported_settling": {
+          "seconds": 1.004546231997665,
+          "angle_range_rad": 0.0,
+          "max_abs_omega": 0.0,
+          "mean_down_angle": -0.14419365358979272
+        }
+      },
+      "settled_hanging": {
+        "window": "last 1 actual board-clock second ending at recorded motion-start STATE",
+        "reported_settling": {
+          "seconds": 1.004546231997665,
+          "angle_range_rad": 0.0,
+          "max_abs_omega": 0.0,
+          "mean_down_angle": -0.14419365358979272
+        },
+        "state_n": 251,
+        "board_duration_s": 1.0,
+        "raw_count_min_median_max": [
+          2305,
+          2305.0,
+          2305
+        ],
+        "count_decode_max_rounding_residual": 0.00035233261178291286,
+        "theta_down_p5_median_p95_deg": [
+          -8.261687783266549,
+          -8.261687783266549,
+          -8.261687783266549
+        ],
+        "theta_range_deg": 0.0,
+        "max_abs_native_omega": 0.0,
+        "all_disabled_healthy": true,
+        "max_abs_x_m": 0.0,
+        "camera": {
+          "distinct_n": 72,
+          "valid_n": 68,
+          "working_down_angle_p5_median_p95_deg": [
+            0.3332782317645092,
+            0.5414833078033352,
+            0.7141349060034755
+          ],
+          "read_to_observer_ms_p50_p95_max": [
+            22.13808249507565,
+            31.216420965211,
+            39.7766400128603
+          ],
+          "clock_note": "Host-read source t, mapped using unchanged per-run lower-envelope receipt convention; no exposure claim."
+        }
+      },
+      "home_return": {
+        "reported_horizontal_delta_px": -0.384278002699034,
+        "recomputed_delta_xy_px": [
+          -0.384278002699034,
+          -0.03812415654519441
+        ],
+        "start_pose": {
+          "pivot_px": [
+            514.8974358974359,
+            254.05128205128204
+          ],
+          "seq": 457985,
+          "received_s": 190557.363016813
+        },
+        "end_pose": {
+          "pivot_px": [
+            514.5131578947369,
+            254.01315789473685
+          ],
+          "seq": 459182,
+          "received_s": 190572.427776343
+        },
+        "final_counted_x_m": 0.0,
+        "metric_camera_cart_calibration_available": false
+      }
+    },
+    {
+      "name": "cart-poles-q-long1-1792095141306802109",
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "reference_raw": 351,
+      "reported_success": true,
+      "source_hashes": {
+        "report.json": "6bfb8e1fb8eb0a122335dd1ade80376d83c73bb2b46510a22de030b3ce56d124",
+        "camera.json": "fb54a2cff6c10d170e6bdab68b6dcb984c88717c755ecd9a1a95d3a692e5bf32",
+        "rig-1792095141387026313-2454758461.jsonl": "7313c16d86a56672e5fbdcb4d64356c4bf3f8706d08a21c2a3ca51e82afa0fce"
+      },
+      "time": {
+        "board_window_start_s": 776.617637,
+        "board_window_end_s": 796.617637,
+        "source_state_n": 7179,
+        "deduplicated_n": 7171,
+        "duplicate_tick_n": 8,
+        "covered_interval_s": 20.0,
+        "active_gap_ms_p50_p95_max": [
+          4.000000000019099,
+          4.000000000019099,
+          4.000000000019099
+        ],
+        "health_invalid_n": 0
+      },
+      "mode_duration_left_hold_s": {
+        "0": 0.004000000000019099,
+        "2": 8.671999999999912,
+        "3": 10.536000000000058,
+        "5": 0.4759999999999991,
+        "6": 0.3120000000000118
+      },
+      "balance": {
+        "episodes": [
+          {
+            "first_s": 4.1340000000000146,
+            "last_s": 5.758000000000038,
+            "lower_duration_s": 1.6240000000000236,
+            "upper_duration_s": 1.6319999999999482,
+            "entry_interval_s": [
+              4.130000000000109,
+              4.1340000000000146
+            ],
+            "exit_interval_s": [
+              5.758000000000038,
+              5.762000000000057
+            ],
+            "samples": 407,
+            "max_abs_theta_deg": 16.61132990630366,
+            "start_x": -0.0440625,
+            "exit_x": 0.2354625,
+            "max_abs_x": 0.2354625,
+            "last_100ms_demand_minus_accel_max_abs": 14.9242363,
+            "end_mode_next": 5
+          },
+          {
+            "first_s": 8.822000000000003,
+            "last_s": 10.814000000000078,
+            "lower_duration_s": 1.9920000000000755,
+            "upper_duration_s": 2.0,
+            "entry_interval_s": [
+              8.818000000000097,
+              8.822000000000003
+            ],
+            "exit_interval_s": [
+              10.814000000000078,
+              10.818000000000097
+            ],
+            "samples": 499,
+            "max_abs_theta_deg": 20.03906137482971,
+            "start_x": -0.07995,
+            "exit_x": 0.240675,
+            "max_abs_x": 0.240675,
+            "last_100ms_demand_minus_accel_max_abs": 20.4043752,
+            "end_mode_next": 5
+          },
+          {
+            "first_s": 11.642000000000053,
+            "last_s": 15.582000000000107,
+            "lower_duration_s": 3.9400000000000546,
+            "upper_duration_s": 3.947999999999979,
+            "entry_interval_s": [
+              11.638000000000034,
+              11.642000000000053
+            ],
+            "exit_interval_s": [
+              15.582000000000107,
+              15.586000000000013
+            ],
+            "samples": 986,
+            "max_abs_theta_deg": 26.191407694431124,
+            "start_x": -0.1171125,
+            "exit_x": -0.0892875,
+            "max_abs_x": 0.23505,
+            "last_100ms_demand_minus_accel_max_abs": 13.88097,
+            "end_mode_next": 5
+          },
+          {
+            "first_s": 16.62200000000007,
+            "last_s": 19.586000000000013,
+            "lower_duration_s": 2.963999999999942,
+            "upper_duration_s": 2.97199999999998,
+            "entry_interval_s": [
+              16.618000000000052,
+              16.62200000000007
+            ],
+            "exit_interval_s": [
+              19.586000000000013,
+              19.590000000000032
+            ],
+            "samples": 742,
+            "max_abs_theta_deg": 12.480470361171012,
+            "start_x": 0.1197,
+            "exit_x": 0.1954875,
+            "max_abs_x": 0.1954875,
+            "last_100ms_demand_minus_accel_max_abs": 11.743005,
+            "end_mode_next": 5
+          }
+        ],
+        "count": 4,
+        "total_lower_duration_s": 10.520000000000095,
+        "total_upper_duration_s": 10.551999999999907,
+        "longest_lower_s": 3.9400000000000546
+      },
+      "rail_brake": {
+        "episodes": [
+          {
+            "first_s": 5.762000000000057,
+            "last_s": 5.83400000000006,
+            "lower_duration_s": 0.07200000000000273,
+            "upper_duration_s": 0.08000000000004093,
+            "entry_interval_s": [
+              5.758000000000038,
+              5.762000000000057
+            ],
+            "exit_interval_s": [
+              5.83400000000006,
+              5.838000000000079
+            ],
+            "samples": 19,
+            "max_abs_theta_deg": 7.910157916750973,
+            "start_x": 0.2365125,
+            "exit_x": 0.244575,
+            "max_abs_x": 0.244575,
+            "last_100ms_demand_minus_accel_max_abs": 6.595115999999999,
+            "end_mode_next": 6
+          },
+          {
+            "first_s": 10.818000000000097,
+            "last_s": 10.870000000000005,
+            "lower_duration_s": 0.05199999999990723,
+            "upper_duration_s": 0.05999999999994543,
+            "entry_interval_s": [
+              10.814000000000078,
+              10.818000000000097
+            ],
+            "exit_interval_s": [
+              10.870000000000005,
+              10.874000000000024
+            ],
+            "samples": 14,
+            "max_abs_theta_deg": 8.173827364492226,
+            "start_x": 0.241425,
+            "exit_x": 0.2448375,
+            "max_abs_x": 0.2448375,
+            "last_100ms_demand_minus_accel_max_abs": 5.280057,
+            "end_mode_next": 6
+          },
+          {
+            "first_s": 15.586000000000013,
+            "last_s": 15.786000000000058,
+            "lower_duration_s": 0.20000000000004547,
+            "upper_duration_s": 0.20799999999997,
+            "entry_interval_s": [
+              15.582000000000107,
+              15.586000000000013
+            ],
+            "exit_interval_s": [
+              15.786000000000058,
+              15.790000000000077
+            ],
+            "samples": 51,
+            "max_abs_theta_deg": 13.886720784806249,
+            "start_x": -0.0952875,
+            "exit_x": -0.242625,
+            "max_abs_x": 0.242625,
+            "last_100ms_demand_minus_accel_max_abs": 14.6246,
+            "end_mode_next": 6
+          },
+          {
+            "first_s": 19.590000000000032,
+            "last_s": 19.726,
+            "lower_duration_s": 0.13599999999996726,
+            "upper_duration_s": 0.14400000000000546,
+            "entry_interval_s": [
+              19.586000000000013,
+              19.590000000000032
+            ],
+            "exit_interval_s": [
+              19.726,
+              19.730000000000018
+            ],
+            "samples": 35,
+            "max_abs_theta_deg": 12.041017461883621,
+            "start_x": 0.1981125,
+            "exit_x": 0.24405,
+            "max_abs_x": 0.24405,
+            "last_100ms_demand_minus_accel_max_abs": 9.409155,
+            "end_mode_next": 6
+          }
+        ],
+        "count": 4,
+        "total_lower_duration_s": 0.4599999999999227,
+        "total_upper_duration_s": 0.4919999999999618,
+        "longest_lower_s": 0.20000000000004547
+      },
+      "rail_return": {
+        "episodes": [
+          {
+            "first_s": 5.838000000000079,
+            "last_s": 5.918000000000006,
+            "lower_duration_s": 0.07999999999992724,
+            "upper_duration_s": 0.08799999999996544,
+            "entry_interval_s": [
+              5.83400000000006,
+              5.838000000000079
+            ],
+            "exit_interval_s": [
+              5.918000000000006,
+              5.9220000000000255
+            ],
+            "samples": 21,
+            "max_abs_theta_deg": 3.0761720138851163,
+            "start_x": 0.244575,
+            "exit_x": 0.240075,
+            "max_abs_x": 0.244575,
+            "last_100ms_demand_minus_accel_max_abs": 1.1418094,
+            "end_mode_next": 2
+          },
+          {
+            "first_s": 10.874000000000024,
+            "last_s": 10.954000000000065,
+            "lower_duration_s": 0.08000000000004093,
+            "upper_duration_s": 0.08800000000007913,
+            "entry_interval_s": [
+              10.870000000000005,
+              10.874000000000024
+            ],
+            "exit_interval_s": [
+              10.954000000000065,
+              10.958000000000084
+            ],
+            "samples": 21,
+            "max_abs_theta_deg": 3.6914066458452575,
+            "start_x": 0.2448375,
+            "exit_x": 0.2403375,
+            "max_abs_x": 0.2448375,
+            "last_100ms_demand_minus_accel_max_abs": 1.1177053,
+            "end_mode_next": 2
+          },
+          {
+            "first_s": 15.790000000000077,
+            "last_s": 15.850000000000023,
+            "lower_duration_s": 0.05999999999994543,
+            "upper_duration_s": 0.06799999999998363,
+            "entry_interval_s": [
+              15.786000000000058,
+              15.790000000000077
+            ],
+            "exit_interval_s": [
+              15.850000000000023,
+              15.854000000000042
+            ],
+            "samples": 16,
+            "max_abs_theta_deg": 8.437502541811432,
+            "start_x": -0.242625,
+            "exit_x": -0.2401875,
+            "max_abs_x": 0.242625,
+            "last_100ms_demand_minus_accel_max_abs": 1.2,
+            "end_mode_next": 2
+          },
+          {
+            "first_s": 19.730000000000018,
+            "last_s": 19.80600000000004,
+            "lower_duration_s": 0.07600000000002183,
+            "upper_duration_s": 0.08400000000006003,
+            "entry_interval_s": [
+              19.726,
+              19.730000000000018
+            ],
+            "exit_interval_s": [
+              19.80600000000004,
+              19.81000000000006
+            ],
+            "samples": 20,
+            "max_abs_theta_deg": 4.570312444420038,
+            "start_x": 0.24405,
+            "exit_x": 0.24015,
+            "max_abs_x": 0.24405,
+            "last_100ms_demand_minus_accel_max_abs": 1.2936025,
+            "end_mode_next": 2
+          }
+        ],
+        "count": 4,
+        "total_lower_duration_s": 0.2959999999999354,
+        "total_upper_duration_s": 0.3280000000000882,
+        "longest_lower_s": 0.08000000000004093
+      },
+      "first_capture_board_s": [
+        4.130000000000109,
+        4.1340000000000146
+      ],
+      "limits": {
+        "max_abs_x_m": 0.2448375,
+        "max_abs_v_m_s": 1.499903,
+        "max_abs_accel_m_s2": 14.69999,
+        "max_abs_demand_m_s2": 25.0,
+        "max_abs_omega_rad_s": 21.16387
+      },
+      "actuation": {
+        "swing": {
+          "demand_minus_acceleration": {
+            "duration_s": 8.671999999999912,
+            "n": 2169,
+            "rms": 2.6329161048836083,
+            "mean": -0.043199492283406214,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              7.076916800000034,
+              11.024258680000724
+            ],
+            "max_abs": 15.7558718
+          },
+          "theta_deg": {
+            "duration_s": 8.671999999999912,
+            "n": 2169,
+            "rms": 90.17572821574764,
+            "mean": 2.035247865635124,
+            "abs_quantiles_p50_p95_p99": [
+              54.799806334945394,
+              172.8808473560038,
+              178.1824189588524
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 8.671999999999912,
+            "n": 2169,
+            "rms": 4.706679029212114,
+            "mean": -0.06298597259757734,
+            "abs_quantiles_p50_p95_p99": [
+              3.021592999999907,
+              9.066862999999211,
+              11.83469159999994
+            ],
+            "max_abs": 16.44361
+          },
+          "acceleration": {
+            "duration_s": 8.671999999999912,
+            "n": 2169,
+            "rms": 3.8947143073694668,
+            "mean": -0.019786480314171136,
+            "abs_quantiles_p50_p95_p99": [
+              2.7667154999998345,
+              7.476705000000242,
+              9.811079399999887
+            ],
+            "max_abs": 12.28771
+          },
+          "residual_abs_gt_catch_da_fraction": 0.10793357933575921,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 8.65400000000011,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            60.660274999713806,
+            150.0002499992837,
+            150.00025000083994
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.2831060781141685,
+          "jerk_near_cap_and_toward_demand_fraction": 0.2562976658193322,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.16824589785067845,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 10.536000000000058,
+            "n": 2634,
+            "rms": 6.2280440040264216,
+            "mean": -0.6879133033193615,
+            "abs_quantiles_p50_p95_p99": [
+              3.3452505000018364,
+              12.917763439993985,
+              19.103430980015943
+            ],
+            "max_abs": 26.994856
+          },
+          "theta_deg": {
+            "duration_s": 10.536000000000058,
+            "n": 2634,
+            "rms": 8.001626328805486,
+            "mean": -3.728878324444643,
+            "abs_quantiles_p50_p95_p99": [
+              5.712890555525047,
+              15.117187756895351,
+              22.587892774358934
+            ],
+            "max_abs": 26.191407694431124
+          },
+          "demand": {
+            "duration_s": 10.536000000000058,
+            "n": 2634,
+            "rms": 7.150640428869902,
+            "mean": -0.7655128907259764,
+            "abs_quantiles_p50_p95_p99": [
+              4.400307,
+              14.171408999989348,
+              19.541531600014338
+            ],
+            "max_abs": 25.0
+          },
+          "acceleration": {
+            "duration_s": 10.536000000000058,
+            "n": 2634,
+            "rms": 3.317429248599736,
+            "mean": -0.07759958740661496,
+            "abs_quantiles_p50_p95_p99": [
+              2.205161,
+              6.300317099999914,
+              9.886750260000436
+            ],
+            "max_abs": 13.65177
+          },
+          "residual_abs_gt_catch_da_fraction": 0.4403948367502724,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 10.520000000000095,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992838,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.8391634980989141,
+          "jerk_near_cap_and_toward_demand_fraction": 0.8000000000000195,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.8163498098859209,
+          "demand_near_acceleration_cap_fraction": 0.0026575550493672683
+        },
+        "balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 9.808000000000106,
+            "n": 2452,
+            "rms": 6.183672660979771,
+            "mean": -0.7423300824117296,
+            "abs_quantiles_p50_p95_p99": [
+              3.2550790000014445,
+              12.865513399997965,
+              19.24443028000042
+            ],
+            "max_abs": 26.994856
+          },
+          "theta_deg": {
+            "duration_s": 9.808000000000106,
+            "n": 2452,
+            "rms": 7.9679721599766475,
+            "mean": -3.420350516057524,
+            "abs_quantiles_p50_p95_p99": [
+              5.449218815952613,
+              15.292971208441488,
+              22.675784500132004
+            ],
+            "max_abs": 26.191407694431124
+          },
+          "demand": {
+            "duration_s": 9.808000000000106,
+            "n": 2452,
+            "rms": 7.1395861224226245,
+            "mean": -0.6914303336959879,
+            "abs_quantiles_p50_p95_p99": [
+              4.374728000000281,
+              14.264053999999135,
+              19.858034800030648
+            ],
+            "max_abs": 25.0
+          },
+          "acceleration": {
+            "duration_s": 9.808000000000106,
+            "n": 2452,
+            "rms": 3.333891731715934,
+            "mean": 0.05089974871574162,
+            "abs_quantiles_p50_p95_p99": [
+              2.20256,
+              6.349893799999961,
+              9.92891408000019
+            ],
+            "max_abs": 13.65177
+          },
+          "residual_abs_gt_catch_da_fraction": 0.43311582381740804,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 9.804000000000087,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992838,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.8388412892697643,
+          "jerk_near_cap_and_toward_demand_fraction": 0.8000815993472497,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.8119135046919241,
+          "demand_near_acceleration_cap_fraction": 0.0028548123980560148
+        },
+        "swing_balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 19.20799999999997,
+            "n": 4803,
+            "rms": 4.940253311469039,
+            "mean": -0.3968388463585246,
+            "abs_quantiles_p50_p95_p99": [
+              1.2023190000007113,
+              11.024389400000278,
+              16.539694478004748
+            ],
+            "max_abs": 26.994856
+          },
+          "theta_deg": {
+            "duration_s": 19.20799999999997,
+            "n": 4803,
+            "rms": 60.88013307139453,
+            "mean": -1.1264989866493846,
+            "abs_quantiles_p50_p95_p99": [
+              10.371091860929177,
+              159.36327181944623,
+              176.30686682663818
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 19.20799999999997,
+            "n": 4803,
+            "rms": 6.168333478200755,
+            "mean": -0.44833705596913426,
+            "abs_quantiles_p50_p95_p99": [
+              3.684757500000227,
+              12.380374999999576,
+              17.293154400000052
+            ],
+            "max_abs": 25.0
+          },
+          "acceleration": {
+            "duration_s": 19.20799999999997,
+            "n": 4803,
+            "rms": 3.5895753136314728,
+            "mean": -0.05149820961060973,
+            "abs_quantiles_p50_p95_p99": [
+              2.4553124999999496,
+              7.04666499999974,
+              9.887155560000748
+            ],
+            "max_abs": 13.65177
+          },
+          "residual_abs_gt_catch_da_fraction": 0.2902957101208142,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 19.174000000000206,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992837,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.5881923437989246,
+          "jerk_near_cap_and_toward_demand_fraction": 0.5546051945343015,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.5238343590278318,
+          "demand_near_acceleration_cap_fraction": 0.0014577259475288286
+        },
+        "swing_balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 17.66800000000012,
+            "n": 4418,
+            "rms": 4.815344072669776,
+            "mean": -0.3867435956201552,
+            "abs_quantiles_p50_p95_p99": [
+              1.036797500000662,
+              10.852430400000005,
+              16.68446999000123
+            ],
+            "max_abs": 26.994856
+          },
+          "theta_deg": {
+            "duration_s": 17.66800000000012,
+            "n": 4418,
+            "rms": 63.165573988170934,
+            "mean": -1.5666598304072745,
+            "abs_quantiles_p50_p95_p99": [
+              10.50292944959003,
+              162.03518028296128,
+              176.66019156424576
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 17.66800000000012,
+            "n": 4418,
+            "rms": 6.0115991717499275,
+            "mean": -0.2743638171868611,
+            "abs_quantiles_p50_p95_p99": [
+              3.481958,
+              12.424435499999735,
+              17.380466700000593
+            ],
+            "max_abs": 25.0
+          },
+          "acceleration": {
+            "duration_s": 17.66800000000012,
+            "n": 4418,
+            "rms": 3.505252310528641,
+            "mean": 0.11237977843329416,
+            "abs_quantiles_p50_p95_p99": [
+              2.402677999999875,
+              6.610605600000362,
+              9.8993
+            ],
+            "max_abs": 13.65177
+          },
+          "residual_abs_gt_catch_da_fraction": 0.27371519130636685,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 17.6460000000003,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.99999612534958,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.576787940609818,
+          "jerk_near_cap_and_toward_demand_fraction": 0.5425592202199325,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.5254448600249029,
+          "demand_near_acceleration_cap_fraction": 0.0015847860538902821
+        }
+      },
+      "camera": {
+        "envelopes": 1099,
+        "distinct_sequences": 1099,
+        "duplicate_envelopes": 0,
+        "distinct_rate_hz": 54.931052900460536,
+        "valid_distinct": 974,
+        "valid_fraction": 0.8862602365787079,
+        "stale_distinct_n": 0,
+        "camera_gap_ms_p50_p95_max": [
+          13.384249497903511,
+          26.915017652208913,
+          72.9963899939321
+        ],
+        "read_to_observer_ms_p50_p95_max": [
+          25.93463598168455,
+          33.486524503678076,
+          72.38739400054328
+        ],
+        "source_read_to_result_ms_p50_p95_max": [
+          20.201829000143334,
+          27.516203315462917,
+          35.76849299133755
+        ],
+        "valid_confidence_p5_p50_p95": [
+          0.8607768425927328,
+          0.896367975934876,
+          0.9047924710222298
+        ],
+        "camera_anchor_rad": -0.009445365634260372,
+        "source_host_read_window_s": [
+          190438.43128382196,
+          190458.43128382196
+        ],
+        "source_clock_mapping": "native board plus per-run 1st percentile serial-receipt offset; camera t is host-read, not exposure",
+        "receipt_age_over100ms_n": 0,
+        "valid_receipt_age_over100ms_n": 0,
+        "valid_source_gap_ms_p95_max": [
+          38.209984602872275,
+          201.04449198697694
+        ],
+        "calibration_identities": [
+          "{\"cart_a_px\": null, \"cart_b_px\": null, \"cart_span_mm\": null, \"home_angle_rad\": -0.006486665936711519, \"home_length_px\": 150.33427350884477}"
+        ],
+        "alignment_effective_delay_ms": 19,
+        "angle_map_applied": false,
+        "balance_aligned": {
+          "n": 494,
+          "camera_working_theta_rms_deg": 7.588592746885795,
+          "camera_working_abs_theta_p95_deg": 14.390711020663366,
+          "camera_minus_encoder_median_deg": 2.7901941146633047,
+          "camera_minus_encoder_p5_p95_deg": [
+            -2.3376145417936045,
+            6.371523521825553
+          ]
+        }
+      },
+      "final": {
+        "mode": 0,
+        "flags": 205,
+        "x": 0.0,
+        "fault": 0,
+        "reference_raw": 351,
+        "i2c_errors": 0
+      },
+      "firmware_provenance": {
+        "reported_version": "executor-v5-calmodel",
+        "final_reported_version": "executor-v5-calmodel",
+        "hex_sha256": "baf8b176fcb026c9d76cdc8a75f27698845f4e34a98e3733810c4103765f6e26",
+        "reference_initial_raw": 351,
+        "reference_final_raw": 351,
+        "source": "Explicit release-manifest association, matched to INFO version; not a device hash readback.",
+        "hex_artifact": "artifacts/executor-v5-calmodel-jerk600.hex",
+        "manifest_path": "/tmp/cartpole-retune-20261015/jerk-release-manifest.json",
+        "manifest_sha256": "aef770da042fb4e14a3f349358b5c437021fac81db17f360abf53d5a2685c7f4",
+        "release": "platform-20261015-v5-jerk600"
+      },
+      "source_report": {
+        "records_dropped": 0,
+        "error": null,
+        "reported_settling": {
+          "seconds": 1.0048762710066512,
+          "angle_range_rad": 0.0015339999999999243,
+          "max_abs_omega": 0.05450338,
+          "mean_down_angle": -0.14878954203600872
+        }
+      },
+      "settled_hanging": {
+        "window": "last 1 actual board-clock second ending at recorded motion-start STATE",
+        "reported_settling": {
+          "seconds": 1.0048762710066512,
+          "angle_range_rad": 0.0015339999999999243,
+          "max_abs_omega": 0.05450338,
+          "mean_down_angle": -0.14878954203600872
+        },
+        "state_n": 251,
+        "board_duration_s": 1.0,
+        "raw_count_min_median_max": [
+          2302,
+          2302.0,
+          2303
+        ],
+        "count_decode_max_rounding_residual": 0.00032728390874581237,
+        "theta_down_p5_median_p95_deg": [
+          -8.525362960585767,
+          -8.525362960585767,
+          -8.525362960585767
+        ],
+        "theta_range_deg": 0.08789172577306395,
+        "max_abs_native_omega": 0.05450338,
+        "all_disabled_healthy": true,
+        "max_abs_x_m": 0.0,
+        "camera": {
+          "distinct_n": 67,
+          "valid_n": 63,
+          "working_down_angle_p5_median_p95_deg": [
+            0.4980264822357116,
+            0.6849768449639575,
+            0.9858862482453938
+          ],
+          "read_to_observer_ms_p50_p95_max": [
+            21.16778600611724,
+            28.968256199732423,
+            37.890326988417655
+          ],
+          "clock_note": "Host-read source t, mapped using unchanged per-run lower-envelope receipt convention; no exposure claim."
+        }
+      },
+      "home_return": {
+        "reported_horizontal_delta_px": -0.4692982456140271,
+        "recomputed_delta_xy_px": [
+          -0.4692982456140271,
+          -0.07695374800636046
+        ],
+        "start_pose": {
+          "pivot_px": [
+            514.8026315789474,
+            254.0921052631579
+          ],
+          "seq": 448512,
+          "received_s": 190438.407785149
+        },
+        "end_pose": {
+          "pivot_px": [
+            514.3333333333334,
+            254.01515151515153
+          ],
+          "seq": 450676,
+          "received_s": 190465.681517012
+        },
+        "final_counted_x_m": 0.0,
+        "metric_camera_cart_calibration_available": false
+      }
+    },
+    {
+      "name": "cart-poles-q1-1792095046832307229",
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "reference_raw": 351,
+      "reported_success": true,
+      "source_hashes": {
+        "report.json": "6b0bf55c1dbd7d7c533473ed566007b8b5bb9a28bb48ee9be765bd745cc1a5af",
+        "camera.json": "36f16705b2a863150773983d5a690170c8f675980ec6339b8c8f5050b45b232a",
+        "rig-1792095046908760159-1066707994.jsonl": "642672d216d9581bb77e7af73ba57dc2bdaa5c69dd15927210475517fc573ea7"
+      },
+      "time": {
+        "board_window_start_s": 682.144637,
+        "board_window_end_s": 690.144637,
+        "source_state_n": 3844,
+        "deduplicated_n": 3833,
+        "duplicate_tick_n": 11,
+        "covered_interval_s": 8.0,
+        "active_gap_ms_p50_p95_max": [
+          4.000000000019099,
+          4.000000000019099,
+          4.001000000016575
+        ],
+        "health_invalid_n": 0
+      },
+      "mode_duration_left_hold_s": {
+        "0": 0.004000000000019099,
+        "2": 2.6720000000000255,
+        "3": 5.323999999999955
+      },
+      "balance": {
+        "episodes": [
+          {
+            "first_s": 2.6760000000000446,
+            "last_s": 8.0,
+            "lower_duration_s": 5.323999999999955,
+            "upper_duration_s": 5.3279999999999745,
+            "entry_interval_s": [
+              2.6720000000000255,
+              2.6760000000000446
+            ],
+            "exit_interval_s": [
+              8.0,
+              8.0
+            ],
+            "samples": 1332,
+            "max_abs_theta_deg": 17.40234397910537,
+            "start_x": 0.0713625,
+            "exit_x": -0.0023625,
+            "max_abs_x": 0.2010375,
+            "last_100ms_demand_minus_accel_max_abs": 0.44746890000000006,
+            "end_mode_next": 14
+          }
+        ],
+        "count": 1,
+        "total_lower_duration_s": 5.323999999999955,
+        "total_upper_duration_s": 5.3279999999999745,
+        "longest_lower_s": 5.323999999999955
+      },
+      "rail_brake": {
+        "episodes": [],
+        "count": 0,
+        "total_lower_duration_s": 0,
+        "total_upper_duration_s": 0,
+        "longest_lower_s": 0
+      },
+      "rail_return": {
+        "episodes": [],
+        "count": 0,
+        "total_lower_duration_s": 0,
+        "total_upper_duration_s": 0,
+        "longest_lower_s": 0
+      },
+      "first_capture_board_s": [
+        2.6720000000000255,
+        2.6760000000000446
+      ],
+      "limits": {
+        "max_abs_x_m": 0.2134875,
+        "max_abs_v_m_s": 1.232253,
+        "max_abs_accel_m_s2": 12.86418,
+        "max_abs_demand_m_s2": 18.9071,
+        "max_abs_omega_rad_s": 19.70738
+      },
+      "actuation": {
+        "swing": {
+          "demand_minus_acceleration": {
+            "duration_s": 2.6720000000000255,
+            "n": 668,
+            "rms": 1.479035646282756,
+            "mean": -0.0858301877654402,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              3.8237642000023255,
+              6.861909120001258
+            ],
+            "max_abs": 8.544511
+          },
+          "theta_deg": {
+            "duration_s": 2.6720000000000255,
+            "n": 668,
+            "rms": 111.84683770615786,
+            "mean": 6.920464082414007,
+            "abs_quantiles_p50_p95_p99": [
+              92.19727442035837,
+              176.11526286445724,
+              178.9136781172883
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 2.6720000000000255,
+            "n": 668,
+            "rms": 4.866808082792862,
+            "mean": -0.11703604631650029,
+            "abs_quantiles_p50_p95_p99": [
+              3.3844060000002534,
+              8.750098600000182,
+              12.49330040000051
+            ],
+            "max_abs": 12.86418
+          },
+          "acceleration": {
+            "duration_s": 2.6720000000000255,
+            "n": 668,
+            "rms": 4.534053400487344,
+            "mean": -0.031205858551060214,
+            "abs_quantiles_p50_p95_p99": [
+              3.116826,
+              8.354025800000352,
+              12.10060200000082
+            ],
+            "max_abs": 12.86418
+          },
+          "residual_abs_gt_catch_da_fraction": 0.046407185628836015,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 2.6680000000000064,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            52.349624999759136,
+            150.00007499928378,
+            150.00024999928394
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.23688155922049764,
+          "jerk_near_cap_and_toward_demand_fraction": 0.19940029985017438,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.1694152923537794,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 5.323999999999955,
+            "n": 1331,
+            "rms": 4.0238222700625625,
+            "mean": -0.20892605602310102,
+            "abs_quantiles_p50_p95_p99": [
+              0.48016727499980866,
+              9.397333900000943,
+              14.543374613963016
+            ],
+            "max_abs": 18.424823
+          },
+          "theta_deg": {
+            "duration_s": 5.323999999999955,
+            "n": 1331,
+            "rms": 4.781700309445092,
+            "mean": -1.5082057764438905,
+            "abs_quantiles_p50_p95_p99": [
+              1.4062498506774435,
+              12.128909187656689,
+              15.732424107728878
+            ],
+            "max_abs": 17.40234397910537
+          },
+          "demand": {
+            "duration_s": 5.323999999999955,
+            "n": 1331,
+            "rms": 4.683142961760635,
+            "mean": -0.2106087419453037,
+            "abs_quantiles_p50_p95_p99": [
+              0.9364559499999378,
+              10.664565500000169,
+              15.631460199996287
+            ],
+            "max_abs": 18.9071
+          },
+          "acceleration": {
+            "duration_s": 5.323999999999955,
+            "n": 1331,
+            "rms": 2.2151506033368165,
+            "mean": -0.0016826859222027152,
+            "abs_quantiles_p50_p95_p99": [
+              0.6246131500000062,
+              4.991935,
+              7.281000710002425
+            ],
+            "max_abs": 9.191935
+          },
+          "residual_abs_gt_catch_da_fraction": 0.213373403456001,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 5.323999999999955,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.99974999928375,
+            150.0002499992837,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.5154019534183852,
+          "jerk_near_cap_and_toward_demand_fraction": 0.48084147257687543,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.502629601803104,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 5.267999999999915,
+            "n": 1317,
+            "rms": 4.014129398688906,
+            "mean": -0.24723671500892502,
+            "abs_quantiles_p50_p95_p99": [
+              0.450896149999513,
+              9.427873750000511,
+              14.646795497962543
+            ],
+            "max_abs": 18.424823
+          },
+          "theta_deg": {
+            "duration_s": 5.267999999999915,
+            "n": 1317,
+            "rms": 4.603590601332598,
+            "mean": -1.3829593207776358,
+            "abs_quantiles_p50_p95_p99": [
+              1.4062498506774435,
+              11.175294562738346,
+              15.629590788574927
+            ],
+            "max_abs": 17.40234397910537
+          },
+          "demand": {
+            "duration_s": 5.267999999999915,
+            "n": 1317,
+            "rms": 4.695399772853171,
+            "mean": -0.21651097542075884,
+            "abs_quantiles_p50_p95_p99": [
+              0.90961375,
+              10.714124500018892,
+              15.655481399996177
+            ],
+            "max_abs": 18.9071
+          },
+          "acceleration": {
+            "duration_s": 5.267999999999915,
+            "n": 1317,
+            "rms": 2.1953783526669772,
+            "mean": 0.03072573958816622,
+            "abs_quantiles_p50_p95_p99": [
+              0.6170334500000239,
+              4.953834500000021,
+              7.331100970002197
+            ],
+            "max_abs": 9.191935
+          },
+          "residual_abs_gt_catch_da_fraction": 0.21184510250565225,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 5.267999999999915,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.99974999928375,
+            150.0002499992837,
+            150.00025000282227
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.5148063781320168,
+          "jerk_near_cap_and_toward_demand_fraction": 0.4798785117690328,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.49886104783594226,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 3.3928754399858203,
+            "mean": -0.16779146873139592,
+            "abs_quantiles_p50_p95_p99": [
+              0.11625259999999468,
+              8.311326500000083,
+              13.148599512997963
+            ],
+            "max_abs": 18.424823
+          },
+          "theta_deg": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 64.77313528270614,
+            "mean": 1.3083782484271158,
+            "abs_quantiles_p50_p95_p99": [
+              3.7792966527449403,
+              171.2153564483832,
+              177.62694325197
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 4.745308704084781,
+            "mean": -0.17933982714788427,
+            "abs_quantiles_p50_p95_p99": [
+              1.8788499999998889,
+              10.217065500000354,
+              14.450837499999787
+            ],
+            "max_abs": 18.9071
+          },
+          "acceleration": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 3.1838431218014462,
+            "mean": -0.011548358416488378,
+            "abs_quantiles_p50_p95_p99": [
+              1.2856395000002356,
+              6.896435399999895,
+              9.584561370002655
+            ],
+            "max_abs": 12.86418
+          },
+          "residual_abs_gt_catch_da_fraction": 0.15757878939469658,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.991999999999962,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            100.3727499994814,
+            150.0002499992837,
+            150.00024999936812
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.42242242242239303,
+          "jerk_near_cap_and_toward_demand_fraction": 0.38688688688682993,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.3913913913913417,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.759999999999877,
+            "n": 1940,
+            "rms": 3.393714772189667,
+            "mean": -0.18159170343707495,
+            "abs_quantiles_p50_p95_p99": [
+              0.10789449799998634,
+              8.3261028000001,
+              13.214709779997682
+            ],
+            "max_abs": 18.424823
+          },
+          "theta_deg": {
+            "duration_s": 7.759999999999877,
+            "n": 1940,
+            "rms": 65.09643827022202,
+            "mean": 0.37344394930269953,
+            "abs_quantiles_p50_p95_p99": [
+              3.3398437534575502,
+              171.2988535878707,
+              177.62694325197
+            ],
+            "max_abs": 180.00001984784282
+          },
+          "demand": {
+            "duration_s": 7.759999999999877,
+            "n": 1940,
+            "rms": 4.707978042992603,
+            "mean": -0.08105091632389314,
+            "abs_quantiles_p50_p95_p99": [
+              1.8208670000000982,
+              10.334600000001144,
+              14.457769999999757
+            ],
+            "max_abs": 18.9071
+          },
+          "acceleration": {
+            "duration_s": 7.759999999999877,
+            "n": 1940,
+            "rms": 3.1189525613916533,
+            "mean": 0.1005407871131818,
+            "abs_quantiles_p50_p95_p99": [
+              1.2246850000000116,
+              6.624687999999108,
+              9.737629200002006
+            ],
+            "max_abs": 12.86418
+          },
+          "residual_abs_gt_catch_da_fraction": 0.15515463917525385,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.755999999999858,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            98.73397499952775,
+            150.0002499992837,
+            150.00024999928394
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.4187725631768798,
+          "jerk_near_cap_and_toward_demand_fraction": 0.38421866941717614,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.3929860752965081,
+          "demand_near_acceleration_cap_fraction": 0.0
+        }
+      },
+      "camera": {
+        "envelopes": 444,
+        "distinct_sequences": 444,
+        "duplicate_envelopes": 0,
+        "distinct_rate_hz": 55.55041368695095,
+        "valid_distinct": 393,
+        "valid_fraction": 0.8851351351351351,
+        "stale_distinct_n": 0,
+        "camera_gap_ms_p50_p95_max": [
+          13.196963991504163,
+          34.54135678766761,
+          49.780002009356394
+        ],
+        "read_to_observer_ms_p50_p95_max": [
+          24.442862020805478,
+          35.10731078858952,
+          44.60579599253833
+        ],
+        "source_read_to_result_ms_p50_p95_max": [
+          18.876400499721058,
+          27.55037216702476,
+          37.5990429893136
+        ],
+        "valid_confidence_p5_p50_p95": [
+          0.8778495343901342,
+          0.8980396742109216,
+          0.9076294493284518
+        ],
+        "camera_anchor_rad": -0.009445365634260372,
+        "source_host_read_window_s": [
+          190343.95891194878,
+          190351.95891194878
+        ],
+        "source_clock_mapping": "native board plus per-run 1st percentile serial-receipt offset; camera t is host-read, not exposure",
+        "receipt_age_over100ms_n": 0,
+        "valid_receipt_age_over100ms_n": 0,
+        "valid_source_gap_ms_p95_max": [
+          37.9951522409101,
+          125.64803098211996
+        ],
+        "calibration_identities": [
+          "{\"cart_a_px\": null, \"cart_b_px\": null, \"cart_span_mm\": null, \"home_angle_rad\": -0.006486665936711519, \"home_length_px\": 150.33427350884477}"
+        ],
+        "alignment_effective_delay_ms": 19,
+        "angle_map_applied": false,
+        "balance_aligned": {
+          "n": 254,
+          "camera_working_theta_rms_deg": 5.017114751954698,
+          "camera_working_abs_theta_p95_deg": 11.055855286124103,
+          "camera_minus_encoder_median_deg": 0.349727796175346,
+          "camera_minus_encoder_p5_p95_deg": [
+            -1.6145620228446822,
+            5.69446130047088
+          ]
+        }
+      },
+      "final": {
+        "mode": 0,
+        "flags": 205,
+        "x": 0.0,
+        "fault": 0,
+        "reference_raw": 351,
+        "i2c_errors": 0
+      },
+      "firmware_provenance": {
+        "reported_version": "executor-v5-calmodel",
+        "final_reported_version": "executor-v5-calmodel",
+        "hex_sha256": "baf8b176fcb026c9d76cdc8a75f27698845f4e34a98e3733810c4103765f6e26",
+        "reference_initial_raw": 351,
+        "reference_final_raw": 351,
+        "source": "Explicit release-manifest association, matched to INFO version; not a device hash readback.",
+        "hex_artifact": "artifacts/executor-v5-calmodel-jerk600.hex",
+        "manifest_path": "/tmp/cartpole-retune-20261015/jerk-release-manifest.json",
+        "manifest_sha256": "aef770da042fb4e14a3f349358b5c437021fac81db17f360abf53d5a2685c7f4",
+        "release": "platform-20261015-v5-jerk600"
+      },
+      "source_report": {
+        "records_dropped": 0,
+        "error": null,
+        "reported_settling": {
+          "seconds": 1.0024019130214583,
+          "angle_range_rad": 0.0015339999999998966,
+          "max_abs_omega": 0.05450338,
+          "mean_down_angle": -0.14418754203600784
+        }
+      },
+      "settled_hanging": {
+        "window": "last 1 actual board-clock second ending at recorded motion-start STATE",
+        "reported_settling": {
+          "seconds": 1.0024019130214583,
+          "angle_range_rad": 0.0015339999999998966,
+          "max_abs_omega": 0.05450338,
+          "mean_down_angle": -0.14418754203600784
+        },
+        "state_n": 251,
+        "board_duration_s": 1.0,
+        "raw_count_min_median_max": [
+          2305,
+          2305.0,
+          2306
+        ],
+        "count_decode_max_rounding_residual": 0.0003648569629604026,
+        "theta_down_p5_median_p95_deg": [
+          -8.261687783266549,
+          -8.261687783266549,
+          -8.261687783266549
+        ],
+        "theta_range_deg": 0.08789172577306395,
+        "max_abs_native_omega": 0.05450338,
+        "all_disabled_healthy": true,
+        "max_abs_x_m": 0.0,
+        "camera": {
+          "distinct_n": 68,
+          "valid_n": 60,
+          "working_down_angle_p5_median_p95_deg": [
+            0.3829880311851096,
+            0.5547909495531247,
+            0.7107156347916186
+          ],
+          "read_to_observer_ms_p50_p95_max": [
+            24.603340498288162,
+            31.028910596796777,
+            40.16625200165436
+          ],
+          "clock_note": "Host-read source t, mapped using unchanged per-run lower-envelope receipt convention; no exposure claim."
+        }
+      },
+      "home_return": {
+        "reported_horizontal_delta_px": -0.2824133504493602,
+        "recomputed_delta_xy_px": [
+          -0.2824133504493602,
+          -0.008344030808700609
+        ],
+        "start_pose": {
+          "pivot_px": [
+            514.7560975609757,
+            254.0609756097561
+          ],
+          "seq": 440994,
+          "received_s": 190343.958889404
+        },
+        "end_pose": {
+          "pivot_px": [
+            514.4736842105264,
+            254.0526315789474
+          ],
+          "seq": 442095,
+          "received_s": 190357.848977631
+        },
+        "final_counted_x_m": 0.0,
+        "metric_camera_cart_calibration_available": false
+      }
+    },
+    {
+      "name": "cart-poles-q2-1792095098516249201",
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "reference_raw": 351,
+      "reported_success": true,
+      "source_hashes": {
+        "report.json": "80a949aa6e0eabe88781d20d777e7c28ee12b68518eb3effecda884f51834981",
+        "camera.json": "74a11d3331ceb822c869a8b1d4534126da04c7eea856a29a642d4883b2659716",
+        "rig-1792095098586211181-2536373219.jsonl": "a4a474a2b0ee02a9e19933bb50f3a09f596599817e3eaed9159f9e2cc0f49807"
+      },
+      "time": {
+        "board_window_start_s": 733.785637,
+        "board_window_end_s": 741.785637,
+        "source_state_n": 4247,
+        "deduplicated_n": 4244,
+        "duplicate_tick_n": 3,
+        "covered_interval_s": 8.0,
+        "active_gap_ms_p50_p95_max": [
+          4.000000000019099,
+          4.000000000019099,
+          4.000000000019099
+        ],
+        "health_invalid_n": 0
+      },
+      "mode_duration_left_hold_s": {
+        "0": 0.004000000000019099,
+        "2": 2.6200000000000045,
+        "3": 5.375999999999976
+      },
+      "balance": {
+        "episodes": [
+          {
+            "first_s": 2.6240000000000236,
+            "last_s": 8.0,
+            "lower_duration_s": 5.375999999999976,
+            "upper_duration_s": 5.3799999999999955,
+            "entry_interval_s": [
+              2.6200000000000045,
+              2.6240000000000236
+            ],
+            "exit_interval_s": [
+              8.0,
+              8.0
+            ],
+            "samples": 1345,
+            "max_abs_theta_deg": 17.138674531364117,
+            "start_x": 0.06195,
+            "exit_x": 0.0817875,
+            "max_abs_x": 0.2113125,
+            "last_100ms_demand_minus_accel_max_abs": 13.767057000000001,
+            "end_mode_next": 14
+          }
+        ],
+        "count": 1,
+        "total_lower_duration_s": 5.375999999999976,
+        "total_upper_duration_s": 5.3799999999999955,
+        "longest_lower_s": 5.375999999999976
+      },
+      "rail_brake": {
+        "episodes": [],
+        "count": 0,
+        "total_lower_duration_s": 0,
+        "total_upper_duration_s": 0,
+        "longest_lower_s": 0
+      },
+      "rail_return": {
+        "episodes": [],
+        "count": 0,
+        "total_lower_duration_s": 0,
+        "total_upper_duration_s": 0,
+        "longest_lower_s": 0
+      },
+      "first_capture_board_s": [
+        2.6200000000000045,
+        2.6240000000000236
+      ],
+      "limits": {
+        "max_abs_x_m": 0.2113125,
+        "max_abs_v_m_s": 1.184361,
+        "max_abs_accel_m_s2": 11.84559,
+        "max_abs_demand_m_s2": 20.28007,
+        "max_abs_omega_rad_s": 19.67807
+      },
+      "actuation": {
+        "swing": {
+          "demand_minus_acceleration": {
+            "duration_s": 2.6200000000000045,
+            "n": 655,
+            "rms": 1.2020644701848238,
+            "mean": -0.09021219361804922,
+            "abs_quantiles_p50_p95_p99": [
+              0.0,
+              2.686487500003989,
+              6.147441300000395
+            ],
+            "max_abs": 8.835126
+          },
+          "theta_deg": {
+            "duration_s": 2.6200000000000045,
+            "n": 655,
+            "rms": 113.07894172532363,
+            "mean": 9.37142178275332,
+            "abs_quantiles_p50_p95_p99": [
+              95.75683201838062,
+              176.68216449569027,
+              179.02442169176229
+            ],
+            "max_abs": 179.8242363962967
+          },
+          "demand": {
+            "duration_s": 2.6200000000000045,
+            "n": 655,
+            "rms": 4.801621093273228,
+            "mean": -0.17585987114026858,
+            "abs_quantiles_p50_p95_p99": [
+              3.3751945000003256,
+              9.710757500001488,
+              11.631243000000005
+            ],
+            "max_abs": 12.24508
+          },
+          "acceleration": {
+            "duration_s": 2.6200000000000045,
+            "n": 655,
+            "rms": 4.551183355182147,
+            "mean": -0.08564767752221912,
+            "abs_quantiles_p50_p95_p99": [
+              3.1285425,
+              9.485361750000232,
+              11.342391500000632
+            ],
+            "max_abs": 11.84559
+          },
+          "residual_abs_gt_catch_da_fraction": 0.02595419847331954,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 2.6159999999999854,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            52.8264999997825,
+            150.0000000035471,
+            150.00024999928382
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.18960244648321764,
+          "jerk_near_cap_and_toward_demand_fraction": 0.1666666666666377,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.14220183486228286,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 5.375999999999976,
+            "n": 1344,
+            "rms": 5.066627113500409,
+            "mean": -0.7442347410080746,
+            "abs_quantiles_p50_p95_p99": [
+              2.5825089999996416,
+              10.705069780004752,
+              15.410342060001383
+            ],
+            "max_abs": 22.774555
+          },
+          "theta_deg": {
+            "duration_s": 5.375999999999976,
+            "n": 1344,
+            "rms": 6.704753420090653,
+            "mean": -1.7611476292466248,
+            "abs_quantiles_p50_p95_p99": [
+              5.449218815952613,
+              12.199217984613531,
+              15.820310103923994
+            ],
+            "max_abs": 17.138674531364117
+          },
+          "demand": {
+            "duration_s": 5.375999999999976,
+            "n": 1344,
+            "rms": 5.91272024893802,
+            "mean": -0.6067152686849995,
+            "abs_quantiles_p50_p95_p99": [
+              3.7115389999982074,
+              11.996758000001277,
+              15.634803600000774
+            ],
+            "max_abs": 20.28007
+          },
+          "acceleration": {
+            "duration_s": 5.375999999999976,
+            "n": 1344,
+            "rms": 2.913385988138369,
+            "mean": 0.13751947232307526,
+            "abs_quantiles_p50_p95_p99": [
+              2.0396949999996443,
+              5.685528599999918,
+              7.156560999998544
+            ],
+            "max_abs": 8.332215
+          },
+          "residual_abs_gt_catch_da_fraction": 0.3571428571428934,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 5.375999999999976,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992838,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.8214285714284582,
+          "jerk_near_cap_and_toward_demand_fraction": 0.7805059523810031,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.7827380952378816,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 5.240000000000009,
+            "n": 1310,
+            "rms": 5.05009020457732,
+            "mean": -0.7834641487137138,
+            "abs_quantiles_p50_p95_p99": [
+              2.4825559999991142,
+              10.734736155001753,
+              15.423462150001312
+            ],
+            "max_abs": 22.774555
+          },
+          "theta_deg": {
+            "duration_s": 5.240000000000009,
+            "n": 1310,
+            "rms": 6.362454836932954,
+            "mean": -1.4300005895075483,
+            "abs_quantiles_p50_p95_p99": [
+              5.361328236095135,
+              11.513672836823163,
+              13.359376159745791
+            ],
+            "max_abs": 14.062498506774435
+          },
+          "demand": {
+            "duration_s": 5.240000000000009,
+            "n": 1310,
+            "rms": 5.859594583187615,
+            "mean": -0.5256090413074918,
+            "abs_quantiles_p50_p95_p99": [
+              3.6514209999996594,
+              11.960225000000461,
+              15.670184000000583
+            ],
+            "max_abs": 20.28007
+          },
+          "acceleration": {
+            "duration_s": 5.240000000000009,
+            "n": 1310,
+            "rms": 2.8465712222635178,
+            "mean": 0.2578551074062221,
+            "abs_quantiles_p50_p95_p99": [
+              1.9922879999962442,
+              5.546693999998573,
+              7.130691099999653
+            ],
+            "max_abs": 8.332215
+          },
+          "residual_abs_gt_catch_da_fraction": 0.3519083969466174,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 5.240000000000009,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992838,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.819083969465523,
+          "jerk_near_cap_and_toward_demand_fraction": 0.7778625954198936,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.7816793893127595,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 4.211034053502692,
+            "mean": -0.529935206970822,
+            "abs_quantiles_p50_p95_p99": [
+              1.2264917500000247,
+              9.486145060001535,
+              14.17533879000232
+            ],
+            "max_abs": 22.774555
+          },
+          "theta_deg": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 64.96161418216673,
+            "mean": 1.886592723359674,
+            "abs_quantiles_p50_p95_p99": [
+              7.5585910136587,
+              172.09427370611397,
+              177.9793890723184
+            ],
+            "max_abs": 179.8242363962967
+          },
+          "demand": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 5.573107082942242,
+            "mean": -0.4655395381238188,
+            "abs_quantiles_p50_p95_p99": [
+              3.5681689999995387,
+              11.133775000000837,
+              14.878627500000048
+            ],
+            "max_abs": 20.28007
+          },
+          "acceleration": {
+            "duration_s": 7.995999999999981,
+            "n": 1999,
+            "rms": 3.5346366674025784,
+            "mean": 0.06439566884700304,
+            "abs_quantiles_p50_p95_p99": [
+              2.3169229999999974,
+              7.0519124999997835,
+              10.043955299999208
+            ],
+            "max_abs": 11.84559
+          },
+          "residual_abs_gt_catch_da_fraction": 0.2486243121561141,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.991999999999962,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992837,
+            150.00024999928382,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.6146146146145508,
+          "jerk_near_cap_and_toward_demand_fraction": 0.5795795795796043,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.573073073072896,
+          "demand_near_acceleration_cap_fraction": 0.0
+        },
+        "swing_balance_away_from_rail_speed_limit": {
+          "demand_minus_acceleration": {
+            "duration_s": 7.812000000000012,
+            "n": 1953,
+            "rms": 4.193971650283278,
+            "mean": -0.554220329050063,
+            "abs_quantiles_p50_p95_p99": [
+              1.1978155000001192,
+              9.495145420001192,
+              14.2796111300018
+            ],
+            "max_abs": 22.774555
+          },
+          "theta_deg": {
+            "duration_s": 7.812000000000012,
+            "n": 1953,
+            "rms": 65.67182191421125,
+            "mean": 2.0539764673729843,
+            "abs_quantiles_p50_p95_p99": [
+              7.470705017463582,
+              172.1777708455988,
+              178.0198192661738
+            ],
+            "max_abs": 179.8242363962967
+          },
+          "demand": {
+            "duration_s": 7.812000000000012,
+            "n": 1953,
+            "rms": 5.512619887756574,
+            "mean": -0.3636266583254915,
+            "abs_quantiles_p50_p95_p99": [
+              3.50227049999816,
+              11.085704500000006,
+              14.880812500000038
+            ],
+            "max_abs": 20.28007
+          },
+          "acceleration": {
+            "duration_s": 7.812000000000012,
+            "n": 1953,
+            "rms": 3.468595603083753,
+            "mean": 0.1905936707245715,
+            "abs_quantiles_p50_p95_p99": [
+              2.272968999999526,
+              6.868979000000723,
+              10.063979099999107
+            ],
+            "max_abs": 11.84559
+          },
+          "residual_abs_gt_catch_da_fraction": 0.24475166410655053,
+          "jerk_cap_m_s3": 150.0,
+          "near_cap_fraction_threshold": 0.95,
+          "jerk_interval_eligible_s": 7.807999999999993,
+          "observed_avg_abs_jerk_p50_p95_p99": [
+            149.9999999992837,
+            150.00024999928377,
+            150.000250003547
+          ],
+          "observed_avg_jerk_near_cap_fraction": 0.612192622950744,
+          "jerk_near_cap_and_toward_demand_fraction": 0.5768442622950996,
+          "demand_slew_abs_gt_jerk_cap_fraction": 0.5722336065571979,
+          "demand_near_acceleration_cap_fraction": 0.0
+        }
+      },
+      "camera": {
+        "envelopes": 450,
+        "distinct_sequences": 450,
+        "duplicate_envelopes": 0,
+        "distinct_rate_hz": 56.28711089679148,
+        "valid_distinct": 401,
+        "valid_fraction": 0.8911111111111111,
+        "stale_distinct_n": 0,
+        "camera_gap_ms_p50_p95_max": [
+          13.136237976141274,
+          27.019220212241628,
+          38.689381995936856
+        ],
+        "read_to_observer_ms_p50_p95_max": [
+          25.093078991631046,
+          33.3457361033652,
+          42.35759502626024
+        ],
+        "source_read_to_result_ms_p50_p95_max": [
+          19.482948497170582,
+          27.574080908379972,
+          36.31948001566343
+        ],
+        "valid_confidence_p5_p50_p95": [
+          0.8779412284452367,
+          0.897377337826298,
+          0.9040237496809482
+        ],
+        "camera_anchor_rad": -0.009445365634260372,
+        "source_host_read_window_s": [
+          190395.59958508582,
+          190403.59958508582
+        ],
+        "source_clock_mapping": "native board plus per-run 1st percentile serial-receipt offset; camera t is host-read, not exposure",
+        "receipt_age_over100ms_n": 0,
+        "valid_receipt_age_over100ms_n": 0,
+        "valid_source_gap_ms_p95_max": [
+          37.607343441050034,
+          200.32070801244117
+        ],
+        "calibration_identities": [
+          "{\"cart_a_px\": null, \"cart_b_px\": null, \"cart_span_mm\": null, \"home_angle_rad\": -0.006486665936711519, \"home_length_px\": 150.33427350884477}"
+        ],
+        "alignment_effective_delay_ms": 19,
+        "angle_map_applied": false,
+        "balance_aligned": {
+          "n": 264,
+          "camera_working_theta_rms_deg": 7.134368960201362,
+          "camera_working_abs_theta_p95_deg": 13.10822116996917,
+          "camera_minus_encoder_median_deg": 2.8040251563278664,
+          "camera_minus_encoder_p5_p95_deg": [
+            -2.1334361482149866,
+            6.139388041146115
+          ]
+        }
+      },
+      "final": {
+        "mode": 0,
+        "flags": 205,
+        "x": 0.0,
+        "fault": 0,
+        "reference_raw": 351,
+        "i2c_errors": 0
+      },
+      "firmware_provenance": {
+        "reported_version": "executor-v5-calmodel",
+        "final_reported_version": "executor-v5-calmodel",
+        "hex_sha256": "baf8b176fcb026c9d76cdc8a75f27698845f4e34a98e3733810c4103765f6e26",
+        "reference_initial_raw": 351,
+        "reference_final_raw": 351,
+        "source": "Explicit release-manifest association, matched to INFO version; not a device hash readback.",
+        "hex_artifact": "artifacts/executor-v5-calmodel-jerk600.hex",
+        "manifest_path": "/tmp/cartpole-retune-20261015/jerk-release-manifest.json",
+        "manifest_sha256": "aef770da042fb4e14a3f349358b5c437021fac81db17f360abf53d5a2685c7f4",
+        "release": "platform-20261015-v5-jerk600"
+      },
+      "source_report": {
+        "records_dropped": 0,
+        "error": null,
+        "reported_settling": {
+          "seconds": 1.0062629700114485,
+          "angle_range_rad": 0.0015340000000003962,
+          "max_abs_omega": 0.05454573,
+          "mean_down_angle": -0.14419974089138002
+        }
+      },
+      "settled_hanging": {
+        "window": "last 1 actual board-clock second ending at recorded motion-start STATE",
+        "reported_settling": {
+          "seconds": 1.0062629700114485,
+          "angle_range_rad": 0.0015340000000003962,
+          "max_abs_omega": 0.05454573,
+          "mean_down_angle": -0.14419974089138002
+        },
+        "state_n": 251,
+        "board_duration_s": 1.0,
+        "raw_count_min_median_max": [
+          2304,
+          2305.0,
+          2305
+        ],
+        "count_decode_max_rounding_residual": 0.00035233261178291286,
+        "theta_down_p5_median_p95_deg": [
+          -8.261687783266549,
+          -8.261687783266549,
+          -8.261687783266549
+        ],
+        "theta_range_deg": 0.08789172577308939,
+        "max_abs_native_omega": 0.05454573,
+        "all_disabled_healthy": true,
+        "max_abs_x_m": 0.0,
+        "camera": {
+          "distinct_n": 70,
+          "valid_n": 60,
+          "working_down_angle_p5_median_p95_deg": [
+            0.41667121618503966,
+            0.6174793442108162,
+            0.8879066150495428
+          ],
+          "read_to_observer_ms_p50_p95_max": [
+            22.824678497272544,
+            30.825809300586116,
+            32.90476999245584
+          ],
+          "clock_note": "Host-read source t, mapped using unchanged per-run lower-envelope receipt convention; no exposure claim."
+        }
+      },
+      "home_return": {
+        "reported_horizontal_delta_px": 0.06111111111124501,
+        "recomputed_delta_xy_px": [
+          0.06111111111124501,
+          -0.17083333333332007
+        ],
+        "start_pose": {
+          "pivot_px": [
+            514.55,
+            254.2125
+          ],
+          "seq": 445104,
+          "received_s": 190395.591246811
+        },
+        "end_pose": {
+          "pivot_px": [
+            514.6111111111112,
+            254.04166666666669
+          ],
+          "seq": 446340,
+          "received_s": 190411.136638644
+        },
+        "final_counted_x_m": 0.0,
+        "metric_camera_cart_calibration_available": false
+      }
+    }
+  ]
+}

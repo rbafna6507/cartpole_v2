@@ -1,0 +1,102 @@
+....................................................... [  7%]
+............................ [ 11%]
+........................................................................ [ 22%]
+.............................................FFF........................ [ 32%]
+................ssss........ss.................................................... [ 44%]
+.............................................. [ 50%]
+............................................. [ 57%]
+.................................................................................................................. [ 73%]
+..................................................... [ 81%]
+................................................s........... [ 89%]
+......................................................................   [100%]
+=================================== FAILURES ===================================
+___ test_export_embeds_exact_artifact_and_runs_without_original_weight_file ____
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_embeds_exact_artif0')
+
+    def test_export_embeds_exact_artifact_and_runs_without_original_weight_file(tmp_path):
+        export=api()
+        copy=tmp_path/'weights.json';copy.write_bytes(ARTIFACT.read_bytes())
+        target=tmp_path/'policy.py'
+        result=export(copy,target,source='simulation')
+        copy.unlink()
+        assert 0<len(target.read_bytes())<=65536
+        assert result['artifact_sha256']==sha256(ARTIFACT.read_bytes()).hexdigest()
+        module=load_source(target)
+        assert module.ARTIFACT_SHA256==result['artifact_sha256']
+        assert module.SENSOR_SOURCE=='simulation'
+        assert module.RATE_HZ==100
+        assert json.loads(module.ARTIFACT_JSON)==read_artifact(ARTIFACT)
+>       p=module.create_policy()
+          ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_learning_export.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def create_policy():
+        if sha256(ARTIFACT_JSON.encode('utf-8')).hexdigest() != ARTIFACT_SHA256:
+            raise ValidationError('embedded learned artifact digest mismatch')
+        root = Path(cartpole_sdk.__file__).resolve().parent
+        for name, expected in RUNTIME_SHA256.items():
+            if sha256((root / name).read_bytes()).hexdigest() != expected:
+>               raise ValidationError('SDK inference code differs from trained provenance')
+E               cartpole_sdk.contracts.ValidationError: SDK inference code differs from trained provenance
+
+/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_embeds_exact_artif0/policy.py:31: ValidationError
+__________ test_export_is_deterministic_and_wrong_sources_fail_closed __________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_is_deterministic_a0')
+
+    def test_export_is_deterministic_and_wrong_sources_fail_closed(tmp_path):
+        export=api()
+        first,second=tmp_path/'one.py',tmp_path/'two.py'
+        export(ARTIFACT,first,source='magnetic-step')
+        export(ARTIFACT,second,source='magnetic-step')
+        assert first.read_bytes()==second.read_bytes()
+>       p=load_source(first).create_policy()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_learning_export.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def create_policy():
+        if sha256(ARTIFACT_JSON.encode('utf-8')).hexdigest() != ARTIFACT_SHA256:
+            raise ValidationError('embedded learned artifact digest mismatch')
+        root = Path(cartpole_sdk.__file__).resolve().parent
+        for name, expected in RUNTIME_SHA256.items():
+            if sha256((root / name).read_bytes()).hexdigest() != expected:
+>               raise ValidationError('SDK inference code differs from trained provenance')
+E               cartpole_sdk.contracts.ValidationError: SDK inference code differs from trained provenance
+
+/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_is_deterministic_a0/one.py:31: ValidationError
+____ test_export_loads_in_stdlib_only_child_and_missing_runtime_hash_fails _____
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_loads_in_stdlib_on0')
+
+    def test_export_loads_in_stdlib_only_child_and_missing_runtime_hash_fails(tmp_path):
+        export=api()
+        target=tmp_path/'policy.py';export(ARTIFACT,target,source='simulation')
+        code='''import importlib.util,sys
+    sys.path.insert(0,sys.argv[1])
+    spec=importlib.util.spec_from_file_location('policy',sys.argv[2]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+    p=m.create_policy()
+    assert p.rate_hz==100
+    assert 'numpy' not in sys.modules and 'mujoco' not in sys.modules
+    '''
+        p=subprocess.run([sys.executable,'-I','-S','-c',code,str(ROOT/'src'),str(target)],capture_output=True,text=True)
+>       assert p.returncode==0,p.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 4, in <module>
+E           File "/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-94/test_export_loads_in_stdlib_on0/policy.py", line 31, in create_policy
+E             raise ValidationError('SDK inference code differs from trained provenance')
+E         cartpole_sdk.contracts.ValidationError: SDK inference code differs from trained provenance
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/Users/rbafna/projects/cartpole_v2/.venv/bin/python', '-I', '-S', '-c', "import importlib.util...m trained provenance\')\ncartpole_sdk.contracts.ValidationError: SDK inference code differs from trained provenance\n').returncode
+
+tests/test_learning_export.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_learning_export.py::test_export_embeds_exact_artifact_and_runs_without_original_weight_file
+FAILED tests/test_learning_export.py::test_export_is_deterministic_and_wrong_sources_fail_closed
+FAILED tests/test_learning_export.py::test_export_loads_in_stdlib_only_child_and_missing_runtime_hash_fails
+3 failed, 687 passed, 7 skipped, 381 subtests passed in 49.69s

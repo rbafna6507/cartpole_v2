@@ -1,0 +1,60 @@
+{
+  "recorded_utc": "2026-10-14T16:43:14.790502+00:00",
+  "firmware": "executor-v2-cart2",
+  "confirmed_installation": {
+    "switch_1_D26": "cart left",
+    "switch_2_D27": "cart right",
+    "switch_3_D28": "not installed",
+    "switch_4_D29": "not installed"
+  },
+  "required_mask": 3,
+  "raw_telemetry_mask": 15,
+  "z_pulses": "blocked in rate setting and pulse ISR; shared driver enable unchanged",
+  "regression_before": "6 expected failures, 48 passed",
+  "local_tests": "342 passed, 6 skipped (Linux-specific), 180 subtests passed",
+  "build_command": "arduino-cli compile --fqbn teensy:avr:teensy41 --build-path /tmp/cartpole-executor-cart2-build firmware/teensy_executor",
+  "build_exit": 0,
+  "hex_sha256": "db5f7b529a2a80316e4b15a5a102db568276a6fb4e40ea8636d81e1ac65c1c7d",
+  "firmware_files": {
+    "firmware/teensy_executor/cart_homing.h": "92a74cb7a5a974a03cf92edb64a85f5faa0ac2d32082efc3d8e7901faa50fd0d",
+    "firmware/teensy_executor/cart_mechanics.h": "04d5d54363baaaeb0e1df9827e06ef3c2a4be3fcb9b967e8a2c48d6b94e442b6",
+    "firmware/teensy_executor/cart_motion.h": "bba693c6f651731b51032d76e8f2b66cfbf3016f2048b6a4648a6d1f8042ab6f",
+    "firmware/teensy_executor/encoder_reference.h": "80c6da8ba4612fd3cbccdd4f55d574c582f066117697738ad7e292a2fbcd2a37",
+    "firmware/teensy_executor/ethernet_config.h": "18943b67065cc1c46148a129476482e6c1d19f5a7ddb3f7588183a8cb6434841",
+    "firmware/teensy_executor/ethernet_transport.h": "c142475c384314adb116262c1813740c5b19f930d1c57b4c5167adbc8841e1b2",
+    "firmware/teensy_executor/executor_core.h": "c36a3bd1cc15a7df2feec16181f14d454c10afa91e1f3446ab9c0c9a76fd5b32",
+    "firmware/teensy_executor/rail_recovery.h": "339c9106a6376e0213af2f5cce7f796c5a9492c282599cc87281e38ca227fd4c",
+    "firmware/teensy_executor/serial_frame.h": "88eddb8cfb400af0346de9a5e98e456c741b5161fb8a304a7c595c07047cd36c",
+    "firmware/teensy_executor/spin_recovery.h": "571cbbd6c5171e2f9c3aa291fbf20f128abefbe759ce2628511ee9b361b8d12f",
+    "firmware/teensy_executor/status_display.h": "8c00048762de0b478a63b133ab429c20574f7b21dbc5ac39f35091df97c736bf",
+    "firmware/teensy_executor/swing_controller.h": "5bc0787d861aec4c50a7149a454465b8b53046d6f2341f8e9218f54376f76c5a",
+    "firmware/teensy_executor/teensy_executor.ino": "358ffab26de2f870f76eeadc400787075af376febbecdc5702423af8475e4182",
+    "firmware/teensy_executor/teensy_reference_store.h": "3f271a9d5441f6337668c68b1d5e2467aa602c8977dc98b1badc54f603dd6e4d",
+    "firmware/teensy_executor/upright_session.h": "7f387f845dd7a122e2d692e32f40ad6737910d6de50df7b5309ac35829af6818"
+  },
+  "preserved_headers_exact": true,
+  "code_review": "Independent review of mask, pulse output, deferred calibration ACK and commit/cancel paths. Added requested pending-save STOP/HELLO boundary tests; passing.",
+  "physical_status": "Not uploaded; owner will reflash. Stopped-only diagnostics performed, no motion/reset. Rig left disabled, unhomed, switch profile enabled. Motor power-off required before flash. Switch polarity/direction/homing and new calibration remain physically uncommissioned.",
+  "sdk_error_recovery": "Existing fail-closed ERR latch retained; explicit STOP/CLEAR after correcting required input health.",
+  "calibration": {
+    "commands": [
+      "upright",
+      "hanging"
+    ],
+    "wire": "V2 CALIBRATE sid upright|hanging; deferred OK after verified save",
+    "sample_count": 400,
+    "max_window_counts": 4,
+    "timeout_s": 5,
+    "heartbeat_ticks": 200,
+    "capture_busy_flag": 256,
+    "persistence": "Old live reference remains until new EEPROM count verifies; STOP/HELLO cancels pending capture and save. Native tests cover pending-save cancellation for both."
+  },
+  "changed_code_sha256": {
+    "src/cartpole_sdk/rig/client.py": "f07ccad9bce63f8da6b88415fa8bfd87bfcbd906d0d78160c7fb914ee7a1196e",
+    "src/cartpole_sdk/rig/console.py": "ee558c4d3096baba13f4fce4338c8a1f0d8e8e45c082759b8b29a869d6bacef2",
+    "src/cartpole_sdk/rig/protocol.py": "2d62a84ec5d23493e417881ab240d3504b0b1f01176fca4b4d0ab9241c80c36b",
+    "tests/test_rig_calibration.py": "1b199adc990ca9b83e4eb1422c4c1b0a8c130583e534a7e5b4eac0ba1b335e74",
+    "tests/executor_native/core.cpp": "8bac408cc4060cbbda243faa633f7ec117db65e62701414304081d115c07bd0e",
+    "tests/executor_native/sketch.cpp": "9be190881a3a500b6a0ed8deec2399a89814a72253904fc4acd2563e64f2c6c0"
+  }
+}

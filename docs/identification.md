@@ -206,3 +206,30 @@ reference differs by 0.004608 rad and is recorded only as stability evidence.
 No calibration, model or acceptance threshold changed. Preserved sources,
 procedure, reproducible hashes and specific next measurements are documented in
 `evidence/phase4/executor4-assessment.md`.
+
+
+## Native Rig JSONL recordings
+
+`rig_log_rows(records, run_id=...)` returns canonical rows plus admission counts.
+It reads the recorded session and preceding INFO reference/home metadata, uses
+unfiltered `theta` and jerk-limited commanded `acceleration` at board
+`unwrapped_us`, and leaves all inactive/unhealthy states as invalid boundaries.
+It never substitutes pre-governor `demand`, filtered `angle_hat`, or filtered
+`omega`. The latter's effective delay is not established. Duplicate identical
+board snapshots are counted once; conflicting duplicates and clock/session
+ambiguities fail. Host errors latch subsequent records invalid for this input.
+The timestamps are acquisition-snapshot proxies, not verified sensor latency.
+
+`examples/identify_rig.py --training INPUT --validation INPUT --output NEW.json`
+accepts plain/gzip JSONL or `ARCHIVE.tar.gz::EXACT_MEMBER`. Archive members are
+read without extraction. Source hashes, session/reference identities, excluded
+counts, fitter/adapter hashes and the unchanged fit thresholds accompany the
+report. A rejected fit returns status2 with `recommended_model:null`; it never
+changes the simulator. Caller must still choose genuinely independent runs and
+check installation/calibration provenance. Health flags cannot prove physical
+accuracy or independent excitation.
+
+The first current-reference assessment is preserved in
+`evidence/phase4/paused-20261016/`. A candidate effective length0.152m was rejected
+on both later recordings. The report describes calibration diagnostics, input
+meaning, causal state-initialization uncertainty, and held-out prediction errors.

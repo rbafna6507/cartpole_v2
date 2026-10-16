@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-15",
+  "scope": "Camera/network only; no serial or motion",
+  "transport": {
+    "raw_snapshot": {
+      "duration_s": 15.005204,
+      "bytes": 1080640,
+      "bytes_per_second": 72017,
+      "completed": false
+    },
+    "isolated_tcp_nine_second_probes": {
+      "default_bytes_per_second": [
+        415066,
+        377329
+      ],
+      "mss1000_bytes_per_second": [
+        770174,
+        741614
+      ],
+      "mss800_bytes_per_second": [
+        636525
+      ]
+    },
+    "initial_live_tcp": "cwnd2\u20134,25\u201336%retransmitted bytes; before NODELAY/MSS improvement",
+    "after_live_tcp": {
+      "two_mbps_bytes_sent": 2240901,
+      "two_mbps_bytes_acked": 2239791,
+      "two_mbps_retransmissions": 0
+    }
+  },
+  "root_visible_browser": {
+    "profile": "80capture/640detector/60video/4Mbps after pacing fix",
+    "capture_fps": 78.42,
+    "tracked_fps": 47.76,
+    "decoded_fps": 59,
+    "painted_fps": 57,
+    "estimated_canvas_age_ms": 55,
+    "clock_uncertainty_ms": 30
+  },
+  "selected_profile": {
+    "capture_fps_request": 80,
+    "detector_width": 640,
+    "video_fps_request": 40,
+    "video_kbps": 3000,
+    "width": 960,
+    "height": 600,
+    "rotation": 180,
+    "private_tcp_mss": 1000,
+    "calibration_unchanged": true
+  },
+  "measurement_stage_sample": {
+    "samples": 30,
+    "mean_processing_ms": 27.918379864422604,
+    "mean_lock_wait_ms": 1.2101972630868356,
+    "mean_detection_ms": 26.117743934931543,
+    "mean_comparison_ms": 0.18098896834999323
+  },
+  "limitations": [
+    "Browser rates are observations reported by root on the one visible tab.",
+    "Neither static scatter nor detector agreement is ground truth.",
+    "Cap comparison60FPS initial view mode was not controlled; subsequent restarts defaulted smoothcamera.",
+    "Final concurrent SDK validation is recorded separately by root."
+  ]
+}

@@ -27,7 +27,7 @@ class PolicyAndConsoleTests(unittest.TestCase):
         return Rig(port or self.fw.port,transport_factory=FDTransport,command_timeout=.2,**kwargs)
     def test_noninteractive_auto_records_and_stops_finally(self):
         with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()):
-            code=main(['--port',self.fw.port,'--command','auto','--duration','.04','--switches','off','--center-confirmed','--log-dir',directory],rig_factory=self.rig)
+            code=main(['--port',self.fw.port,'--keep-board-params','--command','auto','--duration','.04','--switches','off','--center-confirmed','--log-dir',directory],rig_factory=self.rig)
             self.assertEqual(code,0)
             records=[json.loads(s) for p in __import__('pathlib').Path(directory).glob('*.jsonl') for s in p.read_text().splitlines()]
             self.assertTrue(any(r['type']=='command' and 'MODE' in r['payload'] for r in records))
@@ -93,3 +93,37 @@ class PolicyAndConsoleTests(unittest.TestCase):
                 run_policy(rig,lambda channels:Excessive(),channels=CHANNELS,duration_s=.2)
             self.assertFalse(any(c[1]=='A' for c in self.fw.commands))
             self.assertFalse(self.fw.flags&2)
+
+
+class PythonConsoleTests(unittest.TestCase):
+    def setUp(self):
+        from test_rig_parameters import ParameterFirmware
+        self.fw=ParameterFirmware()
+    def tearDown(self): self.fw.close()
+    def rig(self, port=None, **kwargs):
+        return Rig(port or self.fw.port, transport_factory=FDTransport, command_timeout=.2, **kwargs)
+
+    def test_python_balance_uses_external_action_and_stops_without_native_mode(self):
+        self.fw.flags=205
+        with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()) as output:
+            code=main(['--port',self.fw.port,'--rate','100','--command','python-bal',
+                       '--source','magnetic-step','--duration','.08','--log-dir',directory],rig_factory=self.rig)
+        self.assertEqual(code,0,output.getvalue())
+        self.assertTrue(any(c[1]=='A' for c in self.fw.commands))
+        self.assertFalse(any(c[1]=='MODE' for c in self.fw.commands))
+        self.assertFalse(self.fw.flags&2)
+
+
+    def test_python_balance_from_hanging_faults_and_stops_without_action(self):
+        self.fw.state=lambda **kwargs: __import__('test_rig').Firmware.state(self.fw, theta='3.14', **kwargs)
+        with self.rig() as rig:
+            with self.assertRaises(ValueError):
+                execute_command(rig,'python-bal .1',output=io.StringIO())
+            self.assertFalse(self.fw.flags&2)
+            self.assertFalse(any(c[1]=='A' for c in self.fw.commands))
+            self.assertTrue(any(c[1]=='STOP' for c in self.fw.commands))
+
+    def test_unsupported_host_rate_does_not_open_serial(self):
+        with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            main(['--port',self.fw.port,'--command','python-auto','--source','magnetic-step','--rate','500'],rig_factory=self.rig)
+        self.assertFalse(self.fw.commands)

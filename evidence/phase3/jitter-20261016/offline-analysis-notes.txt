@@ -1,0 +1,77 @@
+Offline jitter investigation — 2026-10-16
+
+No hardware access or repository edits were performed. Analysis concerns command
+telemetry: velocity and acceleration are commanded states, not measured motor
+tracking. Encoder angle is not an independent optical motion measurement.
+
+Current preserved baseline: reference330, pw3, pz.85, pc1=-5, pc2=-6, leff.124,
+bw10, jerk150. Swing energy/capture settings unchanged.
+
+REUSABLE SCORER (Python 3 + NumPy only)
+python3 /tmp/cartpole-jitter-20261016/score_jitter.py /absolute/path/report.json.gz --json-output /tmp/cartpole-jitter-20261016/new-score.json
+
+Multiple report paths, directories, and quoted glob patterns are supported.
+Default common window: 15 seconds beginning 2 seconds after capture into the
+longest continuous mode3 bout. Shorter/gappy windows are marked non-comparable.
+--skip and --window can override this, but compare identical settings.
+
+The JSON retains the full parameter subset, first/all capture states, initial
+hanging offset, longest/total observed balance durations, balanced-at-deadline,
+return success, faults/misses/I2C delta, comparison-window bounds, native gaps,
+angle/cart extrema, spectral bands, four feedback terms, requested/applied jerk,
+and acceleration tracking error. Capture inward_velocity is positive when moving
+toward center, negative when moving toward the nearer rail. This is a useful
+stratification variable; hanging offset alone previously failed to predict success.
+
+Spectra: 250 Hz interpolation on board ticks, Welch periodic-Hann 2048 samples,
+50% overlap, segment mean removed, trapezoidal band integration. NumPy Welch was
+verified numerically against scipy.signal.welch. At most 20 ms native gaps are
+allowed for a comparable window. Jerk is the native interval-average derivative;
+a 4 ms interval at the 150 limit implies sustained limiting across that interval,
+but the fraction is not an exact 1 kHz instantaneous duty. Longest-hold durations
+are observed lower bounds. Full return requires report ok, REHOME then IDLE,
+centered/settled commanded cart, and final fault0.
+
+BASELINE RESULTS
+baseline-common-window.json contains the fair 15-second ag5/ag7 scores.
+ag5: window4.496..19.496, demand4-9=1.110, applied=.868, demand9-30=1.352,
+      applied=1.066 m/s2, sampled jerk-limit fraction36.7%, theta RMS3.189deg.
+ag7: window4.526..19.526, demand4-9=3.056, applied=2.161, demand9-30=2.089,
+      applied=1.143 m/s2, sampled jerk-limit fraction59.1%, theta RMS3.391deg.
+Baseline run-to-run variability exceeds the predicted small bw9 filter benefit;
+one quiet trial does not establish closed-loop improvement.
+
+LONG-WINDOW ANALYSIS
+bw10_jitter.py and bw10-jitter-results.json use t5..59.5 s in the two 60-second
+holds. These files also compare earlier same-gain BW30 t1 over t5..24.5.
+ag5/ag7: 4-9 Hz demand1.246/2.119, applied1.007/1.637; 9-30 Hz demand1.577/1.682,
+applied1.222/1.108 m/s2. Rate term contributes ~77% of band variance; angle~24-26%,
+cart terms slightly oppose it. Jerk limiting39.2/46.4% vs prior BW30 t1 76.9%.
+Dominant low-fast peaks7.08/6.47 Hz; demand-to-applied lag22/33deg, coherence.94/.96.
+No rail-brake samples in these steady windows. Demand reconstruction RMS error
+is .006/.007 m/s2, confirming the decomposed terms explain the logged demand.
+
+QUANTIZATION AND CANDIDATE REPLAY
+bw10_noise_and_candidates.py and observer-replay-and-quantization.txt implement
+the exact discrete 1 kHz observer transfer and replay the unchanged recorded
+trajectories. This is not a closed-loop plant simulation or stability proof.
+12-bit encoder quantum=.08789deg. Observed raw4-9 RMS=.79/1.40deg (~9/16 counts),
+raw9-30=.94/1.00deg (~11 counts). Ideal uniform white one-count quantization at
+1 kHz gives only .004/.008 m/s2 demand RMS in those bands after the bw10 observer;
+actual demand is hundreds of times larger. Direct rounding alone cannot explain
+the amplitude. Quantization could still seed a feedback oscillation. The records
+cannot distinguish physical vibration, flexible mechanics, or magnetic disturbance.
+In ag7 one raw angle jump is7.82deg in4ms at59.366s; no independent camera evidence
+is available to classify it.
+
+NARROW EXPERIMENTS
+1) bw10 -> 9 only, preserve pw/pz/poles/jerk and all swing/capture parameters.
+Recorded-trajectory replay predicts 4-9 demand RMS reduction3.9-4.7%, 9-30~9.5%,
+with another5-6deg demand phase lag at6-10Hz. Repeat complete successful holds
+before interpreting the change, because initial state/run variability is larger.
+2) bw8 only if bw9 remains eligible: replay predicts4-9 reduction8.7-10.5%,
+9-30~19.7%, with11-13deg additional phase lag. bw is shared with swing estimation,
+so capture must still be checked even when energy/capture parameters remain fixed.
+Do not reduce jerk first: the governor is already lagging, and its jerk parameter
+also affects capture/rail prediction. pz.85->.8 reduces rate gain by only2.15%
+while changing low-frequency feedback. Preserve bw10 as the reloadable baseline.

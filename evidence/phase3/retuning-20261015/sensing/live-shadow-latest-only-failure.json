@@ -1,0 +1,287 @@
+{
+  "path": "/home/rbafna/cartpole-v2-runs/retune-20261015/sdk-shadow-live-1792085808905121166",
+  "success": false,
+  "counts": {
+    "unavailable": 452
+  },
+  "last": {
+    "schema": "cartpole-sdk-shadow-v1",
+    "session_id": "stopped-live-shadow-1792085808906062562",
+    "clock_id": "local-monotonic",
+    "sequence": 451,
+    "host_t": 181129.765645017,
+    "observation": {
+      "session_id": "stopped-live-shadow-1792085808906062562",
+      "clock_id": "local-monotonic",
+      "sequence": 451,
+      "available_ns": 181129765645017,
+      "availability_basis": "shadow observer receipt; source effective times retained",
+      "samples": [
+        {
+          "entity": "pole",
+          "quantity": "angle",
+          "source": "magnetic",
+          "value": 3.0097250954454786,
+          "unit": "rad",
+          "frame_id": "visible-upright-20261015-encoder-positive",
+          "method": "magnetic decoded; explicit receipt-anchor clock; explicit angular anchor 5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+          "validity": "valid",
+          "reason": null,
+          "kind": "measured",
+          "acquired_ns": 181129686457869,
+          "effective_ns": 181129686457869,
+          "received_ns": 181129719890548
+        },
+        {
+          "entity": "pole",
+          "quantity": "angle",
+          "source": "vision",
+          "value": 3.1269626626551155,
+          "unit": "rad",
+          "frame_id": "visible-upright-20261015-encoder-positive",
+          "method": "vision3 arm angle; host-read acquisition proxy; explicit angular anchor c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+          "validity": "valid",
+          "reason": null,
+          "kind": "measured",
+          "acquired_ns": 181129708235798,
+          "effective_ns": 181129708235798,
+          "received_ns": 181129764452351
+        },
+        {
+          "entity": "pole",
+          "quantity": "angle",
+          "source": "fused",
+          "value": null,
+          "unit": "rad",
+          "frame_id": "visible-upright-20261015-encoder-positive",
+          "method": "shadow complementary bias; delayed wrapped encoder interpolation; 82a0967a132085fa4e2d7f1c730aedd584b0d74a84ce261310699214d77d719f",
+          "validity": "invalid",
+          "reason": "aligned vision correction unavailable",
+          "kind": "estimated",
+          "acquired_ns": 181129686457869,
+          "effective_ns": 181129686457869,
+          "received_ns": 181129765645017
+        }
+      ]
+    },
+    "diagnostics": {
+      "status": "unavailable",
+      "reason": "aligned vision correction unavailable",
+      "bias_rad": 0.0,
+      "innovation_rad": null,
+      "last_vision_effective_ns": null,
+      "last_vision_received_ns": null,
+      "history_size": 16,
+      "accepted_vision": 0,
+      "rejected_vision": 452,
+      "calibration_id": "82a0967a132085fa4e2d7f1c730aedd584b0d74a84ce261310699214d77d719f",
+      "frame_id": "visible-upright-20261015-encoder-positive",
+      "sources": {
+        "magnetic": {
+          "source_id": "visible-upright-rig-as5600-reference370",
+          "calibration_id": "5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+          "clock_mapping_id": "647fff7c675872f63e87869e3f61d5514958ba1074f2fd3f959c0b51de20ad21"
+        },
+        "vision": {
+          "source_id": "visible-upright-jetson-camera-960x600-rotation180",
+          "calibration_id": "c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+          "clock_mapping_id": "dda89eee3d34cfe3f7dff9953a5ea8ee30ec9aef5249900818feac25d4ac3c17"
+        }
+      },
+      "commissioned": false,
+      "control_eligible": false,
+      "timing_basis": "explicit clock map; camera host read is an acquisition proxy",
+      "encoder_clock": {
+        "strategy": "receipt-anchor",
+        "receipt_delay_ns": 22000000,
+        "uncertainty_ns": 25000000,
+        "max_receipt_residual_ns": 10000000,
+        "valid_for_ns": 60000000000,
+        "source_clock_id": "teensy:888767121",
+        "session_clock_id": "local-monotonic",
+        "offset_ns": 180002789141869,
+        "anchor_received_ns": 181104756457869
+      },
+      "vision_clock": {
+        "source_clock_id": "jetson-local-monotonic-camera-host-read",
+        "session_clock_id": "local-monotonic",
+        "offset_ns": 0
+      },
+      "configuration_sha256": "c0d45363bbd2d89585c815d93347275c29d5f5708edc6a461529a2c5812db83f"
+    },
+    "commissioned": false,
+    "control_eligible": false
+  },
+  "initial_info": {
+    "sid": 888767121,
+    "firmware": "executor-v4-rehome",
+    "encoder_upright_raw": 370,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 0,
+    "home_epoch": 1,
+    "measured_span_steps": 16512,
+    "rail_half_m": 0.26,
+    "received_ns": 181104737688118,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2333,
+    "encoder_raw_age_us": 38151,
+    "encoder_recoveries": 0
+  },
+  "viewer": {
+    "age_s": 0.012984219007194042,
+    "packet": {
+      "clock_id": "local-monotonic",
+      "commissioned": false,
+      "control_eligible": false,
+      "diagnostics": {
+        "accepted_vision": 0,
+        "bias_rad": 0.0,
+        "calibration_id": "82a0967a132085fa4e2d7f1c730aedd584b0d74a84ce261310699214d77d719f",
+        "commissioned": false,
+        "configuration_sha256": "c0d45363bbd2d89585c815d93347275c29d5f5708edc6a461529a2c5812db83f",
+        "control_eligible": false,
+        "encoder_clock": {
+          "anchor_received_ns": 181104756457869,
+          "max_receipt_residual_ns": 10000000,
+          "offset_ns": 180002789141869,
+          "receipt_delay_ns": 22000000,
+          "session_clock_id": "local-monotonic",
+          "source_clock_id": "teensy:888767121",
+          "strategy": "receipt-anchor",
+          "uncertainty_ns": 25000000,
+          "valid_for_ns": 60000000000
+        },
+        "frame_id": "visible-upright-20261015-encoder-positive",
+        "history_size": 16,
+        "innovation_rad": null,
+        "last_vision_effective_ns": null,
+        "last_vision_received_ns": null,
+        "reason": "aligned vision correction unavailable",
+        "rejected_vision": 452,
+        "sources": {
+          "magnetic": {
+            "calibration_id": "5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+            "clock_mapping_id": "647fff7c675872f63e87869e3f61d5514958ba1074f2fd3f959c0b51de20ad21",
+            "source_id": "visible-upright-rig-as5600-reference370"
+          },
+          "vision": {
+            "calibration_id": "c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+            "clock_mapping_id": "dda89eee3d34cfe3f7dff9953a5ea8ee30ec9aef5249900818feac25d4ac3c17",
+            "source_id": "visible-upright-jetson-camera-960x600-rotation180"
+          }
+        },
+        "status": "unavailable",
+        "timing_basis": "explicit clock map; camera host read is an acquisition proxy",
+        "vision_clock": {
+          "offset_ns": 0,
+          "session_clock_id": "local-monotonic",
+          "source_clock_id": "jetson-local-monotonic-camera-host-read"
+        }
+      },
+      "host_t": 181129.765645017,
+      "observation": {
+        "availability_basis": "shadow observer receipt; source effective times retained",
+        "available_ns": 181129765645017,
+        "clock_id": "local-monotonic",
+        "samples": [
+          {
+            "acquired_ns": 181129686457869,
+            "effective_ns": 181129686457869,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "measured",
+            "method": "magnetic decoded; explicit receipt-anchor clock; explicit angular anchor 5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+            "quantity": "angle",
+            "reason": null,
+            "received_ns": 181129719890548,
+            "source": "magnetic",
+            "unit": "rad",
+            "validity": "valid",
+            "value": 3.0097250954454786
+          },
+          {
+            "acquired_ns": 181129708235798,
+            "effective_ns": 181129708235798,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "measured",
+            "method": "vision3 arm angle; host-read acquisition proxy; explicit angular anchor c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+            "quantity": "angle",
+            "reason": null,
+            "received_ns": 181129764452351,
+            "source": "vision",
+            "unit": "rad",
+            "validity": "valid",
+            "value": 3.1269626626551155
+          },
+          {
+            "acquired_ns": 181129686457869,
+            "effective_ns": 181129686457869,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "estimated",
+            "method": "shadow complementary bias; delayed wrapped encoder interpolation; 82a0967a132085fa4e2d7f1c730aedd584b0d74a84ce261310699214d77d719f",
+            "quantity": "angle",
+            "reason": "aligned vision correction unavailable",
+            "received_ns": 181129765645017,
+            "source": "fused",
+            "unit": "rad",
+            "validity": "invalid",
+            "value": null
+          }
+        ],
+        "sequence": 451,
+        "session_id": "stopped-live-shadow-1792085808906062562"
+      },
+      "schema": "cartpole-sdk-shadow-v1",
+      "sequence": 451,
+      "session_id": "stopped-live-shadow-1792085808906062562"
+    },
+    "purpose": "SDK shadow observation; control is not commissioned",
+    "status": "unavailable"
+  },
+  "final": {
+    "sid": 888767121,
+    "tick": 5419275,
+    "us": 1127028316,
+    "mode": 0,
+    "flags": 205,
+    "theta": 3.011204,
+    "angle_hat": 3.011203,
+    "omega": -0.0003381368,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 1071396,
+    "brake_direction": 0,
+    "received_ns": 181129840484281,
+    "unwrapped_tick": 5419275,
+    "unwrapped_us": 1127028316
+  },
+  "final_info": {
+    "sid": 888767121,
+    "firmware": "executor-v4-rehome",
+    "encoder_upright_raw": 370,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 0,
+    "home_epoch": 1,
+    "measured_span_steps": 16512,
+    "rail_half_m": 0.26,
+    "received_ns": 181129843144403,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2333,
+    "encoder_raw_age_us": 36402,
+    "encoder_recoveries": 0
+  },
+  "error": "AssertionError()"
+}

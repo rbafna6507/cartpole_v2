@@ -1,0 +1,69 @@
+{
+  "status": "insufficient_data",
+  "reference_preserved": 370,
+  "source_files": [
+    {
+      "path": "/tmp/cartpole-retune-20261015/manual-angle-map-assessment.md",
+      "sha256": "edef40eb1becb0ff1b2dd8c4c0d675c28d11aae065cee4d26859115fbc0bde00"
+    },
+    {
+      "path": "/tmp/cartpole-retune-20261015/manual-angle-map-analysis.json",
+      "sha256": "6e3e4a91bbfa2a7a7c2f87aecbff8826da507772f230dd2fec28895e9e714782"
+    },
+    {
+      "path": "/tmp/cartpole-retune-20261015/manual-angle-map-compact.json.gz",
+      "sha256": "babe21699a62d4bbd7ad278c4677b3f8ef5440a10b562532f7bcc560d031715f"
+    },
+    {
+      "path": "/tmp/cartpole-retune-20261015/visible-upright-report.json",
+      "sha256": "ee030920d5c4a2ddcc9d1dd0b1b214c4bf5b1403a84764b3d36347935d1156ed"
+    },
+    {
+      "path": "/tmp/cartpole-retune-20261015/upright370-camera-comparison.md",
+      "sha256": "ab81047128fe810b13ada177480427793676e6f1a49db48538818cacab32ebee"
+    }
+  ],
+  "coverage": {
+    "encoder_unwrapped_range_rad": [
+      -3.3180003071795863,
+      2.968253
+    ],
+    "net_encoder_turn_rad": -6.240234307179586,
+    "moving_camera_samples": 418,
+    "motion_interval_s": [
+      40,
+      74
+    ],
+    "limitation": "One complete negative traversal only; no complete positive traversal. Directional calibration/hysteresis not validated."
+  },
+  "stationary_windows": {
+    "before": {
+      "n": 565,
+      "camera_mean_rad": -3.1122859621272054,
+      "camera_std_rad": 0.00294489177100277,
+      "encoder_mean_rad": 2.968247734479453,
+      "encoder_std_rad": 7.666848017371541e-05,
+      "camera_minus_encoder_mean_rad": 0.20265160997354922,
+      "camera_minus_encoder_std_rad": 0.00294443012867427
+    },
+    "after": {
+      "n": 604,
+      "camera_mean_rad": -3.117867857609979,
+      "camera_std_rad": 0.0030911320599657523,
+      "encoder_mean_rad": 3.0112729841416797,
+      "encoder_std_rad": 0.0002609885453394087,
+      "camera_minus_encoder_mean_rad": 0.1540444711783172,
+      "camera_minus_encoder_std_rad": 0.003097986079860192
+    },
+    "near_upright": {
+      "n": 60,
+      "camera_mean_rad": -0.02323044795773764,
+      "camera_std_rad": 0.06705413983985356,
+      "encoder_mean_rad": -0.027895159926713216,
+      "encoder_std_rad": 0.0723008369513028,
+      "camera_minus_encoder_mean_rad": 0.004686771844545413,
+      "camera_minus_encoder_std_rad": 0.02994287602340492
+    }
+  },
+  "reason": "No independently labeled native upright/hanging pairs with uncertainty, fixture, direction, session, and heldout provenance exist in the summary records."
+}

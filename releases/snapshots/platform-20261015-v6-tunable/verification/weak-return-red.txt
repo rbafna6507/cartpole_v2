@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________________ SketchTests.test_tunable_auto_return _____________________
+tests/test_executor_native.py:108: in <lambda>
+    setattr(SketchTests,'test_'+name,lambda self,name=name:self.run_case(name))
+                                                           ^^^^^^^^^^^^^^^^^^^
+tests/test_executor_native.py:48: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (fabsf(acc_cmd)<=center_a+1e-7f), function tunable_weak_return, file motion_limits_sketch_test.h, line 226.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::SketchTests::test_tunable_auto_return
+1 failed, 84 deselected in 2.16s

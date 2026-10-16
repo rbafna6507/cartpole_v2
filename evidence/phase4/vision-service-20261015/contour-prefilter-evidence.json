@@ -1,0 +1,190 @@
+{
+  "candidate": "skip contour lengths below three (exactly zero polygon area), hoist unchanged area thresholds",
+  "opencv": "4.14.0",
+  "opencv_threads": 11,
+  "width": 640,
+  "stills": [
+    {
+      "name": "cartpole-current-auto.png",
+      "sha256": "3fa1fe0f51f31fc8c9a52f199dfd9c4b063d9accfcda708e13947c1649783edb",
+      "detected": true,
+      "exact_fields_and_mask": true,
+      "contours": 757,
+      "contours_lt3": 628,
+      "timing": {
+        "baseline": {
+          "count": 200,
+          "mean_ms": 2.85900745,
+          "median_ms": 2.7509995,
+          "p95_ms": 3.5451981999999997
+        },
+        "candidate": {
+          "count": 200,
+          "mean_ms": 2.67658395,
+          "median_ms": 2.5538334999999996,
+          "p95_ms": 3.5486119
+        }
+      }
+    },
+    {
+      "name": "cartpole-vision-80fps.png",
+      "sha256": "0082845f92a1e6617a7f22dfeb370cce4e9d9b95f24fb706829a30106383220c",
+      "detected": true,
+      "exact_fields_and_mask": true,
+      "contours": 573,
+      "contours_lt3": 434,
+      "timing": {
+        "baseline": {
+          "count": 200,
+          "mean_ms": 2.993088985,
+          "median_ms": 2.2949374999999996,
+          "p95_ms": 5.249379499999996
+        },
+        "candidate": {
+          "count": 200,
+          "mean_ms": 3.071137935,
+          "median_ms": 2.1654999999999998,
+          "p95_ms": 7.059348549999995
+        }
+      }
+    },
+    {
+      "name": "bright.png",
+      "sha256": "001be595dfdfd8c688a37c4f5b419462d6d5d39d1eeaab2ec012b9cbbaef0d00",
+      "detected": true,
+      "exact_fields_and_mask": true,
+      "contours": 246,
+      "contours_lt3": 174,
+      "timing": {
+        "baseline": {
+          "count": 200,
+          "mean_ms": 2.400831065,
+          "median_ms": 2.25775,
+          "p95_ms": 3.24833925
+        },
+        "candidate": {
+          "count": 200,
+          "mean_ms": 2.29809623,
+          "median_ms": 2.050771,
+          "p95_ms": 3.404764899999998
+        }
+      }
+    },
+    {
+      "name": "horizontal.png",
+      "sha256": "228cea839355bc1a1bef28d82acb8759106e55531fce2d712eaa926913292cd5",
+      "detected": true,
+      "exact_fields_and_mask": true,
+      "contours": 201,
+      "contours_lt3": 146,
+      "timing": {
+        "baseline": {
+          "count": 200,
+          "mean_ms": 2.408472085,
+          "median_ms": 2.079708,
+          "p95_ms": 3.9795919999999967
+        },
+        "candidate": {
+          "count": 200,
+          "mean_ms": 2.34579962,
+          "median_ms": 2.0319789999999998,
+          "p95_ms": 4.2199854
+        }
+      }
+    },
+    {
+      "name": "live.png",
+      "sha256": "55e4bdc759e11d496f242483395d61d761ec552b6e2241605fcd1c0a9cb97ad8",
+      "detected": true,
+      "exact_fields_and_mask": true,
+      "contours": 368,
+      "contours_lt3": 282,
+      "timing": {
+        "baseline": {
+          "count": 200,
+          "mean_ms": 2.374778915,
+          "median_ms": 2.127625,
+          "p95_ms": 3.307787499999996
+        },
+        "candidate": {
+          "count": 200,
+          "mean_ms": 2.22640732,
+          "median_ms": 2.0591665,
+          "p95_ms": 3.471405949999995
+        }
+      }
+    }
+  ],
+  "motion": {
+    "source": "/Users/rbafna/projects/cartpole/vision/evidence/live-motion/raw.avi",
+    "sha256": "120e982f3ebebff42ef43ea961474635486380f00ecef3efe8a05d37d0d27b56",
+    "exact_fields_and_mask_all_frames": true,
+    "passes": [
+      {
+        "run": 0,
+        "frames": 650,
+        "detected": 507,
+        "timing": {
+          "baseline": {
+            "count": 650,
+            "mean_ms": 3.770269027692308,
+            "median_ms": 2.4003335000000003,
+            "p95_ms": 9.161987349999983
+          },
+          "candidate": {
+            "count": 650,
+            "mean_ms": 4.108230532307692,
+            "median_ms": 2.4074999999999998,
+            "p95_ms": 8.019683849999998
+          }
+        }
+      },
+      {
+        "run": 1,
+        "frames": 650,
+        "detected": null,
+        "timing": {
+          "baseline": {
+            "count": 650,
+            "mean_ms": 2.7335868538461536,
+            "median_ms": 2.123563,
+            "p95_ms": 4.401545899999999
+          },
+          "candidate": {
+            "count": 650,
+            "mean_ms": 2.5395464661538463,
+            "median_ms": 2.0960210000000004,
+            "p95_ms": 4.1630729499999966
+          }
+        }
+      },
+      {
+        "run": 2,
+        "frames": 650,
+        "detected": null,
+        "timing": {
+          "baseline": {
+            "count": 650,
+            "mean_ms": 2.56381954,
+            "median_ms": 2.2317915,
+            "p95_ms": 3.9030293499999984
+          },
+          "candidate": {
+            "count": 650,
+            "mean_ms": 2.5080805753846156,
+            "median_ms": 2.196333,
+            "p95_ms": 3.8698479499999996
+          }
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "60-frame current burst retained pose rows and first/last raw frames only; full burst cannot be reprocessed.",
+    "Timings are local workstation only; not a live Jetson throughput claim."
+  ],
+  "baseline_sha256": "2c769e615f554a0f1a53e22e1ce9cd159cbdf1df3e54b20a916b2af757dc4b6b",
+  "candidate_sha256": "6669f7eac3f32933a5d5a23ea0e54449d3274a794c83339113fa84962d99c656",
+  "comparison": "Exact Python equality of all pose dataclass fields, reason, candidates; np.array_equal for each segmentation mask; same ordered stateful detectors.",
+  "timing_method": "Alternate baseline/candidate order per frame; 15 warmup pairs and 200 measured pairs per still; three 650-frame moving passes. Local workstation timing only."
+}

@@ -1,0 +1,439 @@
+....................................................... [  8%]
+............................ [ 12%]
+........................................................................ [ 22%]
+........................................................FFFFFFF....................ssss.......FssFF................................................... [ 45%]
+............................................................................................... [ 59%]
+............. [ 61%]
+........ [ 62%]
+.............................. [ 66%]
+............................................................... [ 76%]
+......................................................................F. [ 86%]
+......s..FF................................................. [ 95%]
+............................                                             [100%]
+=================================== FAILURES ===================================
+_____________________ HTTPTests.test_auth_and_role_guards ______________________
+
+self = <test_portal_http.HTTPTests testMethod=test_auth_and_role_guards>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1144f0bd0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+____________ HTTPTests.test_cross_origin_browser_mutation_rejected _____________
+
+self = <test_portal_http.HTTPTests testMethod=test_cross_origin_browser_mutation_rejected>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x113ff4d90>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+___ HTTPTests.test_slow_body_progress_cannot_extend_absolute_request_budget ____
+
+self = <test_portal_http.HTTPTests testMethod=test_slow_body_progress_cannot_extend_absolute_request_budget>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1144f3cd0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+_________ HTTPTests.test_source_size_unknown_fields_and_path_rejected __________
+
+self = <test_portal_http.HTTPTests testMethod=test_source_size_unknown_fields_and_path_rejected>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1144e2f10>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+_______________ HTTPTests.test_submit_list_ownership_and_result ________________
+
+self = <test_portal_http.HTTPTests testMethod=test_submit_list_ownership_and_result>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1141d0550>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+__________ HTTPTests.test_ui_is_public_but_does_not_embed_credentials __________
+
+self = <test_portal_http.HTTPTests testMethod=test_ui_is_public_but_does_not_embed_credentials>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1140b6bd0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+______ HTTPTests.test_worker_claim_fetch_and_reset_before_start_contract _______
+
+self = <test_portal_http.HTTPTests testMethod=test_worker_claim_fetch_and_reset_before_start_contract>
+
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
+>       self.server=make_server(self.store,{'alice-secret-long':('alice','submit'),'bob-secret-long':('bob','submit'),'worker-secret-long':('worker','worker'),'operator-secret-long':('operator','operator')},port=0)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_http.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x1142aca90>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+___ WorkerTests.test_outbound_http_worker_claim_fetch_and_finish_end_to_end ____
+
+self = <test_portal_worker.WorkerTests testMethod=test_outbound_http_worker_claim_fetch_and_finish_end_to_end>
+
+    def test_outbound_http_worker_claim_fetch_and_finish_end_to_end(self):
+        from cartpole_sdk.portal.server import make_server
+>       server=make_server(self.store,{'test-worker-token-secret':('w','worker')},port=0)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_worker.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/portal/server.py:178: in make_server
+    server=PortalServer((host,port),Handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/portal/server.py:58: in __init__
+    super().__init__(*args,**kwargs)
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.portal.server.PortalServer object at 0x114616490>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+___ WorkerTests.test_remote_redirect_cannot_forward_bearer_to_another_origin ___
+
+self = <test_portal_worker.WorkerTests testMethod=test_remote_redirect_cannot_forward_bearer_to_another_origin>
+
+    def test_remote_redirect_cannot_forward_bearer_to_another_origin(self):
+        received=[]
+        class Sink(BaseHTTPRequestHandler):
+            def log_message(self,*args):pass
+            def do_GET(self):
+                received.append(self.headers.get('Authorization'))
+                self.send_response(200);self.end_headers();self.wfile.write(b'{}')
+>       sink=ThreadingHTTPServer(('127.0.0.1',0),Sink)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_worker.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.server.ThreadingHTTPServer object at 0x114434510>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+__ WorkerTests.test_remote_slow_response_cannot_extend_absolute_call_timeout ___
+
+self = <test_portal_worker.WorkerTests testMethod=test_remote_slow_response_cannot_extend_absolute_call_timeout>
+
+    def test_remote_slow_response_cannot_extend_absolute_call_timeout(self):
+        class Slow(BaseHTTPRequestHandler):
+            def log_message(self,*args):pass
+            def do_GET(self):
+                self.send_response(200);self.send_header('Content-Length','100');self.end_headers()
+                try:
+                    for _ in range(100):self.wfile.write(b' ');self.wfile.flush();time.sleep(.02)
+                except OSError:pass
+>       server=ThreadingHTTPServer(('127.0.0.1',0),Slow);server.daemon_threads=True
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_portal_worker.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:456: in __init__
+    self.server_bind()
+../../.pyenv/versions/3.11.7/lib/python3.11/http/server.py:136: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.server.ThreadingHTTPServer object at 0x11411d350>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+    
+        May be overridden.
+    
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        if self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../.pyenv/versions/3.11.7/lib/python3.11/socketserver.py:472: PermissionError
+___ ProcessTests.test_separate_process_tracks_without_camera_and_shuts_down ____
+
+self = <vision_runtime.test_comparison_process.ProcessTests testMethod=test_separate_process_tracks_without_camera_and_shuts_down>
+
+    def test_separate_process_tracks_without_camera_and_shuts_down(self):
+>       probe=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);probe.bind(('127.0.0.1',0));port=probe.getsockname()[1];probe.close()
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/vision_runtime/test_comparison_process.py:5: PermissionError
+__ FeedTests.test_health_is_required_and_expires_even_if_telemetry_continues ___
+
+self = <vision_runtime.test_encoder_feed.FeedTests testMethod=test_health_is_required_and_expires_even_if_telemetry_continues>
+
+    def test_health_is_required_and_expires_even_if_telemetry_continues(self):
+>       udp=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);udp.bind(('127.0.0.1',0));udp.settimeout(1)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/vision_runtime/test_encoder_feed.py:50: PermissionError
+______________ FeedTests.test_real_udp_publisher_and_no_receiver _______________
+
+self = <vision_runtime.test_encoder_feed.FeedTests testMethod=test_real_udp_publisher_and_no_receiver>
+
+    def test_real_udp_publisher_and_no_receiver(self):
+>       s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);s.bind(('127.0.0.1',0));s.settimeout(1)
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/vision_runtime/test_encoder_feed.py:11: PermissionError
+=========================== short test summary info ============================
+FAILED tests/test_portal_http.py::HTTPTests::test_auth_and_role_guards - Perm...
+FAILED tests/test_portal_http.py::HTTPTests::test_cross_origin_browser_mutation_rejected
+FAILED tests/test_portal_http.py::HTTPTests::test_slow_body_progress_cannot_extend_absolute_request_budget
+FAILED tests/test_portal_http.py::HTTPTests::test_source_size_unknown_fields_and_path_rejected
+FAILED tests/test_portal_http.py::HTTPTests::test_submit_list_ownership_and_result
+FAILED tests/test_portal_http.py::HTTPTests::test_ui_is_public_but_does_not_embed_credentials
+FAILED tests/test_portal_http.py::HTTPTests::test_worker_claim_fetch_and_reset_before_start_contract
+FAILED tests/test_portal_worker.py::WorkerTests::test_outbound_http_worker_claim_fetch_and_finish_end_to_end
+FAILED tests/test_portal_worker.py::WorkerTests::test_remote_redirect_cannot_forward_bearer_to_another_origin
+FAILED tests/test_portal_worker.py::WorkerTests::test_remote_slow_response_cannot_extend_absolute_call_timeout
+FAILED tests/vision_runtime/test_comparison_process.py::ProcessTests::test_separate_process_tracks_without_camera_and_shuts_down
+FAILED tests/vision_runtime/test_encoder_feed.py::FeedTests::test_health_is_required_and_expires_even_if_telemetry_continues
+FAILED tests/vision_runtime/test_encoder_feed.py::FeedTests::test_real_udp_publisher_and_no_receiver
+13 failed, 654 passed, 7 skipped, 362 subtests passed in 43.52s

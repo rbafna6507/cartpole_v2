@@ -1,0 +1,148 @@
+{
+  "source_capture_sha256": "8b9fa5ff989e86427d6b2435cfdd9afcf0fb4a40a7f63df2cf5f0e04cb38a74b",
+  "source_capture": "live-shadow-batch-capture.jsonl.gz",
+  "source_run": "sdk-shadow-batch-1792086307023618699",
+  "cycles": 428,
+  "requested_poll_hz": 100,
+  "observed_poll_hz": 17.056698305453253,
+  "cycle_ms": {
+    "mean": 58.627993653395784,
+    "p50": 54.468194,
+    "p95": 87.86353349999996,
+    "max": 146.577853
+  },
+  "segments_ms": {
+    "vision_receipt_to_encoder_receipt": {
+      "mean": 17.916820724299065,
+      "p50": 16.989554,
+      "p95": 26.238013799999994,
+      "max": 75.811932
+    },
+    "encoder_receipt_to_flush": {
+      "mean": 2.938242684579439,
+      "p50": 2.616638,
+      "p95": 5.027153549999999,
+      "max": 9.095773
+    },
+    "flush_to_output": {
+      "mean": 0.47932018691588785,
+      "p50": 0.400989,
+      "p95": 0.8634538499999995,
+      "max": 5.054783
+    },
+    "previous_output_to_next_vision_receipt": {
+      "mean": 37.34266917798595,
+      "p50": 33.87657,
+      "p95": 60.6386013,
+      "max": 110.836684
+    }
+  },
+  "payload_bytes": {
+    "vision_mean": 5511.8317757009345,
+    "encoder_mean": 13351.532710280373
+  },
+  "camera_capture_fps_mean": 59.38287027330133,
+  "tracking_report_fps_mean": 26.16645485213993,
+  "processing_ms_mean": 46.99561579206525,
+  "host_read_to_result_ms_mean": 56.98914752667117,
+  "interpretation": "Most observed cycle time is around sequential HTTP/server requests; encoder ingestion and fusion consume a smaller measured segment. Segment boundaries include intervening client work and are not isolated HTTP CPU profiles. Engine processing_ms includes lock wait.",
+  "code_evidence": [
+    "Full Engine.snapshot calculates tracking and metric percentiles while holding the detector engine lock.",
+    "Full state also performs comparison-process RPC and camera/video diagnostic reports.",
+    "urllib urlopen opens/closes a connection per fetch; its individual timing contribution is unmeasured."
+  ],
+  "change": "Use maintained /api/state?measurement=1; keep native image geometry, detector settings, calibration and all timing gates unchanged.",
+  "verification": "Source-contract regression checks calibration, dimensions, source timestamps, distinct derivative effective times, and stale invalidation; live before/after performance still requires root operator measurement.",
+  "subsequent_change": {
+    "transport": "persistent NDJSON /api/sensing-stream",
+    "reason": "Root operator workload isolation found repeated HTTP requests still suppress tracking after measurement-only endpoint optimization. The original fields above preserve the earlier full-state HTTP baseline. The measured comparison below separately compares the later measurement-only HTTP baseline with persistent NDJSON.",
+    "client_bounds": {
+      "max_line_bytes": 4194304,
+      "chunk_bytes": 65536,
+      "read_timeout_s": 0.2,
+      "heartbeat_expected_s": 0.1,
+      "reconnect_backoff_s": [
+        0.05,
+        0.2
+      ],
+      "stream_rate_ceiling_hz": 100
+    },
+    "preservation": "No image geometry, detector, angular calibration, clock mapping, age, innovation or interpolation-gap gate changed. Reconnect resumes accepted encoder cursor without reanchoring.",
+    "verification": "Deterministic transport/source-contract tests and the root-operated stopped live run below verify the transport. This does not commission sensor accuracy or control use."
+  },
+  "measured_stream_comparison": {
+    "evidence_directory": "evidence/phase4/vision-service-20261015",
+    "stream_summary_sha256": "6968ee14449974bfe114ddd27d1c9f03c9c73d7178ac88be8f910081926c08dd",
+    "http_measurement_summary_sha256": "daa37110cd07065daf6e052b6fc367ed2637fe1e23528fa5e96659f8c2d033d9",
+    "duration_s": 25,
+    "profile": {
+      "capture_fps": 80,
+      "detector_width": 640,
+      "video_fps": 40,
+      "video_bitrate_kbps": 3000,
+      "native_camera_size": [
+        960,
+        600
+      ],
+      "rotation_degrees": 180
+    },
+    "comparison_basis": "Separate short stopped runs with one visible smooth-camera browser client. Omit first two performance samples from each run; means of service-reported host timestamp rates, not guaranteed throughput or exposure timing.",
+    "stream": {
+      "postwarm_samples": 23,
+      "mean_fps": {
+        "camera": 75.32014127888107,
+        "tracking": 38.235428239575235,
+        "video": 40.00846443291732
+      },
+      "accepted_vision": 903,
+      "rejected_vision": 13,
+      "encoder_history_truncations": 0,
+      "pending_vision_dropped": 0
+    },
+    "measurement_only_http": {
+      "postwarm_samples": 22,
+      "mean_fps": {
+        "camera": 74.98784434058666,
+        "tracking": 28.488402677730157,
+        "video": 35.73981411717743
+      },
+      "accepted_vision": 593,
+      "rejected_vision": 3
+    },
+    "final_state": {
+      "mode": 0,
+      "flags": 205,
+      "x": 0.0,
+      "velocity": 0.0,
+      "demand": 0.0,
+      "fault": 0
+    },
+    "final_reference_raw": 370,
+    "after_close_sdk_status": "stale",
+    "after_close_encoder_health": "stale",
+    "replay": {
+      "capture_sha256": "23cbc48e25e9aac93646d8c8e31295f4c97bfcd391c9d3bab0f2e61aaa41969b",
+      "accepted_vision": 903,
+      "rejected_vision": 13,
+      "final_bias_rad": 0.12127569650337743,
+      "live_rows": 3670,
+      "replay_rows": 2750,
+      "exact_final_diagnostics": true,
+      "exact_final_observation": false,
+      "control_eligible": false,
+      "observation_difference": {
+        "field": "sequence",
+        "live": 917,
+        "replay": 2748,
+        "reason": "Replay emits after every recorded input event; live emits after each complete stream envelope. Sample values and timestamps are identical."
+      }
+    },
+    "limitations": [
+      "Stationary pole, one visible smooth-camera browser client",
+      "Clock uncertainty and source calibration remain uncommissioned for control",
+      "Short measured run; not a guaranteed rate under all scenes or client counts"
+    ],
+    "commissioned": false,
+    "control_eligible": false
+  }
+}

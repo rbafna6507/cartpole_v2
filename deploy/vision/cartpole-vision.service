@@ -1,0 +1,20 @@
+[Unit]
+Description=Cartpole observation camera and local dashboard
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=%h/cartpole_v2
+EnvironmentFile=%h/.config/cartpole-vision/runtime.env
+ExecStart=%h/cartpole_v2/scripts/run-vision-service.sh
+Restart=always
+RestartSec=5
+TimeoutStopSec=15
+KillMode=control-group
+NoNewPrivileges=true
+UMask=0077
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=default.target

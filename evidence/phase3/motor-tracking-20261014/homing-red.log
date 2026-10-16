@@ -1,0 +1,33 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+______________________ ExecutorTests.test_homing_success _______________________
+
+self = <test_executor_native.ExecutorTests testMethod=test_homing_success>
+name = 'homing_success'
+
+>   setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                   ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (m.done()), function homing_success, file core.cpp, line 34.
+______________________ SketchTests.test_whole_homing_info ______________________
+
+self = <test_executor_native.SketchTests testMethod=test_whole_homing_info>
+name = 'whole_homing_info'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : @V2 INFO 7 executor-v3-encguard 3953 0 32 0 2 14000 0.2575 0 768 1 0 36410007 0*9C7E
+E   Assertion failed: (seen==3), function whole_homing_info, file sketch.cpp, line 40.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::ExecutorTests::test_homing_success - As...
+FAILED tests/test_executor_native.py::SketchTests::test_whole_homing_info - A...
+2 failed, 56 deselected in 3.28s

@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "run": "natural351-bw20a-1792092993959609231",
+      "eight_board_seconds": true,
+      "healthy_sources": true,
+      "all_balance_exits_to_rail_brake": true,
+      "stopped_final": true,
+      "balance_away_limit_jerk_fraction": 0.8571428571432438,
+      "camera_over100ms": 0
+    },
+    {
+      "run": "natural351-bw20b-1792093059534160195",
+      "eight_board_seconds": true,
+      "healthy_sources": true,
+      "all_balance_exits_to_rail_brake": true,
+      "stopped_final": true,
+      "balance_away_limit_jerk_fraction": 0.7344262295077237,
+      "camera_over100ms": 1
+    },
+    {
+      "run": "natural351-bw30-reversal-1792093118417738756",
+      "eight_board_seconds": true,
+      "healthy_sources": true,
+      "all_balance_exits_to_rail_brake": true,
+      "stopped_final": true,
+      "balance_away_limit_jerk_fraction": 0.7988047808758886,
+      "camera_over100ms": 0
+    }
+  ],
+  "audited_release_source_sha256": {
+    "firmware/teensy_executor/cart_motion.h": "bba693c6f651731b51032d76e8f2b66cfbf3016f2048b6a4648a6d1f8042ab6f",
+    "firmware/teensy_executor/teensy_executor.ino": "c8a2430d2c481e2c206a48173cc73925e771082b72f711517a86c51246bf64ab"
+  },
+  "demand_semantics": "executor-v4 stores demand before cart_motion::advance. acceleration is resulting commanded trajectory acceleration, not a physical measurement.",
+  "jerk_semantics": "150 m/s^3 cap => 0.15 m/s^2 commanded acceleration change per 1 ms control tick. Observed native 4ms differences are interval averages, not every control tick."
+}

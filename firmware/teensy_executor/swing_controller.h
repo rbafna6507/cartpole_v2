@@ -24,6 +24,10 @@ struct Parameters {
   float amax_b = cart_hardware::default_acceleration; // 25 m/s^2
   float jmax = 150.0f; // user-tuned default, m/s^3
   float amax_m = 0.5f, jmax_m = 10.0f;
+  float manual_speed_max = .15f;
+  float rail_fraction = .95f, rail_margin = .015f, rail_fault_margin = .010f;
+  float rail_hysteresis = .005f, rail_recover_v = .15f, rail_recover_a = 1.5f, rail_recover_s = 8.f;
+  float rehome_v = .08f, rehome_a = .5f, rehome_j = 10.f;
   float ke = 4.0f, kpx = 40.0f, kdx = 2.0f;
   float phase_soft = 2.0f;          // rad/s scale of smooth phase feedback
   float catch_a = 0.60f, catch_r = 3.0f, giveup = 0.80f;
@@ -118,7 +122,7 @@ inline bool canCapture(const Parameters &p, const Gains &k, float theta,
                        float omega, float x, float v, float acceleration=0) {
   const float demand=balance(k,theta,omega,x,v);
   if(fabsf(theta)>=p.catch_a || fabsf(omega)>=p.catch_r ||
-     fabsf(x)>=fminf(0.12f,p.rail-0.03f) ||
+     fabsf(x)>=fminf(0.12f,p.rail-2*p.rail_margin) ||
      fabsf(v)>=fminf(p.catch_v,speedLimit(p,true)) ||
      fabsf(demand)>=p.amax_b || fabsf(demand-acceleration)>p.catch_da)return false;
   if(fabsf(theta)>0.20f && theta*omega>0)return false;
@@ -131,12 +135,12 @@ inline bool canCapture(const Parameters &p, const Gains &k, float theta,
   for(int i=0;i<36;++i){
     const float request=balance(k,q,w,xx,motion.velocity);
     motion=cart_motion::advance(motion,xx,request,speedLimit(p,true),p.amax_b,
-                               fmaxf(p.amax_s,p.amax_b),p.jmax,p.rail,dt);
+                               fmaxf(p.amax_s,p.amax_b),p.jmax,p.rail,dt,p.rail_margin);
     if(motion.brake_direction)return false;
     xx+=motion.velocity*dt;
     const float alpha=(kGravity*sinf(q)-motion.acceleration*cosf(q))/p.leff;
     q=wrap(q+w*dt+0.5f*alpha*dt*dt);w+=alpha*dt;
-    if(fabsf(q)>=p.giveup || fabsf(xx)>p.rail-0.02f)return false;
+    if(fabsf(q)>=p.giveup || fabsf(xx)>p.rail-p.rail_margin-p.rail_hysteresis)return false;
   }
   return kGravity/p.leff*q*q+w*w<=initial*1.05f+0.01f;
 }

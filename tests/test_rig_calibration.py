@@ -31,7 +31,8 @@ class CalibrationFirmware(Firmware):
         parts = payload.split()
         if parts[1] == 'INFO':
             self.commands.append(parts)
-            self.send(f'V2 INFO {self.sid} {self.identity} {self.reference} {int(self.saved)} 103 0 2 13867 0.255')
+            diagnostics = ' 768 768 1 3210 50000 0' if self.identity in ('executor-v3-encguard','executor-v4-rehome','executor-v5-calmodel') else ''
+            self.send(f'V2 INFO {self.sid} {self.identity} {self.reference} {int(self.saved)} 103 0 2 13867 0.255'+diagnostics)
         elif parts[1] == 'CALIBRATE':
             self.commands.append(parts)
             self.pending = True
@@ -123,6 +124,17 @@ class RigCalibrationTests(unittest.TestCase):
         with self.rig(rate_hz=0) as rig:
             self.assertEqual(rig.calibrate_encoder('hanging').encoder_upright_raw, 3210)
             self.assertEqual(next(c for c in self.fw.commands if c[1] == 'CALIBRATE')[3], 'hanging')
+
+    def test_guard_firmware_calibration_returns_verified_reference_and_diagnostics(self):
+        self.fw.identity = 'executor-v3-encguard'
+        with self.rig() as rig:
+            info = rig.calibrate_encoder('hanging')
+            self.assertEqual(info.encoder_upright_raw, 3210)
+            self.assertTrue(info.reference_saved)
+            self.assertEqual(info.encoder_conf, 768)
+            self.assertIs(info.encoder_conf_valid, True)
+            self.assertEqual(next(c for c in self.fw.commands if c[1] == 'CALIBRATE')[3], 'hanging')
+            self.assertFalse(rig.state.enabled)
 
     def test_unknown_pose_sends_no_calibration(self):
         with self.rig() as rig:
@@ -219,7 +231,7 @@ class RigCalibrationTests(unittest.TestCase):
             with self.subTest(pose=pose), self.rig() as rig, ThreadPoolExecutor(1) as pool:
                 output = io.StringIO()
                 self.fw.started.clear()
-                result = pool.submit(execute_command, rig, pose, output=output)
+                result = pool.submit(execute_command, rig, 'hanging ideal' if pose == 'hanging' else pose, output=output)
                 self.assertTrue(self.fw.started.wait(.5))
                 self.assertIn(instruction, output.getvalue())
                 self.assertNotIn('saved', output.getvalue().lower())
@@ -239,7 +251,7 @@ class RigCalibrationTests(unittest.TestCase):
     def test_noninteractive_calibration_command_waits_and_exits_stopped(self):
         with tempfile.TemporaryDirectory() as directory:
             output = io.StringIO()
-            code = main(['--port', self.fw.port, '--command', 'hanging', '--log-dir', directory],
+            code = main(['--port', self.fw.port, '--command', 'hanging', '--ideal-half-turn', '--log-dir', directory],
                         rig_factory=self.rig, output=output)
         self.assertEqual(code, 0)
         self.assertTrue(self.fw.completed)

@@ -1,0 +1,19 @@
+Captured pre-fix native regression failure (excerpt from actual tool output).
+Production saved_center_return brake jerk was still fixed at 150 m/s^3.
+
+Command:
+PYTHONPATH=src .venv/bin/python -B -m pytest -p no:cacheprovider -q tests/test_executor_native.py::SketchTests::test_auto_return_braking
+
+Exit status: 1
+
+_____________________ SketchTests.test_auto_return_braking _____________________
+E   AssertionError: -6 != 0 : return transition jerk=300 sign=-1 near_rail=1 fault=7 x=-0.25035
+E   Assertion failed: (executor_state.fault==executor::NONE), function auto_return_high_jerk, file rehome_sketch_test.h, line 49.
+FAILED tests/test_executor_native.py::SketchTests::test_auto_return_braking
+1 failed in 2.00s
+
+The initial position, velocity, and acceleration were generated from rest by the
+production cart_motion::advance governor at jmax=300. The seed was the last tick
+before that governor would latch rail braking. The actual sketch then entered
+saved-center return on automatic run expiry, retaining momentum, with pulse ISR
+and control timing simulated until the independent hard-rail fault occurred.

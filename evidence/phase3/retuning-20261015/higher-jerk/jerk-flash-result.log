@@ -1,0 +1,21 @@
+{"phase": "upload", "log": "/home/rbafna/cartpole-v2-runs/retune-20261015/jerk-update-1792094363189833027"}
+Teensy Loader, Command Line, Version 2.3
+Read "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v5-jerk600/artifacts/executor-v5-calmodel-jerk600.hex": 125952 bytes, 1.5% usage
+Waiting for Teensy device...
+ (hint: press the reset button)
+Found HalfKay Bootloader
+Read "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v5-jerk600/artifacts/executor-v5-calmodel-jerk600.hex": 125952 bytes, 1.5% usage
+Programming........................................................................................................................
+Booting
+
+Traceback (most recent call last):
+  File "/tmp/flash_jerk_update.py", line 39, in <module>
+    with Rig(port,rate_hz=250,log_dir=logroot) as r:
+  File "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v5-jerk600/src/cartpole_sdk/rig/client.py", line 103, in __enter__
+    return self.connect()
+           ^^^^^^^^^^^^^^
+  File "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v5-jerk600/src/cartpole_sdk/rig/client.py", line 127, in connect
+    self._command('HELLO', reply='HELLO', allow_error=True)
+  File "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v5-jerk600/src/cartpole_sdk/rig/client.py", line 191, in _command
+    raise RigError(f'{command} acknowledgement timeout')
+cartpole_sdk.rig.client.RigError: HELLO acknowledgement timeout

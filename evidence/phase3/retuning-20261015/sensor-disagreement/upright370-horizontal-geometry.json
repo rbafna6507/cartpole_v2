@@ -1,0 +1,1018 @@
+{
+  "method": {
+    "crossing": "zero of bob-minus-pivot dy - track_slope*dx; raw marker positions; interpolation bracket<120ms",
+    "timing": "lag estimated from earlier swing comparison, frozen; telemetry board clock linearly mapped to host",
+    "zero_convention": "target +/-pi/2 minus encoder at crossing; positive means encoder reads below rail-relative orientation",
+    "ellipse": "fit bob-minus-pivot point cloud to a free centered ellipse under weak-perspective assumption; no encoder angle used",
+    "limits": [
+      "Rail-normal is gravity-upright only if rail is physically level.",
+      "Horizontal-crossing method requires red marker at actual hinge and blue marker on pole axis.",
+      "Perspective/nonplanar motion and marker offsets can break the simple ellipse-center interpretation.",
+      "Camera15Hz and encoder high-rate chatter limit crossing timing; report linear-vs-cubic sensitivity and direction spread, not a calibrated confidence interval."
+    ]
+  },
+  "runs": [
+    {
+      "run": 1,
+      "candidate": "A_L124_B30",
+      "track_slope_dy_dx": 0.014186558911375756,
+      "track_normal_angle_rad": 0.014185607304647626,
+      "crossings": [
+        {
+          "elapsed_s": 0.7437317688309122,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4159293859519817,
+          "rail_relative_minus_encoder_rad": 0.15486694084291486,
+          "camera_bracket_s": 0.06641490498441271,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 0.7632142486108933,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4551123080849357,
+          "rail_relative_minus_encoder_rad": 0.11568401870996083,
+          "camera_bracket_s": 0.06691798701649532,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.013433648593992075,
+          "cubic_rail_relative_minus_encoder_rad": 0.07621629996400037
+        },
+        {
+          "elapsed_s": 2.262667853210587,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6867404551499043,
+          "rail_relative_minus_encoder_rad": 0.11594412835500778,
+          "camera_bracket_s": 0.06670332999783568,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.001439047615900863,
+          "cubic_rail_relative_minus_encoder_rad": 0.13194856728939408
+        },
+        {
+          "elapsed_s": 6.829384807817405,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6880960487470937,
+          "rail_relative_minus_encoder_rad": 0.11729972195219718,
+          "camera_bracket_s": 0.06690238101873547,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 7.774073356122244,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.704860939753147,
+          "rail_relative_minus_encoder_rad": 0.13406461295825034,
+          "camera_bracket_s": 0.06638749298872426,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.542645130044548,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.716896750488435,
+          "rail_relative_minus_encoder_rad": 0.14610042369353837,
+          "camera_bracket_s": 0.06905452199862339,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.858705791615648,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6718038582302348,
+          "rail_relative_minus_encoder_rad": 0.10100753143533825,
+          "camera_bracket_s": 0.06698475597659126,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 10.785887509729946,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7300134155596723,
+          "rail_relative_minus_encoder_rad": 0.1592170887647757,
+          "camera_bracket_s": 0.06595084999571554,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 11.088950478238985,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6879993335597454,
+          "rail_relative_minus_encoder_rad": 0.11720300676484884,
+          "camera_bracket_s": 0.03327658399939537,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 11.630028901185142,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.286640669518913,
+          "rail_relative_minus_encoder_rad": 0.2841556572759836,
+          "camera_bracket_s": 0.0673373099998571,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.00208533649374788,
+          "cubic_rail_relative_minus_encoder_rad": 0.27455889635943415
+        },
+        {
+          "elapsed_s": 11.91227800375782,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7065926404004237,
+          "rail_relative_minus_encoder_rad": 0.13579631360552713,
+          "camera_bracket_s": 0.06750896101584658,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0008720683935555544,
+          "cubic_rail_relative_minus_encoder_rad": 0.14215045005657134
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 112,
+        "center_relative_to_red_marker_px": [
+          1.0805827765677771,
+          2.390892936109168
+        ],
+        "radii_px": [
+          162.64954252248373,
+          158.78311572871596
+        ],
+        "rotation_rad": 1.867302940699824,
+        "normalized_radial_residual_rms": 0.031815547243494204,
+        "max_marker_center_angle_bias_bound_rad": 0.01652482105813126
+      },
+      "crossing_summary": {
+        "n": 11,
+        "mean_rad": 0.1437581313053039,
+        "median_rad": 0.13406461295825034,
+        "p05_p95_rad": [
+          0.10834577507264953,
+          0.22168637302037963
+        ],
+        "by_side": {
+          "right": {
+            "n": 3,
+            "median_rad": 0.15486694084291486,
+            "mean_rad": 0.18490220560961976
+          },
+          "left": {
+            "n": 8,
+            "median_rad": 0.12568216745522376,
+            "mean_rad": 0.12832910344118545
+          }
+        }
+      }
+    },
+    {
+      "run": 2,
+      "candidate": "B_L164_B30",
+      "track_slope_dy_dx": 0.012032567384871936,
+      "track_normal_angle_rad": 0.012031986732869562,
+      "crossings": [
+        {
+          "elapsed_s": 1.7005353258864488,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6202382018075137,
+          "rail_relative_minus_encoder_rad": 0.0494418750126171,
+          "camera_bracket_s": 0.06613462697714567,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 2.508622070279671,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.704478396962272,
+          "rail_relative_minus_encoder_rad": 0.13368207016737554,
+          "camera_bracket_s": 0.06743266899138689,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.001831608110764019,
+          "cubic_rail_relative_minus_encoder_rad": 0.14421796723888147
+        },
+        {
+          "elapsed_s": 2.717554952716455,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.7088733881595977,
+          "rail_relative_minus_encoder_rad": 0.1380770613647011,
+          "camera_bracket_s": 0.06632695201551542,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.0006838446400504158,
+          "cubic_rail_relative_minus_encoder_rad": 0.14043718677211037
+        },
+        {
+          "elapsed_s": 3.0725861113751307,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.3204194331233512,
+          "rail_relative_minus_encoder_rad": 0.25037689367154536,
+          "camera_bracket_s": 0.06629872901248746,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.1296885265910532,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4205549874354775,
+          "rail_relative_minus_encoder_rad": 0.15024133935941908,
+          "camera_bracket_s": 0.06690648398944177,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.553211140271742,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7340840041470165,
+          "rail_relative_minus_encoder_rad": 0.1632876773521199,
+          "camera_bracket_s": 0.06653713298146613,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0013390308550754026,
+          "cubic_rail_relative_minus_encoder_rad": 0.16534175642177226
+        },
+        {
+          "elapsed_s": 3.5660158067767043,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.719071737106564,
+          "rail_relative_minus_encoder_rad": 0.1482754103116675,
+          "camera_bracket_s": 0.06759628999861889,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 99,
+        "center_relative_to_red_marker_px": [
+          0.21516943927149879,
+          0.15248411888115584
+        ],
+        "radii_px": [
+          165.84441843384948,
+          161.60955367136316
+        ],
+        "rotation_rad": 0.2730061295933005,
+        "normalized_radial_residual_rms": 0.06469357011737564,
+        "max_marker_center_angle_bias_bound_rad": 0.001631847329661802
+      },
+      "crossing_summary": {
+        "n": 7,
+        "mean_rad": 0.14762604674849222,
+        "median_rad": 0.1482754103116675,
+        "p05_p95_rad": [
+          0.07471393355904464,
+          0.22425012877571768
+        ],
+        "by_side": {
+          "right": {
+            "n": 2,
+            "median_rad": 0.20030911651548222,
+            "mean_rad": 0.20030911651548222
+          },
+          "left": {
+            "n": 5,
+            "median_rad": 0.1380770613647011,
+            "mean_rad": 0.12655281884169622
+          }
+        }
+      }
+    },
+    {
+      "run": 3,
+      "candidate": "D_L164_B10",
+      "track_slope_dy_dx": 0.012715533327280338,
+      "track_normal_angle_rad": 0.01271484809098523,
+      "crossings": [
+        {
+          "elapsed_s": 2.383970775961643,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.3475516922014201,
+          "rail_relative_minus_encoder_rad": 0.22324463459347643,
+          "camera_bracket_s": 0.06669250200502574,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 2.649574393639341,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7189014753520448,
+          "rail_relative_minus_encoder_rad": 0.1481051485571483,
+          "camera_bracket_s": 0.06833439000183716,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0020209560373864203,
+          "cubic_rail_relative_minus_encoder_rad": 0.16283037399118094
+        },
+        {
+          "elapsed_s": 2.9607587035861798,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6802877944232784,
+          "rail_relative_minus_encoder_rad": 0.1094914676283818,
+          "camera_bracket_s": 0.06708383801742457,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.4635628433316015,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.433968252386798,
+          "rail_relative_minus_encoder_rad": 0.13682807440809852,
+          "camera_bracket_s": 0.06715305600664578,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.0012843998300291963,
+          "cubic_rail_relative_minus_encoder_rad": 0.13288752652325053
+        },
+        {
+          "elapsed_s": 3.783905527641764,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.692871648907855,
+          "rail_relative_minus_encoder_rad": 0.12207532211295846,
+          "camera_bracket_s": 0.06654373300261796,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0031334323817563668,
+          "cubic_rail_relative_minus_encoder_rad": 0.13861327149509806
+        },
+        {
+          "elapsed_s": 5.209919688699301,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4871574046728306,
+          "rail_relative_minus_encoder_rad": 0.08363892212206592,
+          "camera_bracket_s": 0.06682092300616205,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 5.335811214434216,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4260708501670993,
+          "rail_relative_minus_encoder_rad": 0.14472547662779722,
+          "camera_bracket_s": 0.06625585799338296,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 6.790140059310943,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6888700406077952,
+          "rail_relative_minus_encoder_rad": 0.11807371381289866,
+          "camera_bracket_s": 0.06618132998119108,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 7.165781817340758,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4383043259736188,
+          "rail_relative_minus_encoder_rad": 0.13249200082127777,
+          "camera_bracket_s": 0.06758756600902416,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 7.195275483070873,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.483405928768668,
+          "rail_relative_minus_encoder_rad": 0.0873903980262285,
+          "camera_bracket_s": 0.06551414899877273,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 7.746512510027969,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6713664109831055,
+          "rail_relative_minus_encoder_rad": 0.1005700841882089,
+          "camera_bracket_s": 0.06686553699546494,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 8.139253610774176,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4634573881412634,
+          "rail_relative_minus_encoder_rad": 0.1073389386536332,
+          "camera_bracket_s": 0.06396816798951477,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 8.149895880138502,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4711781239892463,
+          "rail_relative_minus_encoder_rad": 0.09961820280565026,
+          "camera_bracket_s": 0.03324791701743379,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.0066629932794497835,
+          "cubic_rail_relative_minus_encoder_rad": 0.08087174827551613
+        },
+        {
+          "elapsed_s": 8.693621813319623,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6857597316987827,
+          "rail_relative_minus_encoder_rad": 0.11496340490388612,
+          "camera_bracket_s": 0.06627928698435426,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 10.592751849675551,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6840221565305964,
+          "rail_relative_minus_encoder_rad": 0.11322582973569985,
+          "camera_bracket_s": 0.06562382099218667,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 102,
+        "center_relative_to_red_marker_px": [
+          0.26418315699882533,
+          1.6046609881457132
+        ],
+        "radii_px": [
+          161.5862499724675,
+          166.04563508764204
+        ],
+        "rotation_rad": -1.5040545383036048,
+        "normalized_radial_residual_rms": 0.04494734034097151,
+        "max_marker_center_angle_bias_bound_rad": 0.010064531652686436
+      },
+      "crossing_summary": {
+        "n": 15,
+        "mean_rad": 0.12278544126649399,
+        "median_rad": 0.11496340490388612,
+        "p05_p95_rad": [
+          0.08626495525497972,
+          0.17064699436804665
+        ],
+        "by_side": {
+          "right": {
+            "n": 8,
+            "median_rad": 0.11991546973745548,
+            "mean_rad": 0.12690958100727848
+          },
+          "left": {
+            "n": 7,
+            "median_rad": 0.11496340490388612,
+            "mean_rad": 0.11807213870559743
+          }
+        }
+      }
+    },
+    {
+      "run": 4,
+      "candidate": "C_L124_B10",
+      "track_slope_dy_dx": 0.013927422074267804,
+      "track_normal_angle_rad": 0.013926521664047129,
+      "crossings": [
+        {
+          "elapsed_s": 3.7836294965236448,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.2886228604048025,
+          "rail_relative_minus_encoder_rad": 0.2821734663900941,
+          "camera_bracket_s": 0.0665387750195805,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 5.760210655193077,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.6916384172014178,
+          "rail_relative_minus_encoder_rad": 0.12084209040652127,
+          "camera_bracket_s": 0.06679014200926758,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.453207732207375,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6514381442014872,
+          "rail_relative_minus_encoder_rad": 0.0806418174065906,
+          "camera_bracket_s": 0.06660236901370808,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.001760629601903175,
+          "cubic_rail_relative_minus_encoder_rad": 0.09579153449922573
+        },
+        {
+          "elapsed_s": 10.036002972454298,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.2894430065564417,
+          "rail_relative_minus_encoder_rad": 0.28135332023845483,
+          "camera_bracket_s": 0.0649512319942005,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.0016318265163421416,
+          "cubic_rail_relative_minus_encoder_rad": 0.27321782670267347
+        },
+        {
+          "elapsed_s": 10.310903832607437,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.718965655789779,
+          "rail_relative_minus_encoder_rad": 0.14816932899488244,
+          "camera_bracket_s": 0.06725259099039249,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.00026422358692537474,
+          "cubic_rail_relative_minus_encoder_rad": 0.15009453335333967
+        },
+        {
+          "elapsed_s": 10.618746718682814,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6886969515824426,
+          "rail_relative_minus_encoder_rad": 0.11790062478754604,
+          "camera_bracket_s": 0.0669957859790884,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.00024018490510507417,
+          "cubic_rail_relative_minus_encoder_rad": 0.11974284798465296
+        },
+        {
+          "elapsed_s": 10.92620933469152,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.2963944582089861,
+          "rail_relative_minus_encoder_rad": 0.2744018685859104,
+          "camera_bracket_s": 0.0661282810033299,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 11.472460752702318,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.6967883014217098,
+          "rail_relative_minus_encoder_rad": 0.12599197462681322,
+          "camera_bracket_s": 0.06699230000958778,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.009871812503578554,
+          "cubic_rail_relative_minus_encoder_rad": 0.13864714392159902
+        },
+        {
+          "elapsed_s": 11.506028102478012,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6936003880755381,
+          "rail_relative_minus_encoder_rad": 0.1228040612806416,
+          "camera_bracket_s": 0.06594603799749166,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 121,
+        "center_relative_to_red_marker_px": [
+          1.1418909237723665,
+          2.3401958875315017
+        ],
+        "radii_px": [
+          161.83772614282805,
+          160.13498466442914
+        ],
+        "rotation_rad": -0.7944362620422292,
+        "normalized_radial_residual_rms": 0.038454504375505516,
+        "max_marker_center_angle_bias_bound_rad": 0.016261536948094537
+      },
+      "crossing_summary": {
+        "n": 9,
+        "mean_rad": 0.17269761696860605,
+        "median_rad": 0.12599197462681322,
+        "p05_p95_rad": [
+          0.09554534035897277,
+          0.2818454079294384
+        ],
+        "by_side": {
+          "right": {
+            "n": 3,
+            "median_rad": 0.28135332023845483,
+            "mean_rad": 0.27930955173815314
+          },
+          "left": {
+            "n": 6,
+            "median_rad": 0.12182307584358143,
+            "mean_rad": 0.11939164958383253
+          }
+        }
+      }
+    },
+    {
+      "run": 5,
+      "candidate": "D_L164_B10",
+      "track_slope_dy_dx": 0.012184815029597711,
+      "track_normal_angle_rad": 0.012184212057962995,
+      "crossings": [
+        {
+          "elapsed_s": 2.2431627509649843,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.341292153587863,
+          "rail_relative_minus_encoder_rad": 0.22950417320703353,
+          "camera_bracket_s": 0.0683587149833329,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 2.5295502477383707,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7212915294830256,
+          "rail_relative_minus_encoder_rad": 0.150495202688129,
+          "camera_bracket_s": 0.06771649399888702,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0014199506450613953,
+          "cubic_rail_relative_minus_encoder_rad": 0.16029675141589217
+        },
+        {
+          "elapsed_s": 2.790783870324958,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6926588344466762,
+          "rail_relative_minus_encoder_rad": 0.12186250765177964,
+          "camera_bracket_s": 0.0667810190061573,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.00012722095979495086,
+          "cubic_rail_relative_minus_encoder_rad": 0.12274071255590813
+        },
+        {
+          "elapsed_s": 3.1073738829582,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.339044006485639,
+          "rail_relative_minus_encoder_rad": 0.23175232030925752,
+          "camera_bracket_s": 0.06641256299917586,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": -0.0046839832131485475,
+          "cubic_rail_relative_minus_encoder_rad": 0.24443751704417815
+        },
+        {
+          "elapsed_s": 3.2442079867760185,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4544246152483606,
+          "rail_relative_minus_encoder_rad": 0.11637171154653593,
+          "camera_bracket_s": 0.06684630099334754,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.004975513063395305,
+          "cubic_rail_relative_minus_encoder_rad": 0.10009852038066658
+        },
+        {
+          "elapsed_s": 3.6463296074653044,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.6977612302804153,
+          "rail_relative_minus_encoder_rad": 0.1269649034855187,
+          "camera_bracket_s": 0.06620030401973054,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.6744299761776347,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6974084614998495,
+          "rail_relative_minus_encoder_rad": 0.12661213470495292,
+          "camera_bracket_s": 0.0669374709832482,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.013000646150266585,
+          "cubic_rail_relative_minus_encoder_rad": 0.14593494804368334
+        },
+        {
+          "elapsed_s": 5.026619880052749,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.415299460092996,
+          "rail_relative_minus_encoder_rad": 0.15549686670190055,
+          "camera_bracket_s": 0.06833289400674403,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 5.088486254418967,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4789575041839556,
+          "rail_relative_minus_encoder_rad": 0.091838822610941,
+          "camera_bracket_s": 0.0664547749911435,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 5.999504912499106,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4605761745709418,
+          "rail_relative_minus_encoder_rad": 0.11022015222395476,
+          "camera_bracket_s": 0.06953826401149854,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 6.000761249306379,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.462503392155,
+          "rail_relative_minus_encoder_rad": 0.10829293463989664,
+          "camera_bracket_s": 0.06423463398823515,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 7.50443502626149,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.658463558350553,
+          "rail_relative_minus_encoder_rad": 0.08766723155565635,
+          "camera_bracket_s": 0.10062041197670624,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.792051033873577,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.4429966259438267,
+          "rail_relative_minus_encoder_rad": 0.12779970085106987,
+          "camera_bracket_s": 0.06618520800839178,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.815761617443059,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.4614109632327594,
+          "rail_relative_minus_encoder_rad": 0.10938536356213713,
+          "camera_bracket_s": 0.06628556299256161,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 10.370946416136576,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.702329168933294,
+          "rail_relative_minus_encoder_rad": 0.13153284213839744,
+          "camera_bracket_s": 0.06539242499275133,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 11.308979562367313,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6699383560314713,
+          "rail_relative_minus_encoder_rad": 0.09914202923657478,
+          "camera_bracket_s": 0.06651024200255051,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 98,
+        "center_relative_to_red_marker_px": [
+          0.26822627737458127,
+          0.8218657900587685
+        ],
+        "radii_px": [
+          166.46796346706503,
+          161.74305813903445
+        ],
+        "rotation_rad": -0.16400207891554489,
+        "normalized_radial_residual_rms": 0.052031623506481633,
+        "max_marker_center_angle_bias_bound_rad": 0.0053450958294969
+      },
+      "crossing_summary": {
+        "n": 16,
+        "mean_rad": 0.13280868106960847,
+        "median_rad": 0.12423732117836628,
+        "p05_p95_rad": [
+          0.09079592484711985,
+          0.23006620998258953
+        ],
+        "by_side": {
+          "right": {
+            "n": 9,
+            "median_rad": 0.11637171154653593,
+            "mean_rad": 0.14229578285030298
+          },
+          "left": {
+            "n": 7,
+            "median_rad": 0.12661213470495292,
+            "mean_rad": 0.12061097878014412
+          }
+        }
+      }
+    },
+    {
+      "run": 6,
+      "candidate": "C_L124_B10",
+      "track_slope_dy_dx": 0.014704896369063561,
+      "track_normal_angle_rad": 0.01470383660714523,
+      "crossings": [
+        {
+          "elapsed_s": 2.1251729542855173,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6938085198593655,
+          "rail_relative_minus_encoder_rad": 0.12301219306446898,
+          "camera_bracket_s": 0.06673718098318204,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.0650615454360377,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.6883249263595137,
+          "rail_relative_minus_encoder_rad": 0.11752859956461714,
+          "camera_bracket_s": 0.06645845601451583,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 3.5430484336975496,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6706590425336594,
+          "rail_relative_minus_encoder_rad": 0.09986271573876282,
+          "camera_bracket_s": 0.06800008998834528,
+          "mode": 2,
+          "cubic_interpolation_time_change_s": 0.001688121147001539,
+          "cubic_rail_relative_minus_encoder_rad": 0.11540018193960444
+        },
+        {
+          "elapsed_s": 4.218414825707441,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6534937147795452,
+          "rail_relative_minus_encoder_rad": 0.08269738798464865,
+          "camera_bracket_s": 0.0680665239924565,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 6.162873582477914,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6574955992749907,
+          "rail_relative_minus_encoder_rad": 0.08669927248009411,
+          "camera_bracket_s": 0.0663352579867933,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.171332783356775,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7054593641531828,
+          "rail_relative_minus_encoder_rad": 0.1346630373582862,
+          "camera_bracket_s": 0.06662496499484405,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.559287434181897,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6700816201658066,
+          "rail_relative_minus_encoder_rad": 0.09928529337091008,
+          "camera_bracket_s": 0.06727525099995546,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 9.795526231231634,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.2969683135042172,
+          "rail_relative_minus_encoder_rad": 0.2738280132906794,
+          "camera_bracket_s": 0.06705418997444212,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 10.535800195677439,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.6718333557002893,
+          "rail_relative_minus_encoder_rad": 0.10103702890539279,
+          "camera_bracket_s": 0.06613449199358001,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 109,
+        "center_relative_to_red_marker_px": [
+          -0.08361084800904788,
+          2.953342876891504
+        ],
+        "radii_px": [
+          162.45519899608124,
+          155.72622379409012
+        ],
+        "rotation_rad": -1.528143065675107,
+        "normalized_radial_residual_rms": 0.035320092376693556,
+        "max_marker_center_angle_bias_bound_rad": 0.01897370515623594
+      },
+      "crossing_summary": {
+        "n": 9,
+        "mean_rad": 0.12429039352865114,
+        "median_rad": 0.10103702890539279,
+        "p05_p95_rad": [
+          0.08429814178282684,
+          0.21816202291772208
+        ],
+        "by_side": {
+          "right": {
+            "n": 1,
+            "median_rad": 0.2738280132906794,
+            "mean_rad": 0.2738280132906794
+          },
+          "left": {
+            "n": 8,
+            "median_rad": 0.1004498723220778,
+            "mean_rad": 0.1055981910583976
+          }
+        }
+      }
+    },
+    {
+      "run": 7,
+      "candidate": "A_L124_B30",
+      "track_slope_dy_dx": 0.015251793535737204,
+      "track_normal_angle_rad": 0.01525061109090048,
+      "crossings": [
+        {
+          "elapsed_s": 1.8263841230946127,
+          "side": "left",
+          "direction": "dy_decreasing",
+          "encoder_rad": -1.7134716054855894,
+          "rail_relative_minus_encoder_rad": 0.14267527869069285,
+          "camera_bracket_s": 0.06763829401461408,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 2.2508217300928663,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6552422900281827,
+          "rail_relative_minus_encoder_rad": 0.08444596323328613,
+          "camera_bracket_s": 0.06678518699482083,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 2.471611677261535,
+          "side": "right",
+          "direction": "dy_decreasing",
+          "encoder_rad": 1.3054579864740175,
+          "rail_relative_minus_encoder_rad": 0.2653383403208791,
+          "camera_bracket_s": 0.0668084190110676,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 4.471931802778272,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.6862074800656814,
+          "rail_relative_minus_encoder_rad": 0.1154111532707849,
+          "camera_bracket_s": 0.06559956399723887,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 8.009341158671305,
+          "side": "left",
+          "direction": "dy_increasing",
+          "encoder_rad": -1.7441171970701146,
+          "rail_relative_minus_encoder_rad": 0.17332087027521803,
+          "camera_bracket_s": 0.061299732013139874,
+          "mode": 2
+        },
+        {
+          "elapsed_s": 8.712986574420938,
+          "side": "right",
+          "direction": "dy_increasing",
+          "encoder_rad": 1.2760072177525206,
+          "rail_relative_minus_encoder_rad": 0.294789109042376,
+          "camera_bracket_s": 0.06635939501575194,
+          "mode": 2
+        }
+      ],
+      "weak_perspective_ellipse": {
+        "points": 117,
+        "center_relative_to_red_marker_px": [
+          0.20746258086330494,
+          2.7291569829540583
+        ],
+        "radii_px": [
+          163.0969527827039,
+          156.49905157233445
+        ],
+        "rotation_rad": -1.5446918871109154,
+        "normalized_radial_residual_rms": 0.024795074026324932,
+        "max_marker_center_angle_bias_bound_rad": 0.017490013492483594
+      },
+      "crossing_summary": {
+        "n": 6,
+        "mean_rad": 0.17933011913887284,
+        "median_rad": 0.15799807448295544,
+        "p05_p95_rad": [
+          0.09218726074266081,
+          0.28742641686200177
+        ],
+        "by_side": {
+          "right": {
+            "n": 2,
+            "median_rad": 0.28006372468162755,
+            "mean_rad": 0.28006372468162755
+          },
+          "left": {
+            "n": 4,
+            "median_rad": 0.12904321598073887,
+            "mean_rad": 0.12896331636749547
+          }
+        }
+      }
+    }
+  ]
+}

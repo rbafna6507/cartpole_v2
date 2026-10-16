@@ -1,0 +1,106 @@
+   Building cartpole-sdk @ file:///Users/rbafna/projects/cartpole_v2
+      Built cartpole-sdk @ file:///Users/rbafna/projects/cartpole_v2
+Uninstalled 1 package in 2ms
+Installed 1 package in 3ms
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+_____________________ SketchTests.test_encoder_config_boot _____________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_boot>
+name = 'encoder_config_boot'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (Wire1.conf==0xC3F0), function encoder_config_boot, file sketch.cpp, line 108.
+_________________ SketchTests.test_encoder_config_failed_read __________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_failed_read>
+name = 'encoder_config_failed_read'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!encoderHealthy()), function encoder_config_failed_read, file sketch.cpp, line 118.
+_________________ SketchTests.test_encoder_config_failed_write _________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_failed_write>
+name = 'encoder_config_failed_write'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!as5600FastFilter()), function encoder_config_failed_write, file sketch.cpp, line 115.
+___________________ SketchTests.test_encoder_config_recovery ___________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_recovery>
+name = 'encoder_config_recovery'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!encoderHealthy()), function encoder_config_recovery, file sketch.cpp, line 130.
+___________________ SketchTests.test_encoder_config_runtime ____________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_runtime>
+name = 'encoder_config_runtime'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!g_energized&&!executor_state.healthy&&!executor_state.homed&&executor_state.fault==executor::ENCODER), function encoder_config_runtime, file sketch.cpp, line 124.
+____________________ SketchTests.test_encoder_config_stale _____________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_stale>
+name = 'encoder_config_stale'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!encoderHealthy()), function encoder_config_stale, file sketch.cpp, line 132.
+___________________ SketchTests.test_encoder_config_watchdog ___________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_watchdog>
+name = 'encoder_config_watchdog'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!g_energized&&!executor_state.healthy&&!executor_state.homed&&executor_state.fault==executor::ENCODER), function encoder_config_runtime, file sketch.cpp, line 124.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_boot
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_failed_read
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_failed_write
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_recovery
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_runtime
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_stale
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_watchdog
+7 failed, 50 deselected in 1.98s

@@ -68,10 +68,10 @@ class State:
     acceleration: float = 0.0
     brake_direction: int = 0
 
-def advance(s, x, requested_accel, vmax, drive_amax, brake_amax, jerk, rail_half, dt):
+def advance(s, x, requested_accel, vmax, drive_amax, brake_amax, jerk, rail_half, dt, *, rail_margin=.015):
     x,requested_accel,vmax,drive_amax,brake_amax,jerk,rail_half,dt = map(_Float32,(x,requested_accel,vmax,drive_amax,brake_amax,jerk,rail_half,dt))
     s = State(_Float32(s.velocity),_Float32(s.acceleration),s.brake_direction)
-    boundary,jd = rail_half-.015,jerk*dt
+    boundary,jd = rail_half-_Float32(rail_margin),jerk*dt
     target = clamp(requested_accel,-drive_amax,drive_amax)
     positive = settled_velocity_accel(s.velocity,s.acceleration,vmax,brake_amax,jerk,dt)
     negative = settled_velocity_accel(s.velocity,s.acceleration,-vmax,brake_amax,jerk,dt)

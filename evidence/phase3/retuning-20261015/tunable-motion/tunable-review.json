@@ -1,0 +1,22 @@
+{
+  "reviewer": "/root/jerk_review",
+  "scope": "Integrated measured-rail and motion-parameter source; firmware, SDK, profiles, native regressions",
+  "outstanding_blockers": [],
+  "findings_resolved": [
+    "Float32 measured rail cap matches separate MCU products and whole-step floor",
+    "Automatic return braking retains configured automatic speed/acceleration/jerk",
+    "Low-jerk centering handoff previews the first centering tick and both rail stopping envelopes",
+    "Geometry-only profiles preserve the hidden rail preference; explicit rail writes are not skipped on equal readback"
+  ],
+  "limitations": [
+    "Software tests do not certify physical motor performance or missed step detection",
+    "No v6 physical trial has run yet",
+    "Encoder/vision fusion is not controlling this trial",
+    "Homing seek/latch and spin/upright-fall recovery are fixed paths; low-level hardware/timing are outside the requested configuration scope"
+  ],
+  "root_verification": {
+    "tests": "691 passed, 7 skipped, 381 subtests passed",
+    "build": "Arduino Teensy 4.1 compiled successfully",
+    "diff_check": "passed"
+  }
+}

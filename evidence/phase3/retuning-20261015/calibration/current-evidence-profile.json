@@ -1,0 +1,93 @@
+{
+  "approval": null,
+  "calibration_id": "h2u-853f98e451fbb314afed946cc296f28fd53f5e15dc0d24b3070bb4829cee63f9",
+  "counts_per_turn": 4096,
+  "estimate_counts": null,
+  "evidence": {
+    "counts_per_turn": 4096,
+    "fixture_id": "unverified-recorded-fixture",
+    "frame_id": "pole-upright",
+    "hardware_id": "unverified-recorded-rig",
+    "pairs": [],
+    "provenance": {
+      "acquisition_version": "diagnostic-summary-only-20261015",
+      "limitations": "No independently labeled native upright/hanging pairs with uncertainty, fixture, direction, session, and heldout provenance exist in the summary records.",
+      "source": "source-evidence.json",
+      "source_sha256": "fd655d8c8fc7c050abf177863e70133bf1d32423237d57f196a708609f136fd1"
+    },
+    "schema_version": 1,
+    "sensor_config_id": "recorded-conf-768-unverified-identity",
+    "source_id": "as5600-raw-12bit"
+  },
+  "fit_version": "paired-circular-offset-v1",
+  "fixture_id": "unverified-recorded-fixture",
+  "frame_id": "pole-upright",
+  "hardware_id": "unverified-recorded-rig",
+  "model_kind": "hanging_to_upright_offset",
+  "offset_counts": null,
+  "policy": {
+    "max_direction_gap_counts": 3.0,
+    "max_error_deg": 0.5,
+    "max_offset_counts": 256,
+    "max_session_gap_counts": 3.0,
+    "max_window_drift_counts": 2.0,
+    "max_window_span_counts": 4.0,
+    "min_train_pairs": 6,
+    "min_train_per_direction": 3,
+    "min_train_sessions": 2,
+    "min_validation_pairs": 4,
+    "min_validation_per_direction": 2,
+    "min_validation_sessions": 2,
+    "min_window_duration_s": 0.4,
+    "min_window_samples": 32
+  },
+  "schema_version": 1,
+  "sensor_config_id": "recorded-conf-768-unverified-identity",
+  "source_id": "as5600-raw-12bit",
+  "validation": {
+    "bound_interpretation": "Observed residual plus full window radii, one count for two quantized pose readings, and declared external reference bound; not a confidence interval.",
+    "coverage": {
+      "train": {
+        "directions": {
+          "negative": 0,
+          "positive": 0
+        },
+        "pairs": 0,
+        "sessions": []
+      },
+      "validation": {
+        "directions": {
+          "negative": 0,
+          "positive": 0
+        },
+        "pairs": 0,
+        "sessions": []
+      }
+    },
+    "direction_centers_counts": {},
+    "direction_gap_counts": null,
+    "error_target_counts": 5.688888888888889,
+    "error_target_deg": 0.5,
+    "excluded_pairs": [],
+    "outlier_pair_ids": [],
+    "pair_results": [],
+    "prediction_bound_counts": {
+      "train": null,
+      "validation": null
+    },
+    "reasons": [
+      "insufficient train pairs",
+      "insufficient independent train sessions",
+      "insufficient train positive direction coverage",
+      "insufficient train negative direction coverage",
+      "insufficient validation pairs",
+      "insufficient independent validation sessions",
+      "insufficient validation positive direction coverage",
+      "insufficient validation negative direction coverage"
+    ],
+    "session_centers_counts": {},
+    "session_gap_counts": null,
+    "status": "insufficient_data",
+    "training_mad_counts": null
+  }
+}

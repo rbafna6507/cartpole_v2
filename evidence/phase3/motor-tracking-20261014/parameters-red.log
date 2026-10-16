@@ -1,0 +1,2200 @@
+FFFFF.F..FFFFFFFFF.F.......F...                                                         [100%]
+=================================== FAILURES ===================================
+_________ ParameterTests.test_all_parameters_are_live_reads_of_catalog _________
+
+self = <test_rig_parameters.ParameterTests testMethod=test_all_parameters_are_live_reads_of_catalog>
+
+    def test_all_parameters_are_live_reads_of_catalog(self):
+        self.fw.values['leff'] = .13
+        with self.rig() as rig:
+>           values = rig.get_parameters()
+                     ^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'get_parameters'
+
+tests/test_rig_parameters.py:101: AttributeError
+___________ ParameterTests.test_cli_set_and_get_do_not_start_motion ____________
+
+self = ArgumentParser(prog='__main__.py', usage=None, description='Operator console for board reference modes and explicit external policies.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+args = ['--port', '/dev/ttys006', '--log-dir', '/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/tmpb_3yldv3', '--command', 'set', ...]
+namespace = Namespace(port='/dev/ttys006', rate=100, log_dir='/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/tmpb_3yldv3', command=None, duration=None, switches=None, center_confirmed=False, velocity=0.0, ttl_ms=50, source=None)
+
+    def parse_known_args(self, args=None, namespace=None):
+        if args is None:
+            # args default to the system args
+            args = _sys.argv[1:]
+        else:
+            # make sure that args are mutable
+            args = list(args)
+    
+        # default Namespace built from parser defaults
+        if namespace is None:
+            namespace = Namespace()
+    
+        # add any action defaults that aren't present
+        for action in self._actions:
+            if action.dest is not SUPPRESS:
+                if not hasattr(namespace, action.dest):
+                    if action.default is not SUPPRESS:
+                        setattr(namespace, action.dest, action.default)
+    
+        # add any parser defaults that aren't present
+        for dest in self._defaults:
+            if not hasattr(namespace, dest):
+                setattr(namespace, dest, self._defaults[dest])
+    
+        # parse the arguments and exit if there are any errors
+        if self.exit_on_error:
+            try:
+>               namespace, args = self._parse_known_args(args, namespace)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:1902: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2114: in _parse_known_args
+    start_index = consume_optional(start_index)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2054: in consume_optional
+    take_action(action, args, option_string)
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:1962: in take_action
+    argument_values = self._get_values(action, argument_strings)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2497: in _get_values
+    self._check_value(action, value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ArgumentParser(prog='__main__.py', usage=None, description='Operator console for board reference modes and explicit external policies.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+action = _StoreAction(option_strings=['--command'], dest='command', nargs=None, const=None, default=None, type=None, choices=('...ter', 'home', 'upright', 'hanging', 'status', 'info', 'clear', 'policy-zero'), required=False, help=None, metavar=None)
+value = 'set'
+
+    def _check_value(self, action, value):
+        # converted value must be one of the choices (if specified)
+        if action.choices is not None and value not in action.choices:
+            args = {'value': value,
+                    'choices': ', '.join(map(repr, action.choices))}
+            msg = _('invalid choice: %(value)r (choose from %(choices)s)')
+>           raise ArgumentError(action, msg % args)
+E           argparse.ArgumentError: argument --command: invalid choice: 'set' (choose from 'auto', 'bal', 'manual', 'velocity', 'stop', 'center', 'home', 'upright', 'hanging', 'status', 'info', 'clear', 'policy-zero')
+
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2553: ArgumentError
+
+During handling of the above exception, another exception occurred:
+
+self = <test_rig_parameters.ParameterTests testMethod=test_cli_set_and_get_do_not_start_motion>
+
+    def test_cli_set_and_get_do_not_start_motion(self):
+        for command, extra in (('set',['--value','3.25']), ('get',[])):
+            output=io.StringIO()
+>           result=main(['--port',self.fw.port,'--log-dir',self.tmp.name,
+                         '--command',command,'--param','ke',*extra],rig_factory=self.rig,output=output)
+
+tests/test_rig_parameters.py:224: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/console.py:127: in main
+    args=parser.parse_args(argv)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:1869: in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:1904: in parse_known_args
+    self.error(str(err))
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2630: in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ArgumentParser(prog='__main__.py', usage=None, description='Operator console for board reference modes and explicit external policies.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+status = 2
+message = "__main__.py: error: argument --command: invalid choice: 'set' (choose from 'auto', 'bal', 'manual', 'velocity', 'stop', 'center', 'home', 'upright', 'hanging', 'status', 'info', 'clear', 'policy-zero')\n"
+
+    def exit(self, status=0, message=None):
+        if message:
+            self._print_message(message, _sys.stderr)
+>       _sys.exit(status)
+E       SystemExit: 2
+
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2617: SystemExit
+----------------------------- Captured stderr call -----------------------------
+usage: __main__.py [-h] --port PORT [--rate {0,100,250,500,1000}]
+                   [--log-dir LOG_DIR]
+                   [--command {auto,bal,manual,velocity,stop,center,home,upright,hanging,status,info,clear,policy-zero}]
+                   [--duration DURATION] [--switches {on,off}]
+                   [--center-confirmed] [--velocity VELOCITY]
+                   [--ttl-ms TTL_MS] [--source {magnetic-step}]
+__main__.py: error: argument --command: invalid choice: 'set' (choose from 'auto', 'bal', 'manual', 'velocity', 'stop', 'center', 'home', 'upright', 'hanging', 'status', 'info', 'clear', 'policy-zero')
+____ ParameterTests.test_console_get_set_params_save_and_load_show_readback ____
+
+self = <test_rig_parameters.ParameterTests testMethod=test_console_get_set_params_save_and_load_show_readback>
+
+    def test_console_get_set_params_save_and_load_show_readback(self):
+        path = Path(self.tmp.name)/'console profile.json'
+        with self.rig() as rig:
+            output=io.StringIO()
+            for line in ('set ke 3.25', 'get ke', 'params', f'save "{path}"',
+                         'set ke 4', f'load "{path}"'):
+>               self.assertTrue(execute_command(rig,line,output=output))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_parameters.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+rig = <cartpole_sdk.rig.client.Rig object at 0x1089cc310>, line = 'set ke 3.25'
+output = <_io.StringIO object at 0x108812950>
+
+    def execute_command(rig, line, *, output=None):
+        """One interactive trusted operator command; return False to quit."""
+        output=sys.stdout if output is None else output
+        words=shlex.split(line)
+        if not words:return True
+        command,*args=words
+        if command in ('quit','exit'):
+            rig.stop(); return False
+        if command in ('help','?'):
+            print(HELP,file=output);return True
+        if command in ('auto','bal','balance','manual'):
+            if len(args)>1:raise ValidationError('mode accepts at most one duration')
+            mode='bal' if command=='balance' else command
+            duration=10. if not args else float(args[0])
+            rig.start(mode,duration)
+            print(f'board reference {mode} active for at most {duration:g}s',file=output)
+        elif command=='velocity':
+            if not 1<=len(args)<=2:raise ValidationError('velocity requires m/s and optional TTL milliseconds')
+            seq=rig.set_velocity(float(args[0]),50 if len(args)==1 else int(args[1]))
+            print(f'one manual velocity lease, sequence {seq}; expires unless explicitly renewed',file=output)
+        elif command=='switches':
+            if args not in (['on'],['off']):raise ValidationError('switches requires on or off')
+            rig.configure_switches(args[0]=='on')
+            print(f'physical switch profile {args[0]}',file=output)
+        elif command in ('upright','hanging'):
+            if args:raise ValidationError(f'{command} accepts no arguments')
+            rig._stopped_healthy()  # Check before asking the operator to touch the pole.
+            instruction='hold the pole straight up' if command=='upright' else 'let the pole hang fully down'
+            print(f'Encoder calibration: {instruction} and keep it still; waiting for capture and EEPROM verification (up to 5s).',file=output,flush=True)
+            info=rig.calibrate_encoder(command)
+            print(f'encoder calibration saved; upright raw reference {info.encoder_upright_raw}',file=output)
+        elif command=='rate':
+            if len(args)!=1:raise ValidationError('rate requires one Hz value')
+            rig.set_rate(int(args[0]))
+        elif command in ('stop','center','home','status','info','clear'):
+            if args:raise ValidationError(f'{command} accepts no arguments')
+            if command=='status':_status(rig,output)
+            elif command=='info':print(canonical_json(asdict(rig.get_info())),file=output)
+            elif command=='center':
+                rig.center()
+                print('operator confirmed cart physically centered; step origin established',file=output)
+            elif command=='clear':rig.clear_fault()
+            else:getattr(rig,command)()
+        else:
+>           raise ValidationError(f'unknown command: {command}; {HELP}')
+E           cartpole_sdk.contracts.ValidationError: unknown command: set; auto [seconds], bal [seconds], manual [seconds], velocity m/s [ttl_ms], stop, center, home, upright, hanging, switches on|off, status, info, clear, rate hz, quit
+
+src/cartpole_sdk/rig/console.py:77: ValidationError
+_ ParameterTests.test_faulted_get_works_but_write_and_calibration_are_rejected _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_faulted_get_works_but_write_and_calibration_are_rejected>
+
+    def test_faulted_get_works_but_write_and_calibration_are_rejected(self):
+        with self.rig() as rig:
+            self.fw.mode = 4;self.fw.fault = 4
+            rig._snapshot(allow_error=True)
+>           self.assertEqual(rig.get_parameter('ke'), 4.0)
+                             ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'get_parameter'
+
+tests/test_rig_parameters.py:144: AttributeError
+_ ParameterTests.test_get_reads_current_board_value_and_matches_response_name __
+
+self = <test_rig_parameters.ParameterTests testMethod=test_get_reads_current_board_value_and_matches_response_name>
+
+    def test_get_reads_current_board_value_and_matches_response_name(self):
+        self.fw.wrong_name = True
+        with self.rig() as rig:
+            self.fw.values['ke'] = 3.25
+>           self.assertEqual(rig.get_parameter('ke'), 3.25)
+                             ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'get_parameter'
+
+tests/test_rig_parameters.py:86: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='leff', value=0.019) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='leff', value=1.01) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pw', value=0.09) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pw', value=30.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='bal_pw', value=0.9) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='bal_pw', value=20.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pz', value=0.04) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pz', value=5.1) __
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pc1', value=-50.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+__ ParameterTests.test_live_bounds_reject_before_writes (name='pc1', value=0) __
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pc2', value=-50.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='pc2', value=-0.09) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vmax_s', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vmax_s', value=1.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vmax_b', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vmax_b', value=1.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='approach_v', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='approach_v', value=1.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_v', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_v', value=1.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_s', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_s', value=25.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_b', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_b', value=25.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='jmax', value=0) __
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='jmax', value=150.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_m', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='amax_m', value=0.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='jmax_m', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='jmax_m', value=10.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vman', value=-0.01) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='vman', value=0.151) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='ke', value=-0.01) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='ke', value=100.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='kpx', value=-0.01) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='kpx', value=1000.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='kdx', value=-0.01) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='kdx', value=100.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='phase_soft', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='phase_soft', value=50.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_a', value=0.04) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_a', value=1.21) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_r', value=0.09) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_r', value=30.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='giveup', value=0.09) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='giveup', value=2.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='bw', value=0.09) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='bw', value=100.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='approach_angle', value=0.64) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='approach_angle', value=1.51) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_da', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='catch_da', value=25.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='spin_trip_rad_s', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='spin_trip_rad_s', value=150.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='spin_resume_rad_s', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='spin_resume_rad_s', value=150.1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='rail', value=0.02) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_bounds_reject_before_writes (name='rail', value=0.261) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_bounds_reject_before_writes>
+
+    def test_live_bounds_reject_before_writes(self):
+        bad = {'leff':(.019,1.01), 'pw':(.09,30.1), 'bal_pw':(.9,20.1),
+               'pz':(.04,5.1), 'pc1':(-50.1,0), 'pc2':(-50.1,-.09),
+               'vmax_s':(0,1.51), 'vmax_b':(0,1.51), 'approach_v':(0,1.51),
+               'catch_v':(0,1.51), 'amax_s':(0,25.1), 'amax_b':(0,25.1),
+               'jmax':(0,150.1), 'amax_m':(0,.51), 'jmax_m':(0,10.1),
+               'vman':(-.01,.151), 'ke':(-.01,100.1), 'kpx':(-.01,1000.1),
+               'kdx':(-.01,100.1), 'phase_soft':(0,50.1), 'catch_a':(.04,1.21),
+               'catch_r':(.09,30.1), 'giveup':(.09,2.51), 'bw':(.09,100.1),
+               'approach_angle':(.64,1.51), 'catch_da':(0,25.1),
+               'spin_trip_rad_s':(0,150.1), 'spin_resume_rad_s':(0,150.1),
+               'rail':(.02,.261)}
+        with self.rig() as rig:
+            for name, values in bad.items():
+                for value in values:
+                    with self.subTest(name=name,value=value),self.assertRaises(ValidationError):
+>                       rig.set_parameter(name,value)
+                        ^^^^^^^^^^^^^^^^^
+E                       AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:246: AttributeError
+_ ParameterTests.test_live_measured_rail_cap_checked_before_any_profile_write __
+
+self = <test_rig_parameters.ParameterTests testMethod=test_live_measured_rail_cap_checked_before_any_profile_write>
+
+    def test_live_measured_rail_cap_checked_before_any_profile_write(self):
+        self.fw.span = 10668
+        with self.rig() as rig:
+>           with self.assertRaises(ValidationError):rig.set_parameter('rail', .2)
+                                                    ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:263: AttributeError
+_ ParameterTests.test_load_rejects_schema_and_duplicate_keys_before_writing (text='{"schema_version":2,"parameters":{"ke":3}}') _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_rejects_schema_and_duplicate_keys_before_writing>
+
+    def test_load_rejects_schema_and_duplicate_keys_before_writing(self):
+        path = Path(self.tmp.name)/'invalid.json'
+        with self.rig() as rig:
+            for text in ('{"schema_version":2,"parameters":{"ke":3}}',
+                         '{"schema_version":true,"parameters":{"ke":3}}',
+                         '{"schema_version":1,"parameters":{"ke":3,"ke":4}}'):
+                path.write_text(text)
+>               with self.subTest(text=text), self.assertRaises(ValidationError):rig.load_parameters(path)
+                                                                                 ^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:184: AttributeError
+_ ParameterTests.test_load_rejects_schema_and_duplicate_keys_before_writing (text='{"schema_version":true,"parameters":{"ke":3}}') _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_rejects_schema_and_duplicate_keys_before_writing>
+
+    def test_load_rejects_schema_and_duplicate_keys_before_writing(self):
+        path = Path(self.tmp.name)/'invalid.json'
+        with self.rig() as rig:
+            for text in ('{"schema_version":2,"parameters":{"ke":3}}',
+                         '{"schema_version":true,"parameters":{"ke":3}}',
+                         '{"schema_version":1,"parameters":{"ke":3,"ke":4}}'):
+                path.write_text(text)
+>               with self.subTest(text=text), self.assertRaises(ValidationError):rig.load_parameters(path)
+                                                                                 ^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:184: AttributeError
+_ ParameterTests.test_load_rejects_schema_and_duplicate_keys_before_writing (text='{"schema_version":1,"parameters":{"ke":3,"ke":4}}') _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_rejects_schema_and_duplicate_keys_before_writing>
+
+    def test_load_rejects_schema_and_duplicate_keys_before_writing(self):
+        path = Path(self.tmp.name)/'invalid.json'
+        with self.rig() as rig:
+            for text in ('{"schema_version":2,"parameters":{"ke":3}}',
+                         '{"schema_version":true,"parameters":{"ke":3}}',
+                         '{"schema_version":1,"parameters":{"ke":3,"ke":4}}'):
+                path.write_text(text)
+>               with self.subTest(text=text), self.assertRaises(ValidationError):rig.load_parameters(path)
+                                                                                 ^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:184: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={'ke': 3, 'unknown': 2}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={'ke': 3, 'leff': 0}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={'ke': 3, 'vmax': 2}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={'ke': 3, 'bw': nan}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={'ke': True}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_every_value_before_first_write (values={}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_every_value_before_first_write>
+
+    def test_load_validates_every_value_before_first_write(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'unknown':2}, {'ke':3,'leff':0}, {'ke':3,'vmax':2},
+                           {'ke':3,'bw':float('nan')}, {'ke':True}, {}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+>                   rig.load_parameters(self.profile(values))
+                    ^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:174: AttributeError
+_ ParameterTests.test_load_validates_spin_pair_and_orders_lower_then_higher_pairs _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_load_validates_spin_pair_and_orders_lower_then_higher_pairs>
+
+    def test_load_validates_spin_pair_and_orders_lower_then_higher_pairs(self):
+        with self.rig() as rig:
+            with self.assertRaises(ValidationError):
+>               rig.load_parameters(self.profile({'ke':3,'spin_trip_rad_s':5}))
+                ^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:252: AttributeError
+_____________ ParameterTests.test_parameter_reply_parser_is_strict _____________
+
+self = <test_rig_parameters.ParameterTests testMethod=test_parameter_reply_parser_is_strict>
+
+    def test_parameter_reply_parser_is_strict(self):
+>       self.assertEqual(protocol.parse_parameter('V2 PARAM 7 pc1 -2.5'), ('pc1', -2.5))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cartpole_sdk.rig.protocol' has no attribute 'parse_parameter'
+
+tests/test_rig_parameters.py:75: AttributeError
+_ ParameterTests.test_partial_load_failure_reports_confirmed_and_uncertain_keys _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_partial_load_failure_reports_confirmed_and_uncertain_keys>
+
+    def test_partial_load_failure_reports_confirmed_and_uncertain_keys(self):
+        self.fw.drop_write_reply = 'kpx'
+        with self.rig() as rig:
+            with self.assertRaises(RigError) as caught:
+>               rig.load_parameters(self.profile({'ke':3.25,'kpx':35}))
+                ^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:199: AttributeError
+_ ParameterTests.test_partial_profile_load_reads_back_changes_and_never_starts_motion _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_partial_profile_load_reads_back_changes_and_never_starts_motion>
+
+    def test_partial_profile_load_reads_back_changes_and_never_starts_motion(self):
+        with self.rig() as rig:
+>           loaded = rig.load_parameters(self.profile({'ke':3.25,'kpx':35}))
+                     ^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'load_parameters'
+
+tests/test_rig_parameters.py:189: AttributeError
+________ ParameterTests.test_reads_and_writes_require_stopped_executor _________
+
+self = <test_rig_parameters.ParameterTests testMethod=test_reads_and_writes_require_stopped_executor>
+
+    def test_reads_and_writes_require_stopped_executor(self):
+        with self.rig() as rig:
+            rig.start('auto', .5)
+>           for operation in (lambda:rig.get_parameter('ke'), rig.get_parameters,
+                                                              ^^^^^^^^^^^^^^^^^^
+                              lambda:rig.set_parameter('ke', 3)):
+E                             AttributeError: 'Rig' object has no attribute 'get_parameters'
+
+tests/test_rig_parameters.py:135: AttributeError
+_ ParameterTests.test_save_uses_verified_live_values_and_does_not_change_board _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_save_uses_verified_live_values_and_does_not_change_board>
+
+    def test_save_uses_verified_live_values_and_does_not_change_board(self):
+        self.fw.values['ke'] = 3.125
+        path = Path(self.tmp.name)/'saved.json'
+        with self.rig() as rig:
+>           rig.save_parameters(path)
+            ^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'save_parameters'
+
+tests/test_rig_parameters.py:162: AttributeError
+__ ParameterTests.test_set_accepts_float32_readback_and_returns_actual_value ___
+
+self = <test_rig_parameters.ParameterTests testMethod=test_set_accepts_float32_readback_and_returns_actual_value>
+
+    def test_set_accepts_float32_readback_and_returns_actual_value(self):
+        with self.rig() as rig:
+>           actual = rig.set_parameter('leff', .123456789)
+                     ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:109: AttributeError
+__ ParameterTests.test_set_rejects_mismatched_actual_value_and_requests_stop ___
+
+self = <test_rig_parameters.ParameterTests testMethod=test_set_rejects_mismatched_actual_value_and_requests_stop>
+
+    def test_set_rejects_mismatched_actual_value_and_requests_stop(self):
+        self.fw.override = 2.0
+        with self.rig() as rig:
+            with self.assertRaisesRegex(RigError, '(?i)(readback|confirm|actual)'):
+>               rig.set_parameter('ke', 3.0)
+                ^^^^^^^^^^^^^^^^^
+E               AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:118: AttributeError
+____ ParameterTests.test_unsupported_firmware_error_does_not_claim_success _____
+
+self = <test_rig_parameters.ParameterTests testMethod=test_unsupported_firmware_error_does_not_claim_success>
+
+    def test_unsupported_firmware_error_does_not_claim_success(self):
+        self.fw.reject = 'ke'
+        with self.rig() as rig:
+>           with self.assertRaises(RigError):rig.get_parameter('ke')
+                                             ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'get_parameter'
+
+tests/test_rig_parameters.py:155: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='unknown', value=1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke other', value=1) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke', value=True) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke', value='3') _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke', value=nan) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke', value=inf) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='ke', value=1e+100) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='leff', value=0) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='vmax', value=1.6) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+_ ParameterTests.test_validation_happens_before_parameter_writes (name='bw', value=101) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_validation_happens_before_parameter_writes>
+
+    def test_validation_happens_before_parameter_writes(self):
+        with self.rig() as rig:
+            for name, value in (('unknown', 1), ('ke other', 1), ('ke', True),
+                                ('ke', '3'), ('ke', float('nan')), ('ke', float('inf')),
+                                ('ke', 1e100), ('leff', 0), ('vmax', 1.6), ('bw', 101)):
+                with self.subTest(name=name, value=value), self.assertRaises(ValidationError):
+>                   rig.set_parameter(name, value)
+                    ^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'Rig' object has no attribute 'set_parameter'
+
+tests/test_rig_parameters.py:128: AttributeError
+______ ParameterTests.test_wrong_parameter_reply_cannot_complete_request _______
+
+self = <test_rig_parameters.ParameterTests testMethod=test_wrong_parameter_reply_cannot_complete_request>
+
+    def test_wrong_parameter_reply_cannot_complete_request(self):
+        self.fw.only_wrong_name = True
+        with self.rig() as rig:
+>           with self.assertRaises(RigError):rig.get_parameter('ke')
+                                             ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'Rig' object has no attribute 'get_parameter'
+
+tests/test_rig_parameters.py:95: AttributeError
+___________ RigInfoTests.test_homing_span_up_to_750_mm_is_supported ____________
+
+self = <test_rig_info.RigInfoTests testMethod=test_homing_span_up_to_750_mm_is_supported>
+
+    def test_homing_span_up_to_750_mm_is_supported(self):
+>       info = parse_info(PAYLOAD.replace('13867', '20000'), received_ns=1)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_info.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = 'V2 INFO 7 executor-v1 3485 1 103 0 2 20000 0.255', received_ns = 1
+
+    def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
+        parts = payload.split(' ')
+        field_counts = {'executor-v1': 11, 'executor-v2-cart2': 11, 'executor-v3-encguard': 17}
+        if len(parts) < 4 or parts[:2] != ['V2', 'INFO'] or len(parts) != field_counts.get(parts[3]):
+            raise ProtocolError('invalid diagnostic identity or field count')
+        sid = uint32(parts[2])
+        reference, saved, status, errors, epoch, span = map(uint32, parts[4:10])
+        if not sid or reference > 4095 or saved > 1 or status > 255 or span > 16000:
+>           raise ProtocolError('invalid diagnostic range')
+E           cartpole_sdk.rig.protocol.ProtocolError: invalid diagnostic range
+
+src/cartpole_sdk/rig/protocol.py:145: ProtocolError
+=========================== short test summary info ============================
+FAILED tests/test_rig_parameters.py::ParameterTests::test_all_parameters_are_live_reads_of_catalog
+FAILED tests/test_rig_parameters.py::ParameterTests::test_cli_set_and_get_do_not_start_motion
+FAILED tests/test_rig_parameters.py::ParameterTests::test_console_get_set_params_save_and_load_show_readback
+FAILED tests/test_rig_parameters.py::ParameterTests::test_faulted_get_works_but_write_and_calibration_are_rejected
+FAILED tests/test_rig_parameters.py::ParameterTests::test_get_reads_current_board_value_and_matches_response_name
+SUBFAILED(name='leff', value=0.019) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='leff', value=1.01) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pw', value=0.09) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pw', value=30.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='bal_pw', value=0.9) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='bal_pw', value=20.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pz', value=0.04) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pz', value=5.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pc1', value=-50.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pc1', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pc2', value=-50.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='pc2', value=-0.09) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vmax_s', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vmax_s', value=1.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vmax_b', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vmax_b', value=1.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='approach_v', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='approach_v', value=1.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_v', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_v', value=1.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_s', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_s', value=25.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_b', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_b', value=25.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='jmax', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='jmax', value=150.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_m', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='amax_m', value=0.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='jmax_m', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='jmax_m', value=10.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vman', value=-0.01) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='vman', value=0.151) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='ke', value=-0.01) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='ke', value=100.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='kpx', value=-0.01) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='kpx', value=1000.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='kdx', value=-0.01) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='kdx', value=100.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='phase_soft', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='phase_soft', value=50.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_a', value=0.04) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_a', value=1.21) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_r', value=0.09) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_r', value=30.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='giveup', value=0.09) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='giveup', value=2.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='bw', value=0.09) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='bw', value=100.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='approach_angle', value=0.64) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='approach_angle', value=1.51) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_da', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='catch_da', value=25.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='spin_trip_rad_s', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='spin_trip_rad_s', value=150.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='spin_resume_rad_s', value=0) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='spin_resume_rad_s', value=150.1) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='rail', value=0.02) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+SUBFAILED(name='rail', value=0.261) tests/test_rig_parameters.py::ParameterTests::test_live_bounds_reject_before_writes
+FAILED tests/test_rig_parameters.py::ParameterTests::test_live_measured_rail_cap_checked_before_any_profile_write
+SUBFAILED(text='{"schema_version":2,"parameters":{"ke":3}}') tests/test_rig_parameters.py::ParameterTests::test_load_rejects_schema_and_duplicate_keys_before_writing
+SUBFAILED(text='{"schema_version":true,"parameters":{"ke":3}}') tests/test_rig_parameters.py::ParameterTests::test_load_rejects_schema_and_duplicate_keys_before_writing
+SUBFAILED(text='{"schema_version":1,"parameters":{"ke":3,"ke":4}}') tests/test_rig_parameters.py::ParameterTests::test_load_rejects_schema_and_duplicate_keys_before_writing
+SUBFAILED(values={'ke': 3, 'unknown': 2}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+SUBFAILED(values={'ke': 3, 'leff': 0}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+SUBFAILED(values={'ke': 3, 'vmax': 2}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+SUBFAILED(values={'ke': 3, 'bw': nan}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+SUBFAILED(values={'ke': True}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+SUBFAILED(values={}) tests/test_rig_parameters.py::ParameterTests::test_load_validates_every_value_before_first_write
+FAILED tests/test_rig_parameters.py::ParameterTests::test_load_validates_spin_pair_and_orders_lower_then_higher_pairs
+FAILED tests/test_rig_parameters.py::ParameterTests::test_parameter_reply_parser_is_strict
+FAILED tests/test_rig_parameters.py::ParameterTests::test_partial_load_failure_reports_confirmed_and_uncertain_keys
+FAILED tests/test_rig_parameters.py::ParameterTests::test_partial_profile_load_reads_back_changes_and_never_starts_motion
+FAILED tests/test_rig_parameters.py::ParameterTests::test_reads_and_writes_require_stopped_executor
+FAILED tests/test_rig_parameters.py::ParameterTests::test_save_uses_verified_live_values_and_does_not_change_board
+FAILED tests/test_rig_parameters.py::ParameterTests::test_set_accepts_float32_readback_and_returns_actual_value
+FAILED tests/test_rig_parameters.py::ParameterTests::test_set_rejects_mismatched_actual_value_and_requests_stop
+FAILED tests/test_rig_parameters.py::ParameterTests::test_unsupported_firmware_error_does_not_claim_success
+SUBFAILED(name='unknown', value=1) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke other', value=1) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke', value=True) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke', value='3') tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke', value=nan) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke', value=inf) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='ke', value=1e+100) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='leff', value=0) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='vmax', value=1.6) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+SUBFAILED(name='bw', value=101) tests/test_rig_parameters.py::ParameterTests::test_validation_happens_before_parameter_writes
+FAILED tests/test_rig_parameters.py::ParameterTests::test_wrong_parameter_reply_cannot_complete_request
+FAILED tests/test_rig_info.py::RigInfoTests::test_homing_span_up_to_750_mm_is_supported
+94 failed, 14 passed, 52 subtests passed in 0.95s

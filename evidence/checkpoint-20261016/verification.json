@@ -1,0 +1,26 @@
+{
+  "full_suite": {
+    "command": "uv run --locked --offline pytest -q",
+    "passed": 721,
+    "skipped": 7,
+    "subtests_passed": 384,
+    "seconds": 45.56,
+    "output": "pytest.txt"
+  },
+  "vision_frontend": {
+    "command": "node --test tests/vision_runtime/*.test.cjs",
+    "passed": 19,
+    "output": "vision-js-tests.txt"
+  },
+  "release_verification": {
+    "releases": 9,
+    "files_verified": 1379,
+    "unique_contents": 419,
+    "expanded_bytes": 18072822,
+    "bundle_sha256": "baba7268556be1fb650b191098fac471b619a5b486d247757b2f2dab5141e6b2"
+  },
+  "active_firmware_source_matches_root": true,
+  "snapshot_scope": "Seven named releases plus legacy-current and legacy-firmware. All1,379 captured files verified and staged. Generated environments/caches/run directories excluded.",
+  "whitespace": "Historical snapshots and evidence retain original bytes, including log/HEX whitespace. Active source/doc whitespace checked separately.",
+  "hardware_activity": "No serial connection, motion, calibration, flash or deployment performed during checkpoint."
+}

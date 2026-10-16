@@ -17,8 +17,11 @@ from cartpole_sdk.contracts import (ActionLimits, ActionRequest, Observation, Sa
                                     Session, ValidationError, validate_action)
 from cartpole_sdk.recording import canonical_json
 from .protocol import (LineBuffer, ProtocolError, State, UINT32, decode, encode,
-                       parse_state, parse_info, uint32, unwrap32)
+                       parse_state, parse_info, parse_parameter, uint32, unwrap32)
 from .transport import SerialTransport
+from .parameters import (PARAMETER_NAMES, parameter_name, parameter_value, parameter_map,
+                         validate_parameters, read_profile, write_profile, float32,
+                         LEGACY_PARAMETER_NAMES, TUNABLE_FIRMWARE, GEOMETRY_PARAMETERS, COUPLED_PARAMETERS)
 
 class RigError(RuntimeError):
     """Stopped or latched live rig failure; recovery is always explicit."""
@@ -27,6 +30,8 @@ _OWNERS = set()
 _OWNERS_LOCK = threading.Lock()
 _RATE = (0, 100, 250, 500, 1000)
 _NS_TICK = 1_000_000
+_RETURN_SECONDS = 15.
+_RETURN_CONFIRMATION_SECONDS = .25
 
 class Rig:
     """Context management connects stopped and stops in finally.
@@ -37,7 +42,8 @@ class Rig:
     """
     def __init__(self, port='/dev/serial/by-id/cartpole', rate_hz=100, log_dir=None, *,
                  transport_factory=None, command_timeout=.5, max_bad_frames=1,
-                 heartbeat_interval=.05, max_host_age_s=.1, record_capacity=1024):
+                 heartbeat_interval=.05, max_host_age_s=.1, record_capacity=1024,
+                 vision_publisher=None):
         if type(rate_hz) is not int or rate_hz not in _RATE:
             raise ValidationError('rate must be 0, 100, 250, 500 or 1000 Hz')
         for value in (command_timeout, heartbeat_interval, max_host_age_s):
@@ -49,6 +55,9 @@ class Rig:
             raise ValidationError('max_bad_frames must be positive')
         if type(record_capacity) is not int or record_capacity < 1:
             raise ValidationError('record capacity must be positive')
+        self._vision_publisher = vision_publisher
+        self._mirror_reference_quarantined = False
+        self.vision_telemetry_error = None
         self.port = str(port)
         self.rate_hz = rate_hz
         self.log_dir = None if log_dir is None else Path(log_dir)
@@ -76,6 +85,7 @@ class Rig:
         self._history = OrderedDict()
         self._sequence = 0
         self._active = False
+        self._return_expected = False
         self._calibrating = False
         self._calibration_cancelled = False
         self._deadline_ns = None
@@ -89,6 +99,10 @@ class Rig:
         self._sid = secrets.randbelow(UINT32)+1
         self.session = Session(str(self._sid), f'teensy:{self._sid}')
         self.action_limits = ActionLimits(25., 50_000_000, 20_000_000)
+        # Trusted direct intents use verified board configuration. Broker limits
+        # remain separately bounded and are never enlarged by parameter reads.
+        self._manual_speed_max = .15
+        self._direct_acceleration_max = 25.
 
     def __enter__(self):
         return self.connect()
@@ -110,6 +124,9 @@ class Rig:
             self._connected = True
             self._start_logger()
             self._record('session', session=asdict(self.session), protocol=2)
+            if self._vision_publisher is not None:
+                try:self._vision_publisher.start()
+                except Exception as exc:self.vision_telemetry_error = str(exc)
             self._thread = threading.Thread(target=self._io, name='cartpole-rig-io', daemon=True)
             self._thread.start()
             self._command('HELLO', reply='HELLO', allow_error=True)
@@ -153,7 +170,7 @@ class Rig:
             raise error from exc
         self._record('command', payload=payload)
 
-    def _command(self, command, *args, reply='OK', allow_error=False, timeout_s=None):
+    def _command(self, command, *args, reply='OK', allow_error=False, timeout_s=None, reply_key=None):
         self._require(allow_error=allow_error)
         with self._command_lock:
             with self._condition:
@@ -167,8 +184,8 @@ class Rig:
                     for response in self._replies:
                         if response[1] == 'ERR':
                             raise RigError(f'executor rejected {command}: {response[3]}')
-                        if response[1] == reply and (reply in ('HELLO', 'INFO') or response[3] == command):
-                            return
+                        if response[1] == reply and (reply in ('HELLO', 'INFO') or response[3] == (command if reply_key is None else reply_key)):
+                            return response
                     if self.error is not None and not allow_error:
                         raise RigError(f'latched rig error: {self.error}')
                     remaining = deadline-time.monotonic()
@@ -209,6 +226,7 @@ class Rig:
         self._logger.start()
 
     def _emergency_stop(self):
+        self._return_expected = False
         if self._transport is None:
             return
         try:
@@ -241,12 +259,15 @@ class Rig:
             raise ProtocolError('wrong session or reply header')
         if parts[1] == 'S':
             state = parse_state(payload, received_ns=received_ns)
+            incomplete_return=False
             with self._condition:
                 previous = self._state
                 state = replace(state,
                     unwrapped_tick=unwrap32(state.tick, None if previous is None else previous.unwrapped_tick),
                     unwrapped_us=unwrap32(state.us, None if previous is None else previous.unwrapped_us))
-                if previous is not None and previous.mode==13 and state.mode==0 and not state.enabled:
+                if (previous is not None and state.mode==0 and not state.enabled and
+                    (previous.mode in (13,14) or (self._return_expected and previous.enabled))):
+                    incomplete_return=self._return_expected and not (state.homed and state.healthy and state.x==0)
                     self._active=False
                     self._deadline_ns=None
                 self._state = state
@@ -255,16 +276,30 @@ class Rig:
                 while len(self._history) > 64:
                     self._history.popitem(last=False)
                 self._condition.notify_all()
+            if self._vision_publisher is not None:
+                try:self._vision_publisher.submit(state, None if self._mirror_reference_quarantined else self._info)
+                except Exception as exc:self.vision_telemetry_error = str(exc)
             self._record('state', state=asdict(state))
             if state.fault:
                 self._latch(RigError(f'executor fault {state.fault}'))
+            elif incomplete_return:
+                self._latch(RigError('return interrupted before counted home completion'))
         elif parts[1] == 'INFO':
             info = parse_info(payload, received_ns=received_ns)
             with self._condition:
                 self._info = info
                 self._replies.append(parts)
                 self._condition.notify_all()
+            if self._vision_publisher is not None and self._state is not None:
+                try:self._vision_publisher.submit(self._state, None if self._mirror_reference_quarantined else info)
+                except Exception as exc:self.vision_telemetry_error = str(exc)
             self._record('info', info=asdict(info))
+        elif parts[1] == 'PARAM':
+            name, value = parse_parameter(payload)
+            with self._condition:
+                self._replies.append(parts)
+                self._condition.notify_all()
+            self._record('parameter', name=name, value=value)
         elif parts[1] == 'HELLO':
             if len(parts) != 5 or parts[3:] != ['1', '1000']:
                 raise ProtocolError('unsupported protocol revision or control frequency')
@@ -307,8 +342,11 @@ class Rig:
                     if state is not None and time.monotonic_ns()-state.received_ns > self._max_host_age_ns:
                         self._latch(RigError('stale host telemetry'))
                     elif self._deadline_ns is not None and time.monotonic_ns() >= self._deadline_ns:
-                        self._emergency_stop()
-                        self._record('duration_end')
+                        if self._return_expected:
+                            self._latch(RigError('return completion deadline exceeded'))
+                        else:
+                            self._emergency_stop()
+                            self._record('duration_end')
                 # Event.wait is interruptible; no busy heartbeat loop on empty transports.
                 if not data:
                     self._wake.wait(.001)
@@ -423,27 +461,63 @@ class Rig:
             raise RigError('CENTER requires explicit no-switch commissioning profile')
         self._command_state('CENTER', predicate=lambda s:s.homed)
 
-    def calibrate_encoder(self, pose='upright'):
+    def calibrate_encoder(self, pose='upright', *, hanging_model=None, calibration_identity=None):
         """Capture and save the magnetic reference from a stationary known pose.
 
         Hold the pole straight up for ``upright`` or let it hang fully down for
         ``hanging``. The board acknowledges only after its stable capture and
         EEPROM verification finish. No motion, home, switch or fault change is
         requested. Ctrl-C or any failure requests STOP to cancel capture.
+
+        Legacy ``hanging`` assumes an ideal half-turn. For a measured correction,
+        supply an approved CalibrationProfile and a separate installation identity
+        mapping. This requires v5 firmware and never falls back to an ideal capture.
+        The model converts a reference; it does not linearize the encoder angle.
         """
         if pose not in ('upright', 'hanging'):
             raise ValidationError('encoder calibration pose must be upright or hanging')
+        offset = None
+        if hanging_model is not None or calibration_identity is not None:
+            from ..sensing.calibration import CalibrationProfile
+            if pose != 'hanging' or not isinstance(hanging_model, CalibrationProfile):
+                raise ValidationError('a hanging calibration model is required only with hanging pose')
+            if not isinstance(calibration_identity, dict):
+                raise ValidationError('model calibration requires a separate installation identity mapping')
+            try:
+                offset = hanging_model.approved_offset_counts(**calibration_identity)
+                quality = hanging_model.to_dict()['policy']
+                if (quality['min_window_samples'] > 401 or quality['min_window_duration_s'] > .4 or
+                    quality['max_window_span_counts'] < 4 or quality['max_window_drift_counts'] < 2):
+                    raise ValueError('model capture quality exceeds the firmware 401-sample/0.4s/span4/drift2 capability')
+                if (calibration_identity.get('counts_per_turn',4096) != 4096 or
+                    type(offset) is not int or abs(offset)>256):
+                    raise ValueError('executor calibration requires 4096 counts/turn and offset within 256 counts')
+            except (TypeError, ValueError) as exc:
+                raise ValidationError(str(exc)) from exc
         self._stopped_healthy()
-        if self.get_info().firmware != 'executor-v2-cart2':
-            raise RigError('update firmware to executor-v2-cart2 before encoder calibration')
+        firmware = self.get_info().firmware
+        if firmware not in ('executor-v2-cart2', 'executor-v3-encguard', 'executor-v4-rehome', 'executor-v5-calmodel','executor-v6-measuredrail'):
+            raise RigError('update firmware to executor-v2-cart2 or newer before encoder calibration')
+        if offset is not None and firmware not in ('executor-v5-calmodel','executor-v6-measuredrail'):
+            raise RigError('model-corrected hanging requires executor-v5-calmodel or later supported firmware')
         with self._condition:
             self._stopped_healthy()
             self._calibrating = True
             self._calibration_cancelled = False
+            # V4/V5 state frames do not carry a reference generation. Old queued
+            # states and new INFO cannot be paired unambiguously across capture.
+            # Keep mirror reference unavailable until a new Rig/board session.
+            self._mirror_reference_quarantined = True
+            if self._vision_publisher is not None:
+                try:self._vision_publisher.submit(self._state, None)
+                except Exception as exc:self.vision_telemetry_error = str(exc)
         try:
             # Firmware has a 5 s capture deadline; ordinary commands retain
             # their shorter transport timeout.
-            self._command('CALIBRATE', pose, timeout_s=6.)
+            if offset is not None:
+                self._record('calibration_model', calibration_id=hanging_model.calibration_id,
+                             offset_counts=offset, installation_identity=calibration_identity)
+            self._command('CALIBRATE', pose, *((offset,) if offset is not None else ()), timeout_s=6.)
             state = self._snapshot()
             if state.enabled or state.mode != 0 or not state.healthy or state.flags & 256:
                 raise RigError('calibration did not confirm a stopped healthy executor')
@@ -475,12 +549,52 @@ class Rig:
         if not state.switch_profile:
             raise RigError('HOME requires enabled physical switch profile')
         self._active=True
+        self._return_expected=False
         self._deadline_ns=None
         try:
             self._command_state('HOME', predicate=lambda s:s.mode==13 or (s.homed and not s.enabled))
         except BaseException:
             self._emergency_stop()
             raise
+
+    def rehome(self):
+        """Return to the existing counted home, asynchronously, without seeking switches.
+
+        Requires supported firmware with REHOME, a healthy established home and streaming.
+        STOP, faults and close cancel the return; none restart it automatically.
+        """
+        if self.rate_hz==0:
+            raise RigError('return requires streaming telemetry; set a positive rate')
+        state=self._stopped_healthy()
+        if not state.homed:
+            raise RigError('REHOME requires an established home; use HOME first')
+        if (self._info or self.get_info()).firmware not in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail'):
+            raise RigError('REHOME requires executor-v4-rehome or later supported firmware')
+        self._active=True
+        self._return_expected=True
+        self._deadline_ns=time.monotonic_ns()+int((_RETURN_SECONDS+_RETURN_CONFIRMATION_SECONDS)*1e9)
+        try:
+            self._command_state('REHOME',predicate=lambda s:s.mode==14 or
+                                (s.mode==0 and s.homed and s.healthy and not s.enabled and s.x==0))
+            self._confirm_fast_return()
+        except BaseException:
+            self._emergency_stop()
+            raise
+
+    def _confirm_fast_return(self):
+        # A return can finish before any enabled snapshot is sampled. Confirm
+        # idle once more after the ACK/STATUS exchange: the transmitter may
+        # still have one older latest-state publication pending behind ACK.
+        state=self.state
+        if not self._return_expected or state.enabled or state.mode!=0:
+            return
+        self._snapshot()
+        with self._condition:
+            state=self._state
+            if (self._return_expected and state.mode==0 and not state.enabled and
+                state.healthy and state.homed and state.x==0):
+                self._active=False
+                self._deadline_ns=None
 
     def _duration(self, duration_s):
         if type(duration_s) not in (int,float) or not math.isfinite(duration_s):
@@ -490,7 +604,7 @@ class Rig:
             raise ValidationError('duration must be 1ms..60s')
         return milliseconds
 
-    def _start(self, command, args, duration_s, predicate):
+    def _start(self, command, args, duration_s, predicate, *, return_to_center=False):
         if self.rate_hz==0:
             raise RigError('motion requires streaming telemetry; set a positive rate')
         duration = self._duration(duration_s)
@@ -499,22 +613,50 @@ class Rig:
             raise RigError('motion requires a physical home or explicit centering')
         # Set active before write so parse/read failures during ACK always stop.
         self._active = True
-        self._deadline_ns = time.monotonic_ns()+duration*1_000_000
+        self._return_expected = return_to_center
+        extra=(_RETURN_SECONDS+_RETURN_CONFIRMATION_SECONDS) if return_to_center else 0
+        self._deadline_ns = time.monotonic_ns()+duration*1_000_000+int(extra*1e9)
         try:
             self._command_state(command,*args,duration,predicate=predicate)
+            if return_to_center:self._confirm_fast_return()
             self._sequence = 0
         except BaseException:
             self._emergency_stop()
             raise
 
     def start(self, mode='auto', duration_s=10):
-        """Select the preserved controller on the board (auto/bal/manual)."""
+        """Select the preserved board controller (auto/bal/manual).
+
+        V4/V5 auto returns to the existing counted home at normal duration expiry,
+        then disables. Other identities/modes retain their original duration.
+        """
         if mode not in ('auto','bal','manual'):
             raise ValidationError('mode must be auto, bal or manual')
-        self._start('MODE',(mode,),duration_s,lambda s:s.enabled and s.mode !=12)
+        # Discover capability while stopped. Older identities retain their original
+        # duration budget; no return is inferred from a mode number or host request.
+        self._duration(duration_s)
+        if self.rate_hz==0:
+            raise RigError('motion requires streaming telemetry; set a positive rate')
+        return_to_center=False
+        if mode=='auto':
+            self._stopped_healthy()
+            return_to_center=(self._info or self.get_info()).firmware in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail')
+        if mode=='manual':
+            self._stopped_healthy()
+            info = self._info or self.get_info()
+            self._manual_speed_max = (self.get_parameter('manual_speed_max')
+                                      if info.firmware==TUNABLE_FIRMWARE else .15)
+        self._start('MODE',(mode,),duration_s,
+                    lambda s:(s.enabled and s.mode!=12) or
+                    (return_to_center and s.mode==0 and s.homed and s.healthy and s.x==0),
+                    return_to_center=return_to_center)
 
     def arm(self, duration_s=10):
         """Explicitly arm external acceleration; first action due within 20 ticks."""
+        self._stopped_healthy()
+        info = self._info or self.get_info()
+        self._direct_acceleration_max = (max(self.get_parameter('amax_s'),self.get_parameter('amax_b'))
+                                         if info.firmware==TUNABLE_FIRMWARE else 25.)
         self._start('ARM',(),duration_s,lambda s:s.enabled and s.mode==12)
 
     def _intent(self, command, value, ttl_ms, mode, bound):
@@ -539,10 +681,10 @@ class Rig:
         return sequence
 
     def set_acceleration(self, value, ttl_ms=20):
-        return self._intent('A',value,ttl_ms,12,25.)
+        return self._intent('A',value,ttl_ms,12,self._direct_acceleration_max)
 
     def set_velocity(self, value, ttl_ms=50):
-        return self._intent('V',value,ttl_ms,1,.15)
+        return self._intent('V',value,ttl_ms,1,self._manual_speed_max)
 
     def step(self, request: ActionRequest | None) -> Observation:
         """Validate a board-clock request before any write; never implicitly arm.
@@ -579,6 +721,7 @@ class Rig:
 
     def stop(self):
         self._require(allow_error=True)
+        self._return_expected=False
         with self._condition:
             if self._calibrating:
                 # Wake the deferred ACK wait before taking the command lock.
@@ -587,6 +730,7 @@ class Rig:
                 self._condition.notify_all()
         self._command_state('STOP',predicate=lambda s:not s.enabled and s.mode in (0,4),allow_error=True)
         self._active = False
+        self._return_expected = False
         self._deadline_ns = None
 
     def clear_fault(self):
@@ -614,6 +758,173 @@ class Rig:
         self._command('INFO', reply='INFO', allow_error=True)
         return self._info
 
+    def _parameter_stopped(self):
+        self._require(allow_error=True)
+        state = self._snapshot(allow_error=True)
+        if self._calibrating or state.flags & 256:
+            raise RigError('encoder calibration is in progress; parameter access requires stopped capture')
+        if self._active or state.enabled or state.mode not in (0,4):
+            raise RigError('parameter access requires stopped executor')
+        return state
+
+    def _parameter_catalog(self):
+        info = self._info or self.get_info()
+        return PARAMETER_NAMES if info.firmware==TUNABLE_FIRMWARE else LEGACY_PARAMETER_NAMES
+
+    def get_parameter(self, name):
+        """Read one actual board parameter while stopped, including fault diagnosis."""
+        parameter_name(name)
+        self._parameter_stopped()
+        if name not in self._parameter_catalog():
+            raise ValidationError(f'{name} is unsupported by firmware {self._info.firmware}')
+        response = self._command('PARAM', name, reply='PARAM', reply_key=name, allow_error=True)
+        value = float(response[4])
+        if name=='manual_speed_max':self._manual_speed_max=value
+        return value
+
+    def get_parameters(self):
+        """Read the supported live catalog; never substitute missing legacy defaults."""
+        self._parameter_stopped()
+        return {name:self.get_parameter(name) for name in self._parameter_catalog()}
+
+    def _rail_cap(self, values, info):
+        cap = float32(.26)
+        if self.state.homed and info.measured_span_steps:
+            if info.firmware == TUNABLE_FIRMWARE:
+                if not 10667 <= info.measured_span_steps <= 20000:
+                    raise ValidationError('invalid measured homing span')
+                half = info.measured_span_steps//2
+                steps_per_m = float32(26666.6666667)
+                # Mirror the firmware's conservative whole-step, binary32 cap.
+                fraction_steps = float32(float32(values['rail_fraction'])*half)
+                margin_steps = float32(float32(values['rail_margin'])*steps_per_m)
+                cap_steps = math.floor(float32(fraction_steps+margin_steps))
+                cap = float32(min(half,cap_steps)/steps_per_m)
+            else:
+                cap = min(cap,float32((info.measured_span_steps//2)/26666.6666667-.005))
+        return cap
+
+    def _validate_live_rail(self, value, values=None, info=None):
+        info = info or self.get_info()
+        if values is None:
+            values = ({name:self.get_parameter(name) for name in ('rail_fraction','rail_margin')}
+                      if info.firmware==TUNABLE_FIRMWARE else {})
+        cap = self._rail_cap(values,info)
+        if value > cap:
+            raise ValidationError(f'rail exceeds current homing clearance ({cap:g} m)')
+        return cap
+
+    def _validate_parameter_position(self, values, info):
+        if info.firmware==TUNABLE_FIRMWARE and self.state.homed:
+            boundary=float32(float32(values['rail'])-float32(values['rail_fault_margin']))
+            if abs(float32(self.state.x))>boundary:
+                raise ValidationError('new hard rail boundary excludes current position; rehome before shrinking it')
+
+    def _parameter_candidate(self, before, name, value, info):
+        candidate = dict(before,**{name:value})
+        if info.firmware==TUNABLE_FIRMWARE and name in ('rail_fraction','rail_margin'):
+            # The stored rail preference is not reported by the protocol. The
+            # current effective rail is a conservative lower bound on it; actual
+            # derived readback is fetched after every geometry write.
+            candidate['rail'] = min(before['rail'],self._rail_cap(candidate,info))
+        validate_parameters(candidate)
+        if name=='rail':self._validate_live_rail(value,candidate,info)
+        if name in GEOMETRY_PARAMETERS:self._validate_parameter_position(candidate,info)
+        return candidate
+
+    def set_parameter(self, name, value):
+        """Set a stopped healthy board parameter and verify its actual float32 reply."""
+        expected = parameter_value(name,value)
+        self._parameter_stopped()
+        self._stopped_healthy()
+        if name not in self._parameter_catalog():
+            raise ValidationError(f'{name} is unsupported by firmware {self._info.firmware}')
+        if name in COUPLED_PARAMETERS:
+            before=self.get_parameters()
+            self._parameter_candidate(before,name,expected,self.get_info())
+        response = self._command('PARAM', name, format(expected,'.9g'), reply='PARAM', reply_key=name)
+        actual = float(response[4])
+        try:confirmed = float32(actual) == expected
+        except (OverflowError,ValueError):confirmed = False
+        if not confirmed:
+            error = RigError(f'{name} readback mismatch: requested {expected:.9g}, actual {actual:.9g}')
+            self._latch(error)
+            raise error
+        if name=='manual_speed_max':self._manual_speed_max=actual
+        return actual
+
+    def save_parameters(self, path):
+        """Save verified live readback to an explicit host JSON profile."""
+        values = self.get_parameters()
+        return write_profile(path,values,None if self._info is None else self._info.firmware)
+
+    def load_parameters(self, path):
+        """Apply a validated explicit profile while stopped; writes are not atomic."""
+        requested = read_profile(path)
+        self._parameter_stopped()
+        self._stopped_healthy()
+        before = self.get_parameters()
+        unsupported=set(requested)-set(before)
+        if unsupported:
+            raise ValidationError(f'profile fields unsupported by firmware: {", ".join(sorted(unsupported))}')
+        candidate = parameter_map(dict(before,**requested))
+        info=self.get_info()
+        if 'rail' in requested:
+            self._validate_live_rail(candidate['rail'],candidate,info)
+        elif info.firmware==TUNABLE_FIRMWARE and {'rail_fraction','rail_margin'} & requested.keys():
+            candidate['rail']=min(before['rail'],self._rail_cap(candidate,info))
+        validate_parameters(candidate)
+        if GEOMETRY_PARAMETERS & requested.keys():self._validate_parameter_position(candidate,info)
+        # Plan every intermediate state before sending the first write. A small
+        # bridge rail can be necessary when increasing both a very small rail
+        # preference and its margin beyond the old geometry cap.
+        pending_names=list(requested); planned=dict(before); plan=[]
+        while pending_names:
+            for name in pending_names:
+                try:after=self._parameter_candidate(planned,name,requested[name],info)
+                except ValidationError:continue
+                plan.append((name,requested[name]));planned=after;pending_names.remove(name)
+                break
+            else:
+                if 'rail' in pending_names and requested['rail']>planned['rail']:
+                    bridge=min(requested['rail'],self._rail_cap(planned,info))
+                    if bridge>planned['rail']:
+                        planned=self._parameter_candidate(planned,'rail',bridge,info)
+                        plan.append(('rail',bridge));continue
+                raise ValidationError('profile has no safe intermediate parameter ordering')
+        actual,changed = {},{}
+        current=dict(before);pending=None
+        try:
+            for name,value in plan:
+                # Explicit rail writes store a future-HOME preference even when
+                # current effective readback already equals the requested value.
+                if name!='rail' and float32(current[name])==value:
+                    actual[name]=current[name];continue
+                pending=name
+                actual[name]=self.set_parameter(name,value)
+                current[name]=actual[name]
+                if name=='rail' or actual[name]!=before[name]:changed[name]=actual[name]
+                pending=None
+                if name in ('rail_margin','rail_fraction'):
+                    pending='rail'
+                    derived=self.get_parameter('rail')
+                    current['rail']=derived
+                    if derived!=before['rail']:
+                        actual['rail']=changed['rail']=derived
+                    pending=None
+            return actual
+        except BaseException as exc:
+            try:self.stop()
+            except BaseException:self._emergency_stop()
+            message = f'profile load failed; confirmed changed keys: {", ".join(changed) or "none"}'
+            if pending is not None:message += f'; unconfirmed key {pending} may have changed'
+            message += f'; {exc}'
+            error = RigError(message)
+            error.changed_parameters = changed
+            error.unconfirmed_parameter = pending
+            self._record('parameter_load_failed',changed_parameters=changed,unconfirmed_parameter=pending,reason=str(exc))
+            raise error from exc
+
     def set_rate(self, hz):
         if type(hz) is not int or hz not in _RATE:
             raise ValidationError('rate must be 0, 100, 250, 500 or 1000 Hz')
@@ -639,6 +950,9 @@ class Rig:
         self._log_end.set()
         if self._logger is not None:
             self._logger.join(self._timeout+.1)
+        if self._vision_publisher is not None:
+            try:self._vision_publisher.close()
+            except Exception as exc:self.vision_telemetry_error = str(exc)
         self._connected=False; self._closed=True
         if hasattr(self,'_owner'):
             with _OWNERS_LOCK:

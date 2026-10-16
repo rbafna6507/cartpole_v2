@@ -1,0 +1,1270 @@
+{
+  "schema": "preflash-repeat-comparison-v1",
+  "timing": "Board microsecond timestamps relative to last settled observation before MODE command. Entry/exit brackets reflect telemetry sampling. Observed episode duration is a conservative lower bound; mode is not an independent physical balance measurement.",
+  "script_sha256": "f17fd0d741ae234aa00480c0524f408fff2999b20a4e55a6c4401c3ce5e10c0c",
+  "runs": [
+    {
+      "name": "cart-poles-q-jerk225-c2-1792095387543731764",
+      "ok": true,
+      "requested_s": 8.0,
+      "jmax": 225.0,
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 225.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "settling": {
+        "seconds": 1.0053437059978023,
+        "angle_range_rad": 0.0015340000000003962,
+        "max_abs_omega": 0.05454573,
+        "mean_down_angle": -0.14422409009772924
+      },
+      "first_capture_s": 2.785,
+      "episodes": [
+        {
+          "entry_bracket_s": [
+            2.781,
+            2.785
+          ],
+          "exit_bracket_s": [
+            2.945,
+            2.949
+          ],
+          "observed_duration_s": 0.1599999999999997,
+          "duration_upper_s": 0.1679999999999997,
+          "exit_mode": 5,
+          "exit_x_m": -0.1242,
+          "exit_velocity_m_s": -1.498447,
+          "entry_x_m": 0.0271125,
+          "entry_velocity_m_s": -0.2993334,
+          "angle_rms_deg": 8.042516623426955
+        },
+        {
+          "entry_bracket_s": [
+            4.993,
+            4.997
+          ],
+          "exit_bracket_s": [
+            6.477,
+            6.481
+          ],
+          "observed_duration_s": 1.4800000000000004,
+          "duration_upper_s": 1.4879999999999995,
+          "exit_mode": 5,
+          "exit_x_m": 0.2349375,
+          "exit_velocity_m_s": 0.2634503,
+          "entry_x_m": 0.0691125,
+          "entry_velocity_m_s": -0.01460462,
+          "angle_rms_deg": 6.4795142421752585
+        }
+      ],
+      "observed_total_balance_s": 1.6400000000000001,
+      "observed_longest_balance_s": 1.4800000000000004,
+      "balance_exits_to_rail": 2,
+      "rail_recovery_entries": 2,
+      "max_abs_x_m": 0.24465,
+      "max_abs_v_m_s": 1.499797,
+      "transitions": [
+        {
+          "t": 0.004,
+          "from": 0,
+          "to": 2,
+          "x": 0.0,
+          "v": 0.000225,
+          "a": 0.225,
+          "theta": 2.997399,
+          "brake_direction": 0
+        },
+        {
+          "t": 2.785,
+          "from": 2,
+          "to": 3,
+          "x": 0.0271125,
+          "v": -0.2993334,
+          "a": 0.45,
+          "theta": 0.05368933,
+          "brake_direction": 0
+        },
+        {
+          "t": 2.949,
+          "from": 3,
+          "to": 5,
+          "x": -0.1242,
+          "v": -1.498447,
+          "a": 0.675,
+          "theta": -0.04755341,
+          "brake_direction": -1
+        },
+        {
+          "t": 3.113,
+          "from": 5,
+          "to": 6,
+          "x": -0.24255,
+          "v": 4.898623e-05,
+          "a": 0.2809402,
+          "theta": -0.1917476,
+          "brake_direction": 0
+        },
+        {
+          "t": 3.177,
+          "from": 6,
+          "to": 2,
+          "x": -0.2397,
+          "v": 0.09557873,
+          "a": 2.4,
+          "theta": -0.5169516,
+          "brake_direction": 0
+        },
+        {
+          "t": 4.997,
+          "from": 2,
+          "to": 3,
+          "x": 0.0691125,
+          "v": -0.01460462,
+          "a": -4.257373,
+          "theta": 0.2101554,
+          "brake_direction": 0
+        },
+        {
+          "t": 6.481,
+          "from": 3,
+          "to": 5,
+          "x": 0.2349375,
+          "v": 0.2634503,
+          "a": 0.5172958,
+          "theta": -0.06749516,
+          "brake_direction": 1
+        },
+        {
+          "t": 6.557,
+          "from": 5,
+          "to": 6,
+          "x": 0.24465,
+          "v": -0.001246235,
+          "a": -0.7166995,
+          "theta": 0.05982525,
+          "brake_direction": 0
+        },
+        {
+          "t": 6.637,
+          "from": 6,
+          "to": 2,
+          "x": 0.2398875,
+          "v": -0.1204714,
+          "a": -1.725,
+          "theta": 0.2147573,
+          "brake_direction": 0
+        },
+        {
+          "t": 8.005,
+          "from": 2,
+          "to": 14,
+          "x": -0.048525,
+          "v": -0.284325,
+          "a": 2.360321,
+          "theta": -0.4601943,
+          "brake_direction": 0
+        }
+      ],
+      "camera_return_delta_px": -0.11964285714282141,
+      "final": {
+        "sid": 1134650092,
+        "tick": 1035028,
+        "us": 1037748637,
+        "mode": 0,
+        "flags": 205,
+        "theta": -2.20433,
+        "angle_hat": -2.205262,
+        "omega": -1.41703,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 188440,
+        "brake_direction": 0,
+        "received_ns": 190699561694219,
+        "unwrapped_tick": 1035028,
+        "unwrapped_us": 1037748637
+      },
+      "final_info": {
+        "sid": 1134650092,
+        "firmware": "executor-v5-calmodel",
+        "encoder_upright_raw": 351,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 0,
+        "home_epoch": 1,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.26,
+        "received_ns": 190699564820969,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 3009,
+        "encoder_raw_age_us": 876,
+        "encoder_recoveries": 0
+      },
+      "sha256": {
+        "report.json": "04d5c0599854f6c954a28477233c79725a17103e5780be5a7dc1a9529818db09",
+        "camera.json": "ae276babef55f8e3483e66b21dbed6ab6d7102b5b7fd21639b5f38d2e5c01d13",
+        "rig-1792095387627382431-1134650092.jsonl": "abad296218c7fc805b258235ec967d58768e176ce71c6c302fca6d9cc4ee18f0"
+      }
+    },
+    {
+      "name": "preflash-repeat-q-jerk225-c3-1792097445974543467",
+      "ok": true,
+      "requested_s": 8.0,
+      "jmax": 225.0,
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 225.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "settling": {
+        "seconds": 1.00791614499758,
+        "angle_range_rad": 0.0015340000000003962,
+        "max_abs_omega": 0.05454572,
+        "mean_down_angle": -0.1443097731117051
+      },
+      "first_capture_s": 2.78,
+      "episodes": [
+        {
+          "entry_bracket_s": [
+            2.776,
+            2.78
+          ],
+          "exit_bracket_s": [
+            3.052,
+            3.056
+          ],
+          "observed_duration_s": 0.27200000000000024,
+          "duration_upper_s": 0.28000000000000025,
+          "exit_mode": 5,
+          "exit_x_m": -0.176325,
+          "exit_velocity_m_s": -0.969382,
+          "entry_x_m": 0.05385,
+          "entry_velocity_m_s": -0.29775,
+          "angle_rms_deg": 7.540821909944054
+        }
+      ],
+      "observed_total_balance_s": 0.27200000000000024,
+      "observed_longest_balance_s": 0.27200000000000024,
+      "balance_exits_to_rail": 1,
+      "rail_recovery_entries": 1,
+      "max_abs_x_m": 0.242775,
+      "max_abs_v_m_s": 1.499971,
+      "transitions": [
+        {
+          "t": 0.004,
+          "from": 0,
+          "to": 2,
+          "x": 0.0,
+          "v": 0.0006750001,
+          "a": 0.45,
+          "theta": 2.997399,
+          "brake_direction": 0
+        },
+        {
+          "t": 2.78,
+          "from": 2,
+          "to": 3,
+          "x": 0.05385,
+          "v": -0.29775,
+          "a": 0.9,
+          "theta": 0.09203885,
+          "brake_direction": 0
+        },
+        {
+          "t": 3.056,
+          "from": 3,
+          "to": 5,
+          "x": -0.176325,
+          "v": -0.969382,
+          "a": -0.5932335,
+          "theta": 0.1825437,
+          "brake_direction": -1
+        },
+        {
+          "t": 3.196,
+          "from": 5,
+          "to": 6,
+          "x": -0.242775,
+          "v": 0.000599315,
+          "a": 0.45,
+          "theta": 0.3834952,
+          "brake_direction": 0
+        },
+        {
+          "t": 3.26,
+          "from": 6,
+          "to": 2,
+          "x": -0.2398125,
+          "v": 0.09532436,
+          "a": 1.95,
+          "theta": 0.3681554,
+          "brake_direction": 0
+        },
+        {
+          "t": 8.004,
+          "from": 2,
+          "to": 14,
+          "x": 0.13035,
+          "v": -1.076819,
+          "a": -5.025481,
+          "theta": -1.810097,
+          "brake_direction": 0
+        }
+      ],
+      "camera_return_delta_px": -0.09423076923076223,
+      "final": {
+        "sid": 2904834133,
+        "tick": 3093245,
+        "us": 3095965637,
+        "mode": 0,
+        "flags": 205,
+        "theta": -3.051088,
+        "angle_hat": -3.050629,
+        "omega": 0.580155,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 698876,
+        "brake_direction": 0,
+        "received_ns": 192757765216322,
+        "unwrapped_tick": 3093245,
+        "unwrapped_us": 3095965637
+      },
+      "final_info": {
+        "sid": 2904834133,
+        "firmware": "executor-v5-calmodel",
+        "encoder_upright_raw": 351,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 0,
+        "home_epoch": 1,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.26,
+        "received_ns": 192757767294286,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2458,
+        "encoder_raw_age_us": 2878,
+        "encoder_recoveries": 0
+      },
+      "sha256": {
+        "report.json": "4ed3bf4c3a7dc3f45a289f27893e6ac06150839608a848068a102512ee391478",
+        "camera.json": "c667c2079074ffc2164768e5308d6886a93492c3ef09174dedbd463508e7bfea",
+        "rig-1792097446043044947-2904834133.jsonl": "16cbd124a5bced79f247356b5f3c4d3d034cf526c18403ff7df1c2a2171a18da"
+      }
+    },
+    {
+      "name": "cart-poles-q-long1-1792095141306802109",
+      "ok": true,
+      "requested_s": 20.0,
+      "jmax": 150.0,
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "settling": {
+        "seconds": 1.0048762710066512,
+        "angle_range_rad": 0.0015339999999999243,
+        "max_abs_omega": 0.05450338,
+        "mean_down_angle": -0.14878954203600872
+      },
+      "first_capture_s": 4.134,
+      "episodes": [
+        {
+          "entry_bracket_s": [
+            4.13,
+            4.134
+          ],
+          "exit_bracket_s": [
+            5.758,
+            5.762
+          ],
+          "observed_duration_s": 1.6239999999999997,
+          "duration_upper_s": 1.6319999999999997,
+          "exit_mode": 5,
+          "exit_x_m": 0.2365125,
+          "exit_velocity_m_s": 0.2601018,
+          "entry_x_m": -0.0440625,
+          "entry_velocity_m_s": 0.2123277,
+          "angle_rms_deg": 7.247037727699751
+        },
+        {
+          "entry_bracket_s": [
+            8.818,
+            8.822
+          ],
+          "exit_bracket_s": [
+            10.814,
+            10.818
+          ],
+          "observed_duration_s": 1.9920000000000009,
+          "duration_upper_s": 2.0,
+          "exit_mode": 5,
+          "exit_x_m": 0.241425,
+          "exit_velocity_m_s": 0.1675082,
+          "entry_x_m": -0.07995,
+          "entry_velocity_m_s": 0.1673964,
+          "angle_rms_deg": 8.544620358084515
+        },
+        {
+          "entry_bracket_s": [
+            11.638,
+            11.642
+          ],
+          "exit_bracket_s": [
+            15.582,
+            15.586
+          ],
+          "observed_duration_s": 3.9400000000000013,
+          "duration_upper_s": 3.9480000000000004,
+          "exit_mode": 5,
+          "exit_x_m": -0.0952875,
+          "exit_velocity_m_s": -1.499453,
+          "entry_x_m": -0.1171125,
+          "entry_velocity_m_s": 0.2776544,
+          "angle_rms_deg": 9.548267706908732
+        },
+        {
+          "entry_bracket_s": [
+            16.618,
+            16.622
+          ],
+          "exit_bracket_s": [
+            19.586,
+            19.59
+          ],
+          "observed_duration_s": 2.9639999999999986,
+          "duration_upper_s": 2.9720000000000013,
+          "exit_mode": 5,
+          "exit_x_m": 0.1981125,
+          "exit_velocity_m_s": 0.6576515,
+          "entry_x_m": 0.1197,
+          "entry_velocity_m_s": -0.1929589,
+          "angle_rms_deg": 5.312826539918712
+        }
+      ],
+      "observed_total_balance_s": 10.52,
+      "observed_longest_balance_s": 3.9400000000000013,
+      "balance_exits_to_rail": 4,
+      "rail_recovery_entries": 4,
+      "max_abs_x_m": 0.2448375,
+      "max_abs_v_m_s": 1.499903,
+      "transitions": [
+        {
+          "t": 0.004,
+          "from": 0,
+          "to": 2,
+          "x": 0.0,
+          "v": 0.00045,
+          "a": 0.3,
+          "theta": 2.992797,
+          "brake_direction": 0
+        },
+        {
+          "t": 4.134,
+          "from": 2,
+          "to": 3,
+          "x": -0.0440625,
+          "v": 0.2123277,
+          "a": 5.092278,
+          "theta": -0.1810097,
+          "brake_direction": 0
+        },
+        {
+          "t": 5.762,
+          "from": 3,
+          "to": 5,
+          "x": 0.2365125,
+          "v": 0.2601018,
+          "a": -2.125664,
+          "theta": -0.1380583,
+          "brake_direction": 1
+        },
+        {
+          "t": 5.838,
+          "from": 5,
+          "to": 6,
+          "x": 0.244575,
+          "v": -0.0004800941,
+          "a": -0.3581906,
+          "theta": -0.02914564,
+          "brake_direction": 0
+        },
+        {
+          "t": 5.922,
+          "from": 6,
+          "to": 2,
+          "x": 0.239625,
+          "v": -0.1241875,
+          "a": -2.1,
+          "theta": 0.01227185,
+          "brake_direction": 0
+        },
+        {
+          "t": 8.822,
+          "from": 2,
+          "to": 3,
+          "x": -0.07995,
+          "v": 0.1673964,
+          "a": 6.194858,
+          "theta": -0.2162913,
+          "brake_direction": 0
+        },
+        {
+          "t": 10.818,
+          "from": 3,
+          "to": 5,
+          "x": 0.241425,
+          "v": 0.1675082,
+          "a": -3.180056,
+          "theta": -0.1426602,
+          "brake_direction": 1
+        },
+        {
+          "t": 10.874,
+          "from": 5,
+          "to": 6,
+          "x": 0.2448375,
+          "v": -0.0004420147,
+          "a": -0.3822947,
+          "theta": -0.0644272,
+          "brake_direction": 0
+        },
+        {
+          "t": 10.958,
+          "from": 6,
+          "to": 2,
+          "x": 0.23985,
+          "v": -0.1229682,
+          "a": -1.65,
+          "theta": 0.02147573,
+          "brake_direction": 0
+        },
+        {
+          "t": 11.642,
+          "from": 2,
+          "to": 3,
+          "x": -0.1171125,
+          "v": 0.2776544,
+          "a": 3.132029,
+          "theta": -0.1104466,
+          "brake_direction": 0
+        },
+        {
+          "t": 15.586,
+          "from": 3,
+          "to": 5,
+          "x": -0.0952875,
+          "v": -1.499453,
+          "a": 0.3,
+          "theta": -0.07516506,
+          "brake_direction": -1
+        },
+        {
+          "t": 15.79,
+          "from": 5,
+          "to": 6,
+          "x": -0.242625,
+          "v": 0.0003787021,
+          "a": 0.3,
+          "theta": 0.01687379,
+          "brake_direction": 0
+        },
+        {
+          "t": 15.854,
+          "from": 6,
+          "to": 2,
+          "x": -0.23985,
+          "v": 0.09262873,
+          "a": 1.8,
+          "theta": -0.161068,
+          "brake_direction": 0
+        },
+        {
+          "t": 16.622,
+          "from": 2,
+          "to": 3,
+          "x": 0.1197,
+          "v": -0.1929589,
+          "a": 5.29204,
+          "theta": 0.04295146,
+          "brake_direction": 0
+        },
+        {
+          "t": 19.59,
+          "from": 3,
+          "to": 5,
+          "x": 0.1981125,
+          "v": 0.6576515,
+          "a": 0.4908453,
+          "theta": -0.1334563,
+          "brake_direction": 1
+        },
+        {
+          "t": 19.73,
+          "from": 5,
+          "to": 6,
+          "x": 0.24405,
+          "v": -0.0001207952,
+          "a": -0.2063975,
+          "theta": -0.004601942,
+          "brake_direction": 0
+        },
+        {
+          "t": 19.81,
+          "from": 6,
+          "to": 2,
+          "x": 0.2397,
+          "v": -0.1142721,
+          "a": -1.05,
+          "theta": 0.08283497,
+          "brake_direction": 0
+        },
+        {
+          "t": 20.002,
+          "from": 2,
+          "to": 14,
+          "x": 0.1815,
+          "v": -0.8767488,
+          "a": -5.025218,
+          "theta": 0.9311264,
+          "brake_direction": 0
+        }
+      ],
+      "camera_return_delta_px": -0.4692982456140271,
+      "final": {
+        "sid": 2454758461,
+        "tick": 801153,
+        "us": 803873637,
+        "mode": 0,
+        "flags": 205,
+        "theta": -2.015651,
+        "angle_hat": -2.016232,
+        "omega": -0.9493896,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 138094,
+        "brake_direction": 0,
+        "received_ns": 190465688945288,
+        "unwrapped_tick": 801153,
+        "unwrapped_us": 803873637
+      },
+      "final_info": {
+        "sid": 2454758461,
+        "firmware": "executor-v5-calmodel",
+        "encoder_upright_raw": 351,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 0,
+        "home_epoch": 1,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.26,
+        "received_ns": 190465691257912,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 3130,
+        "encoder_raw_age_us": 1426,
+        "encoder_recoveries": 0
+      },
+      "sha256": {
+        "report.json": "6bfb8e1fb8eb0a122335dd1ade80376d83c73bb2b46510a22de030b3ce56d124",
+        "camera.json": "fb54a2cff6c10d170e6bdab68b6dcb984c88717c755ecd9a1a95d3a692e5bf32",
+        "rig-1792095141387026313-2454758461.jsonl": "7313c16d86a56672e5fbdcb4d64356c4bf3f8706d08a21c2a3ca51e82afa0fce"
+      }
+    },
+    {
+      "name": "preflash-repeat-q150-long2-1792097494019382153",
+      "ok": true,
+      "requested_s": 20.0,
+      "jmax": 150.0,
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "settling": {
+        "seconds": 1.0019320000137668,
+        "angle_range_rad": 0.0015339999999998966,
+        "max_abs_omega": 0.07530005,
+        "mean_down_angle": -0.14415623895564633
+      },
+      "first_capture_s": 2.684,
+      "episodes": [
+        {
+          "entry_bracket_s": [
+            2.68,
+            2.684
+          ],
+          "exit_bracket_s": [
+            13.676,
+            13.68
+          ],
+          "observed_duration_s": 10.992,
+          "duration_upper_s": 11.0,
+          "exit_mode": 5,
+          "exit_x_m": -0.079725,
+          "exit_velocity_m_s": -1.480992,
+          "entry_x_m": 0.0757125,
+          "entry_velocity_m_s": 0.04692688,
+          "angle_rms_deg": 7.5272321076083974
+        },
+        {
+          "entry_bracket_s": [
+            17.308,
+            17.312
+          ],
+          "exit_bracket_s": [
+            18.328,
+            18.332
+          ],
+          "observed_duration_s": 1.0159999999999982,
+          "duration_upper_s": 1.024000000000001,
+          "exit_mode": 5,
+          "exit_x_m": 0.2183625,
+          "exit_velocity_m_s": 0.6022192,
+          "entry_x_m": -0.0699375,
+          "entry_velocity_m_s": 0.1982679,
+          "angle_rms_deg": 8.480793932918614
+        }
+      ],
+      "observed_total_balance_s": 12.008,
+      "observed_longest_balance_s": 10.992,
+      "balance_exits_to_rail": 2,
+      "rail_recovery_entries": 2,
+      "max_abs_x_m": 0.2440875,
+      "max_abs_v_m_s": 1.499892,
+      "transitions": [
+        {
+          "t": 0.004,
+          "from": 0,
+          "to": 2,
+          "x": 0.0,
+          "v": 0.00045,
+          "a": 0.3,
+          "theta": 2.997399,
+          "brake_direction": 0
+        },
+        {
+          "t": 2.684,
+          "from": 2,
+          "to": 3,
+          "x": 0.0757125,
+          "v": 0.04692688,
+          "a": -1.804056,
+          "theta": 0.2469709,
+          "brake_direction": 0
+        },
+        {
+          "t": 13.68,
+          "from": 3,
+          "to": 5,
+          "x": -0.079725,
+          "v": -1.480992,
+          "a": -1.5,
+          "theta": -0.08283497,
+          "brake_direction": -1
+        },
+        {
+          "t": 13.896,
+          "from": 5,
+          "to": 6,
+          "x": -0.24315,
+          "v": 0.001569136,
+          "a": 0.6575433,
+          "theta": -0.1794758,
+          "brake_direction": 0
+        },
+        {
+          "t": 13.964,
+          "from": 6,
+          "to": 2,
+          "x": -0.2397375,
+          "v": 0.1025069,
+          "a": 1.95,
+          "theta": -0.5046797,
+          "brake_direction": 0
+        },
+        {
+          "t": 17.312,
+          "from": 2,
+          "to": 3,
+          "x": -0.0699375,
+          "v": 0.1982679,
+          "a": 5.391908,
+          "theta": -0.1871457,
+          "brake_direction": 0
+        },
+        {
+          "t": 18.332,
+          "from": 3,
+          "to": 5,
+          "x": 0.2183625,
+          "v": 0.6022192,
+          "a": -4.43035,
+          "theta": -0.239301,
+          "brake_direction": 1
+        },
+        {
+          "t": 18.44,
+          "from": 5,
+          "to": 6,
+          "x": 0.2440875,
+          "v": -2.153085e-05,
+          "a": -0.1733479,
+          "theta": -0.1963495,
+          "brake_direction": 0
+        },
+        {
+          "t": 18.52,
+          "from": 6,
+          "to": 2,
+          "x": 0.2397375,
+          "v": -0.1157084,
+          "a": -1.95,
+          "theta": -0.1181165,
+          "brake_direction": 0
+        },
+        {
+          "t": 20.004,
+          "from": 2,
+          "to": 14,
+          "x": 0.0655125,
+          "v": -0.1507067,
+          "a": 0.64262,
+          "theta": 1.785554,
+          "brake_direction": 0
+        }
+      ],
+      "camera_return_delta_px": -0.015476190476192642,
+      "final": {
+        "sid": 64339824,
+        "tick": 3153554,
+        "us": 3156274637,
+        "mode": 0,
+        "flags": 205,
+        "theta": 2.965185,
+        "angle_hat": 2.973288,
+        "omega": 7.894804,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 706907,
+        "brake_direction": 0,
+        "received_ns": 192818076527440,
+        "unwrapped_tick": 3153554,
+        "unwrapped_us": 3156274637
+      },
+      "final_info": {
+        "sid": 64339824,
+        "firmware": "executor-v5-calmodel",
+        "encoder_upright_raw": 351,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 0,
+        "home_epoch": 1,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.26,
+        "received_ns": 192818081483824,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2312,
+        "encoder_raw_age_us": 710,
+        "encoder_recoveries": 0
+      },
+      "sha256": {
+        "report.json": "471f2e89143f8c995bc57c0e93162d0e76dd1e81d17e7d520908ba85acf4c61f",
+        "camera.json": "3fa8ea2ac39f49e173e38666815a874a8bf20259b6a7b95d1f621790001278d2",
+        "rig-1792097494092504201-64339824.jsonl": "28bb2c2337242aa78d1ac6a2c7afaeb2449f867ff1c599f664eb2fb40d80cd3e"
+      }
+    },
+    {
+      "name": "preflash-repeat-q150-long3-1792097596983002419",
+      "ok": false,
+      "requested_s": 20.0,
+      "jmax": 150.0,
+      "parameters": {
+        "leff": 0.123999998,
+        "pw": 4.5,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.300000012,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.25999999,
+        "bw": 30.0,
+        "vman": 0.0500000007
+      },
+      "settling": {
+        "seconds": 1.0023098360106815,
+        "angle_range_rad": 0.0,
+        "max_abs_omega": 4.109132e-05,
+        "mean_down_angle": -0.14879565358979358
+      },
+      "first_capture_s": 2.656,
+      "episodes": [
+        {
+          "entry_bracket_s": [
+            2.652,
+            2.656
+          ],
+          "exit_bracket_s": [
+            3.928,
+            3.932
+          ],
+          "observed_duration_s": 1.2719999999999998,
+          "duration_upper_s": 1.2799999999999998,
+          "exit_mode": 5,
+          "exit_x_m": 0.207525,
+          "exit_velocity_m_s": 0.6765954,
+          "entry_x_m": 0.058575,
+          "entry_velocity_m_s": -0.2761485,
+          "angle_rms_deg": 6.951527866837044
+        },
+        {
+          "entry_bracket_s": [
+            11.396,
+            11.4
+          ],
+          "exit_bracket_s": [
+            11.524,
+            11.528
+          ],
+          "observed_duration_s": 0.12399999999999878,
+          "duration_upper_s": 0.13199999999999967,
+          "exit_mode": 5,
+          "exit_x_m": 0.0001875,
+          "exit_velocity_m_s": 0.8139859,
+          "entry_x_m": -0.0412875,
+          "entry_velocity_m_s": 0.2460068,
+          "angle_rms_deg": 6.659165138005926
+        }
+      ],
+      "observed_total_balance_s": 1.3959999999999986,
+      "observed_longest_balance_s": 1.2719999999999998,
+      "balance_exits_to_rail": 2,
+      "rail_recovery_entries": 3,
+      "max_abs_x_m": 0.244425,
+      "max_abs_v_m_s": 1.499948,
+      "transitions": [
+        {
+          "t": 0.004,
+          "from": 0,
+          "to": 2,
+          "x": 0.0,
+          "v": 0.00045,
+          "a": 0.3,
+          "theta": 2.992797,
+          "brake_direction": 0
+        },
+        {
+          "t": 2.656,
+          "from": 2,
+          "to": 3,
+          "x": 0.058575,
+          "v": -0.2761485,
+          "a": -2.958106,
+          "theta": 0.2316311,
+          "brake_direction": 0
+        },
+        {
+          "t": 3.932,
+          "from": 3,
+          "to": 5,
+          "x": 0.207525,
+          "v": 0.6765954,
+          "a": -2.297806,
+          "theta": -0.2224272,
+          "brake_direction": 1
+        },
+        {
+          "t": 4.056,
+          "from": 5,
+          "to": 6,
+          "x": 0.244425,
+          "v": -4.949411e-05,
+          "a": -0.2125257,
+          "theta": -0.2883884,
+          "brake_direction": 0
+        },
+        {
+          "t": 4.14,
+          "from": 6,
+          "to": 2,
+          "x": 0.2395875,
+          "v": -0.1226498,
+          "a": -2.1,
+          "theta": -0.401903,
+          "brake_direction": 0
+        },
+        {
+          "t": 7.26,
+          "from": 2,
+          "to": 5,
+          "x": 0.1678875,
+          "v": 1.193926,
+          "a": -5.116825,
+          "theta": -2.04633,
+          "brake_direction": 1
+        },
+        {
+          "t": 7.416,
+          "from": 5,
+          "to": 6,
+          "x": 0.2442,
+          "v": -0.0005141195,
+          "a": -0.380309,
+          "theta": -1.886796,
+          "brake_direction": 0
+        },
+        {
+          "t": 7.496,
+          "from": 6,
+          "to": 2,
+          "x": 0.2397,
+          "v": -0.1177764,
+          "a": -1.95,
+          "theta": -2.371534,
+          "brake_direction": 0
+        },
+        {
+          "t": 11.4,
+          "from": 2,
+          "to": 3,
+          "x": -0.0412875,
+          "v": 0.2460068,
+          "a": -4.604661,
+          "theta": -0.1334563,
+          "brake_direction": 0
+        },
+        {
+          "t": 11.528,
+          "from": 3,
+          "to": 5,
+          "x": 0.0001875,
+          "v": 0.8139859,
+          "a": 13.07371,
+          "theta": 0.2561748,
+          "brake_direction": 1
+        },
+        {
+          "t": 11.812,
+          "from": 5,
+          "to": 2,
+          "x": 0.2359125,
+          "v": -0.000833079,
+          "a": -0.5062028,
+          "theta": 0.4693981,
+          "brake_direction": 0
+        },
+        {
+          "t": 12.535,
+          "from": 2,
+          "to": 0,
+          "x": -0.068325,
+          "v": 0.0,
+          "a": 0.0,
+          "theta": -2.609301,
+          "brake_direction": 0
+        }
+      ],
+      "camera_return_delta_px": null,
+      "final": {
+        "sid": 407240046,
+        "tick": 3242111,
+        "us": 3244831637,
+        "mode": 0,
+        "flags": 205,
+        "theta": -2.609301,
+        "angle_hat": -2.618792,
+        "omega": -12.87717,
+        "x": -0.068325,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 725600,
+        "brake_direction": 0,
+        "received_ns": 192906629773990,
+        "unwrapped_tick": 3242111,
+        "unwrapped_us": 3244831637
+      },
+      "final_info": {
+        "sid": 407240046,
+        "firmware": "executor-v5-calmodel",
+        "encoder_upright_raw": 351,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 0,
+        "home_epoch": 1,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.26,
+        "received_ns": 192910635214879,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 1266,
+        "encoder_raw_age_us": 880,
+        "encoder_recoveries": 0
+      },
+      "sha256": {
+        "report.json": "fd4d6f6becd55462d5e581d7d64cedf7a51f1c2d699b22fa6509308389c1eca3",
+        "camera.json": "4cde0991015fae0dd4fd82e51b2dc58e3632348c049798d7df600b1e656ca1fa",
+        "rig-1792097597059637441-407240046.jsonl": "5a3de65e6cfe48039bd1af3f08cc689f5055403fab5c2e5bf003a0e656af026f"
+      }
+    }
+  ]
+}

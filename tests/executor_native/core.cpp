@@ -25,8 +25,22 @@ static void wrap(){Core c=ready();c.tick=UINT32_MAX-5;arm(c);assert(send(c,"V2 A
 static void guards(){Core c=ready();check_error(c,"V2 ARM 7 0");check_error(c,"V2 ARM 7 60001");c.sample(false,0);check_error(c,"V2 ARM 7 1000");c.sample(true,0);arm(c);check_error(c,"V2 CENTER 7");check_error(c,"V2 CLEAR 7");check_error(c,"V2 SWITCHES 7 1");c.trip(ENCODER);assert(!c.homed&&!c.enabled);assert(send(c,"V2 CLEAR 7").kind==OK);check_error(c,"V2 ARM 7 1000");}
 static void watchdogs(){Core c=ready();arm(c,1);c.advance(1000);assert(!c.enabled&&c.fault==DURATION);c=ready();assert(send(c,"V2 MODE 7 auto 1000").kind==OK);for(int i=0;i<199;++i)c.advance(i);assert(c.enabled);check_error(c,"V2 PING 9");c.advance(200);assert(!c.enabled&&c.fault==HOST_TIMEOUT);c=ready();arm(c);send(c,"V2 A 7 1 0 20 1");for(int i=0;i<20;++i){send(c,"V2 PING 7");c.advance(i);}assert(c.fault==ACTION_EXPIRED);c=ready();assert(send(c,"V2 MODE 7 manual 1000").kind==OK);check_error(c,"V2 V 7 1 0 20 0.16");assert(send(c,"V2 V 7 1 0 20 -.15").kind==SILENT);assert(c.demand==-.15f);}
 static void switches(){Core c;c.sample(true,15);send(c,"V2 HELLO 7");check_error(c,"V2 ARM 7 1000");check_error(c,"V2 HOME 7");check_error(c,"V2 CENTER 7");assert(send(c,"V2 SWITCHES 7 0").kind==OK);assert(send(c,"V2 CENTER 7").kind==OK);arm(c);c.sample(true,15);assert(c.enabled);send(c,"V2 STOP 7");assert(send(c,"V2 SWITCHES 7 1").kind==OK);assert(!c.homed);check_error(c,"V2 HOME 7");c.sample(true,0);for(int i=0;i<5;++i)c.advance(i);assert(send(c,"V2 HOME 7").kind==OK);assert(c.mode==13&&c.enabled&&!c.homed);c.stop();c.homed=true;arm(c);c.sample(true,1);assert(!c.enabled&&!c.homed&&c.fault==LIMIT);}
-static void homing_success(){cart_homing::Machine m;assert(m.start(0,0,0));int32_t pos=0;uint32_t tick=0;double fraction=0;for(;tick<60000&&!m.done()&&!m.failed();++tick){uint8_t raw=(pos<=-7000?1:0)|(pos>=7000?2:0);m.update(tick,pos,raw);float v=m.velocity(pos);if((raw&1)&&v<0)assert(false);if((raw&2)&&v>0)assert(false);fraction+=v*cart_homing::steps_per_m/1000;int n=(int)fraction;pos+=n;fraction-=n;}assert(m.done());assert(m.negative<=-7000&&m.positive>=7000);assert(pos==m.center());assert(m.span()==14000);assert(fabsf(m.safeRail(.26f)-.2575f)<1e-6);m.negative=-5334;m.positive=5334;assert(m.safeRail(.26f)<.196f);}
-static void homing_faults(){cart_homing::Machine m;assert(!m.start(0,0,1));assert(!m.start(0,0,12));assert(m.start(0,0,0));m.update(1,0,2);assert(m.failed());assert(m.start(0,0,0));m.update(25001,0,0);assert(m.failed());assert(m.start(0,0,0));m.update(1,-17000,0);assert(m.failed());assert(m.start(0,0,0));m.update(1,-100,1);assert(m.velocity()==0);for(unsigned i=2;i<8;++i)m.update(i,-100,1);assert(m.velocity()>0);m.update(2000,-100,1);assert(m.failed());assert(m.start(0,0,0));m.cancel();assert(!m.active()&&!m.done());}
+static void homing_success(){
+ // Contact-to-contact widths from the former short fixture through the new
+ // 750 mm cap; start near either end to exercise the total deadline too.
+ for(int half:{7000,9000,10000})for(int start:{-half+300,0,half-300}){
+  cart_homing::Machine m;assert(m.start(0,start,0));int32_t pos=start;uint32_t tick=0;double fraction=0;unsigned seen=0;
+  for(;tick<75000&&!m.done()&&!m.failed();++tick){uint8_t raw=(pos<=-half?1:0)|(pos>=half?2:0);seen|=raw;m.update(tick,pos,raw);float v=m.velocity(pos);if((raw&1)&&v<0)assert(false);if((raw&2)&&v>0)assert(false);fraction+=v*cart_homing::steps_per_m/1000;int n=(int)fraction;pos+=n;fraction-=n;}
+  assert(m.done());assert(seen==3);assert(m.negative==-half&&m.positive==half);assert(pos==m.center());assert(m.span()==2*half);assert(fabsf(m.safeRail(.375f)-(half==7000?.2625f:half==9000?.335625f:.37125f))<1e-6);
+ }
+ cart_homing::Machine m; m.negative=-5334;m.positive=5334;assert(fabsf(m.safeRail(.375f)-.200025f)<1e-6f);
+ // A missing contact must stop within 750 mm; an oversize measured span fails.
+ assert(m.start(0,0,0));m.update(1,-20001,0);assert(m.failed());
+ assert(m.start(0,0,0));m.negative=0;m.enter(cart_homing::Machine::SEEK_POS,10,134);m.update(20,20001,0);assert(m.failed());
+ assert(m.start(0,0,0));m.negative=-10001;m.positive=10000;m.enter(cart_homing::Machine::CLEAR_POS,10,9800);m.released=true;m.release_pos=9800;m.update(20,9600,0);assert(m.failed());
+ assert(m.start(0,0,0));m.enter(cart_homing::Machine::SEEK_POS,74000,0);m.update(75000,0,0);assert(m.failed());
+}
+static void homing_faults(){cart_homing::Machine m;assert(!m.start(0,0,1));assert(!m.start(0,0,12));assert(m.start(0,0,0));m.update(1,0,2);assert(m.failed());assert(m.start(0,0,0));m.update(27000,0,0);assert(m.failed());assert(m.start(0,0,0));m.update(1,-20001,0);assert(m.failed());assert(m.start(0,0,0));m.update(1,-100,1);assert(m.velocity()==0);for(unsigned i=2;i<8;++i)m.update(i,-100,1);assert(m.velocity()>0);m.update(2000,-100,1);assert(m.failed());assert(m.start(0,0,0));m.cancel();assert(!m.active()&&!m.done());}
 static void homing_more_faults(){
  cart_homing::Machine m;assert(m.start(0,0,0));m.update(1,0,3);assert(m.failed());
  assert(m.start(0,0,0));m.update(1,0,8);assert(m.failed());
@@ -67,4 +81,17 @@ static void cart_only_switches(){
  assert(!c.enabled&&!c.homed&&c.fault==LIMIT);
 }
 static void info_guards(){Core c=ready();assert(send(c,"V2 INFO 7").kind==INFO);check_error(c,"V2 INFO 8");check_error(c,"V2 INFO 7 extra");arm(c);check_error(c,"V2 INFO 7");c.trip(ENCODER);assert(send(c,"V2 INFO 7").kind==INFO);}
-int main(int argc,char** argv){assert(argc==2);std::string n=argv[1];if(n=="calibration_guards")calibration_guards();else if(n=="cart_only_switches")cart_only_switches();else if(n=="info_guards")info_guards();else if(n=="homing_more_faults")homing_more_faults();else if(n=="stable_switches")stable_switches();else if(n=="framing")framing();else if(n=="boot_session")boot_session();else if(n=="actions")actions();else if(n=="wrap")wrap();else if(n=="guards")guards();else if(n=="watchdogs")watchdogs();else if(n=="switches")switches();else if(n=="homing_success")homing_success();else if(n=="homing_faults")homing_faults();else return 2;std::cout<<n<<" passed\n";}
+static void homing_duration(){
+ Core c;c.sample(true,0);send(c,"V2 HELLO 7");
+ for(int i=0;i<5;++i)c.advance(i*1000);
+ assert(send(c,"V2 HOME 7").kind==OK);
+ for(uint32_t elapsed=1;elapsed<75000;++elapsed){
+  if(elapsed%100==0)assert(send(c,"V2 PING 7").kind==SILENT);
+  c.advance((elapsed+5)*1000);assert(c.enabled&&c.fault==NONE);
+ }
+ c.advance(75005000);assert(!c.enabled&&c.fault==DURATION);
+}
+#include "parameters_core_test.h"
+#include "rehome_core_test.h"
+#include "hanging_offset_core_test.h"
+int main(int argc,char** argv){assert(argc==2);std::string n=argv[1];if(n=="hanging_offset_core")hanging_offset_core();else if(n=="rehome_core_guards")rehome_core_guards();else if(n=="auto_return_intent")auto_return_intent();else if(n=="return_safety_precedence")return_safety_precedence();else if(n=="homing_duration")homing_duration();else if(n=="parameter_core_guards")parameter_core_guards();else if(n=="calibration_guards")calibration_guards();else if(n=="cart_only_switches")cart_only_switches();else if(n=="info_guards")info_guards();else if(n=="homing_more_faults")homing_more_faults();else if(n=="stable_switches")stable_switches();else if(n=="framing")framing();else if(n=="boot_session")boot_session();else if(n=="actions")actions();else if(n=="wrap")wrap();else if(n=="guards")guards();else if(n=="watchdogs")watchdogs();else if(n=="switches")switches();else if(n=="homing_success")homing_success();else if(n=="homing_faults")homing_faults();else return 2;std::cout<<n<<" passed\n";}

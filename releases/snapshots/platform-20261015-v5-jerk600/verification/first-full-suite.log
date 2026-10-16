@@ -1,0 +1,69 @@
+....................................................... [  8%]
+............................ [ 12%]
+........................................................................ [ 23%]
+..................................................................................ssss........ss...................................................... [ 45%]
+.....F......................................................................................... [ 59%]
+...................................................................................................................... [ 77%]
+.....................................................................s.............................................................. [ 97%]
+...................                                                      [100%]
+=================================== FAILURES ===================================
+_ RigTests.test_cross_clock_sequence_expiry_rejected_before_write (bad=ActionRequest(session_id='3859561667', clock_id='teensy:3859561667', sequence=1, observation_sequence=5, issued_at_ns=5000000, expires_at_ns=65000000, acceleration_m_s2=0.1)) _
+
+self = <test_rig.RigTests testMethod=test_cross_clock_sequence_expiry_rejected_before_write>
+
+    def test_cross_clock_sequence_expiry_rejected_before_write(self):
+        with self.rig() as rig:
+            rig.arm(.3); obs=rig.observation()
+            request=ActionRequest(obs.session_id,obs.clock_id,1,obs.sequence,obs.available_ns,obs.available_ns+20_000_000,.1)
+            for bad in (replace(request,clock_id='host'),replace(request,session_id='other'),replace(request,observation_sequence=obs.sequence+1000),replace(request,sequence=0),replace(request,expires_at_ns=request.issued_at_ns+60_000_000)):
+>               with self.subTest(bad=bad), self.assertRaises(ValidationError): rig.step(bad)
+                                                                                ^^^^^^^^^^^^^
+
+tests/test_rig.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:681: in step
+    self._require()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _require(self, *, allow_error=False):
+        if not self._connected or self._closed:
+            raise RigError('rig is not connected')
+        if self.error is not None and not allow_error:
+>           raise RigError(f'latched rig error: {self.error}')
+E           cartpole_sdk.rig.client.RigError: latched rig error: executor fault 1
+
+src/cartpole_sdk/rig/client.py:150: RigError
+_______ RigTests.test_cross_clock_sequence_expiry_rejected_before_write ________
+
+self = <test_rig.RigTests testMethod=test_cross_clock_sequence_expiry_rejected_before_write>
+
+    def test_cross_clock_sequence_expiry_rejected_before_write(self):
+        with self.rig() as rig:
+            rig.arm(.3); obs=rig.observation()
+            request=ActionRequest(obs.session_id,obs.clock_id,1,obs.sequence,obs.available_ns,obs.available_ns+20_000_000,.1)
+            for bad in (replace(request,clock_id='host'),replace(request,session_id='other'),replace(request,observation_sequence=obs.sequence+1000),replace(request,sequence=0),replace(request,expires_at_ns=request.issued_at_ns+60_000_000)):
+                with self.subTest(bad=bad), self.assertRaises(ValidationError): rig.step(bad)
+>           rig.step(request)
+
+tests/test_rig.py:204: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:681: in step
+    self._require()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.rig.client.Rig object at 0x116473a10>, allow_error = False
+
+    def _require(self, *, allow_error=False):
+        if not self._connected or self._closed:
+            raise RigError('rig is not connected')
+        if self.error is not None and not allow_error:
+>           raise RigError(f'latched rig error: {self.error}')
+E           cartpole_sdk.rig.client.RigError: latched rig error: executor fault 1
+
+src/cartpole_sdk/rig/client.py:150: RigError
+----------------------------- Captured stdout call -----------------------------
+uuuuu
+=========================== short test summary info ============================
+SUBFAILED(bad=ActionRequest(session_id='3859561667', clock_id='teensy:3859561667', sequence=1, observation_sequence=5, issued_at_ns=5000000, expires_at_ns=65000000, acceleration_m_s2=0.1)) tests/test_rig.py::RigTests::test_cross_clock_sequence_expiry_rejected_before_write
+FAILED tests/test_rig.py::RigTests::test_cross_clock_sequence_expiry_rejected_before_write
+2 failed, 661 passed, 7 skipped, 357 subtests passed in 45.37s

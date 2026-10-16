@@ -38,12 +38,49 @@ The existing PCB does not hold the shared enable input disabled without firmware
 clicking was observed during programming and the board was recovered with motor
 power off. A hardware default-disable circuit remains necessary.
 
-[PCB switch wiring](docs/pcb-switches.md) specifies normally-closed contacts and
-finite cart homing. The owner installed switch 1 at the left and switch 2 at the
-right on 2026-10-14; their first physical homing still needs commissioning.
-Only these two switches are required by `executor-v2-cart2`. Uninstalled D28/D29
-remain diagnostic inputs and Z pulses are disabled. Z homing awaits mechanical
-switch-role confirmation. Every boot defaults to the switch interlock enabled.
+[PCB switch wiring](docs/pcb-switches.md) specifies normally-closed contacts.
+Switch 1 is the left cart limit and switch 2 the right. Physical two-end homing
+measured 619.2 mm of travel; `rehome` returns to the established center. Only these
+two switches are required for cart motion. Uninstalled D28/D29 remain diagnostic
+inputs, Z pulses are disabled, and every boot enables the cart switch interlock.
+See [current commands and commissioning evidence](docs/rig-usage.md).
+
+The current operator release is `platform-20261015-v6-tunable`, running
+`executor-v6-measuredrail`. The console loads the preserved bandwidth-10 gains
+by default (`pw=3`, jerk 150 m/s³). Repeated native AUTO trials captured in about
+2.5 seconds; two 60-second trials held continuously for about 57.5 seconds after
+capture. A separate bandwidth-8 smoothing candidate also completed a 60-second
+trial with return. These are measured bounded results, not unlimited stability.
+The working encoder reference is 330 counts, an experimental constant trim;
+there is still no accepted hanging-only or nonlinear calibration model.
+
+See the [current task checkpoint](docs/checkpoint-20261016.md),
+[tuning and jitter evidence](evidence/phase3/jitter-20261016/README.txt), and
+[preserved Jetson releases](releases/README.md). The root source includes local
+experimental Python AUTO/BAL commands that have not been deployed to the physical
+rig; release snapshots preserve the exact operator software separately.
+
+## Persistent vision and SDK sensing
+
+The maintained camera runtime is `src/cartpole_vision`; `archive/vision3` stays
+unchanged. The Jetson's `cartpole-vision.service` keeps the camera portal running
+independently of the console. From a computer on the same Tailscale network:
+
+```sh
+python3 scripts/vision-view.py --host 100.126.59.18 --port 13090
+```
+
+Open **http://127.0.0.1:13090/**. The portal provides camera, tracked overlay, green
+mask, measured rates and plots. The v2 console automatically publishes its
+accepted encoder telemetry; closing it marks encoder readings stale while the
+camera continues. The camera service never opens serial. An isolated vision
+environment prevents normal console installs from removing its dependencies.
+
+[Vision setup and measured performance](docs/vision-usage.md) describes the private
+viewer, SSH fallback, service and camera configuration. [SDK sensing](docs/sensing.md)
+describes explicit frames and timestamps, the actual shadow fusion monitor, and
+hanging model validation. Shadow fusion was verified against stopped live data;
+it remains uncommissioned and does not control motion.
 
 ## Policies, identification and the portal
 
@@ -54,7 +91,7 @@ switch-role confirmation. Every boot defaults to the switch interlock enabled.
   calibration, validity and held-out rejection. The MuJoCo plant remains provisional.
 - [Portal and isolated worker](docs/portal.md): authenticated immutable uploads,
   durable single-rig queue, results and a Linux sandbox. The service defaults to
-  loopback. Public hosting and physical-switch commissioning remain deployment gates.
+  loopback. Public hosting and learned-policy hardware acceptance remain deployment gates.
 - [Current implementation and acceptance state](docs/platform-status.md).
 - [Detailed execution plan](docs/live-rig-plan.md).
 
@@ -89,7 +126,7 @@ Outputs are never overwritten; choose fresh paths when repeating commands.
 
 See [SDK usage, data semantics and next integrations](docs/phase1-usage.md).
 Run maintained tests with
-`uv run --locked --extra sim --extra hardware --group dev python -m pytest`
+`uv run --locked --extra sim --extra hardware --extra vision --group dev python -m pytest`
 (C++17 compiler required for native firmware tests). Archived projects retain
 their own separate environments and test commands.
 
@@ -108,7 +145,9 @@ The console restores the saved tuning while stopped, verifies 33 parameters and
 8 computed gains, and opens the terminal interface. It does not start motion or
 restore an old home/upright reference. Close any other Teensy console first.
 
-In a separate Jetson terminal, with no other camera owner:
+To use the preserved camera baseline instead of the maintained service, first stop
+`cartpole-vision.service`, then run in a separate Jetson terminal with no other
+camera owner:
 
 ```bash
 cd archive/vision3

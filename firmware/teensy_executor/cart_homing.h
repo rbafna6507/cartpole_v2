@@ -6,16 +6,31 @@
 // Direction and travel bounds still need physical commissioning.
 namespace cart_homing {
 constexpr float steps_per_m=26666.6666667f;
+constexpr float maximum_rail_half=.375f;
+// rail is the governor reference half-span. Its normal/fault boundaries are
+// rail-margin and rail-fault_margin. Never place the reference past a measured
+// switch contact. Floor the float32 expression once to a whole commanded step.
+inline float measuredRailCap(int32_t span_steps,float fraction=.95f,float margin=.015f){
+ if(span_steps<10667 || span_steps>20000)return 0;
+ const int32_t half=span_steps/2;
+ // Volatile products force the same individual float32 roundings as the SDK;
+ // otherwise ARM FMA contraction can move floor() by one commanded step.
+ const volatile float fraction_steps=float(half)*fraction;
+ const volatile float margin_steps=margin*steps_per_m;
+ const float requested=fraction_steps+margin_steps;
+ return floorf(fminf(float(half),requested))/steps_per_m;
+}
 struct Machine {
  enum Phase:uint8_t { OFF,SEEK_NEG,VERIFY_NEG,BACK_NEG,LATCH_NEG,VERIFY_LATCH_NEG,CLEAR_NEG,SEEK_POS,VERIFY_POS,BACK_POS,LATCH_POS,VERIFY_LATCH_POS,CLEAR_POS,CENTER,DONE,FAILED };
  Phase phase=OFF;int32_t negative=0,positive=0;
  uint32_t started=0,phase_at=0,stable_at=0;int32_t origin=0,release_pos=0;
  bool released=false;uint8_t chatter=0;
  static constexpr float seek=.03f,slow=.01f;
- static constexpr int32_t clearance=134,max_backoff=534,max_seek=16000,min_span=10667,max_span=16000;
- float safeRail(float saved)const{
-  const int32_t half=positive-center()<center()-negative?positive-center():center()-negative;
-  return fminf(saved,float(half)/steps_per_m-.005f);
+ // 750 mm maximum search/contact span. 27 s covers a full traverse at
+ // 30 mm/s; 75 s covers a near-end start, both relatches and centering.
+ static constexpr int32_t clearance=134,max_backoff=534,max_seek=20000,min_span=10667,max_span=20000;
+ float safeRail(float saved,float fraction=.95f,float margin=.015f)const{
+  return fminf(saved,measuredRailCap(span(),fraction,margin));
  }
  bool active()const{return phase>=SEEK_NEG&&phase<=CENTER;}
  bool done()const{return phase==DONE;}bool failed()const{return phase==FAILED;}
@@ -34,7 +49,10 @@ struct Machine {
  void update(uint32_t tick,int32_t pos,uint8_t raw){
   if(!active())return;
   const int64_t travel=int64_t(pos)-origin;
-  if(uint32_t(tick-started)>=60000||uint32_t(tick-phase_at)>=25000||llabs(travel)>max_seek|| (raw&12)|| ((raw&3)==3) || (raw&~expected())){fail();return;}
+  if(uint32_t(tick-started)>=75000||uint32_t(tick-phase_at)>=27000||llabs(travel)>max_seek|| (raw&12)|| ((raw&3)==3) || (raw&~expected())){fail();return;}
+  // Clearance after the left latch must not add distance beyond the total
+  // allowed contact-to-contact span during the rightward search.
+  if(expected()==2 && int64_t(pos)-negative>max_span){fail();return;}
   const bool contact=(raw&expected())!=0;const bool neg=expected()==1;
   switch(phase){
    case SEEK_NEG:case SEEK_POS:case LATCH_NEG:case LATCH_POS:

@@ -1,0 +1,89 @@
+{
+  "source": "/tmp/cartpole-retune-20261015/negative1-source-and-shadow.jsonl",
+  "source_sha256": "0eac47a30877d955ee1ffd49c11e6aea14480ed926ba22d29e228d4d9942f9a8",
+  "configuration": {
+    "strategy": "receipt-anchor",
+    "receipt_delay_ns": 22000000,
+    "uncertainty_ns": 25000000,
+    "max_receipt_residual_ns": 10000000,
+    "valid_for_ns": 60000000000
+  },
+  "anchor": {
+    "seq": 4,
+    "tick": 11206303,
+    "board_us": 2619089020,
+    "serial_received_ns": 186916883590357,
+    "event_available_ns": 186916998709357,
+    "residual_ns": 0,
+    "flags": 205,
+    "fault": 0,
+    "x": 0.0,
+    "upright_raw": 370
+  },
+  "failure_replayed": {
+    "row_index_zero_based": 162,
+    "line_one_based": 163,
+    "type": "encoder_batch",
+    "event_available_ns": 186918006155264,
+    "exception": "encoder receipt clock mapping residual exceeded; construct a new shadow observer after checking calibration and clocks",
+    "last_encoder_sequence": 169,
+    "latched_error": "encoder receipt clock mapping residual exceeded"
+  },
+  "formula": "residual_ns = (serial_received_ns - board_us*1000) - (anchor_serial_received_ns - anchor_board_us*1000); configured receipt_delay cancels in this relative residual",
+  "preceding": {
+    "seq": 168,
+    "tick": 11207394,
+    "board_us": 2620180020,
+    "serial_received_ns": 186917976787825,
+    "event_available_ns": 186918006155264,
+    "residual_ns": 2197468,
+    "flags": 205,
+    "fault": 0,
+    "x": 0.0,
+    "upright_raw": 370
+  },
+  "rejected": {
+    "seq": 169,
+    "tick": 11207398,
+    "board_us": 2620184020,
+    "serial_received_ns": 186917992302487,
+    "event_available_ns": 186918006155264,
+    "residual_ns": 13712130,
+    "flags": 205,
+    "fault": 0,
+    "x": 0.0,
+    "upright_raw": 370
+  },
+  "following_recorded_but_not_ingested_after_latch": {
+    "seq": 170,
+    "tick": 11207418,
+    "board_us": 2620204020,
+    "serial_received_ns": 186917999493904,
+    "event_available_ns": 186918006155264,
+    "residual_ns": 903547,
+    "flags": 205,
+    "fault": 0,
+    "x": 0.0,
+    "upright_raw": 370
+  },
+  "elapsed_since_anchor_serial_receipt_s": 1.10871213,
+  "threshold_excess_ns": 3712130,
+  "preceding_to_rejected": {
+    "board_delta_ms": 4.0,
+    "serial_delta_ms": 15.514662
+  },
+  "rejected_to_following": {
+    "board_delta_ms": 20.0,
+    "serial_delta_ms": 7.191417
+  },
+  "source_states": 167,
+  "out_of_residual_bound_states": 1,
+  "interpretation": "One transient relative board-to-serial-host-receipt delay exceeded the fixed mapping residual gate. The following recorded packet returned within budget; no reset/reanchor was applied. The guard is independent of downstream stream receipt/processing time.",
+  "not_established": [
+    "Whether USB buffering, serial reader scheduling, or another pre-receipt host effect caused the delay.",
+    "Absolute sensor acquisition/exposure latency; the22ms delay is assumed and cancels from this residual calculation.",
+    "Calibration accuracy or any control eligibility."
+  ],
+  "native_camera_scope": "The clock-map rejection does not itself change native counts, board timestamps, camera geometry, or rig health; independent diagnostics may continue with their own validity/guard checks. Fused shadow remains invalid after the latch.",
+  "code_or_threshold_changes": false
+}

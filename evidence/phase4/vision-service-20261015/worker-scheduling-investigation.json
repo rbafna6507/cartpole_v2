@@ -1,0 +1,71 @@
+{
+  "scope": "Local PTY firmware and trusted subprocess fixtures only; no live hardware, serial devices, SSH, network, source changes or test changes.",
+  "initial_full_suite": {
+    "passed": 657,
+    "skipped": 7,
+    "failed": 1,
+    "test": "tests/test_portal_worker.py::WorkerTests::test_hardware_queue_reset_ack_precedes_explicit_arm_and_stop_finally",
+    "failure": "Expected succeeded; got failed. The original full-suite log did not retain the worker error detail."
+  },
+  "isolated_targeted_pytest": {
+    "passed": 1
+  },
+  "first_external_diagnostic": {
+    "runs": 50,
+    "passed": 48,
+    "failed": 2,
+    "failures": [
+      {
+        "iteration": 48,
+        "category": "worker_guard_failure",
+        "actions": 0,
+        "arm_commands": 0,
+        "stopped": true,
+        "reset_elapsed_ms": 314.048958,
+        "reset_completion_to_stop_start_ms": 142.685792,
+        "interpretation": "Consistent with pre-arm motion budget exhaustion. Exact exception message was not captured in this run."
+      },
+      {
+        "iteration": 49,
+        "category": "backend_failure",
+        "exception": "RigError: latched rig error: executor fault 1",
+        "actions": 0,
+        "arm_elapsed_ms": 69.417542,
+        "initial_action_lease_ms": 20,
+        "stopped": true,
+        "interpretation": "The real-time PTY fixture expired its initial action lease before ARM confirmation completed; the SDK latched the executor fault and stopped."
+      }
+    ]
+  },
+  "followup_external_diagnostic": {
+    "runs": 50,
+    "passed": 50,
+    "failed": 0,
+    "instrumentation": "Added exception-constructor and queue-call timings in memory only."
+  },
+  "controlled_prearm_reproduction": {
+    "runs": 1,
+    "injection": "110 ms delay after Store.heartbeat in the external harness only",
+    "exception": "WorkerError: start reply exhausted motion budget",
+    "source": "src/cartpole_sdk/portal/worker.py:224",
+    "category": "worker_guard_failure",
+    "actions": 0,
+    "arm_commands": 0,
+    "stopped": true
+  },
+  "conclusion": "The success-only ordering test is sensitive to real host scheduling/queue latency. The reproduced failures are fail-closed. Production motion budgets, lease limits and safety behavior were not changed. The exact category of the original full-suite failure cannot be recovered from its assertion-only log.",
+  "artifacts": {
+    "worker-targeted-diagnostic.json.gz": {
+      "uncompressed_sha256": "99295eb4b73b899caf492bb4db49ad7cc94dedc0e22b9f38ca43d9f19e7baf58",
+      "compressed_sha256": "f021541b6e1e5401bf3564141bf8709abf211da89d82a6cea334c018e647faab"
+    },
+    "worker-targeted-guard-diagnostic.json.gz": {
+      "uncompressed_sha256": "0077459a2cb7bebc0b55bc0a8a9e9a3de12f251d4a1a8504313b967c84272352",
+      "compressed_sha256": "b4d8a2167c4699f446860952403f15cbcebb160c06155610c6616461a90ebe38"
+    },
+    "worker-controlled-prearm-guard-diagnostic.json.gz": {
+      "uncompressed_sha256": "90e88a29d0d3af1a530820badb2ed494f5d3e85d6e2b44ebc6f887a7870230b7",
+      "compressed_sha256": "130f5d430bda767e3cf0a87dc045dd8ec6fcc2a8c2d809306c81c336aec56616"
+    }
+  }
+}

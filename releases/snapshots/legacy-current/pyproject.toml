@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cartpole-sdk"
+version = "0.2.0"
+description = "Cartpole SDK with source-explicit policies, firmware reference and optional MuJoCo simulation"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+cartpole-v2 = "cartpole_sdk.cli:main"
+cartpole-console = "cartpole_sdk.rig.console:main"
+cartpole-v2-view = "cartpole_sdk.sim.viewer:launch"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+hardware = ["pyserial>=3.5,<4"]
+sim = ["mujoco>=3.15,<4", "gymnasium>=1.0,<2", "numpy>=1.26,<3"]
+
+[tool.setuptools.package-data]
+cartpole_sdk = ["control/*.json", "sim/*.json", "sim/*.xml"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]

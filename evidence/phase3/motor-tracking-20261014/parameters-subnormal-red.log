@@ -1,0 +1,96 @@
+.FF                                                                 [100%]
+=================================== FAILURES ===================================
+_ ParameterTests.test_late_subnormal_profile_value_prevents_all_earlier_writes (values={'ke': 3, 'jmax': 1e-39}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_late_subnormal_profile_value_prevents_all_earlier_writes>
+
+    def test_late_subnormal_profile_value_prevents_all_earlier_writes(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'jmax':1e-39}, {'kpx':35,'ke':1e-50}):
+>               with self.subTest(values=values), self.assertRaises(ValidationError):
+E               AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:304: AssertionError
+_ ParameterTests.test_late_subnormal_profile_value_prevents_all_earlier_writes (values={'kpx': 35, 'ke': 1e-50}) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_late_subnormal_profile_value_prevents_all_earlier_writes>
+
+    def test_late_subnormal_profile_value_prevents_all_earlier_writes(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'jmax':1e-39}, {'kpx':35,'ke':1e-50}):
+>               with self.subTest(values=values), self.assertRaises(ValidationError):
+E               AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:304: AssertionError
+_ ParameterTests.test_late_subnormal_profile_value_prevents_all_earlier_writes _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_late_subnormal_profile_value_prevents_all_earlier_writes>
+
+    def test_late_subnormal_profile_value_prevents_all_earlier_writes(self):
+        with self.rig() as rig:
+            for values in ({'ke':3,'jmax':1e-39}, {'kpx':35,'ke':1e-50}):
+                with self.subTest(values=values), self.assertRaises(ValidationError):
+                    rig.load_parameters(self.profile(values))
+>           self.assertFalse(self.fw.writes)
+E           AssertionError: [('ke', 3.0), ('jmax', 1.0000002153053333e-39), ('kpx', 35.0), ('ke', 0.0)] is not false
+
+tests/test_rig_parameters.py:306: AssertionError
+----------------------------- Captured stdout call -----------------------------
+uu
+_ ParameterTests.test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes (value=1e-39) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes>
+
+    def test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes(self):
+        with self.rig() as rig:
+            for value in (1e-39, 1e-50, -1e-50):
+>               with self.subTest(value=value), self.assertRaises(ValidationError):
+E               AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:296: AssertionError
+_ ParameterTests.test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes (value=1e-50) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes>
+
+    def test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes(self):
+        with self.rig() as rig:
+            for value in (1e-39, 1e-50, -1e-50):
+>               with self.subTest(value=value), self.assertRaises(ValidationError):
+E               AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:296: AssertionError
+_ ParameterTests.test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes (value=-1e-50) _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes>
+
+    def test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes(self):
+        with self.rig() as rig:
+            for value in (1e-39, 1e-50, -1e-50):
+>               with self.subTest(value=value), self.assertRaises(ValidationError):
+E               AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:296: AssertionError
+_ ParameterTests.test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes _
+
+self = <test_rig_parameters.ParameterTests testMethod=test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes>
+
+    def test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes(self):
+        with self.rig() as rig:
+            for value in (1e-39, 1e-50, -1e-50):
+                with self.subTest(value=value), self.assertRaises(ValidationError):
+                    rig.set_parameter('ke', value)
+>           self.assertFalse(self.fw.writes)
+E           AssertionError: [('ke', 1.0000002153053333e-39), ('ke', 0.0), ('ke', -0.0)] is not false
+
+tests/test_rig_parameters.py:298: AssertionError
+----------------------------- Captured stdout call -----------------------------
+uuu
+=========================== short test summary info ============================
+SUBFAILED(values={'ke': 3, 'jmax': 1e-39}) tests/test_rig_parameters.py::ParameterTests::test_late_subnormal_profile_value_prevents_all_earlier_writes
+SUBFAILED(values={'kpx': 35, 'ke': 1e-50}) tests/test_rig_parameters.py::ParameterTests::test_late_subnormal_profile_value_prevents_all_earlier_writes
+FAILED tests/test_rig_parameters.py::ParameterTests::test_late_subnormal_profile_value_prevents_all_earlier_writes
+SUBFAILED(value=1e-39) tests/test_rig_parameters.py::ParameterTests::test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes
+SUBFAILED(value=1e-50) tests/test_rig_parameters.py::ParameterTests::test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes
+SUBFAILED(value=-1e-50) tests/test_rig_parameters.py::ParameterTests::test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes
+FAILED tests/test_rig_parameters.py::ParameterTests::test_subnormal_and_nonzero_underflow_values_are_rejected_before_writes
+7 failed, 1 passed, 23 deselected in 0.17s

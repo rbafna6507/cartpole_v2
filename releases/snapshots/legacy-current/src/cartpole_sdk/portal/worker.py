@@ -1,0 +1,285 @@
+"""Trusted outbound pull worker. Uploaded modules are never imported here."""
+import argparse
+import base64
+from dataclasses import asdict, replace
+import hashlib
+import math
+import os
+from pathlib import Path
+import tempfile
+import time
+import http.client
+import queue as thread_queue
+import socket
+import threading
+from urllib.parse import urlsplit
+from cartpole_sdk.contracts import ActionRequest, Channel, Observation, SelectionError, select_channels
+from cartpole_sdk.recording import canonical_json, strict_json_loads
+from .queue import Store, QueueError
+from .sandbox import Sandbox, SandboxError
+
+class WorkerError(ValueError):pass
+
+class RemoteQueue:
+    def __init__(self,url,token,*,timeout=1):
+        parts=urlsplit(url)
+        if parts.username or parts.password or parts.query or parts.fragment or parts.path not in ('','/') or parts.scheme not in ('http','https'):
+            raise WorkerError('invalid portal origin')
+        if parts.scheme=='http' and parts.hostname not in ('localhost','127.0.0.1','::1'):
+            raise WorkerError('remote portal requires HTTPS')
+        if parts.hostname is None or type(timeout) not in (int,float) or not math.isfinite(timeout) or timeout<=0:
+            raise WorkerError('invalid portal timeout/origin')
+        self.url=url.rstrip('/');self.parts=parts;self.token=token;self.timeout=timeout
+        self._slots=threading.BoundedSemaphore(2)
+    def _request(self,path,body=None):
+        if not path.startswith('/api/') or '?' in path or '#' in path:
+            raise WorkerError('invalid portal API path')
+        data=None if body is None else canonical_json(body).encode()
+        if not self._slots.acquire(blocking=False):raise WorkerError('portal request already pending')
+        deadline=time.monotonic()+self.timeout
+        replies=thread_queue.Queue(maxsize=1);cancel=threading.Event();state={}
+        def request():
+            connection=None
+            try:
+                kind=http.client.HTTPSConnection if self.parts.scheme=='https' else http.client.HTTPConnection
+                connection=kind(self.parts.hostname,self.parts.port,timeout=self.timeout)
+                state['connection']=connection
+                connection.connect()
+                state['socket']=connection.sock
+                if cancel.is_set():raise WorkerError('portal deadline exceeded')
+                connection.request('GET' if data is None else 'POST',path,body=data,
+                    headers={'Authorization':'Bearer '+self.token,**({'Content-Type':'application/json'} if data is not None else {})})
+                response=connection.getresponse()
+                if not 200<=response.status<300:raise WorkerError('portal status rejected')
+                # Fixed API endpoints never need redirects. HTTPConnection does not
+                # follow them or forward a bearer token to another origin.
+                length=response.getheader('Content-Length')
+                if response.getheader('Transfer-Encoding') is not None or length is None or not length.isdecimal() or not 0<=int(length)<=100000:
+                    raise WorkerError('invalid portal response framing')
+                raw=bytearray()
+                while len(raw)<int(length):
+                    remaining=deadline-time.monotonic()
+                    if remaining<=0 or cancel.is_set():raise WorkerError('portal deadline exceeded')
+                    state['socket'].settimeout(remaining)
+                    chunk=response.read1(min(4096,int(length)-len(raw)))
+                    if not chunk:raise WorkerError('incomplete portal response')
+                    raw.extend(chunk)
+                value=strict_json_loads(raw.decode())
+                if not cancel.is_set():replies.put_nowait((value,None))
+            except Exception:
+                if not cancel.is_set():replies.put_nowait((None,WorkerError('portal request failed')))
+            finally:
+                if connection is not None:connection.close()
+                self._slots.release()
+        thread=threading.Thread(target=request,daemon=True)
+        thread.start()
+        try:
+            value,error=replies.get(timeout=max(.000001,deadline-time.monotonic()))
+        except thread_queue.Empty:
+            cancel.set()
+            connection_socket=state.get('socket')
+            if connection_socket is not None:
+                try:connection_socket.shutdown(socket.SHUT_RDWR)
+                except OSError:pass
+            raise WorkerError('portal absolute request deadline exceeded')
+        if error is not None:raise error
+        return value
+    def claim(self,worker,rig,*,sensor_source=None):return self._request('/api/claim',{'rig':rig,'sensor_source':sensor_source})['job']
+    def fetch(self,job,worker):
+        value=self._request('/api/jobs/'+job['id']+'/artifact')
+        try:source=base64.b64decode(value['source_base64'],validate=True)
+        except (KeyError,ValueError) as exc:raise WorkerError('invalid artifact response') from exc
+        if len(source)>65536 or value['sha256']!=job['artifact'] or hashlib.sha256(source).hexdigest()!=job['artifact']:raise WorkerError('artifact digest mismatch')
+        return source
+    def start(self,identifier,worker,token):return self._request('/api/jobs/'+identifier+'/start',{'lease':token})
+    def heartbeat(self,identifier,worker,token):return self._request('/api/jobs/'+identifier+'/heartbeat',{'lease':token})
+    def finish(self,identifier,worker,token,status,result):return self._request('/api/jobs/'+identifier+'/finish',{'lease':token,'status':status,'result':result})
+
+class SimulationBridge:
+    kind='simulation'
+    def prepare(self,duration,identifier):
+        from cartpole_sdk.sim import SimulationConfig
+        from cartpole_sdk.sim.executor import ExecutorSimulation
+        self.backend=ExecutorSimulation(SimulationConfig(control_steps=10,max_steps=math.ceil(duration*100)+1))
+        self.current=self.backend.reset(session_id=identifier)
+        self.session=self.backend.session
+        self.channels=tuple(Channel(entity,quantity,'simulation','sim:upright+x') for entity,quantity in (
+            ('cart','position'),('cart','velocity'),('pole','angle'),('pole','angular_velocity')))
+        self.duration_ns=int(duration*1e9)
+        self.config=asdict(self.backend.config)
+        return self.selected()
+    def selected(self):
+        samples=select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
+        return replace(self.current,samples=samples)
+    def arm(self,duration):pass  # simulation has no devices or physical arming
+    def advance(self,value,sequence):
+        observation=self.current
+        request=None if value is None else ActionRequest(observation.session_id,observation.clock_id,sequence,
+            observation.sequence,observation.available_ns,observation.available_ns+20_000_000,value)
+        self.current=self.backend.step(request)
+        if self.backend.terminated:raise WorkerError('simulation executor fault')
+        return self.selected()
+    def complete(self):return self.current.available_ns>=self.duration_ns
+    def stop(self):
+        if hasattr(self,'backend'):self.backend.close()
+        return True
+    def close(self):self.stop()
+    def diagnostics(self):return {'sim_config':self.config,'simulation_time_ns':self.current.available_ns,
+                                 'simulation_fault':self.backend.fault_reason,
+                                 'action_semantics':self.backend.action_semantics,
+                                 'executor':asdict(self.backend.diagnostics),'physical_acceptance':False}
+
+class HardwareBridge:
+    kind='magnetic-step'
+    def __init__(self,port=None,*,rate_hz=100,log_dir=None,rig=None):
+        self.rig=rig;self.port=port;self.rate_hz=rate_hz;self.log_dir=log_dir;self._owns=rig is None
+    def prepare(self,duration,identifier):
+        if self.rig is None:
+            from cartpole_sdk.rig import Rig
+            self.rig=Rig(self.port,rate_hz=self.rate_hz,log_dir=self.log_dir).connect()
+        state=self.rig.state
+        if self.rig.rate_hz==0 or self.rig.error is not None or state.enabled or state.mode!=0 or not state.homed or not state.healthy or not state.switch_profile:
+            raise WorkerError('hardware queue requires operator-prepared homed healthy switch-enabled stopped rig')
+        self.session=self.rig.session
+        self.channels=tuple(Channel(entity,quantity,source,frame) for entity,quantity,source,frame in (
+            ('cart','position','step','cart-step-home'),('cart','velocity','step','cart-step-home'),
+            ('pole','angle','magnetic','encoder-zero'),('pole','angular_velocity','magnetic','encoder-zero')))
+        self.current=self.rig.observation()
+        return self.selected()
+    def selected(self):
+        samples=select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
+        return replace(self.current,samples=samples)
+    def arm(self,duration):
+        self.rig.arm(duration)
+        self.current=self.rig.observation()
+        self.end=self.rig._deadline_ns/1e9-min(.01,duration*.25)
+    def advance(self,value,sequence):
+        observation=self.current
+        request=None if value is None else ActionRequest(observation.session_id,observation.clock_id,sequence,
+            observation.sequence,observation.available_ns,observation.available_ns+20_000_000,value)
+        self.rig.step(request)
+        remaining=self.end-time.monotonic()
+        if remaining>0:
+            try:self.rig.wait_state(after_tick=observation.sequence,timeout=min(.02,remaining))
+            except TimeoutError:
+                if time.monotonic()<self.end:raise
+        self.current=self.rig.observation()
+        return self.selected()
+    def complete(self):return time.monotonic()>=self.end
+    def stop(self):
+        if self.rig is None:return True
+        self.rig.stop();return not self.rig.state.enabled
+    def close(self):
+        if self._owns and self.rig is not None:self.rig.close()
+    def diagnostics(self):
+        state=self.rig.state
+        return {'last_accepted_action':state.last_seq,'board_tick':state.unwrapped_tick,
+                'board_time_us':state.unwrapped_us,'physical_acceptance':False}
+
+def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_factory=Sandbox,sensor_source='simulation',spool_root=None):
+    """Claim one job, acknowledge child reset, then explicitly start a bounded run.
+
+    Injection points are trusted integration/test configuration, never HTTP input.
+    The production CLI always uses Sandbox. Failure never selects a host fallback.
+    """
+    job=queue.claim(worker,rig_id,sensor_source=sensor_source)
+    if job is None:return None
+    lease=job['lease'];identifier=job['id'];bridge=None
+    status='failed';error=None;stopped=False;latencies=[];actions=0;observations=0;diagnostics={}
+    began=time.monotonic();interrupted=False
+    try:
+        bridge=bridge_factory()
+        if bridge.kind!=job['source']:raise WorkerError('worker source selection mismatch')
+        current=bridge.prepare(job['duration'],identifier)
+        source=queue.artifact(job['artifact']) if isinstance(queue,Store) else queue.fetch(job,worker)
+        if len(source)>65536 or hashlib.sha256(source).hexdigest()!=job['artifact']:raise WorkerError('artifact digest mismatch')
+        with tempfile.TemporaryDirectory(prefix='cartpole-policy-',dir=spool_root) as spool:
+            path=Path(spool)/'source.py';path.write_bytes(source);path.chmod(0o400)
+            with sandbox_factory(path,wall_seconds=job['duration']).launch() as child:
+                child.reset(bridge.session)  # no physical arm before strict reset ACK
+                start_began=time.monotonic()
+                original_duration=job['duration']
+                job=queue.start(identifier,worker,lease)
+                if time.monotonic()-start_began>.25:
+                    raise WorkerError('start authority response too old')
+                # A successful but delayed start response is not current authority.
+                # Revalidate the actual lease after setup, immediately before ARM.
+                authority_began=time.monotonic()
+                job=queue.heartbeat(identifier,worker,lease)
+                if time.monotonic()-authority_began>.25:
+                    raise WorkerError('final lease authority response too old')
+                if job['id']!=identifier or job['worker']!=worker or job['rig']!=rig_id or job['lease']!=lease or job['status']!='running':
+                    raise WorkerError('worker lease identity mismatch')
+                if job['cancel_requested']:raise WorkerError('job cancelled')
+                remaining_duration=original_duration-(time.monotonic()-start_began)
+                if remaining_duration<.001:raise WorkerError('start reply exhausted motion budget')
+                bridge.arm(remaining_duration)
+                if isinstance(bridge,HardwareBridge):current=bridge.selected()
+                wall_end=time.monotonic()+job['duration']+min(.5,job['duration'])
+                heartbeat_at=time.monotonic()+.25
+                sequence=0
+                while not bridge.complete():
+                    if time.monotonic()>=wall_end:raise WorkerError('run wall deadline exceeded')
+                    if time.monotonic()>=heartbeat_at:
+                        job=queue.heartbeat(identifier,worker,lease)
+                        if job['cancel_requested']:status='cancelled';break
+                        heartbeat_at=time.monotonic()+.25
+                    action_began=time.monotonic()
+                    value=child.act(current)
+                    latencies.append(time.monotonic()-action_began)
+                    if value is not None:
+                        if type(value) not in (int,float) or not math.isfinite(value) or abs(value)>.25:raise SandboxError('policy acceleration exceeds commissioning bound')
+                        sequence+=1;actions+=1
+                    current=bridge.advance(value,sequence)
+                    observations+=1
+                else:status='succeeded'
+                diagnostics=bridge.diagnostics()
+    except KeyboardInterrupt:
+        interrupted=True;status='cancelled';error='worker_interrupted'
+    except SandboxError:error='isolated_policy_failure'
+    except QueueError:error='queue_lease_failure'
+    except WorkerError:error='worker_guard_failure'
+    except Exception:error='backend_failure'
+    finally:
+        if bridge is not None:
+            try:diagnostics=bridge.diagnostics()
+            except Exception:pass
+            try:stopped=bridge.stop() is True
+            except Exception:stopped=False;error=error or 'stop_unconfirmed';status='failed'
+            finally:
+                try:bridge.close()
+                except Exception:stopped=False;error=error or 'close_failure';status='failed'
+    if error is not None and status!='cancelled':status='failed'
+    result={'backend':sensor_source,'stopped':stopped,'error':error,'actions':actions,'observations':observations,
+            'elapsed_wall_s':time.monotonic()-began,'max_inference_s':max(latencies,default=0),**diagnostics}
+    # An expired/uncertain lease is not retried or cleared. Queue recovery blocks
+    # an active rig; only an authenticated operator can confirm physical recovery.
+    finished=queue.finish(identifier,worker,lease,status,result)
+    if interrupted:raise KeyboardInterrupt()
+    return finished
+
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    source=parser.add_mutually_exclusive_group(required=True)
+    source.add_argument('--local-root');source.add_argument('--portal')
+    parser.add_argument('--token-file');parser.add_argument('--worker',default='worker')
+    parser.add_argument('--rig-id',required=True);parser.add_argument('--backend',choices=('simulation','hardware'),default='simulation')
+    parser.add_argument('--port');parser.add_argument('--rate',type=int,default=100,choices=(100,250,500,1000))
+    parser.add_argument('--log-dir',default='runs/portal-hardware');parser.add_argument('--once',action='store_true')
+    parser.add_argument('--spool-root')
+    args=parser.parse_args(argv)
+    if args.portal and not args.token_file:parser.error('--portal requires --token-file')
+    if args.backend=='hardware' and not args.port:parser.error('--backend hardware requires --port')
+    queue=Store(args.local_root) if args.local_root else RemoteQueue(args.portal,Path(args.token_file).read_text().strip())
+    bridge=SimulationBridge if args.backend=='simulation' else lambda:HardwareBridge(args.port,rate_hz=args.rate,log_dir=args.log_dir)
+    sensor_source='simulation' if args.backend=='simulation' else 'magnetic-step'
+    try:
+        while True:
+            result=run_once(queue,args.worker,args.rig_id,bridge_factory=bridge,sensor_source=sensor_source,spool_root=args.spool_root)
+            if result is not None:print(canonical_json(result),flush=True)
+            if args.once:return 0 if result is None or result['status']=='succeeded' else 1
+            if result is None:time.sleep(.5)
+    except KeyboardInterrupt:return 130
+    except (QueueError,WorkerError):
+        print('worker stopped: queue lease or recovery requires operator attention',file=__import__('sys').stderr)
+        return 1

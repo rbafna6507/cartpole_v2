@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "tests": 50,
+  "skips": [
+    [
+      "test_missing_runtime_fails_before_policy_import (test_portal_sandbox.IPCTests.test_missing_runtime_fails_before_policy_import)",
+      "tests absent-runtime fail-closed path"
+    ],
+    [
+      "test_default_sandbox_on_mac_fails_job_without_importing_artifact (test_portal_worker.WorkerTests.test_default_sandbox_on_mac_fails_job_without_importing_artifact)",
+      "non-Linux fail-closed case"
+    ]
+  ],
+  "learned_results": [
+    {
+      "id": "7948d85a82e947609887e7a357268894",
+      "owner": "alice",
+      "key": "real-learned",
+      "artifact": "4e2ae15c38f61fbbcb8f43988d1760e8006b18e906e0ac109f907f8a6ca88125",
+      "filename": "learned-policy.py",
+      "source": "simulation",
+      "duration": 10.0,
+      "status": "succeeded",
+      "created": 1791935192.5979905,
+      "updated": 1791935205.4882805,
+      "rig": "isolated-learned-simulation",
+      "deadline": 1791935213.9048576,
+      "cancel_requested": false,
+      "result": {
+        "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+        "actions": 1000,
+        "backend": "simulation",
+        "elapsed_wall_s": 12.844450783002685,
+        "error": null,
+        "execution_wall_budget_s": 20.0,
+        "executor": {
+          "active_request_sequence": 1000,
+          "enabled": true,
+          "executed_acceleration_m_s2": 6.301776465988951e-06,
+          "expires_at_ns": 10010000000,
+          "fault_reason": null,
+          "force_saturated": false,
+          "rail_braking": false,
+          "raw_acceleration_m_s2": 6.3017764771657276e-06
+        },
+        "ground_truth": {
+          "omega": 2.480648593152629e-07,
+          "theta": 5.398849717149367e-07,
+          "time_ns": 10000000000,
+          "v": -1.3393487400741385e-06,
+          "x": -1.7346077166984664e-07
+        },
+        "max_abs_requested_acceleration_m_s2": 16.825294021060536,
+        "max_acceleration_m_s2": 25.0,
+        "max_inference_s": 0.006787693000660511,
+        "observations": 1000,
+        "physical_acceptance": false,
+        "sim_config": {
+          "cart_damping": 0.05,
+          "cart_mass_kg": 0.35,
+          "control_steps": 10,
+          "effective_length_m": 0.124,
+          "hinge_damping": 0.0001,
+          "max_acceleration_m_s2": 25.0,
+          "max_action_ttl_ns": 1000000000,
+          "max_force_n": 20.0,
+          "max_steps": 1001,
+          "physics_dt_ns": 1000000,
+          "pole_mass_kg": 0.02275,
+          "rail_half_m": 0.26
+        },
+        "simulation_fault": null,
+        "simulation_time_ns": 10000000000,
+        "stopped": true
+      }
+    }
+  ],
+  "source_manifest_sha256": "7c3d8a2b3950bfc128ac2bb60c3ce220065cebe1ac70bccafb6877ea5dfc4d78"
+}

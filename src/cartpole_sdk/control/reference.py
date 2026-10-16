@@ -9,6 +9,8 @@ Micros/millis arithmetic wraps at uint32, while the public clock is unwrapped.
 wrap uses atan2(sin,cos); +/-pi representations are equivalent, not bit exact.
 Hard-rail guards round parameter/input operands to binary32 as in the firmware.
 No pulse generation, calibration, Z-axis, I2C, or foreground scheduling is modeled.
+Measured homing geometry and saved-center REHOME are live-executor features;
+rail_fraction and rehome_* do not synthesize either feature in this reference.
 """
 from dataclasses import dataclass
 import math
@@ -71,7 +73,7 @@ def swing(p, s, theta, omega, x, v, dt=DT, acceleration=0, feedback=None):
 
 def can_capture(p, k, theta, omega, x, v, acceleration=0):
     demand = balance(k,theta,omega,x,v)
-    if (abs(theta) >= p.catch_a or abs(omega) >= p.catch_r or abs(x) >= min(.12,p.rail-.03)
+    if (abs(theta) >= p.catch_a or abs(omega) >= p.catch_r or abs(x) >= min(.12,p.rail-2*p.rail_margin)
         or abs(v) >= min(p.catch_v,speed_limit(p,True)) or abs(demand) >= p.amax_b or abs(demand-acceleration) > p.catch_da): return False
     if abs(theta) > .20 and theta*omega > 0: return False
     initial = GRAVITY/p.leff*theta*theta+omega*omega
@@ -79,13 +81,13 @@ def can_capture(p, k, theta, omega, x, v, acceleration=0):
     motion = State(v,acceleration)
     for _ in range(36):
         request = balance(k,q,w,xx,motion.velocity)
-        motion = advance(motion,xx,request,speed_limit(p,True),p.amax_b,max(p.amax_s,p.amax_b),p.jmax,p.rail,dt)
+        motion = advance(motion,xx,request,speed_limit(p,True),p.amax_b,max(p.amax_s,p.amax_b),p.jmax,p.rail,dt,rail_margin=p.rail_margin)
         if motion.brake_direction: return False
         xx += motion.velocity*dt
         alpha = (GRAVITY*math.sin(q)-motion.acceleration*math.cos(q))/p.leff
         q = wrap(q+w*dt+.5*alpha*dt*dt)
         w += alpha*dt
-        if abs(q) >= p.giveup or abs(xx) > p.rail-.02: return False
+        if abs(q) >= p.giveup or abs(xx) > p.rail-p.rail_margin-p.rail_hysteresis: return False
     return GRAVITY/p.leff*q*q+w*w <= initial*1.05+.01
 
 @dataclass
@@ -111,22 +113,22 @@ class RailRecovery:
     exit_boundary: float = 0
     side: int = 0
     def reset(self): self.phase=0; self.elapsed=self.exit_boundary=0; self.side=0
-    def begin(self,x,rail,brake):
+    def begin(self,x,rail,brake,margin=.015,hysteresis=.005):
         if self.phase: return
-        self.phase=1; self.elapsed=0; self.side=brake or (1 if x >= 0 else -1); self.exit_boundary=rail-.015-.005
-    def update(self,x,m):
+        self.phase=1; self.elapsed=0; self.side=brake or (1 if x >= 0 else -1); self.exit_boundary=rail-margin-hysteresis
+    def update(self,x,m,recover_v=.15,recover_a=1.5):
         if not self.phase: return False
         self.elapsed = _elapsed(self.elapsed)
         stopped = abs(m.velocity) <= .005 and abs(m.acceleration) <= .1
         if self.phase == 1 and stopped: self.phase=2
         inward = m.velocity*self.side < -.005 or (m.velocity*self.side <= .005 and m.acceleration*self.side <= 0)
-        settled = abs(m.velocity) <= .155 and abs(m.acceleration) <= 1.5
+        settled = abs(m.velocity) <= recover_v+.005 and abs(m.acceleration) <= recover_a
         if self.phase == 2 and inward and settled and m.brake_direction == 0 and abs(x) <= self.exit_boundary:
             self.reset(); return True
         return False
-    def demand(self,m,vmax,amax,jerk):
-        target = -self.side*min(.15,vmax) if self.phase == 2 else 0
-        cap = min(1.5,amax) if self.phase == 2 else amax
+    def demand(self,m,vmax,amax,jerk,recover_v=.15,recover_a=1.5):
+        target = -self.side*min(recover_v,vmax) if self.phase == 2 else 0
+        cap = min(recover_a,amax) if self.phase == 2 else amax
         return settled_velocity_accel(m.velocity,m.acceleration,target,cap,jerk,DT)
 
 @dataclass
@@ -207,7 +209,7 @@ class ReferenceController:
         if self.upright_only: self._begin_upright_return(now); return
         if self.mode in (5,6): return
         self.recovery_was_manual=self.mode==1
-        self.rail.begin(x,self.parameters.rail,self.motion.brake_direction); self.mode=5
+        self.rail.begin(x,self.parameters.rail,self.motion.brake_direction,self.parameters.rail_margin,self.parameters.rail_hysteresis); self.mode=5
     def _begin_spin(self,now):
         self.spin.begin(now); self.rail.reset(); self.recovery_was_manual=False
         self.watch.armed=False; self.pump.reset(); self.manual_velocity=0; self.mode=7
@@ -222,7 +224,7 @@ class ReferenceController:
         elif command == 'manual': self._stop(); self.enabled=True; self.mode=1
         elif command == 'v' and self.mode not in (5,6):
             if self.mode != 1: self._stop(); self.enabled=True; self.mode=1
-            self.manual_velocity=clamp(value,-self.parameters.vmax,self.parameters.vmax)
+            self.manual_velocity=clamp(value,-self.parameters.manual_speed_max,self.parameters.manual_speed_max)
             self.manual_deadline=(now_ms+250)&UINT32
     def _swing(self,x):
         p=self.parameters; m=self.motion
@@ -244,7 +246,7 @@ class ReferenceController:
         if self.mode not in (0,4) and self.encoder_errors >= 5: self._fault()
         if encoder_ok: self.theta=_firmware_wrap(theta)
         self.angle_hat,self.rate_hat=estimate(self.theta,self.angle_hat,self.rate_hat,p.bw)
-        if self.mode not in (0,4) and abs(_Float32(x)) > _Float32(p.rail)-.01: self._fault()
+        if self.mode not in (0,4) and abs(_Float32(x)) > _Float32(p.rail)-_Float32(p.rail_fault_margin): self._fault()
         if self.req_balance:
             self.req_balance=False
             m=self.motion
@@ -255,7 +257,7 @@ class ReferenceController:
         if self.upright_only and self.mode==3 and abs(wrap(self.theta)) > 50*math.pi/180: self._begin_upright_return(now)
         automatic = self.mode in (2,3) or (self.mode in (5,6) and not self.recovery_was_manual)
         if not self.upright_only and automatic and encoder_ok and abs(self.rate_hat)>p.spin_trip_rad_s: self._begin_spin(now)
-        if self.mode in (1,2,3) and abs(x)>=p.rail-.015: self._begin_rail(x,now)
+        if self.mode in (1,2,3) and abs(x)>=p.rail-p.rail_margin: self._begin_rail(x,now)
         a=0.0; m=self.motion; k=gains(p,self.upright_only)
         if self.mode==1:
             if ((ms-self.manual_deadline)&UINT32) < 0x80000000: self.manual_velocity=0
@@ -273,15 +275,15 @@ class ReferenceController:
         elif self.mode in (5,6):
             amax=p.amax_m if self.recovery_was_manual else max(p.amax_s,p.amax_b)
             jerk=p.jmax_m if self.recovery_was_manual else p.jmax
-            if self.rail.update(x,m):
+            if self.rail.update(x,m,p.rail_recover_v,p.rail_recover_a):
                 if self.recovery_was_manual:
                     self.recovery_was_manual=False; self.mode=1; self.manual_velocity=0; self.manual_deadline=ms
                     a=velocity_accel(m.velocity,0,p.amax_m,p.jmax_m,DT)
                 else: self.pump.reset(); self.mode=2; a=self._swing(x)
-            elif self.rail.elapsed>8: self._fault(); self.output=self._output(0); return self.output
+            elif self.rail.elapsed>p.rail_recover_s: self._fault(); self.output=self._output(0); return self.output
             else:
                 if self.mode==5 and self.rail.phase==2: self.mode=6
-                a=self.rail.demand(m,p.vmax,amax,jerk)
+                a=self.rail.demand(m,p.vmax,amax,jerk,p.rail_recover_v,p.rail_recover_a)
         elif self.mode in (10,11):
             self.upright_return.update(x,m,0,False,now)
             if self.upright_return.phase==3: self._stop(); self.output=self._output(0); return self.output
@@ -301,8 +303,8 @@ class ReferenceController:
         drive=p.amax_m if manual else max(p.amax_s,p.amax_b) if recovery else p.amax_s if self.mode==2 else p.amax_b
         brake=p.amax_m if manual else max(p.amax_s,p.amax_b)
         jerk=p.jmax_m if manual else p.jmax
-        speed=p.vmax if manual else speed_limit(p,False) if self.mode==2 else speed_limit(p,True) if self.mode==3 else min(p.vmax,max(p.vmax_s,p.vmax_b))
-        self.motion=advance(m,x,a,speed,drive,brake,jerk,p.rail,DT)
+        speed=min(p.vmax,p.manual_speed_max) if manual else speed_limit(p,False) if self.mode==2 else speed_limit(p,True) if self.mode==3 else min(p.vmax,max(p.vmax_s,p.vmax_b))
+        self.motion=advance(m,x,a,speed,drive,brake,jerk,p.rail,DT,rail_margin=p.rail_margin)
         if self.motion.brake_direction and self.mode in (1,2,3): self._begin_rail(x,now)
         if abs(self.motion.velocity)>p.vmax+.002: self._fault()
         if (self.mode==2 or (self.mode in (5,6) and not self.recovery_was_manual)) and self.watch.fault(self.theta,self.motion.velocity): self._fault()

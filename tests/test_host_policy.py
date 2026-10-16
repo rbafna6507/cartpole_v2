@@ -204,3 +204,85 @@ def test_executor_trips_if_initial_commanded_velocity_exceeds_firmware_ceiling()
     b.reset(state=(0.,2.,math.pi,0.))
     b.step(request(b,0.))
     assert b.terminated and b.fault_reason == 'speed exceeded'
+
+
+def test_balance_only_refuses_hanging_and_latches_instead_of_swinging_up():
+    Host, _ = policy_api()
+    b = MujocoBackend()
+    o = b.reset(state=(0., 0., math.pi, 0.))
+    p = Host(channels(o), start_mode='bal')
+    p.reset(b.session)
+    assert p.act(o) is None
+    assert 'balance' in p.fault_reason
+    upright = replace(o, samples=tuple(replace(s, value=.02) if s.quantity=='angle' else s for s in o.samples))
+    assert p.act(upright) is None
+    p.reset(b.session)
+    assert p.act(upright).acceleration_m_s2 > 0
+    fallen = replace(upright, sequence=1, available_ns=10_000_000,
+                     samples=tuple(replace(s, value=1.) if s.quantity=='angle' else s for s in upright.samples))
+    assert p.act(fallen) is None
+
+
+def test_live_gain_mapping_distinguishes_auto_and_balance_without_saved_defaults():
+    from cartpole_sdk.control.parameters import ControllerParameters
+    _, Params = policy_api()
+    p = ControllerParameters(pw=3.5, bal_pw=4.5, pc1=-5., pc2=-6., catch_a=.25)
+    auto = Params.from_controller(p, start_mode='auto')
+    bal = Params.from_controller(p, start_mode='bal')
+    assert auto.capture_angle_rad == .25
+    assert bal.theta_gain > auto.theta_gain
+    assert auto.theta_gain == pytest.approx(23.7408, abs=.00005)
+    assert auto.effective_length_m == .124
+    with pytest.raises(ValueError): Params.from_controller(p, start_mode='bogus')
+
+
+def test_executor_uses_explicit_live_limits_and_rejects_geometry_mismatch():
+    from cartpole_sdk.control.parameters import ControllerParameters
+    limits = ControllerParameters(rail=.31, vmax=.5, jmax=150., rail_margin=.025, rail_fault_margin=.02)
+    b = executor(config=SimulationConfig(control_steps=10, rail_half_m=.31), parameters=limits)
+    b.reset(state=(0.,0.,math.pi,0.))
+    b.step(request(b,25.))
+    assert b.motion.acceleration == pytest.approx(1.5)
+    b.reset(state=(.2901,.1,math.pi,0.))
+    b.step(request(b,0.))
+    assert b.terminated
+    with pytest.raises(ValueError): executor(parameters=limits)
+
+
+
+def test_host_sim_cli_uses_profile_in_governor_and_policy_and_records_outcome(tmp_path):
+    import json, subprocess, sys
+    output=tmp_path/'rollout.json'
+    run=subprocess.run([sys.executable,'examples/host_cartpole.py','--mode','bal','--seconds','.1',
+        '--rate','250','--profile','profiles/last-observed-20261015-full-snapshot.json',
+        '--output',str(output)],capture_output=True,text=True)
+    assert run.returncode==0, run.stderr
+    result=json.loads(output.read_text())
+    assert result['backend']=='simulation'
+    assert result['hardware_validated'] is False
+    assert result['executor_parameters']['vmax']==1.
+    assert result['executor_parameters']['jmax']==150.
+    assert result['config']['rail_half_m']==pytest.approx(.30915001)
+    assert len(result['trajectory'])==25
+    assert result['trajectory'][0]['raw_acceleration_m_s2'] != result['trajectory'][0]['executed_acceleration_m_s2']
+
+
+
+def test_executor_rejects_acceleration_limits_that_the_inner_plant_cannot_accept():
+    from cartpole_sdk.control.parameters import ControllerParameters
+    with pytest.raises(ValueError, match='25'):
+        executor(parameters=ControllerParameters(amax_s=30.))
+
+
+
+@pytest.mark.parametrize('name', ['ke','kpx','kdx'])
+def test_host_gain_mapping_accepts_disabled_native_swing_term(name):
+    from cartpole_sdk.control.parameters import ControllerParameters
+    Host, Params = policy_api()
+    settings=Params.from_controller(ControllerParameters(**{name:0.}),start_mode='bal')
+    b=MujocoBackend()
+    observation=b.reset(state=(0.,0.,.03,0.))
+    policy=Host(channels(observation),parameters=settings,start_mode='bal')
+    policy.reset(b.session)
+    assert policy.act(observation).acceleration_m_s2>0
+    with pytest.raises(ValueError):Params(energy_gain=-1.)

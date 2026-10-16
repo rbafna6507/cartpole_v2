@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "session_id": "calibration-screen-negative1-1792091621041929115",
+  "clock_id": "local-monotonic",
+  "encoder_reference": {
+    "upright_raw": 370,
+    "firmware": "executor-v4-rehome"
+  },
+  "vision_calibration": {
+    "cart_a_px": null,
+    "cart_b_px": null,
+    "cart_span_mm": null,
+    "home_angle_rad": -0.006486665936711519,
+    "home_length_px": 150.33427350884477
+  },
+  "encoder_alignment": {
+    "source": "magnetic",
+    "source_frame_id": "encoder-zero",
+    "source_id": "visible-upright-rig-as5600-reference370",
+    "source_calibration_id": "af758b7827e21340b6e58abb5d05f267cecfb337776957fe5dfea993327c3971",
+    "target_frame_id": "visible-upright-20261015-encoder-positive",
+    "reference_id": "visible-upright-20261015:ee030920d5c4a2ddcc9d1dd0b1b214c4bf5b1403a84764b3d36347935d1156ed",
+    "zero_rad": 0.0014789045545212766,
+    "sign": 1
+  },
+  "vision_alignment": {
+    "source": "vision",
+    "source_frame_id": "camera-native",
+    "source_id": "visible-upright-jetson-camera-960x600-rotation180",
+    "source_calibration_id": "c6b106b0595f94032364cebf985f8a8661d36ea044f82fd434fb6561a602e4dc",
+    "target_frame_id": "visible-upright-20261015-encoder-positive",
+    "reference_id": "visible-upright-20261015:ee030920d5c4a2ddcc9d1dd0b1b214c4bf5b1403a84764b3d36347935d1156ed",
+    "zero_rad": 0.025411013337611914,
+    "sign": 1
+  },
+  "encoder_clock": {
+    "strategy": "receipt-anchor",
+    "receipt_delay_ns": 22000000,
+    "uncertainty_ns": 25000000,
+    "max_receipt_residual_ns": 10000000,
+    "valid_for_ns": 60000000000
+  },
+  "vision_clock": {
+    "source_clock_id": "jetson-local-monotonic-camera-host-read",
+    "session_clock_id": "local-monotonic",
+    "offset_ns": 0
+  },
+  "fusion": {},
+  "alignment_evidence": {
+    "source_file": "visible-upright-source.json.gz",
+    "source_sha256": "ee030920d5c4a2ddcc9d1dd0b1b214c4bf5b1403a84764b3d36347935d1156ed",
+    "source_path": "/home/rbafna/cartpole-v2-runs/retune-20261015/visible-upright-1792083804339028182",
+    "calibration_sha256": "c6b106b0595f94032364cebf985f8a8661d36ea044f82fd434fb6561a602e4dc",
+    "camera_theta_rad_zero": 0.025411013337611914,
+    "camera_raw_geometry_mean": 0.03189767927432337,
+    "camera_raw_geometry_std": 0.002586768031721268,
+    "encoder_theta_rad_zero": 0.0014789045545212766,
+    "native_frame_size": [
+      960,
+      600
+    ],
+    "rotation": 180,
+    "capture_fps": 30,
+    "live_fps": 60,
+    "native_geometry_verified_by_root_current_api": true,
+    "sign_basis": "existing magnetic and calibrated vision positive directions; same-pose record does not independently validate angular sign",
+    "timing_basis": "22ms serial receipt correction is explicitly approximate; 25ms declared uncertainty is not exposure certification",
+    "intended_use": "stopped shadow wiring and alignment demonstration; not control or independent held-out validation",
+    "commissioned": false,
+    "control_eligible": false
+  }
+}

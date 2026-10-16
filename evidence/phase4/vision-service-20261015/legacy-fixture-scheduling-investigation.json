@@ -1,0 +1,45 @@
+{
+  "full_suite": {
+    "passed": 658,
+    "skipped": 7,
+    "failed": 1,
+    "duration_s": 45.07,
+    "test": "tests/test_rig_calibration_model.py::V5ReturnTests::test_legacy_auto_keeps_early_stopping_budget",
+    "exception": "RigError: latched rig error: executor fault 1",
+    "failure_location": "src/cartpole_sdk/rig/client.py start -> _stopped_healthy -> _require, before MODE"
+  },
+  "targeted_run": {
+    "runs": 1,
+    "passed": 1,
+    "duration_s": 0.38,
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/test_rig_calibration_model.py::V5ReturnTests::test_legacy_auto_keeps_early_stopping_budget --disable-warnings"
+  },
+  "code_evidence": [
+    {
+      "file": "tests/test_rig_rehome.py:115",
+      "fact": "The inherited test changes among three legacy firmware identities while reusing one ReturnFirmware instance."
+    },
+    {
+      "file": "src/cartpole_sdk/rig/console.py:115",
+      "fact": "Legacy _wait_run stops10ms before the requested100ms duration; real host scheduling can consume that margin."
+    },
+    {
+      "file": "tests/test_rig.py:126",
+      "fact": "The PTY firmware sets fault=1 when enabled and any duration/watchdog/action lease expires."
+    },
+    {
+      "file": "tests/test_rig.py:85",
+      "fact": "HELLO replaces the session but does not reset fault. STOP disables and preserves a nonzero fault."
+    },
+    {
+      "file": "tests/test_rig_rehome.py:121",
+      "fact": "After each run, this test checks disabled state and no automatic return, but does not assert or clear the persistent fixture fault."
+    },
+    {
+      "file": "src/cartpole_sdk/rig/client.py:278",
+      "fact": "An incoming nonzero executor fault is latched; a later start refuses the faulted session."
+    }
+  ],
+  "interpretation": "The failure is consistent with a prior legacy loop iteration missing its early-stop timing margin, leaving a fault on the reused PTY firmware. The next session correctly refuses start. The original log does not identify the loop identity or scheduling delay, so the precise triggering interval is not established.",
+  "scope": "One requested targeted run only. No hardware, SSH, network, stress loop, source/test changes, safety deadline change or lease widening."
+}

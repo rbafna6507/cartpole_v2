@@ -1,0 +1,3685 @@
+{
+  "path": "/home/rbafna/cartpole-v2-runs/retune-20261015/sdk-shadow-lightweight-1792088261083913264",
+  "success": true,
+  "performance": [
+    {
+      "t": 183556.898698871,
+      "seq": 2121,
+      "processing_ms": 47.073030000319704,
+      "detection_ms": 46.51052298140712,
+      "lock_wait_ms": 0.0031679810490459204,
+      "tracking": {
+        "arrival_interval_p95_ms": 26.27560219843872,
+        "delivered_fps": 52.034826823438436,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 18.11341822030954,
+        "delivered_fps": 76.5335420334814,
+        "error": null,
+        "frames_delivered": 2125,
+        "latest_age_s": 0.016854414017871022,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": true,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 33.87225548794959,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 40.046968599536434,
+        "diagnostics": [],
+        "encoded_mbps": 3.000087391167863,
+        "error": null,
+        "frames_encoded": 1085,
+        "host_read_to_encode_ms": {
+          "max": 36.2238489786364,
+          "p50": 20.84239099755436,
+          "p95": 26.680507604384818,
+          "p99": 34.33083966008849
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.6418918918918919,
+          "angle_fps": 48.62286894051549,
+          "angle_frames": 95,
+          "calibrated_camera_frames": 148,
+          "camera_frames_in_span": 148,
+          "detected_frames": 95,
+          "detection_reasons": {
+            "measured": 95,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9332466810010374,
+          "geometry_coverage": 0.6418918918918919,
+          "host_read_to_result_ms": {
+            "max": 64.91888800519519,
+            "p50": 27.35018999374006,
+            "p95": 42.082530504558235,
+            "p99": 59.30161589058115
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 49.14013350371246,
+          "processed_frames": 96,
+          "processing_deadline_misses": 96,
+          "processing_ms": {
+            "max": 50.88702499051578,
+            "p50": 18.40121300483588,
+            "p95": 30.81921100965701,
+            "p99": 47.263729749829494
+          },
+          "skipped_camera_frames": 52,
+          "velocity_coverage_calibrated": 0.6418918918918919,
+          "velocity_delay_ms": {
+            "max": 50.26549028116278,
+            "p50": 30.67269566236064,
+            "p95": 44.481345484382466,
+            "p99": 48.53308578778525
+          },
+          "velocity_fps": 48.62286894051549,
+          "velocity_frames": 95
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6652522395096653,
+          "angle_frames": 1411,
+          "calibrated_camera_frames": 2121,
+          "camera_frames_in_span": 2121,
+          "detected_frames": 1411,
+          "geometry_coverage": 0.6652522395096653,
+          "processed_frames": 1424,
+          "skipped_camera_frames": 697,
+          "velocity_coverage_calibrated": 0.6628948609146629,
+          "velocity_frames": 1406
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183557.973520183,
+      "seq": 2202,
+      "processing_ms": 44.04874501051381,
+      "detection_ms": 40.80708199762739,
+      "lock_wait_ms": 1.9793669926002622,
+      "tracking": {
+        "arrival_interval_p95_ms": 38.53306719684041,
+        "delivered_fps": 46.7205220117535,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 18.774605792714283,
+        "delivered_fps": 75.87961540071989,
+        "error": null,
+        "frames_delivered": 2206,
+        "latest_age_s": 0.009247800015145913,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 33.527875211439095,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.95779115735031,
+        "diagnostics": [],
+        "encoded_mbps": 3.0079593327006338,
+        "error": null,
+        "frames_encoded": 1127,
+        "host_read_to_encode_ms": {
+          "max": 36.2238489786364,
+          "p50": 20.879517991277297,
+          "p95": 26.680507604384818,
+          "p99": 34.33083966008849
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.47586206896551725,
+          "angle_fps": 34.978646240958696,
+          "angle_frames": 69,
+          "calibrated_camera_frames": 145,
+          "camera_frames_in_span": 145,
+          "detected_frames": 69,
+          "detection_reasons": {
+            "measured": 69
+          },
+          "duration_s": 1.9440432180126663,
+          "geometry_coverage": 0.47586206896551725,
+          "host_read_to_result_ms": {
+            "max": 67.22174800233915,
+            "p50": 33.85257499758154,
+            "p95": 57.860001589870066,
+            "p99": 65.65580320428124
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 34.978646240958696,
+          "processed_frames": 69,
+          "processing_deadline_misses": 69,
+          "processing_ms": {
+            "max": 58.66129099740647,
+            "p50": 24.13407899439335,
+            "p95": 50.05658320733345,
+            "p99": 53.60775743261906
+          },
+          "skipped_camera_frames": 76,
+          "velocity_coverage_calibrated": 0.4068965517241379,
+          "velocity_delay_ms": {
+            "max": 57.16879642568529,
+            "p50": 37.53569701802917,
+            "p95": 56.81226188899018,
+            "p99": 57.00244921783451
+          },
+          "velocity_fps": 29.83472767611183,
+          "velocity_frames": 59
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6544050862851952,
+          "angle_frames": 1441,
+          "calibrated_camera_frames": 2202,
+          "camera_frames_in_span": 2202,
+          "detected_frames": 1441,
+          "geometry_coverage": 0.6544050862851952,
+          "processed_frames": 1454,
+          "skipped_camera_frames": 748,
+          "velocity_coverage_calibrated": 0.6475930971843779,
+          "velocity_frames": 1426
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183559.064743646,
+      "seq": 2282,
+      "processing_ms": 28.650104010012,
+      "detection_ms": 27.219036011956632,
+      "lock_wait_ms": 0.0024320033844560385,
+      "tracking": {
+        "arrival_interval_p95_ms": 50.24803620181046,
+        "delivered_fps": 41.70863582146264,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.40372411813587,
+        "delivered_fps": 74.08574747590059,
+        "error": null,
+        "frames_delivered": 2285,
+        "latest_age_s": 0.012050767021719366,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 35.1061296853004,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 40.00548354987735,
+        "diagnostics": [],
+        "encoded_mbps": 3.0071503205558905,
+        "error": null,
+        "frames_encoded": 1170,
+        "host_read_to_encode_ms": {
+          "max": 36.2238489786364,
+          "p50": 20.916757486235227,
+          "p95": 27.21737984148919,
+          "p99": 34.33083966008849
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3493150684931507,
+          "angle_fps": 25.579933426850673,
+          "angle_frames": 51,
+          "calibrated_camera_frames": 146,
+          "camera_frames_in_span": 146,
+          "detected_frames": 51,
+          "detection_reasons": {
+            "measured": 51
+          },
+          "duration_s": 1.9546571590180974,
+          "geometry_coverage": 0.3493150684931507,
+          "host_read_to_result_ms": {
+            "max": 70.92841499252245,
+            "p50": 46.51189802098088,
+            "p95": 65.36783999763429,
+            "p99": 69.86005749786273
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 25.579933426850673,
+          "processed_frames": 51,
+          "processing_deadline_misses": 51,
+          "processing_ms": {
+            "max": 61.90455597243272,
+            "p50": 38.95347600337118,
+            "p95": 57.110236506559886,
+            "p99": 61.26057497749571
+          },
+          "skipped_camera_frames": 95,
+          "velocity_coverage_calibrated": 0.19863013698630136,
+          "velocity_delay_ms": {
+            "max": 59.89355826750398,
+            "p50": 52.64756185351871,
+            "p95": 57.89944980060682,
+            "p99": 59.368606293573976
+          },
+          "velocity_fps": 14.324762719036377,
+          "velocity_frames": 29
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6432953549517967,
+          "angle_frames": 1468,
+          "calibrated_camera_frames": 2282,
+          "camera_frames_in_span": 2282,
+          "detected_frames": 1468,
+          "geometry_coverage": 0.6432953549517967,
+          "processed_frames": 1481,
+          "skipped_camera_frames": 801,
+          "velocity_coverage_calibrated": 0.6314636283961438,
+          "velocity_frames": 1441
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183560.121911842,
+      "seq": 2360,
+      "processing_ms": 54.77820700616576,
+      "detection_ms": 46.7263660102617,
+      "lock_wait_ms": 7.67736800480634,
+      "tracking": {
+        "arrival_interval_p95_ms": 50.9449556004256,
+        "delivered_fps": 37.86575674377699,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.68649699212983,
+        "delivered_fps": 74.15522993458528,
+        "error": null,
+        "frames_delivered": 2364,
+        "latest_age_s": 0.015300335013307631,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 35.80544611031655,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.993301874944954,
+        "diagnostics": [],
+        "encoded_mbps": 3.0046629266430185,
+        "error": null,
+        "frames_encoded": 1213,
+        "host_read_to_encode_ms": {
+          "max": 36.2238489786364,
+          "p50": 21.105407993976755,
+          "p95": 28.96665094233235,
+          "p99": 34.33083966008849
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3333333333333333,
+          "angle_fps": 24.092411543719315,
+          "angle_frames": 47,
+          "calibrated_camera_frames": 141,
+          "camera_frames_in_span": 141,
+          "detected_frames": 47,
+          "detection_reasons": {
+            "measured": 47,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9093148859974463,
+          "geometry_coverage": 0.3333333333333333,
+          "host_read_to_result_ms": {
+            "max": 76.16522299940698,
+            "p50": 48.82172049838118,
+            "p95": 64.45224480848992,
+            "p99": 73.70392323617125
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 24.61615962075669,
+          "processed_frames": 48,
+          "processing_deadline_misses": 48,
+          "processing_ms": {
+            "max": 64.57609697827138,
+            "p50": 40.003913003602065,
+            "p95": 55.28584076237166,
+            "p99": 63.32047270552721
+          },
+          "skipped_camera_frames": 93,
+          "velocity_coverage_calibrated": 0.14184397163120568,
+          "velocity_delay_ms": {
+            "max": 59.89355826750398,
+            "p50": 55.60203477216419,
+            "p95": 58.112471213098615,
+            "p99": 59.537340856622905
+          },
+          "velocity_fps": 10.474961540747527,
+          "velocity_frames": 20
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6326271186440678,
+          "angle_frames": 1493,
+          "calibrated_camera_frames": 2360,
+          "camera_frames_in_span": 2360,
+          "detected_frames": 1493,
+          "geometry_coverage": 0.6326271186440678,
+          "processed_frames": 1507,
+          "skipped_camera_frames": 853,
+          "velocity_coverage_calibrated": 0.6135593220338983,
+          "velocity_frames": 1448
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183561.198600683,
+      "seq": 2438,
+      "processing_ms": 47.32503401464783,
+      "detection_ms": 40.29919899767265,
+      "lock_wait_ms": 6.745254009729251,
+      "tracking": {
+        "arrival_interval_p95_ms": 52.818042802391574,
+        "delivered_fps": 34.89722152664421,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.551883305073712,
+        "delivered_fps": 73.33223039027314,
+        "error": null,
+        "frames_delivered": 2442,
+        "latest_age_s": 0.015471794991753995,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 36.69461508397944,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.91887767192817,
+        "diagnostics": [],
+        "encoded_mbps": 2.9972444427311307,
+        "error": null,
+        "frames_encoded": 1256,
+        "host_read_to_encode_ms": {
+          "max": 36.2238489786364,
+          "p50": 21.11310649321041,
+          "p95": 28.96665094233235,
+          "p99": 34.33083966008849
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3333333333333333,
+          "angle_fps": 23.943461001851553,
+          "angle_frames": 47,
+          "calibrated_camera_frames": 141,
+          "camera_frames_in_span": 141,
+          "detected_frames": 47,
+          "detection_reasons": {
+            "measured": 47,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9211925960262306,
+          "geometry_coverage": 0.3333333333333333,
+          "host_read_to_result_ms": {
+            "max": 68.17066398798488,
+            "p50": 49.30064201471396,
+            "p95": 64.40097016165964,
+            "p99": 66.97769729304127
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 24.463971023630936,
+          "processed_frames": 48,
+          "processing_deadline_misses": 48,
+          "processing_ms": {
+            "max": 55.27620000066236,
+            "p50": 40.20665350253694,
+            "p95": 53.81974743359024,
+            "p99": 55.042143293248955
+          },
+          "skipped_camera_frames": 93,
+          "velocity_coverage_calibrated": 0.14184397163120568,
+          "velocity_delay_ms": {
+            "max": 57.09472644957714,
+            "p50": 54.33667317265645,
+            "p95": 57.08956726884935,
+            "p99": 57.09369461343158
+          },
+          "velocity_fps": 9.889690413808252,
+          "velocity_frames": 20
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6230516817063166,
+          "angle_frames": 1519,
+          "calibrated_camera_frames": 2438,
+          "camera_frames_in_span": 2438,
+          "detected_frames": 1519,
+          "geometry_coverage": 0.6230516817063166,
+          "processed_frames": 1533,
+          "skipped_camera_frames": 905,
+          "velocity_coverage_calibrated": 0.5992616899097621,
+          "velocity_frames": 1461
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183562.236787898,
+      "seq": 2511,
+      "processing_ms": 41.102382994722575,
+      "detection_ms": 39.09412000211887,
+      "lock_wait_ms": 1.6786570195108652,
+      "tracking": {
+        "arrival_interval_p95_ms": 55.98680879338644,
+        "delivered_fps": 31.98083980838761,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.65004138567019,
+        "delivered_fps": 72.45447530564118,
+        "error": null,
+        "frames_delivered": 2515,
+        "latest_age_s": 0.014038389985216781,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.00569038046524,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.7041794954996,
+        "diagnostics": [],
+        "encoded_mbps": 2.9787435792776344,
+        "error": null,
+        "frames_encoded": 1296,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 21.09912148317683,
+          "p95": 29.559053386744512,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3381294964028777,
+          "angle_fps": 23.677492973573646,
+          "angle_frames": 47,
+          "calibrated_camera_frames": 139,
+          "camera_frames_in_span": 139,
+          "detected_frames": 47,
+          "detection_reasons": {
+            "measured": 47
+          },
+          "duration_s": 1.9427732510084752,
+          "geometry_coverage": 0.3381294964028777,
+          "host_read_to_result_ms": {
+            "max": 153.60144700389355,
+            "p50": 46.960450999904424,
+            "p95": 65.63556078763209,
+            "p99": 115.94214124197599
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 23.677492973573646,
+          "processed_frames": 47,
+          "processing_deadline_misses": 47,
+          "processing_ms": {
+            "max": 143.26108200475574,
+            "p50": 40.01541799516417,
+            "p95": 53.363221691688516,
+            "p99": 107.26006106357084
+          },
+          "skipped_camera_frames": 92,
+          "velocity_coverage_calibrated": 0.16546762589928057,
+          "velocity_delay_ms": {
+            "max": 57.894167402992025,
+            "p50": 55.86781696183607,
+            "p95": 57.09418337792158,
+            "p99": 57.71829039324075
+          },
+          "velocity_fps": 11.838746486786823,
+          "velocity_frames": 23
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6140979689366786,
+          "angle_frames": 1542,
+          "calibrated_camera_frames": 2511,
+          "camera_frames_in_span": 2511,
+          "detected_frames": 1542,
+          "geometry_coverage": 0.6140979689366786,
+          "processed_frames": 1556,
+          "skipped_camera_frames": 955,
+          "velocity_coverage_calibrated": 0.5858223815213063,
+          "velocity_frames": 1471
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183563.302741168,
+      "seq": 2589,
+      "processing_ms": 37.8160780237522,
+      "detection_ms": 35.67728400230408,
+      "lock_wait_ms": 1.5541110187768936,
+      "tracking": {
+        "arrival_interval_p95_ms": 58.64039511070587,
+        "delivered_fps": 29.55595305186099,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.661281294655055,
+        "delivered_fps": 71.93932699784969,
+        "error": null,
+        "frames_delivered": 2593,
+        "latest_age_s": 0.010311757010640576,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 36.740613298024975,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.65754867765684,
+        "diagnostics": [],
+        "encoded_mbps": 2.9781689938740055,
+        "error": null,
+        "frames_encoded": 1338,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 21.130020980642428,
+          "p95": 28.991691542554843,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.33093525179856115,
+          "angle_fps": 23.3126439262658,
+          "angle_frames": 46,
+          "calibrated_camera_frames": 139,
+          "camera_frames_in_span": 139,
+          "detected_frames": 46,
+          "detection_reasons": {
+            "measured": 46
+          },
+          "duration_s": 1.9302829890220892,
+          "geometry_coverage": 0.33093525179856115,
+          "host_read_to_result_ms": {
+            "max": 153.60144700389355,
+            "p50": 47.5098379974952,
+            "p95": 74.15923900407506,
+            "p99": 120.21128859778379
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 23.3126439262658,
+          "processed_frames": 46,
+          "processing_deadline_misses": 46,
+          "processing_ms": {
+            "max": 143.26108200475574,
+            "p50": 39.82512600487098,
+            "p95": 63.890539000567514,
+            "p99": 111.17308364919134
+          },
+          "skipped_camera_frames": 93,
+          "velocity_coverage_calibrated": 0.1366906474820144,
+          "velocity_delay_ms": {
+            "max": 59.540923044551164,
+            "p50": 55.16580477706157,
+            "p95": 58.66193459951319,
+            "p99": 59.36512535554357
+          },
+          "velocity_fps": 9.843116324423338,
+          "velocity_frames": 19
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.6056392429509463,
+          "angle_frames": 1568,
+          "calibrated_camera_frames": 2589,
+          "camera_frames_in_span": 2589,
+          "detected_frames": 1568,
+          "geometry_coverage": 0.6056392429509463,
+          "processed_frames": 1582,
+          "skipped_camera_frames": 1007,
+          "velocity_coverage_calibrated": 0.5716492854383932,
+          "velocity_frames": 1480
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183564.372068267,
+      "seq": 2666,
+      "processing_ms": 19.567043986171484,
+      "detection_ms": 18.926744000054896,
+      "lock_wait_ms": 0.0022400054149329662,
+      "tracking": {
+        "arrival_interval_p95_ms": 58.79202958021778,
+        "delivered_fps": 27.65332407639654,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.656336286105216,
+        "delivered_fps": 72.20165219131758,
+        "error": null,
+        "frames_delivered": 2668,
+        "latest_age_s": 0.02082822099328041,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.44397169502918,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.77138574774338,
+        "diagnostics": [],
+        "encoded_mbps": 2.9195056393486727,
+        "error": null,
+        "frames_encoded": 1380,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 21.278807988005966,
+          "p95": 29.504973604429807,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.352112676056338,
+          "angle_fps": 25.194753801612286,
+          "angle_frames": 50,
+          "calibrated_camera_frames": 142,
+          "camera_frames_in_span": 142,
+          "detected_frames": 50,
+          "detection_reasons": {
+            "measured": 50
+          },
+          "duration_s": 1.944849327992415,
+          "geometry_coverage": 0.352112676056338,
+          "host_read_to_result_ms": {
+            "max": 74.96785500552505,
+            "p50": 48.621669004205614,
+            "p95": 63.48439353605499,
+            "p99": 72.39852628845254
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 25.194753801612286,
+          "processed_frames": 50,
+          "processing_deadline_misses": 50,
+          "processing_ms": {
+            "max": 65.09108300087973,
+            "p50": 39.883478995761834,
+            "p95": 52.616507987841025,
+            "p99": 62.87485905835637
+          },
+          "skipped_camera_frames": 92,
+          "velocity_coverage_calibrated": 0.1619718309859155,
+          "velocity_delay_ms": {
+            "max": 59.90053538698703,
+            "p50": 53.23480241349898,
+            "p95": 59.44325766176917,
+            "p99": 59.82142067165114
+          },
+          "velocity_fps": 11.8261089272874,
+          "velocity_frames": 23
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5982745686421606,
+          "angle_frames": 1595,
+          "calibrated_camera_frames": 2666,
+          "camera_frames_in_span": 2666,
+          "detected_frames": 1595,
+          "geometry_coverage": 0.5982745686421606,
+          "processed_frames": 1609,
+          "skipped_camera_frames": 1057,
+          "velocity_coverage_calibrated": 0.5603900975243811,
+          "velocity_frames": 1494
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183565.441312166,
+      "seq": 2745,
+      "processing_ms": 18.840277014533058,
+      "detection_ms": 18.327211000723764,
+      "lock_wait_ms": 0.0016959966160356998,
+      "tracking": {
+        "arrival_interval_p95_ms": 58.79202958021778,
+        "delivered_fps": 25.983598524930887,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.656336286105216,
+        "delivered_fps": 72.41312055929033,
+        "error": null,
+        "frames_delivered": 2748,
+        "latest_age_s": 0.005119654000736773,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.022487580543384,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.68229783854291,
+        "diagnostics": [],
+        "encoded_mbps": 2.9771286667259345,
+        "error": null,
+        "frames_encoded": 1424,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 21.17299699402153,
+          "p95": 28.79480878029453,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.34265734265734266,
+          "angle_fps": 24.773008599727024,
+          "angle_frames": 49,
+          "calibrated_camera_frames": 143,
+          "camera_frames_in_span": 143,
+          "detected_frames": 49,
+          "detection_reasons": {
+            "measured": 49
+          },
+          "duration_s": 1.9375926749780774,
+          "geometry_coverage": 0.34265734265734266,
+          "host_read_to_result_ms": {
+            "max": 69.72432701149955,
+            "p50": 49.79244398418814,
+            "p95": 58.024702209513634,
+            "p99": 65.17578749684613
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 24.773008599727024,
+          "processed_frames": 49,
+          "processing_deadline_misses": 49,
+          "processing_ms": {
+            "max": 65.09108300087973,
+            "p50": 41.5712250105571,
+            "p95": 51.90715439966879,
+            "p99": 59.74069003248583
+          },
+          "skipped_camera_frames": 94,
+          "velocity_coverage_calibrated": 0.16083916083916083,
+          "velocity_delay_ms": {
+            "max": 59.90053538698703,
+            "p50": 53.23480241349898,
+            "p95": 57.97108256374486,
+            "p99": 59.47624554100912
+          },
+          "velocity_fps": 11.354295608208218,
+          "velocity_frames": 23
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.590528233151184,
+          "angle_frames": 1621,
+          "calibrated_camera_frames": 2745,
+          "camera_frames_in_span": 2745,
+          "detected_frames": 1621,
+          "geometry_coverage": 0.590528233151184,
+          "processed_frames": 1635,
+          "skipped_camera_frames": 1110,
+          "velocity_coverage_calibrated": 0.5479052823315118,
+          "velocity_frames": 1504
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183566.513339961,
+      "seq": 2824,
+      "processing_ms": 39.17197699774988,
+      "detection_ms": 36.20340701309033,
+      "lock_wait_ms": 2.7221979980822653,
+      "tracking": {
+        "arrival_interval_p95_ms": 59.912074898602434,
+        "delivered_fps": 24.857922179571112,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.594264896702953,
+        "delivered_fps": 73.34365283002023,
+        "error": null,
+        "frames_delivered": 2827,
+        "latest_age_s": 0.015966300998115912,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 35.79154889448545,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.721646107439604,
+        "diagnostics": [],
+        "encoded_mbps": 2.9859600759674145,
+        "error": null,
+        "frames_encoded": 1466,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 20.821724505562855,
+          "p95": 28.79480878029453,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3402777777777778,
+          "angle_fps": 24.89149776680161,
+          "angle_frames": 49,
+          "calibrated_camera_frames": 144,
+          "camera_frames_in_span": 144,
+          "detected_frames": 49,
+          "detection_reasons": {
+            "measured": 49
+          },
+          "duration_s": 1.9283692949975375,
+          "geometry_coverage": 0.3402777777777778,
+          "host_read_to_result_ms": {
+            "max": 73.08410599944182,
+            "p50": 48.44323298311792,
+            "p95": 59.277188620762885,
+            "p99": 69.77497400366698
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 24.89149776680161,
+          "processed_frames": 49,
+          "processing_deadline_misses": 49,
+          "processing_ms": {
+            "max": 52.597650996176526,
+            "p50": 39.31175501202233,
+            "p95": 51.05664818547666,
+            "p99": 52.473693405045196
+          },
+          "skipped_camera_frames": 95,
+          "velocity_coverage_calibrated": 0.16666666666666666,
+          "velocity_delay_ms": {
+            "max": 57.97194517799653,
+            "p50": 54.64002615190111,
+            "p95": 57.924428769911174,
+            "p99": 57.96112425159663
+          },
+          "velocity_fps": 11.927176013259105,
+          "velocity_frames": 24
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5839235127478754,
+          "angle_frames": 1649,
+          "calibrated_camera_frames": 2824,
+          "camera_frames_in_span": 2824,
+          "detected_frames": 1649,
+          "geometry_coverage": 0.5839235127478754,
+          "processed_frames": 1663,
+          "skipped_camera_frames": 1161,
+          "velocity_coverage_calibrated": 0.5393059490084986,
+          "velocity_frames": 1523
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183567.579371318,
+      "seq": 2908,
+      "processing_ms": 43.86509500909597,
+      "detection_ms": 41.53787999530323,
+      "lock_wait_ms": 2.0782810170203447,
+      "tracking": {
+        "arrival_interval_p95_ms": 59.69241279817651,
+        "delivered_fps": 24.562044709616075,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.287465196452104,
+        "delivered_fps": 75.57887311955525,
+        "error": null,
+        "frames_delivered": 2912,
+        "latest_age_s": 0.003624967997893691,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.207415990997106,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.787856847365525,
+        "diagnostics": [],
+        "encoded_mbps": 2.985923108191689,
+        "error": null,
+        "frames_encoded": 1509,
+        "host_read_to_encode_ms": {
+          "max": 76.70019999063271,
+          "p50": 20.871126990385847,
+          "p95": 29.62446248751256,
+          "p99": 49.02818173113939
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.33783783783783783,
+          "angle_fps": 25.55454456941979,
+          "angle_frames": 50,
+          "calibrated_camera_frames": 148,
+          "camera_frames_in_span": 148,
+          "detected_frames": 50,
+          "detection_reasons": {
+            "measured": 50
+          },
+          "duration_s": 1.9174671599757858,
+          "geometry_coverage": 0.33783783783783783,
+          "host_read_to_result_ms": {
+            "max": 81.8993849970866,
+            "p50": 46.25650150410365,
+            "p95": 64.76237905153538,
+            "p99": 77.57989828824064
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 25.55454456941979,
+          "processed_frames": 50,
+          "processing_deadline_misses": 50,
+          "processing_ms": {
+            "max": 65.95439702505246,
+            "p50": 36.60139850398991,
+            "p95": 52.97799470718019,
+            "p99": 62.223831012088326
+          },
+          "skipped_camera_frames": 98,
+          "velocity_coverage_calibrated": 0.20945945945945946,
+          "velocity_delay_ms": {
+            "max": 58.40316184912808,
+            "p50": 54.3815836426802,
+            "p95": 57.92333466524724,
+            "p99": 58.25968259596266
+          },
+          "velocity_fps": 15.64563953229783,
+          "velocity_frames": 31
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5763411279229711,
+          "angle_frames": 1676,
+          "calibrated_camera_frames": 2908,
+          "camera_frames_in_span": 2908,
+          "detected_frames": 1676,
+          "geometry_coverage": 0.5763411279229711,
+          "processed_frames": 1690,
+          "skipped_camera_frames": 1218,
+          "velocity_coverage_calibrated": 0.5288858321870702,
+          "velocity_frames": 1538
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183568.620029406,
+      "seq": 2988,
+      "processing_ms": 40.135068993549794,
+      "detection_ms": 38.06581097887829,
+      "lock_wait_ms": 1.5511349774897099,
+      "tracking": {
+        "arrival_interval_p95_ms": 58.79202958021778,
+        "delivered_fps": 24.848136328752446,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 19.8708200128749,
+        "delivered_fps": 76.69460465836774,
+        "error": null,
+        "frames_delivered": 2992,
+        "latest_age_s": 0.012374709011055529,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": true,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.207415990997106,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.96731953544724,
+        "diagnostics": [],
+        "encoded_mbps": 3.0004952630000377,
+        "error": null,
+        "frames_encoded": 1551,
+        "host_read_to_encode_ms": {
+          "max": 35.5364510066849,
+          "p50": 20.87951598880622,
+          "p95": 27.977027955290616,
+          "p99": 33.374050778697885
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 0,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.35570469798657717,
+          "angle_fps": 27.30921671155565,
+          "angle_frames": 53,
+          "calibrated_camera_frames": 149,
+          "camera_frames_in_span": 149,
+          "detected_frames": 53,
+          "detection_reasons": {
+            "measured": 53
+          },
+          "duration_s": 1.9041190580173861,
+          "geometry_coverage": 0.35570469798657717,
+          "host_read_to_result_ms": {
+            "max": 63.017409993335605,
+            "p50": 43.71747499681078,
+            "p95": 57.754579198081046,
+            "p99": 60.86967636714688
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 27.30921671155565,
+          "processed_frames": 53,
+          "processing_deadline_misses": 53,
+          "processing_ms": {
+            "max": 58.340996998595074,
+            "p50": 35.417438979493454,
+            "p95": 46.55838899197988,
+            "p99": 53.16051312373017
+          },
+          "skipped_camera_frames": 96,
+          "velocity_coverage_calibrated": 0.2751677852348993,
+          "velocity_delay_ms": {
+            "max": 58.40316184912808,
+            "p50": 54.914870008360595,
+            "p95": 57.3213241295889,
+            "p99": 58.043329179054126
+          },
+          "velocity_fps": 21.53226702257272,
+          "velocity_frames": 41
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.570615796519411,
+          "angle_frames": 1705,
+          "calibrated_camera_frames": 2988,
+          "camera_frames_in_span": 2988,
+          "detected_frames": 1705,
+          "geometry_coverage": 0.570615796519411,
+          "processed_frames": 1719,
+          "skipped_camera_frames": 1269,
+          "velocity_coverage_calibrated": 0.5237617135207496,
+          "velocity_frames": 1565
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183569.686241441,
+      "seq": 3071,
+      "processing_ms": 35.46608000760898,
+      "detection_ms": 33.63049100153148,
+      "lock_wait_ms": 1.3214669888839126,
+      "tracking": {
+        "arrival_interval_p95_ms": 53.80309290776493,
+        "delivered_fps": 25.145086594664612,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 18.133431510068476,
+        "delivered_fps": 77.8525880880803,
+        "error": null,
+        "frames_delivered": 3074,
+        "latest_age_s": 0.012588537996634841,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": true,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 36.927743707201444,
+        "bitrate_kbps": 3000,
+        "clients": 0,
+        "delivered_fps": 39.995765482552166,
+        "diagnostics": [],
+        "encoded_mbps": 3.016902788589426,
+        "error": null,
+        "frames_encoded": 1586,
+        "host_read_to_encode_ms": {
+          "max": 35.5364510066849,
+          "p50": 21.034753994758404,
+          "p95": 27.495010843641765,
+          "p99": 32.798390105290345
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.35526315789473684,
+          "angle_fps": 27.107364006029204,
+          "angle_frames": 54,
+          "calibrated_camera_frames": 152,
+          "camera_frames_in_span": 152,
+          "detected_frames": 54,
+          "detection_reasons": {
+            "measured": 54
+          },
+          "duration_s": 1.9551882650121115,
+          "geometry_coverage": 0.35526315789473684,
+          "host_read_to_result_ms": {
+            "max": 71.97704401914962,
+            "p50": 42.919443498249166,
+            "p95": 55.73732195189222,
+            "p99": 65.85307367204221
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 27.107364006029204,
+          "processed_frames": 54,
+          "processing_deadline_misses": 54,
+          "processing_ms": {
+            "max": 68.62846598960459,
+            "p50": 35.44175949355122,
+            "p95": 43.248224192939226,
+            "p99": 58.84389485028803
+          },
+          "skipped_camera_frames": 98,
+          "velocity_coverage_calibrated": 0.29605263157894735,
+          "velocity_delay_ms": {
+            "max": 59.90083611686714,
+            "p50": 54.73655535024591,
+            "p95": 57.23701810929924,
+            "p99": 58.84604350198061
+          },
+          "velocity_fps": 22.50422672198651,
+          "velocity_frames": 45
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5643112992510583,
+          "angle_frames": 1733,
+          "calibrated_camera_frames": 3071,
+          "camera_frames_in_span": 3071,
+          "detected_frames": 1733,
+          "geometry_coverage": 0.5643112992510583,
+          "processed_frames": 1747,
+          "skipped_camera_frames": 1324,
+          "velocity_coverage_calibrated": 0.5164441549983718,
+          "velocity_frames": 1586
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183570.739107998,
+      "seq": 3155,
+      "processing_ms": 33.624283998506144,
+      "detection_ms": 31.504690006840974,
+      "lock_wait_ms": 1.6564810066483915,
+      "tracking": {
+        "arrival_interval_p95_ms": 52.56811738072429,
+        "delivered_fps": 26.181505182239416,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 17.711330697056837,
+        "delivered_fps": 78.13640446134656,
+        "error": null,
+        "frames_delivered": 3158,
+        "latest_age_s": 0.009263607993489131,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": true,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 36.927743707201444,
+        "bitrate_kbps": 3000,
+        "clients": 0,
+        "delivered_fps": 39.995765482552166,
+        "diagnostics": [],
+        "encoded_mbps": 3.016902788589426,
+        "error": null,
+        "frames_encoded": 1586,
+        "host_read_to_encode_ms": {
+          "max": 35.5364510066849,
+          "p50": 21.034753994758404,
+          "p95": 27.495010843641765,
+          "p99": 32.798390105290345
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3935483870967742,
+          "angle_fps": 30.673538923281082,
+          "angle_frames": 61,
+          "calibrated_camera_frames": 155,
+          "camera_frames_in_span": 155,
+          "detected_frames": 61,
+          "detection_reasons": {
+            "measured": 61
+          },
+          "duration_s": 1.9560833899886347,
+          "geometry_coverage": 0.3935483870967742,
+          "host_read_to_result_ms": {
+            "max": 56.299037009011954,
+            "p50": 39.967641001567245,
+            "p95": 52.04004101688042,
+            "p99": 55.38483019918203
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 30.673538923281082,
+          "processed_frames": 61,
+          "processing_deadline_misses": 61,
+          "processing_ms": {
+            "max": 44.14829998859204,
+            "p50": 31.81029501138255,
+            "p95": 39.73749201395549,
+            "p99": 43.317460792604834
+          },
+          "skipped_camera_frames": 94,
+          "velocity_coverage_calibrated": 0.36129032258064514,
+          "velocity_delay_ms": {
+            "max": 59.90083611686714,
+            "p50": 49.67934837623034,
+            "p95": 56.44396652496653,
+            "p99": 58.13716930133524
+          },
+          "velocity_fps": 28.62863632839568,
+          "velocity_frames": 56
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5603803486529318,
+          "angle_frames": 1768,
+          "calibrated_camera_frames": 3155,
+          "camera_frames_in_span": 3155,
+          "detected_frames": 1768,
+          "geometry_coverage": 0.5603803486529318,
+          "processed_frames": 1782,
+          "skipped_camera_frames": 1373,
+          "velocity_coverage_calibrated": 0.5137876386687797,
+          "velocity_frames": 1621
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183571.769925894,
+      "seq": 3233,
+      "processing_ms": 47.256746009225026,
+      "detection_ms": 44.86956199980341,
+      "lock_wait_ms": 1.3785550254397094,
+      "tracking": {
+        "arrival_interval_p95_ms": 52.19771091360598,
+        "delivered_fps": 27.026226658897677,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 18.11535430897493,
+        "delivered_fps": 77.49439626550564,
+        "error": null,
+        "frames_delivered": 3237,
+        "latest_age_s": 0.010148745001060888,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": true,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.207415990997106,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.478360730753252,
+        "diagnostics": [],
+        "encoded_mbps": 2.289390451897163,
+        "error": null,
+        "frames_encoded": 1603,
+        "host_read_to_encode_ms": {
+          "max": 35.5364510066849,
+          "p50": 21.124352991442663,
+          "p95": 28.45106985619914,
+          "p99": 34.15525937734584
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.4,
+          "angle_fps": 30.709886280177514,
+          "angle_frames": 60,
+          "calibrated_camera_frames": 150,
+          "camera_frames_in_span": 150,
+          "detected_frames": 60,
+          "detection_reasons": {
+            "measured": 60
+          },
+          "duration_s": 1.9212054210074712,
+          "geometry_coverage": 0.4,
+          "host_read_to_result_ms": {
+            "max": 69.91261997609399,
+            "p50": 38.4185539878672,
+            "p95": 55.482258292613544,
+            "p99": 69.90805042907596
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 30.709886280177514,
+          "processed_frames": 60,
+          "processing_deadline_misses": 60,
+          "processing_ms": {
+            "max": 63.976789999287575,
+            "p50": 30.668784500448965,
+            "p95": 51.66741183784325,
+            "p99": 63.61511764029274
+          },
+          "skipped_camera_frames": 90,
+          "velocity_coverage_calibrated": 0.36,
+          "velocity_delay_ms": {
+            "max": 57.7824444626458,
+            "p50": 44.71822115010582,
+            "p95": 55.16841203498188,
+            "p99": 56.92452088347636
+          },
+          "velocity_fps": 27.586846997447594,
+          "velocity_frames": 54
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5558304979894835,
+          "angle_frames": 1797,
+          "calibrated_camera_frames": 3233,
+          "camera_frames_in_span": 3233,
+          "detected_frames": 1797,
+          "geometry_coverage": 0.5558304979894835,
+          "processed_frames": 1811,
+          "skipped_camera_frames": 1422,
+          "velocity_coverage_calibrated": 0.5085060315496442,
+          "velocity_frames": 1644
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183572.846463386,
+      "seq": 3310,
+      "processing_ms": 47.961656004190445,
+      "detection_ms": 38.86227498878725,
+      "lock_wait_ms": 8.256803994299844,
+      "tracking": {
+        "arrival_interval_p95_ms": 52.19771091360598,
+        "delivered_fps": 26.976427802313395,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 19.467640487710014,
+        "delivered_fps": 75.45023519889288,
+        "error": null,
+        "frames_delivered": 3314,
+        "latest_age_s": 0.004559291002806276,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.94260579452384,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.475328537045815,
+        "diagnostics": [],
+        "encoded_mbps": 2.289152167061186,
+        "error": null,
+        "frames_encoded": 1645,
+        "host_read_to_encode_ms": {
+          "max": 37.2860519994731,
+          "p50": 21.31060999692025,
+          "p95": 29.436668539866748,
+          "p99": 35.05976549966887
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.35714285714285715,
+          "angle_fps": 25.698450112237662,
+          "angle_frames": 50,
+          "calibrated_camera_frames": 140,
+          "camera_frames_in_span": 140,
+          "detected_frames": 50,
+          "detection_reasons": {
+            "measured": 50
+          },
+          "duration_s": 1.906729774986161,
+          "geometry_coverage": 0.35714285714285715,
+          "host_read_to_result_ms": {
+            "max": 69.91261997609399,
+            "p50": 47.2755299997516,
+            "p95": 67.73098774865501,
+            "p99": 69.90882492857054
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 25.698450112237662,
+          "processed_frames": 50,
+          "processing_deadline_misses": 50,
+          "processing_ms": {
+            "max": 63.976789999287575,
+            "p50": 37.77402950800024,
+            "p95": 54.398607915209126,
+            "p99": 63.67641804012237
+          },
+          "skipped_camera_frames": 90,
+          "velocity_coverage_calibrated": 0.22142857142857142,
+          "velocity_delay_ms": {
+            "max": 59.10038517322391,
+            "p50": 54.92631977540441,
+            "p95": 58.6522219091421,
+            "p99": 59.03092433291022
+          },
+          "velocity_fps": 15.73374496667612,
+          "velocity_frames": 31
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5507552870090634,
+          "angle_frames": 1823,
+          "calibrated_camera_frames": 3310,
+          "camera_frames_in_span": 3310,
+          "detected_frames": 1823,
+          "geometry_coverage": 0.5507552870090634,
+          "processed_frames": 1837,
+          "skipped_camera_frames": 1473,
+          "velocity_coverage_calibrated": 0.5006042296072507,
+          "velocity_frames": 1657
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183573.899372347,
+      "seq": 3386,
+      "processing_ms": 47.931254986906424,
+      "detection_ms": 46.083987021120265,
+      "lock_wait_ms": 1.4207639906089753,
+      "tracking": {
+        "arrival_interval_p95_ms": 52.810525393579155,
+        "delivered_fps": 26.583336083985653,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.55963650345802,
+        "delivered_fps": 73.33786901820011,
+        "error": null,
+        "frames_delivered": 3391,
+        "latest_age_s": 0.006042392022209242,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 39.06656737963203,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.480973317161887,
+        "diagnostics": [],
+        "encoded_mbps": 2.2889763035595663,
+        "error": null,
+        "frames_encoded": 1688,
+        "host_read_to_encode_ms": {
+          "max": 37.2860519994731,
+          "p50": 21.19143149141678,
+          "p95": 29.436668539866748,
+          "p99": 35.05976549966887
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3381294964028777,
+          "angle_fps": 23.87093978406625,
+          "angle_frames": 47,
+          "calibrated_camera_frames": 139,
+          "camera_frames_in_span": 139,
+          "detected_frames": 47,
+          "detection_reasons": {
+            "measured": 47
+          },
+          "duration_s": 1.9270292839792091,
+          "geometry_coverage": 0.3381294964028777,
+          "host_read_to_result_ms": {
+            "max": 69.5563250046689,
+            "p50": 47.73889898206107,
+            "p95": 63.934202998643734,
+            "p99": 67.69042469852138
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 23.87093978406625,
+          "processed_frames": 47,
+          "processing_deadline_misses": 47,
+          "processing_ms": {
+            "max": 62.006605992792174,
+            "p50": 41.23617897857912,
+            "p95": 52.18793209351133,
+            "p99": 59.3120571039617
+          },
+          "skipped_camera_frames": 92,
+          "velocity_coverage_calibrated": 0.1510791366906475,
+          "velocity_delay_ms": {
+            "max": 60.40153434150852,
+            "p50": 56.45079637179151,
+            "p95": 59.10038517322391,
+            "p99": 60.1413045078516
+          },
+          "velocity_fps": 10.37866947133315,
+          "velocity_frames": 21
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5457767277023036,
+          "angle_frames": 1848,
+          "calibrated_camera_frames": 3386,
+          "camera_frames_in_span": 3386,
+          "detected_frames": 1848,
+          "geometry_coverage": 0.5457767277023036,
+          "processed_frames": 1862,
+          "skipped_camera_frames": 1524,
+          "velocity_coverage_calibrated": 0.4920259893679858,
+          "velocity_frames": 1666
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183574.977755927,
+      "seq": 3467,
+      "processing_ms": 63.699920021463186,
+      "detection_ms": 56.34092597756535,
+      "lock_wait_ms": 7.0527479983866215,
+      "tracking": {
+        "arrival_interval_p95_ms": 56.55097230628598,
+        "delivered_fps": 26.48546886037612,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.643331090104766,
+        "delivered_fps": 72.98215156260027,
+        "error": null,
+        "frames_delivered": 3471,
+        "latest_age_s": 0.022862277983222157,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 39.06656737963203,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.48920365073908,
+        "diagnostics": [],
+        "encoded_mbps": 2.287883102232418,
+        "error": null,
+        "frames_encoded": 1732,
+        "host_read_to_encode_ms": {
+          "max": 37.2860519994731,
+          "p50": 21.139427488837015,
+          "p95": 28.779368101520216,
+          "p99": 34.15525937734584
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.323943661971831,
+          "angle_fps": 23.61203700475085,
+          "angle_frames": 46,
+          "calibrated_camera_frames": 142,
+          "camera_frames_in_span": 142,
+          "detected_frames": 46,
+          "detection_reasons": {
+            "measured": 46
+          },
+          "duration_s": 1.9058076179935597,
+          "geometry_coverage": 0.323943661971831,
+          "host_read_to_result_ms": {
+            "max": 71.13376402412541,
+            "p50": 51.69281801499892,
+            "p95": 69.18174076417927,
+            "p99": 70.93393116228981
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 23.61203700475085,
+          "processed_frames": 46,
+          "processing_deadline_misses": 46,
+          "processing_ms": {
+            "max": 63.699920021463186,
+            "p50": 41.77414100558963,
+            "p95": 60.80907899013255,
+            "p99": 62.93792870856122
+          },
+          "skipped_camera_frames": 96,
+          "velocity_coverage_calibrated": 0.1267605633802817,
+          "velocity_delay_ms": {
+            "max": 60.40153434150852,
+            "p50": 54.15299697779119,
+            "p95": 59.250173065811396,
+            "p99": 60.1712620863691
+          },
+          "velocity_fps": 9.444814801900339,
+          "velocity_frames": 18
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5402365157196424,
+          "angle_frames": 1873,
+          "calibrated_camera_frames": 3467,
+          "camera_frames_in_span": 3467,
+          "detected_frames": 1873,
+          "geometry_coverage": 0.5402365157196424,
+          "processed_frames": 1887,
+          "skipped_camera_frames": 1580,
+          "velocity_coverage_calibrated": 0.48312662244015,
+          "velocity_frames": 1675
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183576.045614275,
+      "seq": 3545,
+      "processing_ms": 47.17524099396542,
+      "detection_ms": 45.35696501261555,
+      "lock_wait_ms": 1.351771003101021,
+      "tracking": {
+        "arrival_interval_p95_ms": 58.38993328216019,
+        "delivered_fps": 26.323903757552984,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 20.668077189475298,
+        "delivered_fps": 73.25861954027984,
+        "error": null,
+        "frames_delivered": 3549,
+        "latest_age_s": 0.004237907996866852,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 39.1526523802895,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.568590461962092,
+        "diagnostics": [],
+        "encoded_mbps": 2.293285813178399,
+        "error": null,
+        "frames_encoded": 1774,
+        "host_read_to_encode_ms": {
+          "max": 37.2860519994731,
+          "p50": 21.363038987711747,
+          "p95": 28.98504114982039,
+          "p99": 33.29535852107841
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.31724137931034485,
+          "angle_fps": 23.48414790851272,
+          "angle_frames": 46,
+          "calibrated_camera_frames": 145,
+          "camera_frames_in_span": 145,
+          "detected_frames": 46,
+          "detection_reasons": {
+            "measured": 46,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9161861939937808,
+          "geometry_coverage": 0.31724137931034485,
+          "host_read_to_result_ms": {
+            "max": 81.39995101373643,
+            "p50": 49.228144984226674,
+            "p95": 71.00054211623501,
+            "p99": 78.34605010633823
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 24.00601786203523,
+          "processed_frames": 47,
+          "processing_deadline_misses": 47,
+          "processing_ms": {
+            "max": 70.42398999328725,
+            "p50": 39.2415150126908,
+            "p95": 62.2534182970412,
+            "p99": 67.33091780624818
+          },
+          "skipped_camera_frames": 98,
+          "velocity_coverage_calibrated": 0.1310344827586207,
+          "velocity_delay_ms": {
+            "max": 59.046991664217785,
+            "p50": 50.122259330237284,
+            "p95": 57.23831722571048,
+            "p99": 58.685256776516326
+          },
+          "velocity_fps": 9.915529116927594,
+          "velocity_frames": 19
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5354019746121298,
+          "angle_frames": 1898,
+          "calibrated_camera_frames": 3545,
+          "camera_frames_in_span": 3545,
+          "detected_frames": 1898,
+          "geometry_coverage": 0.5354019746121298,
+          "processed_frames": 1913,
+          "skipped_camera_frames": 1632,
+          "velocity_coverage_calibrated": 0.47531734837799716,
+          "velocity_frames": 1685
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183577.109461377,
+      "seq": 3624,
+      "processing_ms": 31.38119899085723,
+      "detection_ms": 27.578563982388005,
+      "lock_wait_ms": 1.5754550113342702,
+      "tracking": {
+        "arrival_interval_p95_ms": 60.948697396088384,
+        "delivered_fps": 25.967131210346224,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.18511848966591,
+        "delivered_fps": 73.89577973854976,
+        "error": null,
+        "frames_delivered": 3627,
+        "latest_age_s": 0.02217400900553912,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 39.76127869682386,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 30.43941547607346,
+        "diagnostics": [],
+        "encoded_mbps": 2.284846634481543,
+        "error": null,
+        "frames_encoded": 1816,
+        "host_read_to_encode_ms": {
+          "max": 37.2860519994731,
+          "p50": 21.107459487542002,
+          "p95": 28.98504114982039,
+          "p99": 33.29535852107841
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": false,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3194444444444444,
+          "angle_fps": 23.300378824078205,
+          "angle_frames": 46,
+          "calibrated_camera_frames": 144,
+          "camera_frames_in_span": 144,
+          "detected_frames": 46,
+          "detection_reasons": {
+            "measured": 46,
+            "no reliable arm geometry": 2
+          },
+          "duration_s": 1.9312990719918162,
+          "geometry_coverage": 0.3194444444444444,
+          "host_read_to_result_ms": {
+            "max": 81.39995101373643,
+            "p50": 48.11825099750422,
+            "p95": 72.1320538141299,
+            "p99": 78.27966095617741
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 24.335951216259456,
+          "processed_frames": 48,
+          "processing_deadline_misses": 48,
+          "processing_ms": {
+            "max": 70.42398999328725,
+            "p50": 39.127528507378884,
+            "p95": 57.0917215081863,
+            "p99": 66.84358686819907
+          },
+          "skipped_camera_frames": 96,
+          "velocity_coverage_calibrated": 0.09027777777777778,
+          "velocity_delay_ms": {
+            "max": 57.03735339920968,
+            "p50": 50.641768728382885,
+            "p95": 56.940914574079216,
+            "p99": 57.018065634183586
+          },
+          "velocity_fps": 6.731220549178148,
+          "velocity_frames": 13
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5303532008830022,
+          "angle_frames": 1922,
+          "calibrated_camera_frames": 3624,
+          "camera_frames_in_span": 3624,
+          "detected_frames": 1922,
+          "geometry_coverage": 0.5303532008830022,
+          "processed_frames": 1938,
+          "skipped_camera_frames": 1686,
+          "velocity_coverage_calibrated": 0.46578366445916114,
+          "velocity_frames": 1688
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183578.154595181,
+      "seq": 3701,
+      "processing_ms": 50.078338012099266,
+      "detection_ms": 48.440673999721184,
+      "lock_wait_ms": 1.2987779919058084,
+      "tracking": {
+        "arrival_interval_p95_ms": 61.4750312117394,
+        "delivered_fps": 25.85314543774206,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.78985718928743,
+        "delivered_fps": 73.54818288817893,
+        "error": null,
+        "frames_delivered": 3706,
+        "latest_age_s": 0.013648399006342515,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 39.00477097777184,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 40.0172730892675,
+        "diagnostics": [],
+        "encoded_mbps": 2.9998771382503078,
+        "error": null,
+        "frames_encoded": 1859,
+        "host_read_to_encode_ms": {
+          "max": 35.786899983918374,
+          "p50": 20.996704995017268,
+          "p95": 27.996593836981987,
+          "p99": 31.266483730002143
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3263888888888889,
+          "angle_fps": 23.94563587316144,
+          "angle_frames": 47,
+          "calibrated_camera_frames": 144,
+          "camera_frames_in_span": 144,
+          "detected_frames": 47,
+          "detection_reasons": {
+            "measured": 47,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9210181029920932,
+          "geometry_coverage": 0.3263888888888889,
+          "host_read_to_result_ms": {
+            "max": 82.50115800183266,
+            "p50": 50.30573498515878,
+            "p95": 72.40645325218793,
+            "p99": 81.50401586317457
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 24.466193174751904,
+          "processed_frames": 48,
+          "processing_deadline_misses": 48,
+          "processing_ms": {
+            "max": 67.65567901311442,
+            "p50": 41.19565000291914,
+            "p95": 60.16338500048732,
+            "p99": 67.10636227566283
+          },
+          "skipped_camera_frames": 96,
+          "velocity_coverage_calibrated": 0.10416666666666667,
+          "velocity_delay_ms": {
+            "max": 60.03544488339685,
+            "p50": 50.82280756323598,
+            "p95": 58.87026241980493,
+            "p99": 59.802408390678465
+          },
+          "velocity_fps": 7.808359523856991,
+          "velocity_frames": 15
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5263442312888409,
+          "angle_frames": 1948,
+          "calibrated_camera_frames": 3701,
+          "camera_frames_in_span": 3701,
+          "detected_frames": 1948,
+          "geometry_coverage": 0.5263442312888409,
+          "processed_frames": 1964,
+          "skipped_camera_frames": 1737,
+          "velocity_coverage_calibrated": 0.4593353147797892,
+          "velocity_frames": 1700
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183579.294357008,
+      "seq": 3785,
+      "processing_ms": 22.08443798008375,
+      "detection_ms": 21.81598500465043,
+      "lock_wait_ms": 0.0020479783415794373,
+      "tracking": {
+        "arrival_interval_p95_ms": 63.059504388365895,
+        "delivered_fps": 25.371293756871182,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 21.221950196195394,
+        "delivered_fps": 74.13518474167563,
+        "error": null,
+        "frames_delivered": 3788,
+        "latest_age_s": 0.01243391100433655,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.202996900305145,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 40.15145612406203,
+        "diagnostics": [],
+        "encoded_mbps": 3.010188794849458,
+        "error": null,
+        "frames_encoded": 1903,
+        "host_read_to_encode_ms": {
+          "max": 35.786899983918374,
+          "p50": 20.75066449635088,
+          "p95": 27.468890648462,
+          "p99": 31.001557512262803
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3472222222222222,
+          "angle_fps": 25.380627061261873,
+          "angle_frames": 50,
+          "calibrated_camera_frames": 144,
+          "camera_frames_in_span": 144,
+          "detected_frames": 50,
+          "detection_reasons": {
+            "measured": 50
+          },
+          "duration_s": 1.9306063590047415,
+          "geometry_coverage": 0.3472222222222222,
+          "host_read_to_result_ms": {
+            "max": 80.0385490001645,
+            "p50": 47.73995600407943,
+            "p95": 69.80064619710902,
+            "p99": 76.5086600507493
+          },
+          "longest_rejected_run_frames": 0,
+          "processed_fps": 25.380627061261873,
+          "processed_frames": 50,
+          "processing_deadline_misses": 50,
+          "processing_ms": {
+            "max": 64.48169599752873,
+            "p50": 38.116996991448104,
+            "p95": 56.68575200252234,
+            "p99": 62.904398244863835
+          },
+          "skipped_camera_frames": 94,
+          "velocity_coverage_calibrated": 0.19444444444444445,
+          "velocity_delay_ms": {
+            "max": 60.03544488339685,
+            "p50": 51.80166284844745,
+            "p95": 58.901407866505906,
+            "p99": 59.74814136920031
+          },
+          "velocity_fps": 14.503215463578213,
+          "velocity_frames": 28
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5220607661822986,
+          "angle_frames": 1976,
+          "calibrated_camera_frames": 3785,
+          "camera_frames_in_span": 3785,
+          "detected_frames": 1976,
+          "geometry_coverage": 0.5220607661822986,
+          "processed_frames": 1992,
+          "skipped_camera_frames": 1793,
+          "velocity_coverage_calibrated": 0.45336856010568033,
+          "velocity_frames": 1716
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183580.357331137,
+      "seq": 3866,
+      "processing_ms": 69.03577098273672,
+      "detection_ms": 56.60592400818132,
+      "lock_wait_ms": 12.139120983192697,
+      "tracking": {
+        "arrival_interval_p95_ms": 63.393971385085024,
+        "delivered_fps": 24.689234508191873,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 19.603951193857934,
+        "delivered_fps": 74.72146060014695,
+        "error": null,
+        "frames_delivered": 3872,
+        "latest_age_s": 0.007717049011262134,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.83162800827995,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 40.02466825131654,
+        "diagnostics": [],
+        "encoded_mbps": 3.0096500398525063,
+        "error": null,
+        "frames_encoded": 1947,
+        "host_read_to_encode_ms": {
+          "max": 35.786899983918374,
+          "p50": 20.555104492647303,
+          "p95": 27.468890648462,
+          "p99": 32.55289701461895
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3287671232876712,
+          "angle_fps": 24.659175966888455,
+          "angle_frames": 48,
+          "calibrated_camera_frames": 146,
+          "camera_frames_in_span": 146,
+          "detected_frames": 48,
+          "detection_reasons": {
+            "measured": 48,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9059842090064194,
+          "geometry_coverage": 0.3287671232876712,
+          "host_read_to_result_ms": {
+            "max": 80.0385490001645,
+            "p50": 46.612828999059275,
+            "p95": 72.06825939938423,
+            "p99": 77.5420080393087
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 25.18383928533289,
+          "processed_frames": 49,
+          "processing_deadline_misses": 49,
+          "processing_ms": {
+            "max": 69.03577098273672,
+            "p50": 38.2709999976214,
+            "p95": 61.69470919994633,
+            "p99": 68.89235178590752
+          },
+          "skipped_camera_frames": 97,
+          "velocity_coverage_calibrated": 0.1780821917808219,
+          "velocity_delay_ms": {
+            "max": 59.70922019332647,
+            "p50": 52.73696708900388,
+            "p95": 58.88043635059148,
+            "p99": 59.511102190299425
+          },
+          "velocity_fps": 13.11658296111088,
+          "velocity_frames": 26
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5178479048111744,
+          "angle_frames": 2002,
+          "calibrated_camera_frames": 3866,
+          "camera_frames_in_span": 3866,
+          "detected_frames": 2002,
+          "geometry_coverage": 0.5178479048111744,
+          "processed_frames": 2019,
+          "skipped_camera_frames": 1847,
+          "velocity_coverage_calibrated": 0.4469736161407139,
+          "velocity_frames": 1728
+        },
+        "window_s": 2
+      }
+    },
+    {
+      "t": 183581.435951209,
+      "seq": 3948,
+      "processing_ms": 48.48768300144002,
+      "detection_ms": 40.94295701361261,
+      "lock_wait_ms": 7.201870990684256,
+      "tracking": {
+        "arrival_interval_p95_ms": 63.882381311850615,
+        "delivered_fps": 24.251066947600275,
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "camera": {
+        "arrival_interval_p95_ms": 18.973547988571227,
+        "delivered_fps": 75.96198399489847,
+        "error": null,
+        "frames_delivered": 3952,
+        "latest_age_s": 0.01660240997443907,
+        "read_failures": 0,
+        "settings": {
+          "actual_frame_size": [
+            960,
+            600
+          ],
+          "backend": "V4L2",
+          "controls": {
+            "buffer": {
+              "accepted": true,
+              "readback": 1.0,
+              "requested": 1
+            },
+            "fourcc": {
+              "accepted": true,
+              "readback": 1448695129.0,
+              "requested": 1448695129
+            },
+            "fps": {
+              "accepted": true,
+              "readback": 80.0,
+              "requested": 80
+            },
+            "height": {
+              "accepted": true,
+              "readback": 600.0,
+              "requested": 600
+            },
+            "width": {
+              "accepted": true,
+              "readback": 960.0,
+              "requested": 960
+            }
+          },
+          "driver_auto_exposure_raw": 0.0,
+          "driver_exposure_raw": 5.0,
+          "driver_fps": 80.0,
+          "driver_gain_raw": 168.0,
+          "requested_fps": 80,
+          "requested_height": 600,
+          "requested_width": 960,
+          "rotation": 180
+        },
+        "target_rate_met": false,
+        "timing_note": "Host read completion timestamps; not sensor timestamps or end-to-end latency"
+      },
+      "video": {
+        "arrival_interval_p95_ms": 37.13876200199593,
+        "bitrate_kbps": 3000,
+        "clients": 1,
+        "delivered_fps": 39.9575053234485,
+        "diagnostics": [],
+        "encoded_mbps": 3.0006292064281546,
+        "error": null,
+        "frames_encoded": 1989,
+        "host_read_to_encode_ms": {
+          "max": 38.50810698511253,
+          "p50": 20.58714649421134,
+          "p95": 28.565666582317192,
+          "p99": 35.15104047269053
+        },
+        "mode": "camera",
+        "requested_fps": 40,
+        "slow_disconnects": 1,
+        "source_origin_s": 183529.865454223,
+        "target_rate_met": true,
+        "timing_note": "Encoder output arrival timestamps; not sensor-to-screen latency"
+      },
+      "measurement_quality": {
+        "recent": {
+          "angle_coverage_calibrated": 0.3082191780821918,
+          "angle_fps": 23.10944552907647,
+          "angle_frames": 45,
+          "calibrated_camera_frames": 146,
+          "camera_frames_in_span": 146,
+          "detected_frames": 45,
+          "detection_reasons": {
+            "measured": 45,
+            "no reliable arm geometry": 1
+          },
+          "duration_s": 1.9039833709830418,
+          "geometry_coverage": 0.3082191780821918,
+          "host_read_to_result_ms": {
+            "max": 86.24407998286188,
+            "p50": 48.530835498240776,
+            "p95": 74.6521302498877,
+            "p99": 83.85606633964925
+          },
+          "longest_rejected_run_frames": 1,
+          "processed_fps": 23.634660200191842,
+          "processed_frames": 46,
+          "processing_deadline_misses": 46,
+          "processing_ms": {
+            "max": 77.81856899964623,
+            "p50": 40.77426499861758,
+            "p95": 66.79365449235775,
+            "p99": 73.86630989203692
+          },
+          "skipped_camera_frames": 100,
+          "velocity_coverage_calibrated": 0.08904109589041095,
+          "velocity_delay_ms": {
+            "max": 59.70922019332647,
+            "p50": 53.21386436116882,
+            "p95": 59.23373698606156,
+            "p99": 59.61412355187349
+          },
+          "velocity_fps": 6.302576053384492,
+          "velocity_frames": 13
+        },
+        "timing_note": "Host read completion to result; excludes sensor exposure/readout and browser display.",
+        "totals": {
+          "angle_coverage_calibrated": 0.5134245187436677,
+          "angle_frames": 2027,
+          "calibrated_camera_frames": 3948,
+          "camera_frames_in_span": 3948,
+          "detected_frames": 2027,
+          "geometry_coverage": 0.5134245187436677,
+          "processed_frames": 2044,
+          "skipped_camera_frames": 1904,
+          "velocity_coverage_calibrated": 0.4389564336372847,
+          "velocity_frames": 1733
+        },
+        "window_s": 2
+      }
+    }
+  ],
+  "initial_info": {
+    "sid": 1968358707,
+    "firmware": "executor-v4-rehome",
+    "encoder_upright_raw": 370,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 0,
+    "home_epoch": 1,
+    "measured_span_steps": 16512,
+    "rail_half_m": 0.26,
+    "received_ns": 183556913695873,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2333,
+    "encoder_raw_age_us": 1923,
+    "encoder_recoveries": 0
+  },
+  "monitor_returncode": 0,
+  "viewer": {
+    "age_s": 0.11244085698854178,
+    "packet": {
+      "clock_id": "local-monotonic",
+      "commissioned": false,
+      "control_eligible": false,
+      "diagnostics": {
+        "accepted_vision": 563,
+        "bias_rad": 0.1207893123207113,
+        "calibration_id": "43cbb250912edd13fb4ec275aa0f9d9f656b66d380b05ca3774a9fa19ef9211c",
+        "commissioned": false,
+        "configuration_sha256": "ca23640af0ba2c174372818b569b65511eea4ad6306bdbce6364336d93ad695a",
+        "control_eligible": false,
+        "encoder_clock": {
+          "anchor_received_ns": 183556912501961,
+          "max_receipt_residual_ns": 10000000,
+          "offset_ns": 180002795185961,
+          "receipt_delay_ns": 22000000,
+          "session_clock_id": "local-monotonic",
+          "source_clock_id": "teensy:1968358707",
+          "strategy": "receipt-anchor",
+          "uncertainty_ns": 25000000,
+          "valid_for_ns": 60000000000
+        },
+        "encoder_history_truncations": 0,
+        "frame_id": "visible-upright-20261015-encoder-positive",
+        "history_size": 327,
+        "innovation_rad": 0.0006727823332379756,
+        "last_vision_available_ns": 183582220742504,
+        "last_vision_effective_ns": 183582150624440,
+        "last_vision_received_ns": 183582201490058,
+        "pending_vision": 0,
+        "pending_vision_dropped": 0,
+        "reason": null,
+        "rejected_vision": 5,
+        "sources": {
+          "magnetic": {
+            "calibration_id": "5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+            "clock_mapping_id": "befb8babc99c69ce5bff2c4f75e46dc11921ea8b87dadfa102e6736d8e117752",
+            "source_id": "visible-upright-rig-as5600-reference370"
+          },
+          "vision": {
+            "calibration_id": "c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+            "clock_mapping_id": "dda89eee3d34cfe3f7dff9953a5ea8ee30ec9aef5249900818feac25d4ac3c17",
+            "source_id": "visible-upright-jetson-camera-960x600-rotation180"
+          }
+        },
+        "status": "tracking",
+        "timing_basis": "explicit clock map; camera host read is an acquisition proxy",
+        "vision_clock": {
+          "offset_ns": 0,
+          "session_clock_id": "local-monotonic",
+          "source_clock_id": "jetson-local-monotonic-camera-host-read"
+        }
+      },
+      "host_t": 183582.221275891,
+      "observation": {
+        "availability_basis": "shadow observer receipt; source effective times retained",
+        "available_ns": 183582221275891,
+        "clock_id": "local-monotonic",
+        "samples": [
+          {
+            "acquired_ns": 183582174501961,
+            "effective_ns": 183582174501961,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "measured",
+            "method": "magnetic decoded; explicit receipt-anchor clock; explicit angular anchor 5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+            "quantity": "angle",
+            "reason": null,
+            "received_ns": 183582198656274,
+            "source": "magnetic",
+            "unit": "rad",
+            "validity": "valid",
+            "value": 3.0097250954454786
+          },
+          {
+            "acquired_ns": 183582150624440,
+            "effective_ns": 183582150624440,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "measured",
+            "method": "vision3 arm angle; host-read acquisition proxy; explicit angular anchor c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+            "quantity": "angle",
+            "reason": null,
+            "received_ns": 183582201490058,
+            "source": "vision",
+            "unit": "rad",
+            "validity": "valid",
+            "value": 3.13119835233827
+          },
+          {
+            "acquired_ns": 183582174501961,
+            "effective_ns": 183582174501961,
+            "entity": "pole",
+            "frame_id": "visible-upright-20261015-encoder-positive",
+            "kind": "estimated",
+            "method": "shadow complementary bias; delayed wrapped encoder interpolation; 43cbb250912edd13fb4ec275aa0f9d9f656b66d380b05ca3774a9fa19ef9211c",
+            "quantity": "angle",
+            "reason": null,
+            "received_ns": 183582221275891,
+            "source": "fused",
+            "unit": "rad",
+            "validity": "valid",
+            "value": 3.1305144077661904
+          }
+        ],
+        "sequence": 567,
+        "session_id": "stopped-batch-shadow-1792088261084895299"
+      },
+      "schema": "cartpole-sdk-shadow-v1",
+      "sequence": 567,
+      "session_id": "stopped-batch-shadow-1792088261084895299"
+    },
+    "purpose": "SDK shadow observation; control is not commissioned",
+    "status": "tracking"
+  },
+  "final": {
+    "sid": 1968358707,
+    "tick": 7871805,
+    "us": 3579558316,
+    "mode": 0,
+    "flags": 205,
+    "theta": 3.012738,
+    "angle_hat": 3.012155,
+    "omega": 0.06921792,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 1651377,
+    "brake_direction": 0,
+    "received_ns": 183582375682989,
+    "unwrapped_tick": 7871805,
+    "unwrapped_us": 3579558316
+  },
+  "final_info": {
+    "sid": 1968358707,
+    "firmware": "executor-v4-rehome",
+    "encoder_upright_raw": 370,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 0,
+    "home_epoch": 1,
+    "measured_span_steps": 16512,
+    "rail_half_m": 0.26,
+    "received_ns": 183582379944898,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2333,
+    "encoder_raw_age_us": 3472,
+    "encoder_recoveries": 0
+  },
+  "after_close_status": "stale",
+  "after_close_encoder": {
+    "bias": -0.14453455423575795,
+    "bias_note": "Relative encoder minus vision offset; neither sensor establishes physical truth.",
+    "clock_jitter_ms": 7.617222989210859,
+    "disagreement_deg": null,
+    "encoder_age_s": 0.7695160290168133,
+    "encoder_health": {
+      "age_s": 0.7674051270005293,
+      "basis": "current executor state flags and fault",
+      "diagnostic_received_ns": 183582379944898,
+      "i2c_errors": 0,
+      "magnet_status": 103,
+      "period_s": null,
+      "status": "stale"
+    },
+    "encoder_hz": 0.0,
+    "encoder_sign": 1,
+    "fusion_queue_drops": 3,
+    "omega": -0.02089716220733226,
+    "purpose": "legacy display comparison; not SDK control fusion",
+    "receiver_error": null,
+    "rejected_vision": 0,
+    "sigma_deg": 18.522918736560076,
+    "source": "vision only",
+    "theta": -3.127093455038396,
+    "timing_note": "Estimated measurement times: board clock mapped from serial receipt; camera host-read minus configured delay. Absolute sensor/serial delay is uncalibrated.",
+    "upright_raw": 370,
+    "vision_age_s": 0.03207180500612594,
+    "vision_delay_ms": 0.0,
+    "vision_hz": 34.975247888622384
+  },
+  "counts": {
+    "tracking": 563,
+    "vision_rejected": 4,
+    "unavailable": 1
+  },
+  "rows": 2273,
+  "last_diagnostics": {
+    "accepted_vision": 563,
+    "bias_rad": 0.1207893123207113,
+    "calibration_id": "43cbb250912edd13fb4ec275aa0f9d9f656b66d380b05ca3774a9fa19ef9211c",
+    "commissioned": false,
+    "configuration_sha256": "ca23640af0ba2c174372818b569b65511eea4ad6306bdbce6364336d93ad695a",
+    "control_eligible": false,
+    "encoder_clock": {
+      "anchor_received_ns": 183556912501961,
+      "max_receipt_residual_ns": 10000000,
+      "offset_ns": 180002795185961,
+      "receipt_delay_ns": 22000000,
+      "session_clock_id": "local-monotonic",
+      "source_clock_id": "teensy:1968358707",
+      "strategy": "receipt-anchor",
+      "uncertainty_ns": 25000000,
+      "valid_for_ns": 60000000000
+    },
+    "encoder_history_truncations": 0,
+    "frame_id": "visible-upright-20261015-encoder-positive",
+    "history_size": 327,
+    "innovation_rad": 0.0006727823332379756,
+    "last_vision_available_ns": 183582220742504,
+    "last_vision_effective_ns": 183582150624440,
+    "last_vision_received_ns": 183582201490058,
+    "pending_vision": 0,
+    "pending_vision_dropped": 0,
+    "reason": null,
+    "rejected_vision": 5,
+    "sources": {
+      "magnetic": {
+        "calibration_id": "5d1cbd15dd97eb7fca7ac7340b1574ea619c5ba8534422eeda8432ada5fe15c3",
+        "clock_mapping_id": "befb8babc99c69ce5bff2c4f75e46dc11921ea8b87dadfa102e6736d8e117752",
+        "source_id": "visible-upright-rig-as5600-reference370"
+      },
+      "vision": {
+        "calibration_id": "c6c14e6f0fb775b6e7f7fad75087549729a7ec820af30b6bd56a9dbf06624cbe",
+        "clock_mapping_id": "dda89eee3d34cfe3f7dff9953a5ea8ee30ec9aef5249900818feac25d4ac3c17",
+        "source_id": "visible-upright-jetson-camera-960x600-rotation180"
+      }
+    },
+    "status": "tracking",
+    "timing_basis": "explicit clock map; camera host read is an acquisition proxy",
+    "vision_clock": {
+      "offset_ns": 0,
+      "session_clock_id": "local-monotonic",
+      "source_clock_id": "jetson-local-monotonic-camera-host-read"
+    }
+  }
+}

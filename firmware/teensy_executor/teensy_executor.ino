@@ -12,10 +12,13 @@
 #include "spin_recovery.h"
 #include "upright_session.h"
 #include "swing_controller.h"
+#include "controller_parameters.h"
 #include "encoder_reference.h"
+#include "model_encoder_reference.h"
 #include "serial_frame.h"
 #include "executor_core.h"
 #include "cart_homing.h"
+#include "saved_center_return.h"
 #include <cstdarg>
 #include "status_display.h"
 
@@ -83,7 +86,7 @@ static const float VMAX_CEIL = cart_hardware::max_speed;
 #define MANUAL_TIMEOUT_MS 250     // 'v' command watchdog: no news = stop
 
 // ===================== LIVE-TUNABLE PARAMETERS ==============================
-// Saved parameters are fixed at boot; no arbitrary wire-level tuning exists.
+// Saved defaults load at boot; bounded stopped-only operator tuning is volatile.
 // Current arm: 125 mm / 11.05 g plus two 5.85 g end weights.
 // L_eff=0.124 m from 20 low-angle cycles in the pre-175 mm captures.
 swing_control::Parameters controller;
@@ -116,27 +119,6 @@ float p_ztravel = 100.0f;  // mm of usable screw travel above z=0
 
 // state-feedback gains, computed from the poles above: a = -(K.[th,thd,x,v])
 float K1, K2, K3, K4;
-
-struct Param { const char *name; float *ptr; bool recalc; };
-static const Param PARAMS[] = {
-  {"spin_trip_rad_s",&controller.spin_trip_rad_s,false},
-  {"spin_resume_rad_s",&controller.spin_resume_rad_s,false},
-  {"bal_pw",&controller.bal_pw,false},
-  {"leff",&p_leff,true},   {"pw",&p_pw,true},      {"pz",&p_pz,true},
-  {"pc1",&p_pc1,true},     {"pc2",&p_pc2,true},
-  {"vmax_s",&p_vmax_s,false},{"vmax_b",&p_vmax_b,false},
-  {"approach_v",&controller.approach_v,false},{"catch_v",&controller.catch_v,false},
-  {"approach_angle",&controller.approach_angle,false},{"catch_da",&controller.catch_da,false},
-  {"vmax",&p_vmax,false},  {"amax_s",&p_amax_s,false},{"amax_b",&p_amax_b,false},
-  {"amax_m",&p_amax_m,false},{"jmax_m",&p_jmax_m,false},
-  {"phase_soft",&p_phase_soft,false},{"jmax",&p_jmax,false},  {"ke",&p_ke,false},      {"kpx",&p_kpx,false},   {"kdx",&p_kdx,false},
-  {"catch_a",&p_catch_a,false},{"catch_r",&p_catch_r,false},
-  {"giveup",&p_giveup,false},{"rail",&p_rail,false},{"bw",&p_bw,false},
-  {"vman",&p_vman,false},  {"zvmax",&p_zvmax,false},{"zamax",&p_zamax,false},
-  {"ztravel",&p_ztravel,false},
-  {"k1",&K1,false}, {"k2",&K2,false}, {"k3",&K3,false}, {"k4",&K4,false},
-};
-static const int N_PARAMS = sizeof(PARAMS)/sizeof(PARAMS[0]);
 
 // ==================== STEP PULSE GENERATOR (3 axes) =========================
 // Same DDS rates and 7 us tick as the working ESP32 firmware.
@@ -257,6 +239,14 @@ static bool mag_status_valid=false;
 static uint32_t mag_status_us=0;
 constexpr uint32_t MAG_STATUS_MAX_AGE_US=20000;
 volatile uint32_t enc_errors = 0;
+// Verify the sensor's operating mode, not just successful I2C transactions.
+// AS5600 datasheet v1-06: PM=3 updates only every 100 ms. WD can enter that
+// mode after inactivity. Preserve reserved and output-stage bits on writes.
+constexpr uint16_t ENC_CONF_MASK=0x3F0F, ENC_CONF_EXPECTED=0x0300;
+constexpr uint32_t ENC_CONF_MAX_AGE_US=20000;
+static int32_t enc_boot_conf=-1, enc_conf=-1;
+static bool enc_conf_valid=false;
+static uint32_t enc_conf_us=0, enc_raw_changed_us=0;
 
 bool as5600Write8(uint8_t reg, uint8_t val) {
   Wire1.beginTransmission(AS5600_ADDR);
@@ -271,19 +261,31 @@ int16_t as5600Read8(uint8_t reg) {
   return Wire1.read();
 }
 
-// The single most important line in this file for control performance:
-// the AS5600's Slow Filter defaults to 16x, which is 2.2 ms of propagation
-// delay. That is pure phase lag in a 1 kHz balance loop and it hard-caps how
-// stiff you can make the controller. SF=2x drops it to 0.286 ms. Costs a
-// little LSB noise, which the estimator cleans up anyway. CONF is volatile,
-// so this has to be rewritten every boot.
-//   CONF high byte: [--][WD][FTH2:0][SF1:0]
-//   SF: 00=16x(2.2ms) 01=8x(1.1ms) 10=4x(0.55ms) 11=2x(0.286ms)
-//   FTH=000 -> slow filter only
+int32_t as5600ReadConf() {
+  Wire1.beginTransmission(AS5600_ADDR);Wire1.write(REG_CONF_HI);
+  if(Wire1.endTransmission(false)!=0 || Wire1.requestFrom((uint8_t)AS5600_ADDR,(uint8_t)2)!=2){
+    ++enc_errors;return -1;
+  }
+  const uint16_t hi=Wire1.read(),lo=Wire1.read();
+  return (hi<<8)|lo;
+}
+void encConfigRead() {
+  enc_conf=as5600ReadConf();enc_conf_us=micros();
+  enc_conf_valid=enc_conf>=0 && (uint16_t(enc_conf)&ENC_CONF_MASK)==ENC_CONF_EXPECTED;
+}
+// NOM power, watchdog off, hysteresis off, slow filter 2x (0.286 ms).
+// Acknowledged writes alone do not prove the device accepted this mode.
 bool as5600FastFilter() {
-  bool ok  = as5600Write8(REG_CONF_HI, 0b00000011);   // FTH=000, SF=2x
-  ok &= as5600Write8(REG_CONF_HI + 1, 0b00000000);    // PM=NOM, HYST off
-  return ok;
+  enc_conf_valid=false;
+  const int32_t before=as5600ReadConf();
+  if(before<0){enc_conf=-1;return false;}
+  const uint16_t desired=(uint16_t(before)&uint16_t(~ENC_CONF_MASK))|ENC_CONF_EXPECTED;
+  const bool high=as5600Write8(REG_CONF_HI,uint8_t(desired>>8));
+  const bool low=as5600Write8(REG_CONF_HI+1,uint8_t(desired));
+  if(!high || !low)++enc_errors;
+  encConfigRead();
+  enc_conf_valid=enc_conf_valid && high && low;
+  return enc_conf_valid;
 }
 
 // I2C is used only in setup and the foreground control tick, never in an ISR.
@@ -329,6 +331,7 @@ void encUpdate() {
   if (d >  ENC_CPR/2) d -= ENC_CPR;
   if (d < -ENC_CPR/2) d += ENC_CPR;
   enc_ticks += d;
+  if(raw!=enc_last_raw)enc_raw_changed_us=micros();
   enc_last_raw = raw;
 }
 
@@ -359,7 +362,8 @@ void encStatusRead(){
   else enc_status=(uint8_t)status;
 }
 bool encoderHealthy(){
-  return enc_ok && enc_consec_err==0 && mag_status_valid &&
+  return enc_ok && enc_consec_err==0 && enc_conf_valid &&
+    uint32_t(micros()-enc_conf_us)<=ENC_CONF_MAX_AGE_US && mag_status_valid &&
     uint32_t(micros()-mag_status_us)<=MAG_STATUS_MAX_AGE_US &&
     (enc_status & 0x20) && !(enc_status & 0x18);
 }
@@ -390,9 +394,9 @@ void encPrintMagnet() {
 }
 
 // ========================== CONTROLLER ======================================
-enum Mode { M_IDLE=0, M_MANUAL, M_SWINGUP, M_BALANCE, M_FAULT, M_RAIL_BRAKE, M_RAIL_RETURN, M_SPIN_BRAKE, M_SPIN_CENTER, M_SPIN_WAIT, M_BAL_BRAKE, M_BAL_CENTER, M_EXTERNAL, M_HOMING };
+enum Mode { M_IDLE=0, M_MANUAL, M_SWINGUP, M_BALANCE, M_FAULT, M_RAIL_BRAKE, M_RAIL_RETURN, M_SPIN_BRAKE, M_SPIN_CENTER, M_SPIN_WAIT, M_BAL_BRAKE, M_BAL_CENTER, M_EXTERNAL, M_HOMING, M_REHOME };
 volatile Mode mode = M_IDLE;
-const char *MODE_NAME[] = {"IDLE","MANUAL","SWINGUP","BALANCE","FAULT","RAIL_BRAKE","RAIL_RETURN","SPIN_BRAKE","SPIN_CENTER","SPIN_WAIT","BAL_BRAKE","BAL_CENTER","EXTERNAL","HOMING"};
+const char *MODE_NAME[] = {"IDLE","MANUAL","SWINGUP","BALANCE","FAULT","RAIL_BRAKE","RAIL_RETURN","SPIN_BRAKE","SPIN_CENTER","SPIN_WAIT","BAL_BRAKE","BAL_CENTER","EXTERNAL","HOMING","REHOME"};
 
 volatile float th=0, thd=0, xc=0, vc=0, acc_cmd=0, energy_n=-1;
 volatile float z_mm=0;
@@ -405,6 +409,8 @@ static int32_t home_steps=0, zhome_steps=0;
 static int32_t measured_home_span_steps=0;
 static uint32_t home_epoch=0;
 constexpr float SAVED_RAIL_HALF=.26f;
+// Default HOME uses measured travel. An explicit stopped rail write narrows it.
+static float configured_rail=cart_homing::maximum_rail_half;
 
 // Deferred foreground requests. loop() may only SET these; the control tick is the
 // only thing allowed to act on them, because it is the sole owner of the I2C
@@ -413,6 +419,8 @@ volatile bool req_diag = false, req_encoder = false;
 // 0 none, 1 hanging capture, 2 upright capture. Operator-only V2 command.
 volatile int calibration_request=0;
 volatile int32_t requested_upright_raw=0;
+volatile int16_t requested_hanging_offset=0;
+volatile bool requested_model_capture=false;
 volatile bool reference_save_pending=false;
 static char display_fault[81]="See serial log";
 volatile uint32_t dropped_control_messages=0;
@@ -422,15 +430,18 @@ void controlLog(const char *text){
 }
 volatile bool diag_done = false;
 static volatile bool zeroing = false;
-static bool capture_upright=false;
+static bool capture_upright=false,capture_model=false;
 static encoder_reference::StillCapture reference_capture;
+static encoder_reference::ModelStillCapture model_reference_capture;
 static uint32_t zero_t0=0;
 static uint32_t calibration_sid=0;
 void queueReply(const char* payload);
 bool encoderCalibrationBusy(){return calibration_request!=0 || zeroing || reference_save_pending;}
 void cancelEncoderCalibration(){
   calibration_request=0;zeroing=false;reference_save_pending=false;
-  executor_state.calibration=0;calibration_sid=0;
+  executor_state.calibration=0;executor_state.calibration_offset=0;executor_state.calibration_model=false;
+  requested_hanging_offset=0;requested_model_capture=false;capture_model=false;
+  reference_capture.reset();model_reference_capture.reset();calibration_sid=0;
 }
 void finishEncoderCalibration(const char* error){
   const uint32_t sid=calibration_sid;
@@ -474,6 +485,7 @@ static rail_recovery::State rail_recovery_state;
 static bool recovery_was_manual=false;
 static spin_recovery::State spin_recovery_state;
 static upright_session::Return upright_return;
+static saved_center_return::State saved_return;
 static bool upright_only=false;
 volatile bool req_balance=false;
 bool inUprightReturn(){return mode==M_BAL_BRAKE || mode==M_BAL_CENTER;}
@@ -516,6 +528,7 @@ float swingAccel() {
 
 void eStop() {
   energize(false); // Disable immediately; ISR also suppresses pulses/counts.
+  saved_return.reset();
   executor_state.stop();homing.cancel();homing_active=homing_centering=false;homing_edge_pending=0;
   cancelEncoderCalibration();
   mode = M_IDLE;
@@ -527,6 +540,13 @@ void eStop() {
   v_manual = 0; vc = 0; acc_cmd = 0; zv_target = 0; zv_now = 0;
   for (int i=0;i<N_AX;i++) ax_inc[i] = 0;
   clearStepPins();
+}
+
+void beginSavedReturn(){
+  saved_return.begin();mode=M_REHOME;
+  req_balance=false;upright_only=false;upright_return.reset();
+  rail_recovery_state.reset();recovery_was_manual=false;spin_recovery_state.reset();
+  response_watch.armed=false;pump.reset();v_manual=0;zv_target=0;
 }
 
 void beginUprightReturn(const char *reason) {
@@ -541,7 +561,7 @@ void beginRailRecovery() {
   if(upright_only){beginUprightReturn("# upright trial rail protection -> BAL_BRAKE; return to center and stop");return;}
   if (mode==M_RAIL_BRAKE || mode==M_RAIL_RETURN) return;
   recovery_was_manual = mode==M_MANUAL;
-  rail_recovery_state.begin(xc,p_rail,cart_brake_direction);
+  rail_recovery_state.begin(xc,p_rail,cart_brake_direction,controller.rail_margin,controller.rail_hysteresis);
   // Keep the startup response watch active through recovery.
   mode=M_RAIL_BRAKE;
   controlLog("# rail recovery -> BRAKING; pendulum control paused");
@@ -564,6 +584,8 @@ void controlTick() {
     if(executor_state.fault!=executor::NONE)mode=M_FAULT;
     encUpdate();
     if(executor_state.tick%10==0)encStatusRead();
+    // Offset from magnet status polling to bound each tick's bus work.
+    if(executor_state.tick%10==5)encConfigRead();
     executor_state.sample(encoderHealthy(),rawLimits());
     if(!executor_state.enabled && g_energized){eStop();mode=M_FAULT;}
 
@@ -587,8 +609,8 @@ void controlTick() {
     // Serve bus requests here, where we already own Wire1.
     if (req_diag) { req_diag = false; encDiagRead(); diag_done = true; }
     if(calibration_request){
-      capture_upright=calibration_request==2;
-      calibration_request=0;zeroing=true;reference_capture.reset();zero_t0=millis();
+      capture_upright=calibration_request==2;capture_model=requested_model_capture;
+      calibration_request=0;zeroing=true;reference_capture.reset();model_reference_capture.reset();zero_t0=millis();
     }
     if(zeroing){
       if(!executor_state.calibration || mode!=M_IDLE || g_energized){
@@ -599,9 +621,9 @@ void controlTick() {
         finishEncoderCalibration("calibration_watchdog");
       }else if(uint32_t(millis()-zero_t0)>=5000){
         finishEncoderCalibration("calibration_timeout");
-      }else if(reference_capture.add(enc_last_raw,true)){
-        const int32_t raw=reference_capture.mean();
-        requested_upright_raw=capture_upright?raw:encoder_reference::opposite(raw);
+      }else if(capture_model?model_reference_capture.add(enc_last_raw,true):reference_capture.add(enc_last_raw,true)){
+        const int32_t raw=capture_model?model_reference_capture.median():reference_capture.mean();
+        requested_upright_raw=capture_upright?raw:encoder_reference::normalize(encoder_reference::opposite(raw)+requested_hanging_offset);
         zeroing=false;reference_save_pending=true;
       }
     }
@@ -610,7 +632,7 @@ void controlTick() {
     xc = (ax_pos[AX_CART] - home_steps) / CART_STEPS_PER_M;
     z_mm = (ax_pos[AX_Z1] - zhome_steps) / Z_STEPS_PER_MM;
 
-    float rail_hard = p_rail - 0.01f;
+    float rail_hard = p_rail - controller.rail_fault_margin;
     if (mode != M_IDLE && mode != M_FAULT && mode != M_HOMING && fabsf(xc) > rail_hard) {
       executor_state.trip(executor::RAIL);
       controlLog("! rail limit -> FAULT");
@@ -628,7 +650,7 @@ void controlTick() {
       if(homing.failed()){executor_state.trip(executor::HOMING);eStop();mode=M_FAULT;}
       else if(homing.done()){
         const int32_t center=homing.center();
-        p_rail=homing.safeRail(SAVED_RAIL_HALF);
+        p_rail=homing.safeRail(configured_rail,controller.rail_fraction,controller.rail_margin);
         measured_home_span_steps=homing.span();++home_epoch;
         eStop();home_steps=center;
         executor_state.homed=true;xc=0;
@@ -641,6 +663,29 @@ void controlTick() {
         if(!irq)__enable_irq();
         vc=homing.velocity(ax_pos[AX_CART]);acc_cmd=0;executor_state.demand=vc;
         axSetRate(AX_CART,vc*CART_STEPS_PER_M,CART_INVERT);
+      }
+      axSetRate(AX_Z1,0,Z_INVERT);axSetRate(AX_Z2,0,Z_INVERT);
+      loop_us=micros()-t_start;return;
+    }
+    // Normal auto expiry requests this only after fresh health/rail guards.
+    // Preserve inherited v/a: returning is a jerk-limited brake, not an eStop.
+    if(executor_state.enabled && executor_state.mode==M_REHOME && mode!=M_REHOME)beginSavedReturn();
+    if(mode==M_REHOME){
+      cart_motion::State current;
+      current.velocity=vc;current.acceleration=acc_cmd;current.brake_direction=cart_brake_direction;
+      const uint32_t irq=interruptMask();__disable_irq();
+      const bool centered=saved_return.settledAtCenter(ax_pos[AX_CART]-home_steps,current);
+      if(centered){eStop();xc=0;} // Atomic count check and disable; publish that verified coordinate.
+      if(!irq)__enable_irq();
+      if(!centered){
+        const auto next=saved_return.advance(current,xc,p_rail,DT,p_vmax,p_jmax,max(p_amax_s,p_amax_b),controller.rehome_v,controller.rehome_a,controller.rehome_j,controller.rail_margin);
+        if(!isfinite(next.velocity)||!isfinite(next.acceleration)||fabsf(next.velocity)>p_vmax+.002f||fabsf(next.velocity)>VMAX_CEIL||fabsf(next.acceleration)>max(max(p_amax_s,p_amax_b),controller.rehome_a)+.001f){
+          executor_state.trip(executor::CONTROLLER);eStop();mode=M_FAULT;
+        }else{
+          vc=next.velocity;acc_cmd=next.acceleration;cart_brake_direction=next.brake_direction;
+          executor_state.demand=saved_return.demand;
+          axSetRate(AX_CART,vc*CART_STEPS_PER_M,CART_INVERT);
+        }
       }
       axSetRate(AX_Z1,0,Z_INVERT);axSetRate(AX_Z2,0,Z_INVERT);
       loop_us=micros()-t_start;return;
@@ -666,7 +711,7 @@ void controlTick() {
     if(!upright_only && automatic && enc_ok && spin_recovery::trigger(thd,controller.spin_trip_rad_s))beginSpinRecovery();
 
     if ((mode==M_SWINGUP || mode==M_BALANCE) &&
-        rail_recovery_state.atEdge(xc,p_rail)) beginRailRecovery();
+        rail_recovery_state.atEdge(xc,p_rail,controller.rail_margin)) beginRailRecovery();
 
     float a = 0.0f;
     switch (mode) {
@@ -706,7 +751,7 @@ void controlTick() {
         current.brake_direction=cart_brake_direction;
         const float recovery_amax=recovery_was_manual?p_amax_m:max(p_amax_s,p_amax_b);
         const float recovery_jerk=recovery_was_manual?p_jmax_m:p_jmax;
-        if(rail_recovery_state.update(xc,current,DT)) {
+        if(rail_recovery_state.update(xc,current,DT,controller.rail_recover_v,controller.rail_recover_a)) {
           char handoff[96];snprintf(handoff,sizeof(handoff),"# rail handoff x=%.5f v=%.4f a=%.3f",xc,vc,acc_cmd);
           controlLog(handoff);
           if(recovery_was_manual) {
@@ -720,7 +765,7 @@ void controlTick() {
           mode=M_SWINGUP;
           a=swingAccel();
           controlLog("# back inside operating range -> SWINGUP");
-        } else if(rail_recovery_state.timedOut()) {
+        } else if(rail_recovery_state.timedOut(controller.rail_recover_s)) {
           eStop(); mode=M_FAULT;
           controlLog("! rail recovery timeout -> FAULT");
           goto zaxis;
@@ -728,7 +773,7 @@ void controlTick() {
           if(mode==M_RAIL_BRAKE && rail_recovery_state.phase==rail_recovery::RETURNING) {
             mode=M_RAIL_RETURN; controlLog("# rail speed and acceleration settled -> RETURN_INSIDE");
           }
-          a=rail_recovery_state.demand(xc,current,p_vmax,recovery_amax,recovery_jerk,DT);
+          a=rail_recovery_state.demand(xc,current,p_vmax,recovery_amax,recovery_jerk,DT,controller.rail_recover_v,controller.rail_recover_a);
         }
         break;
       }
@@ -790,11 +835,11 @@ void controlTick() {
       const bool use_manual_limits=mode==M_MANUAL ||
         ((mode==M_RAIL_BRAKE || mode==M_RAIL_RETURN) && recovery_was_manual);
       const float drive_amax = use_manual_limits ? p_amax_m :
-                               ((mode==M_RAIL_BRAKE || mode==M_RAIL_RETURN || inSpinRecovery() || inUprightReturn()) ? max(p_amax_s,p_amax_b) :
+                               ((mode==M_EXTERNAL || mode==M_RAIL_BRAKE || mode==M_RAIL_RETURN || inSpinRecovery() || inUprightReturn()) ? max(p_amax_s,p_amax_b) :
                                 (mode == M_SWINGUP ? p_amax_s : p_amax_b));
       const float brake_amax = use_manual_limits ? p_amax_m : max(p_amax_s, p_amax_b);
       const float jerk = use_manual_limits ? p_jmax_m : p_jmax;
-      const float mode_speed=use_manual_limits?p_vmax:
+      const float mode_speed=use_manual_limits?fminf(p_vmax,controller.manual_speed_max):
           mode==M_SWINGUP?swing_control::speedLimit(controller,false):
           mode==M_BALANCE?swing_control::speedLimit(controller,true):
           swing_control::recoverySpeedLimit(controller);
@@ -802,7 +847,7 @@ void controlTick() {
       // ceiling below is a fault. Never clip velocity on a mode transition.
       if(mode!=M_EXTERNAL && mode!=M_MANUAL)executor_state.demand=a;
       motion = cart_motion::advance(motion, xc, a, mode_speed, drive_amax,
-                                    brake_amax, jerk, p_rail, DT);
+                                    brake_amax, jerk, p_rail, DT,controller.rail_margin);
       vc = motion.velocity;
       acc_cmd = motion.acceleration;
       cart_brake_direction = motion.brake_direction;
@@ -810,7 +855,7 @@ void controlTick() {
         beginRailRecovery();
       // Only exceptional stops bypass the jerk ramp. Never keep integrating
       // a speed the pulse generator cannot produce.
-      if (fabsf(vc) > p_vmax + 0.002f) {
+      if (fabsf(vc) > p_vmax + 0.002f || fabsf(vc)>VMAX_CEIL) {
         controlLog("! motion speed limit -> FAULT");
         eStop(); mode = M_FAULT;
       }
@@ -896,11 +941,18 @@ void handleV2(const char* line){
   if(reply.kind==executor::OK){
     if(!strcmp(reply.text,"CALIBRATE")){
       calibration_sid=executor_state.sid;
+      requested_hanging_offset=executor_state.calibration_offset;
+      requested_model_capture=executor_state.calibration_model;
       calibration_request=executor_state.calibration;
       return; // No success response until stable capture and verified EEPROM write.
     }
     if(!strcmp(reply.text,"STOP") || !strcmp(reply.text,"CLEAR")){eStop();mode=executor_state.fault==executor::NONE?M_IDLE:M_FAULT;}
-    else if(!strcmp(reply.text,"CENTER")){home_steps=ax_pos[AX_CART];p_rail=SAVED_RAIL_HALF;measured_home_span_steps=0;++home_epoch;xc=0;}
+    else if(!strcmp(reply.text,"CENTER")){home_steps=ax_pos[AX_CART];p_rail=fminf(configured_rail,SAVED_RAIL_HALF);measured_home_span_steps=0;++home_epoch;xc=0;}
+    else if(!strcmp(reply.text,"REHOME")){
+      if(!encoderHealthy() || (executor_state.switches && executor::requiredLimits(rawLimits()))){
+        executor_state.trip(!encoderHealthy()?executor::ENCODER:executor::LIMIT);eStop();mode=M_FAULT;reply={executor::ERROR,"health"};
+      }else{beginSavedReturn();energize(true);}
+    }
     else if(!strcmp(reply.text,"HOME")){
       if(!homing.start(executor_state.tick,ax_pos[AX_CART],executor::requiredLimits(rawLimits()))){executor_state.trip(executor::HOMING);reply={executor::ERROR,"homing"};}
       else{homing_edge_pending=0;homing_active=true;homing_expected=1;homing_approach=true;homing_verify=false;homing_centering=false;mode=M_HOMING;energize(true);}
@@ -914,11 +966,48 @@ void handleV2(const char* line){
   }
   if(reply.kind==executor::HELLO){resetTx();status_requested=false;eStop();mode=executor_state.fault==executor::NONE?M_IDLE:M_FAULT;}
   if(executor_state.enabled&&!g_energized){executor_state.trip(executor::DEADLINE);eStop();mode=M_FAULT;reply={executor::ERROR,"timer"};}
+  if(reply.kind==executor::PARAM){
+    const auto* field=controller_parameters::find(executor_state.parameter_name);
+    if(!field)reply={executor::ERROR,"parameter"};
+    else if(g_energized || encoderCalibrationBusy())reply={executor::ERROR,"health"};
+    else if(executor_state.parameter_write){
+      const float value=executor_state.parameter_value;
+      auto candidate=controller;candidate.*(field->member)=value;
+      const bool geometry=field->member==&swing_control::Parameters::rail_fraction ||
+                          field->member==&swing_control::Parameters::rail_margin;
+      float rail_cap=SAVED_RAIL_HALF;
+      if(executor_state.homed && measured_home_span_steps>0)
+        rail_cap=cart_homing::measuredRailCap(measured_home_span_steps,candidate.rail_fraction,candidate.rail_margin);
+      if(geometry)candidate.rail=fminf(configured_rail,rail_cap);
+      const bool changes_boundary=geometry || field->member==&swing_control::Parameters::rail ||
+                                   field->member==&swing_control::Parameters::rail_fault_margin;
+      const float stopped_x=(ax_pos[AX_CART]-home_steps)/CART_STEPS_PER_M;
+      if((changes_boundary && executor_state.homed && fabsf(stopped_x)>candidate.rail-candidate.rail_fault_margin) ||
+         !controller_parameters::valid(*field,value,candidate,rail_cap))reply={executor::ERROR,"value"};
+      else{
+        controller=candidate;
+        if(field->member==&swing_control::Parameters::rail)configured_rail=value;
+        executor_state.acceleration_limit=max(p_amax_s,p_amax_b);
+        executor_state.manual_speed_limit=controller.manual_speed_max;
+        eStop();computeGains();req_estimator_reset=true;
+      }
+    }
+    if(reply.kind==executor::PARAM){
+      char payload[100];
+      snprintf(payload,sizeof payload,"V2 PARAM %lu %s %.9g",(unsigned long)executor_state.sid,
+        field->name,(double)(controller.*(field->member)));
+      queueReply(payload);return;
+    }
+  }
   if(reply.kind==executor::INFO){
-    char payload[160];
-    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v2-cart2 %ld %u %u %lu %lu %ld %.7g",
+    encConfigRead(); // INFO is stopped-only; return an actual register readback.
+    executor_state.sample(encoderHealthy(),rawLimits());
+    char payload[224];
+    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v6-measuredrail %ld %u %u %lu %lu %ld %.7g %ld %ld %u %ld %lu %lu",
       (unsigned long)executor_state.sid,(long)enc_upright_raw,(unsigned)reference_saved,(unsigned)enc_status,
-      (unsigned long)enc_errors,(unsigned long)home_epoch,(long)measured_home_span_steps,(double)p_rail);
+      (unsigned long)enc_errors,(unsigned long)home_epoch,(long)measured_home_span_steps,(double)p_rail,
+      (long)enc_boot_conf,(long)enc_conf,(unsigned)enc_conf_valid,(long)enc_last_raw,
+      (unsigned long)(micros()-enc_raw_changed_us),(unsigned long)enc_recoveries);
     queueReply(payload);return;
   }
   if(reply.kind==executor::STATE){status_requested=true;return;}
@@ -973,7 +1062,9 @@ void setup() {
   if (!enc_ok) { checkedPrintln(F("! encoder not answering - check SDA=17 SCL=16, "
                                   "3V3, and DIR tied to GND")); enc_last_raw = 0; }
   encPrintMagnet();
-  if (as5600FastFilter()) checkedPrintln(F("# AS5600 slow filter -> 2x (0.29 ms lag)"));
+  enc_boot_conf=as5600ReadConf(); // Capture before correcting a retained bad mode.
+  enc_raw_changed_us=micros();
+  if (as5600FastFilter()) checkedPrintln(F("# AS5600 normal power, watchdog off, 2x filter verified"));
   else                    checkedPrintln(F("! AS5600 CONF write failed"));
   enc_ticks = 0;
 
@@ -981,6 +1072,7 @@ void setup() {
 
   // Exact saved working parameter set. Historical encoder calibration is excluded.
   controller.rail=0.26f;
+  configured_rail=cart_homing::maximum_rail_half;
   controller.leff=0.124f;
   controller.pw=4.5f;
   controller.pz=0.85f;
@@ -1010,6 +1102,19 @@ void setup() {
   controller.jmax_m=10.0f;
   controller.vman=0.05f;
   controller.bal_pw=4.0f;
+  controller.manual_speed_max=.15f;
+  controller.rail_fraction=.95f;
+  controller.rail_margin=.015f;
+  controller.rail_fault_margin=.010f;
+  controller.rail_hysteresis=.005f;
+  controller.rail_recover_v=.15f;
+  controller.rail_recover_a=1.5f;
+  controller.rail_recover_s=8.f;
+  controller.rehome_v=.08f;
+  controller.rehome_a=.5f;
+  controller.rehome_j=10.f;
+  executor_state.acceleration_limit=max(p_amax_s,p_amax_b);
+  executor_state.manual_speed_limit=controller.manual_speed_max;
   p_zvmax=2.0f;
   p_zamax=20.0f;
   p_ztravel=100.0f;
@@ -1034,7 +1139,7 @@ void setup() {
   checkedPrintln(F("# Drivers DISABLED. Motion commands enable; stop disables all drivers."));
   checkedPrintln(F("# ready. 'help' for commands."));
 
-  encStatusRead();
+  encStatusRead();encConfigRead();
   executor_state.sample(encoderHealthy(),rawLimits());
   control_heartbeat_us=micros();
 }

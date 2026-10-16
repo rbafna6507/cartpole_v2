@@ -1,0 +1,274 @@
+{
+  "accepted": false,
+  "parameters": {
+    "effective_length_m": 0.15203835205181535,
+    "input_gain": 0.8751096445497826,
+    "angular_damping_per_s": 0.27809919292419377,
+    "damping_ratio": 0.01731058743652978,
+    "delay_s": 0.0
+  },
+  "uncertainty": {
+    "coefficient_standard_errors": {
+      "alpha_per_s2": 2.1634274988537534,
+      "gamma_per_s": 0.10112976468505609,
+      "beta_per_m": 0.24556421767310463
+    },
+    "delay_profile_near_optimal_s": [
+      0.0
+    ],
+    "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+    "effective_length_standard_error_m": 0.005097763054867855
+  },
+  "training": {
+    "segment_count": 1,
+    "sample_count": 3750,
+    "delay_profile": [
+      {
+        "delay_s": 0.0,
+        "mean_squared_integral_residual": 0.0013615765407609178
+      },
+      {
+        "delay_s": 0.005,
+        "mean_squared_integral_residual": 0.0014920747207871846
+      },
+      {
+        "delay_s": 0.01,
+        "mean_squared_integral_residual": 0.001747794551668744
+      },
+      {
+        "delay_s": 0.015,
+        "mean_squared_integral_residual": 0.0021348124766724227
+      },
+      {
+        "delay_s": 0.02,
+        "mean_squared_integral_residual": 0.00265607494329092
+      },
+      {
+        "delay_s": 0.025,
+        "mean_squared_integral_residual": 0.0033109378737130237
+      },
+      {
+        "delay_s": 0.03,
+        "mean_squared_integral_residual": 0.004092142164915634
+      },
+      {
+        "delay_s": 0.035,
+        "mean_squared_integral_residual": 0.004988559016913056
+      },
+      {
+        "delay_s": 0.04,
+        "mean_squared_integral_residual": 0.0059832532992772965
+      },
+      {
+        "delay_s": 0.045,
+        "mean_squared_integral_residual": 0.0070546091126836115
+      },
+      {
+        "delay_s": 0.05,
+        "mean_squared_integral_residual": 0.008178239845108034
+      },
+      {
+        "delay_s": 0.055,
+        "mean_squared_integral_residual": 0.009327983160042993
+      },
+      {
+        "delay_s": 0.06,
+        "mean_squared_integral_residual": 0.010477680137513752
+      },
+      {
+        "delay_s": 0.065,
+        "mean_squared_integral_residual": 0.011601405358476076
+      },
+      {
+        "delay_s": 0.07,
+        "mean_squared_integral_residual": 0.012681149610065355
+      },
+      {
+        "delay_s": 0.075,
+        "mean_squared_integral_residual": 0.013701017424985836
+      },
+      {
+        "delay_s": 0.08,
+        "mean_squared_integral_residual": 0.014647900685456083
+      },
+      {
+        "delay_s": 0.085,
+        "mean_squared_integral_residual": 0.015510031982895342
+      },
+      {
+        "delay_s": 0.09,
+        "mean_squared_integral_residual": 0.016285040571515145
+      },
+      {
+        "delay_s": 0.095,
+        "mean_squared_integral_residual": 0.016971801181609264
+      },
+      {
+        "delay_s": 0.1,
+        "mean_squared_integral_residual": 0.01757282034230116
+      }
+    ],
+    "angle_zero_diagnostic": {
+      "rank": 5,
+      "condition": 1.9141124803512606,
+      "identifiable": true,
+      "gravity_offset_rad": -0.00839287915144725,
+      "input_offset_rad": -0.1541009320500682
+    },
+    "window_count": 42,
+    "rank": 3,
+    "condition": 1.5578886475836342,
+    "integral_nrmse": 0.189125388556478,
+    "angle_span_rad": 12.224292914359172,
+    "acceleration_std_m_s2": 3.9976714512743117
+  },
+  "validation": {
+    "prediction_windows": 28,
+    "prediction_samples": 3489,
+    "prediction_rmse_rad": 0.8946414639243884,
+    "prediction_p95_rad": 2.061955720960387,
+    "horizon_s": 0.5,
+    "segment_count": 3,
+    "integral_nrmse": 0.15504059606280934
+  },
+  "reasons": [
+    "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+    "training integral residual exceeds threshold",
+    "held-out prediction or integral residual exceeds threshold/coverage"
+  ],
+  "provenance": {
+    "source": "magnetic",
+    "acceleration_kind": "commanded",
+    "training_sha256": "76b7e20e3008990c220e12a04e95f2a48f62b93677464924f0469deafd90d7d9",
+    "validation_sha256": "78a9af210ce4c113805fdc03e3d2fe72e3beba4d16ca9dac81b6aede0a4d5d2d",
+    "training_run_ids": [
+      "3956487517"
+    ],
+    "validation_run_ids": [
+      "4181688593"
+    ],
+    "config": {
+      "gravity_m_s2": 9.81,
+      "length_bounds_m": [
+        0.05,
+        1.5
+      ],
+      "gain_bounds": [
+        0.05,
+        3.0
+      ],
+      "max_damping_per_s": 5.0,
+      "angle_offset_rad": 0.0,
+      "max_angle_zero_bias_rad": 0.02,
+      "max_gap_s": 0.05,
+      "window_s": 0.35,
+      "delay_candidates_s": [
+        0.0,
+        0.005,
+        0.01,
+        0.015,
+        0.02,
+        0.025,
+        0.03,
+        0.035,
+        0.04,
+        0.045,
+        0.05,
+        0.055,
+        0.06,
+        0.065,
+        0.07,
+        0.075,
+        0.08,
+        0.085,
+        0.09,
+        0.095,
+        0.1
+      ],
+      "min_windows": 20,
+      "max_condition": 1000.0,
+      "min_angle_span_rad": 0.15,
+      "min_acceleration_rms_m_s2": 0.05,
+      "prediction_horizon_s": 0.5,
+      "max_prediction_rmse_rad": 0.08,
+      "max_prediction_p95_rad": 0.15,
+      "max_integral_nrmse": 0.15
+    },
+    "supplied": {
+      "inputs": {
+        "training": {
+          "path": "evidence/phase3/retuning-20261015/tunable-motion/postcapture/reference330-first.tar.gz",
+          "member": "reference330-g1-1792099465601576729/rig-1792099465632851039-3956487517.jsonl",
+          "sha256": "6e2af6b485c27f67177edb65863b4c0592f6fd1a1e061909c8ad726d8bdfd66f",
+          "admission": {
+            "run_id": "3956487517",
+            "session_id": "3956487517",
+            "clock_id": "teensy:3956487517",
+            "total_states": 6282,
+            "eligible_states": 3750,
+            "excluded_states": 2532,
+            "duplicate_states": 3,
+            "exclusion_counts": {
+              "outside control interval": 2532,
+              "unhealthy, unhomed, disabled or calibrating": 1394,
+              "reference not yet available": 5
+            },
+            "calibration_ids": [
+              "executor-v6-measuredrail:upright:330"
+            ],
+            "angle_field": "theta",
+            "acceleration_field": "acceleration",
+            "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+            "rate_channel": "omitted: filtered omega has unknown effective delay"
+          }
+        },
+        "validation": {
+          "path": "evidence/phase3/retuning-20261015/tunable-motion/postcapture/reference330-first.tar.gz",
+          "member": "reference330-j300-h1-1792099527041280586/rig-1792099527072622842-4181688593.jsonl",
+          "sha256": "68aad1936127a02045fe671d71e7c5cd83ce6eb3cca256151b8454eb6d82a48c",
+          "admission": {
+            "run_id": "4181688593",
+            "session_id": "4181688593",
+            "clock_id": "teensy:4181688593",
+            "total_states": 6386,
+            "eligible_states": 3685,
+            "excluded_states": 2701,
+            "duplicate_states": 5,
+            "exclusion_counts": {
+              "outside control interval": 2701,
+              "unhealthy, unhomed, disabled or calibrating": 1398,
+              "reference not yet available": 4
+            },
+            "calibration_ids": [
+              "executor-v6-measuredrail:upright:330"
+            ],
+            "angle_field": "theta",
+            "acceleration_field": "acceleration",
+            "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+            "rate_channel": "omitted: filtered omega has unknown effective delay"
+          }
+        }
+      },
+      "adapter": "rig-log-v1",
+      "hardware_activity": false,
+      "caveat": "Closed-loop data, commanded acceleration and board snapshot timestamps; not independent motion metrology."
+    },
+    "adapter_sha256": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+    "fitter_sha256": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76"
+  },
+  "assumptions": [
+    "upright theta=0; positive theta follows cart +x rotation",
+    "rigid planar pendulum; constant effective length; linear viscous angular damping",
+    "sampling captures less than pi angular motion per valid interval",
+    "acceleration and angle share a calibrated monotonic clock",
+    "commanded input gain/delay include actuator, estimator and clock effects",
+    "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+  ],
+  "unidentifiable": [
+    "cart_mass_kg",
+    "pole_mass_kg",
+    "force_gain_N_per_command",
+    "hinge_damping_N_m_s"
+  ],
+  "recommended_model": null
+}

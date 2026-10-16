@@ -55,6 +55,7 @@ class Firmware:
         self.quiet = False
         self.ignore = None
         self.rate_hz = 100
+        self.last_emitted_tick = 0
         self.publish_commands = True
         self.hello_prefix = b''
         self.home_complete_ms = None
@@ -64,6 +65,11 @@ class Firmware:
     def ticks(self):
         return int((time.monotonic()-self.origin)*1000)
     def send(self, payload):
+        # Match firmware STATUS/emitTelemetry: an explicit snapshot restarts the
+        # periodic publication interval. Otherwise the PTY invents a short next
+        # interval that correctly trips a host policy's cadence guard.
+        if payload.startswith('V2 S '):
+            self.last_emitted_tick = self.ticks()
         with self.lock:
             try:
                 os.write(self.master, encode(payload))
@@ -80,6 +86,8 @@ class Firmware:
         if p[1] == 'HELLO':
             if self.hello_prefix:os.write(self.master,self.hello_prefix)
             self.sid = int(p[2]); self.send(f'V2 HELLO {self.sid} 1 1000'); return
+        if p[1] == 'INFO':
+            self.send(f'V2 INFO {self.sid} executor-v1 270 1 32 0 1 0 0.26'); return
         if p[1] == 'STATUS':
             self.send(self.state()); return
         if p[1] == 'PING':
@@ -110,7 +118,7 @@ class Firmware:
         self.send(f'V2 OK {self.sid} {p[1]}')
         if self.publish_commands:self.send(self.state())
     def run(self):
-        buffer=b''; last=0
+        buffer=b''
         while not self.done.is_set():
             try:
                 if select.select([self.master],[],[],.002)[0]:
@@ -126,8 +134,8 @@ class Firmware:
                     self.flags &=~2; self.mode=0; self.fault=1; self.expiry=None
                 if self.mode==13 and self.home_complete_ms is not None and now-self.home_started>=self.home_complete_ms:
                     self.mode=0; self.flags=(self.flags&~2)|4
-                if self.sid and self.rate_hz and not self.quiet and now-last>=1000/self.rate_hz:
-                    self.send(self.state()); last=now
+                if self.sid and self.rate_hz and not self.quiet and now-self.last_emitted_tick>=1000/self.rate_hz:
+                    self.send(self.state())
             except OSError:
                 break
     def close(self):
@@ -229,7 +237,8 @@ class RigTests(unittest.TestCase):
     def test_home_requires_switch_profile_and_motion_requires_home(self):
         with self.rig() as rig:
             with self.assertRaises(RigError):rig.home()
-            self.fw.flags &=~4; rig.wait_state(after_tick=rig.state.tick)
+            self.fw.flags &=~4
+            self.wait_until(lambda:not rig.state.homed)
             with self.assertRaises(RigError):rig.start()
     def test_wait_timeout_and_none_step_never_send_action(self):
         with self.rig() as rig:

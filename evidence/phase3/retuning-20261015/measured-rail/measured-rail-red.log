@@ -1,0 +1,125 @@
+..............F...................................F............F...F.... [ 64%]
+.......F...............F...............        [100%]
+=================================== FAILURES ===================================
+______________________ ExecutorTests.test_homing_success _______________________
+
+self = <test_executor_native.ExecutorTests testMethod=test_homing_success>
+name = 'homing_success'
+
+>   setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                   ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (fabsf(m.safeRail(.375f)-(half==7000?.2625f:half==9000?.335625f:.37125f))<1e-6), function homing_success, file core.cpp, line 34.
+_________________________ SketchTests.test_info_homed __________________________
+
+self = <test_executor_native.SketchTests testMethod=test_info_homed>
+name = 'info_homed'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (fabsf(p_rail-.200025f)<1e-6f), function info_homed, file sketch.cpp, line 30.
+____________________ SketchTests.test_measured_rail_motion _____________________
+
+self = <test_executor_native.SketchTests testMethod=test_measured_rail_motion>
+name = 'measured_rail_motion'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (latched&&settled&&furthest>.28f), function measured_rail_motion, file parameters_sketch_test.h, line 217.
+_______________________ SketchTests.test_parameter_rail ________________________
+
+self = <test_executor_native.SketchTests testMethod=test_parameter_rail>
+name = 'parameter_rail'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (fabsf(p_rail-.30904875f)<1e-6f), function parameter_rail, file parameters_sketch_test.h, line 188.
+______________________ SketchTests.test_whole_homing_info ______________________
+
+self = <test_executor_native.SketchTests testMethod=test_whole_homing_info>
+name = 'whole_homing_info'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (fabsf(p_rail-(half==7000?.2625f:.37125f))<1e-6), function whole_homing_info, file sketch.cpp, line 40.
+____ ParameterTests.test_measured_rail_accepts_wider_profile_without_arming ____
+
+self = <test_rig_parameters.ParameterTests testMethod=test_measured_rail_accepts_wider_profile_without_arming>
+
+    def test_measured_rail_accepts_wider_profile_without_arming(self):
+        self.fw.span=16509
+        with self.rig() as rig:
+>           self.assertAlmostEqual(rig.set_parameter('rail', .30904875), .30904875, places=7)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_parameters.py:311: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:776: in set_parameter
+    expected = parameter_value(name,value)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'rail', value = 0.30904875
+
+    def parameter_value(name,value):
+        parameter_name(name)
+        if isinstance(value,bool) or not isinstance(value,(int,float)):
+            raise ValidationError(f'{name} must be finite numeric, not boolean')
+        try:
+            rounded=float32(value)
+        except (OverflowError,struct.error):
+            raise ValidationError(f'{name} must fit a finite float32') from None
+        if not math.isfinite(rounded):
+            raise ValidationError(f'{name} must be finite numeric')
+        if value != 0 and (rounded == 0 or abs(rounded) < 2**-126):
+            raise ValidationError(f'{name} must not underflow float32')
+        lower,upper,inclusive=_BOUNDS[name]
+        lower,upper=float32(lower),float32(upper)
+        if rounded>upper or (rounded<lower if inclusive else rounded<=lower):
+            relation='<=' if inclusive else '<'
+>           raise ValidationError(f'{name} requires {lower:g} {relation} value <= {upper:g}')
+E           cartpole_sdk.contracts.ValidationError: rail requires 0.02 < value <= 0.26
+
+src/cartpole_sdk/rig/parameters.py:60: ValidationError
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:469
+  /Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: cache could not write path /Users/rbafna/projects/cartpole_v2/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '/Users/rbafna/projects/cartpole_v2/.pytest_cache/v/cache/nodeids'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:423
+  /Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:423: PytestCacheWarning: cache could not write path /Users/rbafna/projects/cartpole_v2/.pytest_cache/v/cache/lastfailed: [Errno 1] Operation not permitted: '/Users/rbafna/projects/cartpole_v2/.pytest_cache/v/cache/lastfailed'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::ExecutorTests::test_homing_success - As...
+FAILED tests/test_executor_native.py::SketchTests::test_info_homed - Assertio...
+FAILED tests/test_executor_native.py::SketchTests::test_measured_rail_motion
+FAILED tests/test_executor_native.py::SketchTests::test_parameter_rail - Asse...
+FAILED tests/test_executor_native.py::SketchTests::test_whole_homing_info - A...
+FAILED tests/test_rig_parameters.py::ParameterTests::test_measured_rail_accepts_wider_profile_without_arming
+6 failed, 105 passed, 2 warnings, 98 subtests passed in 5.63s

@@ -15,7 +15,11 @@ class SourceTests(unittest.TestCase):
 
     def test_preserved_algorithm_headers(self):
         archive = ROOT / 'archive/good_balancing_jetson/teensy_firmware/teensy_swingup'
+        # Runtime-tunable extensions retain default behavior through the native
+        # preserved_defaults case; all other archive headers remain byte-exact.
+        extended={'cart_motion.h','rail_recovery.h','swing_controller.h'}
         for path in archive.glob('*.h'):
+            if path.name in extended:continue
             self.assertEqual((FW / path.name).read_bytes(), path.read_bytes(), path.name)
 
     def test_saved_defaults_exclude_historical_calibration(self):
@@ -55,7 +59,7 @@ class SketchTests(ExecutorTests):
         before = '  uint32_t mask;asm volatile("mrs %0, primask" : "=r"(mask) :: "memory");return mask;'
         if source.count(before) != 1:
             raise AssertionError('native ARM interrupt mask substitution must match once')
-        (build / 'firmware_native.ino').write_text(source.replace(before, '  return 0;', 1))
+        (build / 'firmware_native.ino').write_text(source.replace(before, '  return native_interrupt_mask();', 1))
         cls.binary = build / 'executor-sketch'
         result = subprocess.run([shutil.which('c++') or '/usr/bin/c++', '-std=c++17', '-O2', '-fno-fast-math', '-I', str(ROOT / 'tests/executor_native'), '-I', str(ROOT / 'tests/native'), '-I', str(FW), '-I', str(build), str(ROOT / 'tests/executor_native/sketch.cpp'), '-o', str(cls.binary)], capture_output=True, text=True)
         if result.returncode:
@@ -64,7 +68,7 @@ class SketchTests(ExecutorTests):
 # Do not inherit the pure-header case names into the separate whole-sketch binary.
 for name in ['calibration_guards','cart_only_switches','info_guards','homing_more_faults','stable_switches','framing','boot_session','actions','wrap','guards','watchdogs','switches','homing_success','homing_faults']:
     setattr(SketchTests, 'test_' + name, None)
-for name in ['calibrate_cancel_commit_stop','calibrate_cancel_commit_hello','calibrate_upright','calibrate_hanging','calibrate_cancel','calibrate_fail_moving','calibrate_fail_magnet','calibrate_fail_save','calibrate_fail_watchdog','cart_only_pulses','lcd_health','magnet_stale','whole_homing_info','magnet_healthy','magnet_weak','magnet_strong','magnet_absent','magnet_readfailure','magnet_anglefailure','info_snapshot','info_homed','edge_consume_race','hello_partial','bounced_isr_edge','isr_center','calibration','reference_watchdog','motion','timing','isr_homing_stall','isr_limits','telemetry']:
+for name in ['encoder_config_info_guard','encoder_config_boot','encoder_config_failed_write','encoder_config_failed_read','encoder_config_runtime','encoder_config_watchdog','encoder_config_recovery','encoder_config_stale','calibrate_cancel_commit_stop','calibrate_cancel_commit_hello','calibrate_upright','calibrate_hanging','calibrate_cancel','calibrate_fail_moving','calibrate_fail_magnet','calibrate_fail_save','calibrate_fail_watchdog','cart_only_pulses','lcd_health','magnet_stale','whole_homing_info','magnet_healthy','magnet_weak','magnet_strong','magnet_absent','magnet_readfailure','magnet_anglefailure','info_snapshot','info_homed','edge_consume_race','hello_partial','bounced_isr_edge','isr_center','calibration','reference_watchdog','motion','timing','isr_homing_stall','isr_limits','telemetry']:
     setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
 
 
@@ -79,3 +83,26 @@ def _wire_contract(self):
     self.assertEqual((state.last_seq, state.fault, state.demand), (1, 0, 2.0))
     self.assertAlmostEqual(state.acceleration, .15, places=6)
 SketchTests.test_sdk_wire_contract = _wire_contract
+
+# Parameter cases use the same production core and complete native sketch.
+ExecutorTests.test_parameter_core_guards = lambda self: self.run_case('parameter_core_guards')
+SketchTests.test_parameter_core_guards = None
+for name in ('parameter_values','parameter_bounds','parameter_guards','parameter_rail','measured_rail_motion'):
+    setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+
+ExecutorTests.test_homing_duration = lambda self: self.run_case('homing_duration')
+SketchTests.test_homing_duration = None
+
+for name in ('rehome_core_guards','auto_return_intent','return_safety_precedence'):
+    setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+    setattr(SketchTests, 'test_' + name, None)
+for name in ('rehome_run','auto_return_braking','return_cancel','rehome_timeout','rehome_isr_limit','auto_expiry_fresh_health','rehome_completion_snapshot','rehome_configured_speed'):
+    setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+
+ExecutorTests.test_hanging_offset_core = lambda self: self.run_case('hanging_offset_core')
+SketchTests.test_hanging_offset_core = None
+for name in ('hanging_offset_capture','hanging_offset_cancel','hanging_model_quality'):
+    setattr(SketchTests,'test_'+name,lambda self,name=name:self.run_case(name))
+
+for name in ('tunable_motion','tunable_geometry','tunable_recovery','tunable_auto_return','preserved_defaults'):
+    setattr(SketchTests,'test_'+name,lambda self,name=name:self.run_case(name))

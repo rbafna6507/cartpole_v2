@@ -1,0 +1,66 @@
+{
+  "status": "Paused at user request; saved and read back last observed tuning; no sustained-stability claim",
+  "control": "native Teensy1kHz, encoder only; PythonSDK250Hz telemetry",
+  "upright": {
+    "old": 351,
+    "new": 330,
+    "pose_shift_deg": -1.845703125,
+    "held_mean_before_deg": -1.8369142649,
+    "held_mean_after_deg": 0.01228012894,
+    "pose_source": "User usual natural upright resting position; not independently surveyed vertical",
+    "comparison_cart_mean_m": {
+      "old_run_feedback35_d1": 0.1063,
+      "new_run_reference330_g1": 0.0053
+    },
+    "limits": "Single paired comparison, different capture states. Supports reference bias but not proof of encoder drift vs repeatability of pose. Hanging measured and never used to overwrite this direct reference."
+  },
+  "last_actual_auto": {
+    "name": "reference330-speed1-k1-1792099820902940709",
+    "requested_s": 12,
+    "captured_s": 1.342,
+    "continuous_balance_s": 6.044,
+    "angle_rms_deg": 6.259,
+    "mean_cart_m": -0.0279,
+    "balance_exit": "rail recovery",
+    "run_exit": "encoder fault4",
+    "i2c_counter": 4,
+    "user_annotation": "User said last one worked well; closest preceding actualAUTO is this run."
+  },
+  "historical_comparison": {
+    "source": "archive/good_balancing_jetson/settings.json",
+    "sha256": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+    "historical_holds_s": [
+      43.179,
+      42.668
+    ],
+    "loaded_and_verified": true,
+    "executed": false,
+    "why": "Automatic approval review rejected20s poweredAUTO after4recurring motion-associated encoderI2Cfaults. Do not bypass; investigate movingcable/sensorconnection first."
+  },
+  "health": {
+    "errors": 4,
+    "three_recent_fault_x_m": [
+      -0.1223625,
+      -0.1147125,
+      -0.1220625
+    ],
+    "speed_reduction_did_not_eliminate_fault": true,
+    "disabled_check_seconds_without_errors": 60,
+    "watchdog_or_control_deadline_misses": 0,
+    "root_cause": "Unresolved; position clustering suggests movingcable/connection but not proven."
+  },
+  "current": {
+    "profile": "profiles/last-observed-20261015.json",
+    "verified_fields": 40,
+    "rail_omitted": "preserve fresh physicalHOME geometry",
+    "homed": true,
+    "enabled": false,
+    "x": 0,
+    "fault": 0,
+    "reference": 330,
+    "span_steps": 16516,
+    "rail_half_m": 0.3091875
+  },
+  "next": "Physical encoder/cable investigation, then historical-profile comparison. User powering motor off; no further motion authorized this turn.",
+  "analysis_limit": "Exploratory closed-loop dynamics coefficients were highly filter-dependent; not accepted as system identification or encoder calibration."
+}

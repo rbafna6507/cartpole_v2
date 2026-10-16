@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 import math
 import re
+from .parameters import PARAMETER_NAMES
 
 MAX_LINE = 255
 UINT32 = 0xFFFFFFFF
@@ -98,7 +99,7 @@ def parse_state(payload: str, *, received_ns: int) -> State:
         raise ProtocolError('invalid state field count')
     tokens = parts[2:]
     integers = [uint32(t) for t in tokens[:5]]
-    if integers[0] == 0 or integers[3] > 13:
+    if integers[0] == 0 or integers[3] > 14:
         raise ProtocolError('invalid session or mode')
     if not all(re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?',t) for t in tokens[5:12]):
         raise ProtocolError('invalid real grammar')
@@ -125,22 +126,52 @@ class ExecutorInfo:
     measured_span_steps: int
     rail_half_m: float
     received_ns: int
+    encoder_boot_conf: int | None = None
+    encoder_conf: int | None = None
+    encoder_conf_valid: bool | None = None
+    encoder_raw: int | None = None
+    # Time since the value changed, not proof of a fresh sensor transaction.
+    encoder_raw_age_us: int | None = None
+    encoder_recoveries: int | None = None
 
 
 def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
     parts = payload.split(' ')
-    if len(parts) != 11 or parts[:2] != ['V2', 'INFO'] or parts[3] not in ('executor-v1', 'executor-v2-cart2'):
+    field_counts = {'executor-v1': 11, 'executor-v2-cart2': 11, 'executor-v3-encguard': 17, 'executor-v4-rehome': 17, 'executor-v5-calmodel': 17, 'executor-v6-measuredrail': 17}
+    if len(parts) < 4 or parts[:2] != ['V2', 'INFO'] or len(parts) != field_counts.get(parts[3]):
         raise ProtocolError('invalid diagnostic identity or field count')
     sid = uint32(parts[2])
     reference, saved, status, errors, epoch, span = map(uint32, parts[4:10])
-    if not sid or reference > 4095 or saved > 1 or status > 255 or span > 16000:
+    if not sid or reference > 4095 or saved > 1 or status > 255 or span > 20000:
         raise ProtocolError('invalid diagnostic range')
     if not re.fullmatch(r'[+]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', parts[10]):
         raise ProtocolError('invalid diagnostic rail value')
     rail = float(parts[10])
-    if not math.isfinite(rail) or not 0 < rail <= .26:
+    if not math.isfinite(rail) or not 0 < rail <= (.375 if parts[3] == 'executor-v6-measuredrail' else .26):
         raise ProtocolError('invalid diagnostic rail bound')
-    return ExecutorInfo(sid, parts[3], reference, bool(saved), status, errors, epoch, span, rail, received_ns)
+    base = (sid, parts[3], reference, bool(saved), status, errors, epoch, span, rail, received_ns)
+    if len(parts) == 11:
+        return ExecutorInfo(*base)
+    boot_conf, conf = (-1 if token == '-1' else uint32(token) for token in parts[11:13])
+    valid, raw, raw_age, recoveries = map(uint32, parts[13:17])
+    if boot_conf > 65535 or conf > 65535 or valid > 1 or raw > 4095:
+        raise ProtocolError('invalid encoder diagnostic range')
+    if valid and (conf < 0 or (conf & 0x3F0F) != 0x0300):
+        raise ProtocolError('invalid encoder configuration claim')
+    return ExecutorInfo(*base, boot_conf, conf, bool(valid), raw, raw_age, recoveries)
+
+def parse_parameter(payload: str) -> tuple[str, float]:
+    parts = payload.split(' ')
+    if len(parts) != 5 or parts[:2] != ['V2', 'PARAM']:
+        raise ProtocolError('invalid parameter field count')
+    if not uint32(parts[2]) or parts[3] not in PARAMETER_NAMES:
+        raise ProtocolError('invalid parameter session or name')
+    if not re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', parts[4]):
+        raise ProtocolError('invalid parameter value grammar')
+    value = float(parts[4])
+    if not math.isfinite(value):
+        raise ProtocolError('nonfinite parameter value')
+    return parts[3], value
 
 class LineBuffer:
     """Bounded incremental framing; discard through newline after overflow."""

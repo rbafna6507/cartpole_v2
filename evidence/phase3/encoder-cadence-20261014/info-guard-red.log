@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ SketchTests.test_encoder_config_info_guard __________________
+
+self = <test_executor_native.SketchTests testMethod=test_encoder_config_info_guard>
+name = 'encoder_config_info_guard'
+
+>   setattr(SketchTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                 ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (!g_energized&&!executor_state.enabled&&!executor_state.healthy), function encoder_config_info_guard, file sketch.cpp, line 134.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::SketchTests::test_encoder_config_info_guard
+1 failed, 57 deselected in 1.79s

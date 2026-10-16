@@ -1,0 +1,59 @@
+{
+  "status": "v6 running; physical two-switch HOME verified measured span16512steps; bounded tuning continues",
+  "release": "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v6-tunable",
+  "firmware": "executor-v6-measuredrail",
+  "verified_files": 263,
+  "tests": {
+    "passed": 691,
+    "skipped": 7,
+    "subtests_passed": 381
+  },
+  "preflash_trials": {
+    "jerk225_repeat": {
+      "first_capture_s": 2.78,
+      "longest_balance_s_lower": 0.272,
+      "balance_exits_to_rail": 1,
+      "completed": true
+    },
+    "jerk150_long2": {
+      "first_capture_s": 2.684,
+      "longest_balance_s_lower": 10.992,
+      "balance_exits_to_rail": 2,
+      "completed": true
+    },
+    "jerk150_long3": {
+      "first_capture_s": 2.656,
+      "longest_balance_s_lower": 1.272,
+      "balance_exits_to_rail": 2,
+      "completed": false,
+      "stopped_by": "camera guard at about12.53s; frame645262 was detected but angle_valid=false and pivot y294.34 outside allowed y160..290. Adjacent valid frames placed pivot near y253.5. No board fault/miss."
+    }
+  },
+  "conclusion": "Wider measured envelope is worth a controlled comparison; every observed balance episode in these three trials ended in rail recovery. This does not establish the rail limit as the only cause: variable capture states and oscillatory balance remain. Keep Q gains, vmax1.5, amax25 and jerk150 initially.",
+  "geometry_m": {
+    "measured_switch_span": 0.6192,
+    "old_normal_travel": 0.49,
+    "new_normal_travel": 0.588225,
+    "normal_margin_to_switch_each_approx": 0.0155
+  },
+  "measurement_limits": [
+    "Mode3 duration reflects the controller state, not independently certified physical balance",
+    "The third trial is truncated by a visual guard and not a complete20second result",
+    "Camera return delta is an image measurement, not a certified cart displacement"
+  ],
+  "next": "Fresh motor OFF confirmation, upload, stopped verification, motor ON confirmation, slow physical HOME, bounded repeated Q150 trials changing only rail envelope",
+  "final_preflash_rehome": {
+    "report": "preflash-final-rehome.json",
+    "ok": true,
+    "x_m": 0,
+    "mode": 0,
+    "enabled": false,
+    "fault": 0,
+    "misses": 0,
+    "reference": 351
+  },
+  "postflash_verification": "tunable-stopped-verification.json",
+  "upload_note": "Loader2.3 upload succeeded. Initial postboot HELLO timed out; separate stopped-only reconnect passed without another reset/upload.",
+  "encoder_only": "Owner requested encoder-only trials after camera stopped first home. Vision server remains active for viewing; motion decisions use native encoder feedback and board interlocks.",
+  "console_uv_help": "Verified from new release using /home/rbafna/.local/bin/uv run --locked --extra hardware cartpole-console --help"
+}

@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-14T17:54:49.428482+00:00",
+  "scope": "Read-only local source, generated-source, build-configuration and ELF audit. No hardware/SSH access or firmware changes.",
+  "builds": {
+    "parameters_home750": {
+      "build_directory": "/tmp/cartpole-parameters-build",
+      "hex_sha256": "4b78c057d629c734822c8047402da1747519ca1d639ddc086f52e24fd22b8881",
+      "elf_sha256": "f2c54400b3da2025754c1af70fab43ed663bce1231725c866353a3ead57db655",
+      "generated_source_path": "/tmp/cartpole-parameters-build/sketch/teensy_executor.ino.cpp",
+      "step_dir_enable_source_block_sha256": "7bffb5f60e86c85173f154ad8dd87dbfb2958edbac53f03009d2ab0ae96244e9",
+      "encoder_i2c_source_block_sha256_after_line_directive_removal": "d93040836f7d27c7f92623d9356dcd437413082dec29e9068cc620e2247d9bbb",
+      "objdump_command": [
+        "/Users/rbafna/Library/Arduino15/packages/teensy/tools/teensy-compile/15.2.1/arm/bin/arm-none-eabi-objdump",
+        "-d",
+        "--disassemble=_Z11onStepTimerv",
+        "/tmp/cartpole-parameters-build/teensy_executor.ino.elf"
+      ],
+      "nm_command": [
+        "/Users/rbafna/Library/Arduino15/packages/teensy/tools/teensy-compile/15.2.1/arm/bin/arm-none-eabi-nm",
+        "-S",
+        "-C",
+        "/tmp/cartpole-parameters-build/teensy_executor.ino.elf"
+      ],
+      "symbols": [
+        "000000cc 00000178 T onStepTimer()",
+        "00001b40 00000090 T energize(bool)",
+        "00000248 00000118 t axSetRate(int, float, bool) [clone .part.0]"
+      ],
+      "isr_instruction_count": 122,
+      "isr_instruction_encoding_sequence_sha256": "ba29e01e47e99e508b252e00c0c6c8ba0ed3f384b581c9aa6a516b66ce9b5636",
+      "isr_literal_pool": [
+        {
+          "address": "0x1fc",
+          "encoding": "4200c000",
+          "assembly": ".word\t0x4200c000"
+        },
+        {
+          "address": "0x200",
+          "encoding": "42004000",
+          "assembly": ".word\t0x42004000"
+        },
+        {
+          "address": "0x204",
+          "encoding": "20004caf",
+          "assembly": ".word\t0x20004caf"
+        },
+        {
+          "address": "0x208",
+          "encoding": "20003004",
+          "assembly": ".word\t0x20003004"
+        },
+        {
+          "address": "0x20c",
+          "encoding": "20004cb3",
+          "assembly": ".word\t0x20004cb3"
+        },
+        {
+          "address": "0x210",
+          "encoding": "20004cb2",
+          "assembly": ".word\t0x20004cb2"
+        },
+        {
+          "address": "0x214",
+          "encoding": "20004afc",
+          "assembly": ".word\t0x20004afc"
+        },
+        {
+          "address": "0x218",
+          "encoding": "20003d50",
+          "assembly": ".word\t0x20003d50"
+        },
+        {
+          "address": "0x21c",
+          "encoding": "20004b08",
+          "assembly": ".word\t0x20004b08"
+        },
+        {
+          "address": "0x220",
+          "encoding": "20002f6c",
+          "assembly": ".word\t0x20002f6c"
+        },
+        {
+          "address": "0x224",
+          "encoding": "20004cc2",
+          "assembly": ".word\t0x20004cc2"
+        },
+        {
+          "address": "0x228",
+          "encoding": "20004cb0",
+          "assembly": ".word\t0x20004cb0"
+        },
+        {
+          "address": "0x22c",
+          "encoding": "20004cb4",
+          "assembly": ".word\t0x20004cb4"
+        },
+        {
+          "address": "0x230",
+          "encoding": "20004cb1",
+          "assembly": ".word\t0x20004cb1"
+        },
+        {
+          "address": "0x234",
+          "encoding": "20004cb5",
+          "assembly": ".word\t0x20004cb5"
+        },
+        {
+          "address": "0x238",
+          "encoding": "20004b6c",
+          "assembly": ".word\t0x20004b6c"
+        },
+        {
+          "address": "0x23c",
+          "encoding": "20004cb7",
+          "assembly": ".word\t0x20004cb7"
+        },
+        {
+          "address": "0x240",
+          "encoding": "20004b18",
+          "assembly": ".word\t0x20004b18"
+        }
+      ],
+      "build_configuration": {
+        "fqbn": "teensy:avr:teensy41",
+        "hardwareFolders": "/Users/rbafna/Library/Arduino15/packages/teensy/hardware/avr/1.62.0,/Users/rbafna/Library/Arduino15/packages/teensy/hardware/avr/1.62.0",
+        "compiler.optimization_flags": "",
+        "customBuildProperties": ""
+      }
+    },
+    "previous_encoder_guard": {
+      "build_directory": "/tmp/cartpole-executor-encguard-build",
+      "hex_sha256": "f7a2fc2bf799a7d1e5ef96535efe5649e2a86afb99142a47261589502ad39b4c",
+      "elf_sha256": "b3e5d62bcfb79faa92616c0de583a4d8897dd96b3480719333e96ea782e8a82c",
+      "generated_source_path": "/tmp/cartpole-executor-encguard-build/sketch/teensy_executor.ino.cpp",
+      "step_dir_enable_source_block_sha256": "7bffb5f60e86c85173f154ad8dd87dbfb2958edbac53f03009d2ab0ae96244e9",
+      "encoder_i2c_source_block_sha256_after_line_directive_removal": "d93040836f7d27c7f92623d9356dcd437413082dec29e9068cc620e2247d9bbb",
+      "objdump_command": [
+        "/Users/rbafna/Library/Arduino15/packages/teensy/tools/teensy-compile/15.2.1/arm/bin/arm-none-eabi-objdump",
+        "-d",
+        "--disassemble=_Z11onStepTimerv",
+        "/tmp/cartpole-executor-encguard-build/teensy_executor.ino.elf"
+      ],
+      "nm_command": [
+        "/Users/rbafna/Library/Arduino15/packages/teensy/tools/teensy-compile/15.2.1/arm/bin/arm-none-eabi-nm",
+        "-S",
+        "-C",
+        "/tmp/cartpole-executor-encguard-build/teensy_executor.ino.elf"
+      ],
+      "symbols": [
+        "000000cc 00000178 T onStepTimer()",
+        "00001818 00000090 T energize(bool)",
+        "00000248 00000118 t axSetRate(int, float, bool) [clone .part.0]"
+      ],
+      "isr_instruction_count": 122,
+      "isr_instruction_encoding_sequence_sha256": "a1cee5bcd09414d7654562092f89d7cd1de982594c9c2b5bf017078996a3ed11",
+      "isr_literal_pool": [
+        {
+          "address": "0x1fc",
+          "encoding": "4200c000",
+          "assembly": ".word\t0x4200c000"
+        },
+        {
+          "address": "0x200",
+          "encoding": "42004000",
+          "assembly": ".word\t0x42004000"
+        },
+        {
+          "address": "0x204",
+          "encoding": "200048af",
+          "assembly": ".word\t0x200048af"
+        },
+        {
+          "address": "0x208",
+          "encoding": "20002c60",
+          "assembly": ".word\t0x20002c60"
+        },
+        {
+          "address": "0x20c",
+          "encoding": "200048b3",
+          "assembly": ".word\t0x200048b3"
+        },
+        {
+          "address": "0x210",
+          "encoding": "200048b2",
+          "assembly": ".word\t0x200048b2"
+        },
+        {
+          "address": "0x214",
+          "encoding": "200046fc",
+          "assembly": ".word\t0x200046fc"
+        },
+        {
+          "address": "0x218",
+          "encoding": "20003950",
+          "assembly": ".word\t0x20003950"
+        },
+        {
+          "address": "0x21c",
+          "encoding": "20004708",
+          "assembly": ".word\t0x20004708"
+        },
+        {
+          "address": "0x220",
+          "encoding": "20002bc8",
+          "assembly": ".word\t0x20002bc8"
+        },
+        {
+          "address": "0x224",
+          "encoding": "200048c2",
+          "assembly": ".word\t0x200048c2"
+        },
+        {
+          "address": "0x228",
+          "encoding": "200048b0",
+          "assembly": ".word\t0x200048b0"
+        },
+        {
+          "address": "0x22c",
+          "encoding": "200048b4",
+          "assembly": ".word\t0x200048b4"
+        },
+        {
+          "address": "0x230",
+          "encoding": "200048b1",
+          "assembly": ".word\t0x200048b1"
+        },
+        {
+          "address": "0x234",
+          "encoding": "200048b5",
+          "assembly": ".word\t0x200048b5"
+        },
+        {
+          "address": "0x238",
+          "encoding": "2000476c",
+          "assembly": ".word\t0x2000476c"
+        },
+        {
+          "address": "0x23c",
+          "encoding": "200048b7",
+          "assembly": ".word\t0x200048b7"
+        },
+        {
+          "address": "0x240",
+          "encoding": "20004718",
+          "assembly": ".word\t0x20004718"
+        }
+      ],
+      "build_configuration": {
+        "fqbn": "teensy:avr:teensy41",
+        "hardwareFolders": "/Users/rbafna/Library/Arduino15/packages/teensy/hardware/avr/1.62.0,/Users/rbafna/Library/Arduino15/packages/teensy/hardware/avr/1.62.0",
+        "compiler.optimization_flags": "",
+        "customBuildProperties": ""
+      }
+    }
+  },
+  "method": {
+    "source_extraction": {
+      "start_marker_inclusive": "// ==================== STEP PULSE GENERATOR",
+      "end_marker_exclusive": "// ============================== AS5600"
+    },
+    "elf_comparison": "Run arm-none-eabi-objdump -d --disassemble=_Z11onStepTimerv on each exact build ELF. Compare ordered instruction encodings, separating .word literal-pool rows. Record every opcode and literal difference. Normalize only bl call addresses by their resolved target symbol to compare relocated external calls; all other instruction encodings must match.",
+    "symbol_check": "arm-none-eabi-nm -S -C: onStepTimer is at0x000000cc and size0x178 in both builds. There are122 executable instructions;121 encodings are byte-identical. The remaining call at0xf0 targets micros in both builds, relocated from0xc064 to0xc294.",
+    "encoder_comparison": "Strip generated #line directives; compare from the as5600Write8 definition through the CONTROLLER section marker.",
+    "literal_pool_caveat": "RAM globals moved when parameter catalog/core storage was added. The ISR uses different RAM-address literals; GPIO register-address literals remain unchanged. This is not a whole-function byte-identity claim.",
+    "correction_to_initial_summary": "The initial informal statement that only RAM literals differ was too broad. Exact automated comparison additionally identified the relocated bl micros instruction, recorded below. The same external-call target and source behavior are preserved."
+  },
+  "comparison": {
+    "step_dir_enable_source_equal": true,
+    "isr_instruction_encodings_all_byte_identical": false,
+    "isr_instruction_count": 122,
+    "isr_byte_identical_instruction_count": 121,
+    "isr_instruction_sequence_equal_after_external_call_relocation_normalization": true,
+    "isr_opcode_differences": [
+      {
+        "parameters_home750": {
+          "address": "0xf0",
+          "encoding": "f00cf8d0",
+          "assembly": "bl\tc294 <micros>"
+        },
+        "previous_encoder_guard": {
+          "address": "0xf0",
+          "encoding": "f00bffb8",
+          "assembly": "bl\tc064 <micros>"
+        }
+      }
+    ],
+    "isr_literal_pool_differences": [
+      {
+        "address": "0x204",
+        "parameters_home750": "20004caf",
+        "previous_encoder_guard": "200048af"
+      },
+      {
+        "address": "0x208",
+        "parameters_home750": "20003004",
+        "previous_encoder_guard": "20002c60"
+      },
+      {
+        "address": "0x20c",
+        "parameters_home750": "20004cb3",
+        "previous_encoder_guard": "200048b3"
+      },
+      {
+        "address": "0x210",
+        "parameters_home750": "20004cb2",
+        "previous_encoder_guard": "200048b2"
+      },
+      {
+        "address": "0x214",
+        "parameters_home750": "20004afc",
+        "previous_encoder_guard": "200046fc"
+      },
+      {
+        "address": "0x218",
+        "parameters_home750": "20003d50",
+        "previous_encoder_guard": "20003950"
+      },
+      {
+        "address": "0x21c",
+        "parameters_home750": "20004b08",
+        "previous_encoder_guard": "20004708"
+      },
+      {
+        "address": "0x220",
+        "parameters_home750": "20002f6c",
+        "previous_encoder_guard": "20002bc8"
+      },
+      {
+        "address": "0x224",
+        "parameters_home750": "20004cc2",
+        "previous_encoder_guard": "200048c2"
+      },
+      {
+        "address": "0x228",
+        "parameters_home750": "20004cb0",
+        "previous_encoder_guard": "200048b0"
+      },
+      {
+        "address": "0x22c",
+        "parameters_home750": "20004cb4",
+        "previous_encoder_guard": "200048b4"
+      },
+      {
+        "address": "0x230",
+        "parameters_home750": "20004cb1",
+        "previous_encoder_guard": "200048b1"
+      },
+      {
+        "address": "0x234",
+        "parameters_home750": "20004cb5",
+        "previous_encoder_guard": "200048b5"
+      },
+      {
+        "address": "0x238",
+        "parameters_home750": "20004b6c",
+        "previous_encoder_guard": "2000476c"
+      },
+      {
+        "address": "0x23c",
+        "parameters_home750": "20004cb7",
+        "previous_encoder_guard": "200048b7"
+      },
+      {
+        "address": "0x240",
+        "parameters_home750": "20004b18",
+        "previous_encoder_guard": "20004718"
+      }
+    ],
+    "encoder_i2c_source_equal": true,
+    "selected_build_configuration_equal": true
+  },
+  "code_findings": [
+    "PARAM reads only report the requested controller field. eStop/recompute/reset occurs only inside the successful parameter-write branch.",
+    "configured_rail is consumed for CENTER and successful HOME completion. It does not alter the negative seek rate.",
+    "SEEK_NEG still requests -0.03m/s. With26666.6667steps/m this is800 commanded pulses/s; the timer interval is7us.",
+    "ax_pos changes only in the ISR overflow branch that also writes D2 HIGH. Telemetry x is (ax_pos-home_steps)/steps_per_m, not integrated requested velocity.",
+    "A -0.1539m reported change corresponds to approximately4104 attempted STEP writes. It is not independent physical displacement measurement.",
+    "GPIO initialization keeps STEP/DIR atD2/D3 and shared active-low enable atD8. LCD and encoder pin assignments do not overlap. No microstep GPIO writes exist despite an inherited misleading comment.",
+    "The instantaneous30mm/s homing start predates the parameter/home750 build; this audit does not validate motor pull-in torque or physical tracking."
+  ],
+  "conclusion": {
+    "software_regression": "No new persistent pulse-generation defect was found in the parameter/home750 changes. Exact build comparison substantially weakens that specific explanation for the reported jitter/no-motion observation.",
+    "not_proven": "The audit does not prove STEP, DIR or ENABLE electrical levels at the driver, pulse timing under actual hardware interrupt conditions, motor coil health, power/current, driver condition, coupling, belt motion, or mechanical freedom. The software step counter cannot establish motor following.",
+    "discriminating_measurement": "Measure D2 STEP, D3 DIR and D8 ENABLE at the driver input during a separately authorized bounded test to distinguish electrical delivery from motor/driver/mechanical failure."
+  }
+}

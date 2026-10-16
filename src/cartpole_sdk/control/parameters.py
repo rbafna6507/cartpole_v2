@@ -1,8 +1,13 @@
 """Saved candidate controller settings, independent of rig calibration."""
-from dataclasses import dataclass, fields
+from dataclasses import asdict, dataclass, fields
 from importlib.resources import files
 import json
 import math
+from .motion import _Float32
+
+# Pulse-generation ceiling, not measured motor tracking capability.
+PULSE_SPEED_MAX = (1_000_000 / 7 * .5) * 120 / 3_200_000
+
 
 @dataclass(frozen=True)
 class ControllerParameters:
@@ -36,6 +41,17 @@ class ControllerParameters:
     rail: float = .26
     bw: float = 30.0
     vman: float = .05
+    manual_speed_max: float = .15
+    rail_fraction: float = .95
+    rail_margin: float = .015
+    rail_fault_margin: float = .010
+    rail_hysteresis: float = .005
+    rail_recover_v: float = .15
+    rail_recover_a: float = 1.5
+    rail_recover_s: float = 8.0
+    rehome_v: float = .08
+    rehome_a: float = .5
+    rehome_j: float = 10.0
 
     def __post_init__(self):
         for f in fields(self):
@@ -49,6 +65,36 @@ class ControllerParameters:
             raise ValueError('rail or estimator bandwidth outside supported range')
         if not 0 < self.spin_resume_rad_s < self.spin_trip_rad_s:
             raise ValueError('spin limits require 0 < resume < trip')
+        for name in ('vmax','vmax_s','vmax_b','approach_v','catch_v','manual_speed_max','rail_recover_v','rehome_v'):
+            if not 0 < getattr(self,name) <= PULSE_SPEED_MAX + 1e-7:
+                raise ValueError(f'{name} exceeds pulse speed envelope')
+        for name in ('amax_s','amax_b','amax_m','rail_recover_a','rehome_a','catch_da'):
+            if not 0 < getattr(self,name) <= 200:
+                raise ValueError(f'{name} exceeds acceleration envelope')
+        for name in ('jmax','jmax_m','rehome_j'):
+            if not 0 < getattr(self,name) <= 10000:
+                raise ValueError(f'{name} exceeds jerk envelope')
+        for name,lower,upper in (('rail_fraction',.5,.99),('rail_margin',.002,.05),
+                                 ('rail_fault_margin',.001,.049),('rail_hysteresis',.001,.05),
+                                 ('rail_recover_s',.1,60)):
+            if not lower <= getattr(self,name) <= upper:
+                raise ValueError(f'{name} outside supported range')
+        validate_coupled(asdict(self))
+
+def validate_coupled(values):
+    """Validate a complete supported catalog; never fill absent legacy fields."""
+    try:values={name:_Float32(value) for name,value in values.items()}
+    except OverflowError as exc:raise ValueError('parameters must fit finite float32') from exc
+    if not 0 < values['spin_resume_rad_s'] < values['spin_trip_rad_s']:
+        raise ValueError('spin limits require 0 < spin_resume_rad_s < spin_trip_rad_s')
+    if 'manual_speed_max' in values:
+        if not 0 <= values['vman'] <= values['manual_speed_max']:
+            raise ValueError('vman must be between zero and manual_speed_max')
+        if values['rail_margin'] - values['rail_fault_margin'] < _Float32(.001) - _Float32(1e-8):
+            raise ValueError('rail_margin must exceed rail_fault_margin by at least 0.001 m')
+        if values['rail'] - values['rail_margin'] - values['rail_hysteresis'] < _Float32(1) / _Float32(26666.6666667):
+            raise ValueError('rail must exceed rail_margin + rail_hysteresis by at least one step')
+
 
 @dataclass(frozen=True)
 class Gains:
@@ -59,7 +105,10 @@ class Gains:
 
 def load_tuned_parameters() -> ControllerParameters:
     preset = json.loads(files(__package__).joinpath('tuned_parameters.json').read_text())
-    return ControllerParameters(**{f.name: preset['settings'][f.name] for f in fields(ControllerParameters)})
+    # Historical offline preset predates motion tunables. Explicit class defaults
+    # preserve its governor behavior; live profile loading never uses this path.
+    return ControllerParameters(**{f.name: preset['settings'][f.name] for f in fields(ControllerParameters)
+                                   if f.name in preset['settings']})
 
 def gains(p: ControllerParameters, upright: bool = False) -> Gains:
     pw = p.bal_pw if upright else p.pw

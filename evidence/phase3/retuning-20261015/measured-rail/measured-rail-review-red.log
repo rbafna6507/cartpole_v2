@@ -1,0 +1,16 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+____ ParameterTests.test_invalid_measured_span_rejects_before_profile_write ____
+
+self = <test_rig_parameters.ParameterTests testMethod=test_invalid_measured_span_rejects_before_profile_write>
+
+    def test_invalid_measured_span_rejects_before_profile_write(self):
+        self.fw.span=10666
+        with self.rig() as rig:
+>           with self.assertRaises(ValidationError):
+E           AssertionError: ValidationError not raised
+
+tests/test_rig_parameters.py:325: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_rig_parameters.py::ParameterTests::test_invalid_measured_span_rejects_before_profile_write
+1 failed, 1 passed, 32 deselected in 0.28s

@@ -9,7 +9,7 @@ from dataclasses import dataclass, fields
 import math
 from cartpole_sdk.contracts import (Acceleration, Channel, Observation, Session,
     SelectionError, ValidationError, _finite, _integer, select_channels, validate_observation)
-from cartpole_sdk.control.parameters import gains, load_tuned_parameters
+from cartpole_sdk.control.parameters import ControllerParameters, gains, load_tuned_parameters
 
 _saved = load_tuned_parameters()
 _gains = gains(_saved)
@@ -34,12 +34,33 @@ class HostPolicyParameters:
     kick_duration_s: float = .12
     max_acceleration_m_s2: float = 25.
 
+    @classmethod
+    def from_controller(cls, parameters: ControllerParameters, *, start_mode='auto'):
+        """Map explicit live/saved feedback settings; no 1 kHz observer/governor.
+
+        This maps the energy and feedback terms, not native approach velocity,
+        capture ramp, recovery state machines or observer dynamics. Those do not
+        become equivalent merely by using the same gains at a different rate.
+        """
+        if not isinstance(parameters, ControllerParameters) or start_mode not in ('auto', 'bal'):
+            raise ValidationError('expected ControllerParameters and auto or bal start mode')
+        p = parameters
+        g = gains(p, upright=start_mode == 'bal')
+        return cls(effective_length_m=p.leff, energy_gain=p.ke,
+            swing_position_gain=p.kpx, swing_velocity_gain=p.kdx,
+            phase_softness=p.phase_soft, theta_gain=-g.k1, omega_gain=-g.k2,
+            position_gain=-g.k3, velocity_gain=-g.k4,
+            capture_angle_rad=p.catch_a, capture_rate_rad_s=p.catch_r,
+            approach_angle_rad=p.approach_angle, release_angle_rad=p.giveup,
+            max_acceleration_m_s2=min(25., p.amax_b if start_mode=='bal' else min(p.amax_s,p.amax_b)))
+
     def __post_init__(self):
         for field in fields(self):
             value = getattr(self, field.name)
             _finite(value, field.name)
-            if value <= 0:
-                raise ValidationError(f'{field.name} must be positive')
+            allow_zero = field.name in ('energy_gain','swing_position_gain','swing_velocity_gain')
+            if value < 0 or (value == 0 and not allow_zero):
+                raise ValidationError(f'{field.name} must be nonnegative' if allow_zero else f'{field.name} must be positive')
         if not (.01 <= self.effective_length_m <= 2 and
                 self.capture_angle_rad <= self.approach_angle_rad <= math.pi and
                 self.capture_angle_rad < self.release_angle_rad <= math.pi and
@@ -57,7 +78,7 @@ class HostRatePolicy:
     None means no renewal; trusted runners must stop or let the MCU lease fault.
     """
     def __init__(self, channels: tuple[Channel, ...], *, rate_hz: int = 100,
-                 parameters: HostPolicyParameters | None = None,
+                 parameters: HostPolicyParameters | None = None, start_mode: str = 'auto',
                  max_age_ns: int = 20_000_000, timing_tolerance: float = .5):
         quantities = ('position', 'velocity', 'angle', 'angular_velocity')
         if (type(channels) is not tuple or len(channels) != 4 or
@@ -72,6 +93,9 @@ class HostRatePolicy:
         _finite(timing_tolerance, 'timing_tolerance')
         if not 0 <= timing_tolerance <= .5:
             raise ValidationError('timing tolerance must be between zero and .5')
+        if start_mode not in ('auto', 'bal'):
+            raise ValidationError('start_mode must be auto or bal')
+        self.start_mode = start_mode
         self.channels, self.rate_hz = channels, rate_hz
         self.period_ns = 1_000_000_000 // rate_hz
         self.parameters = parameters if parameters is not None else HostPolicyParameters()
@@ -89,7 +113,7 @@ class HostRatePolicy:
             raise ValidationError('host controller requires its configured cart and single pole')
         self.session = session
         self.fault_reason = self._previous = self._started_ns = None
-        self.mode = 'swing'
+        self.mode = 'balance' if self.start_mode == 'bal' else 'swing'
         self._startup_kick = False
 
     def _fault(self, reason):
@@ -117,6 +141,12 @@ class HostRatePolicy:
             return self._fault('sensor channels exceed one control period of timestamp skew')
         x, v, theta, omega = (sample.value for sample in selected)
         theta = math.atan2(math.sin(theta), math.cos(theta))
+        p = self.parameters
+        if self.start_mode == 'bal':
+            angle_limit = p.capture_angle_rad if self._started_ns is None else p.release_angle_rad
+            if abs(theta) > angle_limit or (self._started_ns is None and
+                    (abs(omega) > p.capture_rate_rad_s or abs(x) >= .16)):
+                return self._fault('balance-only capture/release envelope exceeded')
         if self._started_ns is None:
             self._started_ns = now
             self._startup_kick = abs(abs(theta) - math.pi) < .3 and abs(omega) < .5 and abs(x) < .05

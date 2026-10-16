@@ -25,6 +25,8 @@ inline int native_pins[64]{};
 inline void digitalWrite(int pin,int value){native_pins[pin]=value;}
 inline void digitalWriteFast(int pin,int value){native_pins[pin]=value;}
 inline int digitalReadFast(int pin){return native_pins[pin];}
+inline void (*native_mask_hook)()=nullptr;
+inline uint32_t native_interrupt_mask(){if(native_mask_hook)native_mask_hook();return 0;}
 inline void __disable_irq(){}
 inline void (*native_irq_hook)()=nullptr;
 inline void __enable_irq(){if(native_irq_hook)native_irq_hook();}

@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________________ ExecutorTests.test_homing_success _______________________
+
+self = <test_executor_native.ExecutorTests testMethod=test_homing_success>
+name = 'homing_success'
+
+>   setattr(ExecutorTests, 'test_' + name, lambda self, name=name: self.run_case(name))
+                                                                   ^^^^^^^^^^^^^^^^^^^
+
+tests/test_executor_native.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_executor_native.py:44: in run_case
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E   AssertionError: -6 != 0 : Assertion failed: (m.failed()), function homing_success, file core.cpp, line 39.
+=========================== short test summary info ============================
+FAILED tests/test_executor_native.py::ExecutorTests::test_homing_success - As...
+1 failed, 63 deselected in 0.95s

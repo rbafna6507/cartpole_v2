@@ -62,10 +62,9 @@ struct State {
 
 inline State advance(State s, float x, float requested_accel,
                      float vmax, float drive_amax, float brake_amax,
-                     float jerk, float rail_half, float dt) {
-  // Leave 10 mm to the physical end for the independent fault stop, plus
-  // another 5 mm for step quantization and control timing in normal braking.
-  const float boundary = rail_half - 0.015f;
+                     float jerk, float rail_half, float dt, float rail_margin=0.015f) {
+  // The caller validates a separate fault boundary outside this normal stop.
+  const float boundary = rail_half - rail_margin;
   const float jd = jerk*dt;
   float target = clamp(requested_accel, -drive_amax, drive_amax);
   // Signed bounds also decelerate an inherited velocity above a lower mode cap.

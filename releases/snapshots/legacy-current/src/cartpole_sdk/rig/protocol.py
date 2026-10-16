@@ -1,0 +1,173 @@
+"""Pinned V2 ASCII framing. Parsing has no transport or actuation side effects."""
+from dataclasses import dataclass
+import math
+import re
+
+MAX_LINE = 255
+UINT32 = 0xFFFFFFFF
+
+class ProtocolError(ValueError):
+    """Invalid, damaged or unordered executor traffic."""
+
+def crc16(data: bytes) -> int:
+    crc = 0xFFFF
+    for byte in data:
+        crc ^= byte << 8
+        for _ in range(8):
+            crc = ((crc << 1) ^ (0x1021 if crc & 0x8000 else 0)) & 0xFFFF
+    return crc
+
+def encode(payload: str) -> bytes:
+    try:
+        body = payload.encode('ascii')
+    except (UnicodeEncodeError, AttributeError) as exc:
+        raise ProtocolError('payload must be ASCII') from exc
+    if not body or any(c < 32 or c > 126 for c in body) or b'*' in body or b'@' in body:
+        raise ProtocolError('invalid payload characters')
+    line = b'@' + body + f'*{crc16(body):04X}\n'.encode('ascii')
+    if len(line) > MAX_LINE:
+        raise ProtocolError('oversize frame')
+    return line
+
+def decode(line: bytes) -> str:
+    if not isinstance(line, bytes) or len(line) > MAX_LINE or not line.endswith(b'\n'):
+        raise ProtocolError('invalid frame length or terminator')
+    match = re.fullmatch(rb'@([\x20-\x7e]+)\*([0-9A-Fa-f]{4})\n', line)
+    if match is None:
+        raise ProtocolError('invalid framing')
+    body, checksum = match.groups()
+    if b'*' in body or b'@' in body or crc16(body) != int(checksum, 16):
+        raise ProtocolError('CRC or payload error')
+    return body.decode('ascii')
+
+def uint32(token: str) -> int:
+    if not re.fullmatch(r'[0-9]+', token) or len(token) > 10 or int(token) > UINT32:
+        raise ProtocolError('invalid uint32')
+    return int(token)
+
+def unwrap32(raw: int, previous: int | None) -> int:
+    if previous is None:
+        return raw
+    delta = (raw - (previous & UINT32)) & UINT32
+    if delta >= 0x80000000:
+        raise ProtocolError('out-of-order board counter')
+    return previous + delta
+
+@dataclass(frozen=True, slots=True)
+class State:
+    sid: int
+    tick: int
+    us: int
+    mode: int
+    flags: int
+    theta: float
+    angle_hat: float
+    omega: float
+    x: float
+    velocity: float
+    acceleration: float
+    demand: float
+    last_seq: int
+    fault: int
+    misses: int
+    dropped: int
+    brake_direction: int
+    received_ns: int
+    unwrapped_tick: int = 0
+    unwrapped_us: int = 0
+
+    @property
+    def enabled(self):
+        return bool(self.flags & 2)
+
+    @property
+    def homed(self):
+        return bool(self.flags & 4)
+
+    @property
+    def healthy(self):
+        return bool(self.flags & 1) and self.fault == 0
+
+    @property
+    def switch_profile(self):
+        return bool(self.flags & 8)
+
+def parse_state(payload: str, *, received_ns: int) -> State:
+    parts = payload.split(' ')
+    if len(parts) != 19 or parts[:2] != ['V2', 'S']:
+        raise ProtocolError('invalid state field count')
+    tokens = parts[2:]
+    integers = [uint32(t) for t in tokens[:5]]
+    if integers[0] == 0 or integers[3] > 13:
+        raise ProtocolError('invalid session or mode')
+    if not all(re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?',t) for t in tokens[5:12]):
+        raise ProtocolError('invalid real grammar')
+    try:
+        values = [float(t) for t in tokens[5:12]]
+    except ValueError as exc:
+        raise ProtocolError('invalid real value') from exc
+    if not all(math.isfinite(v) for v in values):
+        raise ProtocolError('nonfinite state')
+    tail = [uint32(t) for t in tokens[12:16]]
+    if tokens[16] not in ('-1', '0', '1'):
+        raise ProtocolError('invalid brake direction')
+    return State(*integers, *values, *tail, int(tokens[16]), received_ns)
+
+@dataclass(frozen=True, slots=True)
+class ExecutorInfo:
+    sid: int
+    firmware: str
+    encoder_upright_raw: int
+    reference_saved: bool
+    mag_status: int
+    i2c_errors: int
+    home_epoch: int
+    measured_span_steps: int
+    rail_half_m: float
+    received_ns: int
+
+
+def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
+    parts = payload.split(' ')
+    if len(parts) != 11 or parts[:2] != ['V2', 'INFO'] or parts[3] != 'executor-v1':
+        raise ProtocolError('invalid diagnostic identity or field count')
+    sid = uint32(parts[2])
+    reference, saved, status, errors, epoch, span = map(uint32, parts[4:10])
+    if not sid or reference > 4095 or saved > 1 or status > 255 or span > 16000:
+        raise ProtocolError('invalid diagnostic range')
+    if not re.fullmatch(r'[+]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', parts[10]):
+        raise ProtocolError('invalid diagnostic rail value')
+    rail = float(parts[10])
+    if not math.isfinite(rail) or not 0 < rail <= .26:
+        raise ProtocolError('invalid diagnostic rail bound')
+    return ExecutorInfo(sid, parts[3], reference, bool(saved), status, errors, epoch, span, rail, received_ns)
+
+class LineBuffer:
+    """Bounded incremental framing; discard through newline after overflow."""
+    def __init__(self):
+        self._buffer = bytearray()
+        self._discarding = False
+
+    @property
+    def buffered_bytes(self):
+        return len(self._buffer)
+
+    def feed(self, data: bytes, *, raise_overflow=True) -> list[bytes]:
+        lines = []
+        overflow = False
+        for byte in data:
+            if self._discarding:
+                if byte == 10:
+                    self._discarding = False
+                continue
+            self._buffer.append(byte)
+            if len(self._buffer) > MAX_LINE:
+                self._buffer.clear()
+                self._discarding = byte != 10
+                overflow = True
+            elif byte == 10:
+                lines.append(bytes(self._buffer))
+                self._buffer.clear()
+        if overflow and raise_overflow:
+            raise ProtocolError('oversize line discarded')
+        return lines

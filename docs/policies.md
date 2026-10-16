@@ -57,8 +57,9 @@ must stop and/or the unchanged MCU lease must expire.
 
 The host and learned policies return **raw demanded acceleration**. The new MCU
 external mode applies its original binary32 `cart_motion` governor once at
-1 kHz, with speed 1.5 m/s, acceleration 25 m/s², jerk 150 m/s³ and commissioned
-rail configuration (currently .26 m half-range). Leases do not renew themselves;
+1 kHz, with the live motion settings and measured rail configuration. The older
+simulation defaults are speed 1.5 m/s, acceleration 25 m/s², jerk 150 m/s³ and
+.26 m half-range; an explicit ControllerParameters snapshot now overrides them. Leases do not renew themselves;
 expiry faults and disables the executor.
 
 `MujocoBackend` intentionally retains its earlier direct/executed-acceleration
@@ -215,3 +216,50 @@ control quality, host inference latency, or physical policy acceptance. Effectiv
 timestamps retain the SDK's board acquisition-snapshot proxy; they do not measure
 magnetic filter or USB delay. Details and hashes are in
 `evidence/phase5/host250-reference-shadow.json`.
+
+
+## Experimental Python auto/bal entry points (local increment, 2026-10-16)
+
+`HostPolicyParameters.from_controller(settings, start_mode='auto'|'bal')` maps
+energy/centering terms and feedback gains from explicit `ControllerParameters`.
+Auto uses `pw`; balance-only uses `bal_pw`. Zero `ke`, `kpx`, and `kdx` values
+are supported. The native approach velocity limiter, capture acceleration ramp,
+observer and recovery state machines are not ported by this mapping. The SDK
+policy uses explicit measured/estimated channels at its own 100/250 Hz cadence.
+
+`HostRatePolicy(..., start_mode='bal')` refuses a start outside its capture angle,
+rate and cart-position envelope. Exceeding the release angle latches a policy
+fault instead of attempting swing-up. The trusted runner immediately stops on a
+latched policy fault. Native Teensy `auto`/`bal` commands are unchanged.
+
+The new console commands are `python-auto SECONDS` and `python-bal SECONDS`.
+They block until the bounded run ends; Ctrl-C requests stop and exits the console.
+They read the complete v6 live catalog while stopped, record the readback and
+mapped policy settings, and execute SDK `ActionRequest` commands in external
+mode. Motion limits remain on the Teensy at 1 kHz; there is no second Python
+governor. Sources are magnetic angle/filtered rate and step/commanded cart state.
+Normal completion stops and disables; a subsequent `rehome` is explicit. They
+are local experimental code and have not been tested on or deployed to the rig.
+
+The noninteractive form (for a future authorized commissioning session) requires
+`--command python-bal --source magnetic-step --rate 250 --duration 2` in addition
+to the usual console port. The console first applies its preserved default
+startup profile (or the explicit `--startup-profile`); `--keep-board-params`
+retains the board's existing settings. The Python runner then reads those live
+settings. Encoder calibration remains an explicit operator operation.
+
+Local simulation has no hardware backend:
+
+```sh
+uv run --extra sim python examples/host_cartpole.py \
+  --mode auto --rate 250 --seconds 10 \
+  --profile profiles/last-observed-20261015-full-snapshot.json \
+  --output /tmp/cartpole-host-auto.json
+```
+
+A complete 41-field snapshot supplies both policy gains and simulation governor
+limits. Partial rig profiles intentionally omit the measured rail; this example
+rejects them instead of inventing geometry. The plant remains provisional. The
+external simulation governor currently supports acceleration caps up to25m/s²;
+larger firmware tunings are rejected before constructing a rollout. See
+`docs/paused-development-status.md` and `evidence/phase4/paused-20261016/`.

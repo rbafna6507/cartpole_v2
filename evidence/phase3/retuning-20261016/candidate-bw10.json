@@ -1,0 +1,69 @@
+{
+  "profile": "/home/rbafna/cartpole-v2-live/releases/platform-20261015-v6-tunable/profiles/candidate-20261016-bw10.json",
+  "sha256": "82b896439486c1c6f2e8c2e8209fffb6a7169c04b5dbae56ee7977f22e181d39",
+  "encoder_reference": 330,
+  "reference_warning": "Experimental constant trim from direct362; not a calibrated hanging/nonlinear model. Profile does not change reference.",
+  "trial_names": [
+    "reference330-bw10-home8-baseline-ai1-1792170071319634397",
+    "reference330-pw3-bw10-ag1-1792169047039299497",
+    "reference330-pw3-bw10-ag2-1792169097101132036",
+    "reference330-pw3-bw10-ag3-1792169152853516309",
+    "reference330-pw3-bw10-ag4long-1792169237704516804",
+    "reference330-pw3-bw10-ag5confirm60-1792169350087140744",
+    "reference330-pw3-bw10-ag6confirm60-lowalloc-1792169837970161600",
+    "reference330-pw3-bw10-ag7confirm60-lowalloc-1792170127093081228"
+  ],
+  "final_readback_matches": true,
+  "final_report": "/home/rbafna/cartpole-v2-runs/retune-20261015/final-bw10-stopped-check-1792170242978375108/report.json",
+  "final": {
+    "sid": 1636123526,
+    "tick": 72396757,
+    "us": 3681797938,
+    "mode": 0,
+    "flags": 205,
+    "theta": 3.029612,
+    "angle_hat": 3.029613,
+    "omega": -1.001931e-05,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 17432244,
+    "brake_direction": 0,
+    "received_ns": 265539166978987,
+    "unwrapped_tick": 72396757,
+    "unwrapped_us": 3681797938
+  },
+  "final_info": {
+    "sid": 1636123526,
+    "firmware": "executor-v6-measuredrail",
+    "encoder_upright_raw": 330,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 5,
+    "home_epoch": 8,
+    "measured_span_steps": 16510,
+    "rail_half_m": 0.309075,
+    "received_ns": 265539168085115,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2305,
+    "encoder_raw_age_us": 109706,
+    "encoder_recoveries": 0
+  },
+  "limits": {
+    "jerk_m_s3": 150,
+    "switches_enabled": true,
+    "normal_half_m": 0.2940750003
+  },
+  "limitations": [
+    "Missed-catch swing-up loop still occurs",
+    "ag5 completed60s balance but return stopped on host telemetry processing pause; independent return succeeded",
+    "ag6 early capture failed, looped, then stopped on one recovered I2C fault; physicalHOME repeated",
+    "ag7 full60s and return succeeded with reduced diagnostic allocations; no watchdog threshold was relaxed"
+  ]
+}

@@ -1,0 +1,109 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/rbafna/projects/cartpole_v2
+configfile: pyproject.toml
+testpaths: tests
+collected 666 items
+
+tests/test_adapters.py ..................                                [  2%]
+tests/test_angle_calibration.py ...........................              [  6%]
+tests/test_cli.py .....                                                  [  7%]
+tests/test_contracts.py ......................                           [ 10%]
+tests/test_executor_native.py .......................................... [ 17%]
+.....................................                                    [ 22%]
+tests/test_gym_env.py ...                                                [ 23%]
+tests/test_host_policy.py .................                              [ 25%]
+tests/test_identification.py .................                           [ 28%]
+tests/test_learning.py ......                                            [ 29%]
+tests/test_learning_export.py ....                                       [ 29%]
+tests/test_native_oracle.py ............                                 [ 31%]
+tests/test_portal_http.py .......                                        [ 32%]
+tests/test_portal_queue.py ...........                                   [ 34%]
+tests/test_portal_sandbox.py .........ssss                               [ 36%]
+tests/test_portal_worker.py ........ss.........                          [ 39%]
+tests/test_recording.py ...........                                      [ 40%]
+tests/test_reference.py ......                                           [ 41%]
+tests/test_reference_parity.py ..........                                [ 43%]
+tests/test_reference_policy.py .....                                     [ 43%]
+tests/test_replay.py ............                                        [ 45%]
+tests/test_rig.py ........................                               [ 49%]
+tests/test_rig_calibration.py ................                           [ 51%]
+tests/test_rig_calibration_model.py .............................F...... [ 57%]
+.......                                                                  [ 58%]
+tests/test_rig_console.py .........                                      [ 59%]
+tests/test_rig_info.py ...........                                       [ 61%]
+tests/test_rig_parameters.py ..........................                  [ 65%]
+tests/test_rig_protocol.py .....                                         [ 65%]
+tests/test_rig_rehome.py ...................                             [ 68%]
+tests/test_rig_transport.py ..                                           [ 68%]
+tests/test_sensing.py ........                                           [ 70%]
+tests/test_sensing_fusion.py .............                               [ 72%]
+tests/test_sensing_runtime.py .                                          [ 72%]
+tests/test_sensing_shadow.py ..............                              [ 74%]
+tests/test_sensing_stream.py .................                           [ 76%]
+tests/test_sensing_telemetry.py ......                                   [ 77%]
+tests/test_simulation.py .............                                   [ 79%]
+tests/test_simulation_runner.py .....                                    [ 80%]
+tests/test_viewer.py ..............                                      [ 82%]
+tests/vision_runtime/test_app.py ........                                [ 83%]
+tests/vision_runtime/test_calibration_boundary.py ....                   [ 84%]
+tests/vision_runtime/test_calibration_restore.py ..                      [ 84%]
+tests/vision_runtime/test_capture.py ....                                [ 85%]
+tests/vision_runtime/test_cart.py ...                                    [ 85%]
+tests/vision_runtime/test_comparison_api.py ...                          [ 86%]
+tests/vision_runtime/test_comparison_process.py ...                      [ 86%]
+tests/vision_runtime/test_detector.py .......                            [ 87%]
+tests/vision_runtime/test_encoder.py s                                   [ 87%]
+tests/vision_runtime/test_encoder_feed.py .......                        [ 88%]
+tests/vision_runtime/test_encoder_history.py ..                          [ 89%]
+tests/vision_runtime/test_evaluate.py .....                              [ 89%]
+tests/vision_runtime/test_fusion.py ......                               [ 90%]
+tests/vision_runtime/test_history.py .....                               [ 91%]
+tests/vision_runtime/test_http_transport.py ...                          [ 92%]
+tests/vision_runtime/test_live_options.py ..                             [ 92%]
+tests/vision_runtime/test_metrics.py ...                                 [ 92%]
+tests/vision_runtime/test_motion.py .....                                [ 93%]
+tests/vision_runtime/test_preview.py .                                   [ 93%]
+tests/vision_runtime/test_replay.py ..                                   [ 93%]
+tests/vision_runtime/test_sdk_feed.py ....                               [ 94%]
+tests/vision_runtime/test_segmentation.py ..                             [ 94%]
+tests/vision_runtime/test_sensing_stream.py .....                        [ 95%]
+tests/vision_runtime/test_service_runtime.py ....                        [ 96%]
+tests/vision_runtime/test_state.py ...........                           [ 97%]
+tests/vision_runtime/test_stream.py .........                            [ 99%]
+tests/vision_runtime/test_transfer.py ...                                [ 99%]
+tests/vision_runtime/test_view_only.py ..                                [100%]
+
+=================================== FAILURES ===================================
+__________ V5ReturnTests.test_legacy_auto_keeps_early_stopping_budget __________
+
+self = <test_rig_calibration_model.V5ReturnTests testMethod=test_legacy_auto_keeps_early_stopping_budget>
+
+    def test_legacy_auto_keeps_early_stopping_budget(self):
+        for identity in ('executor-v1','executor-v2-cart2','executor-v3-encguard'):
+            self.fw.identity=identity
+            with self.rig() as rig:
+>               start=time.monotonic_ns();rig.start('auto',.1)
+                                          ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_rehome.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:637: in start
+    self._stopped_healthy()
+src/cartpole_sdk/rig/client.py:410: in _stopped_healthy
+    self._require()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.rig.client.Rig object at 0x114a8b910>, allow_error = False
+
+    def _require(self, *, allow_error=False):
+        if not self._connected or self._closed:
+            raise RigError('rig is not connected')
+        if self.error is not None and not allow_error:
+>           raise RigError(f'latched rig error: {self.error}')
+E           cartpole_sdk.rig.client.RigError: latched rig error: executor fault 1
+
+src/cartpole_sdk/rig/client.py:150: RigError
+=========================== short test summary info ============================
+FAILED tests/test_rig_calibration_model.py::V5ReturnTests::test_legacy_auto_keeps_early_stopping_budget
+================== 1 failed, 658 passed, 7 skipped in 45.07s ===================
