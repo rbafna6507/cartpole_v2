@@ -1,0 +1,33 @@
+{
+  "status": "prepared_not_hardware_validated",
+  "physical_hardware_access": false,
+  "sdk_source_modified": false,
+  "python": "3.11.7",
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 /Users/rbafna/projects/cartpole_v2/.venv/bin/python -m unittest discover -s /Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/characterization -p 'test_characterize.py' -v",
+  "tests_run": 13,
+  "test_elapsed_s": 4.170,
+  "test_exit_code": 0,
+  "result": "OK",
+  "offline_cli_waveform_exit_code": 0,
+  "protocol_fixture": {
+    "transport": "local PTY and repository FDTransport, never SerialTransport",
+    "rate_hz": 100,
+    "parameter_catalog_count": 41,
+    "bounded_actions_before_observed_guard": 5,
+    "max_abs_requested_acceleration_m_s2": 1.0,
+    "action_ttl_ms": 20,
+    "injected_observed_x_m": 0.031,
+    "stopped_after_guard": true,
+    "parameter_writes": 0,
+    "home_center_clear_switch_mode_rehome_commands": 0
+  },
+  "test_development_findings": [
+    "Initial tests failed before the implementation existed.",
+    "The derivative test was corrected to respect the quintic envelope's C2 joins, where the third derivative can jump; waveform math and bounds were unchanged.",
+    "The real SDK protocol test exposed a Rig._record kind keyword collision in experiment metadata; waveform_kind fixed it before any hardware use."
+  ],
+  "source_sha256": {
+    "characterize.py": "8d9f3a28a64ba2d5e1df729167c243c5946361ca38c75c22afa5e282f271193e",
+    "test_characterize.py": "6e3c3f69a64c99e40cd240a01becf77925a7613bdf8fedd8956dc15dcc709d21"
+  }
+}

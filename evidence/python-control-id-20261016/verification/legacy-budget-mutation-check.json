@@ -1,0 +1,11 @@
+{
+  "mutation": "remove early-stop margin from _wait_run in memory only",
+  "tests_run": 1,
+  "failures": 0,
+  "errors": 3,
+  "errors_text": [
+    "Traceback (most recent call last):\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 151, in test_legacy_auto_keeps_early_stopping_budget\n    _wait_run(rig,.1,io.StringIO())\n  File \"<string>\", line 15, in _review_mutant_wait_run\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 137, in wait_state\n    return super().wait_state(after_tick,timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_console.py\", line 174, in wait_state\n    raise RigError('scripted action lease expired')\ncartpole_sdk.rig.client.RigError: scripted action lease expired\n",
+    "Traceback (most recent call last):\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 151, in test_legacy_auto_keeps_early_stopping_budget\n    _wait_run(rig,.1,io.StringIO())\n  File \"<string>\", line 15, in _review_mutant_wait_run\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 137, in wait_state\n    return super().wait_state(after_tick,timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_console.py\", line 174, in wait_state\n    raise RigError('scripted action lease expired')\ncartpole_sdk.rig.client.RigError: scripted action lease expired\n",
+    "Traceback (most recent call last):\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 151, in test_legacy_auto_keeps_early_stopping_budget\n    _wait_run(rig,.1,io.StringIO())\n  File \"<string>\", line 15, in _review_mutant_wait_run\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_rehome.py\", line 137, in wait_state\n    return super().wait_state(after_tick,timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/rbafna/projects/cartpole_v2/tests/test_rig_console.py\", line 174, in wait_state\n    raise RigError('scripted action lease expired')\ncartpole_sdk.rig.client.RigError: scripted action lease expired\n"
+  ]
+}

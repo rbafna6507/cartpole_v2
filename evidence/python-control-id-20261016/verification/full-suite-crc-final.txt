@@ -1,0 +1,45 @@
+...................................................................... [  8%]
+...................................... [ 12%]
+............................................ [ 17%]
+........................................................................ [ 26%]
+........................................................................ [ 34%]
+........................................................................ [ 42%]
+............ssss........ss..........................................................................................................................F........................ [ 62%]
+.............................................................. [ 70%]
+.................................................... [ 76%]
+..................................................................... [ 84%]
+......................................................s............................................................. [ 97%]
+....................                                                     [100%]
+=================================== FAILURES ===================================
+__________ V5ReturnTests.test_legacy_auto_keeps_early_stopping_budget __________
+
+self = <test_rig_calibration_model.V5ReturnTests testMethod=test_legacy_auto_keeps_early_stopping_budget>
+
+    def test_legacy_auto_keeps_early_stopping_budget(self):
+        for identity in ('executor-v1','executor-v2-cart2','executor-v3-encguard'):
+            self.fw.identity=identity
+            with self.rig() as rig:
+>               start=time.monotonic_ns();rig.start('auto',.1)
+                                          ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rig_rehome.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:674: in start
+    self._stopped_healthy()
+src/cartpole_sdk/rig/client.py:447: in _stopped_healthy
+    self._require()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.rig.client.Rig object at 0x112984890>, allow_error = False
+
+    def _require(self, *, allow_error=False):
+        if not self._connected or self._closed:
+            raise RigError('rig is not connected')
+        if self.error is not None and not allow_error:
+>           raise RigError(f'latched rig error: {self.error}')
+E           cartpole_sdk.rig.client.RigError: latched rig error: executor fault 1
+
+src/cartpole_sdk/rig/client.py:155: RigError
+=========================== short test summary info ============================
+FAILED tests/test_rig_calibration_model.py::V5ReturnTests::test_legacy_auto_keeps_early_stopping_budget
+1 failed, 852 passed, 7 skipped, 384 subtests passed in 50.07s

@@ -1,0 +1,64 @@
+{
+  "source_path": "evidence/python-control-id-20261016/reliability-audit/native-1792178943322637321-compact.json",
+  "source_sha256": "8253202f378eed726d86b4c5be6538b60ec04fa4d4be61f00c3acd5acc981ff2",
+  "script_sha256": "c09ecd75a795410515e57383d3260384044cf499748e70e3fdfe187af01c3c8a",
+  "native_run": "/home/rbafna/cartpole-v2-runs/python-id-20261016/native-1792178943322637321",
+  "mode": 3,
+  "duration_s": 1.1,
+  "hardware_activity": false,
+  "results": [
+    {
+      "snapshot_lag_ms": 0,
+      "request_difference_m_s2": {
+        "n": 276,
+        "min": -0.02377143155479189,
+        "max": 0.027978947474723626,
+        "mean": 0.0018770296031210268,
+        "rms": 0.011402805173005846,
+        "p50": 0.0014956541548155344,
+        "p95": 0.01966335714992784
+      },
+      "maximum_absolute_difference_m_s2": 0.027978947474723626
+    },
+    {
+      "snapshot_lag_ms": 4,
+      "request_difference_m_s2": {
+        "n": 275,
+        "min": -1.8725919799027482,
+        "max": 2.53004356813155,
+        "mean": 0.013565361880447668,
+        "rms": 0.7653161287831547,
+        "p50": -0.08827619600963033,
+        "p95": 1.2964602535202303
+      },
+      "maximum_absolute_difference_m_s2": 2.53004356813155
+    },
+    {
+      "snapshot_lag_ms": 8,
+      "request_difference_m_s2": {
+        "n": 274,
+        "min": -3.5153879799027488,
+        "max": 5.013179568131551,
+        "mean": 0.03530529153818607,
+        "rms": 1.4840644030539816,
+        "p50": -0.14994872672269288,
+        "p95": 2.4004499392667356
+      },
+      "maximum_absolute_difference_m_s2": 5.013179568131551
+    },
+    {
+      "snapshot_lag_ms": 12,
+      "request_difference_m_s2": {
+        "n": 273,
+        "min": -5.014968262777364,
+        "max": 7.206257131712906,
+        "mean": 0.06277304680180323,
+        "rms": 2.1480525942956885,
+        "p50": -0.2799468112174006,
+        "p95": 3.6103565442082117
+      },
+      "maximum_absolute_difference_m_s2": 7.206257131712906
+    }
+  ],
+  "interpretation": "Fixed recorded trajectory only. Differences quantify stale-input sensitivity; they do not predict actual stability or measure transport delay. Same-snapshot discrepancy includes telemetry rounding and observation of motion after a control tick."
+}

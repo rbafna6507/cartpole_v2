@@ -1,0 +1,33 @@
+...................................................................... [  8%]
+...................................... [ 13%]
+............................................ [ 19%]
+........................................................................ [ 28%]
+........................................................................ [ 37%]
+...........................ssss........ss.............................................. [ 48%]
+............................................. [ 54%]
+......................................... [ 59%]
+..............F................................................................................................... [ 73%]
+........................................................................ [ 82%]
+.......................................................s......................................................... [ 96%]
+........................                                                 [100%]
+=================================== FAILURES ===================================
+_ PythonConsoleTests.test_python_balance_uses_external_action_and_stops_without_native_mode _
+
+self = <test_rig_console.PythonConsoleTests testMethod=test_python_balance_uses_external_action_and_stops_without_native_mode>
+
+    def test_python_balance_uses_external_action_and_stops_without_native_mode(self):
+        self.fw.flags=205
+        self.fw.state=lambda **kwargs: __import__('test_rig').Firmware.state(self.fw,theta='0.02',**kwargs).replace(' 0.19 ', ' 0.02 ')
+        with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()) as output:
+            code=main(['--port',self.fw.port,'--rate','100','--command','python-bal',
+                       '--source','magnetic-step','--duration','.08','--log-dir',directory],rig_factory=self.rig)
+>       self.assertEqual(code,0,output.getvalue())
+E       AssertionError: 1 != 0 : connected stopped, session 1533388858; log /var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/tmpkku1c3rn/rig-1792178207520150000-1533388858.jsonl
+E       startup profile tuned-20261016-bw10 applied and verified (40 settings); executor remains stopped
+E       Experimental Python control, filtered magnetic feedback, raw-angle guard and step governor state; Ctrl-C stops.
+E       error: host policy fault: replayed observation or incompatible host cadence
+
+tests/test_rig_console.py:112: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_rig_console.py::PythonConsoleTests::test_python_balance_uses_external_action_and_stops_without_native_mode
+1 failed, 784 passed, 7 skipped, 384 subtests passed in 46.56s

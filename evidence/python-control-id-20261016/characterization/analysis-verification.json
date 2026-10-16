@@ -1,0 +1,24 @@
+{
+  "status": "complete_offline_assessment_both_fits_rejected",
+  "physical_hardware_access": false,
+  "sdk_or_other_evidence_changed": false,
+  "tests_run": 6,
+  "test_result": "OK",
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s evidence/python-control-id-20261016/characterization -p test_analyze_characterization.py -v",
+  "raw_hashes_match_hardware_reports": true,
+  "primary_fit_results_identical_between_analysis_01_and_02": true,
+  "heldout_angle_offset_refitted": false,
+  "thresholds_relaxed": false,
+  "model_promoted": false,
+  "sha256": {
+    "analysis-plan.json": "036e9bcdf06cf7c60b3b663dfd9f092887c50e9cf1eb48ad1290be077afb487b",
+    "analyze_characterization.py": "0f9f1588c8b9ddb6542f20541321218913d53c55a3d06cb3e6715e1e7af44820",
+    "test_analyze_characterization.py": "56a8ab369ea6ce1aa771138db122f0e45d1be6e8e2e5daf244e027d26cf37bd0",
+    "results/analysis-02.json": "8b4786455cbc2e5a3cc550d32ee8efec1e98a15f088849963ef208fa473670dd"
+  },
+  "raw_input_sha256": {
+    "characterization-pilot-01": "9abedc08fc3145c3e694cd45e32ba6a519b3b191a52c72f16179f1f539b77ffc",
+    "characterization-train-01": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+    "characterization-heldout-01": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c"
+  }
+}

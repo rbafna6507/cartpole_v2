@@ -45,7 +45,7 @@ class DiscoveryTests(unittest.TestCase):
         with patch.object(tunnel.subprocess, 'run', side_effect=responses) as run, \
              patch.object(tunnel.socket, 'create_connection', return_value=MagicMock()) as connect:
             cmd = tunnel.prepare(None, {})
-        self.assertEqual(cmd[-1], 'jetson')
+        self.assertEqual(cmd[-1], 'rbafna@jetson')
         self.assertIn('Hostname='+STABLE, cmd)
         self.assertIn('HostKeyAlias=jetson', cmd)
         self.assertIn('StrictHostKeyChecking=yes', cmd)
@@ -166,7 +166,7 @@ class DiscoveryEdgeTests(unittest.TestCase):
                               '  IdentityFile /tmp/fixture-private-key\n'
                               '  UserKnownHostsFile /tmp/fixture-trusted-keys\n'
                               '  ProxyJump jump.example\n  StrictHostKeyChecking no\n')
-            parsed = subprocess.run([shutil.which('ssh'), '-G', '-F', str(config), 'jetson'],
+            parsed = subprocess.run([shutil.which('ssh'), '-G', '-F', str(config), 'rbafna@jetson'],
                                     text=True, capture_output=True, check=True)
             with patch.object(tunnel.subprocess, 'run', side_effect=self.responses(config=parsed.stdout)), \
                  patch.object(tunnel.socket, 'create_connection', return_value=MagicMock()) as connect:
@@ -175,7 +175,7 @@ class DiscoveryEdgeTests(unittest.TestCase):
                                     text=True, capture_output=True, check=True)
         self.assertIn('hostname '+STABLE+'\n', direct.stdout)
         self.assertIn('hostkeyalias trusted-rig\n', direct.stdout)
-        self.assertIn('user fixture-user\n', direct.stdout)
+        self.assertIn('user rbafna\n', direct.stdout)
         self.assertIn('port 2222\n', direct.stdout)
         self.assertIn('identityfile /tmp/fixture-private-key\n', direct.stdout)
         self.assertIn('userknownhostsfile /tmp/fixture-trusted-keys\n', direct.stdout)

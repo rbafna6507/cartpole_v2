@@ -45,6 +45,50 @@ class AppTests(unittest.TestCase):
         self.assertIsNone(r["cart_pivot_px"])
         self.assertFalse(r["cart_valid"])
 
+    def test_rejected_arm_preserves_agreeing_cart_template(self):
+        import numpy as np
+        frame=scene();patch=np.random.default_rng(42).integers(40,230,(35,60,3),dtype=np.uint8)
+        frame[100:135,100:160]=patch
+        self.engine.cart.select(frame,(100,100,60,35),(320,240))
+        self.engine.estimator.cart_a=[100,240];self.engine.estimator.cart_b=[500,240]
+        self.engine.estimator.cart_span_mm=400
+        self.engine.estimator.home_angle=0;self.engine.estimator.home_length=180
+        now=time.monotonic()
+        accepted=self.engine.process(frame,now,1)
+        self.assertTrue(accepted['angle_valid'])
+        self.assertEqual(accepted['cart_source'],'arm pivot')
+        self.engine.estimator.home_length=100
+        rejected=self.engine.process(frame,now+.02,2)
+        self.assertTrue(rejected['detected'])
+        self.assertFalse(rejected['angle_valid'])
+        self.assertTrue(rejected['cart_valid'])
+        self.assertEqual(rejected['cart_source'],'template')
+        self.assertAlmostEqual(rejected['cart_x_m'],.020,places=3)
+        self.assertIsNone(rejected['cart_v_m_s'])
+
+    def test_rejected_arm_cannot_disable_disagreeing_cart_template(self):
+        import numpy as np
+        frame=scene();patch=np.random.default_rng(42).integers(40,230,(35,60,3),dtype=np.uint8)
+        frame[100:135,100:160]=patch
+        self.engine.cart.select(frame,(100,100,60,35),(320,240))
+        self.engine.estimator.cart_a=[100,240];self.engine.estimator.cart_b=[500,240]
+        self.engine.estimator.cart_span_mm=400
+        self.engine.estimator.home_angle=0;self.engine.estimator.home_length=100
+        moved=scene(pivot=(400,240));moved[100:135,100:160]=patch
+        now=time.monotonic()
+        rejected=self.engine.process(moved,now,1)
+        self.assertTrue(rejected['detected'])
+        self.assertFalse(rejected['angle_valid'])
+        self.assertTrue(rejected['cart_valid'])
+        self.assertEqual(rejected['cart_source'],'template')
+        self.assertAlmostEqual(rejected['cart_x_m'],.020,places=3)
+        hidden=np.full_like(frame,35);hidden[100:135,100:160]=patch
+        occluded=self.engine.process(hidden,now+.02,2)
+        self.assertFalse(occluded['detected'])
+        self.assertTrue(occluded['cart_valid'])
+        self.assertEqual(occluded['cart_source'],'template')
+        self.assertAlmostEqual(occluded['cart_x_m'],.020,places=3)
+
     def test_preview_page_and_finite_json(self):
         self.assertEqual(self.client.get('/').status_code,200)
         self.engine.process(scene(),time.monotonic(),1)

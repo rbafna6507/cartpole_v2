@@ -1,0 +1,132 @@
+{
+  "case": "observe",
+  "seconds": 20.0,
+  "rate_hz": 250,
+  "shadow_feedback": false,
+  "log_enabled": true,
+  "mirror_enabled": true,
+  "ttl_ms": 20,
+  "sdk_src": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src",
+  "source_sha256": {
+    "cartpole_sdk/rig/client.py": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae",
+    "cartpole_sdk/rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+    "cartpole_sdk/rig/protocol.py": "a651ebee9ad1295a154ec7bf1c6a75a6aa12898d59c3bc9c6e081766f9d24853",
+    "cartpole_sdk/rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+    "cartpole_sdk/contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+    "cartpole_sdk/policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+    "cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "cartpole_sdk/control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+    "cartpole_sdk/control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+    "cartpole_sdk/control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+    "cartpole_sdk/sensing/telemetry.py": "7ed4f9890787f19090c18e315942220699597e76b1d7e8138e6b5e22bbd4a84b"
+  },
+  "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+  "switch_interval_s": 0.001,
+  "threads_initial": [
+    {
+      "name": "MainThread",
+      "ident": 281473345462304,
+      "native_id": 208118,
+      "affinity": [
+        2
+      ]
+    }
+  ],
+  "instrumentation": "preallocated integer arrays; dump after STOP",
+  "before_info": {
+    "sid": 4020314617,
+    "firmware": "executor-v6-measuredrail",
+    "encoder_upright_raw": 330,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 5,
+    "home_epoch": 14,
+    "measured_span_steps": 16513,
+    "rail_half_m": 0.3091125,
+    "received_ns": 275443161804506,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2947,
+    "encoder_raw_age_us": 154,
+    "encoder_recoveries": 0
+  },
+  "before_state": {
+    "sid": 4020314617,
+    "tick": 82300692,
+    "us": 700831050,
+    "mode": 0,
+    "flags": 205,
+    "theta": -2.274894,
+    "angle_hat": -2.257084,
+    "omega": 6.134245,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 18797775,
+    "brake_direction": 0,
+    "received_ns": 275443161102993,
+    "unwrapped_tick": 82300692,
+    "unwrapped_us": 700831050
+  },
+  "stop_state": {
+    "sid": 4020314617,
+    "tick": 82300696,
+    "us": 700835050,
+    "mode": 0,
+    "flags": 205,
+    "theta": -2.256486,
+    "angle_hat": -2.23924,
+    "omega": 5.933237,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 18797775,
+    "brake_direction": 0,
+    "received_ns": 275443164620255,
+    "unwrapped_tick": 82300696,
+    "unwrapped_us": 700835050
+  },
+  "stop_confirmed": true,
+  "log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/timing-observe-1792180147332969007/rig-1792180147343538457-4020314617.jsonl",
+  "failure": "RuntimeError('requires quietly hanging pole')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/diagnose_timing.py\", line 228, in main\n    try:guarded(rig,lambda:execute(rig,trace,args,modules,report),report)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/diagnose_timing.py\", line 108, in guarded\n    try:return operation()\n               ^^^^^^^^^^^\n  File \"/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/diagnose_timing.py\", line 228, in <lambda>\n    try:guarded(rig,lambda:execute(rig,trace,args,modules,report),report)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/diagnose_timing.py\", line 164, in execute\n    raise RuntimeError('requires quietly hanging pole')\nRuntimeError: requires quietly hanging pole\n",
+  "threads_final": [
+    {
+      "name": "MainThread",
+      "ident": 281473345462304,
+      "native_id": 208118,
+      "affinity": [
+        2
+      ]
+    }
+  ],
+  "timing_summary": {
+    "observations": 0,
+    "max_observation_gap_ns": 0,
+    "gaps_above_1_5_periods": 0,
+    "gaps_above_2_periods": 0,
+    "gaps_above_3_periods": 0,
+    "gaps_below_half_period": 0,
+    "stage_max_wall_ns": {
+      "observe": 0,
+      "act": 0,
+      "step": 0,
+      "wait": 0
+    },
+    "stage_max_cpu_ns": {
+      "observe": 0,
+      "act": 0,
+      "step": 0,
+      "wait": 0
+    }
+  }
+}

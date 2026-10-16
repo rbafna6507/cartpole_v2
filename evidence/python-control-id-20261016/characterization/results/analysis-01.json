@@ -1,0 +1,1897 @@
+{
+  "status": "diagnostic_only_no_model_promotion",
+  "hardware_activity": false,
+  "python": "3.11.7",
+  "numpy": "2.4.6",
+  "source_modules": {
+    "fit": {
+      "path": "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/identification/fit.py",
+      "sha256": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76"
+    },
+    "rig_logs": {
+      "path": "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/identification/rig_logs.py",
+      "sha256": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc"
+    }
+  },
+  "fit_config": {
+    "gravity_m_s2": 9.81,
+    "length_bounds_m": [
+      0.05,
+      1.5
+    ],
+    "gain_bounds": [
+      0.05,
+      3.0
+    ],
+    "max_damping_per_s": 5.0,
+    "angle_offset_rad": 0.0,
+    "max_angle_zero_bias_rad": 0.02,
+    "max_gap_s": 0.05,
+    "window_s": 0.35,
+    "delay_candidates_s": [
+      0.0,
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055,
+      0.06,
+      0.065,
+      0.07,
+      0.075,
+      0.08,
+      0.085,
+      0.09,
+      0.095,
+      0.1
+    ],
+    "min_windows": 20,
+    "max_condition": 1000.0,
+    "min_angle_span_rad": 0.15,
+    "min_acceleration_rms_m_s2": 0.05,
+    "prediction_horizon_s": 0.5,
+    "max_prediction_rmse_rad": 0.08,
+    "max_prediction_p95_rad": 0.15,
+    "max_integral_nrmse": 0.15
+  },
+  "plan_sha256": "036e9bcdf06cf7c60b3b663dfd9f092887c50e9cf1eb48ad1290be077afb487b",
+  "script_sha256": "8b69f4d03ae33bd738c264191cdf62ddc39aa8452efe7896be9fe06260c7eb49",
+  "runs": {
+    "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-pilot-01": {
+      "source": {
+        "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-pilot-01/report.json",
+        "report_sha256": "9362569b3cca18c236432bdc1313ad0a59eb457dff5be7088122b471058112ab",
+        "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-pilot-01/rig-1792177833920197606-1674609980.jsonl.gz",
+        "compressed_sha256": "9970f53c229dca38ec5e8606fe6e947e7e2a98d559288d7ce32eb5956d2ac756",
+        "raw_sha256": "9abedc08fc3145c3e694cd45e32ba6a519b3b191a52c72f16179f1f539b77ffc",
+        "raw_bytes": 2807108,
+        "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-pilot-01/rig-1792177833920197606-1674609980.jsonl",
+        "raw_hash_matches_report": true
+      },
+      "configuration": {
+        "completion_padding_s": 0.03,
+        "duration_s": 20,
+        "hardware_validated": false,
+        "host_monotonic_ns": 273130313108182,
+        "info": {
+          "encoder_boot_conf": 768,
+          "encoder_conf": 768,
+          "encoder_conf_valid": true,
+          "encoder_raw": 2325,
+          "encoder_raw_age_us": 4898768,
+          "encoder_recoveries": 0,
+          "encoder_upright_raw": 330,
+          "firmware": "executor-v6-measuredrail",
+          "home_epoch": 14,
+          "i2c_errors": 5,
+          "mag_status": 103,
+          "measured_span_steps": 16513,
+          "rail_half_m": 0.3091125,
+          "received_ns": 273129815020093,
+          "reference_saved": true,
+          "sid": 1674609980
+        },
+        "initial_hanging": 3.060292,
+        "parameters": {
+          "amax_b": 25.0,
+          "amax_m": 0.5,
+          "amax_s": 25.0,
+          "approach_angle": 0.800000012,
+          "approach_v": 0.200000003,
+          "bal_pw": 4.5,
+          "bw": 10.0,
+          "catch_a": 0.25,
+          "catch_da": 4.0,
+          "catch_r": 3.0,
+          "catch_v": 0.300000012,
+          "giveup": 0.800000012,
+          "jmax": 150.0,
+          "jmax_m": 10.0,
+          "kdx": 2.0,
+          "ke": 4.0,
+          "kpx": 40.0,
+          "leff": 0.123999998,
+          "manual_speed_max": 0.150000006,
+          "pc1": -5.0,
+          "pc2": -6.0,
+          "phase_soft": 2.0,
+          "pw": 3.0,
+          "pz": 0.850000024,
+          "rail": 0.309112519,
+          "rail_fault_margin": 0.00999999978,
+          "rail_fraction": 0.949999988,
+          "rail_hysteresis": 0.00499999989,
+          "rail_margin": 0.0149999997,
+          "rail_recover_a": 1.5,
+          "rail_recover_s": 8.0,
+          "rail_recover_v": 0.150000006,
+          "rehome_a": 0.5,
+          "rehome_j": 10.0,
+          "rehome_v": 0.0799999982,
+          "spin_resume_rad_s": 10.0,
+          "spin_trip_rad_s": 150.0,
+          "vman": 0.0500000007,
+          "vmax": 1.5,
+          "vmax_b": 1.5,
+          "vmax_s": 1.5
+        },
+        "provenance": {
+          "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+          "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+          "sources": [
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/characterize.py",
+              "sha256": "8d9f3a28a64ba2d5e1df729167c243c5946361ca38c75c22afa5e282f271193e"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/contracts.py",
+              "sha256": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py",
+              "sha256": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/policy.py",
+              "sha256": "85ca6f15ef73ca83ab442b9037feeed03cf3e4c5821837ece17cd7c44710c1ce"
+            }
+          ]
+        },
+        "rate_hz": 100,
+        "state": {
+          "acceleration": 0.0,
+          "angle_hat": 3.060292,
+          "brake_direction": 0,
+          "demand": 0.0,
+          "dropped": 18372006,
+          "fault": 0,
+          "flags": 205,
+          "last_seq": 0,
+          "misses": 0,
+          "mode": 0,
+          "omega": 9.099264e-05,
+          "received_ns": 273130312406411,
+          "sid": 1674609980,
+          "theta": 3.060292,
+          "tick": 79987857,
+          "unwrapped_tick": 79987857,
+          "unwrapped_us": 2682963346,
+          "us": 2682963346,
+          "velocity": 0.0,
+          "x": 0.0
+        },
+        "tail": false,
+        "tail_nominal_s": 0,
+        "type": "characterization_start",
+        "waveform_kind": "pilot"
+      },
+      "counts": {
+        "session": 1,
+        "command": 2500,
+        "reply": 6,
+        "state": 2104,
+        "info": 2,
+        "parameter": 43,
+        "characterization_start": 1,
+        "policy_start": 1,
+        "characterization_reference": 2002,
+        "policy_transition": 2,
+        "gc": 22,
+        "action_request": 2002,
+        "policy_end": 1,
+        "termination": 1
+      },
+      "policy_end": {
+        "calls": 2002,
+        "host_monotonic_ns": 273150341799105,
+        "max_compute_ns": 471560,
+        "mean_compute_ns": 146365.02897102898,
+        "type": "policy_end"
+      },
+      "termination": {
+        "error": null,
+        "host_monotonic_ns": 273150353736358,
+        "records_dropped": 0,
+        "type": "termination"
+      },
+      "errors": [],
+      "recorded_duration_s": 20.01,
+      "phase_counts": {
+        "excitation": 2000,
+        "complete": 2
+      },
+      "action_count": 2002,
+      "board_gap_ms": {
+        "n": 2001,
+        "min": 10.0,
+        "max": 10.0,
+        "mean": 10.0,
+        "std": 0.0,
+        "rms": 10.0,
+        "p95_abs": 10.0
+      },
+      "host_policy_gap_ms": {
+        "n": 2001,
+        "min": 4.966322,
+        "max": 14.838197,
+        "mean": 9.999724176411794,
+        "std": 0.36341596595641107,
+        "rms": 10.006325737683467,
+        "p95_abs": 10.501645
+      },
+      "position_counted_m": {
+        "n": 2002,
+        "min": -0.0033375,
+        "max": 0.0034125,
+        "mean": -1.4985014985015762e-07,
+        "std": 0.0015000510343541019,
+        "rms": 0.0015000510418388697,
+        "p95_abs": 0.0030375
+      },
+      "velocity_commanded_m_s": {
+        "n": 2002,
+        "min": -0.02225632,
+        "max": 0.03461594,
+        "mean": -8.957622779720343e-07,
+        "std": 0.014361014923508535,
+        "rms": 0.014361014951444935,
+        "p95_abs": 0.028111511000000002
+      },
+      "acceleration_requested_m_s2": {
+        "n": 2002,
+        "min": -0.32827571596626265,
+        "max": 0.32755199514281863,
+        "mean": 2.4366066794333407e-05,
+        "std": 0.16729587342881522,
+        "rms": 0.16729587520323197,
+        "p95_abs": 0.301643413416374
+      },
+      "acceleration_applied_command_m_s2": {
+        "n": 2002,
+        "min": -0.3282757,
+        "max": 0.327552,
+        "mean": 2.4366044540458785e-05,
+        "std": 0.16729587222992398,
+        "rms": 0.16729587400433754,
+        "p95_abs": 0.30164343999999993
+      },
+      "counted_position_tracking_error_m": {
+        "n": 2000,
+        "min": -0.00018238963911310514,
+        "max": 0.00019752152773645348,
+        "mean": -1.5000000000011474e-07,
+        "std": 8.18512420693097e-05,
+        "rms": 8.185137951365718e-05,
+        "p95_abs": 0.00015101299519933864
+      },
+      "commanded_velocity_tracking_error_m_s": {
+        "n": 2000,
+        "min": -0.0019220086222191714,
+        "max": 0.0019163934502552625,
+        "mean": -8.850309186513384e-07,
+        "std": 0.0009718707706022859,
+        "rms": 0.000971871173577449,
+        "p95_abs": 0.0016610875478360629
+      },
+      "raw_angle_span_rad": 0.09357299999999968,
+      "raw_angle_departure_from_initial_rad": {
+        "n": 2002,
+        "min": -0.08130099999999985,
+        "max": 0.01227199999999984,
+        "mean": -0.021423804695304704,
+        "std": 0.019254597341428287,
+        "rms": 0.0288048420652344,
+        "p95_abs": 0.06435029999999993
+      },
+      "filtered_omega_rad_s": {
+        "n": 2002,
+        "min": -0.5509598,
+        "max": 0.5672953,
+        "mean": -0.0009506353714285718,
+        "std": 0.20639051563034835,
+        "rms": 0.20639270493350892,
+        "p95_abs": 0.4288549699999995
+      },
+      "clamped_samples": 0,
+      "action_trace_max_difference": 0.0,
+      "angle_trace_max_difference": 0.0,
+      "active_firmware_faults": [
+        0
+      ],
+      "active_deadline_miss_delta": 0,
+      "active_firmware_dropped_delta": 0,
+      "excitation_angle_span_rad": 0.09357299999999968,
+      "excitation_acceleration_std_m_s2": 0.1673794992459025,
+      "unchanged_excitation_gates": {
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05
+      },
+      "tail": {
+        "samples": 0,
+        "label": "commanded_hold",
+        "independent_fixed_cart_proof": false,
+        "counted_position_range_m": null,
+        "velocity_commanded_m_s": {
+          "n": 0
+        }
+      },
+      "completion": true,
+      "caveats": [
+        "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+        "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+        "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+        "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+        "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+        "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+      ],
+      "excitation_gate_pass": false
+    },
+    "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01": {
+      "source": {
+        "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/report.json",
+        "report_sha256": "72d805b434d51025c041ce156f82d74232fb5c94439dd222837f2e167f8150f1",
+        "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/rig-1792177943062493208-841516289.jsonl.gz",
+        "compressed_sha256": "4b9951064b5e2a161410ef6807e6cbe3fe57f7662f65d1be19e6bbbef76188cd",
+        "raw_sha256": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+        "raw_bytes": 5260304,
+        "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-train-01/rig-1792177943062493208-841516289.jsonl",
+        "raw_hash_matches_report": true
+      },
+      "configuration": {
+        "completion_padding_s": 0.03,
+        "duration_s": 20,
+        "hardware_validated": false,
+        "host_monotonic_ns": 273239438553763,
+        "info": {
+          "encoder_boot_conf": 768,
+          "encoder_conf": 768,
+          "encoder_conf_valid": true,
+          "encoder_raw": 2311,
+          "encoder_raw_age_us": 8175,
+          "encoder_recoveries": 0,
+          "encoder_upright_raw": 330,
+          "firmware": "executor-v6-measuredrail",
+          "home_epoch": 14,
+          "i2c_errors": 5,
+          "mag_status": 103,
+          "measured_span_steps": 16513,
+          "rail_half_m": 0.3091125,
+          "received_ns": 273238939938162,
+          "reference_saved": true,
+          "sid": 841516289
+        },
+        "initial_hanging": 3.038816,
+        "parameters": {
+          "amax_b": 25.0,
+          "amax_m": 0.5,
+          "amax_s": 25.0,
+          "approach_angle": 0.800000012,
+          "approach_v": 0.200000003,
+          "bal_pw": 4.5,
+          "bw": 10.0,
+          "catch_a": 0.25,
+          "catch_da": 4.0,
+          "catch_r": 3.0,
+          "catch_v": 0.300000012,
+          "giveup": 0.800000012,
+          "jmax": 150.0,
+          "jmax_m": 10.0,
+          "kdx": 2.0,
+          "ke": 4.0,
+          "kpx": 40.0,
+          "leff": 0.123999998,
+          "manual_speed_max": 0.150000006,
+          "pc1": -5.0,
+          "pc2": -6.0,
+          "phase_soft": 2.0,
+          "pw": 3.0,
+          "pz": 0.850000024,
+          "rail": 0.309112519,
+          "rail_fault_margin": 0.00999999978,
+          "rail_fraction": 0.949999988,
+          "rail_hysteresis": 0.00499999989,
+          "rail_margin": 0.0149999997,
+          "rail_recover_a": 1.5,
+          "rail_recover_s": 8.0,
+          "rail_recover_v": 0.150000006,
+          "rehome_a": 0.5,
+          "rehome_j": 10.0,
+          "rehome_v": 0.0799999982,
+          "spin_resume_rad_s": 10.0,
+          "spin_trip_rad_s": 150.0,
+          "vman": 0.0500000007,
+          "vmax": 1.5,
+          "vmax_b": 1.5,
+          "vmax_s": 1.5
+        },
+        "provenance": {
+          "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+          "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+          "sources": [
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/characterize.py",
+              "sha256": "8d9f3a28a64ba2d5e1df729167c243c5946361ca38c75c22afa5e282f271193e"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/contracts.py",
+              "sha256": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py",
+              "sha256": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/policy.py",
+              "sha256": "85ca6f15ef73ca83ab442b9037feeed03cf3e4c5821837ece17cd7c44710c1ce"
+            }
+          ]
+        },
+        "rate_hz": 100,
+        "state": {
+          "acceleration": 0.0,
+          "angle_hat": 3.038917,
+          "brake_direction": 0,
+          "demand": 0.0,
+          "dropped": 18380856,
+          "fault": 0,
+          "flags": 205,
+          "last_seq": 0,
+          "misses": 0,
+          "mode": 0,
+          "omega": -0.002015585,
+          "received_ns": 273239437952121,
+          "sid": 841516289,
+          "theta": 3.038816,
+          "tick": 80096982,
+          "unwrapped_tick": 80096982,
+          "unwrapped_us": 2792088346,
+          "us": 2792088346,
+          "velocity": 0.0,
+          "x": 0.0
+        },
+        "tail": true,
+        "tail_nominal_s": 20,
+        "type": "characterization_start",
+        "waveform_kind": "train"
+      },
+      "counts": {
+        "session": 1,
+        "command": 4885,
+        "reply": 6,
+        "state": 4103,
+        "info": 2,
+        "parameter": 43,
+        "characterization_start": 1,
+        "policy_start": 1,
+        "characterization_reference": 4002,
+        "policy_transition": 3,
+        "gc": 22,
+        "action_request": 4002,
+        "policy_end": 1,
+        "termination": 1
+      },
+      "policy_end": {
+        "calls": 4002,
+        "host_monotonic_ns": 273279467282500,
+        "max_compute_ns": 568233,
+        "mean_compute_ns": 131214.46851574213,
+        "type": "policy_end"
+      },
+      "termination": {
+        "error": null,
+        "host_monotonic_ns": 273279479553582,
+        "records_dropped": 0,
+        "type": "termination"
+      },
+      "errors": [],
+      "recorded_duration_s": 40.01,
+      "phase_counts": {
+        "excitation": 2000,
+        "commanded_hold": 2000,
+        "complete": 2
+      },
+      "action_count": 4002,
+      "board_gap_ms": {
+        "n": 4001,
+        "min": 10.0,
+        "max": 10.0,
+        "mean": 10.0,
+        "std": 0.0,
+        "rms": 10.0,
+        "p95_abs": 10.0
+      },
+      "host_policy_gap_ms": {
+        "n": 4001,
+        "min": 8.290665,
+        "max": 11.73021,
+        "mean": 9.999905048737816,
+        "std": 0.30050236436065486,
+        "rms": 10.004419156290803,
+        "p95_abs": 10.471757
+      },
+      "position_counted_m": {
+        "n": 4002,
+        "min": -0.006675,
+        "max": 0.006825,
+        "mean": 5.54910044977511e-05,
+        "std": 0.002122165368996336,
+        "rms": 0.0021228907425836887,
+        "p95_abs": 0.005398124999999993
+      },
+      "velocity_commanded_m_s": {
+        "n": 4002,
+        "min": -0.04437909,
+        "max": 0.06921828,
+        "mean": 1.8854598788105658e-06,
+        "std": 0.02030260331616568,
+        "rms": 0.02030260340371502,
+        "p95_abs": 0.04519448599999999
+      },
+      "acceleration_requested_m_s2": {
+        "n": 4002,
+        "min": -0.6598290239325328,
+        "max": 0.6540642142856373,
+        "mean": 4.656085107459189e-05,
+        "std": 0.23658016108765836,
+        "rms": 0.2365801656694306,
+        "p95_abs": 0.5479780269206336
+      },
+      "acceleration_applied_command_m_s2": {
+        "n": 4002,
+        "min": -0.659829,
+        "max": 0.6540642,
+        "mean": 4.65609233890549e-05,
+        "std": 0.23658016105984148,
+        "rms": 0.23658016564162795,
+        "p95_abs": 0.5479780699999999
+      },
+      "counted_position_tracking_error_m": {
+        "n": 2000,
+        "min": -0.0003078674066976112,
+        "max": 0.0003731707432450288,
+        "mean": 2.2499999999976314e-07,
+        "std": 0.0001600349405467098,
+        "rms": 0.00016003509871521604,
+        "p95_abs": 0.0002879069041218723
+      },
+      "commanded_velocity_tracking_error_m_s": {
+        "n": 2000,
+        "min": -0.0037222472444383425,
+        "max": 0.003614936900510582,
+        "mean": -7.940590214302701e-06,
+        "std": 0.001928193932645358,
+        "rms": 0.0019282102828434772,
+        "p95_abs": 0.003307916441134219
+      },
+      "raw_angle_span_rad": 0.1994170000000004,
+      "raw_angle_departure_from_initial_rad": {
+        "n": 4002,
+        "min": -0.1303880000000004,
+        "max": 0.06902900000000001,
+        "mean": -0.015649168165917233,
+        "std": 0.031107918958160837,
+        "rms": 0.03482239345870211,
+        "p95_abs": 0.08275829999999994
+      },
+      "filtered_omega_rad_s": {
+        "n": 4002,
+        "min": -1.050226,
+        "max": 0.9386789,
+        "mean": -0.00037969914217360015,
+        "std": 0.2990225395790628,
+        "rms": 0.29902278065015503,
+        "p95_abs": 0.687286135
+      },
+      "clamped_samples": 0,
+      "action_trace_max_difference": 0.0,
+      "angle_trace_max_difference": 0.0,
+      "active_firmware_faults": [
+        0
+      ],
+      "active_deadline_miss_delta": 0,
+      "active_firmware_dropped_delta": 0,
+      "excitation_angle_span_rad": 0.1994170000000004,
+      "excitation_acceleration_std_m_s2": 0.33465849901530215,
+      "unchanged_excitation_gates": {
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05
+      },
+      "tail": {
+        "samples": 2000,
+        "label": "commanded_hold",
+        "independent_fixed_cart_proof": false,
+        "counted_position_range_m": 0.000225,
+        "velocity_commanded_m_s": {
+          "n": 2000,
+          "min": 1.170137e-05,
+          "max": 1.234258e-05,
+          "mean": 1.1701690605000002e-05,
+          "std": 1.4334306557485583e-08,
+          "rms": 1.1701699384597511e-05,
+          "p95_abs": 1.170137e-05
+        }
+      },
+      "completion": true,
+      "caveats": [
+        "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+        "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+        "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+        "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+        "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+        "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+      ],
+      "excitation_gate_pass": true
+    },
+    "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01": {
+      "source": {
+        "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/report.json",
+        "report_sha256": "67e80bcde1c1371ae2b5c852260cd05b55d891f384e3ba52face7bca60c09115",
+        "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl.gz",
+        "compressed_sha256": "06300b76764febd8f6e743fb0d476ba2e4f2aef739cf27ce530f96e201a1d73f",
+        "raw_sha256": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c",
+        "raw_bytes": 5288272,
+        "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl",
+        "raw_hash_matches_report": true
+      },
+      "configuration": {
+        "completion_padding_s": 0.03,
+        "duration_s": 20,
+        "hardware_validated": false,
+        "host_monotonic_ns": 273307652160719,
+        "info": {
+          "encoder_boot_conf": 768,
+          "encoder_conf": 768,
+          "encoder_conf_valid": true,
+          "encoder_raw": 2302,
+          "encoder_raw_age_us": 199776,
+          "encoder_recoveries": 0,
+          "encoder_upright_raw": 330,
+          "firmware": "executor-v6-measuredrail",
+          "home_epoch": 14,
+          "i2c_errors": 5,
+          "mag_status": 103,
+          "measured_span_steps": 16513,
+          "rail_half_m": 0.3091125,
+          "received_ns": 273307154336571,
+          "reference_saved": true,
+          "sid": 2563392343
+        },
+        "initial_hanging": 3.02501,
+        "parameters": {
+          "amax_b": 25.0,
+          "amax_m": 0.5,
+          "amax_s": 25.0,
+          "approach_angle": 0.800000012,
+          "approach_v": 0.200000003,
+          "bal_pw": 4.5,
+          "bw": 10.0,
+          "catch_a": 0.25,
+          "catch_da": 4.0,
+          "catch_r": 3.0,
+          "catch_v": 0.300000012,
+          "giveup": 0.800000012,
+          "jmax": 150.0,
+          "jmax_m": 10.0,
+          "kdx": 2.0,
+          "ke": 4.0,
+          "kpx": 40.0,
+          "leff": 0.123999998,
+          "manual_speed_max": 0.150000006,
+          "pc1": -5.0,
+          "pc2": -6.0,
+          "phase_soft": 2.0,
+          "pw": 3.0,
+          "pz": 0.850000024,
+          "rail": 0.309112519,
+          "rail_fault_margin": 0.00999999978,
+          "rail_fraction": 0.949999988,
+          "rail_hysteresis": 0.00499999989,
+          "rail_margin": 0.0149999997,
+          "rail_recover_a": 1.5,
+          "rail_recover_s": 8.0,
+          "rail_recover_v": 0.150000006,
+          "rehome_a": 0.5,
+          "rehome_j": 10.0,
+          "rehome_v": 0.0799999982,
+          "spin_resume_rad_s": 10.0,
+          "spin_trip_rad_s": 150.0,
+          "vman": 0.0500000007,
+          "vmax": 1.5,
+          "vmax_b": 1.5,
+          "vmax_s": 1.5
+        },
+        "provenance": {
+          "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+          "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+          "sources": [
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/characterize.py",
+              "sha256": "8d9f3a28a64ba2d5e1df729167c243c5946361ca38c75c22afa5e282f271193e"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/contracts.py",
+              "sha256": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py",
+              "sha256": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae"
+            },
+            {
+              "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/policy.py",
+              "sha256": "85ca6f15ef73ca83ab442b9037feeed03cf3e4c5821837ece17cd7c44710c1ce"
+            }
+          ]
+        },
+        "rate_hz": 100,
+        "state": {
+          "acceleration": 0.0,
+          "angle_hat": 3.02501,
+          "brake_direction": 0,
+          "demand": 0.0,
+          "dropped": 18383615,
+          "fault": 0,
+          "flags": 205,
+          "last_seq": 0,
+          "misses": 0,
+          "mode": 0,
+          "omega": -9.049445e-05,
+          "received_ns": 273307651503458,
+          "sid": 2563392343,
+          "theta": 3.02501,
+          "tick": 80165195,
+          "unwrapped_tick": 80165195,
+          "unwrapped_us": 2860301346,
+          "us": 2860301346,
+          "velocity": 0.0,
+          "x": 0.000225
+        },
+        "tail": true,
+        "tail_nominal_s": 20,
+        "type": "characterization_start",
+        "waveform_kind": "heldout"
+      },
+      "counts": {
+        "session": 1,
+        "command": 4885,
+        "reply": 6,
+        "state": 4102,
+        "info": 2,
+        "parameter": 43,
+        "characterization_start": 1,
+        "policy_start": 1,
+        "characterization_reference": 4002,
+        "policy_transition": 3,
+        "action_request": 4002,
+        "gc": 22,
+        "policy_end": 1,
+        "termination": 1
+      },
+      "policy_end": {
+        "calls": 4002,
+        "host_monotonic_ns": 273347681030526,
+        "max_compute_ns": 364039,
+        "mean_compute_ns": 129779.13218390805,
+        "type": "policy_end"
+      },
+      "termination": {
+        "error": null,
+        "host_monotonic_ns": 273347693593457,
+        "records_dropped": 0,
+        "type": "termination"
+      },
+      "errors": [],
+      "recorded_duration_s": 40.01,
+      "phase_counts": {
+        "excitation": 2000,
+        "commanded_hold": 2000,
+        "complete": 2
+      },
+      "action_count": 4002,
+      "board_gap_ms": {
+        "n": 4001,
+        "min": 10.0,
+        "max": 10.0,
+        "mean": 10.0,
+        "std": 0.0,
+        "rms": 10.0,
+        "p95_abs": 10.0
+      },
+      "host_policy_gap_ms": {
+        "n": 4001,
+        "min": 8.332482,
+        "max": 11.691747,
+        "mean": 9.999994881279678,
+        "std": 0.2902674189163582,
+        "rms": 10.004206755165757,
+        "p95_abs": 10.485868
+      },
+      "position_counted_m": {
+        "n": 4002,
+        "min": -0.0053625,
+        "max": 0.005475,
+        "mean": -0.00010508808095952025,
+        "std": 0.001707228778971492,
+        "rms": 0.0017104600575600256,
+        "p95_abs": 0.004310624999999993
+      },
+      "velocity_commanded_m_s": {
+        "n": 4002,
+        "min": -0.04370521,
+        "max": 0.06128084,
+        "mean": -7.817755852823624e-06,
+        "std": 0.018227169431855813,
+        "rms": 0.01822717110839983,
+        "p95_abs": 0.042067062
+      },
+      "acceleration_requested_m_s2": {
+        "n": 4002,
+        "min": -0.6717820993279892,
+        "max": 0.6718613780607235,
+        "mean": 7.589725723826916e-06,
+        "std": 0.23595261941171725,
+        "rms": 0.23595261953378396,
+        "p95_abs": 0.554971180587476
+      },
+      "acceleration_applied_command_m_s2": {
+        "n": 4002,
+        "min": -0.6717821,
+        "max": 0.6718614,
+        "mean": 7.589678540729813e-06,
+        "std": 0.23595261900316333,
+        "rms": 0.23595261912522855,
+        "p95_abs": 0.5549712099999998
+      },
+      "counted_position_tracking_error_m": {
+        "n": 2000,
+        "min": -0.00035299523758733787,
+        "max": 0.00037302054216923307,
+        "mean": -9.749999999996732e-07,
+        "std": 0.00015360985382683887,
+        "rms": 0.00015361294807958995,
+        "p95_abs": 0.00027713510907777944
+      },
+      "commanded_velocity_tracking_error_m_s": {
+        "n": 2000,
+        "min": -0.0040115988590475535,
+        "max": 0.004012659912782941,
+        "mean": 4.486639916191574e-06,
+        "std": 0.0019838517560504874,
+        "rms": 0.001983856829492073,
+        "p95_abs": 0.0035312391250613214
+      },
+      "raw_angle_span_rad": 0.150331,
+      "raw_angle_departure_from_initial_rad": {
+        "n": 4002,
+        "min": -0.09050499999999984,
+        "max": 0.05982600000000016,
+        "mean": -0.003090456521739099,
+        "std": 0.022796378774985453,
+        "rms": 0.02300490831899504,
+        "p95_abs": 0.0552229999999998
+      },
+      "filtered_omega_rad_s": {
+        "n": 4002,
+        "min": -0.9049444,
+        "max": 0.6988937,
+        "mean": -9.914513335634676e-05,
+        "std": 0.2609077702364539,
+        "rms": 0.26090778907406287,
+        "p95_abs": 0.6010669649999998
+      },
+      "clamped_samples": 0,
+      "action_trace_max_difference": 0.0,
+      "angle_trace_max_difference": 0.0,
+      "active_firmware_faults": [
+        0
+      ],
+      "active_deadline_miss_delta": 0,
+      "active_firmware_dropped_delta": 0,
+      "excitation_angle_span_rad": 0.150331,
+      "excitation_acceleration_std_m_s2": 0.3337708050868056,
+      "unchanged_excitation_gates": {
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_rms_m_s2": 0.05
+      },
+      "tail": {
+        "samples": 2000,
+        "label": "commanded_hold",
+        "independent_fixed_cart_proof": false,
+        "counted_position_range_m": 0.0004125,
+        "velocity_commanded_m_s": {
+          "n": 2000,
+          "min": -2.057586e-05,
+          "max": -2.010963e-05,
+          "mean": -2.0109863115e-05,
+          "std": 1.0422613100694833e-08,
+          "rms": 2.0109865815934756e-05,
+          "p95_abs": 2.010963e-05
+        }
+      },
+      "completion": true,
+      "caveats": [
+        "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+        "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+        "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+        "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+        "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+        "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+      ],
+      "excitation_gate_pass": true
+    }
+  },
+  "caveats": [
+    "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+    "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+    "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+    "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+    "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+    "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+  ],
+  "identification": {
+    "training_offset": {
+      "angle_offset_rad": -0.10262626147569875,
+      "circular_mean_theta_rad": 3.0389663921140944,
+      "samples": 51,
+      "duration_s": 0.5,
+      "circular_deviation_std_rad": 0.0004561619973009609,
+      "source": "training preflight only",
+      "independent_angle_calibration": false
+    },
+    "reports": {
+      "raw_zero": {
+        "accepted": false,
+        "parameters": {
+          "effective_length_m": 1.619098501180446,
+          "input_gain": 20.5008930670136,
+          "angular_damping_per_s": 5.283340895631267,
+          "damping_ratio": 1.073200260664546,
+          "delay_s": 0.0
+        },
+        "uncertainty": {
+          "coefficient_standard_errors": {
+            "alpha_per_s2": 2.6163845984246508,
+            "gamma_per_s": 1.2900487054091887,
+            "beta_per_m": 1.7819928899431732
+          },
+          "delay_profile_near_optimal_s": [
+            0.0
+          ],
+          "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+          "effective_length_standard_error_m": 0.6991640961600737
+        },
+        "training": {
+          "segment_count": 1,
+          "sample_count": 2001,
+          "delay_profile": [
+            {
+              "delay_s": 0.0,
+              "mean_squared_integral_residual": 0.0007746553169295001
+            },
+            {
+              "delay_s": 0.005,
+              "mean_squared_integral_residual": 0.0008212460447406504
+            },
+            {
+              "delay_s": 0.01,
+              "mean_squared_integral_residual": 0.0008752783415268273
+            },
+            {
+              "delay_s": 0.015,
+              "mean_squared_integral_residual": 0.0009378042264356946
+            },
+            {
+              "delay_s": 0.02,
+              "mean_squared_integral_residual": 0.0010073839584872994
+            },
+            {
+              "delay_s": 0.025,
+              "mean_squared_integral_residual": 0.001084029362699403
+            },
+            {
+              "delay_s": 0.03,
+              "mean_squared_integral_residual": 0.0011647317982231584
+            },
+            {
+              "delay_s": 0.035,
+              "mean_squared_integral_residual": 0.0012475730841725937
+            },
+            {
+              "delay_s": 0.04,
+              "mean_squared_integral_residual": 0.0013272656142773536
+            },
+            {
+              "delay_s": 0.045,
+              "mean_squared_integral_residual": 0.0013996148971878928
+            },
+            {
+              "delay_s": 0.05,
+              "mean_squared_integral_residual": 0.0014578239845508471
+            },
+            {
+              "delay_s": 0.055,
+              "mean_squared_integral_residual": 0.0014970771665271411
+            },
+            {
+              "delay_s": 0.06,
+              "mean_squared_integral_residual": 0.0015124535428640683
+            },
+            {
+              "delay_s": 0.065,
+              "mean_squared_integral_residual": 0.0015019652233154246
+            },
+            {
+              "delay_s": 0.07,
+              "mean_squared_integral_residual": 0.0014662564222604221
+            },
+            {
+              "delay_s": 0.075,
+              "mean_squared_integral_residual": 0.0014076476249546624
+            },
+            {
+              "delay_s": 0.08,
+              "mean_squared_integral_residual": 0.0013319777318708066
+            },
+            {
+              "delay_s": 0.085,
+              "mean_squared_integral_residual": 0.0012432951704589021
+            },
+            {
+              "delay_s": 0.09,
+              "mean_squared_integral_residual": 0.0011488854125568829
+            },
+            {
+              "delay_s": 0.095,
+              "mean_squared_integral_residual": 0.001051309883703311
+            },
+            {
+              "delay_s": 0.1,
+              "mean_squared_integral_residual": 0.0009564771800524355
+            }
+          ],
+          "angle_zero_diagnostic": {
+            "rank": 5,
+            "condition": 9.90844279409381,
+            "identifiable": true,
+            "gravity_offset_rad": -0.12011964030654494,
+            "input_offset_rad": -0.842948554727568
+          },
+          "window_count": 56,
+          "rank": 3,
+          "condition": 2.029895803579297,
+          "integral_nrmse": 0.6878721297363698,
+          "angle_span_rad": 0.1994170000000004,
+          "acceleration_std_m_s2": 0.3345748658796143
+        },
+        "validation": {
+          "prediction_windows": 39,
+          "prediction_samples": 1950,
+          "prediction_rmse_rad": 0.036764529376271816,
+          "prediction_p95_rad": 0.07887264875288065,
+          "horizon_s": 0.5,
+          "segment_count": 1,
+          "integral_nrmse": 0.5077432049263418
+        },
+        "reasons": [
+          "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+          "effective length outside prior bounds",
+          "input gain outside prior bounds",
+          "angular damping outside nonnegative bounds",
+          "training integral residual exceeds threshold",
+          "held-out prediction or integral residual exceeds threshold/coverage"
+        ],
+        "provenance": {
+          "source": "magnetic",
+          "acceleration_kind": "commanded",
+          "training_sha256": "0837722f03794227e0c3be1be0df1b71a88c2264aecacee148b43d023f14c43a",
+          "validation_sha256": "2497593d83d4c9d92b2e9e8130b806e81179d8eb69e553f13a79331ad12be10f",
+          "training_run_ids": [
+            "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8"
+          ],
+          "validation_run_ids": [
+            "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c"
+          ],
+          "config": {
+            "gravity_m_s2": 9.81,
+            "length_bounds_m": [
+              0.05,
+              1.5
+            ],
+            "gain_bounds": [
+              0.05,
+              3.0
+            ],
+            "max_damping_per_s": 5.0,
+            "angle_offset_rad": 0.0,
+            "max_angle_zero_bias_rad": 0.02,
+            "max_gap_s": 0.05,
+            "window_s": 0.35,
+            "delay_candidates_s": [
+              0.0,
+              0.005,
+              0.01,
+              0.015,
+              0.02,
+              0.025,
+              0.03,
+              0.035,
+              0.04,
+              0.045,
+              0.05,
+              0.055,
+              0.06,
+              0.065,
+              0.07,
+              0.075,
+              0.08,
+              0.085,
+              0.09,
+              0.095,
+              0.1
+            ],
+            "min_windows": 20,
+            "max_condition": 1000.0,
+            "min_angle_span_rad": 0.15,
+            "min_acceleration_rms_m_s2": 0.05,
+            "prediction_horizon_s": 0.5,
+            "max_prediction_rmse_rad": 0.08,
+            "max_prediction_p95_rad": 0.15,
+            "max_integral_nrmse": 0.15
+          },
+          "supplied": {
+            "inputs": {
+              "training": {
+                "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/report.json",
+                "report_sha256": "72d805b434d51025c041ce156f82d74232fb5c94439dd222837f2e167f8150f1",
+                "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/rig-1792177943062493208-841516289.jsonl.gz",
+                "compressed_sha256": "4b9951064b5e2a161410ef6807e6cbe3fe57f7662f65d1be19e6bbbef76188cd",
+                "raw_sha256": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+                "raw_bytes": 5260304,
+                "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-train-01/rig-1792177943062493208-841516289.jsonl",
+                "raw_hash_matches_report": true
+              },
+              "heldout": {
+                "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/report.json",
+                "report_sha256": "67e80bcde1c1371ae2b5c852260cd05b55d891f384e3ba52face7bca60c09115",
+                "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl.gz",
+                "compressed_sha256": "06300b76764febd8f6e743fb0d476ba2e4f2aef739cf27ce530f96e201a1d73f",
+                "raw_sha256": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c",
+                "raw_bytes": 5288272,
+                "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl",
+                "raw_hash_matches_report": true
+              }
+            },
+            "admissions": {
+              "training": {
+                "run_id": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+                "session_id": "841516289",
+                "clock_id": "teensy:841516289",
+                "total_states": 4103,
+                "eligible_states": 4003,
+                "excluded_states": 100,
+                "duplicate_states": 0,
+                "exclusion_counts": {
+                  "outside control interval": 100,
+                  "unhealthy, unhomed, disabled or calibrating": 100,
+                  "reference not yet available": 4
+                },
+                "calibration_ids": [
+                  "executor-v6-measuredrail:upright:330"
+                ],
+                "angle_field": "theta",
+                "acceleration_field": "acceleration",
+                "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+                "rate_channel": "omitted: filtered omega has unknown effective delay"
+              },
+              "heldout": {
+                "run_id": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c",
+                "session_id": "2563392343",
+                "clock_id": "teensy:2563392343",
+                "total_states": 4102,
+                "eligible_states": 4002,
+                "excluded_states": 100,
+                "duplicate_states": 0,
+                "exclusion_counts": {
+                  "outside control interval": 100,
+                  "unhealthy, unhomed, disabled or calibrating": 100,
+                  "reference not yet available": 3
+                },
+                "calibration_ids": [
+                  "executor-v6-measuredrail:upright:330"
+                ],
+                "angle_field": "theta",
+                "acceleration_field": "acceleration",
+                "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+                "rate_channel": "omitted: filtered omega has unknown effective delay"
+              }
+            },
+            "selection": "excitation only, 0..20 s",
+            "hardware_activity": false,
+            "caveats": [
+              "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+              "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+              "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+              "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+              "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+              "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+            ]
+          }
+        },
+        "assumptions": [
+          "upright theta=0; positive theta follows cart +x rotation",
+          "rigid planar pendulum; constant effective length; linear viscous angular damping",
+          "sampling captures less than pi angular motion per valid interval",
+          "acceleration and angle share a calibrated monotonic clock",
+          "commanded input gain/delay include actuator, estimator and clock effects",
+          "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+        ],
+        "unidentifiable": [
+          "cart_mass_kg",
+          "pole_mass_kg",
+          "force_gain_N_per_command",
+          "hinge_damping_N_m_s"
+        ],
+        "recommended_model": null
+      },
+      "conditional_training_hanging_offset": {
+        "accepted": false,
+        "parameters": {
+          "effective_length_m": 0.17799856097139305,
+          "input_gain": 1.736195710941452,
+          "angular_damping_per_s": 4.339309295720149,
+          "damping_ratio": 0.2922566171117655,
+          "delay_s": 0.0
+        },
+        "uncertainty": {
+          "coefficient_standard_errors": {
+            "alpha_per_s2": 4.181000234937347,
+            "gamma_per_s": 0.6583429390645211,
+            "beta_per_m": 0.9264483360746653
+          },
+          "delay_profile_near_optimal_s": [
+            0.0
+          ],
+          "method": "OLS conditional covariance on nonoverlapping weak-form windows",
+          "effective_length_standard_error_m": 0.013503432166188477
+        },
+        "training": {
+          "segment_count": 1,
+          "sample_count": 2001,
+          "delay_profile": [
+            {
+              "delay_s": 0.0,
+              "mean_squared_integral_residual": 0.00019860768718566558
+            },
+            {
+              "delay_s": 0.005,
+              "mean_squared_integral_residual": 0.00021232012611807654
+            },
+            {
+              "delay_s": 0.01,
+              "mean_squared_integral_residual": 0.00022973140638522918
+            },
+            {
+              "delay_s": 0.015,
+              "mean_squared_integral_residual": 0.00025098673178409423
+            },
+            {
+              "delay_s": 0.02,
+              "mean_squared_integral_residual": 0.00027625958757843464
+            },
+            {
+              "delay_s": 0.025,
+              "mean_squared_integral_residual": 0.00030533896388862625
+            },
+            {
+              "delay_s": 0.03,
+              "mean_squared_integral_residual": 0.00033820269041666184
+            },
+            {
+              "delay_s": 0.035,
+              "mean_squared_integral_residual": 0.00037407697444799575
+            },
+            {
+              "delay_s": 0.04,
+              "mean_squared_integral_residual": 0.00041244601830460606
+            },
+            {
+              "delay_s": 0.045,
+              "mean_squared_integral_residual": 0.0004517926797145132
+            },
+            {
+              "delay_s": 0.05,
+              "mean_squared_integral_residual": 0.0004908803062150054
+            },
+            {
+              "delay_s": 0.055,
+              "mean_squared_integral_residual": 0.0005275376885996763
+            },
+            {
+              "delay_s": 0.06,
+              "mean_squared_integral_residual": 0.0005599868124439824
+            },
+            {
+              "delay_s": 0.065,
+              "mean_squared_integral_residual": 0.0005860332290256513
+            },
+            {
+              "delay_s": 0.07,
+              "mean_squared_integral_residual": 0.000604137463051963
+            },
+            {
+              "delay_s": 0.075,
+              "mean_squared_integral_residual": 0.0006130775377149496
+            },
+            {
+              "delay_s": 0.08,
+              "mean_squared_integral_residual": 0.0006124606238457843
+            },
+            {
+              "delay_s": 0.085,
+              "mean_squared_integral_residual": 0.0006025901583410119
+            },
+            {
+              "delay_s": 0.09,
+              "mean_squared_integral_residual": 0.0005844132712981802
+            },
+            {
+              "delay_s": 0.095,
+              "mean_squared_integral_residual": 0.0005593394809183876
+            },
+            {
+              "delay_s": 0.1,
+              "mean_squared_integral_residual": 0.0005290253037969012
+            }
+          ],
+          "angle_zero_diagnostic": {
+            "rank": 5,
+            "condition": 2.919102178637362,
+            "identifiable": true,
+            "gravity_offset_rad": -0.01749337883084622,
+            "input_offset_rad": -0.7403222932518693
+          },
+          "window_count": 56,
+          "rank": 3,
+          "condition": 2.141600121532821,
+          "integral_nrmse": 0.34829840659357136,
+          "angle_span_rad": 0.1994170000000004,
+          "acceleration_std_m_s2": 0.3345748658796143
+        },
+        "validation": {
+          "prediction_windows": 39,
+          "prediction_samples": 1950,
+          "prediction_rmse_rad": 0.02276737103670214,
+          "prediction_p95_rad": 0.04374683730909621,
+          "horizon_s": 0.5,
+          "segment_count": 1,
+          "integral_nrmse": 0.4098088327511638
+        },
+        "reasons": [
+          "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+          "training integral residual exceeds threshold",
+          "held-out prediction or integral residual exceeds threshold/coverage"
+        ],
+        "provenance": {
+          "source": "magnetic",
+          "acceleration_kind": "commanded",
+          "training_sha256": "0837722f03794227e0c3be1be0df1b71a88c2264aecacee148b43d023f14c43a",
+          "validation_sha256": "2497593d83d4c9d92b2e9e8130b806e81179d8eb69e553f13a79331ad12be10f",
+          "training_run_ids": [
+            "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8"
+          ],
+          "validation_run_ids": [
+            "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c"
+          ],
+          "config": {
+            "gravity_m_s2": 9.81,
+            "length_bounds_m": [
+              0.05,
+              1.5
+            ],
+            "gain_bounds": [
+              0.05,
+              3.0
+            ],
+            "max_damping_per_s": 5.0,
+            "angle_offset_rad": -0.10262626147569875,
+            "max_angle_zero_bias_rad": 0.02,
+            "max_gap_s": 0.05,
+            "window_s": 0.35,
+            "delay_candidates_s": [
+              0.0,
+              0.005,
+              0.01,
+              0.015,
+              0.02,
+              0.025,
+              0.03,
+              0.035,
+              0.04,
+              0.045,
+              0.05,
+              0.055,
+              0.06,
+              0.065,
+              0.07,
+              0.075,
+              0.08,
+              0.085,
+              0.09,
+              0.095,
+              0.1
+            ],
+            "min_windows": 20,
+            "max_condition": 1000.0,
+            "min_angle_span_rad": 0.15,
+            "min_acceleration_rms_m_s2": 0.05,
+            "prediction_horizon_s": 0.5,
+            "max_prediction_rmse_rad": 0.08,
+            "max_prediction_p95_rad": 0.15,
+            "max_integral_nrmse": 0.15
+          },
+          "supplied": {
+            "inputs": {
+              "training": {
+                "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/report.json",
+                "report_sha256": "72d805b434d51025c041ce156f82d74232fb5c94439dd222837f2e167f8150f1",
+                "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-train-01/rig-1792177943062493208-841516289.jsonl.gz",
+                "compressed_sha256": "4b9951064b5e2a161410ef6807e6cbe3fe57f7662f65d1be19e6bbbef76188cd",
+                "raw_sha256": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+                "raw_bytes": 5260304,
+                "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-train-01/rig-1792177943062493208-841516289.jsonl",
+                "raw_hash_matches_report": true
+              },
+              "heldout": {
+                "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/report.json",
+                "report_sha256": "67e80bcde1c1371ae2b5c852260cd05b55d891f384e3ba52face7bca60c09115",
+                "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl.gz",
+                "compressed_sha256": "06300b76764febd8f6e743fb0d476ba2e4f2aef739cf27ce530f96e201a1d73f",
+                "raw_sha256": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c",
+                "raw_bytes": 5288272,
+                "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl",
+                "raw_hash_matches_report": true
+              }
+            },
+            "admissions": {
+              "training": {
+                "run_id": "76a7f055240ea75529da3ae1503d2741b69826fe2ef6bfd6ef17d1fb271dd3c8",
+                "session_id": "841516289",
+                "clock_id": "teensy:841516289",
+                "total_states": 4103,
+                "eligible_states": 4003,
+                "excluded_states": 100,
+                "duplicate_states": 0,
+                "exclusion_counts": {
+                  "outside control interval": 100,
+                  "unhealthy, unhomed, disabled or calibrating": 100,
+                  "reference not yet available": 4
+                },
+                "calibration_ids": [
+                  "executor-v6-measuredrail:upright:330"
+                ],
+                "angle_field": "theta",
+                "acceleration_field": "acceleration",
+                "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+                "rate_channel": "omitted: filtered omega has unknown effective delay"
+              },
+              "heldout": {
+                "run_id": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c",
+                "session_id": "2563392343",
+                "clock_id": "teensy:2563392343",
+                "total_states": 4102,
+                "eligible_states": 4002,
+                "excluded_states": 100,
+                "duplicate_states": 0,
+                "exclusion_counts": {
+                  "outside control interval": 100,
+                  "unhealthy, unhomed, disabled or calibrating": 100,
+                  "reference not yet available": 3
+                },
+                "calibration_ids": [
+                  "executor-v6-measuredrail:upright:330"
+                ],
+                "angle_field": "theta",
+                "acceleration_field": "acceleration",
+                "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+                "rate_channel": "omitted: filtered omega has unknown effective delay"
+              }
+            },
+            "selection": "excitation only, 0..20 s",
+            "hardware_activity": false,
+            "caveats": [
+              "Cart x is counted motor steps; v and a are executor command states, not independent physical cart measurements.",
+              "Raw theta is decoded magnetic angle; linearity, true vertical zero, scale and relative latency have not been independently established.",
+              "Filtered omega is omitted from identification; causal local angle initialization is the unchanged fitter default.",
+              "Closed-loop commanded-input gain and delay combine actuator, sensor, observer and clock effects.",
+              "A commanded zero-acceleration hold does not prove a fixed physical cart.",
+              "No cart/pole mass, force gain, physical motor tracking, or absolute mechanical damping coefficient is identified."
+            ]
+          }
+        },
+        "assumptions": [
+          "upright theta=0; positive theta follows cart +x rotation",
+          "rigid planar pendulum; constant effective length; linear viscous angular damping",
+          "sampling captures less than pi angular motion per valid interval",
+          "acceleration and angle share a calibrated monotonic clock",
+          "commanded input gain/delay include actuator, estimator and clock effects",
+          "uncertainty is conditional regression uncertainty; excludes calibration, correlated sensor noise and model bias"
+        ],
+        "unidentifiable": [
+          "cart_mass_kg",
+          "pole_mass_kg",
+          "force_gain_N_per_command",
+          "hinge_damping_N_m_s"
+        ],
+        "recommended_model": null
+      }
+    },
+    "promotion": {
+      "promoted": false,
+      "recommended_model": null,
+      "all_software_gates_pass": false,
+      "independent_angle_validity_established": false,
+      "reason": "Independent physical angle validity is not established; any failed unchanged fit gates also preclude promotion."
+    }
+  },
+  "passive_diagnostics": {
+    "raw_zero": {
+      "accepted": false,
+      "promoted": false,
+      "angle_offset_rad": 0.0,
+      "selection": "20.5..40 s commanded hold",
+      "assumption": "Treat cart acceleration as physically zero; this is not independently verified.",
+      "full_model_gates_applicable": false,
+      "window_count": 55,
+      "validation_segments": 1,
+      "rank": 2,
+      "condition": 1.1263410935511542,
+      "effective_length_m": null,
+      "angular_damping_per_s": -2.4268408812021764,
+      "training_integral_nrmse": 0.9911862252868682,
+      "validation": {
+        "prediction_windows": 38,
+        "prediction_samples": 1900,
+        "prediction_rmse_rad": 0.019176030740833645,
+        "prediction_p95_rad": 0.04971770673079213,
+        "horizon_s": 0.5
+      },
+      "validation_integral_nrmse": 1.097645569163944,
+      "reason": "Two-coefficient conditional passive diagnostic only; no independently fixed cart or angular calibration."
+    },
+    "conditional_training_hanging_offset": {
+      "accepted": false,
+      "promoted": false,
+      "angle_offset_rad": -0.10262626147569875,
+      "selection": "20.5..40 s commanded hold",
+      "assumption": "Treat cart acceleration as physically zero; this is not independently verified.",
+      "full_model_gates_applicable": false,
+      "window_count": 55,
+      "validation_segments": 1,
+      "rank": 2,
+      "condition": 1.1261543580872793,
+      "effective_length_m": null,
+      "angular_damping_per_s": -2.4289186554940794,
+      "training_integral_nrmse": 0.9912355331881773,
+      "validation": {
+        "prediction_windows": 38,
+        "prediction_samples": 1900,
+        "prediction_rmse_rad": 0.019195726568234733,
+        "prediction_p95_rad": 0.04977093608713522,
+        "horizon_s": 0.5
+      },
+      "validation_integral_nrmse": 1.097765635031357,
+      "reason": "Two-coefficient conditional passive diagnostic only; no independently fixed cart or angular calibration."
+    }
+  },
+  "home_right_fault": {
+    "sources": {
+      "home": {
+        "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/physical-home-1792177518529838521/home-report.json",
+        "report_sha256": "bfea432fffaf235367938c0a1d2cff53be46347ddc51c13276b22d33f6cd9038",
+        "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/physical-home-1792177518529838521/rig-1792177518535165712-4007644282.jsonl.gz",
+        "compressed_sha256": "1beb4654e787fcf3305696fec618e2ca23f82f303cee0e30f93c5eaf45f027f4",
+        "raw_sha256": "c4bb25171fb155080a686826fc2bb94820e6e46b04a74ba1bb41715c54c07b56",
+        "raw_bytes": 5544927,
+        "original_remote_log": null,
+        "raw_hash_matches_report": null
+      },
+      "right_fault": {
+        "report_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/auto-1792177225658336737/report.json",
+        "report_sha256": "8ae2e7a21400d792a537f00f671d356ae8d77c9c7f20cb9e77cf01f41b463b0b",
+        "local_log_path": "/Users/rbafna/projects/cartpole_v2/evidence/python-control-id-20261016/hardware/runs/auto-1792177225658336737/rig-1792177225665991164-3773724480.jsonl.gz",
+        "compressed_sha256": "c1fe37d5bba73589037818278dd4298b2e86b7e9164b215461b0ed79fe0eff54",
+        "raw_sha256": "fb57e9840f3557022456c1a6a0f6ebcc00084788ac29e68251dd9a7c1498c2db",
+        "raw_bytes": 911008,
+        "original_remote_log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792177225658336737/rig-1792177225665991164-3773724480.jsonl",
+        "raw_hash_matches_report": null
+      }
+    },
+    "first_limit_fault": {
+      "acceleration": 0.0,
+      "angle_hat": 0.1610482,
+      "brake_direction": 0,
+      "demand": 0.0,
+      "dropped": 18234557,
+      "fault": 5,
+      "flags": 233,
+      "last_seq": 0,
+      "misses": 0,
+      "mode": 4,
+      "omega": 0.8462797,
+      "received_ns": 272526904874897,
+      "sid": 3773724480,
+      "theta": 0.1718059,
+      "tick": 79384452,
+      "unwrapped_tick": 79384452,
+      "unwrapped_us": 2079558346,
+      "us": 2079558346,
+      "velocity": 0.0,
+      "x": 0.2754375
+    },
+    "preceding_active_state": {
+      "acceleration": -12.09225,
+      "angle_hat": 0.1505435,
+      "brake_direction": 1,
+      "demand": -12.12492,
+      "dropped": 18234557,
+      "fault": 0,
+      "flags": 207,
+      "last_seq": 680,
+      "misses": 0,
+      "mode": 12,
+      "omega": 0.6042134,
+      "received_ns": 272526900691437,
+      "sid": 3773724480,
+      "theta": 0.1641359,
+      "tick": 79384448,
+      "unwrapped_tick": 79384448,
+      "unwrapped_us": 2079554346,
+      "us": 2079554346,
+      "velocity": 0.4901766,
+      "x": 0.2743875
+    },
+    "raw_limit_bits": 14,
+    "right_required_switch_asserted": true,
+    "home_invalidated": true,
+    "braking_active_before_fault": true,
+    "counted_fault_x_below_old_rail_half_m": 0.0334875,
+    "counted_fault_x_below_old_software_hard_boundary_m": 0.023487503219999983,
+    "home_transitions": [
+      {
+        "unwrapped_tick": 79671892,
+        "unwrapped_us": 2366998346,
+        "mode": 4,
+        "flags": 201,
+        "x": 0.2754375,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 5
+      },
+      {
+        "unwrapped_tick": 79671990,
+        "unwrapped_us": 2367096346,
+        "mode": 0,
+        "flags": 201,
+        "x": 0.2754375,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79671992,
+        "unwrapped_us": 2367098346,
+        "mode": 13,
+        "flags": 203,
+        "x": 0.2754375,
+        "velocity": -0.03,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79692128,
+        "unwrapped_us": 2387234346,
+        "mode": 13,
+        "flags": 219,
+        "x": -0.3285375,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79692168,
+        "unwrapped_us": 2387274346,
+        "mode": 13,
+        "flags": 203,
+        "x": -0.32745,
+        "velocity": 0.03,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79692980,
+        "unwrapped_us": 2388086346,
+        "mode": 13,
+        "flags": 219,
+        "x": -0.32865,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79693024,
+        "unwrapped_us": 2388130346,
+        "mode": 13,
+        "flags": 203,
+        "x": -0.3274125,
+        "velocity": 0.03,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79713624,
+        "unwrapped_us": 2408730346,
+        "mode": 13,
+        "flags": 235,
+        "x": 0.290475,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79713668,
+        "unwrapped_us": 2408774346,
+        "mode": 13,
+        "flags": 203,
+        "x": 0.2892,
+        "velocity": -0.03,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79714484,
+        "unwrapped_us": 2409590346,
+        "mode": 13,
+        "flags": 235,
+        "x": 0.2905875,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79714528,
+        "unwrapped_us": 2409634346,
+        "mode": 13,
+        "flags": 203,
+        "x": 0.28935,
+        "velocity": -0.03,
+        "acceleration": 0.0,
+        "fault": 0
+      },
+      {
+        "unwrapped_tick": 79724808,
+        "unwrapped_us": 2419914346,
+        "mode": 0,
+        "flags": 205,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "fault": 0
+      }
+    ],
+    "home_before": {
+      "sid": 4007644282,
+      "tick": 79671986,
+      "us": 2367092346,
+      "mode": 4,
+      "flags": 201,
+      "theta": 3.034214,
+      "angle_hat": 3.033928,
+      "omega": -0.006080648,
+      "x": 0.2754375,
+      "velocity": 0.0,
+      "acceleration": 0.0,
+      "demand": 0.0,
+      "last_seq": 0,
+      "fault": 5,
+      "misses": 0,
+      "dropped": 18306395,
+      "brake_direction": 0,
+      "received_ns": 272814440660041,
+      "unwrapped_tick": 79671986,
+      "unwrapped_us": 2367092346
+    },
+    "home_after": {
+      "sid": 4007644282,
+      "tick": 79724808,
+      "us": 2419914346,
+      "mode": 0,
+      "flags": 205,
+      "theta": 3.058758,
+      "angle_hat": 3.058744,
+      "omega": 0.0003872358,
+      "x": 0.0,
+      "velocity": 0.0,
+      "acceleration": 0.0,
+      "demand": 0.0,
+      "last_seq": 0,
+      "fault": 0,
+      "misses": 0,
+      "dropped": 18306395,
+      "brake_direction": 0,
+      "received_ns": 272867262265147,
+      "unwrapped_tick": 79724808,
+      "unwrapped_us": 2419914346
+    },
+    "info_before": {
+      "sid": 4007644282,
+      "firmware": "executor-v6-measuredrail",
+      "encoder_upright_raw": 330,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 5,
+      "home_epoch": 13,
+      "measured_span_steps": 16502,
+      "rail_half_m": 0.308925,
+      "received_ns": 272814354089472,
+      "encoder_boot_conf": 768,
+      "encoder_conf": 768,
+      "encoder_conf_valid": true,
+      "encoder_raw": 2307,
+      "encoder_raw_age_us": 684,
+      "encoder_recoveries": 0
+    },
+    "info_after": {
+      "sid": 4007644282,
+      "firmware": "executor-v6-measuredrail",
+      "encoder_upright_raw": 330,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 5,
+      "home_epoch": 14,
+      "measured_span_steps": 16513,
+      "rail_half_m": 0.3091125,
+      "received_ns": 272867264294108,
+      "encoder_boot_conf": 768,
+      "encoder_conf": 768,
+      "encoder_conf_valid": true,
+      "encoder_raw": 2324,
+      "encoder_raw_age_us": 23867,
+      "encoder_recoveries": 0
+    },
+    "measured_span_step_change": 11,
+    "manual_cart_movement_between_runs": true,
+    "conclusions": [
+      "Firmware registered the right required limit input and fault 5, stopped the driver and invalidated home.",
+      "The cart command was already braking but still moving right in the preceding sampled state.",
+      "Subsequent slow two-switch homing completed, reset counted center, and established epoch 14 / 16513 measured steps.",
+      "Manual movement before home breaks correspondence of old counted position with physical cart location.",
+      "Neither cross-run count differences nor a successful slow home prove lost steps, accurate high-speed tracking, or the cause of the early right input.",
+      "Electrical switch assertion is observed; physical contact versus a transient wiring/switch event is not independently established by these logs."
+    ]
+  }
+}

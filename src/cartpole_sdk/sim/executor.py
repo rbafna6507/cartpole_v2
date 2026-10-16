@@ -6,7 +6,8 @@ the fault tick: no physical disabled-motor stopping distance is claimed. Sensor
 noise/delay belong to the plant and are never bypassed for policy feedback.
 """
 from dataclasses import dataclass, replace
-from cartpole_sdk.contracts import ActionLimits, ActionRequest, ValidationError, validate_action
+from cartpole_sdk.contracts import (ActionLimits, ActionRequest, Observation, Sample,
+                                    ValidationError, validate_action)
 from cartpole_sdk.control.parameters import ControllerParameters
 from cartpole_sdk.control.motion import State, advance, _Float32
 from .backend import MujocoBackend
@@ -68,6 +69,24 @@ class ExecutorSimulation:
         self.observation = observation
         self._initialized = True
         return observation
+
+    def control_observation(self) -> Observation:
+        """Augment held sensor samples with current commanded governor state.
+
+        Sensor noise, delay, validity, and original timestamps remain intact;
+        only the two executor-state estimates use current availability time.
+        """
+        self.plant._require_reset()
+        observation = self.observation
+        timestamp = observation.available_ns
+        feedback = tuple(Sample('cart', quantity, 'simulation', value, unit,
+            self.sensors.frame_id, method, 'valid', None, 'estimated',
+            timestamp, timestamp, timestamp)
+            for quantity, value, unit, method in (
+                ('acceleration', float(self.motion.acceleration), 'm/s^2', 'commanded_acceleration'),
+                ('brake_direction', self.motion.brake_direction, '1', 'governor_brake_direction'),
+            ))
+        return replace(observation, samples=observation.samples+feedback)
 
     def _fault(self, reason):
         self.terminated, self.fault_reason = True, reason

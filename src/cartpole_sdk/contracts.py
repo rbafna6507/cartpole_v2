@@ -9,8 +9,9 @@ from dataclasses import dataclass
 import math
 from typing import Iterable, Protocol
 
-UNITS = {'position': 'm', 'velocity': 'm/s', 'angle': 'rad', 'angular_velocity': 'rad/s'}
-SOURCES = frozenset({'magnetic', 'step', 'vision', 'fused', 'simulation'})
+UNITS = {'position': 'm', 'velocity': 'm/s', 'acceleration': 'm/s^2',
+         'brake_direction': '1', 'angle': 'rad', 'angular_velocity': 'rad/s'}
+SOURCES = frozenset({'magnetic', 'magnetic_filtered', 'step', 'vision', 'fused', 'simulation'})
 
 
 class ValidationError(ValueError):
@@ -169,7 +170,7 @@ def validate_observation(session: Session, observation: Observation) -> None:
         raise ValidationError('observation session or clock does not match session')
     for sample in observation.samples:
         if sample.entity == session.topology.cart:
-            quantities = ('position', 'velocity')
+            quantities = ('position', 'velocity', 'acceleration', 'brake_direction')
         elif sample.entity in session.topology.joints:
             quantities = ('angle', 'angular_velocity')
         else:

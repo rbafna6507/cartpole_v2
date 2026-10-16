@@ -1,7 +1,7 @@
 #!/bin/sh
 # A loopback-only SSH tunnel over Tailscale. Keep this command running.
 set -eu
-host=${1:-jetson.tail6f8113.ts.net}
+host=${1:-rbafna@jetson}
 port=${2:-3090}
 case "$port" in *[!0-9]*|'') echo 'Port must be numeric' >&2; exit 2;; esac
 printf 'Open http://127.0.0.1:%s in Chrome. Stop with Ctrl-C.\n' "$port"

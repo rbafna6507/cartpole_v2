@@ -46,8 +46,12 @@ class Engine:
             detection_ms=(time.perf_counter()-detect_start)*1000
             cart_pivot,score,cart_reason=self.cart.detect(frame)
             self.frame=frame;self.pose=detection.pose;self.mask=detection.mask
-            # Prefer the directly visible screw; use cart appearance through arm occlusion.
-            if detection.pose is not None:
+            # Trust the screw for cart selection only when it passes the same
+            # length gate as StateEstimator; rejected arms cannot disable a template.
+            home_length=self.estimator.home_length
+            arm_accepted=detection.pose is not None and (home_length is None or
+                abs(detection.pose.length/home_length-1)<=.20)
+            if arm_accepted:
                 if cart_pivot is not None and np.linalg.norm(np.array(cart_pivot)-detection.pose.pivot)>8:
                     cart_reason='cart template disagrees with screw; reselect patch'
                     self.cart.invalid_reason=cart_reason

@@ -1,0 +1,13 @@
+{
+  "status": "frozen before reading training or heldout characterization recordings",
+  "primary_fit": "Separate training and heldout run directories, excitation interval 0 <= relative board time <= 20 seconds; raw decoded magnetic theta and MCU jerk-limited commanded acceleration; filtered omega omitted.",
+  "gate_policy": "Use exact unmodified FitConfig defaults. No threshold or search-range changes.",
+  "raw_zero_fit": "angle_offset_rad=0",
+  "conditional_offset_fit": "Circular mean of healthy stopped training preflight theta in the last 0.5 seconds before characterization_start, minus pi wrapped to [-pi,pi]. Freeze this value for both training and heldout. Never use heldout hanging values to refit or recenter.",
+  "pilot": "Characterization and excitation sufficiency only until an independent heldout run exists; never self-validation.",
+  "tail": "Report as zero-command hold, including counted drift and commanded residual motion. Any two-coefficient passive dynamics result is conditional on a physically fixed cart, not an accepted full identification.",
+  "promotion": "Never promote a model unless all unchanged gates pass and independent angle validity is established. Current records do not establish independent physical angle validity, so all outputs remain diagnostic even if software gates pass.",
+  "home_interpretation": "User manually moved the cart between right-fault and full home. Coordinate changes across this boundary are not direct evidence of lost motor steps.",
+  "fit_sha256": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+  "adapter_sha256": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc"
+}

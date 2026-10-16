@@ -113,14 +113,47 @@ class ReturnTests(unittest.TestCase):
                 else:self.assertTrue(.19<=remaining<.3)
                 rig.stop()
     def test_legacy_auto_keeps_early_stopping_budget(self):
+        import math
+        from dataclasses import replace
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from test_rig_console import ScriptedClock, ScriptedConsoleRig
+
+        class BudgetRig(ScriptedConsoleRig):
+            def _command_state(self, command, *args, **kwargs):
+                super()._command_state(command, *args, **kwargs)
+                if command=='MODE':
+                    # Native AUTO has the run-duration deadline, not the
+                    # scripted external controller's 20 ms action lease.
+                    self._state=replace(self._state, mode=2)
+                    self._lease_until_ns=self.clock.now_ns+int(args[-1])*1_000_000
+
+            def wait_state(self, after_tick=None, timeout=1):
+                # The wait may end before the next 10 ms telemetry publication,
+                # including a sub-nanosecond remainder from float arithmetic.
+                if timeout<.01:
+                    self.clock.now_ns+=max(1,math.ceil(timeout*1e9))
+                    raise TimeoutError('no snapshot before deadline')
+                return super().wait_state(after_tick,timeout)
+
+        # This tests deadline arithmetic, not whether the host scheduler can
+        # deliver STOP in a 10 ms window. PTY tests retain real expiry coverage.
         for identity in ('executor-v1','executor-v2-cart2','executor-v3-encguard'):
-            self.fw.identity=identity
-            with self.rig() as rig:
-                start=time.monotonic_ns();rig.start('auto',.1)
-                self.assertLess((rig._deadline_ns-start)/1e9,.2)
+            clock=ScriptedClock()
+            with self.subTest(identity=identity), \
+                    patch('cartpole_sdk.rig.client.time', clock), \
+                    patch('cartpole_sdk.rig.console.time', clock), \
+                    BudgetRig('scripted-legacy', clock=clock) as rig:
+                rig._info=SimpleNamespace(firmware=identity)
+                rig.start('auto',.1)
+                self.assertEqual(rig._deadline_ns,100_000_000)
+                self.assertFalse(rig._return_expected)
                 _wait_run(rig,.1,io.StringIO())
+                self.assertTrue(90_000_000<=clock.now_ns<=90_000_001)
+                self.assertEqual([c[1] for c in rig.commands],['MODE','STOP'])
+                self.assertEqual(rig.commands[0][3:],['auto','100'])
                 self.assertFalse(rig.state.enabled)
-                self.assertEqual(self.fw.return_completed,0)
+                self.assertIsNone(rig.error)
     def test_stop_cancels_return_without_later_restart(self):
         with self.rig() as rig:
             rig.rehome();rig.stop()

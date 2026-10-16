@@ -1,0 +1,466 @@
+{
+  "source_manifest": [
+    {
+      "path": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792176614840269233/report.json",
+      "bytes": 260062,
+      "sha256": "7ab8757bce8176feeeaae7f98600ed2f15112ed8be0e20f92dde6abfa7aba16d"
+    },
+    {
+      "path": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792176614840269233/rig-1792176614848174664-837395026.jsonl",
+      "bytes": 1741107,
+      "sha256": "d4dda2f164d395cd8b6f414a023e5e74227ea937e23ae19a794a1b7bda843d0a"
+    }
+  ],
+  "parameters": {
+    "leff": 0.123999998,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "bal_pw": 4.5,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "vmax": 1.5,
+    "vmax_s": 1.5,
+    "vmax_b": 1.5,
+    "approach_v": 0.200000003,
+    "catch_v": 0.300000012,
+    "approach_angle": 0.800000012,
+    "catch_da": 4.0,
+    "amax_s": 25.0,
+    "amax_b": 25.0,
+    "jmax": 150.0,
+    "amax_m": 0.5,
+    "jmax_m": 10.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "kdx": 2.0,
+    "phase_soft": 2.0,
+    "catch_a": 0.25,
+    "catch_r": 3.0,
+    "giveup": 0.800000012,
+    "spin_trip_rad_s": 150.0,
+    "spin_resume_rad_s": 10.0,
+    "rail": 0.308925003,
+    "bw": 6.0,
+    "vman": 0.0500000007,
+    "manual_speed_max": 0.150000006,
+    "rail_fraction": 0.949999988,
+    "rail_margin": 0.0149999997,
+    "rail_fault_margin": 0.00999999978,
+    "rail_hysteresis": 0.00499999989,
+    "rail_recover_v": 0.150000006,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rehome_v": 0.0799999982,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0
+  },
+  "gains": {
+    "k1": -22.02559265311508,
+    "k2": -2.391379796199559,
+    "k3": -3.4128439816513763,
+    "k4": -3.1853211041467877
+  },
+  "samples": 1248,
+  "duration_s": 4.987999999999829,
+  "events": [
+    {
+      "controller_parameters": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 6.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.308925003,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "hardware_validated": false,
+      "host_monotonic_ns": 271913361780062,
+      "mode": "auto",
+      "policy": "ExecutorFeedbackPolicy",
+      "rate_hz": 250,
+      "type": "host_controller"
+    },
+    {
+      "board_ns": 1466026346000,
+      "host_monotonic_ns": 271913372077656,
+      "mode": "swing",
+      "observation_sequence": 78770920,
+      "type": "policy_transition"
+    },
+    {
+      "calls": 1248,
+      "host_monotonic_ns": 271918363294863,
+      "max_compute_ns": 1315475,
+      "mean_compute_ns": 467945.125,
+      "type": "policy_end"
+    },
+    {
+      "error": null,
+      "host_monotonic_ns": 271921929776539,
+      "records_dropped": 0,
+      "type": "termination"
+    }
+  ],
+  "fast_capture_indices": [],
+  "reference_capture_indices": [],
+  "native_capture_indices": [],
+  "forecast_disagreement_indices": [],
+  "all_initial_guards_pass": 0,
+  "initial_pass_samples": [],
+  "near_upright_samples": 12,
+  "near_upright_bouts": [
+    {
+      "start_s": 1.1639999999999873,
+      "end_s": 1.2079999999998563,
+      "samples": 12,
+      "closest": {
+        "index": 296,
+        "t_s": 1.183999999999969,
+        "board_tick": 78772104,
+        "raw_theta": 0.02147573,
+        "theta": 0.002420685,
+        "omega": 8.964103,
+        "x": 0.1589625,
+        "v": 0.6873906,
+        "a": -10.54071,
+        "recorded_demand": -11.506906509399414,
+        "balance_demand": 24.22196582340874,
+        "acceleration_mismatch": 34.76267582340874,
+        "energy_error": 0.5078481160671062,
+        "brake": 0,
+        "initial_rejections": [
+          "rate",
+          "position",
+          "velocity",
+          "acceleration_mismatch"
+        ],
+        "fast_capture": false,
+        "reference_capture": false,
+        "native_capture": false,
+        "inbound": true,
+        "approach_weight": 1,
+        "native_dt_approach": -11.942960739135742,
+        "host_dt_approach": -11.506906509399414,
+        "receive_to_send_record_ms": 1.071792
+      },
+      "rate_range": [
+        8.109893,
+        9.236465
+      ],
+      "velocity_range": [
+        0.4464137,
+        0.8697049
+      ],
+      "x_range": [
+        0.143175,
+        0.1725375
+      ],
+      "energy_error_range": [
+        0.3930451674511748,
+        0.5290631434908952
+      ],
+      "rejection_counts": {
+        "rate": 12,
+        "position": 12,
+        "velocity": 12,
+        "acceleration_mismatch": 12,
+        "demand": 6,
+        "outbound": 1
+      },
+      "all_initial_guards_pass": 0
+    }
+  ],
+  "approach_bouts": [
+    {
+      "start_s": 1.0839999999998327,
+      "end_s": 1.27599999999984,
+      "samples": 49,
+      "closest": {
+        "index": 296,
+        "t_s": 1.183999999999969,
+        "board_tick": 78772104,
+        "raw_theta": 0.02147573,
+        "theta": 0.002420685,
+        "omega": 8.964103,
+        "x": 0.1589625,
+        "v": 0.6873906,
+        "a": -10.54071,
+        "recorded_demand": -11.506906509399414,
+        "balance_demand": 24.22196582340874,
+        "acceleration_mismatch": 34.76267582340874,
+        "energy_error": 0.5078481160671062,
+        "brake": 0,
+        "initial_rejections": [
+          "rate",
+          "position",
+          "velocity",
+          "acceleration_mismatch"
+        ],
+        "fast_capture": false,
+        "reference_capture": false,
+        "native_capture": false,
+        "inbound": true,
+        "approach_weight": 1,
+        "native_dt_approach": -11.942960739135742,
+        "host_dt_approach": -11.506906509399414,
+        "receive_to_send_record_ms": 1.071792
+      },
+      "rate_range": [
+        7.713606,
+        9.97764
+      ],
+      "velocity_range": [
+        -0.001677273,
+        1.118257
+      ],
+      "x_range": [
+        0.06075,
+        0.1877625
+      ],
+      "energy_error_range": [
+        0.14510329509116304,
+        0.5290631434908952
+      ],
+      "rejection_counts": {
+        "angle": 37,
+        "rate": 49,
+        "velocity": 37,
+        "acceleration_mismatch": 49,
+        "position": 35,
+        "demand": 23,
+        "outbound": 18
+      },
+      "all_initial_guards_pass": 0
+    },
+    {
+      "start_s": 1.6159999999999854,
+      "end_s": 1.8479999999999563,
+      "samples": 59,
+      "closest": {
+        "index": 433,
+        "t_s": 1.731999999999971,
+        "board_tick": 78772652,
+        "raw_theta": -0.4325826,
+        "theta": -0.3768883,
+        "omega": 3.775408,
+        "x": -0.12735,
+        "v": -0.4661526,
+        "a": 1.04408,
+        "recorded_demand": 0.4904305781140911,
+        "balance_demand": -1.1922251535110455,
+        "acceleration_mismatch": 2.2363051535110454,
+        "energy_error": 0.019898911071168035,
+        "brake": 0,
+        "initial_rejections": [
+          "angle",
+          "rate",
+          "position",
+          "velocity"
+        ],
+        "fast_capture": false,
+        "reference_capture": false,
+        "native_capture": false,
+        "inbound": true,
+        "approach_weight": 0.7692940050335854,
+        "native_dt_approach": 0.4904305781140911,
+        "host_dt_approach": 0.4904305781140911,
+        "receive_to_send_record_ms": 1.062096
+      },
+      "rate_range": [
+        -2.487651,
+        8.031995
+      ],
+      "velocity_range": [
+        -0.7380511,
+        -0.2241947
+      ],
+      "x_range": [
+        -0.1804125,
+        -0.060675
+      ],
+      "energy_error_range": [
+        -0.25676844891271433,
+        0.1158691778983898
+      ],
+      "rejection_counts": {
+        "angle": 59,
+        "rate": 31,
+        "velocity": 56,
+        "acceleration_mismatch": 47,
+        "position": 33,
+        "outbound": 23
+      },
+      "all_initial_guards_pass": 0
+    },
+    {
+      "start_s": 2.227999999999838,
+      "end_s": 2.5,
+      "samples": 69,
+      "closest": {
+        "index": 581,
+        "t_s": 2.3239999999998417,
+        "board_tick": 78773244,
+        "raw_theta": 0.5844467,
+        "theta": 0.5402429,
+        "omega": -3.210767,
+        "x": 0.064125,
+        "v": 0.3434234,
+        "a": 0.7672933,
+        "recorded_demand": 1.041028689225872,
+        "balance_demand": 5.533769139034554,
+        "acceleration_mismatch": 4.766475839034554,
+        "energy_error": -0.07726235164279782,
+        "brake": 0,
+        "initial_rejections": [
+          "angle",
+          "rate",
+          "velocity",
+          "acceleration_mismatch"
+        ],
+        "fast_capture": false,
+        "reference_capture": false,
+        "native_capture": false,
+        "inbound": true,
+        "approach_weight": 0.4722856478774041,
+        "native_dt_approach": 1.041028689225872,
+        "host_dt_approach": 1.041028689225872,
+        "receive_to_send_record_ms": 1.368693
+      },
+      "rate_range": [
+        -9.987216,
+        1.777861
+      ],
+      "velocity_range": [
+        0.234144,
+        0.5246015
+      ],
+      "x_range": [
+        0.0257625,
+        0.1263375
+      ],
+      "energy_error_range": [
+        -0.2686214059595674,
+        0.3284054045682838
+      ],
+      "rejection_counts": {
+        "angle": 69,
+        "rate": 25,
+        "velocity": 53,
+        "acceleration_mismatch": 47,
+        "outbound": 20,
+        "position": 7
+      },
+      "all_initial_guards_pass": 0
+    }
+  ],
+  "near_upright_rejection_counts": {
+    "rate": 12,
+    "position": 12,
+    "velocity": 12,
+    "acceleration_mismatch": 12,
+    "demand": 6,
+    "outbound": 1
+  },
+  "receive_to_send_record_ms": {
+    "n": 1248,
+    "min": 0.954767,
+    "max": 2.785386,
+    "mean": 1.6705253573717949,
+    "p50": 1.729562,
+    "p95": 2.188993
+  },
+  "action_intervals_ms": {
+    "n": 1247,
+    "min": 4.0,
+    "max": 4.0,
+    "mean": 4.0,
+    "p50": 4.0,
+    "p95": 4.0
+  },
+  "shadow_policy_max_abs_action_difference": 1.7763568394002505e-15,
+  "shadow_policy_faults": [],
+  "shadow_final_mode": "swing",
+  "native_vs_host_approach_delta_near": {
+    "n": 177,
+    "min": 0.0,
+    "max": 11.388667106628418,
+    "mean": 0.1107983508352506,
+    "p50": 0.0,
+    "p95": 0.43660926818847656
+  },
+  "limitations": [
+    "Native C++ header compiled on Mac is a binary32 control oracle, not a replay of actual 1kHz sensor/motor timing.",
+    "Recorded theta/omega and cart motion states are encoder/command estimates; no independent physical trajectory.",
+    "receive_to_send_record is a host logging proxy, not board command application latency.",
+    "No sample at an unrecorded intermediate 1ms tick can be reconstructed exactly.",
+    "No parameters, thresholds or live control changed."
+  ],
+  "source_hashes": {
+    "source/cartpole_sdk/__init__.py": "824ed9d13a4843244c5528134f57ac2d565a94e514219bd2ec2601678737269e",
+    "source/cartpole_sdk/contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+    "source/cartpole_sdk/policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+    "source/cartpole_sdk/policies/__init__.py": "1ce209d208710327b8a2cd9cae7c091e54b1d944a2955910407c2ac52de22db3",
+    "source/cartpole_sdk/policies/damping.py": "d263ccbb3acbb80cd44c8e98d8e9634146ad89a6f1ddf26d08ee181dffd56cb1",
+    "source/cartpole_sdk/policies/executor_feedback.py": "f6b964578e6946388826942f252e5579f46267d5912547cfde6657eb3a470536",
+    "source/cartpole_sdk/control/tuned_parameters.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+    "source/cartpole_sdk/control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+    "source/cartpole_sdk/control/policy.py": "2173b5f5eaafb8c9eb32cdf65584ee690131109595ecce5ea630efbe6c3d0a3c",
+    "source/cartpole_sdk/control/__init__.py": "313880d7986477c4fc543e36961bdfe03a351dc0cfb7bd37d9fb63f8fa5e0bad",
+    "source/cartpole_sdk/control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+    "source/cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "source/cartpole_sdk/control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+    "source/cartpole_sdk/control/tuned-20261016-bw10.json": "82b896439486c1c6f2e8c2e8209fffb6a7169c04b5dbae56ee7977f22e181d39",
+    "headers/serial_frame.h": "88eddb8cfb400af0346de9a5e98e456c741b5161fb8a304a7c595c07047cd36c",
+    "headers/upright_session.h": "7f387f845dd7a122e2d692e32f40ad6737910d6de50df7b5309ac35829af6818",
+    "headers/swing_controller.h": "fbf7e2b3ea555b8bdaca871edd250f41124babb46597170e7997d5ad728a3fa8",
+    "headers/teensy_reference_store.h": "3f271a9d5441f6337668c68b1d5e2467aa602c8977dc98b1badc54f603dd6e4d",
+    "headers/rail_recovery.h": "7e75a3bb5e29d6479c09b81c98a61703e05ce46e109197804d1f9255afe4cc1e",
+    "headers/spin_recovery.h": "571cbbd6c5171e2f9c3aa291fbf20f128abefbe759ce2628511ee9b361b8d12f",
+    "headers/cart_motion.h": "abc4246bfcb4a651c1a25e0d6791077689b20a163c60d36159692e44611e3e8b",
+    "headers/model_encoder_reference.h": "2218a5839db017807f1bba20de09e1e1dc94bc2eaa39c4511a34c9ef7e62637d",
+    "headers/controller_parameters.h": "7ff0b3a7631d11c0f3e10c559b1f2cd84e75aae0fac93c07ab299669bdc02d47",
+    "headers/cart_mechanics.h": "04d5d54363baaaeb0e1df9827e06ef3c2a4be3fcb9b967e8a2c48d6b94e442b6",
+    "headers/ethernet_transport.h": "c142475c384314adb116262c1813740c5b19f930d1c57b4c5167adbc8841e1b2",
+    "headers/ethernet_config.h": "18943b67065cc1c46148a129476482e6c1d19f5a7ddb3f7588183a8cb6434841",
+    "headers/saved_center_return.h": "65e8d4aedcd037625851cf868bbf5e0744dd0a7b52af559783688af8fa6faa02",
+    "headers/cart_homing.h": "43dc3eeab6eda0331ec92cd4ccf2c8037ad3d5863f696975cde55f3bab59e6fc",
+    "headers/executor_core.h": "55ea99a855a10457b0b1ff55676fb61e21f21ec76c5db6259ca5a7f04cf13d7b",
+    "headers/encoder_reference.h": "80c6da8ba4612fd3cbccdd4f55d574c582f066117697738ad7e292a2fbcd2a37",
+    "headers/status_display.h": "8c00048762de0b478a63b133ab429c20574f7b21dbc5ac39f35091df97c736bf"
+  },
+  "hardware_activity": false
+}

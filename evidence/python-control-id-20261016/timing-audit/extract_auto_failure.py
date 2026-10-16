@@ -1,0 +1,7 @@
+import collections, hashlib, json, sys
+from pathlib import Path
+p=Path(sys.argv[1]); report_path=p/'report.json'; r=json.loads(report_path.read_text()); log=Path(r['log']); rows=[json.loads(s) for s in log.read_text().splitlines()]
+f=[x for x in rows if x['type']=='policy_failure']; t=f[-1]['host_monotonic_ns']; small={k:v for k,v in r.items() if not isinstance(v,list) or len(v)<20}
+states=[x['state'] for x in rows if x['type']=='state']; active=[s for s in states if s['mode']==12 and s['flags']&2]; actions=[x for x in rows if x['type']=='action_request']; obs=[x['request']['observation_sequence'] for x in actions]
+out={'run':str(p),'report_keys':list(r),'report':small,'source_files':[{'path':str(x),'bytes':x.stat().st_size,'sha256':hashlib.sha256(x.read_bytes()).hexdigest()} for x in [report_path,log,p/'parameters.json']], 'record_types':dict(collections.Counter(x['type'] for x in rows)), 'active_first':active[0], 'active_last':active[-1], 'action_observation_gap_counts':dict(collections.Counter(b-a for a,b in zip(obs,obs[1:]))), 'all_special_events':[x for x in rows if x['type'] in ['policy_start','policy_transition','policy_failure','policy_end','error','stop_failure','termination']], 'tail_records':[dict(line=i+1,**x) for i,x in enumerate(rows) if t-80_000_000<=x.get('host_monotonic_ns',0)<=t+50_000_000], 'last_actions':actions[-8:], 'gc_events':r.get('gc_events',[])}
+print(json.dumps(out,separators=(',',':')))

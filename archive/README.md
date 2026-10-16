@@ -48,7 +48,7 @@ pre-cleanup inventory is [`source-inventory.json`](../evidence/phase0/source-inv
 ```
 
 With no destination, the helper runs the fixed read-only command
-`ip -j -6 addr show scope global` through your authenticated SSH alias `jetson`.
+`ip -j -6 addr show scope global` through your authenticated SSH destination `rbafna@jetson`.
 It selects current public IPv6 addresses on active interfaces, rejects expired,
 deprecated, tentative and failed addresses, and prefers stable addresses before
 temporary ones. It probes at most eight addresses for two seconds each using the
@@ -66,11 +66,11 @@ Two uncommon SSH configurations need care: paths using `%h` (such as an
 than the original hostname; use fixed trusted paths or an explicit destination.
 Host certificates on a nonstandard port may also need an explicit trusted
 `HostKeyAlias` that matches the certificate identity. These cases fail without
-weakening verification; `./archive/vision-tunnel.sh jetson` remains the escape
+weakening verification; `./archive/vision-tunnel.sh rbafna@jetson` remains the escape
 hatch using your original route.
 
 Bootstrap discovery is noninteractive and requires an available key/agent. If it
-fails, check that `ssh jetson` works and load/unlock the key if needed. The final
+fails, check that `ssh rbafna@jetson` works and load/unlock the key if needed. The final
 tunnel may prompt for your normal SSH password. Discovery has a 15-second SSH
 process timeout; tunnel connection attempts time out after 10 seconds. If no
 address is reachable, the helper reports an error with an explicit fallback.
@@ -81,14 +81,14 @@ The initial connection message does not confirm that SSH has connected.
 ./archive/vision-tunnel.sh --print-command
 
 # Explicit destinations bypass discovery, including your configured slow route.
-./archive/vision-tunnel.sh jetson
+./archive/vision-tunnel.sh rbafna@jetson
 JETSON_SSH_TARGET=rbafna@my-host ./archive/vision-tunnel.sh
 
 JETSON_KNOWN_HOSTS="$HOME/.ssh/known_hosts" ./archive/vision-tunnel.sh rbafna@jetson
 LOCAL_PORT=4095 ./archive/vision-tunnel.sh
 ```
 
-`JETSON_DISCOVERY_HOST` changes the bootstrap alias when it differs from `jetson`.
+`JETSON_DISCOVERY_HOST` changes the bootstrap alias when it differs from `rbafna@jetson`.
 `JETSON_KNOWN_HOSTS` explicitly overrides the trusted host-key file for both
 bootstrap and final connections; omit it to honor your SSH configuration. The
 bundled `jetson_known_hosts` file contains historical IPv6 entries and is available

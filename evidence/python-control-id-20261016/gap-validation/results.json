@@ -1,0 +1,1445 @@
+{
+  "status": "offline provisional simulation; no hardware stability claim",
+  "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "mujoco": "3.15.0",
+  "parameters": {
+    "leff": 0.123999998,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "bal_pw": 4.5,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "vmax": 1.5,
+    "vmax_s": 1.5,
+    "vmax_b": 1.5,
+    "approach_v": 0.200000003,
+    "catch_v": 0.300000012,
+    "approach_angle": 0.800000012,
+    "catch_da": 4.0,
+    "amax_s": 25.0,
+    "amax_b": 25.0,
+    "jmax": 150.0,
+    "amax_m": 0.5,
+    "jmax_m": 10.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "kdx": 2.0,
+    "phase_soft": 2.0,
+    "catch_a": 0.25,
+    "catch_r": 3.0,
+    "giveup": 0.800000012,
+    "spin_trip_rad_s": 150.0,
+    "spin_resume_rad_s": 10.0,
+    "rail": 0.309037507,
+    "bw": 10.0,
+    "vman": 0.0500000007,
+    "manual_speed_max": 0.150000006,
+    "rail_fraction": 0.949999988,
+    "rail_margin": 0.0149999997,
+    "rail_fault_margin": 0.00999999978,
+    "rail_hysteresis": 0.00499999989,
+    "rail_recover_v": 0.150000006,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rehome_v": 0.0799999982,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0
+  },
+  "physics_tick_ns": 1000000,
+  "nominal_decision_period_ns": 4000000,
+  "action_ttl_ns": 20000000,
+  "source_sha256": {
+    "src/cartpole_sdk/policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+    "src/cartpole_sdk/rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+    "src/cartpole_sdk/sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+    "src/cartpole_sdk/control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+    "tests/test_executor_feedback_policy.py": "56e7e3e32a982ce32eed559870e04c9a5f6c7ed1c8e00a3946813cce5fc5fa80",
+    "evidence/python-control-id-20261016/gap-validation/run_experiments.py": "4bbf9bd4c02fa325d444123aae9577c4e58aa192310c8e50b9d048ca095621d9",
+    "evidence/python-control-id-20261016/capture-audit/source/cartpole_sdk/control/tuned-20261016-bw10.json": "82b896439486c1c6f2e8c2e8209fffb6a7169c04b5dbae56ee7977f22e181d39"
+  },
+  "cases": [
+    {
+      "name": "hanging-strict",
+      "initial_state": [
+        0.0,
+        0.0,
+        3.141592653589793,
+        0.0
+      ],
+      "target_duration_ms": 8000,
+      "simulated_ns": 8000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 2000,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.1513571668327302,
+      "max_abs_v": 1.1148967090472577,
+      "max_abs_acceleration": 13.19506549835205,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 8000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.06443067273552536,
+        "v": -0.5246492443815212,
+        "theta": -1.9091135902022764,
+        "omega": -10.724675649236127,
+        "time_ns": 8000000000
+      },
+      "runtime_s": 3.80619375
+    },
+    {
+      "name": "hanging-gap2",
+      "initial_state": [
+        0.0,
+        0.0,
+        3.141592653589793,
+        0.0
+      ],
+      "target_duration_ms": 8000,
+      "simulated_ns": 8000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        200,
+        700,
+        1300,
+        1800,
+        2400,
+        2900,
+        3500,
+        4000,
+        4600,
+        5100,
+        5700,
+        6200,
+        6800,
+        7300,
+        7900
+      ],
+      "actions": 1985,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 15,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.15136199134522682,
+      "max_abs_v": 1.1148996787667265,
+      "max_abs_acceleration": 13.195234298706055,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 8000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.06437948572859532,
+        "v": -0.5260079427367346,
+        "theta": -1.910962796590875,
+        "omega": -10.735998903989264,
+        "time_ns": 8000000000
+      },
+      "runtime_s": 2.676018708
+    },
+    {
+      "name": "hanging-gap3",
+      "initial_state": [
+        0.0,
+        0.0,
+        3.141592653589793,
+        0.0
+      ],
+      "target_duration_ms": 8000,
+      "simulated_ns": 8000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        200,
+        204,
+        700,
+        704,
+        1300,
+        1304,
+        1800,
+        1804,
+        2400,
+        2404,
+        2900,
+        2904,
+        3500,
+        3504,
+        4000,
+        4004,
+        4600,
+        4604,
+        5100,
+        5104,
+        5700,
+        5704,
+        6200,
+        6204,
+        6800,
+        6804,
+        7300,
+        7304,
+        7900,
+        7904
+      ],
+      "actions": 1970,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 15,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.15138472424779842,
+      "max_abs_v": 1.1149143270477653,
+      "max_abs_acceleration": 13.196072578430176,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 8000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.06444452129894952,
+        "v": -0.5276945685131923,
+        "theta": -1.9117595992809044,
+        "omega": -10.736072083935923,
+        "time_ns": 8000000000
+      },
+      "runtime_s": 3.220499084
+    },
+    {
+      "name": "balance-strict",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 1250,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.014602563227346895,
+      "max_abs_v": 0.03808949859981657,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.9766012030349923e-07,
+        "v": -9.941454678492427e-07,
+        "theta": 3.0955508219318977e-07,
+        "omega": -5.015370965715753e-07,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 2.08559
+    },
+    {
+      "name": "balance-gap2",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        200,
+        700,
+        1300,
+        1800,
+        2400,
+        2900,
+        3500,
+        4000,
+        4600
+      ],
+      "actions": 1241,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 9,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.0145986278541059,
+      "max_abs_v": 0.038107413423625974,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.9833449281824036e-07,
+        "v": -9.927335229068865e-07,
+        "theta": 3.079315888959048e-07,
+        "omega": -4.954382467070089e-07,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.978466708
+    },
+    {
+      "name": "balance-gap3",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        200,
+        204,
+        700,
+        704,
+        1300,
+        1304,
+        1800,
+        1804,
+        2400,
+        2404,
+        2900,
+        2904,
+        3500,
+        3504,
+        4000,
+        4004,
+        4600,
+        4604
+      ],
+      "actions": 1232,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 9,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.0145907081497088,
+      "max_abs_v": 0.03814653557538987,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.9971528946642113e-07,
+        "v": -9.897378477108432e-07,
+        "theta": 3.045544951036616e-07,
+        "omega": -4.828132005916788e-07,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.774077166
+    },
+    {
+      "name": "capture-strict",
+      "initial_state": [
+        0.02,
+        0.15,
+        0.15,
+        -0.4
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 1250,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.1556936592392421,
+      "max_abs_v": 0.3685363863706595,
+      "max_abs_acceleration": 2.900129795074463,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.14961077885692906,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.6156659132233039e-06,
+        "v": -8.967111592820366e-06,
+        "theta": 3.0118980429555055e-06,
+        "omega": -5.545047086914342e-06,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.529571208
+    },
+    {
+      "name": "capture-gap2",
+      "initial_state": [
+        0.02,
+        0.15,
+        0.15,
+        -0.4
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        200,
+        700,
+        1300,
+        1800,
+        2400,
+        2900,
+        3500,
+        4000,
+        4600
+      ],
+      "actions": 1241,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 9,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.1556681285172205,
+      "max_abs_v": 0.3685363863706595,
+      "max_abs_acceleration": 2.900129795074463,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.14961077885692906,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.6235660484640636e-06,
+        "v": -8.960252760495797e-06,
+        "theta": 2.9980542826786315e-06,
+        "omega": -5.4879570794747896e-06,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.6659125
+    },
+    {
+      "name": "capture-gap3",
+      "initial_state": [
+        0.02,
+        0.15,
+        0.15,
+        -0.4
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        200,
+        204,
+        700,
+        704,
+        1300,
+        1304,
+        1800,
+        1804,
+        2400,
+        2404,
+        2900,
+        2904,
+        3500,
+        3504,
+        4000,
+        4004,
+        4600,
+        4604
+      ],
+      "actions": 1232,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 9,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.1556170889163712,
+      "max_abs_v": 0.3685363863706595,
+      "max_abs_acceleration": 2.900129795074463,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.14961077885692906,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.6398070892255176e-06,
+        "v": -8.945366592154475e-06,
+        "theta": 2.9692096932545594e-06,
+        "omega": -5.369641908758938e-06,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.547650417
+    },
+    {
+      "name": "approach-strict",
+      "initial_state": [
+        0.02,
+        0.35,
+        0.2,
+        -0.5
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 1250,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.10484109238624204,
+      "max_abs_v": 0.6926773898324503,
+      "max_abs_acceleration": 5.7992401123046875,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.0477891149060642,
+        "v": -0.6699817024490364,
+        "theta": 2.0906478602776306,
+        "omega": -12.166142818730783,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.541044375
+    },
+    {
+      "name": "approach-gap2",
+      "initial_state": [
+        0.02,
+        0.35,
+        0.2,
+        -0.5
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        20,
+        80,
+        1120,
+        1180,
+        2220,
+        2280,
+        3320,
+        3380,
+        4420,
+        4480
+      ],
+      "actions": 1240,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 10,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.10360566622925878,
+      "max_abs_v": 0.6851389391468233,
+      "max_abs_acceleration": 5.750368595123291,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.04220279033181409,
+        "v": -0.6701553078935808,
+        "theta": 2.195055456486771,
+        "omega": -12.794096621060815,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.667176584
+    },
+    {
+      "name": "approach-gap3",
+      "initial_state": [
+        0.02,
+        0.35,
+        0.2,
+        -0.5
+      ],
+      "target_duration_ms": 5000,
+      "simulated_ns": 5000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        20,
+        24,
+        80,
+        84,
+        1120,
+        1124,
+        1180,
+        1184,
+        2220,
+        2224,
+        2280,
+        2284,
+        3320,
+        3324,
+        3380,
+        3384,
+        4420,
+        4424,
+        4480,
+        4484
+      ],
+      "actions": 1230,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 10,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.10656720150739524,
+      "max_abs_v": 0.6992264441710428,
+      "max_abs_acceleration": 5.874879360198975,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "swing": 5000
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.05573329877844837,
+        "v": -0.6629306274813133,
+        "theta": 1.9609595414422585,
+        "omega": -11.277805718212264,
+        "time_ns": 5000000000
+      },
+      "runtime_s": 1.495090625
+    },
+    {
+      "name": "rail-right-strict",
+      "initial_state": [
+        0.295,
+        0.1,
+        2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 1000,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.10579739301443698,
+        "v": 0.2841148025917345,
+        "theta": 1.212096128587979,
+        "omega": 3.4957805988596453,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.218192875
+    },
+    {
+      "name": "rail-right-gap2",
+      "initial_state": [
+        0.295,
+        0.1,
+        2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        20,
+        80,
+        1120,
+        1180,
+        2220,
+        2280,
+        3320,
+        3380
+      ],
+      "actions": 992,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 8,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.1058368320379334,
+        "v": 0.2855881766255452,
+        "theta": 1.2108714677941463,
+        "omega": 3.500498096436811,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.181674
+    },
+    {
+      "name": "rail-right-gap3",
+      "initial_state": [
+        0.295,
+        0.1,
+        2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        20,
+        24,
+        80,
+        84,
+        1120,
+        1124,
+        1180,
+        1184,
+        2220,
+        2224,
+        2280,
+        2284,
+        3320,
+        3324,
+        3380,
+        3384
+      ],
+      "actions": 984,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 8,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": -0.10595202846684407,
+        "v": 0.2893859526334512,
+        "theta": 1.2065081354803302,
+        "omega": 3.506116523185056,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.599505417
+    },
+    {
+      "name": "rail-left-strict",
+      "initial_state": [
+        -0.295,
+        -0.1,
+        -2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [],
+      "actions": 1000,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 4000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.10579739301443698,
+        "v": -0.2841148025917345,
+        "theta": -1.212096128587979,
+        "omega": -3.4957805988596453,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.23266175
+    },
+    {
+      "name": "rail-left-gap2",
+      "initial_state": [
+        -0.295,
+        -0.1,
+        -2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": 2,
+      "skipped_decision_ms": [
+        20,
+        80,
+        1120,
+        1180,
+        2220,
+        2280,
+        3320,
+        3380
+      ],
+      "actions": 992,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 2,
+        "max_observation_gap_ns": 8000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 8,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.1058368320379334,
+        "v": -0.2855881766255452,
+        "theta": -1.2108714677941463,
+        "omega": -3.500498096436811,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.731466875
+    },
+    {
+      "name": "rail-left-gap3",
+      "initial_state": [
+        -0.295,
+        -0.1,
+        -2.0,
+        0.0
+      ],
+      "target_duration_ms": 4000,
+      "simulated_ns": 4000000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        20,
+        24,
+        80,
+        84,
+        1120,
+        1124,
+        1180,
+        1184,
+        2220,
+        2224,
+        2280,
+        2284,
+        3320,
+        3324,
+        3380,
+        3384
+      ],
+      "actions": 984,
+      "policy_fault": null,
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 8,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 4000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.29750254533055415,
+      "max_abs_v": 1.499999329209328,
+      "max_abs_acceleration": 15.901570320129395,
+      "max_abs_jerk": 150.00009536743164,
+      "max_abs_balance_angle": 0.0,
+      "first_capture_ms": null,
+      "mode_ticks": {
+        "rail_brake": 56,
+        "rail_return": 112,
+        "swing": 3832
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "rail_brake"
+        },
+        {
+          "time_ms": 56,
+          "mode": "rail_return"
+        },
+        {
+          "time_ms": 168,
+          "mode": "swing"
+        }
+      ],
+      "final_state": {
+        "x": 0.10595202846684407,
+        "v": -0.2893859526334512,
+        "theta": -1.2065081354803302,
+        "omega": -3.506116523185056,
+        "time_ns": 4000000000
+      },
+      "runtime_s": 1.454295667
+    },
+    {
+      "name": "strict-rejects-8ms",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 12,
+      "simulated_ns": 8000000,
+      "max_gap_periods": null,
+      "skipped_decision_ms": [
+        4
+      ],
+      "actions": 1,
+      "policy_fault": "replayed observation or incompatible host cadence",
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": null,
+        "max_observation_gap_ns": 6000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 8000000,
+        "max_observed_gap_ns": 8000000
+      },
+      "max_abs_x": 1.2550749033689501e-05,
+      "max_abs_v": 0.003093071132898331,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 8
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 1.2550749033689501e-05,
+        "v": 0.003093071132898331,
+        "theta": 0.01995577886177743,
+        "omega": -0.012275757409702935,
+        "time_ns": 8000000
+      },
+      "runtime_s": 0.003565
+    },
+    {
+      "name": "gap3-rejects-16ms",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 20,
+      "simulated_ns": 16000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        4,
+        8,
+        12
+      ],
+      "actions": 1,
+      "policy_fault": "replayed observation or incompatible host cadence",
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": 16000000,
+        "max_observed_gap_ns": 16000000
+      },
+      "max_abs_x": 5.315374478697778e-05,
+      "max_abs_v": 0.006617165952920914,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 16
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 5.315374478697778e-05,
+        "v": 0.006617165952920914,
+        "theta": 0.019786656429247502,
+        "omega": -0.028042833662626384,
+        "time_ns": 16000000
+      },
+      "runtime_s": 0.006478292
+    },
+    {
+      "name": "gap3-rejects-third",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 32,
+      "simulated_ns": 28000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [
+        4,
+        12,
+        16,
+        24
+      ],
+      "actions": 3,
+      "policy_fault": "observation gap budget exceeded in rolling second",
+      "executor_fault": null,
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 2,
+        "long_gaps_in_window": 2,
+        "last_observation_gap_ns": 8000000,
+        "max_observed_gap_ns": 12000000
+      },
+      "max_abs_x": 0.00016111796572804447,
+      "max_abs_v": 0.011158968955278391,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 28
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 0.00016111796572804447,
+        "v": 0.011158968955278391,
+        "theta": 0.019342235399185947,
+        "omega": -0.04588893717689088,
+        "time_ns": 28000000
+      },
+      "runtime_s": 0.009558
+    },
+    {
+      "name": "gap3-no-renewal-20ms",
+      "initial_state": [
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ],
+      "target_duration_ms": 25,
+      "simulated_ns": 20000000,
+      "max_gap_periods": 3,
+      "skipped_decision_ms": [],
+      "actions": 1,
+      "policy_fault": null,
+      "executor_fault": "action lease expired",
+      "cadence": {
+        "rate_hz": 250,
+        "nominal_period_ns": 4000000,
+        "max_gap_periods": 3,
+        "max_observation_gap_ns": 12000000,
+        "gap_window_ns": 1000000000,
+        "max_long_gaps_per_window": 2,
+        "accepted_long_gap_count": 0,
+        "long_gaps_in_window": 0,
+        "last_observation_gap_ns": null,
+        "max_observed_gap_ns": 0
+      },
+      "max_abs_x": 8.402752712368967e-05,
+      "max_abs_v": 0.008379213362932207,
+      "max_abs_acceleration": 0.4405118525028229,
+      "max_abs_jerk": 150.00000596046448,
+      "max_abs_balance_angle": 0.020000372717048777,
+      "first_capture_ms": 0,
+      "mode_ticks": {
+        "balance": 21
+      },
+      "transitions": [
+        {
+          "time_ms": 0,
+          "mode": "balance"
+        }
+      ],
+      "final_state": {
+        "x": 8.402752712368967e-05,
+        "v": 0.008379213362932207,
+        "theta": 0.01965470955198862,
+        "omega": -0.03595660938153325,
+        "time_ns": 20000000
+      },
+      "runtime_s": 0.005513625
+    }
+  ]
+}

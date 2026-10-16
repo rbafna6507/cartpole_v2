@@ -286,3 +286,31 @@ def test_host_gain_mapping_accepts_disabled_native_swing_term(name):
     policy.reset(b.session)
     assert policy.act(observation).acceleration_m_s2>0
     with pytest.raises(ValueError):Params(energy_gain=-1.)
+
+
+@pytest.mark.parametrize('controller', ['executor-feedback', 'legacy'])
+def test_host_sim_cli_applies_only_selected_controller_profile_constraints(tmp_path, controller):
+    import json, subprocess, sys
+    from dataclasses import asdict
+    from cartpole_sdk.control.parameters import ControllerParameters
+    # Native/new-controller bounds permit overlapping approach/capture angles;
+    # the legacy handwritten controller has its own narrower relationship.
+    parameters=ControllerParameters(catch_a=.9, approach_angle=.8, giveup=1.)
+    profile=tmp_path/'profile.json'
+    profile.write_text(json.dumps(dict(schema_version=1, parameters=asdict(parameters))))
+    output=tmp_path/'rollout.json'
+    run=subprocess.run([sys.executable, 'examples/host_cartpole.py', '--controller', controller,
+        '--seconds', '.004', '--profile', str(profile), '--output', str(output)],
+        capture_output=True, text=True)
+    if controller=='legacy':
+        assert run.returncode==2
+        assert 'unsupported physical or policy parameter bounds' in run.stderr
+        assert not output.exists()
+    else:
+        assert run.returncode==0, run.stderr
+        result=json.loads(output.read_text())
+        assert result['controller']=='executor-feedback'
+        assert result['fault'] is None
+        assert len(result['trajectory'])==1
+        assert result['executor_parameters']['catch_a']==.9
+        assert result['policy_parameters']['approach_angle']==.8

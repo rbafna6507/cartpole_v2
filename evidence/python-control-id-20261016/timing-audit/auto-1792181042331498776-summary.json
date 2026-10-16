@@ -1,0 +1,227 @@
+{
+  "run": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792181042331498776",
+  "source_files": [
+    {
+      "path": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792181042331498776/report.json",
+      "bytes": 262327,
+      "sha256": "4d1a5cf549d823e94d16cac18ca0d1745244ceb2168c541f6d16c56e4768c641"
+    },
+    {
+      "path": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792181042331498776/rig-1792181042343772091-4221735329.jsonl",
+      "bytes": 922596,
+      "sha256": "937c7c4a770e8d1259bdc0bfe02b09e801e4d48de8bcec4fc3628a0417f3dc8f"
+    },
+    {
+      "path": "/home/rbafna/cartpole-v2-runs/python-id-20261016/auto-1792181042331498776/parameters.json",
+      "bytes": 1092,
+      "sha256": "00310e68ef879966ca648eb03ea7bdcc8e97b59621486339b2a397ac18b2d066"
+    }
+  ],
+  "active_healthy_observed_s": 2.744,
+  "first_fault_relative_first_active_s": 2.748,
+  "last_accepted_action": {
+    "host_monotonic_ns": 276343684126100,
+    "request": {
+      "acceleration_m_s2": -3.684640684491259,
+      "clock_id": "teensy:4221735329",
+      "expires_at_ns": 1601370050000,
+      "issued_at_ns": 1601350050000,
+      "observation_sequence": 83201211,
+      "sequence": 683,
+      "session_id": "4221735329"
+    },
+    "type": "action_request"
+  },
+  "failed_step_action": {
+    "host_monotonic_ns": 276343713339429,
+    "request": {
+      "acceleration_m_s2": -3.4006598226854927,
+      "clock_id": "teensy:4221735329",
+      "expires_at_ns": 1601374050000,
+      "issued_at_ns": 1601354050000,
+      "observation_sequence": 83201215,
+      "sequence": 684,
+      "session_id": "4221735329"
+    },
+    "type": "action_request"
+  },
+  "accepted_action_expiry_tick": 83201231,
+  "failed_action_expiry_tick": 83201235,
+  "first_fault_state": {
+    "line": 3326,
+    "host_monotonic_ns": 276343703857966,
+    "state": {
+      "acceleration": 0.0,
+      "angle_hat": 2.407247,
+      "brake_direction": 0,
+      "demand": 0.0,
+      "dropped": 18998842,
+      "fault": 1,
+      "flags": 205,
+      "last_seq": 0,
+      "misses": 0,
+      "mode": 4,
+      "omega": 13.35558,
+      "received_ns": 276343703672651,
+      "sid": 4221735329,
+      "theta": 2.397612,
+      "tick": 83201231,
+      "unwrapped_tick": 83201231,
+      "unwrapped_us": 1601370050,
+      "us": 1601370050,
+      "velocity": 0.0,
+      "x": 0.1593375
+    },
+    "type": "state"
+  },
+  "failure": {
+    "act_finished_host_ns": 276343690569403,
+    "act_started_host_ns": 276343689978386,
+    "failed_observation_board_ns": 1601354050000,
+    "failed_observation_sequence": 83201215,
+    "fetch_finished_host_ns": 276343689911088,
+    "fetch_started_host_ns": 276343686483546,
+    "host_monotonic_ns": 276343713439430,
+    "previous_sent_observation_board_ns": 1601350050000,
+    "previous_sent_observation_sequence": 83201211,
+    "reason": "latched rig error: executor fault 1",
+    "stage": "step",
+    "timing": {
+      "accepted_long_gap_count": 0,
+      "gap_window_ns": 1000000000,
+      "last_observation_gap_ns": 4000000,
+      "long_gaps_in_window": 0,
+      "max_gap_periods": 3,
+      "max_long_gaps_per_window": 2,
+      "max_observation_gap_ns": 12000000,
+      "max_observed_gap_ns": 4014000,
+      "nominal_period_ns": 4000000,
+      "rate_hz": 250
+    },
+    "type": "policy_failure"
+  },
+  "fetch_ms": 3.427542,
+  "act_ms": 0.591017,
+  "act_end_to_failure_record_ms": 22.870027,
+  "act_end_to_command_record_ms": 22.663144,
+  "generic_mode_error_before_failed_command_record_ms": 5.501175,
+  "gc_overlapping_act_or_later": [],
+  "gc_last_end_to_act_end_ms": 378.801892,
+  "state_timeline": [
+    {
+      "line": 3318,
+      "tick": 83201211,
+      "last_seq": 682,
+      "fault": 0,
+      "mode": 12,
+      "received_ns": 276343681899185,
+      "record_ns": 276343682224118,
+      "received_after_act_end_ms": -8.670218,
+      "receipt_gap_ms": null,
+      "receipt_to_record_ms": 0.324933
+    },
+    {
+      "line": 3321,
+      "tick": 83201215,
+      "last_seq": 683,
+      "fault": 0,
+      "mode": 12,
+      "received_ns": 276343686020115,
+      "record_ns": 276343686266679,
+      "received_after_act_end_ms": -4.549288,
+      "receipt_gap_ms": 4.12093,
+      "receipt_to_record_ms": 0.246564
+    },
+    {
+      "line": 3322,
+      "tick": 83201219,
+      "last_seq": 683,
+      "fault": 0,
+      "mode": 12,
+      "received_ns": 276343694482745,
+      "record_ns": 276343699479592,
+      "received_after_act_end_ms": 3.913342,
+      "receipt_gap_ms": 8.46263,
+      "receipt_to_record_ms": 4.996847
+    },
+    {
+      "line": 3323,
+      "tick": 83201223,
+      "last_seq": 683,
+      "fault": 0,
+      "mode": 12,
+      "received_ns": 276343699891983,
+      "record_ns": 276343702313366,
+      "received_after_act_end_ms": 9.32258,
+      "receipt_gap_ms": 5.409238,
+      "receipt_to_record_ms": 2.421383
+    },
+    {
+      "line": 3325,
+      "tick": 83201227,
+      "last_seq": 683,
+      "fault": 0,
+      "mode": 12,
+      "received_ns": 276343703108738,
+      "record_ns": 276343703399943,
+      "received_after_act_end_ms": 12.539335,
+      "receipt_gap_ms": 3.216755,
+      "receipt_to_record_ms": 0.291205
+    },
+    {
+      "line": 3326,
+      "tick": 83201231,
+      "last_seq": 0,
+      "fault": 1,
+      "mode": 4,
+      "received_ns": 276343703672651,
+      "record_ns": 276343703857966,
+      "received_after_act_end_ms": 13.103248,
+      "receipt_gap_ms": 0.563913,
+      "receipt_to_record_ms": 0.185315
+    },
+    {
+      "line": 3330,
+      "tick": 83201235,
+      "last_seq": 0,
+      "fault": 1,
+      "mode": 4,
+      "received_ns": 276343706473080,
+      "record_ns": 276343706697883,
+      "received_after_act_end_ms": 15.903677,
+      "receipt_gap_ms": 2.800429,
+      "receipt_to_record_ms": 0.224803
+    },
+    {
+      "line": 3332,
+      "tick": 83201239,
+      "last_seq": 0,
+      "fault": 1,
+      "mode": 4,
+      "received_ns": 276343712427382,
+      "record_ns": 276343712736923,
+      "received_after_act_end_ms": 21.857979,
+      "receipt_gap_ms": 5.954302,
+      "receipt_to_record_ms": 0.309541
+    }
+  ],
+  "action_observation_gap_counts": {
+    "4": 683
+  },
+  "interpretation_limits": [
+    "No syscall, write-lock entry/acquisition, transport-write entry/exit, per-stage CPU or OS scheduling timestamps recorded.",
+    "Command record is after transport.write and write-lock release; not a send or executor-receipt timestamp.",
+    "Generic ERR mode lacks a sequence number; association with action684 is inference from unique pending action.",
+    "Prior unpinned metrics execution has no recorded start/end timestamps; exact overlap cannot be established."
+  ],
+  "verification": {
+    "all_action_input_tick_increments_four": true,
+    "expiry_matches_first_fault_tick": true,
+    "last_seq683_persists_until_fault": true,
+    "no_gc_overlap": true,
+    "action684_never_acknowledged_in_tail": true,
+    "command_record_after_generic_rejection": true,
+    "final_state_disabled_fault1": true,
+    "no_dropped_log_records": true
+  }
+}

@@ -1,5 +1,6 @@
 """Pinned V2 ASCII framing. Parsing has no transport or actuation side effects."""
 from dataclasses import dataclass
+from binascii import crc_hqx
 import math
 import re
 from .parameters import PARAMETER_NAMES
@@ -11,12 +12,9 @@ class ProtocolError(ValueError):
     """Invalid, damaged or unordered executor traffic."""
 
 def crc16(data: bytes) -> int:
-    crc = 0xFFFF
-    for byte in data:
-        crc ^= byte << 8
-        for _ in range(8):
-            crc = ((crc << 1) ^ (0x1021 if crc & 0x8000 else 0)) & 0xFFFF
-    return crc
+    # CCITT polynomial 0x1021, initial 0xFFFF, no reflection/final XOR.
+    # Keep the wire checksum unchanged while avoiding per-bit Python work.
+    return crc_hqx(data, 0xFFFF)
 
 def encode(payload: str) -> bytes:
     try:

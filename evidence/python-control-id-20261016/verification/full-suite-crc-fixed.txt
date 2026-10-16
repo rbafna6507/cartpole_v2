@@ -1,0 +1,32 @@
+...................................................................... [  8%]
+...................................... [ 12%]
+............................................ [ 17%]
+........................................................................ [ 26%]
+........................................................................ [ 34%]
+........................................................................ [ 42%]
+............ssss........ss.......................................................F........................................................................................ [ 62%]
+............................................................................................................... [ 75%]
+........................................................................ [ 83%]
+..................................................... [ 90%]
+....s....................................................... [ 96%]
+..........................                                               [100%]
+=================================== FAILURES ===================================
+______ RigTests.test_board_tick_and_microsecond_rollovers_are_independent ______
+
+self = <test_rig.RigTests testMethod=test_board_tick_and_microsecond_rollovers_are_independent>
+
+    def test_board_tick_and_microsecond_rollovers_are_independent(self):
+        self.fw.close(); self.fw=Firmware(tick_origin=0xfffffff0,us_origin=0xfffff000)
+        with self.rig() as rig:
+            previous=rig.observation();time.sleep(.035)
+            current=rig.observation()
+            self.assertGreater(current.sequence,previous.sequence)
+            self.assertGreater(current.available_ns,previous.available_ns)
+            self.assertGreater(rig.state.unwrapped_tick,0xffffffff)
+>           self.assertGreater(rig.state.unwrapped_us,0xffffffff)
+E           AssertionError: 42904 not greater than 4294967295
+
+tests/test_rig.py:357: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_rig.py::RigTests::test_board_tick_and_microsecond_rollovers_are_independent
+1 failed, 852 passed, 7 skipped, 390 subtests passed in 49.48s

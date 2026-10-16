@@ -1,0 +1,750 @@
+[
+  {
+    "stage": "first_case_returned",
+    "enabled": false,
+    "firmware_fault": 1,
+    "error": "executor fault 1",
+    "records": [
+      {
+        "type": "session",
+        "host_monotonic_ns": 1593789870350458,
+        "session": {
+          "session_id": "3107668173",
+          "clock_id": "teensy:3107668173",
+          "topology": {
+            "cart": "cart",
+            "joints": [
+              "pole"
+            ]
+          }
+        },
+        "protocol": 2
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789870674541,
+        "payload": "V2 HELLO 3107668173"
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593789871242166,
+        "payload": "V2 HELLO 3107668173 1 1000"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789871297375,
+        "payload": "V2 RATE 3107668173 100"
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593789871501250,
+        "payload": "V2 OK 3107668173 RATE"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789871820958,
+        "state": {
+          "sid": 3107668173,
+          "tick": 2,
+          "us": 2000,
+          "mode": 0,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789871516958,
+          "unwrapped_tick": 2,
+          "unwrapped_us": 2000
+        }
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789871849833,
+        "payload": "V2 STATUS 3107668173"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789871902625,
+        "payload": "V2 INFO 3107668173"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789872147541,
+        "state": {
+          "sid": 3107668173,
+          "tick": 2,
+          "us": 2000,
+          "mode": 0,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789872000083,
+          "unwrapped_tick": 2,
+          "unwrapped_us": 2000
+        }
+      },
+      {
+        "type": "info",
+        "host_monotonic_ns": 1593789872606833,
+        "info": {
+          "sid": 3107668173,
+          "firmware": "executor-v1",
+          "encoder_upright_raw": 270,
+          "reference_saved": true,
+          "mag_status": 32,
+          "i2c_errors": 0,
+          "home_epoch": 1,
+          "measured_span_steps": 14000,
+          "rail_half_m": 0.26,
+          "received_ns": 1593789872153833,
+          "encoder_boot_conf": null,
+          "encoder_conf": null,
+          "encoder_conf_valid": null,
+          "encoder_raw": null,
+          "encoder_raw_age_us": null,
+          "encoder_recoveries": null
+        }
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789872888000,
+        "payload": "V2 MODE 3107668173 auto 100"
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593789873342791,
+        "payload": "V2 OK 3107668173 MODE"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789873646041,
+        "state": {
+          "sid": 3107668173,
+          "tick": 3,
+          "us": 3000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789873349125,
+          "unwrapped_tick": 3,
+          "unwrapped_us": 3000
+        }
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789873734791,
+        "payload": "V2 STATUS 3107668173"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789874296875,
+        "state": {
+          "sid": 3107668173,
+          "tick": 4,
+          "us": 4000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789874057916,
+          "unwrapped_tick": 4,
+          "unwrapped_us": 4000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789884484625,
+        "state": {
+          "sid": 3107668173,
+          "tick": 14,
+          "us": 14000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789884387458,
+          "unwrapped_tick": 14,
+          "unwrapped_us": 14000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789894837083,
+        "state": {
+          "sid": 3107668173,
+          "tick": 25,
+          "us": 25000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789894728958,
+          "unwrapped_tick": 25,
+          "unwrapped_us": 25000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789906528833,
+        "state": {
+          "sid": 3107668173,
+          "tick": 36,
+          "us": 36000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789906376750,
+          "unwrapped_tick": 36,
+          "unwrapped_us": 36000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789916284208,
+        "state": {
+          "sid": 3107668173,
+          "tick": 46,
+          "us": 46000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789916158583,
+          "unwrapped_tick": 46,
+          "unwrapped_us": 46000
+        }
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789922664208,
+        "payload": "V2 PING 3107668173"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789927973875,
+        "state": {
+          "sid": 3107668173,
+          "tick": 58,
+          "us": 58000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789927888125,
+          "unwrapped_tick": 58,
+          "unwrapped_us": 58000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789938268250,
+        "state": {
+          "sid": 3107668173,
+          "tick": 68,
+          "us": 68000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789938127250,
+          "unwrapped_tick": 68,
+          "unwrapped_us": 68000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789948508458,
+        "state": {
+          "sid": 3107668173,
+          "tick": 78,
+          "us": 78000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789948410375,
+          "unwrapped_tick": 78,
+          "unwrapped_us": 78000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789958559583,
+        "state": {
+          "sid": 3107668173,
+          "tick": 88,
+          "us": 88000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789958438083,
+          "unwrapped_tick": 88,
+          "unwrapped_us": 88000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593789968294625,
+        "state": {
+          "sid": 3107668173,
+          "tick": 98,
+          "us": 98000,
+          "mode": 2,
+          "flags": 7,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 0,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593789968094166,
+          "unwrapped_tick": 98,
+          "unwrapped_us": 98000
+        }
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789998905541,
+        "payload": "V2 STOP 3107668173"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593789999309375,
+        "payload": "V2 PING 3107668173"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593790030066666,
+        "payload": "V2 STOP 3107668173"
+      },
+      {
+        "type": "duration_end",
+        "host_monotonic_ns": 1593790030078333
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790031452458,
+        "state": {
+          "sid": 3107668173,
+          "tick": 108,
+          "us": 108000,
+          "mode": 0,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790031286916,
+          "unwrapped_tick": 108,
+          "unwrapped_us": 108000
+        }
+      },
+      {
+        "type": "error",
+        "host_monotonic_ns": 1593790031463708,
+        "reason": "executor fault 1"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593790061589375,
+        "payload": "V2 STOP 3107668173"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790061720666,
+        "state": {
+          "sid": 3107668173,
+          "tick": 118,
+          "us": 118000,
+          "mode": 0,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790061621375,
+          "unwrapped_tick": 118,
+          "unwrapped_us": 118000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790061772083,
+        "state": {
+          "sid": 3107668173,
+          "tick": 128,
+          "us": 128000,
+          "mode": 0,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790061730541,
+          "unwrapped_tick": 128,
+          "unwrapped_us": 128000
+        }
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593790061782625,
+        "payload": "V2 OK 3107668173 STOP"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790061823041,
+        "state": {
+          "sid": 3107668173,
+          "tick": 129,
+          "us": 129000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790061785375,
+          "unwrapped_tick": 129,
+          "unwrapped_us": 129000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790061862875,
+        "state": {
+          "sid": 3107668173,
+          "tick": 139,
+          "us": 139000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790061826625,
+          "unwrapped_tick": 139,
+          "unwrapped_us": 139000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790061903000,
+        "state": {
+          "sid": 3107668173,
+          "tick": 150,
+          "us": 150000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790061866625,
+          "unwrapped_tick": 150,
+          "unwrapped_us": 150000
+        }
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593790061909125,
+        "payload": "V2 OK 3107668173 STOP"
+      },
+      {
+        "type": "command",
+        "host_monotonic_ns": 1593790061963375,
+        "payload": "V2 STATUS 3107668173"
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790062080833,
+        "state": {
+          "sid": 3107668173,
+          "tick": 160,
+          "us": 160000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790062030875,
+          "unwrapped_tick": 160,
+          "unwrapped_us": 160000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790062121916,
+        "state": {
+          "sid": 3107668173,
+          "tick": 171,
+          "us": 171000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790062085250,
+          "unwrapped_tick": 171,
+          "unwrapped_us": 171000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790062162500,
+        "state": {
+          "sid": 3107668173,
+          "tick": 181,
+          "us": 181000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790062126583,
+          "unwrapped_tick": 181,
+          "unwrapped_us": 181000
+        }
+      },
+      {
+        "type": "state",
+        "host_monotonic_ns": 1593790062203166,
+        "state": {
+          "sid": 3107668173,
+          "tick": 191,
+          "us": 191000,
+          "mode": 4,
+          "flags": 5,
+          "theta": 0.2,
+          "angle_hat": 0.19,
+          "omega": 0.4,
+          "x": 0.01,
+          "velocity": 0.0,
+          "acceleration": 0.0,
+          "demand": 0.0,
+          "last_seq": 0,
+          "fault": 1,
+          "misses": 0,
+          "dropped": 0,
+          "brake_direction": 0,
+          "received_ns": 1593790062165875,
+          "unwrapped_tick": 191,
+          "unwrapped_us": 191000
+        }
+      },
+      {
+        "type": "reply",
+        "host_monotonic_ns": 1593790062225625,
+        "payload": "V2 OK 3107668173 STOP"
+      }
+    ]
+  },
+  {
+    "stage": "second_case_start",
+    "exception": "RigError",
+    "error": "latched rig error: executor fault 1",
+    "firmware_fault": 1
+  }
+]

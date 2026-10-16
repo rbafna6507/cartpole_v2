@@ -347,11 +347,31 @@ class RigTests(unittest.TestCase):
             with self.assertRaises(RigError):rig.configure_switches(True)
 
     def test_board_tick_and_microsecond_rollovers_are_independent(self):
-        self.fw.close(); self.fw=Firmware(tick_origin=0xfffffff0,us_origin=0xfffff000)
-        with self.rig() as rig:
-            previous=rig.observation();time.sleep(.035)
-            current=rig.observation()
-            self.assertGreater(current.sequence,previous.sequence)
-            self.assertGreater(current.available_ns,previous.available_ns)
-            self.assertGreater(rig.state.unwrapped_tick,0xffffffff)
-            self.assertGreater(rig.state.unwrapped_us,0xffffffff)
+        class ClockedFirmware(Firmware):
+            elapsed_ms=0
+            def ticks(self):return self.elapsed_ms
+
+        # Freeze board time through handshake: without an observed pre-wrap
+        # sample, the client cannot infer a counter's earlier epoch. Keep real
+        # PTY framing, parsing and independent state-clock unwrapping.
+        self.fw.close();self.fw=ClockedFirmware(tick_origin=0xfffffff0,us_origin=0xfffff000)
+        self.fw.publish_commands=False  # First validated frame comes from STATUS.
+        with self.rig(rate_hz=0) as rig:
+            previous=rig.observation()
+            self.assertEqual((rig.state.unwrapped_tick,rig.state.unwrapped_us),
+                             (0xfffffff0,0xfffff000))
+            for elapsed_ms,tick,us,unwrapped_tick,unwrapped_us in (
+                    (5,0xfffffff5,904,0xfffffff5,0x100000388),
+                    (20,4,15904,0x100000004,0x100003e20)):
+                self.fw.elapsed_ms=elapsed_ms
+                self.fw.send(self.fw.state())
+                state=rig.wait_state(after_tick=previous.sequence)
+                self.assertEqual((state.tick,state.us),(tick,us))
+                self.assertEqual((state.unwrapped_tick,state.unwrapped_us),
+                                 (unwrapped_tick,unwrapped_us))
+                current=rig.observation()
+                self.assertEqual(current.sequence,unwrapped_tick)
+                self.assertEqual(current.available_ns,unwrapped_us*1000)
+                self.assertGreater(current.sequence,previous.sequence)
+                self.assertGreater(current.available_ns,previous.available_ns)
+                previous=current

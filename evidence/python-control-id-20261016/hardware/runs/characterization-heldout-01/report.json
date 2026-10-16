@@ -1,0 +1,97 @@
+{
+  "kind": "heldout",
+  "tail": true,
+  "provenance": {
+    "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+    "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+    "sources": [
+      {
+        "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/characterize.py",
+        "sha256": "8d9f3a28a64ba2d5e1df729167c243c5946361ca38c75c22afa5e282f271193e"
+      },
+      {
+        "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/contracts.py",
+        "sha256": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6"
+      },
+      {
+        "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py",
+        "sha256": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae"
+      },
+      {
+        "path": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/policy.py",
+        "sha256": "85ca6f15ef73ca83ab442b9037feeed03cf3e4c5821837ece17cd7c44710c1ce"
+      }
+    ]
+  },
+  "hardware_validated": false,
+  "result": {
+    "parameters": {
+      "leff": 0.123999998,
+      "pw": 3.0,
+      "pz": 0.850000024,
+      "bal_pw": 4.5,
+      "pc1": -5.0,
+      "pc2": -6.0,
+      "vmax": 1.5,
+      "vmax_s": 1.5,
+      "vmax_b": 1.5,
+      "approach_v": 0.200000003,
+      "catch_v": 0.300000012,
+      "approach_angle": 0.800000012,
+      "catch_da": 4.0,
+      "amax_s": 25.0,
+      "amax_b": 25.0,
+      "jmax": 150.0,
+      "amax_m": 0.5,
+      "jmax_m": 10.0,
+      "ke": 4.0,
+      "kpx": 40.0,
+      "kdx": 2.0,
+      "phase_soft": 2.0,
+      "catch_a": 0.25,
+      "catch_r": 3.0,
+      "giveup": 0.800000012,
+      "spin_trip_rad_s": 150.0,
+      "spin_resume_rad_s": 10.0,
+      "rail": 0.309112519,
+      "bw": 10.0,
+      "vman": 0.0500000007,
+      "manual_speed_max": 0.150000006,
+      "rail_fraction": 0.949999988,
+      "rail_margin": 0.0149999997,
+      "rail_fault_margin": 0.00999999978,
+      "rail_hysteresis": 0.00499999989,
+      "rail_recover_v": 0.150000006,
+      "rail_recover_a": 1.5,
+      "rail_recover_s": 8.0,
+      "rehome_v": 0.0799999982,
+      "rehome_a": 0.5,
+      "rehome_j": 10.0
+    },
+    "info": {
+      "sid": 2563392343,
+      "firmware": "executor-v6-measuredrail",
+      "encoder_upright_raw": 330,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 5,
+      "home_epoch": 14,
+      "measured_span_steps": 16513,
+      "rail_half_m": 0.3091125,
+      "received_ns": 273307154336571,
+      "encoder_boot_conf": 768,
+      "encoder_conf": 768,
+      "encoder_conf_valid": true,
+      "encoder_raw": 2302,
+      "encoder_raw_age_us": 199776,
+      "encoder_recoveries": 0
+    },
+    "initial_hanging": 3.02501,
+    "kind": "heldout",
+    "tail": true,
+    "hardware_validated": false
+  },
+  "log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/characterization-heldout-01/rig-1792178011270243403-2563392343.jsonl",
+  "records_dropped": 0,
+  "raw_log_sha256": "9f864f87430cf12cbc2d5ffa0c21d904ec66965a4ef07c6c9f3e1c485d6eed9c"
+}

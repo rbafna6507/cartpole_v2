@@ -1,0 +1,265 @@
+{
+  "case": "observe",
+  "seconds": 20.0,
+  "rate_hz": 250,
+  "shadow_feedback": false,
+  "log_enabled": true,
+  "mirror_enabled": false,
+  "ttl_ms": 20,
+  "sdk_src": "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src",
+  "source_sha256": {
+    "cartpole_sdk/rig/client.py": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae",
+    "cartpole_sdk/rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+    "cartpole_sdk/rig/protocol.py": "a651ebee9ad1295a154ec7bf1c6a75a6aa12898d59c3bc9c6e081766f9d24853",
+    "cartpole_sdk/rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+    "cartpole_sdk/contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+    "cartpole_sdk/policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+    "cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "cartpole_sdk/control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+    "cartpole_sdk/control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+    "cartpole_sdk/control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+    "cartpole_sdk/sensing/telemetry.py": "7ed4f9890787f19090c18e315942220699597e76b1d7e8138e6b5e22bbd4a84b"
+  },
+  "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+  "switch_interval_s": 0.001,
+  "threads_initial": [
+    {
+      "name": "MainThread",
+      "ident": 281473133707296,
+      "native_id": 207343,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "instrumentation": "preallocated integer arrays; dump after STOP",
+  "before_info": {
+    "sid": 824144519,
+    "firmware": "executor-v6-measuredrail",
+    "encoder_upright_raw": 330,
+    "reference_saved": true,
+    "mag_status": 103,
+    "i2c_errors": 5,
+    "home_epoch": 14,
+    "measured_span_steps": 16513,
+    "rail_half_m": 0.3091125,
+    "received_ns": 275305060755057,
+    "encoder_boot_conf": 768,
+    "encoder_conf": 768,
+    "encoder_conf_valid": true,
+    "encoder_raw": 2328,
+    "encoder_raw_age_us": 1465,
+    "encoder_recoveries": 0
+  },
+  "before_state": {
+    "sid": 824144519,
+    "tick": 82162592,
+    "us": 562731050,
+    "mode": 0,
+    "flags": 205,
+    "theta": 3.064894,
+    "angle_hat": 3.064725,
+    "omega": -0.0005414931,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 18773296,
+    "brake_direction": 0,
+    "received_ns": 275305060141447,
+    "unwrapped_tick": 82162592,
+    "unwrapped_us": 562731050
+  },
+  "parameters": {
+    "leff": 0.123999998,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "bal_pw": 4.5,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "vmax": 1.5,
+    "vmax_s": 1.5,
+    "vmax_b": 1.5,
+    "approach_v": 0.200000003,
+    "catch_v": 0.300000012,
+    "approach_angle": 0.800000012,
+    "catch_da": 4.0,
+    "amax_s": 25.0,
+    "amax_b": 25.0,
+    "jmax": 150.0,
+    "amax_m": 0.5,
+    "jmax_m": 10.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "kdx": 2.0,
+    "phase_soft": 2.0,
+    "catch_a": 0.25,
+    "catch_r": 3.0,
+    "giveup": 0.800000012,
+    "spin_trip_rad_s": 150.0,
+    "spin_resume_rad_s": 10.0,
+    "rail": 0.309112519,
+    "bw": 10.0,
+    "vman": 0.0500000007,
+    "manual_speed_max": 0.150000006,
+    "rail_fraction": 0.949999988,
+    "rail_margin": 0.0149999997,
+    "rail_fault_margin": 0.00999999978,
+    "rail_hysteresis": 0.00499999989,
+    "rail_recover_v": 0.150000006,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rehome_v": 0.0799999982,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0
+  },
+  "threads_before": [
+    {
+      "name": "MainThread",
+      "ident": 281473133707296,
+      "native_id": 207343,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "cartpole-rig-log",
+      "ident": 281473112686880,
+      "native_id": 207347,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "cartpole-rig-io",
+      "ident": 281473030549792,
+      "native_id": 207348,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "threads_after": [
+    {
+      "name": "MainThread",
+      "ident": 281473133707296,
+      "native_id": 207343,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "cartpole-rig-log",
+      "ident": 281473112686880,
+      "native_id": 207347,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "cartpole-rig-io",
+      "ident": 281473030549792,
+      "native_id": 207348,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "stop_state": {
+    "sid": 824144519,
+    "tick": 82182663,
+    "us": 582802050,
+    "mode": 0,
+    "flags": 205,
+    "theta": 3.064894,
+    "angle_hat": 3.064844,
+    "omega": 0.001147219,
+    "x": 0.0,
+    "velocity": 0.0,
+    "acceleration": 0.0,
+    "demand": 0.0,
+    "last_seq": 0,
+    "fault": 0,
+    "misses": 0,
+    "dropped": 18773296,
+    "brake_direction": 0,
+    "received_ns": 275325131988638,
+    "unwrapped_tick": 82182663,
+    "unwrapped_us": 582802050
+  },
+  "stop_confirmed": true,
+  "log": "/home/rbafna/cartpole-v2-runs/python-id-20261016/timing-observe-1792180009230430865/rig-1792180009239206823-824144519.jsonl",
+  "threads_final": [
+    {
+      "name": "MainThread",
+      "ident": 281473133707296,
+      "native_id": 207343,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "timing_summary": {
+    "observations": 4917,
+    "max_observation_gap_ns": 16000000,
+    "gaps_above_1_5_periods": 79,
+    "gaps_above_2_periods": 4,
+    "gaps_above_3_periods": 1,
+    "gaps_below_half_period": 0,
+    "stage_max_wall_ns": {
+      "observe": 12870491,
+      "act": 4669456,
+      "step": 0,
+      "wait": 12917436
+    },
+    "stage_max_cpu_ns": {
+      "observe": 720832,
+      "act": 239520,
+      "step": 0,
+      "wait": 324288
+    }
+  }
+}

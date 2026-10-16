@@ -1,0 +1,43 @@
+{
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "frame_body_bytes": 122,
+  "results": {
+    "python": {
+      "crc_us_per_call": [
+        161.5937167,
+        106.9745084,
+        106.9488458,
+        103.8646667,
+        124.1754708
+      ],
+      "crc_median_us": 106.9745084,
+      "decode_accept_us_per_call": [
+        130.373625,
+        125.14625,
+        131.362646,
+        131.7664585,
+        129.022896
+      ],
+      "decode_accept_median_us": 130.373625
+    },
+    "binascii": {
+      "crc_us_per_call": [
+        0.41373750000000004,
+        0.4147042,
+        0.4106542,
+        0.4175,
+        0.4118417
+      ],
+      "crc_median_us": 0.41373750000000004,
+      "decode_accept_us_per_call": [
+        39.874479,
+        40.0327915,
+        41.6735,
+        40.3543335,
+        39.9804795
+      ],
+      "decode_accept_median_us": 40.0327915
+    }
+  },
+  "note": "Mac local timing; full decode + Rig._accept includes parse, condition lock, replace, history eviction, state asdict and record deque; logger/mirror threads disabled; no hardware"
+}

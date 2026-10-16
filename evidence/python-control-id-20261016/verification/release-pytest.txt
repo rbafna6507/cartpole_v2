@@ -1,0 +1,82 @@
+...................................................................... [  8%]
+...................................... [ 13%]
+............................................ [ 19%]
+........................................................................ [ 28%]
+...........................................................F............ [ 37%]
+...........................ssss.....F..ss.............................................. [ 48%]
+............................................. [ 54%]
+......................................... [ 59%]
+..............F................................................................................................... [ 73%]
+........................................................................ [ 82%]
+.......................................................s......................................................... [ 96%]
+........................                                                 [100%]
+=================================== FAILURES ===================================
+_ test_historical_trained_provenance_is_preserved_and_rejected_by_changed_runtime _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-125/test_historical_trained_proven0')
+
+    def test_historical_trained_provenance_is_preserved_and_rejected_by_changed_runtime(tmp_path):
+>       original=HISTORICAL_ARTIFACT.read_bytes()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_learning_export.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/pathlib.py:1050: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/rbafna/projects/cartpole_v2/releases/snapshots/platform-20261016-python-feedback/evidence/phase5/learned-policy.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/rbafna/projects/cartpole_v2/releases/snapshots/platform-20261016-python-feedback/evidence/phase5/learned-policy.json'
+
+/Users/rbafna/.pyenv/versions/3.11.7/lib/python3.11/pathlib.py:1044: FileNotFoundError
+_ WorkerTests.test_hardware_queue_reset_ack_precedes_explicit_arm_and_stop_finally _
+
+self = <test_portal_worker.WorkerTests testMethod=test_hardware_queue_reset_ack_precedes_explicit_arm_and_stop_finally>
+
+    def test_hardware_queue_reset_ack_precedes_explicit_arm_and_stop_finally(self):
+        fw=Firmware();fw.flags |=8
+        try:
+            with Rig(fw.port,transport_factory=FDTransport,command_timeout=.2) as rig:
+                self.submit('magnetic-step')
+                result=run_once(self.store,'w','rig',bridge_factory=lambda:HardwareBridge(rig=rig),sandbox_factory=TrustedPipeFixture,sensor_source='magnetic-step')
+>               self.assertEqual(result['status'],'succeeded')
+E               AssertionError: 'failed' != 'succeeded'
+E               - failed
+E               + succeeded
+
+tests/test_portal_worker.py:260: AssertionError
+_ PythonConsoleTests.test_python_balance_uses_external_action_and_stops_without_native_mode _
+
+self = <test_rig_console.PythonConsoleTests testMethod=test_python_balance_uses_external_action_and_stops_without_native_mode>
+
+    def test_python_balance_uses_external_action_and_stops_without_native_mode(self):
+        self.fw.flags=205
+        self.fw.state=lambda **kwargs: __import__('test_rig').Firmware.state(self.fw,theta='0.02',**kwargs).replace(' 0.19 ', ' 0.02 ')
+        with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()) as output:
+            code=main(['--port',self.fw.port,'--rate','100','--command','python-bal',
+                       '--source','magnetic-step','--duration','.08','--log-dir',directory],rig_factory=self.rig)
+>       self.assertEqual(code,0,output.getvalue())
+E       AssertionError: 1 != 0 : connected stopped, session 1694020573; log /var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/tmprt1odpol/rig-1792178102240456000-1694020573.jsonl
+E       startup profile tuned-20261016-bw10 applied and verified (40 settings); executor remains stopped
+E       Experimental Python control, filtered magnetic feedback, raw-angle guard and step governor state; Ctrl-C stops.
+E       error: latched rig error: executor fault 1
+
+tests/test_rig_console.py:112: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_learning_export.py::test_historical_trained_provenance_is_preserved_and_rejected_by_changed_runtime
+FAILED tests/test_portal_worker.py::WorkerTests::test_hardware_queue_reset_ack_precedes_explicit_arm_and_stop_finally
+FAILED tests/test_rig_console.py::PythonConsoleTests::test_python_balance_uses_external_action_and_stops_without_native_mode
+3 failed, 782 passed, 7 skipped, 384 subtests passed in 53.47s

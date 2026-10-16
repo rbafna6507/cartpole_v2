@@ -46,3 +46,17 @@ generated runs/logs/reports, egg metadata and macOS resource-fork files. All
 nonexcluded files, including source, lockfiles, profiles, tests, documentation,
 firmware artifacts and release verification evidence, are included. Raw run
 directories remain on the Jetson; curated evidence lives in the root evidence/.
+
+## New experimental Python release
+
+`platform-20261016-python-feedback` is a new SDK snapshot, separate from the
+historical Jetson captures above. Its own `release-manifest.json` records the
+packaged files. Native AUTO/BAL and the working bw10 startup profile remain;
+`python-auto`/`python-bal` use the experimental host feedback controller with
+existing executor-v6-measuredrail firmware. No flash is required.
+
+One 25-second Python AUTO trial held for 21.8 seconds after capture; a repeat
+hit the right switch, and another trial stopped on host cadence. Full physical
+home subsequently succeeded. This release is for explicit commissioning, not a
+claim of repeatable production readiness. Standalone physical Python BAL remains
+pending. See its RELEASE.md and the root Python-control evidence for details.

@@ -1,0 +1,120 @@
+Offline identification assessment of six successful native runs, 2026-10-16
+
+Outcome: no physical model is accepted or recommended. Eleven complete reports reject without changing any gate. No serial connection, motion, service change, calibration change, simulator change or repository edit was made by this analysis.
+
+Scope: historical jitter-20261016 recordings, reference330, home epoch9, 16509 step switch span, native 1 kHz/telemetry250Hz. These are distinct from the primary operator's later working bw4, epoch10, span16508 readback. All raw/report/parameter/camera hashes matched the earlier compact evidence. The 25,869,120 bytes of raw JSONL remain at their original Jetson paths; only compact results were retrieved.
+
+Frozen primary training A1 (bandwidth10), held-out A2 (bandwidth10):
+  effective length 0.1673240033007187 m; composite input gain 1.0905768543067822;
+  angular damping 0.5579411890491994 /s; selected delay 0.005 s.
+  Training 6250 samples, 71 nonoverlapping windows, one uninterrupted 24.996s segment;
+  max gap0.004001s; angle span10.523108rad; acceleration SD2.764432m/s^2.
+  Rank3 condition1.85848; training integralNRMSE0.17598216 (limit0.15).
+  Training zero diagnostic: gravity-0.01345462rad, input+0.22071582rad (limit0.02).
+  A2:49 half-second windows, RMSE1.11913790rad, p95 2.68782306rad, integralNRMSE0.18392567.
+  Limits are RMSE0.08rad/p95 0.15rad/integral0.15. Wider causal rate histories40/80/120ms
+  still yield A2 RMSE1.18478/1.00430/0.85943rad. These diagnostics do not replace the
+  default24ms history or acceptance result. They cannot isolate all state-initialization error.
+  Conditional length SE0.00471237m excludes calibration, correlated noise and model bias.
+  Delays0/5/10ms fall in the training-only5% loss band:5ms is not measured motor latency.
+
+Fixed A1 model transfer checks (no held-out fitting):
+  run   RMSE(rad)     p95(rad)     integralNRMSE
+  a2    1.11913790   2.68782306   0.18392567
+  b1    1.19573754   2.72337244   0.22784146
+  c1    1.07747313   2.57103394   0.20541021
+  c2    0.94822554   2.41540739   0.21164883
+  c3    1.07201572   2.54606522   0.24097965
+
+Independent secondary C1->C2 pair (bandwidth8) also rejects: length0.15601049m,
+gain0.77495556, gamma-0.32072611/s, delay0; input-zero0.34170104rad; held-out
+RMSE1.04803374rad. Although integral residuals0.136028/0.119494 pass, negative
+damping, calibration diagnostic and prediction reject. Controller success is not model acceptance.
+
+Calibration sensitivity: the recorded A1 pretrial hanging offset is -0.12126378851042818rad.
+Using that one fixed value on training and every held-out run worsens training integral
+NRMSE to0.40160271. The rejected candidate length0.22740968m/gain1.70504778 is not
+a correction. A2 integralNRMSE0.48072605 and RMSE0.96757419rad still reject.
+Across pretrials, hanging offsets range-0.12294388 to-0.11198065rad. Small stationary
+scatter is not independent angle accuracy; a hanging trim is not a commissioned global
+upright mapping. No held-out data selected a zero offset or model coefficient.
+
+Useful conditional passive-tail finding:
+  Every recording has about4s of ringing after return and STOP, with zero commanded
+  acceleration/velocity and fixed counted x. The motor is disabled; real cart stationarity
+  was not independently observed. A separate2-parameter weak fit assumes a fixed cart,
+  uses the same A1 hanging offset for all runs, and never declares acceptance.
+  A1 gives L0.15991785077898527m, gamma0.26974924957569224/s,11 windows, training
+  integralNRMSE0.05207219. Independent tail fits rangeL0.15825062–0.16601502m and
+  gamma0.20736–0.39814/s. These are repeatability diagnostics, not bounds on truth.
+  Fixed A1 parameters predict A2 with RMSE0.07899426rad/p95 0.17421303rad/integral0.05024641;
+  C2 RMSE0.23807932rad/p95 0.66597985rad exposes remaining mismatch.
+  Each tail has11 windows (<20 default minimum), no input excitation and no physical
+  cart measurement. Thus passive results cannot accept a full model or identify gain/delay.
+  Four-second tails are unsuitable to commission damping over its full decay.
+
+Next measurement sequence for the sole hardware operator:
+1. Record10s of stationary angle at physically verified hanging and upright, plus
+   several intermediate known angles in both rotation directions. Preserve encoder raw
+   counts/reference/board time/enable state and independent angular geometry. Measure
+   hysteresis/nonlinearity and pre/post reference drift; freeze any mapping from calibration
+   data alone. Do not derive it from the held-out motion or replace reference330 silently.
+2. Obtain independent20s fixed-cart free decays at roughly0.15 and0.25rad from hanging,
+   opposite initial directions, and distinct training/held-out trials. These amplitudes
+   are measurement targets, not verified operational limits. Keep physical cart location
+   fixed and verify it with independent displacement measurement; record motor state.
+   Passive angular period principally identifies L_eff; envelope/energy decay identifies
+   effective damping and reveals viscous-versus-Coulomb/amplitude dependence.
+   Period hypothesis atL.124m is0.706409s; atL.160m it is0.802427s.
+   A verified10–20cycle observation cleanly distinguishes those period hypotheses without
+   relying on an actively balancing closed-loop command.
+3. Then attempt a frozen20s bounded multisine training/held-out pair. The offline proposal
+   in check_waveform.py uses2s quintic ramps, training2.5mm/tone at.8/1.3/2.1Hz and
+   heldout2.0mm/tone at.7/1.6/2.3Hz; all phases0. Continuous nominal bounds:
+   train|x|<6.494mm, |v|<.066014m/s, |a|<.616596m/s^2; heldout5.169mm/.057845/.625541.
+   Analytic jerk bounds9.636/10.386m/s^3. Start reduced amplitude and verify actual response.
+   These nominal reference bounds do not bound feedback correction, governor state or
+   actual motion. Preserve all live switches, homing/reference and established stop path.
+   Do not execute the historical bounded_identification4_procedure.py: it hardcodes
+   reference3485, disables switches and centers. Only its earlier experiment informed
+   the new signal design. Do not change safety settings to make this signal fit.
+   More duration supplies damping information; more amplitude is justified only inside
+   commissioned limits and cannot by itself solve the conflicting angle-zero diagnostic.
+4. Record board applied acceleration, raw theta, demand, counted x/v, deadlines/health,
+   action application time and independent metric cart/angle observations on a calibrated
+   time mapping. Use camera only with established angle/cart scale and timing; the six
+   camera.json files here are empty, so no camera data was used. Before/after still images
+   cannot establish dynamic tracking or synchronized acceleration.
+5. Keep the existing20window/.15rad span/.05m/s^2 input-SD/rank/condition/zero checks and
+   0.5s prediction RMSE.08rad/p95.15rad/integral.15 gates. A separate held-out run must
+   not set parameters, zero, delay or thresholds. A failed test remains failed.
+
+What the measurements can identify:
+  Raw encoder count resolution, conditional angle/timing noise, commanded governor
+  trajectory, control capture/hold performance and repeated pretrial stability are observed.
+  Verified fixed-cart passive data can identify L_eff=I_pivot/(m_pole*COM_distance) and
+  gamma (plus alternative effective friction laws if data distinguish them).
+  Commanded-input forced data can identify effective composite gain/delay conditional
+  on calibrated angle, the model and prediction gates. Independent cart measurement is
+  not mathematically required for that restricted effective model, but is required for
+  physical tracking/missed-step/slip or actuator-latency claims.
+  True cart acceleration/lag require independent calibrated x(t) and clock mapping;
+  step counts are not physical cart truth. Acceleration estimation needs noise-aware
+  derivatives/weak displacement methods and its own uncertainty.
+  Cart mass, pole mass, force-per-command, hinge torque damping and separate motor
+  friction are not identified by angle plus commanded acceleration. Measure mass/COM
+  independently; then L_eff can give inertia and gamma can give physical damping under
+  a validated friction model. Motor force/friction identification also needs force/current
+  calibration or independent load experiments. A successful model-free RL policy would
+  not retroactively identify those physical quantities.
+
+Reproduction (uses only existing files and CPU):
+  ssh jetson OPENBLAS_NUM_THREADS=1 /home/rbafna/cartpole_v2/.venv/bin/python /tmp/cartpole-id-20261016/analyze_current.py
+  ssh jetson OPENBLAS_NUM_THREADS=1 /home/rbafna/cartpole_v2/.venv/bin/python /tmp/cartpole-id-20261016/passive_tails.py
+  python3 /tmp/cartpole-id-20261016/check_waveform.py
+Full results: /tmp/cartpole-id-20261016/results/summary.json and individual fit/metadata
+JSONs, plus passive-tail-diagnostic.json. The exact fit.py and rig_logs.py are byte-identical
+to source checkpoint8d6c8e8 modules and hashes are embedded. analysis-plan.json was
+written before fitting. Raw input paths/hashes, canonical hashes, configurations and
+diagnostic integral vectors are retained. The scripts rerun and replace their /tmp result
+files; preserve this directory before changing inputs or analysis. No deployment involved.

@@ -56,9 +56,12 @@ there is still no accepted hanging-only or nonlinear calibration model.
 
 See the [current task checkpoint](docs/checkpoint-20261016.md),
 [tuning and jitter evidence](evidence/phase3/jitter-20261016/README.txt), and
-[preserved Jetson releases](releases/README.md). The root source includes local
-experimental Python AUTO/BAL commands that have not been deployed to the physical
-rig; release snapshots preserve the exact operator software separately.
+[preserved Jetson releases](releases/README.md). The experimental Python AUTO/BAL implementation now runs through the SDK on the
+physical rig. One 25-second Python AUTO trial captured at 3.17 seconds and held
+for the remaining 21.8 seconds; other trials exposed host timing and an early
+right-switch stop. It is not yet a repeatably commissioned replacement for native
+control. See [Python control, gain explanations and identification](docs/python-control-20261016.md).
+Release snapshots preserve the established native operator software separately.
 
 ## Persistent vision and SDK sensing
 
@@ -162,11 +165,11 @@ On the Mac, from the repository root:
 
 After SSH connects, open **http://127.0.0.1:3095/**. Keep the tunnel terminal open.
 The tunnel discovers the current direct IPv6 address through a read-only query
-using `ssh jetson`, then verifies reachability and reuses the trusted host identity.
+using `ssh rbafna@jetson`, then verifies reachability and reuses the trusted host identity.
 It needs a working bootstrap SSH key/agent; the final connection can still ask for
 your normal password. To preview the selection, use
 `./archive/vision-tunnel.sh --print-command`. An explicit destination bypasses
-discovery: `./archive/vision-tunnel.sh jetson` uses the configured route.
+discovery: `./archive/vision-tunnel.sh rbafna@jetson` uses the configured route.
 It does not start the camera or control the rig.
 
 - [Jetson setup and testing](docs/jetson-testing.md)

@@ -1,0 +1,56 @@
+{
+  "command": [
+    "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "evidence/python-control-id-20261016/timing-audit",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "tests": 7,
+  "output": "test_clock_overhead_may_make_cpu_slightly_exceed_wall (test_analyze_timing.TimingAnalysisTests.test_clock_overhead_may_make_cpu_slightly_exceed_wall) ... ok\ntest_preflight_excluded_and_post_send_step_tail_located (test_analyze_timing.TimingAnalysisTests.test_preflight_excluded_and_post_send_step_tail_located) ... ok\ntest_quantiles_include_empty_and_interpolation (test_analyze_timing.TimingAnalysisTests.test_quantiles_include_empty_and_interpolation) ... ok\ntest_rolling_budget_excludes_exact_one_second_boundary (test_analyze_timing.TimingAnalysisTests.test_rolling_budget_excludes_exact_one_second_boundary) ... ok\ntest_schema_rejects_truncated_column (test_analyze_timing.TimingAnalysisTests.test_schema_rejects_truncated_column) ... ok\ntest_terminal_wait_is_excluded_from_active_interval_max (test_analyze_timing.TimingAnalysisTests.test_terminal_wait_is_excluded_from_active_interval_max) ... ok\ntest_wait_time_is_not_reported_as_cpu_work (test_analyze_timing.TimingAnalysisTests.test_wait_time_is_not_reported_as_cpu_work) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.027s\n\nOK\n",
+  "hardware_activity": false,
+  "all_trace_summaries_match": true,
+  "all_instrumentation_dropped_zero": true,
+  "remote_execution": "Saved analyze_timing.py used for first four runs; saved analyze_timing_v2.py used for all subsequent runs. Source sent on stdin to Python, reading original completed files only.",
+  "artifact_sha256": {
+    "analyze_timing_v2.py": "329d222b367a8eb0c9d01cb99daf5ea171a712e49ceaed45f0d803e69536c846",
+    "timing-observe-1792180214148161278-analysis.json.gz": "d7866fa6ef2b2e79b08cd7ef8af606a909d5a75612084241fcb18078844bbe40",
+    "timing-zero-1792179806748582658-analysis.json.gz": "9cbfe9e28259479ccafd5493fa8a16ac41a4d98172e011929dd5ffffc1af865b",
+    "report.md": "cf1652aa596021b76b03fe48c94d82012417eeefe6bd960868b7123103d5b1ae",
+    "analyze_timing.py": "d5a13ec75665afb4a09482920d7029c2a3ff2c70d53d96ecaab661da5c6ea5fc",
+    "comparison.json": "8707dbae0aa57e05e2e28ab0563721d9b405024ead841c00a0f7ee3c6a24983f",
+    "README.md": "643d2acd09a40e8f640480f6035b271f0328879bd1115ed1cdab42b31b0c1cdd",
+    "cpu-placement-report.md": "e55c2c4afea210f37143e0b3f80dd27b84e57d6df2d1a84d939bed294bc83027",
+    "test_analyze_timing.py": "ec653b06b5508fa3c1586259197fe0980abb749907da8aae07d88dc2fe05106f",
+    "timing-observe-1792179922924907108-analysis.json.gz": "31d7c68f7bf2978b98b579e3e7372ced2ba023b9bfef706248f7c1fedfdeaa61",
+    "cpu-placement-comparison.json": "486b3e645c686a246f76b840888c6a0f62e037727108968bb5b550781386532c",
+    "timing-observe-1792179772031636973-analysis.json.gz": "7c562812affe1bc5090eaf8036327923019366c98351d3638ca3064c2d72cb27",
+    "placement-provenance.json": "72a3e64eb56622226adbefe0f698f92e8ec8b73e7ef92040f0649e3640d4067a",
+    "timing-observe-1792180009230430865-analysis.json.gz": "67fc649110cfad86d89ca780a73908d919c6c2be63be47d67cb1fb80d55dcb82",
+    "timing-observe-1792179973779047271-analysis.json.gz": "5c9433bb555660936302cc4f8e42a888273dabbca88c1a720ddc7e95e9d5ab09",
+    "timing-observe-1792180287685955032-analysis.json.gz": "24a39bad148d8acd0e89f92bd648a154702717a2ec43aced7410f04d449bf267",
+    "timing-observe-1792180117877407679-analysis.json.gz": "8eb9d429b9e63f0cb25abe3511a80557b90c89259b8a8a2488d686586054ef8b"
+  },
+  "addition_checks": {
+    "clean_repeat_all_5000_intervals_4ms": true,
+    "clean_repeat_long_gaps_zero": true,
+    "missing_logger_on_mirror_off_run_added": true,
+    "only_recorded_sdk_source_difference": {
+      "cartpole_sdk/rig/client.py": {
+        "previous": "a74e3248e0eca53e5cbe9be59cc98377a4aa5d1c88d5884fc9a87e761888aeae",
+        "repeat": "ec577c1cf47f95572cb5b7d03b6828af136e85e82d88f9393e36db336ffd4b6b"
+      }
+    },
+    "placement_original_affinities_identically_restored": true,
+    "new_threads_restored_on_repeat": 2,
+    "both_new_trace_summaries_match": true,
+    "both_new_traces_have_no_drops_or_step_calls_or_failure": true,
+    "analyzer_and_tests_unchanged_from_verified_versions": true,
+    "powered_reliability_claim": false
+  }
+}

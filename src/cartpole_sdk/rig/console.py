@@ -53,7 +53,7 @@ def execute_command(rig, line, *, output=None):
         print(f'board reference {mode} active for at most {duration:g}s{suffix}',file=output)
     elif command in ('python-auto','python-bal'):
         if len(args)>1:raise ValidationError('host mode accepts at most one duration')
-        print('Experimental Python control, magnetic angle/rate and step position/velocity; Ctrl-C stops.', file=output, flush=True)
+        print('Experimental Python control, filtered magnetic feedback, raw-angle guard and step governor state; Ctrl-C stops.', file=output, flush=True)
         run_host_controller(rig, mode=command.removeprefix('python-'), duration_s=10. if not args else float(args[0]))
         print('Python run ended; stopped and disabled. Explicit rehome is available.', file=output)
     elif command=='velocity':

@@ -183,6 +183,12 @@ class Rig:
                         raise RigError('encoder calibration cancelled by STOP')
                     for response in self._replies:
                         if response[1] == 'ERR':
+                            # ERR has no command identity: a preceding in-flight
+                            # action may fail after lease expiry while STOP is
+                            # pending. Keep that error latched, but require STOP's
+                            # own OK and subsequent disabled-state confirmation.
+                            if command == 'STOP':
+                                continue
                             raise RigError(f'executor rejected {command}: {response[3]}')
                         if response[1] == reply and (reply in ('HELLO', 'INFO') or response[3] == (command if reply_key is None else reply_key)):
                             return response
@@ -410,6 +416,32 @@ class Rig:
         state = self.state
         self._fresh(state)
         return self._observation(state)
+
+    def control_observation(self) -> Observation:
+        """Add explicit filtered-angle and governor feedback from one snapshot.
+
+        The ordinary four-channel observation remains available unchanged.
+        These command-state estimates do not assert physical motor tracking.
+        """
+        self._require()
+        state = self.state
+        self._fresh(state)
+        observation = self._observation(state)
+        timestamp = observation.available_ns
+        healthy = bool(state.flags & 1)
+        feedback = (
+            Sample('pole', 'angle', 'magnetic_filtered', state.angle_hat if healthy else None,
+                'rad', 'encoder-zero', 'filtered_magnetic_angle',
+                'valid' if healthy else 'invalid', None if healthy else 'encoder unhealthy',
+                'estimated', timestamp, timestamp, timestamp),
+            Sample('cart', 'acceleration', 'step', state.acceleration, 'm/s^2',
+                'cart-step-home', 'commanded_acceleration', 'valid', None,
+                'estimated', timestamp, timestamp, timestamp),
+            Sample('cart', 'brake_direction', 'step', state.brake_direction, '1',
+                'cart-step-home', 'governor_brake_direction', 'valid', None,
+                'estimated', timestamp, timestamp, timestamp),
+        )
+        return replace(observation, samples=observation.samples+feedback)
 
     def _stopped_healthy(self):
         self._require()

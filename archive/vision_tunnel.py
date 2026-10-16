@@ -17,7 +17,7 @@ import subprocess
 import sys
 from collections.abc import Mapping
 
-_FALLBACK = 'Pass an explicit destination (for example: ./archive/vision-tunnel.sh jetson) or set JETSON_SSH_TARGET.'
+_FALLBACK = 'Pass an explicit destination (for example: ./archive/vision-tunnel.sh rbafna@jetson) or set JETSON_SSH_TARGET.'
 _MAX_PROBES = 8
 
 
@@ -110,7 +110,7 @@ def _quoted(value: str) -> str:
 
 
 def prepare(target: str | None, env: Mapping[str, str]) -> list[str]:
-    """Build tunnel SSH argv, discovering through ``jetson`` when unspecified."""
+    """Build tunnel SSH argv, discovering through ``rbafna@jetson`` when unspecified."""
     local_port = _port(env.get('LOCAL_PORT', '3095'))
     remote_port = _port(env.get('REMOTE_PORT', '3090'))
     common = ['-T', '-o', 'ControlMaster=no', '-o', 'ControlPath=none',
@@ -127,7 +127,7 @@ def prepare(target: str | None, env: Mapping[str, str]) -> list[str]:
     if explicit is not None:
         destination = _destination(explicit)
     else:
-        destination = _destination(env.get('JETSON_DISCOVERY_HOST', 'jetson'))
+        destination = _destination(env.get('JETSON_DISCOVERY_HOST', 'rbafna@jetson'))
         discovery_options = common + ['-o', 'BatchMode=yes', '-o', 'ClearAllForwardings=yes',
                                       '-o', 'RemoteCommand=none', '-o', 'SessionType=default']
         try:
@@ -181,7 +181,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description='Discover current direct IPv6 and open a local vision SSH tunnel.')
     parser.add_argument('target', nargs='?', help='Explicit SSH destination; bypasses discovery.')
     parser.add_argument('--print-command', action='store_true', help='Discover and print SSH argv without opening the tunnel.')
-    parser.epilog = ('Environment: JETSON_SSH_TARGET, JETSON_DISCOVERY_HOST (jetson), '
+    parser.epilog = ('Environment: JETSON_SSH_TARGET, JETSON_DISCOVERY_HOST (rbafna@jetson), '
                      'JETSON_KNOWN_HOSTS, LOCAL_PORT (3095), REMOTE_PORT (3090).')
     args = parser.parse_args(argv)
     try:
