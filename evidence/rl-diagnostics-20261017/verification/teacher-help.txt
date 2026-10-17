@@ -1,0 +1,14 @@
+usage: teacher_probe.py [-h] --profile PROFILE --output OUTPUT --seed SEED
+                        [--updates UPDATES]
+
+Offline supervised balance-law diagnostic, not an RL or deployment claim. Run
+via uv run --extra rl python THIS --profile ... --output NEW --seed 3. The
+teacher is the existing host balance linear feedback, sampled on synthetic
+local observed states. It is never called during neural-policy evaluation.
+
+options:
+  -h, --help         show this help message and exit
+  --profile PROFILE
+  --output OUTPUT
+  --seed SEED
+  --updates UPDATES

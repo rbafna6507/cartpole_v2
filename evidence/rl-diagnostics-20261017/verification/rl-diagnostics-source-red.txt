@@ -1,0 +1,22 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_summary_checks_source_archive_hash ____________________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-344/test_summary_checks_source_arc0')
+
+    def test_summary_checks_source_archive_hash(tmp_path):
+        _,run,summarize=api()
+        exp=make_experiment(tmp_path)
+        out=tmp_path/'probe'
+        run(exp,out,variant='upright',seed=3,steps=8,every=8,training_seeds=(11,),evaluation_seeds=(101,),n_steps=8,batch_size=4,epochs=1,evaluation_seconds=.05)
+        with (out/'source.zip').open('ab') as f:f.write(b'tamper')
+>       with pytest.raises(ValueError,match='source'):summarize([out])
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_rl_diagnostics.py:117: Failed
+----------------------------- Captured stdout call -----------------------------
+{"variant": "upright", "seed": 3, "steps": 0, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.9999894973280344, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013305975168316617, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0029347876090612015}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.998888302647167, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.014060937344396365, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0011997947882231976}}}
+{"variant": "upright", "seed": 3, "steps": 8, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.999998929630823, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013526567560867737, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.014180583189365733}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.998821678962485, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.013866820346103093, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.011996163208997377}}}
+=========================== short test summary info ============================
+FAILED tests/test_rl_diagnostics.py::test_summary_checks_source_archive_hash
+1 failed in 2.30s

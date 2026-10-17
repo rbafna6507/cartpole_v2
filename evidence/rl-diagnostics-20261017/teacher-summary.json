@@ -1,0 +1,760 @@
+{
+  "role": "Exploratory nominal simulation; inspected cases are development, not final qualification.",
+  "hold_definition": "Final 5 seconds continuously: abs(wrapped theta)<.15rad, abs(omega)<1rad/s, abs(x)<.12m.",
+  "exact_teacher": [
+    {
+      "seed": 41000,
+      "start": "upright",
+      "initial_state": [
+        0.009077157957939888,
+        -0.007670561330919612,
+        -0.06303617392718668,
+        -0.12610757783296625
+      ],
+      "final_state": {
+        "x": 0.018644629210872097,
+        "v": 0.25992433285992533,
+        "theta": -0.03569634759022611,
+        "omega": -0.09036998830812705,
+        "time_ns": 25003000000
+      },
+      "score": 3.914053502018882,
+      "success": true,
+      "hold_success": true,
+      "hold_seconds": 5.0,
+      "first_one_second_capture_s": 2.09,
+      "longest_balance_dwell_s": 23.910000000000938,
+      "final_window_balanced_fraction": 1.0,
+      "final_window_complete": true,
+      "episode_parameters": {
+        "randomization_episode": 0,
+        "randomization_seed": 0,
+        "simulation_config": {
+          "physics_dt_ns": 1000000,
+          "control_steps": 10,
+          "max_steps": 2500,
+          "rail_half_m": 0.308962494,
+          "effective_length_m": 0.16030387335574306,
+          "cart_mass_kg": 0.35,
+          "pole_mass_kg": 0.02275,
+          "cart_damping": 0.05,
+          "hinge_damping": 3.0218604984532184e-06,
+          "max_force_n": 20.0,
+          "max_acceleration_m_s2": 25.0,
+          "max_action_ttl_ns": 50000000,
+          "hinge_coulomb_friction_nm": 0.0007133292581428023,
+          "hinge_friction_velocity_scale_rad_s": 0.05
+        },
+        "observation_config": {
+          "angle_source": "raw",
+          "encoder_counts": 4096,
+          "angle_noise_std": 0.001,
+          "telemetry_delay_steps": 3,
+          "command_delay_steps": 1,
+          "dropout_probability": 0.0,
+          "angle_frame_id": "encoder-zero",
+          "vision_frame_period_ns": 12500000,
+          "vision_latency_ns": 20000000,
+          "vision_dropout_probability": 0.0,
+          "vision_angle_noise_std": 0.003,
+          "vision_angle_quantum_rad": 0.001,
+          "vision_max_age_ns": 150000000,
+          "vision_warmup_steps": 500
+        }
+      },
+      "steps": 2500,
+      "fault_reason": null,
+      "final_balance_dwell_s": 23.910000000000938,
+      "balanced_fraction": 0.9896,
+      "max_abs_x_m": 0.12491049655667061,
+      "max_abs_speed_m_s": 0.2756889277584232,
+      "force_saturated_control_steps": 0,
+      "rail_braking_control_steps": 0,
+      "wall_seconds": 8.174801124958321,
+      "final_pole_only_dwell_s": 25.00000000000111,
+      "longest_pole_only_dwell_s": 25.00000000000111,
+      "all": {
+        "steps": 2500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 26,
+        "strict_violations": 26,
+        "max_abs_x": 0.12491049655667061,
+        "max_abs_theta": 0.06565961111740286,
+        "max_abs_omega": 0.49089094880629874,
+        "x_min": -0.12491049655667061,
+        "x_max": 0.11785274943452999
+      },
+      "last5s": {
+        "steps": 500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.11785274943452999,
+        "max_abs_theta": 0.05715943160557465,
+        "max_abs_omega": 0.1993217580380818,
+        "x_min": -0.1175761102319687,
+        "x_max": 0.11785274943452999
+      },
+      "first_violation": {
+        "step": 84,
+        "t_s": 0.84,
+        "x": -0.12016665692312326,
+        "v": -0.06831434383249506,
+        "theta": 0.04759661340591005,
+        "omega": 0.009313313844134384,
+        "raw": 0.4137311569754111,
+        "executed": 0.4137311577796936,
+        "observed_x": -0.11996249999999999,
+        "theta_ok": true,
+        "omega_ok": true,
+        "x_ok": false,
+        "strict_dwell": 0.0,
+        "pole_dwell": 0.8400000000000005
+      },
+      "boundary_crossings": [
+        {
+          "step": 84,
+          "t_s": 0.84,
+          "x": -0.12016665692312326,
+          "v": -0.06831434383249506,
+          "theta": 0.04759661340591005,
+          "omega": 0.009313313844134384,
+          "entering_valid": false
+        },
+        {
+          "step": 110,
+          "t_s": 1.1,
+          "x": -0.11990232661589403,
+          "v": 0.08191726402187126,
+          "theta": 0.04293903485474896,
+          "omega": -0.05831956854166314,
+          "entering_valid": true
+        }
+      ]
+    },
+    {
+      "seed": 41001,
+      "start": "upright",
+      "initial_state": [
+        0.005831495330477152,
+        -0.01783496477089156,
+        -3.297443528124556e-05,
+        -0.03663419378747069
+      ],
+      "final_state": {
+        "x": -0.09814217922475114,
+        "v": 0.16342215503745353,
+        "theta": 0.0355882999181154,
+        "omega": -0.15251500349808877,
+        "time_ns": 25003000000
+      },
+      "score": 3.9801981423564894,
+      "success": true,
+      "hold_success": true,
+      "hold_seconds": 5.0,
+      "first_one_second_capture_s": 1.0,
+      "longest_balance_dwell_s": 25.00000000000111,
+      "final_window_balanced_fraction": 1.0,
+      "final_window_complete": true,
+      "episode_parameters": {
+        "randomization_episode": 0,
+        "randomization_seed": 0,
+        "simulation_config": {
+          "physics_dt_ns": 1000000,
+          "control_steps": 10,
+          "max_steps": 2500,
+          "rail_half_m": 0.308962494,
+          "effective_length_m": 0.16030387335574306,
+          "cart_mass_kg": 0.35,
+          "pole_mass_kg": 0.02275,
+          "cart_damping": 0.05,
+          "hinge_damping": 3.0218604984532184e-06,
+          "max_force_n": 20.0,
+          "max_acceleration_m_s2": 25.0,
+          "max_action_ttl_ns": 50000000,
+          "hinge_coulomb_friction_nm": 0.0007133292581428023,
+          "hinge_friction_velocity_scale_rad_s": 0.05
+        },
+        "observation_config": {
+          "angle_source": "raw",
+          "encoder_counts": 4096,
+          "angle_noise_std": 0.001,
+          "telemetry_delay_steps": 3,
+          "command_delay_steps": 1,
+          "dropout_probability": 0.0,
+          "angle_frame_id": "encoder-zero",
+          "vision_frame_period_ns": 12500000,
+          "vision_latency_ns": 20000000,
+          "vision_dropout_probability": 0.0,
+          "vision_angle_noise_std": 0.003,
+          "vision_angle_quantum_rad": 0.001,
+          "vision_max_age_ns": 150000000,
+          "vision_warmup_steps": 500
+        }
+      },
+      "steps": 2500,
+      "fault_reason": null,
+      "final_balance_dwell_s": 25.00000000000111,
+      "balanced_fraction": 1.0,
+      "max_abs_x_m": 0.11685036694189997,
+      "max_abs_speed_m_s": 0.2729959800754927,
+      "force_saturated_control_steps": 0,
+      "rail_braking_control_steps": 0,
+      "wall_seconds": 8.50485008303076,
+      "final_pole_only_dwell_s": 25.00000000000111,
+      "longest_pole_only_dwell_s": 25.00000000000111,
+      "all": {
+        "steps": 2500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.11685036694189997,
+        "max_abs_theta": 0.05709814442900831,
+        "max_abs_omega": 0.20930934400391077,
+        "x_min": -0.11685036694189997,
+        "x_max": 0.11634353213921972
+      },
+      "last5s": {
+        "steps": 500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.11626834376378148,
+        "max_abs_theta": 0.05663779067208318,
+        "max_abs_omega": 0.20011489260817006,
+        "x_min": -0.11626834376378148,
+        "x_max": 0.11533475902658734
+      },
+      "first_violation": null,
+      "boundary_crossings": []
+    },
+    {
+      "seed": 41002,
+      "start": "upright",
+      "initial_state": [
+        -0.0034963502926142896,
+        0.010318075006102129,
+        0.027881678905884128,
+        0.020935030120327457
+      ],
+      "final_state": {
+        "x": 0.009123583864762924,
+        "v": -0.2725743214049579,
+        "theta": 0.024441208926152636,
+        "omega": 0.1275424493610679,
+        "time_ns": 25003000000
+      },
+      "score": 3.9272974796103344,
+      "success": true,
+      "hold_success": true,
+      "hold_seconds": 5.0,
+      "first_one_second_capture_s": 1.0,
+      "longest_balance_dwell_s": 23.86000000000093,
+      "final_window_balanced_fraction": 1.0,
+      "final_window_complete": true,
+      "episode_parameters": {
+        "randomization_episode": 0,
+        "randomization_seed": 0,
+        "simulation_config": {
+          "physics_dt_ns": 1000000,
+          "control_steps": 10,
+          "max_steps": 2500,
+          "rail_half_m": 0.308962494,
+          "effective_length_m": 0.16030387335574306,
+          "cart_mass_kg": 0.35,
+          "pole_mass_kg": 0.02275,
+          "cart_damping": 0.05,
+          "hinge_damping": 3.0218604984532184e-06,
+          "max_force_n": 20.0,
+          "max_acceleration_m_s2": 25.0,
+          "max_action_ttl_ns": 50000000,
+          "hinge_coulomb_friction_nm": 0.0007133292581428023,
+          "hinge_friction_velocity_scale_rad_s": 0.05
+        },
+        "observation_config": {
+          "angle_source": "raw",
+          "encoder_counts": 4096,
+          "angle_noise_std": 0.001,
+          "telemetry_delay_steps": 3,
+          "command_delay_steps": 1,
+          "dropout_probability": 0.0,
+          "angle_frame_id": "encoder-zero",
+          "vision_frame_period_ns": 12500000,
+          "vision_latency_ns": 20000000,
+          "vision_dropout_probability": 0.0,
+          "vision_angle_noise_std": 0.003,
+          "vision_angle_quantum_rad": 0.001,
+          "vision_max_age_ns": 150000000,
+          "vision_warmup_steps": 500
+        }
+      },
+      "steps": 2500,
+      "fault_reason": null,
+      "final_balance_dwell_s": 23.86000000000093,
+      "balanced_fraction": 0.9972,
+      "max_abs_x_m": 0.12027239172602511,
+      "max_abs_speed_m_s": 0.2739309135636152,
+      "force_saturated_control_steps": 0,
+      "rail_braking_control_steps": 0,
+      "wall_seconds": 8.300641290843487,
+      "final_pole_only_dwell_s": 25.00000000000111,
+      "longest_pole_only_dwell_s": 25.00000000000111,
+      "all": {
+        "steps": 2500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 7,
+        "strict_violations": 7,
+        "max_abs_x": 0.12027239172602511,
+        "max_abs_theta": 0.05738832135377944,
+        "max_abs_omega": 0.20965060621291917,
+        "x_min": -0.11817826685643365,
+        "x_max": 0.12027239172602511
+      },
+      "last5s": {
+        "steps": 500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.11817826685643365,
+        "max_abs_theta": 0.057148848478831546,
+        "max_abs_omega": 0.20965060621291917,
+        "x_min": -0.11817826685643365,
+        "x_max": 0.11722858132191327
+      },
+      "first_violation": {
+        "step": 108,
+        "t_s": 1.08,
+        "x": 0.12003535798360415,
+        "v": 0.015956457725932165,
+        "theta": -0.04433764744308838,
+        "omega": 0.01094735596997066,
+        "raw": -0.5302753801854654,
+        "executed": -0.5302754044532776,
+        "observed_x": 0.11996249999999999,
+        "theta_ok": true,
+        "omega_ok": true,
+        "x_ok": false,
+        "strict_dwell": 0.0,
+        "pole_dwell": 1.0800000000000007
+      },
+      "boundary_crossings": [
+        {
+          "step": 108,
+          "t_s": 1.08,
+          "x": 0.12003535798360415,
+          "v": 0.015956457725932165,
+          "theta": -0.04433764744308838,
+          "omega": 0.01094735596997066,
+          "entering_valid": false
+        },
+        {
+          "step": 115,
+          "t_s": 1.15,
+          "x": 0.11981928996018464,
+          "v": -0.022912762709687184,
+          "theta": -0.043103107592742475,
+          "omega": 0.027739181567835024,
+          "entering_valid": true
+        }
+      ]
+    },
+    {
+      "seed": 41003,
+      "start": "upright",
+      "initial_state": [
+        0.01492576391948449,
+        0.0001781632737707595,
+        -0.019735983199222925,
+        0.05859921482576727
+      ],
+      "final_state": {
+        "x": -0.052606844829747014,
+        "v": 0.2591980660879259,
+        "theta": -0.0011103403368213167,
+        "omega": -0.18841881800621857,
+        "time_ns": 25003000000
+      },
+      "score": 3.9787199256145955,
+      "success": true,
+      "hold_success": true,
+      "hold_seconds": 5.0,
+      "first_one_second_capture_s": 1.0,
+      "longest_balance_dwell_s": 25.00000000000111,
+      "final_window_balanced_fraction": 1.0,
+      "final_window_complete": true,
+      "episode_parameters": {
+        "randomization_episode": 0,
+        "randomization_seed": 0,
+        "simulation_config": {
+          "physics_dt_ns": 1000000,
+          "control_steps": 10,
+          "max_steps": 2500,
+          "rail_half_m": 0.308962494,
+          "effective_length_m": 0.16030387335574306,
+          "cart_mass_kg": 0.35,
+          "pole_mass_kg": 0.02275,
+          "cart_damping": 0.05,
+          "hinge_damping": 3.0218604984532184e-06,
+          "max_force_n": 20.0,
+          "max_acceleration_m_s2": 25.0,
+          "max_action_ttl_ns": 50000000,
+          "hinge_coulomb_friction_nm": 0.0007133292581428023,
+          "hinge_friction_velocity_scale_rad_s": 0.05
+        },
+        "observation_config": {
+          "angle_source": "raw",
+          "encoder_counts": 4096,
+          "angle_noise_std": 0.001,
+          "telemetry_delay_steps": 3,
+          "command_delay_steps": 1,
+          "dropout_probability": 0.0,
+          "angle_frame_id": "encoder-zero",
+          "vision_frame_period_ns": 12500000,
+          "vision_latency_ns": 20000000,
+          "vision_dropout_probability": 0.0,
+          "vision_angle_noise_std": 0.003,
+          "vision_angle_quantum_rad": 0.001,
+          "vision_max_age_ns": 150000000,
+          "vision_warmup_steps": 500
+        }
+      },
+      "steps": 2500,
+      "fault_reason": null,
+      "final_balance_dwell_s": 25.00000000000111,
+      "balanced_fraction": 1.0,
+      "max_abs_x_m": 0.1181123375332234,
+      "max_abs_speed_m_s": 0.27318634827972793,
+      "force_saturated_control_steps": 0,
+      "rail_braking_control_steps": 0,
+      "wall_seconds": 8.220772542059422,
+      "final_pole_only_dwell_s": 25.00000000000111,
+      "longest_pole_only_dwell_s": 25.00000000000111,
+      "all": {
+        "steps": 2500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.1181123375332234,
+        "max_abs_theta": 0.05713187064020948,
+        "max_abs_omega": 0.20422651612048692,
+        "x_min": -0.1181123375332234,
+        "x_max": 0.11648495210321995
+      },
+      "last5s": {
+        "steps": 500,
+        "theta_violations": 0,
+        "omega_violations": 0,
+        "x_violations": 0,
+        "strict_violations": 0,
+        "max_abs_x": 0.1167037144394645,
+        "max_abs_theta": 0.05700825273318325,
+        "max_abs_omega": 0.20422651612048692,
+        "x_min": -0.1167037144394645,
+        "x_max": 0.11647241275015241
+      },
+      "first_violation": null,
+      "boundary_crossings": []
+    }
+  ],
+  "imitation": [
+    {
+      "path": "runs/local-teacher-probe-20261017-seed17/report.json",
+      "seed": 17,
+      "updates": 1500,
+      "validation_raw_rmse": 0.037401407957077026,
+      "role": "initial longer evaluation, now inspected development",
+      "by_start": {
+        "hanging": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.1692260681285003,
+          "balanced_fraction": 0.6907,
+          "longest_balance_dwell_s": 2.3074999999999948,
+          "max_abs_x_m": 0.2939627320560573,
+          "rail_braking_control_steps": 248.0,
+          "raw_action_delta_rms": 0.38982700976034934
+        },
+        "upright": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.772695968217953,
+          "balanced_fraction": 0.879,
+          "longest_balance_dwell_s": 2.8199999999999843,
+          "max_abs_x_m": 0.13142428552405538,
+          "rail_braking_control_steps": 0.0,
+          "raw_action_delta_rms": 0.042859942533451774
+        }
+      },
+      "upright_episodes": [
+        {
+          "seed": 41000,
+          "hold_success": false,
+          "balanced_fraction": 0.8652,
+          "final_balance_dwell_s": 0.20000000000000004,
+          "max_abs_x_m": 0.13110135864485647,
+          "x_violations": 337,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41001,
+          "hold_success": false,
+          "balanced_fraction": 0.896,
+          "final_balance_dwell_s": 2.07,
+          "max_abs_x_m": 0.13165685223437976,
+          "x_violations": 260,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41002,
+          "hold_success": false,
+          "balanced_fraction": 0.88,
+          "final_balance_dwell_s": 1.410000000000001,
+          "max_abs_x_m": 0.13118388890328161,
+          "x_violations": 300,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41003,
+          "hold_success": false,
+          "balanced_fraction": 0.8748,
+          "final_balance_dwell_s": 0.0,
+          "max_abs_x_m": 0.13175504231370375,
+          "x_violations": 313,
+          "theta_violations": 0,
+          "omega_violations": 0
+        }
+      ]
+    },
+    {
+      "path": "runs/local-teacher-probe-20261017-seed29/report.json",
+      "seed": 29,
+      "updates": 1500,
+      "validation_raw_rmse": 0.11047535389661789,
+      "role": "initial longer evaluation, now inspected development",
+      "by_start": {
+        "hanging": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.061350259181598,
+          "balanced_fraction": 0.6299,
+          "longest_balance_dwell_s": 2.012500000000001,
+          "max_abs_x_m": 0.29396239456051215,
+          "rail_braking_control_steps": 216.75,
+          "raw_action_delta_rms": 0.3390372304555861
+        },
+        "upright": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.5608322185741463,
+          "balanced_fraction": 0.7769,
+          "longest_balance_dwell_s": 2.692499999999987,
+          "max_abs_x_m": 0.1538551609306073,
+          "rail_braking_control_steps": 0.0,
+          "raw_action_delta_rms": 0.04284797752762381
+        }
+      },
+      "upright_episodes": [
+        {
+          "seed": 41000,
+          "hold_success": false,
+          "balanced_fraction": 0.7564,
+          "final_balance_dwell_s": 0.17,
+          "max_abs_x_m": 0.15710833688004391,
+          "x_violations": 609,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41001,
+          "hold_success": false,
+          "balanced_fraction": 0.808,
+          "final_balance_dwell_s": 1.500000000000001,
+          "max_abs_x_m": 0.15254033769335887,
+          "x_violations": 480,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41002,
+          "hold_success": false,
+          "balanced_fraction": 0.782,
+          "final_balance_dwell_s": 1.5200000000000011,
+          "max_abs_x_m": 0.15274519232969644,
+          "x_violations": 545,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41003,
+          "hold_success": false,
+          "balanced_fraction": 0.7612,
+          "final_balance_dwell_s": 0.0,
+          "max_abs_x_m": 0.1530267768193299,
+          "x_violations": 597,
+          "theta_violations": 0,
+          "omega_violations": 0
+        }
+      ]
+    },
+    {
+      "path": "runs/local-teacher-probe-20261017-seed3/report.json",
+      "seed": 3,
+      "updates": 1500,
+      "validation_raw_rmse": 0.03027658350765705,
+      "role": "initial longer evaluation, now inspected development",
+      "by_start": {
+        "hanging": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 1.9781323847906405,
+          "balanced_fraction": 0.6462,
+          "longest_balance_dwell_s": 2.3774999999999933,
+          "max_abs_x_m": 0.2939650272294584,
+          "rail_braking_control_steps": 420.75,
+          "raw_action_delta_rms": 0.3890605327903946
+        },
+        "upright": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.8137898274413193,
+          "balanced_fraction": 0.8994,
+          "longest_balance_dwell_s": 2.8674999999999833,
+          "max_abs_x_m": 0.1292628600920875,
+          "rail_braking_control_steps": 0.0,
+          "raw_action_delta_rms": 0.04257698440575014
+        }
+      },
+      "upright_episodes": [
+        {
+          "seed": 41000,
+          "hold_success": false,
+          "balanced_fraction": 0.8852,
+          "final_balance_dwell_s": 0.20000000000000004,
+          "max_abs_x_m": 0.1306108135447839,
+          "x_violations": 287,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41001,
+          "hold_success": false,
+          "balanced_fraction": 0.914,
+          "final_balance_dwell_s": 2.0899999999999994,
+          "max_abs_x_m": 0.12890098129695146,
+          "x_violations": 215,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41002,
+          "hold_success": false,
+          "balanced_fraction": 0.8984,
+          "final_balance_dwell_s": 1.390000000000001,
+          "max_abs_x_m": 0.12872694419512998,
+          "x_violations": 254,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41003,
+          "hold_success": false,
+          "balanced_fraction": 0.9,
+          "final_balance_dwell_s": 0.0,
+          "max_abs_x_m": 0.12881270133148473,
+          "x_violations": 250,
+          "theta_violations": 0,
+          "omega_violations": 0
+        }
+      ]
+    },
+    {
+      "path": "runs/local-teacher-probe-20261017-seed3-6000/report.json",
+      "seed": 3,
+      "updates": 6000,
+      "validation_raw_rmse": 0.036681707948446274,
+      "role": "adaptive regression follow-up",
+      "by_start": {
+        "hanging": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.0055309869356566,
+          "balanced_fraction": 0.6811,
+          "longest_balance_dwell_s": 2.434999999999992,
+          "max_abs_x_m": 0.29396486779515096,
+          "rail_braking_control_steps": 422.75,
+          "raw_action_delta_rms": 0.3534668635567843
+        },
+        "upright": {
+          "episodes": 4,
+          "hold_successes": 0,
+          "faults": 0,
+          "score": 2.8911192823666294,
+          "balanced_fraction": 0.9308000000000001,
+          "longest_balance_dwell_s": 3.159999999999977,
+          "max_abs_x_m": 0.1253108509844955,
+          "rail_braking_control_steps": 0.0,
+          "raw_action_delta_rms": 0.0423904280193774
+        }
+      },
+      "upright_episodes": [
+        {
+          "seed": 41000,
+          "hold_success": false,
+          "balanced_fraction": 0.9268,
+          "final_balance_dwell_s": 1.7700000000000014,
+          "max_abs_x_m": 0.12570125537793603,
+          "x_violations": 183,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41001,
+          "hold_success": false,
+          "balanced_fraction": 0.94,
+          "final_balance_dwell_s": 1.450000000000001,
+          "max_abs_x_m": 0.12379628929937102,
+          "x_violations": 150,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41002,
+          "hold_success": false,
+          "balanced_fraction": 0.9212,
+          "final_balance_dwell_s": 0.3300000000000001,
+          "max_abs_x_m": 0.12762324848576362,
+          "x_violations": 197,
+          "theta_violations": 0,
+          "omega_violations": 0
+        },
+        {
+          "seed": 41003,
+          "hold_success": false,
+          "balanced_fraction": 0.9352,
+          "final_balance_dwell_s": 1.5100000000000011,
+          "max_abs_x_m": 0.12412261077491127,
+          "x_violations": 162,
+          "theta_violations": 0,
+          "omega_violations": 0
+        }
+      ]
+    }
+  ]
+}

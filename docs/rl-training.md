@@ -236,3 +236,6 @@ controller's gains. It is separate from PPO. Rebuild model profiles with
 `scripts/prepare-training-model`; see the
 [identification workflow](system-identification-workflow.md). The archived
 `passive-20261017` profile remains unchanged.
+
+For short local experiments, multiple-seed comparisons and balance-first gates,
+see [the RL development cycle](rl-development-cycle.md).

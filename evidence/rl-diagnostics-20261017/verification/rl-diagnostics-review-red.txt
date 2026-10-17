@@ -1,0 +1,25 @@
+...F                                                                     [100%]
+=================================== FAILURES ===================================
+_____ test_summary_rejects_unequal_optimizer_recipes_and_source_corruption _____
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-342/test_summary_rejects_unequal_o0')
+
+    def test_summary_rejects_unequal_optimizer_recipes_and_source_corruption(tmp_path):
+        _,run,summarize=api()
+        exp=make_experiment(tmp_path)
+        kw=dict(variant='upright',steps=8,every=8,training_seeds=(11,),evaluation_seeds=(101,),n_steps=8,batch_size=4,evaluation_seconds=.05)
+        a,b=tmp_path/'a',tmp_path/'b'
+        run(exp,a,seed=3,epochs=1,**kw)
+        run(exp,b,seed=17,epochs=2,**kw)
+>       with pytest.raises(ValueError,match='incomparable'):summarize([a,b])
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_rl_diagnostics.py:95: Failed
+----------------------------- Captured stdout call -----------------------------
+{"variant": "upright", "seed": 3, "steps": 0, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.9999894973280344, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013305975168316617, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0029347876090612015}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.998888302647167, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.014060937344396365, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0011997947882231976}}}
+{"variant": "upright", "seed": 3, "steps": 8, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.999998929630823, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013526567560867737, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.014180583189365733}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.998821678962485, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.013866820346103093, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.011996163208997377}}}
+{"variant": "upright", "seed": 17, "steps": 0, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.9999949975725102, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013305975168316617, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0012447879615748072}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.998887566638807, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.01405577996470208, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.0018681178057652046}}}
+{"variant": "upright", "seed": 17, "steps": 8, "by_start": {"hanging": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": -0.9999908831017981, "balanced_fraction": 0.0, "longest_balance_dwell_s": 0.0, "max_abs_x_m": 0.013305975168316617, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.018231514214233017}, "upright": {"episodes": 1, "hold_successes": 0, "faults": 0, "score": 3.9988773226136347, "balanced_fraction": 1.0, "longest_balance_dwell_s": 0.05, "max_abs_x_m": 0.01398922514841135, "rail_braking_control_steps": 0.0, "raw_action_delta_rms": 0.01220083272904195}}}
+=========================== short test summary info ============================
+FAILED tests/test_rl_diagnostics.py::test_summary_rejects_unequal_optimizer_recipes_and_source_corruption
+1 failed, 3 passed in 2.71s
