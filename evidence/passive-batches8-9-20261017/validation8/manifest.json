@@ -1,0 +1,143 @@
+{
+  "remote_directory": "/home/rbafna/cartpole-v2-live/staging/operator-id-20261017-camera-zero/runs/passive-validation-8",
+  "files": {
+    "rig-1792270896955458741-2678669349.jsonl": {
+      "bytes": 18640762,
+      "sha256": "4f5aa90a2017e73815a4616e17067f208dd9b257f1da493830e609819a0a116e"
+    },
+    "vision.ndjson": {
+      "bytes": 65113596,
+      "sha256": "3921daefc146693ef7008bbcf2b97b32401592734870a0292872603d374c03ea"
+    },
+    "report.json": {
+      "bytes": 16640,
+      "sha256": "e143c2e23e41180c741c5c41aa9696d500e6230602930c13eef22afd7e63943a"
+    },
+    "vision-report.json": {
+      "bytes": 870,
+      "sha256": "439e735c649fa4cf7962a18d2eef73300363815dbfec6fd8b6e2e12abb0aa53c"
+    }
+  },
+  "session": {
+    "clock_id": "teensy:2678669349",
+    "session_id": "2678669349",
+    "topology": {
+      "cart": "cart",
+      "joints": [
+        "pole"
+      ]
+    }
+  },
+  "completed": true,
+  "stop_confirmed": true,
+  "records_dropped": 0,
+  "finish_reason": "duration_elapsed",
+  "collection_protocol": {
+    "schema": "cartpole-collection-protocol-v1",
+    "procedure": "passive",
+    "dataset_role": "validation",
+    "run_label": "passive-validation-8",
+    "operator_cart_restraint": "cart held stationary by hand",
+    "nominal_angles_only": true,
+    "requested_releases": [
+      {
+        "release_id": "release-01",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-02",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-03",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-04",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-05",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-06",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-07",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-08",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-09",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-10",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-11",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-12",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "right",
+        "repetition": 2
+      }
+    ]
+  },
+  "raw_sha256": "4f5aa90a2017e73815a4616e17067f208dd9b257f1da493830e609819a0a116e",
+  "fetched_at_utc": "2026-10-17T21:12:17.317192+00:00",
+  "source_unchanged_across_transfer": true,
+  "archive_sha256": "d9a456d62d43547c4fbab27428e2871fd0d03492c241516298844932e3e5082a",
+  "archive_bytes": 4063848,
+  "archive_members": {
+    "passive-validation-8/rig-1792270896955458741-2678669349.jsonl": {
+      "bytes": 18640762,
+      "sha256": "4f5aa90a2017e73815a4616e17067f208dd9b257f1da493830e609819a0a116e"
+    },
+    "passive-validation-8/vision.ndjson": {
+      "bytes": 65113596,
+      "sha256": "3921daefc146693ef7008bbcf2b97b32401592734870a0292872603d374c03ea"
+    },
+    "passive-validation-8/report.json": {
+      "bytes": 16640,
+      "sha256": "e143c2e23e41180c741c5c41aa9696d500e6230602930c13eef22afd7e63943a"
+    },
+    "passive-validation-8/vision-report.json": {
+      "bytes": 870,
+      "sha256": "439e735c649fa4cf7962a18d2eef73300363815dbfec6fd8b6e2e12abb0aa53c"
+    }
+  },
+  "extraction_root": "/Users/rbafna/projects/cartpole_v2/runs/passive-batches8-9-validation8-original",
+  "remote_tar_command": "bash -o pipefail -c 'tar -C /home/rbafna/cartpole-v2-live/staging/operator-id-20261017-camera-zero/runs -cf - -- passive-validation-8/rig-1792270896955458741-2678669349.jsonl passive-validation-8/vision.ndjson passive-validation-8/report.json passive-validation-8/vision-report.json | nice -n 19 xz -T1 -6 -c'",
+  "remote_files_modified": false
+}

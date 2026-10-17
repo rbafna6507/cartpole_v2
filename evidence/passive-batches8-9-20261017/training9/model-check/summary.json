@@ -1,0 +1,569 @@
+{
+  "source_identity": {
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batches8-9-training9-original/passive-training-9/rig-1792271221721127793-781240700.jsonl",
+    "member": null,
+    "sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384",
+    "hash_basis": "decompressed exact JSONL bytes",
+    "source_bytes": 18589665,
+    "record_count": 49204,
+    "collection_report": {
+      "status": "bound successful collection",
+      "completed": true,
+      "sha256": "91bd830a11f1481201df4431b9c4cfe1976ab6f23c020104d2f6676831e333e0",
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batches8-9-training9-original/passive-training-9/report.json"
+    },
+    "collection_protocol": {
+      "dataset_role": "training",
+      "nominal_angles_only": true,
+      "operator_cart_restraint": "cart held stationary by hand",
+      "procedure": "passive",
+      "requested_releases": [
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-01",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-02",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-03",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-04",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-05",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-06",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-07",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-08",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-09",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-10",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-11",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-12",
+          "repetition": 2
+        }
+      ],
+      "run_label": "passive-training-9",
+      "schema": "cartpole-collection-protocol-v1"
+    },
+    "collection_protocol_sha256": "3155a4845a58c516ec1b0c838346112f589e727ab5bea11f761c71309abc6123",
+    "passive_baseline": {
+      "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+      "camera": {
+        "bounds": {
+          "max_angle_spread_rad": 0.035,
+          "max_angle_vector_error_rad": 0.03,
+          "max_gap_s": 0.2,
+          "max_length_spread_fraction": 0.1,
+          "max_length_vector_error_fraction": 0.05,
+          "max_pivot_spread_px": 4.0,
+          "min_confidence": 0.5,
+          "min_duration_fraction": 0.75,
+          "min_duration_s": 1.5,
+          "min_length_px": 5.0,
+          "min_sample_count": 30,
+          "min_valid_fraction": 0.8
+        },
+        "capture_span_s": 1.9929470550268888,
+        "first_frame_seq": 7316977,
+        "first_host_ns": 366517598785344,
+        "first_source_t": 366517.573681177,
+        "frame_height": 600,
+        "frame_width": 960,
+        "image_angle_rad": -0.02423033920676254,
+        "last_frame_seq": 7317136,
+        "last_host_ns": 366519587538066,
+        "last_source_t": 366519.566628232,
+        "length_px": 194.52686337389773,
+        "length_spread_px": 0.6929446010810523,
+        "max_gap_s": 0.02690561395138502,
+        "pivot_px": [
+          478.1666666666667,
+          295.9929577464789
+        ],
+        "pivot_spread_px": [
+          0.19108063117744223,
+          0.455581414192352
+        ],
+        "rotation": null,
+        "sample_count": 147,
+        "source_frame_count": 147,
+        "spread_rad": 0.0016869311444190245,
+        "valid_fraction": 1.0
+      },
+      "duration_s": 2.003714043,
+      "encoder": {
+        "bounds": {
+          "max_angle_span_rad": 0.03,
+          "max_hanging_offset_rad": 0.35,
+          "min_duration_fraction": 0.95,
+          "min_duration_s": 1.9,
+          "min_sample_count": 100
+        },
+        "first_board_us": 1580492834,
+        "first_host_ns": 366517592877694,
+        "last_board_us": 1582496834,
+        "last_host_ns": 366519596591737,
+        "raw_angle_rad": 3.031146,
+        "sample_count": 502,
+        "span_rad": 0.0015339999999999243,
+        "spread_rad": 0.0015339999999999243
+      },
+      "schema": "cartpole-passive-baseline-v1",
+      "window_host_ns": [
+        366517592877694,
+        366519596591737
+      ],
+      "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+    },
+    "session": {
+      "clock_id": "teensy:781240700",
+      "session_id": "781240700",
+      "topology": {
+        "cart": "cart",
+        "joints": [
+          "pole"
+        ]
+      }
+    },
+    "reference": [
+      330,
+      15,
+      "executor-v6-measuredrail"
+    ],
+    "duplicate_snapshots": 0,
+    "annotations_sha256": "145bbe7d19c18da8ead69b044dea30ce3c039db25d8f05fe7f4976141429d8e5",
+    "operator_cart_restraint": "cart held stationary by hand per collection protocol; independently unverified",
+    "selection_method": "Selected from complete raw encoder/camera curves and all twelve onset zooms before computing or reading any batch9 model errors. Every visible release retained, including final partial decay. Held pose uses 0.5 s ending 0.05 s before observed onset; free interval begins 0.12 s after onset and ends before static tail or recording boundary. Exact hand-clear is not independently verified.",
+    "selection": [
+      {
+        "annotation": {
+          "episode_id": "release-01",
+          "pose_board_relative_s": [
+            10.12,
+            10.62
+          ],
+          "release_board_s": 10.67,
+          "board_relative_s": [
+            10.79,
+            15.2
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1103,
+        "actual_board_relative_s": [
+          10.791,
+          15.199
+        ],
+        "max_gap_s": 0.004000000000001336
+      },
+      {
+        "annotation": {
+          "episode_id": "release-02",
+          "pose_board_relative_s": [
+            22.05,
+            22.55
+          ],
+          "release_board_s": 22.6,
+          "board_relative_s": [
+            22.72,
+            26.8
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1020,
+        "actual_board_relative_s": [
+          22.723,
+          26.799
+        ],
+        "max_gap_s": 0.004000000000001336
+      },
+      {
+        "annotation": {
+          "episode_id": "release-03",
+          "pose_board_relative_s": [
+            33.46,
+            33.96
+          ],
+          "release_board_s": 34.01,
+          "board_relative_s": [
+            34.13,
+            42.5
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2093,
+        "actual_board_relative_s": [
+          34.131,
+          42.499
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-04",
+          "pose_board_relative_s": [
+            50.1,
+            50.6
+          ],
+          "release_board_s": 50.65,
+          "board_relative_s": [
+            50.77,
+            58.9
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2033,
+        "actual_board_relative_s": [
+          50.771,
+          58.899
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-05",
+          "pose_board_relative_s": [
+            67.61,
+            68.11
+          ],
+          "release_board_s": 68.16,
+          "board_relative_s": [
+            68.28,
+            79.2
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2730,
+        "actual_board_relative_s": [
+          68.283,
+          79.199
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-06",
+          "pose_board_relative_s": [
+            88.97,
+            89.47
+          ],
+          "release_board_s": 89.52,
+          "board_relative_s": [
+            89.64,
+            100.6
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2740,
+        "actual_board_relative_s": [
+          89.643,
+          100.599
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-07",
+          "pose_board_relative_s": [
+            105.49,
+            105.99
+          ],
+          "release_board_s": 106.04,
+          "board_relative_s": [
+            106.16,
+            110.9
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1185,
+        "actual_board_relative_s": [
+          106.163,
+          110.899
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-08",
+          "pose_board_relative_s": [
+            118.63,
+            119.13
+          ],
+          "release_board_s": 119.18,
+          "board_relative_s": [
+            119.3,
+            123.4
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1025,
+        "actual_board_relative_s": [
+          119.303,
+          123.399
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-09",
+          "pose_board_relative_s": [
+            132.01,
+            132.51
+          ],
+          "release_board_s": 132.56,
+          "board_relative_s": [
+            132.68,
+            140.5
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1955,
+        "actual_board_relative_s": [
+          132.683,
+          140.499
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-10",
+          "pose_board_relative_s": [
+            145.72,
+            146.22
+          ],
+          "release_board_s": 146.27,
+          "board_relative_s": [
+            146.39,
+            154.3
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1978,
+        "actual_board_relative_s": [
+          146.391,
+          154.299
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-11",
+          "pose_board_relative_s": [
+            160.55,
+            161.05
+          ],
+          "release_board_s": 161.1,
+          "board_relative_s": [
+            161.22,
+            171.8
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2645,
+        "actual_board_relative_s": [
+          161.223,
+          171.799
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-12",
+          "pose_board_relative_s": [
+            178.53,
+            179.03
+          ],
+          "release_board_s": 179.08,
+          "board_relative_s": [
+            179.2,
+            182.08
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified. Final partial decay retained at collection duration boundary."
+        },
+        "samples": 720,
+        "actual_board_relative_s": [
+          179.203,
+          182.079
+        ],
+        "max_gap_s": 0.004000000000019099
+      }
+    ]
+  },
+  "accepted": false,
+  "model_exported": false,
+  "camera_passed": false,
+  "poses_verified": false,
+  "camera_reasons": [
+    "release-11: angular RMSE exceeds 5 degrees or is unavailable",
+    "release-12: angular RMSE exceeds 5 degrees or is unavailable",
+    "release-12: angular P95 exceeds 10 degrees or is unavailable"
+  ],
+  "freeze_sha256": "2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59",
+  "results": [
+    {
+      "model": "weak_viscous",
+      "initializer": "original",
+      "short": {
+        "rms_deg": 5.61168516691571,
+        "p95_deg": 10.067796567119176,
+        "samples": 20109
+      },
+      "short_numeric_gates_pass": false,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 10.6048584570973,
+            "p95_deg": 24.558833257725563,
+            "samples": 20459
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 8.877341857188382,
+            "p95_deg": 19.898722315679894,
+            "samples": 19715
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_viscous",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.5210327857481563,
+        "p95_deg": 4.95842273820978,
+        "samples": 20109
+      },
+      "short_numeric_gates_pass": false,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 10.6048584570973,
+            "p95_deg": 24.558833257725563,
+            "samples": 20459
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 8.877341857188382,
+            "p95_deg": 19.898722315679894,
+            "samples": 19715
+          }
+        }
+      ]
+    },
+    {
+      "model": "batch5_weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.364885393366837,
+        "p95_deg": 4.844315286168449,
+        "samples": 20109
+      },
+      "short_numeric_gates_pass": true,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 5.592783334706696,
+            "p95_deg": 11.814549807037896,
+            "samples": 20459
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 3.940457059865504,
+            "p95_deg": 7.772554190163526,
+            "samples": 19715
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.368130525033715,
+        "p95_deg": 4.8645145074074545,
+        "samples": 20109
+      },
+      "short_numeric_gates_pass": true,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 3.4830307728045615,
+            "p95_deg": 6.833639815850582,
+            "samples": 20459
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 3.0515915367620616,
+            "p95_deg": 6.28047640267746,
+            "samples": 19715
+          }
+        }
+      ]
+    }
+  ]
+}

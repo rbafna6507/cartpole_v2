@@ -41,8 +41,12 @@ accepted-fit claim and is never an identification export.
 
 `training/profiles/passive-20261017` contains ready-to-use model, executor,
 observation and prior inputs. Its source is the frozen batch-6 fit, checked on
-batch 7 before this integration. Batches 8/9 are additional fixed-model checks;
-the profile is not automatically refitted when new recordings arrive.
+batch 7 before this integration. Both training- and validation-labelled files
+from batches 8/9 were then checked as validation without refitting: all 47
+observed releases pass the short-forecast numeric/coverage checks, with
+continuous recording RMS of 2.85-4.06 degrees. Camera/pose qualifications remain
+unresolved; see the [complete comparison](../evidence/passive-batches8-9-20261017/README.md).
+The profile is not automatically refitted when new recordings arrive.
 
 The model uses L_eff=0.160303873 m, gamma=0.006891975/s and smooth dry-friction
 acceleration 1.626894312 rad/s². With assumed pole mass 0.02275 kg,

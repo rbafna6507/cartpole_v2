@@ -1,0 +1,5012 @@
+{
+  "schema": "cartpole-later-passive-frozen-summary-v1",
+  "accepted": false,
+  "refitted": false,
+  "batch9_scored": true,
+  "freeze_sha256": "2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59",
+  "raw_hashes_independent_of_development": true,
+  "combined_metrics_basis": "Pooled individual sample residuals. RMS and P95 are not averages of recording metrics. Short forecasts reconstructed only from the frozen report initial states and verified against each original short score.",
+  "recordings": [
+    {
+      "label": "training9",
+      "role_in_this_review": "independent frozen-model validation",
+      "raw_sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384",
+      "session": {
+        "clock_id": "teensy:781240700",
+        "session_id": "781240700",
+        "topology": {
+          "cart": "cart",
+          "joints": [
+            "pole"
+          ]
+        }
+      },
+      "collection_protocol": {
+        "dataset_role": "training",
+        "nominal_angles_only": true,
+        "operator_cart_restraint": "cart held stationary by hand",
+        "procedure": "passive",
+        "requested_releases": [
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-01",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-02",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-03",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-04",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-05",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-06",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-07",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-08",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-09",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-10",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-11",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-12",
+            "repetition": 2
+          }
+        ],
+        "run_label": "passive-training-9",
+        "schema": "cartpole-collection-protocol-v1"
+      },
+      "camera_passed": false,
+      "poses_verified": false,
+      "camera_reasons": [
+        "release-11: angular RMSE exceeds 5 degrees or is unavailable",
+        "release-12: angular RMSE exceeds 5 degrees or is unavailable",
+        "release-12: angular P95 exceeds 10 degrees or is unavailable"
+      ],
+      "camera_releases": [
+        {
+          "episode_id": "release-01",
+          "annotation": {
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              10.12,
+              10.62
+            ],
+            "release_board_s": 10.67,
+            "board_relative_s": [
+              10.79,
+              15.2
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            10.79,
+            15.2
+          ],
+          "recorded_start_board_s": 10.791,
+          "recorded_start_excursion_rad": 0.171805307179586,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 227,
+          "valid_camera_frames": 227,
+          "camera_coverage_fraction": 0.9952052818300616,
+          "camera_time_coverage_fraction": 0.9952052818300616,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03860324012411276,
+          "missing_camera_intervals_board_s": [
+            [
+              10.79,
+              10.799229560541056
+            ],
+            [
+              15.188084853411628,
+              15.2
+            ]
+          ],
+          "angular_comparison_samples": 227,
+          "angular_rmse_rad": 0.042685981515389285,
+          "angular_p95_rad": 0.07682320706350455,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.35781020934393776,
+            "radial_max_px": 0.44109165219222235,
+            "baseline_displacement_p95_px": 0.35205274525922736,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              10.12,
+              10.62
+            ],
+            "encoder_median_rad": 0.5460973071795865,
+            "camera_median_rad": 0.5399194832395637,
+            "encoder_spread_rad": 0.008897200000000468,
+            "camera_spread_rad": 0.005086397978964526,
+            "reasons": [],
+            "release_board_s": 10.67,
+            "pose_to_release_gap_s": 0.05000000000000071,
+            "release_to_free_gap_s": 0.11999999999999922,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 29,
+            "camera_coverage_fraction": 0.9303601907026362,
+            "max_camera_gap_s": 0.03742313112301687,
+            "missing_camera_intervals_board_s": [
+              [
+                10.12,
+                10.134494009017558
+              ],
+              [
+                10.599674104368876,
+                10.62
+              ]
+            ],
+            "signed_disagreement_rad": 0.006177823940022754
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-02",
+          "annotation": {
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              22.05,
+              22.55
+            ],
+            "release_board_s": 22.6,
+            "board_relative_s": [
+              22.72,
+              26.8
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            22.72,
+            26.8
+          ],
+          "recorded_start_board_s": 22.723,
+          "recorded_start_excursion_rad": -0.24390299999999998,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 193,
+          "valid_camera_frames": 193,
+          "camera_coverage_fraction": 0.9866348999185699,
+          "camera_time_coverage_fraction": 0.9866348999185699,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03826787418448063,
+          "missing_camera_intervals_board_s": [
+            [
+              22.72,
+              22.73692789670857
+            ],
+            [
+              26.762398288376335,
+              26.8
+            ]
+          ],
+          "angular_comparison_samples": 193,
+          "angular_rmse_rad": 0.04352282311238963,
+          "angular_p95_rad": 0.07828091879674648,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.875
+            ],
+            "radial_p95_px": 0.34973571787087904,
+            "radial_max_px": 0.627198078818312,
+            "baseline_displacement_p95_px": 0.3889988361339948,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              22.05,
+              22.55
+            ],
+            "encoder_median_rad": -0.5169520000000003,
+            "camera_median_rad": -0.55454099178021,
+            "encoder_spread_rad": 0.0,
+            "camera_spread_rad": 0.0032038912004745124,
+            "reasons": [],
+            "release_board_s": 22.6,
+            "pose_to_release_gap_s": 0.05000000000000071,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 30,
+            "camera_coverage_fraction": 0.9797976440504499,
+            "max_camera_gap_s": 0.02592064882115963,
+            "missing_camera_intervals_board_s": [
+              [
+                22.05,
+                22.058978431700567
+              ],
+              [
+                22.54887725372579,
+                22.55
+              ]
+            ],
+            "signed_disagreement_rad": 0.03758899178020969
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-03",
+          "annotation": {
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              33.46,
+              33.96
+            ],
+            "release_board_s": 34.01,
+            "board_relative_s": [
+              34.13,
+              42.5
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            34.13,
+            42.5
+          ],
+          "recorded_start_board_s": 34.131,
+          "recorded_start_excursion_rad": 0.555301307179587,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 399,
+          "valid_camera_frames": 397,
+          "camera_coverage_fraction": 0.9949874686716792,
+          "camera_time_coverage_fraction": 0.99646656074544,
+          "valid_geometry_fraction": 0.9949874686716792,
+          "max_camera_gap_s": 0.038400468393668064,
+          "missing_camera_intervals_board_s": [
+            [
+              34.13,
+              34.135847284153584
+            ],
+            [
+              42.476272397592915,
+              42.5
+            ]
+          ],
+          "angular_comparison_samples": 397,
+          "angular_rmse_rad": 0.06262965344539007,
+          "angular_p95_rad": 0.11061195241427163,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.38142881880260954,
+            "radial_max_px": 0.4855210577593713,
+            "baseline_displacement_p95_px": 0.37574250406843196,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              33.46,
+              33.96
+            ],
+            "encoder_median_rad": 1.0446413071795864,
+            "camera_median_rad": 1.0774050735683514,
+            "encoder_spread_rad": 0.007670000000000066,
+            "camera_spread_rad": 0.007713895270624625,
+            "reasons": [],
+            "release_board_s": 34.01,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 24,
+            "camera_coverage_fraction": 0.9763060810818729,
+            "max_camera_gap_s": 0.06307682599290132,
+            "missing_camera_intervals_board_s": [
+              [
+                33.46,
+                33.47162809022294
+              ],
+              [
+                33.95978113076388,
+                33.96
+              ]
+            ],
+            "signed_disagreement_rad": -0.03276376638876499
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-04",
+          "annotation": {
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              50.1,
+              50.6
+            ],
+            "release_board_s": 50.65,
+            "board_relative_s": [
+              50.77,
+              58.9
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            50.77,
+            58.9
+          ],
+          "recorded_start_board_s": 50.771,
+          "recorded_start_excursion_rad": -0.43718499999999993,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 403,
+          "valid_camera_frames": 402,
+          "camera_coverage_fraction": 0.9950023619111559,
+          "camera_time_coverage_fraction": 0.9950023619111559,
+          "valid_geometry_fraction": 0.9975186104218362,
+          "max_camera_gap_s": 0.04785131988072777,
+          "missing_camera_intervals_board_s": [
+            [
+              50.77,
+              50.788392851091906
+            ],
+            [
+              58.8777620534296,
+              58.9
+            ]
+          ],
+          "angular_comparison_samples": 402,
+          "angular_rmse_rad": 0.06214013483594408,
+          "angular_p95_rad": 0.11648874793829249,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.96376811594206
+            ],
+            "radial_p95_px": 0.3941247757272649,
+            "radial_max_px": 0.526515763501339,
+            "baseline_displacement_p95_px": 0.3889988361339948,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              50.1,
+              50.6
+            ],
+            "encoder_median_rad": -1.0277670000000003,
+            "camera_median_rad": -1.0610356241657533,
+            "encoder_spread_rad": 0.0061360000000001405,
+            "camera_spread_rad": 0.008292057721709949,
+            "reasons": [],
+            "release_board_s": 50.65,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9565030795586864,
+            "max_camera_gap_s": 0.037258439852550396,
+            "missing_camera_intervals_board_s": [
+              [
+                50.1,
+                50.11270237027504
+              ],
+              [
+                50.59095391005438,
+                50.6
+              ]
+            ],
+            "signed_disagreement_rad": 0.033268624165752936
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-05",
+          "annotation": {
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              67.61,
+              68.11
+            ],
+            "release_board_s": 68.16,
+            "board_relative_s": [
+              68.28,
+              79.2
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            68.28,
+            79.2
+          ],
+          "recorded_start_board_s": 68.283,
+          "recorded_start_excursion_rad": 0.9357283071795861,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 528,
+          "valid_camera_frames": 526,
+          "camera_coverage_fraction": 0.9962121212121212,
+          "camera_time_coverage_fraction": 0.9980303554646258,
+          "valid_geometry_fraction": 0.9962121212121212,
+          "max_camera_gap_s": 0.047513747863305866,
+          "missing_camera_intervals_board_s": [
+            [
+              68.28,
+              68.28334993221588
+            ],
+            [
+              79.1818414138896,
+              79.2
+            ]
+          ],
+          "angular_comparison_samples": 526,
+          "angular_rmse_rad": 0.07907849232107282,
+          "angular_p95_rad": 0.14200625591386035,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.22222222222223,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.4021269819394098,
+            "radial_max_px": 0.7317686189645616,
+            "baseline_displacement_p95_px": 0.4329968890268115,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              67.61,
+              68.11
+            ],
+            "encoder_median_rad": 1.5155733071795867,
+            "camera_median_rad": 1.5954135562511857,
+            "encoder_spread_rad": 0.012272000000000283,
+            "camera_spread_rad": 0.0026096493256258825,
+            "reasons": [],
+            "release_board_s": 68.16,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 29,
+            "camera_coverage_fraction": 0.9714829547142756,
+            "max_camera_gap_s": 0.037240979449180145,
+            "missing_camera_intervals_board_s": [
+              [
+                67.61,
+                67.62253003982754
+              ],
+              [
+                68.10827151718468,
+                68.11
+              ]
+            ],
+            "signed_disagreement_rad": -0.07984024907159903
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-06",
+          "annotation": {
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              88.97,
+              89.47
+            ],
+            "release_board_s": 89.52,
+            "board_relative_s": [
+              89.64,
+              100.6
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            89.64,
+            100.6
+          ],
+          "recorded_start_board_s": 89.643,
+          "recorded_start_excursion_rad": -0.48320400000000013,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 530,
+          "valid_camera_frames": 528,
+          "camera_coverage_fraction": 0.9962264150943396,
+          "camera_time_coverage_fraction": 0.9976141144528659,
+          "valid_geometry_fraction": 0.9962264150943396,
+          "max_camera_gap_s": 0.0770108306103765,
+          "missing_camera_intervals_board_s": [
+            [
+              89.64,
+              89.65287414341834
+            ],
+            [
+              100.58672483782175,
+              100.6
+            ]
+          ],
+          "angular_comparison_samples": 528,
+          "angular_rmse_rad": 0.08090325141940109,
+          "angular_p95_rad": 0.15803459186296137,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2142857142857,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.36727095022597767,
+            "radial_max_px": 0.5558160270618366,
+            "baseline_displacement_p95_px": 0.3889988361339948,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": false,
+            "status": "not verified",
+            "board_relative_s": [
+              88.97,
+              89.47
+            ],
+            "encoder_median_rad": -1.5232430000000001,
+            "camera_median_rad": -1.6319576043043944,
+            "encoder_spread_rad": 0.007670000000000066,
+            "camera_spread_rad": 0.002193046160956258,
+            "reasons": [
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 89.52,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 24,
+            "camera_coverage_fraction": 0.9760826545536645,
+            "max_camera_gap_s": 0.03835154317692968,
+            "missing_camera_intervals_board_s": [
+              [
+                88.97,
+                88.97546656059606
+              ],
+              [
+                89.4635078878729,
+                89.47
+              ]
+            ],
+            "signed_disagreement_rad": 0.10871460430439428
+          },
+          "pose_verified": false,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-07",
+          "annotation": {
+            "episode_id": "release-07",
+            "pose_board_relative_s": [
+              105.49,
+              105.99
+            ],
+            "release_board_s": 106.04,
+            "board_relative_s": [
+              106.16,
+              110.9
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            106.16,
+            110.9
+          ],
+          "recorded_start_board_s": 106.163,
+          "recorded_start_excursion_rad": 0.14726230717958647,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 222,
+          "valid_camera_frames": 222,
+          "camera_coverage_fraction": 0.9975211805891129,
+          "camera_time_coverage_fraction": 0.9975211805891129,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03941859317767182,
+          "missing_camera_intervals_board_s": [
+            [
+              106.16,
+              106.16740451277667
+            ],
+            [
+              110.89565490876907,
+              110.9
+            ]
+          ],
+          "angular_comparison_samples": 222,
+          "angular_rmse_rad": 0.04618106975793763,
+          "angular_p95_rad": 0.08781273451182202,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.8424657534247
+            ],
+            "radial_p95_px": 0.29170874803540464,
+            "radial_max_px": 0.531759700820245,
+            "baseline_displacement_p95_px": 0.3631404240523123,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              105.49,
+              105.99
+            ],
+            "encoder_median_rad": 0.6181943071795859,
+            "camera_median_rad": 0.6146705991488145,
+            "encoder_spread_rad": 0.021475999999999718,
+            "camera_spread_rad": 0.017243187944277972,
+            "reasons": [],
+            "release_board_s": 106.04,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.11999999999999034,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 23,
+            "camera_coverage_fraction": 0.9550782368574744,
+            "max_camera_gap_s": 0.03742570372942566,
+            "missing_camera_intervals_board_s": [
+              [
+                105.49,
+                105.49050948518027
+              ],
+              [
+                105.968048603609,
+                105.99
+              ]
+            ],
+            "signed_disagreement_rad": 0.0035237080307713997
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-08",
+          "annotation": {
+            "episode_id": "release-08",
+            "pose_board_relative_s": [
+              118.63,
+              119.13
+            ],
+            "release_board_s": 119.18,
+            "board_relative_s": [
+              119.3,
+              123.4
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            119.3,
+            123.4
+          ],
+          "recorded_start_board_s": 119.303,
+          "recorded_start_excursion_rad": -0.1672039999999999,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 197,
+          "valid_camera_frames": 197,
+          "camera_coverage_fraction": 0.9939837229889168,
+          "camera_time_coverage_fraction": 0.9939837229889168,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03842151711400277,
+          "missing_camera_intervals_board_s": [
+            [
+              119.3,
+              119.32261660303385
+            ],
+            [
+              123.39794986728842,
+              123.4
+            ]
+          ],
+          "angular_comparison_samples": 197,
+          "angular_rmse_rad": 0.045412740424307145,
+          "angular_p95_rad": 0.08771664412917245,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.8424657534247
+            ],
+            "radial_p95_px": 0.27640344138843836,
+            "radial_max_px": 0.6067613358404471,
+            "baseline_displacement_p95_px": 0.3558775748356807,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              118.63,
+              119.13
+            ],
+            "encoder_median_rad": -0.513884,
+            "camera_median_rad": -0.5538295067273479,
+            "encoder_spread_rad": 0.0015339999999999243,
+            "camera_spread_rad": 0.0026280463513879914,
+            "reasons": [],
+            "release_board_s": 119.18,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.11999999999999034,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 23,
+            "camera_coverage_fraction": 0.9549695584528592,
+            "max_camera_gap_s": 0.03916094448943852,
+            "missing_camera_intervals_board_s": [
+              [
+                118.63,
+                118.64497224137448
+              ],
+              [
+                119.1224570206009,
+                119.13
+              ]
+            ],
+            "signed_disagreement_rad": 0.03994550672734787
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-09",
+          "annotation": {
+            "episode_id": "release-09",
+            "pose_board_relative_s": [
+              132.01,
+              132.51
+            ],
+            "release_board_s": 132.56,
+            "board_relative_s": [
+              132.68,
+              140.5
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            132.68,
+            140.5
+          ],
+          "recorded_start_board_s": 132.683,
+          "recorded_start_excursion_rad": 0.4341163071795864,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 375,
+          "valid_camera_frames": 372,
+          "camera_coverage_fraction": 0.992,
+          "camera_time_coverage_fraction": 0.9956161047213395,
+          "valid_geometry_fraction": 0.992,
+          "max_camera_gap_s": 0.07648533215063935,
+          "missing_camera_intervals_board_s": [
+            [
+              132.68,
+              132.69222795471183
+            ],
+            [
+              140.4779458936327,
+              140.5
+            ]
+          ],
+          "angular_comparison_samples": 372,
+          "angular_rmse_rad": 0.06645201803272557,
+          "angular_p95_rad": 0.12052746848598181,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.96376811594206
+            ],
+            "radial_p95_px": 0.37374959208909614,
+            "radial_max_px": 0.5307131494810069,
+            "baseline_displacement_p95_px": 0.3715514905896452,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              132.01,
+              132.51
+            ],
+            "encoder_median_rad": 1.0262333071795864,
+            "camera_median_rad": 1.0561687781573341,
+            "encoder_spread_rad": 0.009204000000000434,
+            "camera_spread_rad": 0.0027582093901147063,
+            "reasons": [],
+            "release_board_s": 132.56,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9529859972481063,
+            "max_camera_gap_s": 0.03801013604876857,
+            "missing_camera_intervals_board_s": [
+              [
+                132.01,
+                132.01310712225558
+              ],
+              [
+                132.48960012087963,
+                132.51
+              ]
+            ],
+            "signed_disagreement_rad": -0.029935470977747736
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-10",
+          "annotation": {
+            "episode_id": "release-10",
+            "pose_board_relative_s": [
+              145.72,
+              146.22
+            ],
+            "release_board_s": 146.27,
+            "board_relative_s": [
+              146.39,
+              154.3
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            146.39,
+            154.3
+          ],
+          "recorded_start_board_s": 146.391,
+          "recorded_start_excursion_rad": -0.4985440000000003,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 399,
+          "valid_camera_frames": 396,
+          "camera_coverage_fraction": 0.9924812030075187,
+          "camera_time_coverage_fraction": 0.9956122678508393,
+          "valid_geometry_fraction": 0.9924812030075187,
+          "max_camera_gap_s": 0.039017913122307846,
+          "missing_camera_intervals_board_s": [
+            [
+              146.39,
+              146.4088420500431
+            ],
+            [
+              154.28413508874326,
+              154.3
+            ]
+          ],
+          "angular_comparison_samples": 396,
+          "angular_rmse_rad": 0.06640018205170624,
+          "angular_p95_rad": 0.12876685219437456,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.94520547945206
+            ],
+            "radial_p95_px": 0.36119907234074355,
+            "radial_max_px": 0.5085404507470574,
+            "baseline_displacement_p95_px": 0.37156453089840635,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              145.72,
+              146.22
+            ],
+            "encoder_median_rad": -1.032369,
+            "camera_median_rad": -1.0724775550145256,
+            "encoder_spread_rad": 0.016874000000000056,
+            "camera_spread_rad": 0.02117965969790951,
+            "reasons": [],
+            "release_board_s": 146.27,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.11999999999997613,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9314114722391196,
+            "max_camera_gap_s": 0.02671275896869929,
+            "missing_camera_intervals_board_s": [
+              [
+                145.72,
+                145.7302065048107
+              ],
+              [
+                146.19591224093026,
+                146.22
+              ]
+            ],
+            "signed_disagreement_rad": 0.04010855501452548
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-11",
+          "annotation": {
+            "episode_id": "release-11",
+            "pose_board_relative_s": [
+              160.55,
+              161.05
+            ],
+            "release_board_s": 161.1,
+            "board_relative_s": [
+              161.22,
+              171.8
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            161.22,
+            171.8
+          ],
+          "recorded_start_board_s": 161.223,
+          "recorded_start_excursion_rad": 1.102932307179586,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 519,
+          "valid_camera_frames": 517,
+          "camera_coverage_fraction": 0.9961464354527938,
+          "camera_time_coverage_fraction": 0.9990035374214663,
+          "valid_geometry_fraction": 0.9961464354527938,
+          "max_camera_gap_s": 0.03891692348554443,
+          "missing_camera_intervals_board_s": [
+            [
+              161.22,
+              161.22103419750925
+            ],
+            [
+              171.79049162342838,
+              171.8
+            ]
+          ],
+          "angular_comparison_samples": 517,
+          "angular_rmse_rad": 0.08812427355684484,
+          "angular_p95_rad": 0.162012711713538,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2222222222222,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.45373464909360556,
+            "radial_max_px": 0.938208006770759,
+            "baseline_displacement_p95_px": 0.43685341746341544,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              160.55,
+              161.05
+            ],
+            "encoder_median_rad": 1.5677283071795867,
+            "camera_median_rad": 1.6427945940271718,
+            "encoder_spread_rad": 0.010737999999999914,
+            "camera_spread_rad": 0.007129191731452255,
+            "reasons": [],
+            "release_board_s": 161.1,
+            "pose_to_release_gap_s": 0.04999999999998295,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9784755144638666,
+            "max_camera_gap_s": 0.03830147446029741,
+            "missing_camera_intervals_board_s": [
+              [
+                160.55,
+                160.5546357502221
+              ],
+              [
+                161.04387350745404,
+                161.05
+              ]
+            ],
+            "signed_disagreement_rad": -0.0750662868475851
+          },
+          "pose_verified": true,
+          "passed": false,
+          "reasons": [
+            "angular RMSE exceeds 5 degrees or is unavailable"
+          ]
+        },
+        {
+          "episode_id": "release-12",
+          "annotation": {
+            "episode_id": "release-12",
+            "pose_board_relative_s": [
+              178.53,
+              179.03
+            ],
+            "release_board_s": 179.08,
+            "board_relative_s": [
+              179.2,
+              182.08
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified. Final partial decay retained at collection duration boundary."
+          },
+          "board_relative_s": [
+            179.2,
+            182.08
+          ],
+          "recorded_start_board_s": 179.203,
+          "recorded_start_excursion_rad": -0.11811600000000011,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 137,
+          "valid_camera_frames": 135,
+          "camera_coverage_fraction": 0.9854014598540146,
+          "camera_time_coverage_fraction": 0.9931901212627514,
+          "valid_geometry_fraction": 0.9854014598540146,
+          "max_camera_gap_s": 0.05047937049329221,
+          "missing_camera_intervals_board_s": [
+            [
+              179.2,
+              179.20169747039657
+            ],
+            [
+              182.06208501963332,
+              182.08
+            ]
+          ],
+          "angular_comparison_samples": 135,
+          "angular_rmse_rad": 0.1255274785728483,
+          "angular_p95_rad": 0.19440877916741284,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2323943661972,
+              296.03571428571433
+            ],
+            "radial_p95_px": 0.4537015243987291,
+            "radial_max_px": 0.509546220936382,
+            "baseline_displacement_p95_px": 0.5307602584259965,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": false,
+            "status": "not verified",
+            "board_relative_s": [
+              178.53,
+              179.03
+            ],
+            "encoder_median_rad": -1.4526800000000002,
+            "camera_median_rad": -1.5623059216479362,
+            "encoder_spread_rad": 0.023930400000000098,
+            "camera_spread_rad": 0.03062221575252996,
+            "reasons": [
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 179.08,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.11999999999997613,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 24,
+            "camera_coverage_fraction": 0.9521045703443747,
+            "max_camera_gap_s": 0.03750228279074008,
+            "missing_camera_intervals_board_s": [
+              [
+                178.53,
+                178.54968797902683
+              ],
+              [
+                179.02574026419902,
+                179.03
+              ]
+            ],
+            "signed_disagreement_rad": 0.10962592164793605
+          },
+          "pose_verified": false,
+          "passed": false,
+          "reasons": [
+            "angular RMSE exceeds 5 degrees or is unavailable",
+            "angular P95 exceeds 10 degrees or is unavailable"
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "weak_viscous",
+          "initializer": "original",
+          "short": {
+            "rms_deg": 5.61168516691571,
+            "p95_deg": 10.067796567119176,
+            "samples": 20109
+          },
+          "short_numeric_gates_pass": false,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 10.6048584570973,
+                "p95_deg": 24.558833257725563,
+                "samples": 20459
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 8.877341857188382,
+                "p95_deg": 19.898722315679894,
+                "samples": 19715
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 1.7148241276267895,
+                "p95_deg": 3.6268677884635414,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8933210105286076,
+                  "p95_deg": 8.821289927375147,
+                  "samples": 1039
+                },
+                "0.5": {
+                  "rms_deg": 4.742965620645416,
+                  "p95_deg": 9.59804703946208,
+                  "samples": 977
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.43470040707564,
+                "p95_deg": 4.250224097349416,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.3945016461377735,
+                  "p95_deg": 9.07361867459105,
+                  "samples": 956
+                },
+                "0.5": {
+                  "rms_deg": 5.08002872662662,
+                  "p95_deg": 10.31824982092401,
+                  "samples": 894
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 3.3312838138364627,
+                "p95_deg": 6.739618087517408,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.678545713536214,
+                  "p95_deg": 7.634165217486827,
+                  "samples": 2029
+                },
+                "0.5": {
+                  "rms_deg": 5.301275186043874,
+                  "p95_deg": 8.736560545394527,
+                  "samples": 1967
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 8.323258780949983,
+                "p95_deg": 14.422714710771404,
+                "samples": 1992
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.904267878806807,
+                  "p95_deg": 8.219662444255006,
+                  "samples": 1969
+                },
+                "0.5": {
+                  "rms_deg": 4.229179633479176,
+                  "p95_deg": 8.151529162459559,
+                  "samples": 1907
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 3.944660425142311,
+                "p95_deg": 8.875596599108151,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.146651988351852,
+                  "p95_deg": 28.85314193081266,
+                  "samples": 2666
+                },
+                "0.5": {
+                  "rms_deg": 12.611212831849599,
+                  "p95_deg": 22.77299668500011,
+                  "samples": 2604
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 5.490119684085341,
+                "p95_deg": 13.404789793480695,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.780041699423872,
+                  "p95_deg": 30.106389087531888,
+                  "samples": 2676
+                },
+                "0.5": {
+                  "rms_deg": 13.324464414314127,
+                  "p95_deg": 24.08249825133142,
+                  "samples": 2614
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.4641949025760055,
+                "p95_deg": 5.535391155004321,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.351773679059052,
+                  "p95_deg": 9.07594698349684,
+                  "samples": 1121
+                },
+                "0.5": {
+                  "rms_deg": 5.116515465937909,
+                  "p95_deg": 9.632263418652382,
+                  "samples": 1059
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 7.30084653130329,
+                "p95_deg": 22.357096475762397,
+                "samples": 992
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.382359235534502,
+                  "p95_deg": 9.458688228097397,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 4.988576609596068,
+                  "p95_deg": 10.40659092695376,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 7.308454761314163,
+                "p95_deg": 11.88174556223466,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8946658611222276,
+                  "p95_deg": 7.687249236344466,
+                  "samples": 1891
+                },
+                "0.5": {
+                  "rms_deg": 5.09433561318309,
+                  "p95_deg": 8.256953618961113,
+                  "samples": 1829
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 7.356303986740356,
+                "p95_deg": 12.792017820949503,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.537457296476195,
+                  "p95_deg": 8.946132149934144,
+                  "samples": 1914
+                },
+                "0.5": {
+                  "rms_deg": 4.122741112553857,
+                  "p95_deg": 8.146791804540227,
+                  "samples": 1852
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 5.013665150343593,
+                "p95_deg": 11.178517998769022,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 14.698818589951257,
+                  "p95_deg": 26.285412545852488,
+                  "samples": 2581
+                },
+                "0.5": {
+                  "rms_deg": 12.32247004474183,
+                  "p95_deg": 22.164535279332025,
+                  "samples": 2519
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 5.7686813783925235,
+                "p95_deg": 14.009000951739287,
+                "samples": 625
+              },
+              "short_windows": 5,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 9.452489554252406,
+                  "p95_deg": 18.728887232594722,
+                  "samples": 656
+                },
+                "0.5": {
+                  "rms_deg": 7.043875558602289,
+                  "p95_deg": 14.276800357148687,
+                  "samples": 594
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "weak_viscous",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.5210327857481563,
+            "p95_deg": 4.95842273820978,
+            "samples": 20109
+          },
+          "short_numeric_gates_pass": false,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 10.6048584570973,
+                "p95_deg": 24.558833257725563,
+                "samples": 20459
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 8.877341857188382,
+                "p95_deg": 19.898722315679894,
+                "samples": 19715
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.2366482192684463,
+                "p95_deg": 4.326204382240284,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8933210105286076,
+                  "p95_deg": 8.821289927375147,
+                  "samples": 1039
+                },
+                "0.5": {
+                  "rms_deg": 4.742965620645416,
+                  "p95_deg": 9.59804703946208,
+                  "samples": 977
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.406464608966079,
+                "p95_deg": 4.268526659691696,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.3945016461377735,
+                  "p95_deg": 9.07361867459105,
+                  "samples": 956
+                },
+                "0.5": {
+                  "rms_deg": 5.08002872662662,
+                  "p95_deg": 10.31824982092401,
+                  "samples": 894
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 2.0190408530699795,
+                "p95_deg": 4.247521039811577,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.678545713536214,
+                  "p95_deg": 7.634165217486827,
+                  "samples": 2029
+                },
+                "0.5": {
+                  "rms_deg": 5.301275186043874,
+                  "p95_deg": 8.736560545394527,
+                  "samples": 1967
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.4340475390585476,
+                "p95_deg": 4.820594067075238,
+                "samples": 1992
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.904267878806807,
+                  "p95_deg": 8.219662444255006,
+                  "samples": 1969
+                },
+                "0.5": {
+                  "rms_deg": 4.229179633479176,
+                  "p95_deg": 8.151529162459559,
+                  "samples": 1907
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.605093280484013,
+                "p95_deg": 5.571025144398811,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.146651988351852,
+                  "p95_deg": 28.85314193081266,
+                  "samples": 2666
+                },
+                "0.5": {
+                  "rms_deg": 12.611212831849599,
+                  "p95_deg": 22.77299668500011,
+                  "samples": 2604
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.5924667124245326,
+                "p95_deg": 5.235378209246179,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.780041699423872,
+                  "p95_deg": 30.106389087531888,
+                  "samples": 2676
+                },
+                "0.5": {
+                  "rms_deg": 13.324464414314127,
+                  "p95_deg": 24.08249825133142,
+                  "samples": 2614
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.1912355251588274,
+                "p95_deg": 4.199333230807211,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.351773679059052,
+                  "p95_deg": 9.07594698349684,
+                  "samples": 1121
+                },
+                "0.5": {
+                  "rms_deg": 5.116515465937909,
+                  "p95_deg": 9.632263418652382,
+                  "samples": 1059
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 2.1659634342644223,
+                "p95_deg": 4.218491878621031,
+                "samples": 992
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.382359235534502,
+                  "p95_deg": 9.458688228097397,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 4.988576609596068,
+                  "p95_deg": 10.40659092695376,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 2.00030231485455,
+                "p95_deg": 4.356624669861731,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8946658611222276,
+                  "p95_deg": 7.687249236344466,
+                  "samples": 1891
+                },
+                "0.5": {
+                  "rms_deg": 5.09433561318309,
+                  "p95_deg": 8.256953618961113,
+                  "samples": 1829
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.4429170119602786,
+                "p95_deg": 4.74799672493527,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.537457296476195,
+                  "p95_deg": 8.946132149934144,
+                  "samples": 1914
+                },
+                "0.5": {
+                  "rms_deg": 4.122741112553857,
+                  "p95_deg": 8.146791804540227,
+                  "samples": 1852
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 3.2045295514446015,
+                "p95_deg": 6.586840838569013,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 14.698818589951257,
+                  "p95_deg": 26.285412545852488,
+                  "samples": 2581
+                },
+                "0.5": {
+                  "rms_deg": 12.32247004474183,
+                  "p95_deg": 22.164535279332025,
+                  "samples": 2519
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.5560193581899053,
+                "p95_deg": 8.752694995801951,
+                "samples": 625
+              },
+              "short_windows": 5,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 9.452489554252406,
+                  "p95_deg": 18.728887232594722,
+                  "samples": 656
+                },
+                "0.5": {
+                  "rms_deg": 7.043875558602289,
+                  "p95_deg": 14.276800357148687,
+                  "samples": 594
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "batch5_weak_coulomb",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.364885393366837,
+            "p95_deg": 4.844315286168449,
+            "samples": 20109
+          },
+          "short_numeric_gates_pass": true,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 5.592783334706696,
+                "p95_deg": 11.814549807037896,
+                "samples": 20459
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 3.940457059865504,
+                "p95_deg": 7.772554190163526,
+                "samples": 19715
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.0962469176263148,
+                "p95_deg": 4.069753073876768,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.307597582013353,
+                  "p95_deg": 6.106996720644087,
+                  "samples": 1039
+                },
+                "0.5": {
+                  "rms_deg": 2.725619328113182,
+                  "p95_deg": 4.8395242775997875,
+                  "samples": 977
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.124251081106112,
+                "p95_deg": 3.857559346381044,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.667800064053966,
+                  "p95_deg": 4.325314062517192,
+                  "samples": 956
+                },
+                "0.5": {
+                  "rms_deg": 1.9594464855077351,
+                  "p95_deg": 3.5224494125919423,
+                  "samples": 894
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 1.8975539840345947,
+                "p95_deg": 3.943112044478051,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.7068457384763116,
+                  "p95_deg": 5.811115926909707,
+                  "samples": 2029
+                },
+                "0.5": {
+                  "rms_deg": 4.9986770589315475,
+                  "p95_deg": 8.668424371912492,
+                  "samples": 1967
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.35922048390444,
+                "p95_deg": 5.028293127544871,
+                "samples": 1992
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.573626151374406,
+                  "p95_deg": 8.004392479347606,
+                  "samples": 1969
+                },
+                "0.5": {
+                  "rms_deg": 3.5383768404255798,
+                  "p95_deg": 6.344130313746552,
+                  "samples": 1907
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.448094854910184,
+                "p95_deg": 5.363750132926978,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 8.698733038974959,
+                  "p95_deg": 15.583857969394582,
+                  "samples": 2666
+                },
+                "0.5": {
+                  "rms_deg": 4.811238258320202,
+                  "p95_deg": 9.014873247237775,
+                  "samples": 2604
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.484377227212306,
+                "p95_deg": 4.889867373550017,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 7.796936876252189,
+                  "p95_deg": 13.869211558689658,
+                  "samples": 2676
+                },
+                "0.5": {
+                  "rms_deg": 3.9616131137718624,
+                  "p95_deg": 7.363748440596229,
+                  "samples": 2614
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.025325050079081,
+                "p95_deg": 4.1430655930417775,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.87288931854316,
+                  "p95_deg": 5.540496904257663,
+                  "samples": 1121
+                },
+                "0.5": {
+                  "rms_deg": 2.6598754225859125,
+                  "p95_deg": 4.774518701731103,
+                  "samples": 1059
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 1.879462992191458,
+                "p95_deg": 4.056426023043464,
+                "samples": 992
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.4078349554874796,
+                  "p95_deg": 4.361323056206253,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 1.6763587163002303,
+                  "p95_deg": 3.3239282959748397,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 1.9511989231269387,
+                "p95_deg": 4.2848646237264685,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.27022844795748,
+                  "p95_deg": 5.722067822943441,
+                  "samples": 1891
+                },
+                "0.5": {
+                  "rms_deg": 4.641446463037779,
+                  "p95_deg": 7.8896121225700595,
+                  "samples": 1829
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.329202498510503,
+                "p95_deg": 4.816833183894564,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.461410577229717,
+                  "p95_deg": 9.300084129504992,
+                  "samples": 1914
+                },
+                "0.5": {
+                  "rms_deg": 3.2146495257675456,
+                  "p95_deg": 5.808643302924374,
+                  "samples": 1852
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 2.853876056214311,
+                "p95_deg": 6.2448601287110685,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 6.150986211467196,
+                  "p95_deg": 11.13145589203915,
+                  "samples": 2581
+                },
+                "0.5": {
+                  "rms_deg": 4.489318402533171,
+                  "p95_deg": 8.357596297795345,
+                  "samples": 2519
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.601548678630621,
+                "p95_deg": 8.441279124439715,
+                "samples": 625
+              },
+              "short_windows": 5,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.190395373982897,
+                  "p95_deg": 8.092513643013007,
+                  "samples": 656
+                },
+                "0.5": {
+                  "rms_deg": 1.7279355735951758,
+                  "p95_deg": 3.7220110965345063,
+                  "samples": 594
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "weak_coulomb",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.368130525033715,
+            "p95_deg": 4.8645145074074545,
+            "samples": 20109
+          },
+          "short_numeric_gates_pass": true,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 3.4830307728045615,
+                "p95_deg": 6.833639815850582,
+                "samples": 20459
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 3.0515915367620616,
+                "p95_deg": 6.28047640267746,
+                "samples": 19715
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.0892672037494475,
+                "p95_deg": 4.069219145957633,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.1627530791359684,
+                  "p95_deg": 5.811363545156873,
+                  "samples": 1039
+                },
+                "0.5": {
+                  "rms_deg": 2.6131689923751735,
+                  "p95_deg": 4.589841485023472,
+                  "samples": 977
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.143132248338303,
+                "p95_deg": 3.847858743603759,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.5679823015642604,
+                  "p95_deg": 4.299391597179696,
+                  "samples": 956
+                },
+                "0.5": {
+                  "rms_deg": 1.8552300396237285,
+                  "p95_deg": 3.3526479354281076,
+                  "samples": 894
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 1.9068411851788722,
+                "p95_deg": 4.006239677242577,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.4338761632838173,
+                  "p95_deg": 5.4588386419075015,
+                  "samples": 2029
+                },
+                "0.5": {
+                  "rms_deg": 3.9608892663215833,
+                  "p95_deg": 6.864033329737788,
+                  "samples": 1967
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.356347274938537,
+                "p95_deg": 5.035709032719856,
+                "samples": 1992
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.6563394788234853,
+                  "p95_deg": 6.325321715347515,
+                  "samples": 1969
+                },
+                "0.5": {
+                  "rms_deg": 2.5235011808684544,
+                  "p95_deg": 4.5207995292208905,
+                  "samples": 1907
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.456757337109766,
+                "p95_deg": 5.301700039223782,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.125021165591974,
+                  "p95_deg": 9.115612396491162,
+                  "samples": 2666
+                },
+                "0.5": {
+                  "rms_deg": 2.4375610354984287,
+                  "p95_deg": 5.206889495203721,
+                  "samples": 2604
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.4973668949669907,
+                "p95_deg": 4.866639709160449,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.6747495274217745,
+                  "p95_deg": 6.181969269822792,
+                  "samples": 2676
+                },
+                "0.5": {
+                  "rms_deg": 4.5314663245289175,
+                  "p95_deg": 9.265492289591162,
+                  "samples": 2614
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.016806582181751,
+                "p95_deg": 4.12343093149664,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.67238906972113,
+                  "p95_deg": 5.196915244586713,
+                  "samples": 1121
+                },
+                "0.5": {
+                  "rms_deg": 2.5137385242919073,
+                  "p95_deg": 4.4753934793618635,
+                  "samples": 1059
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 1.8889801745723944,
+                "p95_deg": 4.075941470520907,
+                "samples": 992
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.2787344462916255,
+                  "p95_deg": 4.197459628382796,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 1.5608515225529367,
+                  "p95_deg": 3.0796042700729336,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 1.9716640877324028,
+                "p95_deg": 4.422470611506852,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.3497173591366,
+                  "p95_deg": 4.396951756405772,
+                  "samples": 1891
+                },
+                "0.5": {
+                  "rms_deg": 3.780062604641747,
+                  "p95_deg": 6.293235687022562,
+                  "samples": 1829
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.3247813566231135,
+                "p95_deg": 4.8881168065735325,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.676278417482279,
+                  "p95_deg": 7.815005688959312,
+                  "samples": 1914
+                },
+                "0.5": {
+                  "rms_deg": 2.238702368019457,
+                  "p95_deg": 4.018462883068241,
+                  "samples": 1852
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 2.820196567783038,
+                "p95_deg": 6.009434502143753,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.455523209997324,
+                  "p95_deg": 4.438264189810984,
+                  "samples": 2581
+                },
+                "0.5": {
+                  "rms_deg": 2.190621608534253,
+                  "p95_deg": 5.11873552020216,
+                  "samples": 2519
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.6700796805746716,
+                "p95_deg": 8.408936707336293,
+                "samples": 625
+              },
+              "short_windows": 5,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.0604133210516835,
+                  "p95_deg": 5.537758730437469,
+                  "samples": 656
+                },
+                "0.5": {
+                  "rms_deg": 2.9879914744768383,
+                  "p95_deg": 6.8475153878601525,
+                  "samples": 594
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        }
+      ],
+      "report_sha256": "34cad2c849474465797e5a01e2626c02f690ecc0aeaea82a1b97a4e1e6289ad7"
+    },
+    {
+      "label": "validation9",
+      "role_in_this_review": "independent frozen-model validation",
+      "raw_sha256": "6c3f08f84b3cbb3053a035ae64d3f5b8a8d9ce9bcd099dac6f99a693216d4cfe",
+      "session": {
+        "clock_id": "teensy:3754275768",
+        "session_id": "3754275768",
+        "topology": {
+          "cart": "cart",
+          "joints": [
+            "pole"
+          ]
+        }
+      },
+      "collection_protocol": {
+        "dataset_role": "validation",
+        "nominal_angles_only": true,
+        "operator_cart_restraint": "cart held stationary by hand",
+        "procedure": "passive",
+        "requested_releases": [
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-01",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-02",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-03",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-04",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-05",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-06",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-07",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-08",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-09",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-10",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-11",
+            "repetition": 2
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-12",
+            "repetition": 2
+          }
+        ],
+        "run_label": "passive-validation-9",
+        "schema": "cartpole-collection-protocol-v1"
+      },
+      "camera_passed": false,
+      "poses_verified": false,
+      "camera_reasons": [
+        "release-12: angular RMSE exceeds 5 degrees or is unavailable",
+        "release-12: angular P95 exceeds 10 degrees or is unavailable"
+      ],
+      "camera_releases": [
+        {
+          "episode_id": "release-01",
+          "annotation": {
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              13.36,
+              13.86
+            ],
+            "release_board_s": 13.91,
+            "board_relative_s": [
+              14.03,
+              18.5
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            14.03,
+            18.5
+          ],
+          "recorded_start_board_s": 14.03,
+          "recorded_start_excursion_rad": 0.23316530717958653,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 235,
+          "valid_camera_frames": 235,
+          "camera_coverage_fraction": 0.9959611721303185,
+          "camera_time_coverage_fraction": 0.9959611721303185,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03850698046654877,
+          "missing_camera_intervals_board_s": [
+            [
+              14.03,
+              14.035837274672648
+            ],
+            [
+              18.487783714095173,
+              18.5
+            ]
+          ],
+          "angular_comparison_samples": 235,
+          "angular_rmse_rad": 0.0467102248557577,
+          "angular_p95_rad": 0.09073838082947921,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.88194444444446
+            ],
+            "radial_p95_px": 0.335979474003732,
+            "radial_max_px": 0.4959131611627518,
+            "baseline_displacement_p95_px": 0.3657885516905463,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              13.36,
+              13.86
+            ],
+            "encoder_median_rad": 0.6135923071795866,
+            "camera_median_rad": 0.602682607558786,
+            "encoder_spread_rad": 0.004602000000000217,
+            "camera_spread_rad": 0.002664168394367915,
+            "reasons": [],
+            "release_board_s": 13.91,
+            "pose_to_release_gap_s": 0.05000000000000071,
+            "release_to_free_gap_s": 0.11999999999999922,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 29,
+            "camera_coverage_fraction": 0.9531272697518745,
+            "max_camera_gap_s": 0.03553424449053111,
+            "missing_camera_intervals_board_s": [
+              [
+                13.36,
+                13.370445851554962
+              ],
+              [
+                13.847009486430899,
+                13.86
+              ]
+            ],
+            "signed_disagreement_rad": 0.010909699620800573
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-02",
+          "annotation": {
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              25.03,
+              25.53
+            ],
+            "release_board_s": 25.58,
+            "board_relative_s": [
+              25.7,
+              29.8
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            25.7,
+            29.8
+          ],
+          "recorded_start_board_s": 25.702,
+          "recorded_start_excursion_rad": -0.1718059999999997,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 210,
+          "valid_camera_frames": 210,
+          "camera_coverage_fraction": 0.9911615744721161,
+          "camera_time_coverage_fraction": 0.9911615744721161,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03741791405419903,
+          "missing_camera_intervals_board_s": [
+            [
+              25.7,
+              25.722201577358703
+            ],
+            [
+              29.78596403269438,
+              29.8
+            ]
+          ],
+          "angular_comparison_samples": 210,
+          "angular_rmse_rad": 0.04370671688512353,
+          "angular_p95_rad": 0.08369613940610342,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.9121621621622
+            ],
+            "radial_p95_px": 0.35703640445143653,
+            "radial_max_px": 0.5337345105400906,
+            "baseline_displacement_p95_px": 0.34548107146617973,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              25.03,
+              25.53
+            ],
+            "encoder_median_rad": -0.5000779999999998,
+            "camera_median_rad": -0.5470162253933957,
+            "encoder_spread_rad": 0.0015339999999999243,
+            "camera_spread_rad": 0.0025685904242939706,
+            "reasons": [],
+            "release_board_s": 25.58,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.120000000000001,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 26,
+            "camera_coverage_fraction": 0.9496829430025286,
+            "max_camera_gap_s": 0.026960186422577692,
+            "missing_camera_intervals_board_s": [
+              [
+                25.03,
+                25.03378507355751
+              ],
+              [
+                25.508626545058775,
+                25.53
+              ]
+            ],
+            "signed_disagreement_rad": 0.04693822539339587
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-03",
+          "annotation": {
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              38.2,
+              38.7
+            ],
+            "release_board_s": 38.75,
+            "board_relative_s": [
+              38.87,
+              46.6
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            38.87,
+            46.6
+          ],
+          "recorded_start_board_s": 38.87,
+          "recorded_start_excursion_rad": 0.4141743071795861,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 394,
+          "valid_camera_frames": 392,
+          "camera_coverage_fraction": 0.9949238578680203,
+          "camera_time_coverage_fraction": 0.9958392270581233,
+          "valid_geometry_fraction": 0.9949238578680203,
+          "max_camera_gap_s": 0.07476223345484101,
+          "missing_camera_intervals_board_s": [
+            [
+              38.87,
+              38.879029455088705
+            ],
+            [
+              46.576866680248,
+              46.6
+            ]
+          ],
+          "angular_comparison_samples": 392,
+          "angular_rmse_rad": 0.06168700586469316,
+          "angular_p95_rad": 0.11234105845614767,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.3936873667892709,
+            "radial_max_px": 0.572526928929558,
+            "baseline_displacement_p95_px": 0.4916228658875666,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              38.2,
+              38.7
+            ],
+            "encoder_median_rad": 1.0231653071795865,
+            "camera_median_rad": 1.0663135950476645,
+            "encoder_spread_rad": 0.005829200000000507,
+            "camera_spread_rad": 0.002191718295107047,
+            "reasons": [],
+            "release_board_s": 38.75,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9733819596291937,
+            "max_camera_gap_s": 0.0384286142863246,
+            "missing_camera_intervals_board_s": [
+              [
+                38.2,
+                38.2031449444186
+              ],
+              [
+                38.68983592423319,
+                38.7
+              ]
+            ],
+            "signed_disagreement_rad": -0.043148287868078006
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-04",
+          "annotation": {
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              53.57,
+              54.07
+            ],
+            "release_board_s": 54.12,
+            "board_relative_s": [
+              54.24,
+              62.3
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            54.24,
+            62.3
+          ],
+          "recorded_start_board_s": 54.242,
+          "recorded_start_excursion_rad": -0.06289299999999987,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 372,
+          "valid_camera_frames": 371,
+          "camera_coverage_fraction": 0.9972914274248881,
+          "camera_time_coverage_fraction": 0.9972914274248881,
+          "valid_geometry_fraction": 0.9973118279569892,
+          "max_camera_gap_s": 0.10035281781861727,
+          "missing_camera_intervals_board_s": [
+            [
+              54.24,
+              54.252615739745494
+            ],
+            [
+              62.29078464479009,
+              62.3
+            ]
+          ],
+          "angular_comparison_samples": 371,
+          "angular_rmse_rad": 0.06423268196053539,
+          "angular_p95_rad": 0.12865760750113364,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.96376811594206
+            ],
+            "radial_p95_px": 0.40698368412566754,
+            "radial_max_px": 0.5496115312515446,
+            "baseline_displacement_p95_px": 0.4703916213533984,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              53.57,
+              54.07
+            ],
+            "encoder_median_rad": -1.044641,
+            "camera_median_rad": -1.091318236101967,
+            "encoder_spread_rad": 0.0030680000000000707,
+            "camera_spread_rad": 0.00513109951169599,
+            "reasons": [],
+            "release_board_s": 54.12,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 26,
+            "camera_coverage_fraction": 0.956477479408619,
+            "max_camera_gap_s": 0.038317033569349235,
+            "missing_camera_intervals_board_s": [
+              [
+                53.57,
+                53.574313764379504
+              ],
+              [
+                54.05255250408381,
+                54.07
+              ]
+            ],
+            "signed_disagreement_rad": 0.04667723610196717
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-05",
+          "annotation": {
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              69.33,
+              69.83
+            ],
+            "release_board_s": 69.88,
+            "board_relative_s": [
+              70.0,
+              80.8
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            70.0,
+            80.8
+          ],
+          "recorded_start_board_s": 70.002,
+          "recorded_start_excursion_rad": 0.9924853071795872,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 524,
+          "valid_camera_frames": 522,
+          "camera_coverage_fraction": 0.9961832061068703,
+          "camera_time_coverage_fraction": 0.9984525366790967,
+          "valid_geometry_fraction": 0.9961832061068703,
+          "max_camera_gap_s": 0.03840877673265197,
+          "missing_camera_intervals_board_s": [
+            [
+              70.0,
+              70.00291609053586
+            ],
+            [
+              80.7862034866701,
+              80.8
+            ]
+          ],
+          "angular_comparison_samples": 522,
+          "angular_rmse_rad": 0.07905648919957668,
+          "angular_p95_rad": 0.15087742979650717,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2246376811594,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.4263772021050393,
+            "radial_max_px": 0.6676820463570127,
+            "baseline_displacement_p95_px": 0.5452416178565498,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              69.33,
+              69.83
+            ],
+            "encoder_median_rad": 1.5416503071795866,
+            "camera_median_rad": 1.6096183207432597,
+            "encoder_spread_rad": 0.007668999999999926,
+            "camera_spread_rad": 0.006378154440225026,
+            "reasons": [],
+            "release_board_s": 69.88,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 23,
+            "camera_coverage_fraction": 0.9532457566154449,
+            "max_camera_gap_s": 0.03630850842893096,
+            "missing_camera_intervals_board_s": [
+              [
+                69.33,
+                69.35001794821405
+              ],
+              [
+                69.82664082652177,
+                69.83
+              ]
+            ],
+            "signed_disagreement_rad": -0.0679680135636731
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-06",
+          "annotation": {
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              88.34,
+              88.84
+            ],
+            "release_board_s": 88.89,
+            "board_relative_s": [
+              89.01,
+              99.4
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            89.01,
+            99.4
+          ],
+          "recorded_start_board_s": 89.01,
+          "recorded_start_excursion_rad": -0.12425199999999981,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 519,
+          "valid_camera_frames": 518,
+          "camera_coverage_fraction": 0.9980732177263969,
+          "camera_time_coverage_fraction": 0.9993144231601292,
+          "valid_geometry_fraction": 0.9980732177263969,
+          "max_camera_gap_s": 0.03929682820839275,
+          "missing_camera_intervals_board_s": [
+            [
+              89.01,
+              89.01278878432342
+            ],
+            [
+              99.39566564095716,
+              99.4
+            ]
+          ],
+          "angular_comparison_samples": 518,
+          "angular_rmse_rad": 0.08446881528749262,
+          "angular_p95_rad": 0.16044814911758998,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2246376811594,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.36320222984421,
+            "radial_max_px": 0.5802291540446304,
+            "baseline_displacement_p95_px": 0.5452416178565498,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": false,
+            "status": "not verified",
+            "board_relative_s": [
+              88.34,
+              88.84
+            ],
+            "encoder_median_rad": -1.477223,
+            "camera_median_rad": -1.5920775968547296,
+            "encoder_spread_rad": 0.008896400000000066,
+            "camera_spread_rad": 0.011586805680623868,
+            "reasons": [
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 88.89,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 21,
+            "camera_coverage_fraction": 0.9755901222064836,
+            "max_camera_gap_s": 0.0371713718410831,
+            "missing_camera_intervals_board_s": [
+              [
+                88.34,
+                88.34949063617512
+              ],
+              [
+                88.83728569727836,
+                88.84
+              ]
+            ],
+            "signed_disagreement_rad": 0.11485459685472965
+          },
+          "pose_verified": false,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-07",
+          "annotation": {
+            "episode_id": "release-07",
+            "pose_board_relative_s": [
+              105.37,
+              105.87
+            ],
+            "release_board_s": 105.92,
+            "board_relative_s": [
+              106.04,
+              110.6
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            106.04,
+            110.6
+          ],
+          "recorded_start_board_s": 106.042,
+          "recorded_start_excursion_rad": 0.09817499999999992,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 215,
+          "valid_camera_frames": 215,
+          "camera_coverage_fraction": 0.9955196991983822,
+          "camera_time_coverage_fraction": 0.9955196991983822,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.03843607944578764,
+          "missing_camera_intervals_board_s": [
+            [
+              106.04,
+              106.04298199468887
+            ],
+            [
+              110.58255182303348,
+              110.6
+            ]
+          ],
+          "angular_comparison_samples": 215,
+          "angular_rmse_rad": 0.04560161063502474,
+          "angular_p95_rad": 0.08914867515714273,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.9121621621622
+            ],
+            "radial_p95_px": 0.3172242953097962,
+            "radial_max_px": 0.3980046547410811,
+            "baseline_displacement_p95_px": 0.34163496966117646,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": false,
+            "status": "not verified",
+            "board_relative_s": [
+              105.37,
+              105.87
+            ],
+            "encoder_median_rad": 0.5645053071795865,
+            "camera_median_rad": 0.5594124015643768,
+            "encoder_spread_rad": 0.04601900000000026,
+            "camera_spread_rad": 0.03775322611417176,
+            "reasons": [
+              "held pose is not stationary within provisional angular variability bound"
+            ],
+            "release_board_s": 105.92,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 21,
+            "camera_coverage_fraction": 0.910114786250773,
+            "max_camera_gap_s": 0.027435044801677577,
+            "missing_camera_intervals_board_s": [
+              [
+                105.37,
+                105.39031433982198
+              ],
+              [
+                105.84537173294737,
+                105.87
+              ]
+            ],
+            "signed_disagreement_rad": 0.005092905615209697
+          },
+          "pose_verified": false,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-08",
+          "annotation": {
+            "episode_id": "release-08",
+            "pose_board_relative_s": [
+              117.78,
+              118.28
+            ],
+            "release_board_s": 118.33,
+            "board_relative_s": [
+              118.45,
+              122.4
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            118.45,
+            122.4
+          ],
+          "recorded_start_board_s": 118.45,
+          "recorded_start_excursion_rad": -0.2024849999999998,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 187,
+          "valid_camera_frames": 187,
+          "camera_coverage_fraction": 0.9941823492339036,
+          "camera_time_coverage_fraction": 0.9941823492339036,
+          "valid_geometry_fraction": 1.0,
+          "max_camera_gap_s": 0.04179764333447622,
+          "missing_camera_intervals_board_s": [
+            [
+              118.45,
+              118.45739234574447
+            ],
+            [
+              122.38441262521839,
+              122.4
+            ]
+          ],
+          "angular_comparison_samples": 187,
+          "angular_rmse_rad": 0.051734792618326114,
+          "angular_p95_rad": 0.09920392563795175,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1478873239437,
+              295.8550724637681
+            ],
+            "radial_p95_px": 0.2997760811850614,
+            "radial_max_px": 0.520255694388009,
+            "baseline_displacement_p95_px": 0.2992771074551721,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              117.78,
+              118.28
+            ],
+            "encoder_median_rad": -0.5123500000000001,
+            "camera_median_rad": -0.55842602657579,
+            "encoder_spread_rad": 0.010736999999999776,
+            "camera_spread_rad": 0.0047749961098817045,
+            "reasons": [],
+            "release_board_s": 118.33,
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 28,
+            "camera_coverage_fraction": 0.9494759549129981,
+            "max_camera_gap_s": 0.03788015973539416,
+            "missing_camera_intervals_board_s": [
+              [
+                117.78,
+                117.79411077187332
+              ],
+              [
+                118.26884874932982,
+                118.28
+              ]
+            ],
+            "signed_disagreement_rad": 0.04607602657578991
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-09",
+          "annotation": {
+            "episode_id": "release-09",
+            "pose_board_relative_s": [
+              128.69,
+              129.19
+            ],
+            "release_board_s": 129.24,
+            "board_relative_s": [
+              129.36,
+              137.3
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            129.36,
+            137.3
+          ],
+          "recorded_start_board_s": 129.362,
+          "recorded_start_excursion_rad": 0.3313393071795867,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 385,
+          "valid_camera_frames": 383,
+          "camera_coverage_fraction": 0.9948051948051948,
+          "camera_time_coverage_fraction": 0.9966886467011482,
+          "valid_geometry_fraction": 0.9948051948051948,
+          "max_camera_gap_s": 0.05009365357858542,
+          "missing_camera_intervals_board_s": [
+            [
+              129.36,
+              129.3666739553227
+            ],
+            [
+              137.28038181012982,
+              137.3
+            ]
+          ],
+          "angular_comparison_samples": 383,
+          "angular_rmse_rad": 0.06862187036904197,
+          "angular_p95_rad": 0.121058622921273,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2042253521127,
+              295.9776119402985
+            ],
+            "radial_p95_px": 0.3296718569671664,
+            "radial_max_px": 0.41902191314077186,
+            "baseline_displacement_p95_px": 0.4565628637709256,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              128.69,
+              129.19
+            ],
+            "encoder_median_rad": 1.040039307179587,
+            "camera_median_rad": 1.0830361582196486,
+            "encoder_spread_rad": 0.009971000000000174,
+            "camera_spread_rad": 0.002336375860577555,
+            "reasons": [],
+            "release_board_s": 129.24,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 23,
+            "camera_coverage_fraction": 0.953777064625001,
+            "max_camera_gap_s": 0.027006583364197922,
+            "missing_camera_intervals_board_s": [
+              [
+                128.69,
+                128.70180161793732
+              ],
+              [
+                129.17869015024982,
+                129.19
+              ]
+            ],
+            "signed_disagreement_rad": -0.042996851040061575
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-10",
+          "annotation": {
+            "episode_id": "release-10",
+            "pose_board_relative_s": [
+              144.41,
+              144.91
+            ],
+            "release_board_s": 144.96,
+            "board_relative_s": [
+              145.08,
+              153.4
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            145.08,
+            153.4
+          ],
+          "recorded_start_board_s": 145.082,
+          "recorded_start_excursion_rad": -0.4494560000000001,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 408,
+          "valid_camera_frames": 407,
+          "camera_coverage_fraction": 0.9962719720015808,
+          "camera_time_coverage_fraction": 0.9962719720015808,
+          "valid_geometry_fraction": 0.9975490196078431,
+          "max_camera_gap_s": 0.03971152223448371,
+          "missing_camera_intervals_board_s": [
+            [
+              145.08,
+              145.09312431234727
+            ],
+            [
+              153.38210711940042,
+              153.4
+            ]
+          ],
+          "angular_comparison_samples": 407,
+          "angular_rmse_rad": 0.06396741166441612,
+          "angular_p95_rad": 0.12224259844003507,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.1575342465754,
+              295.96376811594206
+            ],
+            "radial_p95_px": 0.34565031682137193,
+            "radial_max_px": 0.6883723308822057,
+            "baseline_displacement_p95_px": 0.39657125391558795,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              144.41,
+              144.91
+            ],
+            "encoder_median_rad": -1.0323689999999999,
+            "camera_median_rad": -1.0784097724285098,
+            "encoder_spread_rad": 0.012272000000000062,
+            "camera_spread_rad": 0.013573125667195905,
+            "reasons": [],
+            "release_board_s": 144.96,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 28,
+            "camera_coverage_fraction": 0.9486233585218997,
+            "max_camera_gap_s": 0.0375021675812377,
+            "missing_camera_intervals_board_s": [
+              [
+                144.41,
+                144.43039221198836
+              ],
+              [
+                144.9047038912493,
+                144.91
+              ]
+            ],
+            "signed_disagreement_rad": 0.04604077242850991
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-11",
+          "annotation": {
+            "episode_id": "release-11",
+            "pose_board_relative_s": [
+              160.45,
+              160.95
+            ],
+            "release_board_s": 161.0,
+            "board_relative_s": [
+              161.12,
+              171.3
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+          },
+          "board_relative_s": [
+            161.12,
+            171.3
+          ],
+          "recorded_start_board_s": 161.122,
+          "recorded_start_excursion_rad": 1.0829903071795866,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 499,
+          "valid_camera_frames": 495,
+          "camera_coverage_fraction": 0.9919839679358717,
+          "camera_time_coverage_fraction": 0.9965393314602248,
+          "valid_geometry_fraction": 0.9919839679358717,
+          "max_camera_gap_s": 0.06084687490863416,
+          "missing_camera_intervals_board_s": [
+            [
+              161.12,
+              161.1441821248019
+            ],
+            [
+              171.28895251906698,
+              171.3
+            ]
+          ],
+          "angular_comparison_samples": 495,
+          "angular_rmse_rad": 0.08620304676502914,
+          "angular_p95_rad": 0.15710521175160028,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.2323943661972,
+              295.9929577464789
+            ],
+            "radial_p95_px": 0.4044734402380992,
+            "radial_max_px": 0.6191172127671287,
+            "baseline_displacement_p95_px": 0.5452416178565498,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": true,
+            "status": "verified relative held pose",
+            "board_relative_s": [
+              160.45,
+              160.95
+            ],
+            "encoder_median_rad": 1.4894953071795867,
+            "camera_median_rad": 1.5701839611936053,
+            "encoder_spread_rad": 0.009204000000000434,
+            "camera_spread_rad": 0.0017815866402249188,
+            "reasons": [],
+            "release_board_s": 161.0,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 126,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9528944101915613,
+            "max_camera_gap_s": 0.026292597538628115,
+            "missing_camera_intervals_board_s": [
+              [
+                160.45,
+                160.45417243556142
+              ],
+              [
+                160.9306196406572,
+                160.95
+              ]
+            ],
+            "signed_disagreement_rad": -0.08068865401401859
+          },
+          "pose_verified": true,
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "episode_id": "release-12",
+          "annotation": {
+            "episode_id": "release-12",
+            "pose_board_relative_s": [
+              176.44,
+              176.94
+            ],
+            "release_board_s": 176.99,
+            "board_relative_s": [
+              177.11,
+              182.1
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified. Final partial decay retained at collection duration boundary."
+          },
+          "board_relative_s": [
+            177.11,
+            182.1
+          ],
+          "recorded_start_board_s": 177.11,
+          "recorded_start_excursion_rad": -0.809942,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "camera_frames": 260,
+          "valid_camera_frames": 259,
+          "camera_coverage_fraction": 0.9961538461538462,
+          "camera_time_coverage_fraction": 0.9977596743698957,
+          "valid_geometry_fraction": 0.9961538461538462,
+          "max_camera_gap_s": 0.03899904591185077,
+          "missing_camera_intervals_board_s": [
+            [
+              177.11,
+              177.11990945349493
+            ],
+            [
+              182.0987302286007,
+              182.1
+            ]
+          ],
+          "angular_comparison_samples": 259,
+          "angular_rmse_rad": 0.11498611668962182,
+          "angular_p95_rad": 0.18626435708301506,
+          "pivot_motion": {
+            "metric_stationarity_established": false,
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_p95_limit_px": 4.0,
+            "median_pivot_px": [
+              478.28571428571433,
+              295.9852941176471
+            ],
+            "radial_p95_px": 0.44001533916198743,
+            "radial_max_px": 0.6523067184652814,
+            "baseline_displacement_p95_px": 0.6123025080830022,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+          },
+          "release_pose": {
+            "verified": false,
+            "status": "not verified",
+            "board_relative_s": [
+              176.44,
+              176.94
+            ],
+            "encoder_median_rad": -1.4649519999999998,
+            "camera_median_rad": -1.5713165325221032,
+            "encoder_spread_rad": 0.023009000000000057,
+            "camera_spread_rad": 0.024550220295400018,
+            "reasons": [
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 176.99,
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "handling_independently_verified": false,
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "encoder_samples": 125,
+            "camera_frames": 25,
+            "camera_coverage_fraction": 0.9504982967097817,
+            "max_camera_gap_s": 0.037394526624780156,
+            "missing_camera_intervals_board_s": [
+              [
+                176.44,
+                176.45654696426072
+              ],
+              [
+                176.93179611261561,
+                176.94
+              ]
+            ],
+            "signed_disagreement_rad": 0.10636453252210343
+          },
+          "pose_verified": false,
+          "passed": false,
+          "reasons": [
+            "angular RMSE exceeds 5 degrees or is unavailable",
+            "angular P95 exceeds 10 degrees or is unavailable"
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "weak_viscous",
+          "initializer": "original",
+          "short": {
+            "rms_deg": 5.190457887942407,
+            "p95_deg": 11.31953773374461,
+            "samples": 20241
+          },
+          "short_numeric_gates_pass": false,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 9.666797036683123,
+                "p95_deg": 21.640187948420003,
+                "samples": 20607
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 9.000599599365767,
+                "p95_deg": 19.942540972980183,
+                "samples": 19863
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 4.430074222653139,
+                "p95_deg": 11.092549880668747,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8980377899491296,
+                  "p95_deg": 8.867937346764077,
+                  "samples": 1054
+                },
+                "0.5": {
+                  "rms_deg": 4.352848875001781,
+                  "p95_deg": 9.356094643118269,
+                  "samples": 992
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.5845258701421416,
+                "p95_deg": 5.390382178534373,
+                "samples": 991
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.60253915862098,
+                  "p95_deg": 9.680002387364784,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 5.206612708059272,
+                  "p95_deg": 10.58562006699232,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 4.738896144613099,
+                "p95_deg": 12.630223757414855,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.932108790395076,
+                  "p95_deg": 8.158401349336065,
+                  "samples": 1869
+                },
+                "0.5": {
+                  "rms_deg": 5.255685411117964,
+                  "p95_deg": 8.535556030684303,
+                  "samples": 1807
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 3.6895047742094507,
+                "p95_deg": 8.652985582939703,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.809690189622673,
+                  "p95_deg": 9.627706170966912,
+                  "samples": 1951
+                },
+                "0.5": {
+                  "rms_deg": 4.4997700910301655,
+                  "p95_deg": 8.588845288791406,
+                  "samples": 1889
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 4.354381343818557,
+                "p95_deg": 9.263614010734859,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 13.909648345106092,
+                  "p95_deg": 24.993418540671854,
+                  "samples": 2636
+                },
+                "0.5": {
+                  "rms_deg": 12.885451347636264,
+                  "p95_deg": 23.038021480486076,
+                  "samples": 2574
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 4.336198355454999,
+                "p95_deg": 9.472620471875004,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 14.798075129340889,
+                  "p95_deg": 26.423169021914767,
+                  "samples": 2534
+                },
+                "0.5": {
+                  "rms_deg": 12.492740272789021,
+                  "p95_deg": 22.215400404320608,
+                  "samples": 2472
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.6429088973888866,
+                "p95_deg": 6.524794273706342,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.398645218334141,
+                  "p95_deg": 9.793327424868005,
+                  "samples": 1076
+                },
+                "0.5": {
+                  "rms_deg": 5.2042179435352836,
+                  "p95_deg": 10.514606639544727,
+                  "samples": 1014
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 4.983724095854841,
+                "p95_deg": 14.183029867095357,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.2362525510249744,
+                  "p95_deg": 9.0519005876296,
+                  "samples": 924
+                },
+                "0.5": {
+                  "rms_deg": 4.462966082088147,
+                  "p95_deg": 9.15669045978781,
+                  "samples": 862
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 6.177294248451043,
+                "p95_deg": 10.464155256636491,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.850896307416036,
+                  "p95_deg": 8.108849558613727,
+                  "samples": 1921
+                },
+                "0.5": {
+                  "rms_deg": 5.178015631282087,
+                  "p95_deg": 8.442278158164806,
+                  "samples": 1859
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 6.19337318119075,
+                "p95_deg": 14.141606406501415,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.0712961914707995,
+                  "p95_deg": 10.146777502196208,
+                  "samples": 2016
+                },
+                "0.5": {
+                  "rms_deg": 4.630267975217067,
+                  "p95_deg": 10.024771077028788,
+                  "samples": 1954
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 6.307012271384545,
+                "p95_deg": 14.457853526647112,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 10.44988073827684,
+                  "p95_deg": 18.938564598600024,
+                  "samples": 2481
+                },
+                "0.5": {
+                  "rms_deg": 13.114136924949069,
+                  "p95_deg": 23.131413413704998,
+                  "samples": 2419
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 8.338841896086747,
+                "p95_deg": 19.888325811575584,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": false,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.120449778867993,
+                  "p95_deg": 28.988081926822378,
+                  "samples": 1184
+                },
+                "0.5": {
+                  "rms_deg": 10.001100172955043,
+                  "p95_deg": 19.451482253367832,
+                  "samples": 1122
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "weak_viscous",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.4323087319462084,
+            "p95_deg": 4.994124180591173,
+            "samples": 20241
+          },
+          "short_numeric_gates_pass": true,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 9.666797036683123,
+                "p95_deg": 21.640187948420003,
+                "samples": 20607
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 9.000599599365767,
+                "p95_deg": 19.942540972980183,
+                "samples": 19863
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.2033151409560325,
+                "p95_deg": 4.260533097331704,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.8980377899491296,
+                  "p95_deg": 8.867937346764077,
+                  "samples": 1054
+                },
+                "0.5": {
+                  "rms_deg": 4.352848875001781,
+                  "p95_deg": 9.356094643118269,
+                  "samples": 992
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 2.1224096760458178,
+                "p95_deg": 3.839953428266327,
+                "samples": 991
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.60253915862098,
+                  "p95_deg": 9.680002387364784,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 5.206612708059272,
+                  "p95_deg": 10.58562006699232,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 1.947626543007589,
+                "p95_deg": 4.110461446205066,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.932108790395076,
+                  "p95_deg": 8.158401349336065,
+                  "samples": 1869
+                },
+                "0.5": {
+                  "rms_deg": 5.255685411117964,
+                  "p95_deg": 8.535556030684303,
+                  "samples": 1807
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.3439613697103603,
+                "p95_deg": 4.796816268896616,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.809690189622673,
+                  "p95_deg": 9.627706170966912,
+                  "samples": 1951
+                },
+                "0.5": {
+                  "rms_deg": 4.4997700910301655,
+                  "p95_deg": 8.588845288791406,
+                  "samples": 1889
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.501990596328115,
+                "p95_deg": 5.461258627593463,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 13.909648345106092,
+                  "p95_deg": 24.993418540671854,
+                  "samples": 2636
+                },
+                "0.5": {
+                  "rms_deg": 12.885451347636264,
+                  "p95_deg": 23.038021480486076,
+                  "samples": 2574
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.7322508969214736,
+                "p95_deg": 6.1111473768247455,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 14.798075129340889,
+                  "p95_deg": 26.423169021914767,
+                  "samples": 2534
+                },
+                "0.5": {
+                  "rms_deg": 12.492740272789021,
+                  "p95_deg": 22.215400404320608,
+                  "samples": 2472
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.301321902197584,
+                "p95_deg": 4.451615316258099,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.398645218334141,
+                  "p95_deg": 9.793327424868005,
+                  "samples": 1076
+                },
+                "0.5": {
+                  "rms_deg": 5.2042179435352836,
+                  "p95_deg": 10.514606639544727,
+                  "samples": 1014
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 2.484055428343552,
+                "p95_deg": 4.759108509007733,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.2362525510249744,
+                  "p95_deg": 9.0519005876296,
+                  "samples": 924
+                },
+                "0.5": {
+                  "rms_deg": 4.462966082088147,
+                  "p95_deg": 9.15669045978781,
+                  "samples": 862
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 1.9035505712129497,
+                "p95_deg": 4.15992787010546,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.850896307416036,
+                  "p95_deg": 8.108849558613727,
+                  "samples": 1921
+                },
+                "0.5": {
+                  "rms_deg": 5.178015631282087,
+                  "p95_deg": 8.442278158164806,
+                  "samples": 1859
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.426620984131627,
+                "p95_deg": 4.945027198586603,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.0712961914707995,
+                  "p95_deg": 10.146777502196208,
+                  "samples": 2016
+                },
+                "0.5": {
+                  "rms_deg": 4.630267975217067,
+                  "p95_deg": 10.024771077028788,
+                  "samples": 1954
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 2.5666630549713134,
+                "p95_deg": 5.489512108611985,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 10.44988073827684,
+                  "p95_deg": 18.938564598600024,
+                  "samples": 2481
+                },
+                "0.5": {
+                  "rms_deg": 13.114136924949069,
+                  "p95_deg": 23.131413413704998,
+                  "samples": 2419
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.291014032685877,
+                "p95_deg": 7.000140515587847,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 16.120449778867993,
+                  "p95_deg": 28.988081926822378,
+                  "samples": 1184
+                },
+                "0.5": {
+                  "rms_deg": 10.001100172955043,
+                  "p95_deg": 19.451482253367832,
+                  "samples": 1122
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "batch5_weak_coulomb",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.305965855791595,
+            "p95_deg": 4.954429476244532,
+            "samples": 20241
+          },
+          "short_numeric_gates_pass": true,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 4.890721808757616,
+                "p95_deg": 9.82715448354235,
+                "samples": 20607
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 4.1756279139304695,
+                "p95_deg": 8.481257480081823,
+                "samples": 19863
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.0154865641146906,
+                "p95_deg": 4.439898519785073,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.096711907100367,
+                  "p95_deg": 5.626768376309728,
+                  "samples": 1054
+                },
+                "0.5": {
+                  "rms_deg": 2.630054523906795,
+                  "p95_deg": 4.783153738028479,
+                  "samples": 992
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 1.8837129139300621,
+                "p95_deg": 4.158273743161383,
+                "samples": 991
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.2775442259353613,
+                  "p95_deg": 3.9738607772183854,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 1.7697954898180757,
+                  "p95_deg": 3.026674854994153,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 1.8716667092208557,
+                "p95_deg": 4.2541309678783215,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.786074092955561,
+                  "p95_deg": 8.369993827068107,
+                  "samples": 1869
+                },
+                "0.5": {
+                  "rms_deg": 4.689418039863508,
+                  "p95_deg": 7.838999854641885,
+                  "samples": 1807
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.198666225022931,
+                "p95_deg": 4.840253824145228,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 5.127117277796622,
+                  "p95_deg": 8.574649859874993,
+                  "samples": 1951
+                },
+                "0.5": {
+                  "rms_deg": 2.7451954172708333,
+                  "p95_deg": 4.80042687101919,
+                  "samples": 1889
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.3411697471982587,
+                "p95_deg": 5.167456423995434,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 6.562806790186067,
+                  "p95_deg": 11.878224709706831,
+                  "samples": 2636
+                },
+                "0.5": {
+                  "rms_deg": 5.9914877200846215,
+                  "p95_deg": 10.810648089350133,
+                  "samples": 2574
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.705244934196123,
+                "p95_deg": 5.775377692271954,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 6.565377042872858,
+                  "p95_deg": 11.664996700966055,
+                  "samples": 2534
+                },
+                "0.5": {
+                  "rms_deg": 3.6359594797040864,
+                  "p95_deg": 6.866930312896682,
+                  "samples": 2472
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.07938108532744,
+                "p95_deg": 4.415042067675394,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.619484784081476,
+                  "p95_deg": 4.6662136044236,
+                  "samples": 1076
+                },
+                "0.5": {
+                  "rms_deg": 2.325765120463406,
+                  "p95_deg": 4.509793724725926,
+                  "samples": 1014
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 2.120887384708663,
+                "p95_deg": 4.288979077153039,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 1.7832938339779736,
+                  "p95_deg": 3.468854846252084,
+                  "samples": 924
+                },
+                "0.5": {
+                  "rms_deg": 1.6807860732948698,
+                  "p95_deg": 3.359724289240817,
+                  "samples": 862
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 1.8403566793220654,
+                "p95_deg": 4.112785925861346,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.5962464200485575,
+                  "p95_deg": 8.115097297182743,
+                  "samples": 1921
+                },
+                "0.5": {
+                  "rms_deg": 4.368755461264283,
+                  "p95_deg": 7.36668256707162,
+                  "samples": 1859
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.303784787520761,
+                "p95_deg": 4.972442983624841,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.018758803646045,
+                  "p95_deg": 5.272838205788857,
+                  "samples": 2016
+                },
+                "0.5": {
+                  "rms_deg": 2.594510022916015,
+                  "p95_deg": 4.818833936601103,
+                  "samples": 1954
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 2.471597981063235,
+                "p95_deg": 5.474699081366502,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.5118774657225735,
+                  "p95_deg": 6.475203626868212,
+                  "samples": 2481
+                },
+                "0.5": {
+                  "rms_deg": 6.028095618842059,
+                  "p95_deg": 10.744062644961138,
+                  "samples": 2419
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.16078165423228,
+                "p95_deg": 6.161210797753562,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 7.182296476898946,
+                  "p95_deg": 13.355101353853124,
+                  "samples": 1184
+                },
+                "0.5": {
+                  "rms_deg": 3.4222719021531414,
+                  "p95_deg": 7.052129240095851,
+                  "samples": 1122
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        },
+        {
+          "model": "weak_coulomb",
+          "initializer": "history_rawq:0.20",
+          "short": {
+            "rms_deg": 2.331613071517174,
+            "p95_deg": 4.971480805579461,
+            "samples": 20241
+          },
+          "short_numeric_gates_pass": true,
+          "short_coverage_gates_pass": true,
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 3.7365469025943723,
+                "p95_deg": 6.9545885853103355,
+                "samples": 20607
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 3.1869291693369073,
+                "p95_deg": 6.099871292299554,
+                "samples": 19863
+              }
+            }
+          ],
+          "releases": [
+            {
+              "episode_id": "release-01",
+              "short": {
+                "rms_deg": 2.0163868030949565,
+                "p95_deg": 4.448670206621086,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.9282995983076443,
+                  "p95_deg": 5.267291919175402,
+                  "samples": 1054
+                },
+                "0.5": {
+                  "rms_deg": 2.4507908199971435,
+                  "p95_deg": 4.5728470303829045,
+                  "samples": 992
+                }
+              }
+            },
+            {
+              "episode_id": "release-02",
+              "short": {
+                "rms_deg": 1.8954029465304085,
+                "p95_deg": 4.152489176974475,
+                "samples": 991
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.1785467217054335,
+                  "p95_deg": 3.8430550673481525,
+                  "samples": 961
+                },
+                "0.5": {
+                  "rms_deg": 1.6782640084290574,
+                  "p95_deg": 2.9267448270156917,
+                  "samples": 899
+                }
+              }
+            },
+            {
+              "episode_id": "release-03",
+              "short": {
+                "rms_deg": 1.8946734213327725,
+                "p95_deg": 4.39250566341191,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.916185216304054,
+                  "p95_deg": 6.724761801684115,
+                  "samples": 1869
+                },
+                "0.5": {
+                  "rms_deg": 3.846331007475866,
+                  "p95_deg": 6.474202577323228,
+                  "samples": 1807
+                }
+              }
+            },
+            {
+              "episode_id": "release-04",
+              "short": {
+                "rms_deg": 2.2106695933510325,
+                "p95_deg": 4.863827946705472,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.2691211319713664,
+                  "p95_deg": 7.388027606384476,
+                  "samples": 1951
+                },
+                "0.5": {
+                  "rms_deg": 1.9892101819178043,
+                  "p95_deg": 3.3311753887078166,
+                  "samples": 1889
+                }
+              }
+            },
+            {
+              "episode_id": "release-05",
+              "short": {
+                "rms_deg": 2.372908960265658,
+                "p95_deg": 5.104767909320005,
+                "samples": 2625
+              },
+              "short_windows": 21,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.130171486382112,
+                  "p95_deg": 5.638517624668159,
+                  "samples": 2636
+                },
+                "0.5": {
+                  "rms_deg": 2.7755961906643987,
+                  "p95_deg": 4.868509483294209,
+                  "samples": 2574
+                }
+              }
+            },
+            {
+              "episode_id": "release-06",
+              "short": {
+                "rms_deg": 2.735549052275665,
+                "p95_deg": 5.7391325780396665,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.889057434727278,
+                  "p95_deg": 4.802094827087497,
+                  "samples": 2534
+                },
+                "0.5": {
+                  "rms_deg": 3.354346623903147,
+                  "p95_deg": 7.585364180473294,
+                  "samples": 2472
+                }
+              }
+            },
+            {
+              "episode_id": "release-07",
+              "short": {
+                "rms_deg": 2.080996592448573,
+                "p95_deg": 4.439524428157031,
+                "samples": 1000
+              },
+              "short_windows": 8,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.471262268465099,
+                  "p95_deg": 4.495132738505765,
+                  "samples": 1076
+                },
+                "0.5": {
+                  "rms_deg": 2.2368983304239025,
+                  "p95_deg": 4.433549560061031,
+                  "samples": 1014
+                }
+              }
+            },
+            {
+              "episode_id": "release-08",
+              "short": {
+                "rms_deg": 2.140705192355461,
+                "p95_deg": 4.342110603410881,
+                "samples": 875
+              },
+              "short_windows": 7,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 1.6251880214674221,
+                  "p95_deg": 3.183423312532452,
+                  "samples": 924
+                },
+                "0.5": {
+                  "rms_deg": 1.5371704325222924,
+                  "p95_deg": 2.9677278979192976,
+                  "samples": 862
+                }
+              }
+            },
+            {
+              "episode_id": "release-09",
+              "short": {
+                "rms_deg": 1.867138143242226,
+                "p95_deg": 4.217528868113787,
+                "samples": 1875
+              },
+              "short_windows": 15,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 3.6384305163803905,
+                  "p95_deg": 6.259452747686615,
+                  "samples": 1921
+                },
+                "0.5": {
+                  "rms_deg": 3.4475564777809056,
+                  "p95_deg": 5.887812389812791,
+                  "samples": 1859
+                }
+              }
+            },
+            {
+              "episode_id": "release-10",
+              "short": {
+                "rms_deg": 2.3140287777726978,
+                "p95_deg": 4.973301277888714,
+                "samples": 2000
+              },
+              "short_windows": 16,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 2.377628009775696,
+                  "p95_deg": 4.203188861025506,
+                  "samples": 2016
+                },
+                "0.5": {
+                  "rms_deg": 1.8147203107762035,
+                  "p95_deg": 3.662470070880436,
+                  "samples": 1954
+                }
+              }
+            },
+            {
+              "episode_id": "release-11",
+              "short": {
+                "rms_deg": 2.517226023942829,
+                "p95_deg": 5.6533511381189765,
+                "samples": 2500
+              },
+              "short_windows": 20,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 6.274438464135788,
+                  "p95_deg": 12.034297203809672,
+                  "samples": 2481
+                },
+                "0.5": {
+                  "rms_deg": 2.727285894107653,
+                  "p95_deg": 4.694403671265259,
+                  "samples": 2419
+                }
+              }
+            },
+            {
+              "episode_id": "release-12",
+              "short": {
+                "rms_deg": 3.211409465922292,
+                "p95_deg": 6.538571396407413,
+                "samples": 1125
+              },
+              "short_windows": 9,
+              "short_numeric_gates_pass": true,
+              "short_coverage_gates_pass": true,
+              "continuous": {
+                "0.25": {
+                  "rms_deg": 4.047804314020983,
+                  "p95_deg": 6.9018533770712835,
+                  "samples": 1184
+                },
+                "0.5": {
+                  "rms_deg": 7.175102772108745,
+                  "p95_deg": 12.345584294022352,
+                  "samples": 1122
+                }
+              }
+            }
+          ],
+          "skipped_segments": []
+        }
+      ],
+      "report_sha256": "cdf2f368accdd58ca8fd6de50bcdf8afb598170ba0bc7d4c275ba56ca68d56ca"
+    }
+  ],
+  "combined": [
+    {
+      "model": "weak_viscous",
+      "initializer": "original",
+      "short": {
+        "rms_deg": 5.404487867783976,
+        "p95_deg": 10.805646660086536,
+        "samples": 40350
+      },
+      "all_release_short_numeric_gates_pass": false,
+      "all_release_short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 10.144985333498504,
+            "p95_deg": 23.22172612539499,
+            "samples": 41066
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 8.939413622614046,
+            "p95_deg": 19.926033088681727,
+            "samples": 39578
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_viscous",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.476922926583038,
+        "p95_deg": 4.977708925041211,
+        "samples": 40350
+      },
+      "all_release_short_numeric_gates_pass": false,
+      "all_release_short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 10.144985333498504,
+            "p95_deg": 23.22172612539499,
+            "samples": 41066
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 8.939413622614046,
+            "p95_deg": 19.926033088681727,
+            "samples": 39578
+          }
+        }
+      ]
+    },
+    {
+      "model": "batch5_weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.3355150561416504,
+        "p95_deg": 4.894985446186365,
+        "samples": 40350
+      },
+      "all_release_short_numeric_gates_pass": true,
+      "all_release_short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 5.252230949664049,
+            "p95_deg": 10.827877702347624,
+            "samples": 41066
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 4.060185197869506,
+            "p95_deg": 8.05411983062846,
+            "samples": 39578
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.3498830031173745,
+        "p95_deg": 4.924625594381184,
+        "samples": 40350
+      },
+      "all_release_short_numeric_gates_pass": true,
+      "all_release_short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 3.612470232641317,
+            "p95_deg": 6.896397127302044,
+            "samples": 41066
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 3.1202472402865755,
+            "p95_deg": 6.2179504880528516,
+            "samples": 39578
+          }
+        }
+      ]
+    }
+  ]
+}

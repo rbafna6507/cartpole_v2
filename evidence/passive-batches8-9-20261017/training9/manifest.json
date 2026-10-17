@@ -1,0 +1,143 @@
+{
+  "remote_directory": "/home/rbafna/cartpole-v2-live/staging/operator-id-20261017-camera-zero/runs/passive-training-9",
+  "files": {
+    "rig-1792271221721127793-781240700.jsonl": {
+      "bytes": 18589665,
+      "sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384"
+    },
+    "vision.ndjson": {
+      "bytes": 64898533,
+      "sha256": "ce29b5728ef1c8f80ba657c0e409f08ff38e0264a9915f57327ebedaed21dee4"
+    },
+    "report.json": {
+      "bytes": 16662,
+      "sha256": "91bd830a11f1481201df4431b9c4cfe1976ab6f23c020104d2f6676831e333e0"
+    },
+    "vision-report.json": {
+      "bytes": 870,
+      "sha256": "ec8464cc03c16ad072c5392867729da3417e161a6a31036ffab190fdb9df744d"
+    }
+  },
+  "session": {
+    "clock_id": "teensy:781240700",
+    "session_id": "781240700",
+    "topology": {
+      "cart": "cart",
+      "joints": [
+        "pole"
+      ]
+    }
+  },
+  "completed": true,
+  "stop_confirmed": true,
+  "records_dropped": 0,
+  "finish_reason": "duration_elapsed",
+  "collection_protocol": {
+    "schema": "cartpole-collection-protocol-v1",
+    "procedure": "passive",
+    "dataset_role": "training",
+    "run_label": "passive-training-9",
+    "operator_cart_restraint": "cart held stationary by hand",
+    "nominal_angles_only": true,
+    "requested_releases": [
+      {
+        "release_id": "release-01",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-02",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-03",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-04",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-05",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "left",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-06",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "right",
+        "repetition": 1
+      },
+      {
+        "release_id": "release-07",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-08",
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-09",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-10",
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-11",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "left",
+        "repetition": 2
+      },
+      {
+        "release_id": "release-12",
+        "angle_from_hanging_deg": 90.0,
+        "direction": "right",
+        "repetition": 2
+      }
+    ]
+  },
+  "raw_sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384",
+  "fetched_at_utc": "2026-10-17T21:20:21.593286+00:00",
+  "source_unchanged_across_transfer": true,
+  "archive_sha256": "778197d639431530e76c847f6ee1d0f806d5d4e14b39b9a89a7fd1de17956514",
+  "archive_bytes": 4103128,
+  "archive_members": {
+    "passive-training-9/rig-1792271221721127793-781240700.jsonl": {
+      "bytes": 18589665,
+      "sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384"
+    },
+    "passive-training-9/vision.ndjson": {
+      "bytes": 64898533,
+      "sha256": "ce29b5728ef1c8f80ba657c0e409f08ff38e0264a9915f57327ebedaed21dee4"
+    },
+    "passive-training-9/report.json": {
+      "bytes": 16662,
+      "sha256": "91bd830a11f1481201df4431b9c4cfe1976ab6f23c020104d2f6676831e333e0"
+    },
+    "passive-training-9/vision-report.json": {
+      "bytes": 870,
+      "sha256": "ec8464cc03c16ad072c5392867729da3417e161a6a31036ffab190fdb9df744d"
+    }
+  },
+  "extraction_root": "/Users/rbafna/projects/cartpole_v2/runs/passive-batches8-9-training9-original",
+  "remote_tar_command": "bash -o pipefail -c 'tar -C /home/rbafna/cartpole-v2-live/staging/operator-id-20261017-camera-zero/runs -cf - -- passive-training-9/rig-1792271221721127793-781240700.jsonl passive-training-9/vision.ndjson passive-training-9/report.json passive-training-9/vision-report.json | nice -n 19 xz -T1 -6 -c'",
+  "remote_files_modified": false
+}
