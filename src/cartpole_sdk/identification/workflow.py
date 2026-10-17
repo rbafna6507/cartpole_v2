@@ -119,6 +119,22 @@ def _collection_report(spec,records,identity):
         if (event.get('protocol_sha256')!=pin or report.get('collection_protocol')!=value or
                 report.get('collection_protocol_sha256')!=pin):raise ValueError('collection protocol hash/report mismatch')
         identity.update(collection_protocol=value,collection_protocol_sha256=pin)
+    baselines=[r.get('baseline') for r in records if r.get('type')=='passive_baseline']
+    starts=[r for r in records if r.get('type')=='passive_start']
+    required=any(r.get('measurement_version')==2 for r in starts)
+    if baselines or required:
+        if (len(baselines)!=1 or not isinstance(baselines[0],dict) or
+                baselines[0].get('schema')!='cartpole-passive-baseline-v1' or
+                baselines[0]!=report.get('result',{}).get('baseline')):
+            raise ValueError('measured passive baseline missing or inconsistent with completion report')
+        baseline=baselines[0]
+        if required and (len(starts)!=1 or starts[0].get('baseline_sha256')!=digest(baseline)):
+            raise ValueError('passive baseline hash mismatch')
+        for sensor,key in (('encoder','raw_angle_rad'),('camera','image_angle_rad')):
+            angle=baseline.get(sensor,{}).get(key)
+            if type(angle) not in (int,float) or not math.isfinite(angle):raise ValueError('finite measured baseline angle required')
+        if not report.get('camera',{}).get('sha256'):raise ValueError('measured baseline requires camera recording hash')
+        identity['passive_baseline']=baseline
 
 
 
@@ -153,7 +169,8 @@ def annotation_template(source):
     return dict(schema='cartpole-passive-annotations-v1',source_sha256=identity['sha256'],
         selected_before_scoring=False,operator_cart_restraint=identity.get('collection_protocol',{}).get('operator_cart_restraint',''),selection_method='',episodes=[],
         collection_protocol=identity.get('collection_protocol'),requested_releases=identity.get('collection_protocol',{}).get('requested_releases',[]),
-        instructions='Before fitting, annotate hand-clear free releases from independent observation. Fill restraint/method, episode_id, board_relative_s=[start,end], reason; then set selected_before_scoring=true. Time zero is the first recorded STATE. Never include handling or static tails.',
+        measured_baseline=identity.get('passive_baseline'),release_pose_required='passive_baseline' in identity,
+        instructions='Before fitting, annotate hand-clear free releases from independent observation. Fill restraint/method, episode_id, board_relative_s=[start,end], reason; for measured-baseline recordings also pose_board_relative_s=[held_start,held_end] and release_board_s. Keep pose stationary and end within0.5s of release; exclude handling from free intervals. Then freeze selected_before_scoring=true. Time zero is the first recorded STATE. Never include handling or static tails in the fit.',
         board_duration_s=(states[-1]['unwrapped_us']-states[0]['unwrapped_us'])/1e6)
 
 
@@ -232,6 +249,14 @@ def _independent(training,validation):
 def fit_passive_logs(training,training_annotations,validation,validation_annotations,*,model='viscous'):
     train,ti=passive_episodes(training,training_annotations);valid,vi=passive_episodes(validation,validation_annotations)
     _independent(ti,vi)
+    camera_evidence={'status':'not supplied'}
+    if 'passive_baseline' in ti or 'passive_baseline' in vi:
+        if not all('passive_baseline' in value for value in (ti,vi)):
+            raise ValueError('camera-backed passive fitting requires measured baselines for both recordings')
+        from .release_review import analyze_releases
+        tr=analyze_releases(training,training_annotations);vr=analyze_releases(validation,validation_annotations)
+        camera_evidence=dict(status='independent raw camera review',required=True,training=tr,validation=vr,
+            passed=all(r['passed'] and r['all_release_poses_verified'] for r in (tr,vr)))
     report=passive.fit_passive(train,valid,model=model)
     c=report['parameters'].get('linear_coefficients');cfg=report['provenance']['config']
     checks=[]
@@ -248,7 +273,10 @@ def fit_passive_logs(training,training_annotations,validation,validation_annotat
     if checks and not all(c['passed'] for c in checks):report['reasons'].append('one or more validation episodes fail fixed gates')
     report.update(schema='cartpole-id-fit-v1',kind='passive',accepted=bool(report['statistical_checks_pass'] and checks and all(c['passed'] for c in checks)),
         acceptance_scope='passive-down-conditional',per_episode_validation=checks,physical_cart_stationarity_certified=False,
-        recommended_for_hardware_rl=False,camera_evidence={'status':'not supplied'},recommended_model=None)
+        recommended_for_hardware_rl=False,camera_evidence=camera_evidence,recommended_model=None)
+    if camera_evidence.get('required') and not camera_evidence['passed']:
+        report['accepted']=False
+        report['reasons'].append('required camera consistency or release-pose verification failed')
     report['provenance'].update(training=ti,validation=vi,implementation=provenance())
     return report
 

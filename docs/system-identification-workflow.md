@@ -25,7 +25,7 @@ Collection requires a healthy, homed, disabled executor, saved valid encoder ref
 
 ## 2. Collect manual passive releases
 
-Purpose: identify passive pole gravity/damping from free motion while the operator physically restrains the cart. The script **never arms**. Wait for its `"status":"recording","drivers_enabled":false` message, then displace and release the pole. Record several releases with different amplitudes and both directions. Keep hands clear of the pole during each selected free interval and distinguish handling from free motion in your annotations.
+Purpose: identify passive pole gravity/damping from free motion while the operator physically restrains the cart. The script **never arms**. New passive recordings require the camera and first measure two quiet seconds of hanging encoder/camera data. Keep the pole hanging freely and the cart fixed during `measuring_hanging_baseline`; both markers must be visible. This establishes an **experiment-relative zero**, without sending firmware calibration or changing the saved upright reference or camera service calibration. The release timer starts afterward. Wait for its `"status":"recording","drivers_enabled":false` message, then displace and release the pole. Record several releases with different amplitudes and both directions. Keep hands clear of the pole during each selected free interval and distinguish handling from free motion in your annotations.
 
 ```sh
 "$ID" collect-passive --port "$PORT" --seconds 180 \
@@ -41,6 +41,8 @@ Purpose: identify passive pole gravity/damping from free motion while the operat
   --cart-restraint "cart held stationary by hand" \
   --output runs/passive-validate-01
 ```
+
+While recording, a compact `angles` message appears twice per second with `encoder_from_hanging_deg` and `camera_from_hanging_deg`. Use their absolute magnitudes to help aim for the requested pose. A missing camera reading is `null`; it is never filled from the encoder or fusion. These are live relative-angle readings, not final release verification. Hold each intended release pose still for **two seconds with both markers visible**, then release without pushing.
 
 The script prints the sequence after recording starts: 30° left, 30° right, 60° left, 60° right, then repeats. These angles are **requested conditions**, not measurements or automatic fit windows. Conditions, dataset role and restraint are hashed into both the raw log and completion report. The role is descriptive; actual source/session independence is checked during fitting. At most 12 releases fit in one labelled recording, and recording is bounded to 180 seconds. If full settling takes longer, split the procedure across recordings instead of rushing. The collector neither measures nor automatically confirms when each requested release occurred.
 
@@ -66,13 +68,38 @@ The four requested releases are left, right, left, right. Once the procedure is 
 
 A request for 60° is a label, not a mathematical assumption in the fitter. A clean release actually around 40° is useful for identifying and validating that measured range; it cannot establish 60° or 90° accuracy. Do not change encoder measurements or relabel measured angles to force agreement with the requested pose.
 
-`raw-observations.png` plots raw encoder angle minus an integer hanging branch (normally π), **not angle minus the observed settled resting angle**. For example, a resting baseline at −7° and a held pose at +40° are separated by about 47 encoder degrees. Also, the first peak after falling is smaller than the release height because energy has already been lost. Use the pre-release pose and local resting baseline to assess encoder displacement, not just a later peak. This is not an independent physical-angle calibration; the hanging/upright mapping question remains open.
+For new recordings containing `passive_baseline`, `raw-observations.png` subtracts the measured initial hanging encoder baseline, so settled hanging starts at **0°**. Raw `theta` remains unchanged in the JSONL; the fitter still uses it and estimates its training-only gravity phase. Camera comparison subtracts its own measured raw image-angle baseline. This removes constant display offsets, not encoder nonlinearity or camera perspective error.
 
-The default raw camera URL is `http://127.0.0.1:3090/api/sensing-stream?max_hz=100`. Camera work runs in a separate process. It inherits the launching process’s CPU affinity: run the integrated collector without `taskset -c 2`, which would pin both camera and control to the same CPU. The package does not change CPU affinity or scheduler settings. A fresh actual camera frame with valid source age is required before serial collection; advancing HTTP heartbeat envelopes alone do not establish camera readiness; camera failure during collection stops the procedure. Use `--camera-url URL` for an explicit endpoint, or `--no-camera` to deliberately record the absence of independent camera evidence. Raw images/geometry can support stationarity assessment, but uncalibrated pixels do not establish metric cart motion or global angle calibration.
+Historical recordings without a measured baseline still plot raw encoder angle minus an integer hanging branch (normally π), **not angle minus the observed settled resting angle**. For example, a resting baseline at −7° and a held pose at +40° are separated by about 47 encoder degrees. Also, the first peak after falling is smaller than the release height because energy has already been lost. Use the pre-release pose and local resting baseline to assess encoder displacement, not just a later peak. This is not an independent physical-angle calibration; the hanging/upright mapping question remains open.
 
-Camera-enabled sessions also publish the current encoder session to the portal through the existing read-only UDP mirror. Mirrored or fused values in camera packets are display data. Fitting uses **direct Rig JSONL raw `theta`**, never `angle_hat`, mirrored encoder packets or filtered `omega`. Board `unwrapped_us` and raw camera `vision.t` have different clock meanings; no cross-host clock mapping or sensor fusion is inferred.
+The default raw camera URL is `http://127.0.0.1:3090/api/sensing-stream?max_hz=100`. Camera work runs in a separate process. It inherits the launching process’s CPU affinity: run the integrated collector without `taskset -c 2`, which would pin both camera and control to the same CPU. The package does not change CPU affinity or scheduler settings. A fresh actual camera frame with valid source age is required before serial collection; advancing HTTP heartbeat envelopes alone do not establish camera readiness; camera failure during collection stops the procedure. Use `--camera-url URL` for an explicit endpoint. Passive collection rejects `--no-camera`; the older optional-camera pulse workflow remains available separately. Raw marker geometry can support stationarity assessment, but uncalibrated pixels do not establish metric cart motion or global angle calibration.
+
+Camera-enabled sessions also publish the current encoder session to the portal through the existing read-only UDP mirror. Mirrored or fused values in camera packets are display data. Fitting uses **direct Rig JSONL raw `theta`**, never `angle_hat`, mirrored encoder packets or filtered `omega`. Board `unwrapped_us` and raw camera `vision.t` have different clock meanings. New recordings save local camera receipt timestamps plus bounded `/api/clock` round trips before and after capture. Review interpolates those offsets to collector time and then maps encoder receipt time to board time. Synchronization uncertainty, source gaps and unknown exposure/serial latency stay explicit. No sensor fusion or fitted time shift is used to manufacture agreement. The NDJSON contains raw marker geometry and angles, not a replayable movie.
 
 Ctrl-C preserves partial records and attempts STOP. A disconnected camera, stale/unhealthy telemetry, or lost logger records fails the run. Inspect `report.json` and `vision-report.json`, not just whether files exist.
+
+### Batch 2 operator commands
+
+On the Jetson, use the updated staged checkout (earlier recordings remain in the earlier checkout):
+
+```sh
+cd ~/cartpole-v2-live/staging/operator-id-20261017-camera-zero
+PORT=/dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00
+./scripts/system-id collect-passive --port "$PORT" --seconds 180 \
+  --dataset-role training --run-label passive-training-2 \
+  --release-angles-deg 30 60 90 --release-directions left right --repetitions 1 \
+  --cart-restraint "cart held stationary by hand" --output runs/passive-training-2
+
+# Once the first recording has completed, start fresh releases for validation:
+./scripts/system-id collect-passive --port "$PORT" --seconds 180 \
+  --dataset-role validation --run-label passive-validation-2 \
+  --release-angles-deg 30 60 90 --release-directions left right --repetitions 1 \
+  --cart-restraint "cart held stationary by hand" --output runs/passive-validation-2
+```
+
+Each requests 30° left/right, 60° left/right, then 90° left/right. Keep the console closed and the camera fixed, with full swing and both markers visible. At 90° the pole is horizontal. Hold the cart still throughout, hold each pose for two seconds, release without pushing, and let the motion settle before the next. Start each command with the pole hanging; wait for `recording` before touching it. If baseline quality fails, fix the stated condition and choose a new output name. Do not overwrite failed evidence.
+
+For the current collaboration, the operator only collects and reports the directory names. The agent then reviews both raw sources, records held-pose/release/free-motion times before fitting, fits on training, scores independent validation, plots predictions and exports only an accepted model. No new-data fit/export has been performed before those recordings exist.
 
 ## 3. Review the raw recording, then annotate free intervals
 
@@ -135,6 +162,26 @@ The [2026-10-17 batch-1 review](../evidence/operator-batch1-20261017/README.md) 
 Use the first training and validation recordings for an initial fit if completion/STOP, health, clock integrity, reference consistency, restraint and free-interval selection check out. Requested-angle undershoot alone is not a reason to discard them. A quality review before scoring does not consume the validation set; using its prediction errors to change the model does. If you tune the model after inspecting batch-1 validation errors, that validation recording becomes development evidence, and batch 2 can supply a fresh holdout.
 
 Collect improved 60° and separate 90° releases to cover the missing amplitudes. Validate the same physical model on both lower and higher ranges, rather than replacing every smaller swing with a large one. Preserve every original recording and do not overwrite batch 1. Until the intervals are annotated and the fit is scored, “candidate data” does not mean an accepted model.
+
+### Check measured release poses against the camera
+
+For new baseline-bearing recordings, each annotation also needs `pose_board_relative_s: [held_start, held_end]` and `release_board_s`. The pose window must be stationary, last at least 0.15 s, and end within 0.5 s before the explicitly observed release time. `board_relative_s` still selects **only free motion** for the fit. For example (illustrative times only):
+
+```json
+{"episode_id":"release-1", "pose_board_relative_s":[8.0,9.8], "release_board_s":10.0,
+ "board_relative_s":[10.1,16.0], "reason":"held pose then hand-clear free oscillation; cart restrained"}
+```
+
+Run the separate offline camera review after freezing annotations:
+
+```sh
+"$ID" review-releases --input runs/passive-training-2/rig-EXACT.jsonl \
+  --annotations runs/train-annotations.json --output runs/passive-training-2-camera-review
+```
+
+It creates `release-overlay.png`/PDF and `report.json`: raw encoder and raw camera angles relative to their independently measured hanging baselines, signed held-pose angles, sensor differences, camera gaps and pixel pivot motion. Missing geometry stays missing. Orange denotes the held pose, green free motion, red missing camera coverage. The review never fits zero, scale, sign, timing or a model to make the sensors agree. Geometry/sign follow the existing SDK convention.
+
+Provisional checks are declared before batch 2: at least 70% valid camera coverage, no gap over 0.15 s, at least 10 camera frames per free interval, angular RMS ≤5° and P95 ≤10°, stationary pose spread ≤2°, pose disagreement ≤5°, arm length within 20% of baseline, and apparent pivot radial P95 motion ≤max(4 pixels, 2% of baseline arm length). These are consistency screens, not absolute camera accuracy or metric proof of fixed cart position. Passing the camera check does not override failed dynamics validation. New baseline-bearing training **and** validation must pass camera checks and explicit release-pose verification before a fit can be accepted/exported; historical recordings retain their original conditional path.
 
 ## 4. Fit and validate passive dynamics
 

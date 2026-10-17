@@ -172,7 +172,7 @@ def test_passive_session_never_arms_and_stops_on_midstream_health_loss():
         return rig.state
     rig.wait_state=wait
     with patch('cartpole_sdk.rig.client.time',clock),patch.object(probe,'time',clock):
-        with pytest.raises(ValidationError):probe.run_passive(rig,seconds=1.)
+        with pytest.raises(ValidationError):probe.run_passive(rig,seconds=1.,camera_read=lambda:None)
     assert not any(c[1] in ('ARM','MODE','HOME','REHOME','CLEAR','CALIBRATE') for c in rig.commands)
     assert rig.commands[-1][1]=='STOP' and not rig.state.enabled
 
@@ -228,8 +228,11 @@ def test_passive_readiness_is_announced_only_after_disabled_preflight():
         ready.append(data)
         assert not rig.state.enabled and rig.state.mode==0
     with patch('cartpole_sdk.rig.client.time',clock),patch.object(probe,'time',clock):
-        probe.run_passive(rig,seconds=1.,ready=announce)
-    assert ready[0]['status']=='recording' and ready[0]['drivers_enabled'] is False
+        from test_passive_collection_baseline import camera_reader
+        probe.run_passive(rig,seconds=1.,ready=announce,camera_read=camera_reader(clock))
+    assert ready[0]['status']=='measuring_hanging_baseline'
+    recording=next(e for e in ready if e['status']=='recording')
+    assert recording['drivers_enabled'] is False
     assert not any(c[1]=='ARM' for c in rig.commands)
 
 

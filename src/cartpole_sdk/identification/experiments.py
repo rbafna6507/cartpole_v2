@@ -216,28 +216,63 @@ def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,pulse_seconds=PULSE_S,proven
     return result
 
 
-def run_passive(rig,*,seconds=120.,expected_reference=None,expected_home=None,check=None,ready=None):
+def run_passive(rig,*,seconds=120.,expected_reference=None,expected_home=None,check=None,ready=None,camera_read=None):
     """Manual free-release recording, always disabled; operator restrains cart."""
     if type(seconds) not in (int,float) or not math.isfinite(seconds) or not 1<=seconds<=180:
         raise ValidationError('passive duration must be 1..180 seconds')
     failure=None
     try:
         rig.stop();state=rig._stopped_healthy();info=rig.get_info()
+        if camera_read is None:raise ValidationError('passive collection requires camera measurements')
         validate_preflight(state,info,expected_reference=expected_reference,expected_home=expected_home)
         values=rig.get_parameters()
         if set(values)!={f.name for f in fields(ControllerParameters)}:raise ValidationError('complete live parameter catalog required')
         ControllerParameters(**values)
+        state=rig.state;rig._fresh(state)
+        validate_preflight(state,info,expected_reference=expected_reference,expected_home=expected_home)
+        if ready is not None:ready(dict(status='measuring_hanging_baseline',drivers_enabled=False,
+            seconds=2.,instruction='Keep the pole hanging freely, cart fixed, both markers visible; wait for recording.'))
+        states=[plain(state)];camera_rows=[];first_host=state.received_ns;baseline_deadline=time.monotonic()+4.
+        while state.received_ns-first_host<2_000_000_000:
+            if time.monotonic()>=baseline_deadline:raise ValidationError('hanging baseline deadline exceeded')
+            if check is not None:check()
+            state=rig.wait_state(after_tick=state.unwrapped_tick,timeout=.15)
+            rig._fresh(state);validate_preflight(state,info,expected_reference=expected_reference,expected_home=expected_home)
+            states.append(plain(state));sample=camera_read()
+            if sample is not None:
+                received=sample.get('collector_received_ns')
+                if type(received) is not int or not 0<=time.monotonic_ns()-received<=200_000_000:
+                    raise ValidationError('camera baseline measurement is stale; keep markers visible')
+                if not camera_rows or sample!=camera_rows[-1]:camera_rows.append(sample)
+        from .passive_baseline import build_baseline
+        baseline=build_baseline(states,camera_rows)
+        rig._record('passive_baseline',baseline=baseline)
         rig._record('passive_start',info=plain(info),parameters=values,state=plain(state),seconds=seconds,
+            measurement_version=2,baseline_sha256=digest(baseline),
             physical_cart_restraint='operator must independently restrain; step count does not prove physical stationarity')
-        if ready is not None:ready(dict(status='recording',drivers_enabled=False,seconds=seconds,reference=info.encoder_upright_raw,home_epoch=info.home_epoch))
-        deadline=time.monotonic()+seconds
+        if ready is not None:ready(dict(status='recording',drivers_enabled=False,seconds=seconds,reference=info.encoder_upright_raw,home_epoch=info.home_epoch,
+            hanging_zero_measured=True,encoder_hanging_raw_rad=baseline['encoder']['raw_angle_rad'],camera_hanging_image_rad=baseline['camera']['image_angle_rad']))
+        deadline=time.monotonic()+seconds;next_display=time.monotonic()
         while time.monotonic()<deadline:
             if check is not None:check()
             state=rig.wait_state(after_tick=state.unwrapped_tick,timeout=.15)
             rig._fresh(state);validate_board(state)
             if state.enabled or state.mode!=0:raise ValidationError('passive recording requires disabled idle executor')
-        return dict(info=plain(info),parameters=values,final_state=plain(rig.state),physical_cart_stationarity_certified=False)
-    except BaseException as exc:failure=exc;raise
+            if ready is not None and time.monotonic()>=next_display:
+                from .passive_baseline import camera_geometry
+                sample=camera_read();geometry=None
+                if sample is not None and 0<=time.monotonic_ns()-sample.get('collector_received_ns',-1)<=200_000_000:
+                    geometry=camera_geometry(sample.get('vision'))
+                camera_angle=None
+                if geometry is not None and abs(geometry['length_px']/baseline['camera']['length_px']-1)<=.2:
+                    camera_angle=math.degrees(-wrap(geometry['image_angle_rad']-baseline['camera']['image_angle_rad']))
+                ready(dict(status='angles',encoder_from_hanging_deg=round(math.degrees(wrap(state.theta-baseline['encoder']['raw_angle_rad'])),3),
+                    camera_from_hanging_deg=None if camera_angle is None else round(camera_angle,3),
+                    camera_detected=camera_angle is not None,release_angle_verified=False))
+                next_display=time.monotonic()+.5
+        return dict(info=plain(info),parameters=values,baseline=baseline,final_state=plain(rig.state),physical_cart_stationarity_certified=False)
+    except BaseException as exc:
+        failure=exc;rig._record('passive_failure',reason=repr(exc));raise
     finally:
         try:
             rig.stop()
@@ -264,24 +299,47 @@ def inspect_rig(rig,*,expected_reference=None,expected_home=None):
             if failure is None:raise
 
 
-def record_camera(url,directory,seconds,stop,ready):
+def sample_camera_clock(url):
+    """Read-only HTTP round trip: source time to collector monotonic time."""
+    from urllib.request import urlopen
+    from urllib.parse import urlsplit,urlunsplit
+    from cartpole_sdk.recording import strict_json_loads
+    parsed=urlsplit(url)
+    endpoint=urlunsplit((parsed.scheme,parsed.netloc,'/api/clock','',''))
+    before=time.monotonic_ns()
+    with urlopen(endpoint,timeout=.5) as response:payload=response.read(4097)
+    after=time.monotonic_ns()
+    if len(payload)>4096:raise ValueError('camera clock response exceeds byte limit')
+    value=strict_json_loads(payload.decode()).get('monotonic_s')
+    if type(value) not in (int,float) or not math.isfinite(value) or value<0 or after<before:
+        raise ValueError('invalid camera clock response')
+    uncertainty=(after-before+1)//2
+    if uncertainty>10_000_000:raise ValueError('camera clock round-trip uncertainty exceeds10ms')
+    return dict(local_before_ns=before,local_after_ns=after,server_monotonic_s=value,
+                offset_ns=(before+after)//2-round(value*1e9),uncertainty_ns=uncertainty)
+
+
+def record_camera(url,directory,seconds,stop,ready,sample_queue=None,sync_clocks=False):
     """Child process: bounded read-only NDJSON capture; never opens serial."""
     from urllib.request import urlopen
     from urllib.parse import urlsplit
     from cartpole_sdk.recording import strict_json_loads
     directory=Path(directory);path=directory/'vision.ndjson'
-    report=dict(url=url,frames=0,heartbeat_records=0,stream_records=0,started_ns=time.monotonic_ns(),clock='camera t is a source host-read proxy; no cross-host mapping inferred')
+    report=dict(url=url,frames=0,heartbeat_records=0,stream_records=0,started_ns=time.monotonic_ns(),clock='camera t is a host-read proxy; round-trip clock anchors do not measure exposure latency')
+    if sample_queue is not None:sample_queue.cancel_join_thread()
     try:
         parsed=urlsplit(url)
         if parsed.scheme not in ('http','https') or not parsed.netloc:raise ValueError('camera requires HTTP(S) URL')
+        if sync_clocks:report['clock_sync']=dict(method='http-roundtrip-midpoint',start=sample_camera_clock(url))
         deadline=time.monotonic()+seconds;previous=None;previous_frame=None;previous_host=None
         with path.open('xb') as target,urlopen(url,timeout=.5) as stream:
             while not stop.is_set() and time.monotonic()<deadline:
                 line=stream.readline(4*1024*1024+1)
                 if not line or len(line)>4*1024*1024 or not line.endswith(b'\n'):raise ValueError('camera stream ended or exceeded record bound')
-                row=strict_json_loads(line.decode())
+                received_ns=time.monotonic_ns();row=strict_json_loads(line.decode())
                 if row.get('schema')!='cartpole-sensing-stream-v1':raise ValueError('unexpected raw camera stream schema')
-                target.write(line);report['stream_records']+=1
+                row['collector_received_ns']=received_ns
+                target.write((json.dumps(row,separators=(',',':'),allow_nan=False)+'\n').encode());report['stream_records']+=1
                 sequence=row.get('stream_seq');vision=row.get('vision',{});t=vision.get('t')
                 frame_sequence=vision.get('seq');host_t=row.get('host_t');age=vision.get('age_since_host_read_s')
                 if type(sequence) is not int or (previous is not None and sequence<=previous):raise ValueError('repeated or reversed camera stream sequence')
@@ -297,10 +355,22 @@ def record_camera(url,directory,seconds,stop,ready):
                     elif frame_sequence<=previous_frame[0] or t<=previous_frame[1]:raise ValueError('camera source frame clock or sequence reversed')
                     else:report['frames']+=1
                 else:report['frames']+=1
+                if sample_queue is not None and current!=previous_frame:
+                    from queue import Empty,Full
+                    sample=dict(collector_received_ns=received_ns,host_t=host_t,vision=vision)
+                    try:sample_queue.put_nowait(sample)
+                    except Full:
+                        try:sample_queue.get_nowait()
+                        except Empty:pass
+                        try:sample_queue.put_nowait(sample)
+                        except Full:pass  # Latest-preview queue only; NDJSON above retains every record.
                 previous=sequence;previous_frame=current;previous_host=host_t;ready.set()
     except BaseException as exc:
         if not stop.is_set() or not isinstance(exc,OSError):report['failure']=repr(exc)
     finally:
+        if sync_clocks and 'clock_sync' in report:
+            try:report['clock_sync']['end']=sample_camera_clock(url)
+            except Exception as exc:report.setdefault('failure','camera clock completion failed: '+repr(exc))
         report['finished_ns']=time.monotonic_ns()
         if path.exists():report['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
         write_json(directory/'vision-report.json',report)
@@ -312,13 +382,19 @@ class CameraRecorder:
         import multiprocessing
         context=multiprocessing.get_context('spawn')
         self.directory=Path(directory);self.stop=context.Event();self.ready=context.Event()
-        self.process=context.Process(target=record_camera,args=(url,str(directory),seconds,self.stop,self.ready),daemon=True)
+        self.samples=context.Queue(maxsize=8);self._latest=None
+        self.process=context.Process(target=record_camera,args=(url,str(directory),seconds,self.stop,self.ready,self.samples,True),daemon=True)
     def start(self):
         self.process.start()
         if not self.ready.wait(3.):raise RuntimeError('camera unavailable before collection')
         self.check()
     def check(self):
         if not self.process.is_alive():raise RuntimeError('camera recorder ended during collection')
+    def latest(self):
+        from queue import Empty
+        while True:
+            try:self._latest=self.samples.get_nowait()
+            except Empty:return self._latest
     def close(self):
         self.stop.set()
         if self.process.pid is not None:
@@ -335,6 +411,7 @@ def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S
             expected_reference=None,expected_home=None,rig_factory=None,camera_factory=None,ready=None,protocol=None):
     """Create an immutable run directory, preserve failures, and stop before return."""
     if kind not in ('pulse','passive','inspect'):raise ValueError('unknown collection procedure')
+    if kind=='passive' and camera_url is None:raise ValueError('passive collection requires camera recording and hanging baseline')
     protocol=make_protocol(kind) if protocol is None else validate_protocol(protocol,kind)
     if kind=='pulse':pulse_seconds=validate_excitation(amplitude_m,pulse_seconds);hold_seconds=hold_duration(hold_seconds)
     if not math.isfinite(seconds) or not 1<=seconds<=180:raise ValueError('duration must be 1..180 seconds')
@@ -344,7 +421,7 @@ def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S
         started_ns=time.monotonic_ns(),expected_reference=expected_reference,expected_home=expected_home,
         source_semantics={'fit_source':'direct Rig JSONL raw theta and MCU acceleration; never mirrored/fused packets',
             'board_clock':'unwrapped_us snapshot proxy, session-specific',
-            'camera_clock':'raw vision.t host-read proxy; no implicit mapping to the board clock',
+            'camera_clock':'raw vision.t host-read proxy; explicit HTTP round-trip anchors to collector monotonic clock; exposure latency unknown',
             'encoder_mirror':'current-session read-only UDP when camera enabled; display only'},
         camera={'status':'explicitly disabled; independent camera evidence absent'} if camera_url is None else {'url':camera_url},
         options=dict(port=str(port),seconds=seconds,amplitude_m=amplitude_m,pulse_seconds=pulse_seconds,hold_seconds=hold_seconds,rate_hz=100 if kind=='pulse' else 250))
@@ -362,11 +439,12 @@ def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S
         with rig:
             rig._record('collection_protocol',protocol=protocol,protocol_sha256=digest(protocol))
             def announce(status):
-                if ready is not None:ready(dict(status,collection_protocol=protocol,requested_release_instructions=instructions(protocol)))
+                if ready is not None:
+                    ready(dict(status,collection_protocol=protocol,requested_release_instructions=instructions(protocol)) if status.get('status') in ('recording','pulse_starting') else status)
             pins=dict(expected_reference=expected_reference,expected_home=expected_home)
             check=None if camera is None else camera.check
             if kind=='pulse':report['result']=run_pulse(rig,amplitude_m=amplitude_m,hold_seconds=hold_seconds,pulse_seconds=pulse_seconds,provenance=report['provenance'],check=check,ready=announce,**pins)
-            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=announce,**pins)
+            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=announce,camera_read=camera.latest,**pins)
             else:report['result']=inspect_rig(rig,**pins)
             report['stop_state']=plain(rig.state)
             report['stop_confirmed']=not rig.state.enabled

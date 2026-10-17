@@ -22,7 +22,7 @@ def parser():
             p.add_argument('--run-label',default='unspecified',help='Descriptive immutable recording label.')
             camera=p.add_mutually_exclusive_group()
             camera.add_argument('--camera-url',default='http://127.0.0.1:3090/api/sensing-stream?max_hz=100',help='Raw sensing-stream URL; must become ready before serial collection.')
-            camera.add_argument('--no-camera',action='store_true',help='Explicitly record missing independent camera evidence.')
+            camera.add_argument('--no-camera',action='store_true',help='Pulse only: explicitly record missing independent camera evidence; passive collection requires camera.')
         if name=='collect-passive':
             p.add_argument('--seconds',type=float,default=120.,help='Bounded1..180s; annotate hand-clear release intervals afterward.')
             p.add_argument('--release-angles-deg',type=float,nargs='+',help='Requested degrees away from hanging; labels are not measured angles.')
@@ -36,6 +36,9 @@ def parser():
             p.add_argument('--amplitude-mm',type=int,required=True,choices=(-30,-20,-10,-5,5,10,20,30),help='Signed pulse amplitude; begin with5mm and inspect before escalating.')
     p=commands.add_parser('review-recording',help='Check completed raw data and plot observations without fitting or selecting intervals.')
     p.add_argument('--input',required=True);p.add_argument('--output',type=Path,required=True)
+    p=commands.add_parser('review-releases',help='Compare raw camera/encoder relative hanging and qualify explicitly annotated release poses; no fitting.')
+    p.add_argument('--input',required=True);p.add_argument('--annotations',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True)
     p=commands.add_parser('review-fit',help='Plot frozen passive-fit predictions on the exact validation data; never refit or change acceptance.')
     p.add_argument('--fit',type=Path,required=True);p.add_argument('--validation',required=True)
     p.add_argument('--validation-annotations',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
@@ -84,6 +87,11 @@ def main(argv=None):
                 expected_reference=args.expected_reference,expected_home=args.expected_home,
                 ready=announce,protocol=protocol)
             print(json.dumps(dict(output=str(args.output),completed=result['completed'],stop_confirmed=result.get('stop_confirmed'))));return 0
+        if args.command=='review-releases':
+            from .release_review import review_releases
+            result=review_releases(args.input,args.annotations,args.output)
+            print(json.dumps(dict(output=str(args.output),passed=result['passed'],all_release_poses_verified=result['all_release_poses_verified'],physical_model_validated=False)))
+            return 0 if result['passed'] and result['all_release_poses_verified'] else 2
         if args.command=='review-recording':
             from .review import review_recording
             result=review_recording(args.input,args.output)
