@@ -331,11 +331,13 @@ def export_model(report,*,scope,assumptions,output):
     if (kind,scope) not in (('passive','passive-down'),('driven','driven')):raise ValueError('scope does not match fit evidence')
     p=report['parameters'];friction=p.get('coulomb_rad_per_s2',0.)
     if friction!=0 or (kind=='driven' and (abs(p.get('input_gain',0.)-1.)>1e-6 or p.get('delay_s')!=0.)):
-        raise ValueError('SimulationConfig cannot represent fitted friction, non-unit input gain or input delay')
+        raise ValueError('identified exporter cannot represent this friction law, non-unit input gain or input delay')
     names={f.name for f in fields(SimulationConfig)}
     if not isinstance(assumptions,dict) or set(assumptions.get('simulation_config',{}))!=names or not assumptions.get('rationale'):
         raise ValueError('full explicit simulation_config and assumptions rationale required')
-    base=SimulationConfig(**assumptions['simulation_config']);length=p['effective_length_m'];gamma=p['angular_damping_per_s']
+    base=SimulationConfig(**assumptions['simulation_config'])
+    if base.hinge_coulomb_friction_nm != 0.:raise ValueError('identified viscous export cannot add an unfitted friction term')
+    length=p['effective_length_m'];gamma=p['angular_damping_per_s']
     if not math.isfinite(length) or length<=0 or not math.isfinite(gamma) or gamma<0:raise ValueError('invalid fitted length/damping')
     inertia=.75*base.pole_mass_kg*length**2
     config=asdict(base);config.update(effective_length_m=length,hinge_damping=gamma*inertia)

@@ -34,7 +34,13 @@ def read_json(path):
 
 
 def complete_config(value, cls, label):
-    if not isinstance(value, dict) or set(value) != {f.name for f in fields(cls)}:
+    names = {f.name for f in fields(cls)}
+    # Complete pre-friction payloads have a precise legacy field set. Do not
+    # fill arbitrary omissions or a half-specified new friction model.
+    neutral = dict(hinge_coulomb_friction_nm=0., hinge_friction_velocity_scale_rad_s=.05)
+    if cls is SimulationConfig and isinstance(value, dict) and set(value) == names - neutral.keys():
+        value = dict(value, **neutral)
+    if not isinstance(value, dict) or set(value) != names:
         raise ValueError(f'{label} requires all and only explicit fields')
     return cls(**value)
 
@@ -66,6 +72,8 @@ def _identified(model, config):
     if not isinstance(assumptions, dict) or not _text(assumptions.get('rationale')):
         raise ValueError('identified export requires explicit assumptions')
     base = complete_config(assumptions.get('simulation_config'), SimulationConfig, 'assumptions')
+    if base.hinge_coulomb_friction_nm != 0. or config.hinge_coulomb_friction_nm != 0.:
+        raise ValueError('identified viscous export cannot add an unfitted friction term')
     length, gamma = params.get('effective_length_m'), params.get('angular_damping_per_s')
     if (type(length) not in (int, float) or type(gamma) not in (int, float) or
             not math.isfinite(length) or not math.isfinite(gamma) or length <= 0 or gamma < 0):

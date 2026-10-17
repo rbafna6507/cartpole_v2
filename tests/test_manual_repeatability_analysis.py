@@ -9,6 +9,19 @@ def tool():
     assert SCRIPT.exists(),'manual repeatability evaluator not implemented'
     spec=importlib.util.spec_from_file_location('manual_repeatability',SCRIPT);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 
+@pytest.fixture
+def frozen_simulator(monkeypatch):
+    """Historical comparisons run their hash-pinned release, not today's plant."""
+    import sys
+    root=REPO/'releases/snapshots/platform-20261016-python-feedback/src/cartpole_sdk/sim'
+    for short in ('config','model','backend'):
+        name='cartpole_sdk.sim.'+short
+        spec=importlib.util.spec_from_file_location(name,root/(short+'.py'))
+        module=importlib.util.module_from_spec(spec)
+        monkeypatch.setitem(sys.modules,name,module)
+        spec.loader.exec_module(module)
+    return root
+
 def example(fitter,coefficients,run='new-independent',initial=.5,duration=3.):
     q=math.pi-.11310915597373176+initial;w=0.;ts=np.arange(0,duration+.0001,.004);values=[q]
     for _ in ts[1:]:
@@ -32,7 +45,7 @@ def test_exact_frozen_coefficients_only_validation_no_refit():
     assert rejected['aggregate']['statistical_checks_pass'] is False
     assert rejected['aggregate']['parameters']==original
 
-def test_continuous_mujoco_uses_one_past_only_initialization():
+def test_continuous_mujoco_uses_one_past_only_initialization(frozen_simulator):
     pytest.importorskip('mujoco');m=tool();fitter,training,freeze,ev=m.frozen_method(REPO);p=freeze['candidate_parameters'];ep=example(fitter,p['linear_coefficients'])
     result=m.continuous(ep,p,REPO/'evidence/system-id-20261016/mujoco-passive-candidate/model-config.json')
     assert result['initial_t_s']==pytest.approx(.1)
@@ -83,7 +96,7 @@ def test_changed_simulator_source_rejected_before_rollout(tmp_path):
     for name in ('backend.py','model.py','config.py'):(tmp_path/name).write_text('changed source')
     with pytest.raises(ValueError,match='frozen simulator source'):m.verify_simulator_sources(tmp_path)
 
-def test_plot_handles_release_with_no_delivered_camera_frames(tmp_path):
+def test_plot_handles_release_with_no_delivered_camera_frames(tmp_path,frozen_simulator):
     pytest.importorskip('matplotlib');m=tool();fitter,training,freeze,ev=m.frozen_method(REPO);p=freeze['candidate_parameters'];ep=example(fitter,p['linear_coefficients']);report=training['magnetic_reports']['viscous']
     r=dict(frozen_parameters=p,short_forecasts=m.score([ep],report,fitter,ev),short_forecast_readings=[dict(windows=m.forecast_readings(ep,p['linear_coefficients'],report['provenance']['config'],fitter))],continuous_rollouts=[m.continuous(ep,p,REPO/'evidence/system-id-20261016/mujoco-passive-candidate/model-config.json')],camera=dict(per_episode=[dict(geometry=dict(coverage=None))]))
     m.draw(r,[ep],tmp_path)

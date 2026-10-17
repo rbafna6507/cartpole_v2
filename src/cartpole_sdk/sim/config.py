@@ -39,14 +39,17 @@ class SimulationConfig:
     max_force_n: float = 20.
     max_acceleration_m_s2: float = 25.
     max_action_ttl_ns: int = 1_000_000_000
+    hinge_coulomb_friction_nm: float = 0.
+    hinge_friction_velocity_scale_rad_s: float = .05
 
     def __post_init__(self):
         for name in ('physics_dt_ns', 'control_steps', 'max_steps', 'max_action_ttl_ns'):
             integer(getattr(self, name), name, positive=True)
         for name in ('rail_half_m', 'effective_length_m', 'cart_mass_kg', 'pole_mass_kg',
-                     'max_force_n', 'max_acceleration_m_s2'):
+                     'max_force_n', 'max_acceleration_m_s2',
+                     'hinge_friction_velocity_scale_rad_s'):
             number(getattr(self, name), name, positive=True)
-        for name in ('cart_damping', 'hinge_damping'):
+        for name in ('cart_damping', 'hinge_damping', 'hinge_coulomb_friction_nm'):
             number(getattr(self, name), name)
 
 

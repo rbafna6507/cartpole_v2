@@ -1,0 +1,63 @@
+{
+  "schema": "cartpole-frozen-driven-audit-verification-v1",
+  "passed": true,
+  "checks": [
+    "frozen parameters/source hash unchanged",
+    "audit script/report binding",
+    "six unique development recording identities",
+    "all original rows retained through existing segments",
+    "same scored short samples across initializers",
+    "initialization does not inspect future angles or inputs",
+    "successful completion/drop/STOP flags preserved",
+    "30mm two-clamp deviations retained",
+    "zero pre-pulse counted origin verified",
+    "smooth friction dissipates signed angular motion",
+    "independent DOP853/RK4 forecast RMS parity"
+  ],
+  "causality": [
+    {
+      "run_id": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+      "no_future_angle_or_input_leakage": true
+    },
+    {
+      "run_id": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d",
+      "no_future_angle_or_input_leakage": true
+    },
+    {
+      "run_id": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf",
+      "no_future_angle_or_input_leakage": true
+    },
+    {
+      "run_id": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6",
+      "no_future_angle_or_input_leakage": true
+    },
+    {
+      "run_id": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+      "no_future_angle_or_input_leakage": true
+    },
+    {
+      "run_id": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+      "no_future_angle_or_input_leakage": true
+    }
+  ],
+  "weak_form_residuals": {
+    "training": {
+      "windows": 40,
+      "integral_nrmse": 0.267962781076245,
+      "historical_gate": 0.15,
+      "interpretation": "Frozen-coefficient diagnostic only; original reports and acceptance statuses are unchanged."
+    },
+    "previous_validation_now_development": {
+      "windows": 20,
+      "integral_nrmse": 0.10461652137738975,
+      "historical_gate": 0.15,
+      "interpretation": "Frozen-coefficient diagnostic only; original reports and acceptance statuses are unchanged."
+    }
+  },
+  "numerical_parity": {
+    "independent_solver_vs_archived_2ms_rk4_max_rms_difference_deg": 2.1988146936546826e-07,
+    "solver": "DOP853 rtol2e-9 atol1e-11 maxstep1ms; initial-state fitting maxstep5ms, least_squares maxnfev50 diff_step1e-4, convergence required"
+  },
+  "report_sha256": "ca99b97a7e28beb16d47fcf89e968a963942ed0dcd8b6c49178969f38beb0d6c",
+  "script_sha256": "ba846b8345cd6b4263d9b7f0bebdbdb759e9a65f6beefe0e098a221d8e04df13"
+}

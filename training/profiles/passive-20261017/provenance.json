@@ -1,0 +1,3025 @@
+{
+  "assumed_pivot_inertia_kg_m2": 0.0004384607240568233,
+  "assumptions": {
+    "executor_snapshot": {
+      "firmware": "executor-v6-measuredrail",
+      "home_epoch": 15,
+      "path": "evidence/system-id-20261017/raw-final-inspection/final-inspect-01/report.json",
+      "sha256": "3f719ac7aa1e1690d8f072a10e7e4af9637c8bc97491458ce34eeb96f1933693",
+      "source_status": "Recorded stopped inspection from 2026-10-17; not a live readback"
+    },
+    "observation_assumptions": "Raw 4096-count encoder plus the recorded bw=6 observer. 3 ms telemetry and 1 ms command delays are declared engineering assumptions, not identified latency distributions. No extra Gaussian noise beyond quantization and no dropout in this baseline; stress these assumptions before hardware use.",
+    "rationale": "Development training: use measured rail and recorded executor snapshot; .35 kg cart, .02275 kg equivalent pole mass, .05 N s/m cart damping and 20 N force ceiling remain explicit assumptions. Replace passive length/damping/friction using the frozen batch-6 candidate. No claim of measured force authority, actuator tracking, global encoder mapping or hardware transfer.",
+    "simulation_config": {
+      "cart_damping": 0.05,
+      "cart_mass_kg": 0.35,
+      "control_steps": 10,
+      "effective_length_m": 0.124,
+      "hinge_coulomb_friction_nm": 0.0,
+      "hinge_damping": 0.0001,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "max_acceleration_m_s2": 25.0,
+      "max_action_ttl_ns": 50000000,
+      "max_force_n": 20.0,
+      "max_steps": 2500,
+      "physics_dt_ns": 1000000,
+      "pole_mass_kg": 0.02275,
+      "rail_half_m": 0.308962494
+    }
+  },
+  "executor_sha256": "1a44ad5f51adb3ab6ad8dc1440018905bec5727b87a3ea0afc28334805e473b5",
+  "freeze_sha256": "2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59",
+  "hardware_accepted": false,
+  "inferred_fields": [
+    "effective_length_m",
+    "hinge_damping",
+    "hinge_coulomb_friction_nm"
+  ],
+  "law": "-hinge_coulomb_friction_nm*tanh(omega/0.05) at every physics tick",
+  "local_angle_offset_applied_to_simulator": false,
+  "observation_sha256": "1382d4c437eb40737135b96deeb766bd13988854ed389da1f8de40fd2fd9e8f2",
+  "parameters": {
+    "coulomb_rad_per_s2": 1.6268943123178277,
+    "effective_length_m": 0.16030387335574306,
+    "local_angle_offset_rad": -0.11297194821931156,
+    "viscous_per_s": 0.006891975341585199
+  },
+  "schema": "cartpole-passive-training-provenance-v1",
+  "simulation_config_sha256": "7f986b18e8a25535c6ccbe3e89262c534fa594951453398bd438b4c22a1fd54c",
+  "source_accepted": false,
+  "source_raw_sha256": [
+    "d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184",
+    "394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d"
+  ],
+  "training_quality": [
+    {
+      "absolute_angle_calibration": false,
+      "all_release_poses_verified": false,
+      "annotations_sha256": "d18d0b1b3c22bcd693917d1785440ada81cedf163731d3f3577e04cd11aaf9a4",
+      "baseline": {
+        "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+        "camera": {
+          "bounds": {
+            "max_angle_spread_rad": 0.035,
+            "max_angle_vector_error_rad": 0.03,
+            "max_gap_s": 0.2,
+            "max_length_spread_fraction": 0.1,
+            "max_length_vector_error_fraction": 0.05,
+            "max_pivot_spread_px": 4.0,
+            "min_confidence": 0.5,
+            "min_duration_fraction": 0.75,
+            "min_duration_s": 1.5,
+            "min_length_px": 5.0,
+            "min_sample_count": 30,
+            "min_valid_fraction": 0.8
+          },
+          "capture_span_s": 1.9940271800151095,
+          "first_frame_seq": 7102243,
+          "first_host_ns": 363816720924016,
+          "first_source_t": 363816.699283842,
+          "frame_height": 600,
+          "frame_width": 960,
+          "image_angle_rad": -0.021351072680992494,
+          "last_frame_seq": 7102401,
+          "last_host_ns": 363818713749232,
+          "last_source_t": 363818.693311022,
+          "length_px": 194.33675290438106,
+          "length_spread_px": 0.6216101985206137,
+          "max_gap_s": 0.03916955599561334,
+          "pivot_px": [
+            478.3266666666667,
+            296.48
+          ],
+          "pivot_spread_px": [
+            0.1097669453833987,
+            0.30110300658242295
+          ],
+          "rotation": null,
+          "sample_count": 134,
+          "source_frame_count": 134,
+          "spread_rad": 0.001586870534597367,
+          "valid_fraction": 1.0
+        },
+        "duration_s": 2.000097766,
+        "encoder": {
+          "bounds": {
+            "max_angle_span_rad": 0.03,
+            "max_hanging_offset_rad": 0.35,
+            "min_duration_fraction": 0.95,
+            "min_duration_s": 1.9,
+            "min_sample_count": 100
+          },
+          "first_board_us": 3174622130,
+          "first_host_ns": 363816717062347,
+          "last_board_us": 3176622130,
+          "last_host_ns": 363818717160113,
+          "raw_angle_rad": 3.028078,
+          "sample_count": 501,
+          "span_rad": 0.0015339999999999243,
+          "spread_rad": 0.0
+        },
+        "schema": "cartpole-passive-baseline-v1",
+        "window_host_ns": [
+          363816717062347,
+          363818717160113
+        ],
+        "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+      },
+      "camera_preroll": {
+        "comparison_included": false,
+        "frames": 1,
+        "mapped": false,
+        "max_allowed_before_start_s": 0.15,
+        "source_time_bounds_s": [
+          363816.524533061,
+          363816.524533061
+        ]
+      },
+      "camera_records": 8929,
+      "camera_rotation": null,
+      "camera_rotation_status": "declared baseline camera geometry",
+      "camera_scale": 1.0,
+      "camera_sha256": "3bfeab1adc8885c20cffa2041ce1411d6ba80ed58374be8f86d2d707cc1a7c72",
+      "camera_sign": -1,
+      "clock_mapping": {
+        "exposure_latency_known": false,
+        "max_allowed_clock_drift_ppm": 100.0,
+        "max_sync_uncertainty_ns": 5455700,
+        "method": "linearly interpolated HTTP clock offsets, then encoder receipt-to-board interpolation",
+        "note": "Source camera t is a host-read proxy. HTTP bounds do not bound exposure or serial receipt latency.",
+        "serial_receipt_latency_known": false
+      },
+      "clock_sync": {
+        "end": {
+          "local_after_ns": 363998766927406,
+          "local_before_ns": 363998761178551,
+          "offset_ns": -865193,
+          "server_monotonic_s": 363998.764918171,
+          "uncertainty_ns": 2874428
+        },
+        "method": "http-roundtrip-midpoint",
+        "start": {
+          "local_after_ns": 363816533578235,
+          "local_before_ns": 363816522666835,
+          "offset_ns": -3263743,
+          "server_monotonic_s": 363816.531386278,
+          "uncertainty_ns": 5455700
+        }
+      },
+      "collection_report_sha256": "2b27af33635c34704458d1819a8a3af73a366e0b7f9572a5f272918f0b1820aa",
+      "duplicate_camera_frames": 0,
+      "episodes": [
+        {
+          "angular_comparison_samples": 222,
+          "angular_p95_rad": 0.08263247588420655,
+          "angular_rmse_rad": 0.04412988067766976,
+          "annotation": {
+            "board_relative_s": [
+              36.0,
+              40.6
+            ],
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              35.33,
+              35.83
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 35.88
+          },
+          "board_relative_s": [
+            36.0,
+            40.6
+          ],
+          "camera_coverage_fraction": 0.961038961038961,
+          "camera_frames": 231,
+          "camera_time_coverage_fraction": 0.9950586730936911,
+          "episode_id": "release-01",
+          "max_camera_gap_s": 0.10183978170415742,
+          "missing_camera_intervals_board_s": [
+            [
+              36.0,
+              36.0108363905106
+            ],
+            [
+              40.58810628674158,
+              40.6
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.378084805490597,
+            "median_pivot_px": [
+              478.3630136986301,
+              296.3287671232877
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.38433772986677084,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.26153184594131856
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 36.003,
+          "recorded_start_excursion_rad": 0.31906830717958656,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              35.33,
+              35.83
+            ],
+            "camera_coverage_fraction": 0.9503754128363227,
+            "camera_frames": 24,
+            "camera_median_rad": 0.5694683391414648,
+            "camera_spread_rad": 0.006539566572255789,
+            "encoder_median_rad": 0.5951843071795866,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.009204000000000434,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.035527252309790924,
+            "missing_camera_intervals_board_s": [
+              [
+                35.33,
+                35.334959128578866
+              ],
+              [
+                35.81014683499703,
+                35.83
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000000426,
+            "reasons": [],
+            "release_board_s": 35.88,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "signed_disagreement_rad": 0.025715968038121817,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 222,
+          "valid_geometry_fraction": 0.961038961038961
+        },
+        {
+          "angular_comparison_samples": 220,
+          "angular_p95_rad": 0.08406914382443799,
+          "angular_rmse_rad": 0.04660043063408951,
+          "annotation": {
+            "board_relative_s": [
+              50.12,
+              55.0
+            ],
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              49.45,
+              49.95
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 50.0
+          },
+          "board_relative_s": [
+            50.12,
+            55.0
+          ],
+          "camera_coverage_fraction": 0.9482758620689655,
+          "camera_frames": 232,
+          "camera_time_coverage_fraction": 0.9943803787340043,
+          "episode_id": "release-02",
+          "max_camera_gap_s": 0.1266064320502025,
+          "missing_camera_intervals_board_s": [
+            [
+              50.12,
+              50.131148371982775
+            ],
+            [
+              54.98372462020472,
+              55.0
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5188180896030913,
+            "median_pivot_px": [
+              478.3055555555556,
+              296.2676056338029
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.43589312066825026,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.31668712204816307
+          },
+          "pose_verified": false,
+          "reasons": [],
+          "recorded_start_board_s": 50.123,
+          "recorded_start_excursion_rad": -0.27304799999999974,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              49.45,
+              49.95
+            ],
+            "camera_coverage_fraction": 0.8695652173913043,
+            "camera_frames": 20,
+            "camera_median_rad": -0.5802404830781982,
+            "camera_spread_rad": 0.008406173396810851,
+            "encoder_median_rad": -0.5445629999999998,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.05675700000000006,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.06220628559267993,
+            "missing_camera_intervals_board_s": [
+              [
+                49.45,
+                49.455206464653735
+              ],
+              [
+                49.94317926277625,
+                49.95
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [
+              "held pose is not stationary within provisional angular variability bound"
+            ],
+            "release_board_s": 50.0,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "signed_disagreement_rad": 0.0356774830781984,
+            "status": "not verified",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": false
+          },
+          "valid_camera_frames": 220,
+          "valid_geometry_fraction": 0.9482758620689655
+        },
+        {
+          "angular_comparison_samples": 364,
+          "angular_p95_rad": 0.11478410477520755,
+          "angular_rmse_rad": 0.06273166221076576,
+          "annotation": {
+            "board_relative_s": [
+              65.64,
+              73.8
+            ],
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              64.97,
+              65.47
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 65.52
+          },
+          "board_relative_s": [
+            65.64,
+            73.8
+          ],
+          "camera_coverage_fraction": 0.9454545454545454,
+          "camera_frames": 385,
+          "camera_time_coverage_fraction": 0.9989113698012011,
+          "episode_id": "release-03",
+          "max_camera_gap_s": 0.08853763636149381,
+          "missing_camera_intervals_board_s": [
+            [
+              65.64,
+              65.64288265692824
+            ],
+            [
+              73.79399943450603,
+              73.8
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.4471087675275706,
+            "median_pivot_px": [
+              478.31690140845075,
+              296.3098591549296
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4209477220810938,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3346322219177862
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 65.643,
+          "recorded_start_excursion_rad": 0.6458063071795872,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              64.97,
+              65.47
+            ],
+            "camera_coverage_fraction": 0.9779504940395611,
+            "camera_frames": 22,
+            "camera_median_rad": 1.049784437839322,
+            "camera_spread_rad": 0.006395086394972293,
+            "encoder_median_rad": 1.1213403071795869,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.0015339999999994802,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.0370204268483576,
+            "missing_camera_intervals_board_s": [
+              [
+                64.97,
+                64.97844286005396
+              ],
+              [
+                65.46741810707374,
+                65.47
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 65.52,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.07155586934026492,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 364,
+          "valid_geometry_fraction": 0.9454545454545454
+        },
+        {
+          "angular_comparison_samples": 398,
+          "angular_p95_rad": 0.11308441795871965,
+          "angular_rmse_rad": 0.06385914664473878,
+          "annotation": {
+            "board_relative_s": [
+              84.84,
+              93.2
+            ],
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              84.17,
+              84.67
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 84.72
+          },
+          "board_relative_s": [
+            84.84,
+            93.2
+          ],
+          "camera_coverage_fraction": 0.9683698296836983,
+          "camera_frames": 411,
+          "camera_time_coverage_fraction": 0.9961174826767342,
+          "episode_id": "release-04",
+          "max_camera_gap_s": 0.07651087540176604,
+          "missing_camera_intervals_board_s": [
+            [
+              84.84,
+              84.86769974595832
+            ],
+            [
+              93.19524190113582,
+              93.2
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.4697340572360047,
+            "median_pivot_px": [
+              478.2571428571428,
+              296.23188405797106
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4603390768481841,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.39809923069986564
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 84.843,
+          "recorded_start_excursion_rad": -0.37122299999999964,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              84.17,
+              84.67
+            ],
+            "camera_coverage_fraction": 0.9278904680424489,
+            "camera_frames": 26,
+            "camera_median_rad": -1.04733974222068,
+            "camera_spread_rad": 0.0036120903513184865,
+            "encoder_median_rad": -1.1244079999999999,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.007670000000000066,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.0382549999346935,
+            "missing_camera_intervals_board_s": [
+              [
+                84.17,
+                84.18974011570101
+              ],
+              [
+                84.65368534972224,
+                84.67
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 84.72,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": -0.0770682577793198,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 398,
+          "valid_geometry_fraction": 0.9683698296836983
+        },
+        {
+          "angular_comparison_samples": 488,
+          "angular_p95_rad": 0.14569090382395655,
+          "angular_rmse_rad": 0.07649333895949598,
+          "annotation": {
+            "board_relative_s": [
+              106.55,
+              117.0
+            ],
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              105.88,
+              106.38
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 106.43
+          },
+          "board_relative_s": [
+            106.55,
+            117.0
+          ],
+          "camera_coverage_fraction": 0.976,
+          "camera_frames": 500,
+          "camera_time_coverage_fraction": 0.9983070259664227,
+          "episode_id": "release-05",
+          "max_camera_gap_s": 0.08822718733360091,
+          "missing_camera_intervals_board_s": [
+            [
+              106.55,
+              106.56205107994792
+            ],
+            [
+              116.99435950129704,
+              117.0
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5188180896030913,
+            "median_pivot_px": [
+              478.3266666666667,
+              296.3287671232877
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.8604901397553291,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3804339508209035
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 106.551,
+          "recorded_start_excursion_rad": 1.2885443071795868,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              105.88,
+              106.38
+            ],
+            "camera_coverage_fraction": 0.9758260390954661,
+            "camera_frames": 27,
+            "camera_median_rad": 1.598143534224931,
+            "camera_spread_rad": 0.0038417493394341967,
+            "encoder_median_rad": 1.5140393071795863,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.009204000000000434,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03585289905504396,
+            "missing_camera_intervals_board_s": [
+              [
+                105.88,
+                105.88542487193045
+              ],
+              [
+                106.37333789147819,
+                106.38
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "reasons": [],
+            "release_board_s": 106.43,
+            "release_to_free_gap_s": 0.11999999999999034,
+            "signed_disagreement_rad": -0.08410422704534469,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 488,
+          "valid_geometry_fraction": 0.976
+        },
+        {
+          "angular_comparison_samples": 482,
+          "angular_p95_rad": 0.14975444458391898,
+          "angular_rmse_rad": 0.08080358564069329,
+          "annotation": {
+            "board_relative_s": [
+              125.84,
+              136.2
+            ],
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              125.17,
+              125.67
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 125.72
+          },
+          "board_relative_s": [
+            125.84,
+            136.2
+          ],
+          "camera_coverage_fraction": 0.9816700610997964,
+          "camera_frames": 491,
+          "camera_time_coverage_fraction": 0.9959592555562835,
+          "episode_id": "release-06",
+          "max_camera_gap_s": 0.06340090905064244,
+          "missing_camera_intervals_board_s": [
+            [
+              125.84,
+              125.86285051716176
+            ],
+            [
+              136.18098840472484,
+              136.2
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5288574612156084,
+            "median_pivot_px": [
+              478.31690140845075,
+              296.2160093896714
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.8142721177540442,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3725426953440395
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 125.843,
+          "recorded_start_excursion_rad": -1.2164469999999998,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              125.17,
+              125.67
+            ],
+            "camera_coverage_fraction": 0.9255942696330806,
+            "camera_frames": 20,
+            "camera_median_rad": -1.5731118445975834,
+            "camera_spread_rad": 0.0029106158581643352,
+            "encoder_median_rad": -1.5462529999999999,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.023009000000000057,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.02674296587152014,
+            "missing_camera_intervals_board_s": [
+              [
+                125.17,
+                125.18451551368018
+              ],
+              [
+                125.64731264849672,
+                125.67
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 125.72,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.026858844597583472,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 482,
+          "valid_geometry_fraction": 0.9816700610997964
+        },
+        {
+          "angular_comparison_samples": 207,
+          "angular_p95_rad": 0.08745505562189718,
+          "angular_rmse_rad": 0.05017130692277848,
+          "annotation": {
+            "board_relative_s": [
+              147.4,
+              151.8
+            ],
+            "episode_id": "release-07",
+            "pose_board_relative_s": [
+              146.73,
+              147.23
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 147.28
+          },
+          "board_relative_s": [
+            147.4,
+            151.8
+          ],
+          "camera_coverage_fraction": 0.9904306220095693,
+          "camera_frames": 209,
+          "camera_time_coverage_fraction": 0.9948650379259036,
+          "episode_id": "release-07",
+          "max_camera_gap_s": 0.038793851705747784,
+          "missing_camera_intervals_board_s": [
+            [
+              147.4,
+              147.40555777909992
+            ],
+            [
+              151.7829639459739,
+              151.8
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5188180896030913,
+            "median_pivot_px": [
+              478.24285714285713,
+              296.1857142857143
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.44711495809417856,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3132942350158588
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 147.403,
+          "recorded_start_excursion_rad": 0.10584499999999997,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              146.73,
+              147.23
+            ],
+            "camera_coverage_fraction": 0.975784300828991,
+            "camera_frames": 30,
+            "camera_median_rad": 0.5759625005396785,
+            "camera_spread_rad": 0.004225607488857302,
+            "encoder_median_rad": 0.5844463071795867,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.004602000000000217,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03831273656180656,
+            "missing_camera_intervals_board_s": [
+              [
+                146.73,
+                146.7407274965951
+              ],
+              [
+                147.2286196470096,
+                147.23
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "reasons": [],
+            "release_board_s": 147.28,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.00848380663990822,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 207,
+          "valid_geometry_fraction": 0.9904306220095693
+        },
+        {
+          "angular_comparison_samples": 225,
+          "angular_p95_rad": 0.08940741709331182,
+          "angular_rmse_rad": 0.04560347985160294,
+          "annotation": {
+            "board_relative_s": [
+              164.37,
+              169.2
+            ],
+            "episode_id": "release-08",
+            "pose_board_relative_s": [
+              163.7,
+              164.2
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 164.25
+          },
+          "board_relative_s": [
+            164.37,
+            169.2
+          ],
+          "camera_coverage_fraction": 0.995575221238938,
+          "camera_frames": 226,
+          "camera_time_coverage_fraction": 0.9994518307868313,
+          "episode_id": "release-08",
+          "max_camera_gap_s": 0.038832045849090946,
+          "missing_camera_intervals_board_s": [
+            [
+              164.37,
+              164.37215587684787
+            ],
+            [
+              169.19950821954825,
+              169.2
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5299946965962152,
+            "median_pivot_px": [
+              478.24285714285713,
+              296.1857142857143
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.38811278646987957,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3132942350158588
+          },
+          "pose_verified": false,
+          "reasons": [],
+          "recorded_start_board_s": 164.371,
+          "recorded_start_excursion_rad": -0.27611600000000003,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              163.7,
+              164.2
+            ],
+            "camera_coverage_fraction": 0.8571428571428571,
+            "camera_frames": 18,
+            "camera_median_rad": -0.5446567819153822,
+            "camera_spread_rad": 0.0046415653336445905,
+            "encoder_median_rad": -0.633534,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.03344120000000012,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.06396124329370423,
+            "missing_camera_intervals_board_s": [
+              [
+                163.7,
+                163.7068450638983
+              ],
+              [
+                164.1964880226457,
+                164.2
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "reasons": [
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 164.25,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": -0.08887721808461779,
+            "status": "not verified",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": false
+          },
+          "valid_camera_frames": 225,
+          "valid_geometry_fraction": 0.995575221238938
+        },
+        {
+          "angular_comparison_samples": 65,
+          "angular_p95_rad": 0.15246426116330472,
+          "angular_rmse_rad": 0.10158811185010296,
+          "annotation": {
+            "board_relative_s": [
+              180.72,
+              182.08
+            ],
+            "episode_id": "release-09",
+            "pose_board_relative_s": [
+              180.05,
+              180.55
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified. Partial final decay; recording ends before settling; report limited duration.",
+            "release_board_s": 180.6
+          },
+          "board_relative_s": [
+            180.72,
+            182.08
+          ],
+          "camera_coverage_fraction": 0.9863532743069032,
+          "camera_frames": 65,
+          "camera_time_coverage_fraction": 0.9863532743069032,
+          "episode_id": "release-09",
+          "max_camera_gap_s": 0.03746622315989612,
+          "missing_camera_intervals_board_s": [
+            [
+              180.72,
+              180.72393157148574
+            ],
+            [
+              182.06537202454314,
+              182.08
+            ]
+          ],
+          "passed": false,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.5442164361379138,
+            "median_pivot_px": [
+              478.3630136986302,
+              296.2042253521127
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.5747285318997951,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3521174324549657
+          },
+          "pose_verified": true,
+          "reasons": [
+            "angular RMSE exceeds 5 degrees or is unavailable"
+          ],
+          "recorded_start_board_s": 180.723,
+          "recorded_start_excursion_rad": 0.7133013071795864,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              180.05,
+              180.55
+            ],
+            "camera_coverage_fraction": 0.9559667477127505,
+            "camera_frames": 28,
+            "camera_median_rad": 1.0534444449301201,
+            "camera_spread_rad": 0.0017938664395936276,
+            "encoder_median_rad": 1.1013983071795865,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.0015339999999994802,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03619486831601648,
+            "missing_camera_intervals_board_s": [
+              [
+                180.05,
+                180.07062915011457
+              ],
+              [
+                180.54861252397095,
+                180.55
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999998295,
+            "reasons": [],
+            "release_board_s": 180.6,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.047953862249466406,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 65,
+          "valid_geometry_fraction": 1.0
+        }
+      ],
+      "gates": {
+        "max_angular_p95_rad": 0.17453292519943295,
+        "max_angular_rmse_rad": 0.08726646259971647,
+        "max_camera_gap_s": 0.15,
+        "max_camera_length_deviation_fraction": 0.2,
+        "max_pose_disagreement_rad": 0.08726646259971647,
+        "max_pose_spread_rad": 0.03490658503988659,
+        "max_pose_to_release_gap_s": 0.5,
+        "min_camera_coverage_fraction": 0.7,
+        "min_camera_frames": 10,
+        "min_pose_camera_frames": 3,
+        "min_pose_duration_s": 0.15,
+        "pivot_radial_p95_floor_px": 4.0,
+        "pivot_radial_p95_length_fraction": 0.02
+      },
+      "intervals_selected": false,
+      "model_accepted": false,
+      "model_fitted": false,
+      "note": "Passed means provisional camera/encoder consistency and a fixed-pivot pixel screen only. Relative angles are apparent projected angles, not absolute physical-angle calibration or model acceptance. Release poses are only reported for explicit stationary pre-release annotations.",
+      "passed": false,
+      "physical_cart_stationarity_certified": false,
+      "provenance": {
+        "platform": "macOS-26.1-arm64-arm-64bit",
+        "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+        "sources": {
+          "__init__.py": "824ed9d13a4843244c5528134f57ac2d565a94e514219bd2ec2601678737269e",
+          "adapters.py": "17dee09aefbbacb7315831492db662693449cfd221503c350f5b71d2b5c23fec",
+          "cli.py": "0cf51892f98ebde997a07a46b99d5fad54582b1a8b5ed4a437f249aa6e95adbc",
+          "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+          "control/__init__.py": "313880d7986477c4fc543e36961bdfe03a351dc0cfb7bd37d9fb63f8fa5e0bad",
+          "control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+          "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+          "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+          "control/policy.py": "2173b5f5eaafb8c9eb32cdf65584ee690131109595ecce5ea630efbe6c3d0a3c",
+          "control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+          "identification/__init__.py": "f0b85dad78f84dfa71c0af0df02ca52e5fc281fae580d78669e01eb5e8d8a325",
+          "identification/adapters.py": "904009b203c1a1190ce6094e6bcbf3b36cbf5f259a5876d843900923786b519d",
+          "identification/cli.py": "74a0780fa17d288438e5c2eb221d455b7f093086f4d02e03e7109fcc61b82be4",
+          "identification/experiments.py": "8c2b1c28650ea6decf9e1a01d9ed24a067eaafd64f1e0639d743b95f17ea8757",
+          "identification/finish.py": "3456f4128a531a244abe5028bd4b6bd05ffbe3dcc5a370e5a27207d62c2b878b",
+          "identification/fit.py": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+          "identification/fit_review.py": "e9c0882f3a942be3bbc33d94e07c402b83cb4c00457e9abeacd879f11c9d704d",
+          "identification/interruption_recovery.py": "af172abde559bf8eb73753c32fed1ea01c5bd14974c9677cdae194853d33436a",
+          "identification/passive.py": "5dc850ec634e1b71ff417bac0f6a31c4bc53b0bad7e82516235e3606dbf66deb",
+          "identification/passive_baseline.py": "23c4e8508f5a0943859e6d54899126e0e85037ad7927185eab3d9cbbc0df1c7a",
+          "identification/protocol.py": "f327ef4be088fdae3c0098c537bb5fa91ccec749218fb43d09b11b955b1587b5",
+          "identification/release_review.py": "dfb905689e2ddf87b4c4a8e6f5ddd6e2f44951746403cd6834d93b4eb406fcf7",
+          "identification/review.py": "3a7278780cf6fbb6d4a4a1b5d430bd599e04efd10f09dc17bd8b0305063c5a04",
+          "identification/rig_logs.py": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+          "identification/workflow.py": "e4b559e25d2b9a74ef2d66a592cca204246fe2b71f592ca1eebb6108c90d2280",
+          "learning/__init__.py": "5d9158d09f19d2799530a6abea916487d3e3b20e1f3bbaac502554eca4fb0b7a",
+          "learning/artifact.py": "77793377c16d6736fe5f81fcb6fd989a9b66aba9fbf81fc3db1a69c7b4619c6a",
+          "learning/export.py": "0486e6fc685668f67689dd7390f05d37a23a877b5a3fa744f542138f69f7aa7a",
+          "learning/model_experiment.py": "3fcfd81e9539a7b32da3afc9ba235d9c04d7a00880394376e898e9ac0a806c04",
+          "learning/model_search.py": "82a818031084794dcf85d98bcb79fd8d3350521ae8ca63585cb4b35bd22ed9fd",
+          "learning/ppo.py": "cdd6c8e35a0936de1bebc4876e9b4014af559cd81e998395836caab61d36e387",
+          "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+          "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+          "policies/__init__.py": "1ce209d208710327b8a2cd9cae7c091e54b1d944a2955910407c2ac52de22db3",
+          "policies/damping.py": "d263ccbb3acbb80cd44c8e98d8e9634146ad89a6f1ddf26d08ee181dffd56cb1",
+          "policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+          "policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+          "policies/neural.py": "acc03290e1b09fd7c42689f22fa1cfa8209ba1992284bc2c469bf0c3f89b1190",
+          "policies/rig_observation.py": "41ce5c64dcd47d9daf5bcb65c053f0ce6efde186a1f649904d0daeb3c3af38e2",
+          "portal/__init__.py": "4e0ea0f986dbc89c4ac868068e81bee9bd8edc899053b0bbcf76ff90834c3adb",
+          "portal/budget.py": "10f48a08f3b3314e37c9ba405a8915321e43ae40afa89015f23a954ae13a3cda",
+          "portal/harness.py": "5e220d943f84911ef5bc7e9e6c2ad965bdaf6ffa6616f4fcff0f46b993a7bd7b",
+          "portal/queue.py": "e12c4b6c2a5346aeca7f9b02718522d8e53278cec65db4c9c516e649d6b332b8",
+          "portal/sandbox.py": "900c0918aa3e6c7df6a02ee5e5864ece55f69ae827dc297695ae59b2f659dbce",
+          "portal/security.py": "582329b7c99f26c5b0f4210eb5d192c8659634d404db3e28557d51a7dfd3d776",
+          "portal/server.py": "4f529ab6b4494f0d4296fbc1b8d13004fd8ebbec5dd731685ca204b651727595",
+          "portal/worker.py": "e4f8786ad7ccca10a0c99a57d491ae6f9a4fa627662d8bf984b0903e8ad55b93",
+          "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+          "replay.py": "d6bef8d411655bd07c970f32994efa98e6b1a6c221eed56e43bc52a75dd7c94a",
+          "rig/__init__.py": "8f197f0d954e5457dfd10bd3d798dd8d3b759014e3e118a847105fe3a8290638",
+          "rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+          "rig/console.py": "180909487d7e7a028f98f2df86924baba6e024fef4d4dc87481a0c66e8285fa0",
+          "rig/parameters.py": "5ed4c1d1030ac06178459e039e6af06077a3ff70840f4cf9328798fc7c6be1a0",
+          "rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+          "rig/protocol.py": "bea00edbd75eeb5325709e1befcca5f1e4dbfcc3947ea9a167ca62c24c060b80",
+          "rig/startup.py": "6efa27bab733523f9e2e42b85673e7692e1ee7bc9778a24b8927149bf51ef95e",
+          "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+          "sensing/__init__.py": "c758e1c4e278d635d67c1e2c11b135b6a84bd177cd919e8f6433628712e90b10",
+          "sensing/calibration.py": "230e0b482726e295d7d19940228938294fa5819a9380efa970371e3ebc2f156a",
+          "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+          "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+          "sensing/shadow.py": "1a30d7855266280b4503f35cc01d83369d82ed09d1ffb46bd5537630af7d04b7",
+          "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+          "sensing/telemetry.py": "7ed4f9890787f19090c18e315942220699597e76b1d7e8138e6b5e22bbd4a84b",
+          "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2",
+          "sim/__init__.py": "0ab628cd7e0f160ee8528868ab2051f10de98c69ce04b44d054bfcd21f2411a8",
+          "sim/backend.py": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+          "sim/config.py": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+          "sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+          "sim/gym_env.py": "1bca5929575464e6ba14da384a3c7d46854b4866fcc78f8da1fa941d06d97883",
+          "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+          "sim/rig_gym_env.py": "c5ed8c2e9f8bd99d5cc423754e0ededfdf1a59095615e29e2c44fa7574a3b47e",
+          "sim/viewer.py": "795d23539f77bbdbc801e8db8adeeb3d741bee2005c3ffc44d524bfa8eca1ee4",
+          "simulation.py": "1c32358336577d14c45130db084ad3ef028e5e9753a8f9038ab92323547aa63b"
+        }
+      },
+      "reasons": [
+        "release-09: angular RMSE exceeds 5 degrees or is unavailable"
+      ],
+      "schema": "cartpole-release-review-v1",
+      "source_identity": {
+        "annotations_sha256": "d18d0b1b3c22bcd693917d1785440ada81cedf163731d3f3577e04cd11aaf9a4",
+        "collection_protocol": {
+          "dataset_role": "training",
+          "nominal_angles_only": true,
+          "operator_cart_restraint": "cart held stationary by hand",
+          "procedure": "passive",
+          "requested_releases": [
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "left",
+              "release_id": "release-01",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "right",
+              "release_id": "release-02",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "left",
+              "release_id": "release-03",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "right",
+              "release_id": "release-04",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "left",
+              "release_id": "release-05",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "right",
+              "release_id": "release-06",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "left",
+              "release_id": "release-07",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "right",
+              "release_id": "release-08",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "left",
+              "release_id": "release-09",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "right",
+              "release_id": "release-10",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "left",
+              "release_id": "release-11",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "right",
+              "release_id": "release-12",
+              "repetition": 2
+            }
+          ],
+          "run_label": "passive-training-5",
+          "schema": "cartpole-collection-protocol-v1"
+        },
+        "collection_protocol_sha256": "772494e643ee7dd15a5c9c2af7f3a17071b7d7037ed5d370cf3e3b989595500d",
+        "collection_report": {
+          "completed": true,
+          "path": "runs/passive-batch6-original/passive-training-6/report.json",
+          "sha256": "2b27af33635c34704458d1819a8a3af73a366e0b7f9572a5f272918f0b1820aa",
+          "status": "bound successful collection"
+        },
+        "duplicate_snapshots": 2,
+        "hash_basis": "decompressed exact JSONL bytes",
+        "member": null,
+        "operator_cart_restraint": "cart held stationary by hand per collection protocol; independently unverified",
+        "passive_baseline": {
+          "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+          "camera": {
+            "bounds": {
+              "max_angle_spread_rad": 0.035,
+              "max_angle_vector_error_rad": 0.03,
+              "max_gap_s": 0.2,
+              "max_length_spread_fraction": 0.1,
+              "max_length_vector_error_fraction": 0.05,
+              "max_pivot_spread_px": 4.0,
+              "min_confidence": 0.5,
+              "min_duration_fraction": 0.75,
+              "min_duration_s": 1.5,
+              "min_length_px": 5.0,
+              "min_sample_count": 30,
+              "min_valid_fraction": 0.8
+            },
+            "capture_span_s": 1.9940271800151095,
+            "first_frame_seq": 7102243,
+            "first_host_ns": 363816720924016,
+            "first_source_t": 363816.699283842,
+            "frame_height": 600,
+            "frame_width": 960,
+            "image_angle_rad": -0.021351072680992494,
+            "last_frame_seq": 7102401,
+            "last_host_ns": 363818713749232,
+            "last_source_t": 363818.693311022,
+            "length_px": 194.33675290438106,
+            "length_spread_px": 0.6216101985206137,
+            "max_gap_s": 0.03916955599561334,
+            "pivot_px": [
+              478.3266666666667,
+              296.48
+            ],
+            "pivot_spread_px": [
+              0.1097669453833987,
+              0.30110300658242295
+            ],
+            "rotation": null,
+            "sample_count": 134,
+            "source_frame_count": 134,
+            "spread_rad": 0.001586870534597367,
+            "valid_fraction": 1.0
+          },
+          "duration_s": 2.000097766,
+          "encoder": {
+            "bounds": {
+              "max_angle_span_rad": 0.03,
+              "max_hanging_offset_rad": 0.35,
+              "min_duration_fraction": 0.95,
+              "min_duration_s": 1.9,
+              "min_sample_count": 100
+            },
+            "first_board_us": 3174622130,
+            "first_host_ns": 363816717062347,
+            "last_board_us": 3176622130,
+            "last_host_ns": 363818717160113,
+            "raw_angle_rad": 3.028078,
+            "sample_count": 501,
+            "span_rad": 0.0015339999999999243,
+            "spread_rad": 0.0
+          },
+          "schema": "cartpole-passive-baseline-v1",
+          "window_host_ns": [
+            363816717062347,
+            363818717160113
+          ],
+          "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+        },
+        "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch6-original/passive-training-6/rig-1792268520828633785-3963299701.jsonl",
+        "record_count": 49206,
+        "reference": [
+          330,
+          15,
+          "executor-v6-measuredrail"
+        ],
+        "selection": [
+          {
+            "actual_board_relative_s": [
+              36.003,
+              40.599
+            ],
+            "annotation": {
+              "board_relative_s": [
+                36.0,
+                40.6
+              ],
+              "episode_id": "release-01",
+              "pose_board_relative_s": [
+                35.33,
+                35.83
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 35.88
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 1150
+          },
+          {
+            "actual_board_relative_s": [
+              50.123,
+              54.999
+            ],
+            "annotation": {
+              "board_relative_s": [
+                50.12,
+                55.0
+              ],
+              "episode_id": "release-02",
+              "pose_board_relative_s": [
+                49.45,
+                49.95
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 50.0
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 1220
+          },
+          {
+            "actual_board_relative_s": [
+              65.643,
+              73.799
+            ],
+            "annotation": {
+              "board_relative_s": [
+                65.64,
+                73.8
+              ],
+              "episode_id": "release-03",
+              "pose_board_relative_s": [
+                64.97,
+                65.47
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 65.52
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2040
+          },
+          {
+            "actual_board_relative_s": [
+              84.843,
+              93.199
+            ],
+            "annotation": {
+              "board_relative_s": [
+                84.84,
+                93.2
+              ],
+              "episode_id": "release-04",
+              "pose_board_relative_s": [
+                84.17,
+                84.67
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 84.72
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2090
+          },
+          {
+            "actual_board_relative_s": [
+              106.551,
+              116.999
+            ],
+            "annotation": {
+              "board_relative_s": [
+                106.55,
+                117.0
+              ],
+              "episode_id": "release-05",
+              "pose_board_relative_s": [
+                105.88,
+                106.38
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 106.43
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2613
+          },
+          {
+            "actual_board_relative_s": [
+              125.843,
+              136.199
+            ],
+            "annotation": {
+              "board_relative_s": [
+                125.84,
+                136.2
+              ],
+              "episode_id": "release-06",
+              "pose_board_relative_s": [
+                125.17,
+                125.67
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 125.72
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 2590
+          },
+          {
+            "actual_board_relative_s": [
+              147.403,
+              151.799
+            ],
+            "annotation": {
+              "board_relative_s": [
+                147.4,
+                151.8
+              ],
+              "episode_id": "release-07",
+              "pose_board_relative_s": [
+                146.73,
+                147.23
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 147.28
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 1100
+          },
+          {
+            "actual_board_relative_s": [
+              164.371,
+              169.199
+            ],
+            "annotation": {
+              "board_relative_s": [
+                164.37,
+                169.2
+              ],
+              "episode_id": "release-08",
+              "pose_board_relative_s": [
+                163.7,
+                164.2
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 164.25
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 1208
+          },
+          {
+            "actual_board_relative_s": [
+              180.723,
+              182.079
+            ],
+            "annotation": {
+              "board_relative_s": [
+                180.72,
+                182.08
+              ],
+              "episode_id": "release-09",
+              "pose_board_relative_s": [
+                180.05,
+                180.55
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified. Partial final decay; recording ends before settling; report limited duration.",
+              "release_board_s": 180.6
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 340
+          }
+        ],
+        "selection_method": "Selected from full raw encoder/camera and release-onset plots, before prediction scoring. All nine visible releases retained, including the final partial decay cut off by collection duration. Fixed 0.5s pose before onset, free interval starts 0.12s after onset; ends before static tails or end of recording. Existing candidate coefficients/method were frozen before inspecting this trace.",
+        "session": {
+          "clock_id": "teensy:3963299701",
+          "session_id": "3963299701",
+          "topology": {
+            "cart": "cart",
+            "joints": [
+              "pole"
+            ]
+          }
+        },
+        "sha256": "d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184",
+        "source_bytes": 18661058
+      },
+      "source_sha256": "d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184",
+      "unique_camera_frames": 8929,
+      "vision_report_sha256": "945bfb99ead1b043ffe6b5afc8e6b274fc6ec518af2442b86d341795525b8ef1",
+      "zero_source": "measured initial hanging baseline; no fitted offset"
+    },
+    {
+      "absolute_angle_calibration": false,
+      "all_release_poses_verified": false,
+      "annotations_sha256": "39fb49a8030b2b94d5e1132874c32c40d2f1d7bf24141a3bb83b4c9e3a703658",
+      "baseline": {
+        "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+        "camera": {
+          "bounds": {
+            "max_angle_spread_rad": 0.035,
+            "max_angle_vector_error_rad": 0.03,
+            "max_gap_s": 0.2,
+            "max_length_spread_fraction": 0.1,
+            "max_length_vector_error_fraction": 0.05,
+            "max_pivot_spread_px": 4.0,
+            "min_confidence": 0.5,
+            "min_duration_fraction": 0.75,
+            "min_duration_s": 1.5,
+            "min_length_px": 5.0,
+            "min_sample_count": 30,
+            "min_valid_fraction": 0.8
+          },
+          "capture_span_s": 1.970459041011054,
+          "first_frame_seq": 7120261,
+          "first_host_ns": 364043711369991,
+          "first_source_t": 364043.697190242,
+          "frame_height": 600,
+          "frame_width": 960,
+          "image_angle_rad": -0.025122251272357884,
+          "last_frame_seq": 7120417,
+          "last_host_ns": 364045691487140,
+          "last_source_t": 364045.667649283,
+          "length_px": 194.7585057678687,
+          "length_spread_px": 0.4804820938517196,
+          "max_gap_s": 0.035120971,
+          "pivot_px": [
+            478.3283582089552,
+            296.1159420289855
+          ],
+          "pivot_spread_px": [
+            0.2994041170097148,
+            0.33179742631796216
+          ],
+          "rotation": null,
+          "sample_count": 139,
+          "source_frame_count": 139,
+          "spread_rad": 0.0022976609665881116,
+          "valid_fraction": 1.0
+        },
+        "duration_s": 2.003345528,
+        "encoder": {
+          "bounds": {
+            "max_angle_span_rad": 0.03,
+            "max_hanging_offset_rad": 0.35,
+            "min_duration_fraction": 0.95,
+            "min_duration_s": 1.9,
+            "min_sample_count": 100
+          },
+          "first_board_us": 3401601130,
+          "first_host_ns": 364043696147608,
+          "last_board_us": 3403605130,
+          "last_host_ns": 364045699493136,
+          "raw_angle_rad": 3.02501,
+          "sample_count": 502,
+          "span_rad": 0.0015339999999999243,
+          "spread_rad": 0.0
+        },
+        "schema": "cartpole-passive-baseline-v1",
+        "window_host_ns": [
+          364043696147608,
+          364045699493136
+        ],
+        "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+      },
+      "camera_preroll": {
+        "comparison_included": false,
+        "frames": 1,
+        "mapped": false,
+        "max_allowed_before_start_s": 0.15,
+        "source_time_bounds_s": [
+          364043.521508616,
+          364043.521508616
+        ]
+      },
+      "camera_records": 9077,
+      "camera_rotation": null,
+      "camera_rotation_status": "declared baseline camera geometry",
+      "camera_scale": 1.0,
+      "camera_sha256": "2c290ff0a5b308095557dcf300f2e8aa1fbae2e719e5f4153936c5fa4dcf54ea",
+      "camera_sign": -1,
+      "clock_mapping": {
+        "exposure_latency_known": false,
+        "max_allowed_clock_drift_ppm": 100.0,
+        "max_sync_uncertainty_ns": 5407411,
+        "method": "linearly interpolated HTTP clock offsets, then encoder receipt-to-board interpolation",
+        "note": "Source camera t is a host-read proxy. HTTP bounds do not bound exposure or serial receipt latency.",
+        "serial_receipt_latency_known": false
+      },
+      "clock_sync": {
+        "end": {
+          "local_after_ns": 364225777507290,
+          "local_before_ns": 364225772170280,
+          "offset_ns": -860104,
+          "server_monotonic_s": 364225.775698889,
+          "uncertainty_ns": 2668505
+        },
+        "method": "http-roundtrip-midpoint",
+        "start": {
+          "local_after_ns": 364043547327771,
+          "local_before_ns": 364043536512949,
+          "offset_ns": -3672867,
+          "server_monotonic_s": 364043.545593227,
+          "uncertainty_ns": 5407411
+        }
+      },
+      "collection_report_sha256": "6b77edcea26aae259820f9bc3f6248e31a98504447480cf3e28f902e51628db9",
+      "duplicate_camera_frames": 1,
+      "episodes": [
+        {
+          "angular_comparison_samples": 248,
+          "angular_p95_rad": 0.07976210011662767,
+          "angular_rmse_rad": 0.045415330034643056,
+          "annotation": {
+            "board_relative_s": [
+              13.82,
+              18.6
+            ],
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              13.15,
+              13.65
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 13.7
+          },
+          "board_relative_s": [
+            13.82,
+            18.6
+          ],
+          "camera_coverage_fraction": 0.992,
+          "camera_frames": 250,
+          "camera_time_coverage_fraction": 0.9940405806556541,
+          "episode_id": "release-01",
+          "max_camera_gap_s": 0.050197769671113335,
+          "missing_camera_intervals_board_s": [
+            [
+              13.82,
+              13.837824537958042
+            ],
+            [
+              18.58933851349207,
+              18.6
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.2898392180151336,
+            "median_pivot_px": [
+              478.3235294117647,
+              296.0735294117647
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4819360883592169,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.26828524635044393
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 13.82,
+          "recorded_start_excursion_rad": 0.354349307179586,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              13.15,
+              13.65
+            ],
+            "camera_coverage_fraction": 0.9782278550996111,
+            "camera_frames": 29,
+            "camera_median_rad": 0.6092185368492588,
+            "camera_spread_rad": 0.0031099086428945538,
+            "encoder_median_rad": 0.6902913071795871,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.007670000000000843,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03467234347320236,
+            "missing_camera_intervals_board_s": [
+              [
+                13.15,
+                13.158189803839534
+              ],
+              [
+                13.64730373138934,
+                13.65
+              ]
+            ],
+            "pose_to_release_gap_s": 0.049999999999998934,
+            "reasons": [],
+            "release_board_s": 13.7,
+            "release_to_free_gap_s": 0.120000000000001,
+            "signed_disagreement_rad": 0.08107277033032834,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 248,
+          "valid_geometry_fraction": 0.992
+        },
+        {
+          "angular_comparison_samples": 205,
+          "angular_p95_rad": 0.08758165067847362,
+          "angular_rmse_rad": 0.04487851595130844,
+          "annotation": {
+            "board_relative_s": [
+              27.65,
+              31.9
+            ],
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              26.98,
+              27.48
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 27.53
+          },
+          "board_relative_s": [
+            27.65,
+            31.9
+          ],
+          "camera_coverage_fraction": 0.99439752677926,
+          "camera_frames": 205,
+          "camera_time_coverage_fraction": 0.99439752677926,
+          "episode_id": "release-02",
+          "max_camera_gap_s": 0.051281491016212044,
+          "missing_camera_intervals_board_s": [
+            [
+              27.65,
+              27.654561741623677
+            ],
+            [
+              31.880751230435532,
+              31.9
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.3423041909232816,
+            "median_pivot_px": [
+              478.24637681159425,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4659553223680489,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.30262268985481244
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 27.652,
+          "recorded_start_excursion_rad": -0.12271799999999988,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              26.98,
+              27.48
+            ],
+            "camera_coverage_fraction": 0.92,
+            "camera_frames": 23,
+            "camera_median_rad": -0.5417733757474719,
+            "camera_spread_rad": 0.010181295331461681,
+            "encoder_median_rad": -0.5261550000000002,
+            "encoder_samples": 126,
+            "encoder_spread_rad": 0.027227500000000293,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03887982848535643,
+            "missing_camera_intervals_board_s": [
+              [
+                26.98,
+                26.990430760908282
+              ],
+              [
+                27.466665857045353,
+                27.48
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000000071,
+            "reasons": [],
+            "release_board_s": 27.53,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "signed_disagreement_rad": 0.015618375747471713,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 205,
+          "valid_geometry_fraction": 1.0
+        },
+        {
+          "angular_comparison_samples": 363,
+          "angular_p95_rad": 0.11278897924333675,
+          "angular_rmse_rad": 0.06532747210131905,
+          "annotation": {
+            "board_relative_s": [
+              43.8,
+              51.3
+            ],
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              43.13,
+              43.63
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 43.68
+          },
+          "board_relative_s": [
+            43.8,
+            51.3
+          ],
+          "camera_coverage_fraction": 0.9918032786885246,
+          "camera_frames": 366,
+          "camera_time_coverage_fraction": 0.9965503183531733,
+          "episode_id": "release-03",
+          "max_camera_gap_s": 0.0402824930317891,
+          "missing_camera_intervals_board_s": [
+            [
+              43.8,
+              43.81960153147
+            ],
+            [
+              51.2937289191188,
+              51.3
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.351503824504466,
+            "median_pivot_px": [
+              478.31690140845075,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4730935981508715,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3603449076004868
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 43.8,
+          "recorded_start_excursion_rad": 0.5414953071795863,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              43.13,
+              43.63
+            ],
+            "camera_coverage_fraction": 0.9473062198453874,
+            "camera_frames": 25,
+            "camera_median_rad": 1.0394768768033444,
+            "camera_spread_rad": 0.0032477523637499655,
+            "encoder_median_rad": 1.1198063071795865,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.0030679999999998486,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.0378222557754313,
+            "missing_camera_intervals_board_s": [
+              [
+                43.13,
+                43.14430392736303
+              ],
+              [
+                43.61795703728573,
+                43.63
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 43.68,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "signed_disagreement_rad": 0.08032943037624206,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 363,
+          "valid_geometry_fraction": 0.9918032786885246
+        },
+        {
+          "angular_comparison_samples": 399,
+          "angular_p95_rad": 0.1253932393390222,
+          "angular_rmse_rad": 0.06740588186704571,
+          "annotation": {
+            "board_relative_s": [
+              62.64,
+              70.7
+            ],
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              61.97,
+              62.47
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 62.52
+          },
+          "board_relative_s": [
+            62.64,
+            70.7
+          ],
+          "camera_coverage_fraction": 0.9925373134328358,
+          "camera_frames": 402,
+          "camera_time_coverage_fraction": 0.9957720279985509,
+          "episode_id": "release-04",
+          "max_camera_gap_s": 0.04884607460937218,
+          "missing_camera_intervals_board_s": [
+            [
+              62.64,
+              62.65458812908963
+            ],
+            [
+              70.68051067475795,
+              70.7
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.35172386966332575,
+            "median_pivot_px": [
+              478.30597014925377,
+              296.09420289855075
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.44104166814940654,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.36706861584385486
+          },
+          "pose_verified": false,
+          "reasons": [],
+          "recorded_start_board_s": 62.64,
+          "recorded_start_excursion_rad": -0.556835,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              61.97,
+              62.47
+            ],
+            "camera_coverage_fraction": 0.9770417691031668,
+            "camera_frames": 21,
+            "camera_median_rad": -1.0441391496856975,
+            "camera_spread_rad": 0.0036980660298522317,
+            "encoder_median_rad": -1.141281,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.079766,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03739886400830983,
+            "missing_camera_intervals_board_s": [
+              [
+                61.97,
+                61.9770055771783
+              ],
+              [
+                62.46552646172989,
+                62.47
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000000426,
+            "reasons": [
+              "held pose is not stationary within provisional angular variability bound",
+              "camera and encoder held-pose angles disagree"
+            ],
+            "release_board_s": 62.52,
+            "release_to_free_gap_s": 0.11999999999999744,
+            "signed_disagreement_rad": -0.09714185031430245,
+            "status": "not verified",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": false
+          },
+          "valid_camera_frames": 399,
+          "valid_geometry_fraction": 0.9925373134328358
+        },
+        {
+          "angular_comparison_samples": 524,
+          "angular_p95_rad": 0.1529017850976994,
+          "angular_rmse_rad": 0.08173398157905451,
+          "annotation": {
+            "board_relative_s": [
+              77.46,
+              88.5
+            ],
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              76.79,
+              77.29
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 77.34
+          },
+          "board_relative_s": [
+            77.46,
+            88.5
+          ],
+          "camera_coverage_fraction": 0.9831144465290806,
+          "camera_frames": 533,
+          "camera_time_coverage_fraction": 0.9996318504807348,
+          "episode_id": "release-05",
+          "max_camera_gap_s": 0.05143897174953338,
+          "missing_camera_intervals_board_s": [
+            [
+              77.46,
+              77.46381381133867
+            ],
+            [
+              88.49974944064599,
+              88.5
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.3964853723210388,
+            "median_pivot_px": [
+              478.2558151941955,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.8400985052184707,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.42804281361580393
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 77.46,
+          "recorded_start_excursion_rad": 1.1550873071795869,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              76.79,
+              77.29
+            ],
+            "camera_coverage_fraction": 0.9767339737329053,
+            "camera_frames": 25,
+            "camera_median_rad": 1.5974189135053822,
+            "camera_spread_rad": 0.00695655281062146,
+            "encoder_median_rad": 1.5508543071795862,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.009203999999999546,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.038713797708339825,
+            "missing_camera_intervals_board_s": [
+              [
+                76.79,
+                76.7999997113278
+              ],
+              [
+                77.28836669819425,
+                77.29
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 77.34,
+            "release_to_free_gap_s": 0.11999999999999034,
+            "signed_disagreement_rad": -0.046564606325796065,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 524,
+          "valid_geometry_fraction": 0.9831144465290806
+        },
+        {
+          "angular_comparison_samples": 537,
+          "angular_p95_rad": 0.15791391471702734,
+          "angular_rmse_rad": 0.08273623317474176,
+          "annotation": {
+            "board_relative_s": [
+              98.87,
+              109.7
+            ],
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              98.2,
+              98.7
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 98.75
+          },
+          "board_relative_s": [
+            98.87,
+            109.7
+          ],
+          "camera_coverage_fraction": 0.9835164835164835,
+          "camera_frames": 546,
+          "camera_time_coverage_fraction": 0.9969281421810662,
+          "episode_id": "release-06",
+          "max_camera_gap_s": 0.07479971848461275,
+          "missing_camera_intervals_board_s": [
+            [
+              98.87,
+              98.8833071660034
+            ],
+            [
+              109.68003894582435,
+              109.7
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.3964853723210388,
+            "median_pivot_px": [
+              478.2535211267606,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.6305035117340381,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.41846376802240276
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 98.872,
+          "recorded_start_excursion_rad": -1.095262,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              98.2,
+              98.7
+            ],
+            "camera_coverage_fraction": 0.9556264219603179,
+            "camera_frames": 24,
+            "camera_median_rad": -1.592461378360086,
+            "camera_spread_rad": 0.015621841041845483,
+            "encoder_median_rad": -1.567728,
+            "encoder_samples": 126,
+            "encoder_spread_rad": 0.031830499999999984,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.027818880251572864,
+            "missing_camera_intervals_board_s": [
+              [
+                98.2,
+                98.2197774519664
+              ],
+              [
+                98.69759066294655,
+                98.7
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 98.75,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.024733378360086045,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 537,
+          "valid_geometry_fraction": 0.9835164835164835
+        },
+        {
+          "angular_comparison_samples": 274,
+          "angular_p95_rad": 0.09821353702579588,
+          "angular_rmse_rad": 0.054485470893604865,
+          "annotation": {
+            "board_relative_s": [
+              121.46,
+              127.1
+            ],
+            "episode_id": "release-07",
+            "pose_board_relative_s": [
+              120.79,
+              121.29
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 121.34
+          },
+          "board_relative_s": [
+            121.46,
+            127.1
+          ],
+          "camera_coverage_fraction": 0.9963636363636363,
+          "camera_frames": 275,
+          "camera_time_coverage_fraction": 0.9964884790601631,
+          "episode_id": "release-07",
+          "max_camera_gap_s": 0.03790153746632541,
+          "missing_camera_intervals_board_s": [
+            [
+              121.46,
+              121.47934590618041
+            ],
+            [
+              127.09954092807973,
+              127.1
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.3358901712858684,
+            "median_pivot_px": [
+              478.2246376811594,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.573015922613715,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.27386057922285734
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 121.46,
+          "recorded_start_excursion_rad": 0.32673830717958663,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              120.79,
+              121.29
+            ],
+            "camera_coverage_fraction": 0.9054100033408758,
+            "camera_frames": 27,
+            "camera_median_rad": 0.7288264367755818,
+            "camera_spread_rad": 0.008134751788340944,
+            "encoder_median_rad": 0.8084083071795869,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.01534000000000013,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.04667566892342734,
+            "missing_camera_intervals_board_s": [
+              [
+                120.79,
+                120.79061932940614
+              ],
+              [
+                121.24332433107658,
+                121.29
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999999716,
+            "reasons": [],
+            "release_board_s": 121.34,
+            "release_to_free_gap_s": 0.11999999999999034,
+            "signed_disagreement_rad": 0.07958187040400509,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 274,
+          "valid_geometry_fraction": 0.9963636363636363
+        },
+        {
+          "angular_comparison_samples": 239,
+          "angular_p95_rad": 0.09762794336660284,
+          "angular_rmse_rad": 0.055217722520656036,
+          "annotation": {
+            "board_relative_s": [
+              138.22,
+              143.1
+            ],
+            "episode_id": "release-08",
+            "pose_board_relative_s": [
+              137.55,
+              138.05
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 138.1
+          },
+          "board_relative_s": [
+            138.22,
+            143.1
+          ],
+          "camera_coverage_fraction": 0.9947373180115621,
+          "camera_frames": 239,
+          "camera_time_coverage_fraction": 0.9947373180115621,
+          "episode_id": "release-08",
+          "max_camera_gap_s": 0.03873439375399812,
+          "missing_camera_intervals_board_s": [
+            [
+              138.22,
+              138.2337105734536
+            ],
+            [
+              143.08802868535003,
+              143.1
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.37492953459801603,
+            "median_pivot_px": [
+              478.2246376811594,
+              296.089552238806
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.5353897735205742,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.34024376383460125
+          },
+          "pose_verified": false,
+          "reasons": [],
+          "recorded_start_board_s": 138.22,
+          "recorded_start_excursion_rad": -0.31293199999999993,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              137.55,
+              138.05
+            ],
+            "camera_coverage_fraction": 0.9297481752044519,
+            "camera_frames": 27,
+            "camera_median_rad": -0.6512915573358917,
+            "camera_spread_rad": 0.005698330348497859,
+            "encoder_median_rad": -0.6626799999999999,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.07056299999999992,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.031199313515287486,
+            "missing_camera_intervals_board_s": [
+              [
+                137.55,
+                137.5811993135153
+              ],
+              [
+                138.04607340111752,
+                138.05
+              ]
+            ],
+            "pose_to_release_gap_s": 0.04999999999998295,
+            "reasons": [
+              "held pose is not stationary within provisional angular variability bound"
+            ],
+            "release_board_s": 138.1,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": -0.011388442664108211,
+            "status": "not verified",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": false
+          },
+          "valid_camera_frames": 239,
+          "valid_geometry_fraction": 1.0
+        },
+        {
+          "angular_comparison_samples": 414,
+          "angular_p95_rad": 0.12190154999552748,
+          "angular_rmse_rad": 0.06655510487616294,
+          "annotation": {
+            "board_relative_s": [
+              148.77,
+              157.0
+            ],
+            "episode_id": "release-09",
+            "pose_board_relative_s": [
+              148.1,
+              148.6
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 148.65
+          },
+          "board_relative_s": [
+            148.77,
+            157.0
+          ],
+          "camera_coverage_fraction": 0.9928057553956835,
+          "camera_frames": 417,
+          "camera_time_coverage_fraction": 0.9979298938761776,
+          "episode_id": "release-09",
+          "max_camera_gap_s": 0.0502524991470068,
+          "missing_camera_intervals_board_s": [
+            [
+              148.77,
+              148.78150682003644
+            ],
+            [
+              156.99446984663737,
+              157.0
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.3423041909232816,
+            "median_pivot_px": [
+              478.24264069264075,
+              296.1159420289855
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.4382329110660297,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.347721020266557
+          },
+          "pose_verified": true,
+          "reasons": [],
+          "recorded_start_board_s": 148.772,
+          "recorded_start_excursion_rad": 0.294524307179586,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              148.1,
+              148.6
+            ],
+            "camera_coverage_fraction": 0.9512599687838588,
+            "camera_frames": 30,
+            "camera_median_rad": 1.087017706609274,
+            "camera_spread_rad": 0.00851475275519704,
+            "encoder_median_rad": 1.1228743071795864,
+            "encoder_samples": 126,
+            "encoder_spread_rad": 0.015338999999999992,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03723682943888207,
+            "missing_camera_intervals_board_s": [
+              [
+                148.1,
+                148.1162003335936
+              ],
+              [
+                148.59183031798554,
+                148.6
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "reasons": [],
+            "release_board_s": 148.65,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": 0.03585660057031226,
+            "status": "verified relative held pose",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": true
+          },
+          "valid_camera_frames": 414,
+          "valid_geometry_fraction": 0.9928057553956835
+        },
+        {
+          "angular_comparison_samples": 334,
+          "angular_p95_rad": 0.128848492515187,
+          "angular_rmse_rad": 0.07525241964241716,
+          "annotation": {
+            "board_relative_s": [
+              165.74,
+              172.7
+            ],
+            "episode_id": "release-10",
+            "pose_board_relative_s": [
+              165.07,
+              165.57
+            ],
+            "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+            "release_board_s": 165.62
+          },
+          "board_relative_s": [
+            165.74,
+            172.7
+          ],
+          "camera_coverage_fraction": 0.9910979228486647,
+          "camera_frames": 337,
+          "camera_time_coverage_fraction": 0.9947862737172832,
+          "episode_id": "release-10",
+          "max_camera_gap_s": 0.049649777820548024,
+          "missing_camera_intervals_board_s": [
+            [
+              165.74,
+              165.74652686943944
+            ],
+            [
+              172.6702393345117,
+              172.7
+            ]
+          ],
+          "passed": true,
+          "pivot_motion": {
+            "baseline_displacement_p95_px": 0.35941084746141577,
+            "median_pivot_px": [
+              478.2535211267606,
+              296.07246376811594
+            ],
+            "metric_stationarity_established": false,
+            "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability.",
+            "provisional_fixed_pivot_screen_passed": true,
+            "radial_max_px": 0.46718266741931913,
+            "radial_p95_limit_px": 4.0,
+            "radial_p95_px": 0.3892837088772426
+          },
+          "pose_verified": false,
+          "reasons": [],
+          "recorded_start_board_s": 165.74,
+          "recorded_start_excursion_rad": -0.4387180000000001,
+          "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+          "release_pose": {
+            "board_relative_s": [
+              165.07,
+              165.57
+            ],
+            "camera_coverage_fraction": 0.9049704150156117,
+            "camera_frames": 22,
+            "camera_median_rad": -1.0857790696249,
+            "camera_spread_rad": 0.019033878187441667,
+            "encoder_median_rad": -1.115204,
+            "encoder_samples": 125,
+            "encoder_spread_rad": 0.07516500000000015,
+            "handling_independently_verified": false,
+            "max_camera_gap_s": 0.03613406711690459,
+            "missing_camera_intervals_board_s": [
+              [
+                165.07,
+                165.09490449690864
+              ],
+              [
+                165.54738970441645,
+                165.57
+              ]
+            ],
+            "pose_to_release_gap_s": 0.05000000000001137,
+            "reasons": [
+              "held pose is not stationary within provisional angular variability bound"
+            ],
+            "release_board_s": 165.62,
+            "release_to_free_gap_s": 0.12000000000000455,
+            "signed_disagreement_rad": -0.02942493037510019,
+            "status": "not verified",
+            "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+            "verified": false
+          },
+          "valid_camera_frames": 334,
+          "valid_geometry_fraction": 0.9910979228486647
+        }
+      ],
+      "gates": {
+        "max_angular_p95_rad": 0.17453292519943295,
+        "max_angular_rmse_rad": 0.08726646259971647,
+        "max_camera_gap_s": 0.15,
+        "max_camera_length_deviation_fraction": 0.2,
+        "max_pose_disagreement_rad": 0.08726646259971647,
+        "max_pose_spread_rad": 0.03490658503988659,
+        "max_pose_to_release_gap_s": 0.5,
+        "min_camera_coverage_fraction": 0.7,
+        "min_camera_frames": 10,
+        "min_pose_camera_frames": 3,
+        "min_pose_duration_s": 0.15,
+        "pivot_radial_p95_floor_px": 4.0,
+        "pivot_radial_p95_length_fraction": 0.02
+      },
+      "intervals_selected": false,
+      "model_accepted": false,
+      "model_fitted": false,
+      "note": "Passed means provisional camera/encoder consistency and a fixed-pivot pixel screen only. Relative angles are apparent projected angles, not absolute physical-angle calibration or model acceptance. Release poses are only reported for explicit stationary pre-release annotations.",
+      "passed": true,
+      "physical_cart_stationarity_certified": false,
+      "provenance": {
+        "platform": "macOS-26.1-arm64-arm-64bit",
+        "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+        "sources": {
+          "__init__.py": "824ed9d13a4843244c5528134f57ac2d565a94e514219bd2ec2601678737269e",
+          "adapters.py": "17dee09aefbbacb7315831492db662693449cfd221503c350f5b71d2b5c23fec",
+          "cli.py": "0cf51892f98ebde997a07a46b99d5fad54582b1a8b5ed4a437f249aa6e95adbc",
+          "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+          "control/__init__.py": "313880d7986477c4fc543e36961bdfe03a351dc0cfb7bd37d9fb63f8fa5e0bad",
+          "control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+          "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+          "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+          "control/policy.py": "2173b5f5eaafb8c9eb32cdf65584ee690131109595ecce5ea630efbe6c3d0a3c",
+          "control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+          "identification/__init__.py": "f0b85dad78f84dfa71c0af0df02ca52e5fc281fae580d78669e01eb5e8d8a325",
+          "identification/adapters.py": "904009b203c1a1190ce6094e6bcbf3b36cbf5f259a5876d843900923786b519d",
+          "identification/cli.py": "74a0780fa17d288438e5c2eb221d455b7f093086f4d02e03e7109fcc61b82be4",
+          "identification/experiments.py": "8c2b1c28650ea6decf9e1a01d9ed24a067eaafd64f1e0639d743b95f17ea8757",
+          "identification/finish.py": "3456f4128a531a244abe5028bd4b6bd05ffbe3dcc5a370e5a27207d62c2b878b",
+          "identification/fit.py": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+          "identification/fit_review.py": "e9c0882f3a942be3bbc33d94e07c402b83cb4c00457e9abeacd879f11c9d704d",
+          "identification/interruption_recovery.py": "af172abde559bf8eb73753c32fed1ea01c5bd14974c9677cdae194853d33436a",
+          "identification/passive.py": "5dc850ec634e1b71ff417bac0f6a31c4bc53b0bad7e82516235e3606dbf66deb",
+          "identification/passive_baseline.py": "23c4e8508f5a0943859e6d54899126e0e85037ad7927185eab3d9cbbc0df1c7a",
+          "identification/protocol.py": "f327ef4be088fdae3c0098c537bb5fa91ccec749218fb43d09b11b955b1587b5",
+          "identification/release_review.py": "dfb905689e2ddf87b4c4a8e6f5ddd6e2f44951746403cd6834d93b4eb406fcf7",
+          "identification/review.py": "3a7278780cf6fbb6d4a4a1b5d430bd599e04efd10f09dc17bd8b0305063c5a04",
+          "identification/rig_logs.py": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+          "identification/workflow.py": "e4b559e25d2b9a74ef2d66a592cca204246fe2b71f592ca1eebb6108c90d2280",
+          "learning/__init__.py": "5d9158d09f19d2799530a6abea916487d3e3b20e1f3bbaac502554eca4fb0b7a",
+          "learning/artifact.py": "77793377c16d6736fe5f81fcb6fd989a9b66aba9fbf81fc3db1a69c7b4619c6a",
+          "learning/export.py": "0486e6fc685668f67689dd7390f05d37a23a877b5a3fa744f542138f69f7aa7a",
+          "learning/model_experiment.py": "3fcfd81e9539a7b32da3afc9ba235d9c04d7a00880394376e898e9ac0a806c04",
+          "learning/model_search.py": "82a818031084794dcf85d98bcb79fd8d3350521ae8ca63585cb4b35bd22ed9fd",
+          "learning/ppo.py": "cdd6c8e35a0936de1bebc4876e9b4014af559cd81e998395836caab61d36e387",
+          "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+          "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+          "policies/__init__.py": "1ce209d208710327b8a2cd9cae7c091e54b1d944a2955910407c2ac52de22db3",
+          "policies/damping.py": "d263ccbb3acbb80cd44c8e98d8e9634146ad89a6f1ddf26d08ee181dffd56cb1",
+          "policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+          "policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+          "policies/neural.py": "acc03290e1b09fd7c42689f22fa1cfa8209ba1992284bc2c469bf0c3f89b1190",
+          "policies/rig_observation.py": "41ce5c64dcd47d9daf5bcb65c053f0ce6efde186a1f649904d0daeb3c3af38e2",
+          "portal/__init__.py": "4e0ea0f986dbc89c4ac868068e81bee9bd8edc899053b0bbcf76ff90834c3adb",
+          "portal/budget.py": "10f48a08f3b3314e37c9ba405a8915321e43ae40afa89015f23a954ae13a3cda",
+          "portal/harness.py": "5e220d943f84911ef5bc7e9e6c2ad965bdaf6ffa6616f4fcff0f46b993a7bd7b",
+          "portal/queue.py": "e12c4b6c2a5346aeca7f9b02718522d8e53278cec65db4c9c516e649d6b332b8",
+          "portal/sandbox.py": "900c0918aa3e6c7df6a02ee5e5864ece55f69ae827dc297695ae59b2f659dbce",
+          "portal/security.py": "582329b7c99f26c5b0f4210eb5d192c8659634d404db3e28557d51a7dfd3d776",
+          "portal/server.py": "4f529ab6b4494f0d4296fbc1b8d13004fd8ebbec5dd731685ca204b651727595",
+          "portal/worker.py": "e4f8786ad7ccca10a0c99a57d491ae6f9a4fa627662d8bf984b0903e8ad55b93",
+          "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+          "replay.py": "d6bef8d411655bd07c970f32994efa98e6b1a6c221eed56e43bc52a75dd7c94a",
+          "rig/__init__.py": "8f197f0d954e5457dfd10bd3d798dd8d3b759014e3e118a847105fe3a8290638",
+          "rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+          "rig/console.py": "180909487d7e7a028f98f2df86924baba6e024fef4d4dc87481a0c66e8285fa0",
+          "rig/parameters.py": "5ed4c1d1030ac06178459e039e6af06077a3ff70840f4cf9328798fc7c6be1a0",
+          "rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+          "rig/protocol.py": "bea00edbd75eeb5325709e1befcca5f1e4dbfcc3947ea9a167ca62c24c060b80",
+          "rig/startup.py": "6efa27bab733523f9e2e42b85673e7692e1ee7bc9778a24b8927149bf51ef95e",
+          "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+          "sensing/__init__.py": "c758e1c4e278d635d67c1e2c11b135b6a84bd177cd919e8f6433628712e90b10",
+          "sensing/calibration.py": "230e0b482726e295d7d19940228938294fa5819a9380efa970371e3ebc2f156a",
+          "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+          "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+          "sensing/shadow.py": "1a30d7855266280b4503f35cc01d83369d82ed09d1ffb46bd5537630af7d04b7",
+          "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+          "sensing/telemetry.py": "7ed4f9890787f19090c18e315942220699597e76b1d7e8138e6b5e22bbd4a84b",
+          "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2",
+          "sim/__init__.py": "0ab628cd7e0f160ee8528868ab2051f10de98c69ce04b44d054bfcd21f2411a8",
+          "sim/backend.py": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+          "sim/config.py": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+          "sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+          "sim/gym_env.py": "1bca5929575464e6ba14da384a3c7d46854b4866fcc78f8da1fa941d06d97883",
+          "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+          "sim/rig_gym_env.py": "c5ed8c2e9f8bd99d5cc423754e0ededfdf1a59095615e29e2c44fa7574a3b47e",
+          "sim/viewer.py": "795d23539f77bbdbc801e8db8adeeb3d741bee2005c3ffc44d524bfa8eca1ee4",
+          "simulation.py": "1c32358336577d14c45130db084ad3ef028e5e9753a8f9038ab92323547aa63b"
+        }
+      },
+      "reasons": [],
+      "schema": "cartpole-release-review-v1",
+      "source_identity": {
+        "annotations_sha256": "39fb49a8030b2b94d5e1132874c32c40d2f1d7bf24141a3bb83b4c9e3a703658",
+        "collection_protocol": {
+          "dataset_role": "validation",
+          "nominal_angles_only": true,
+          "operator_cart_restraint": "cart held stationary by hand",
+          "procedure": "passive",
+          "requested_releases": [
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "left",
+              "release_id": "release-01",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "right",
+              "release_id": "release-02",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "left",
+              "release_id": "release-03",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "right",
+              "release_id": "release-04",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "left",
+              "release_id": "release-05",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "right",
+              "release_id": "release-06",
+              "repetition": 1
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "left",
+              "release_id": "release-07",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 30.0,
+              "direction": "right",
+              "release_id": "release-08",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "left",
+              "release_id": "release-09",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 60.0,
+              "direction": "right",
+              "release_id": "release-10",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "left",
+              "release_id": "release-11",
+              "repetition": 2
+            },
+            {
+              "angle_from_hanging_deg": 90.0,
+              "direction": "right",
+              "release_id": "release-12",
+              "repetition": 2
+            }
+          ],
+          "run_label": "passive-validation-5",
+          "schema": "cartpole-collection-protocol-v1"
+        },
+        "collection_protocol_sha256": "af6727139de828afab625c7eb004b1b68d609a251e000a50ed418e398dca350b",
+        "collection_report": {
+          "completed": true,
+          "path": "runs/passive-batch6-original/passive-validation-6/report.json",
+          "sha256": "6b77edcea26aae259820f9bc3f6248e31a98504447480cf3e28f902e51628db9",
+          "status": "bound successful collection"
+        },
+        "duplicate_snapshots": 1,
+        "hash_basis": "decompressed exact JSONL bytes",
+        "member": null,
+        "operator_cart_restraint": "cart held stationary by hand per collection protocol; independently unverified",
+        "passive_baseline": {
+          "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+          "camera": {
+            "bounds": {
+              "max_angle_spread_rad": 0.035,
+              "max_angle_vector_error_rad": 0.03,
+              "max_gap_s": 0.2,
+              "max_length_spread_fraction": 0.1,
+              "max_length_vector_error_fraction": 0.05,
+              "max_pivot_spread_px": 4.0,
+              "min_confidence": 0.5,
+              "min_duration_fraction": 0.75,
+              "min_duration_s": 1.5,
+              "min_length_px": 5.0,
+              "min_sample_count": 30,
+              "min_valid_fraction": 0.8
+            },
+            "capture_span_s": 1.970459041011054,
+            "first_frame_seq": 7120261,
+            "first_host_ns": 364043711369991,
+            "first_source_t": 364043.697190242,
+            "frame_height": 600,
+            "frame_width": 960,
+            "image_angle_rad": -0.025122251272357884,
+            "last_frame_seq": 7120417,
+            "last_host_ns": 364045691487140,
+            "last_source_t": 364045.667649283,
+            "length_px": 194.7585057678687,
+            "length_spread_px": 0.4804820938517196,
+            "max_gap_s": 0.035120971,
+            "pivot_px": [
+              478.3283582089552,
+              296.1159420289855
+            ],
+            "pivot_spread_px": [
+              0.2994041170097148,
+              0.33179742631796216
+            ],
+            "rotation": null,
+            "sample_count": 139,
+            "source_frame_count": 139,
+            "spread_rad": 0.0022976609665881116,
+            "valid_fraction": 1.0
+          },
+          "duration_s": 2.003345528,
+          "encoder": {
+            "bounds": {
+              "max_angle_span_rad": 0.03,
+              "max_hanging_offset_rad": 0.35,
+              "min_duration_fraction": 0.95,
+              "min_duration_s": 1.9,
+              "min_sample_count": 100
+            },
+            "first_board_us": 3401601130,
+            "first_host_ns": 364043696147608,
+            "last_board_us": 3403605130,
+            "last_host_ns": 364045699493136,
+            "raw_angle_rad": 3.02501,
+            "sample_count": 502,
+            "span_rad": 0.0015339999999999243,
+            "spread_rad": 0.0
+          },
+          "schema": "cartpole-passive-baseline-v1",
+          "window_host_ns": [
+            364043696147608,
+            364045699493136
+          ],
+          "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+        },
+        "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch6-original/passive-validation-6/rig-1792268747817214822-214671573.jsonl",
+        "record_count": 49207,
+        "reference": [
+          330,
+          15,
+          "executor-v6-measuredrail"
+        ],
+        "selection": [
+          {
+            "actual_board_relative_s": [
+              13.82,
+              18.6
+            ],
+            "annotation": {
+              "board_relative_s": [
+                13.82,
+                18.6
+              ],
+              "episode_id": "release-01",
+              "pose_board_relative_s": [
+                13.15,
+                13.65
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 13.7
+            },
+            "max_gap_s": 0.004000000000001336,
+            "samples": 1196
+          },
+          {
+            "actual_board_relative_s": [
+              27.652,
+              31.9
+            ],
+            "annotation": {
+              "board_relative_s": [
+                27.65,
+                31.9
+              ],
+              "episode_id": "release-02",
+              "pose_board_relative_s": [
+                26.98,
+                27.48
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 27.53
+            },
+            "max_gap_s": 0.004000000000001336,
+            "samples": 1063
+          },
+          {
+            "actual_board_relative_s": [
+              43.8,
+              51.3
+            ],
+            "annotation": {
+              "board_relative_s": [
+                43.8,
+                51.3
+              ],
+              "episode_id": "release-03",
+              "pose_board_relative_s": [
+                43.13,
+                43.63
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 43.68
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 1876
+          },
+          {
+            "actual_board_relative_s": [
+              62.64,
+              70.7
+            ],
+            "annotation": {
+              "board_relative_s": [
+                62.64,
+                70.7
+              ],
+              "episode_id": "release-04",
+              "pose_board_relative_s": [
+                61.97,
+                62.47
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 62.52
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2016
+          },
+          {
+            "actual_board_relative_s": [
+              77.46,
+              88.5
+            ],
+            "annotation": {
+              "board_relative_s": [
+                77.46,
+                88.5
+              ],
+              "episode_id": "release-05",
+              "pose_board_relative_s": [
+                76.79,
+                77.29
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 77.34
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2761
+          },
+          {
+            "actual_board_relative_s": [
+              98.872,
+              109.7
+            ],
+            "annotation": {
+              "board_relative_s": [
+                98.87,
+                109.7
+              ],
+              "episode_id": "release-06",
+              "pose_board_relative_s": [
+                98.2,
+                98.7
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 98.75
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 2708
+          },
+          {
+            "actual_board_relative_s": [
+              121.46,
+              127.1
+            ],
+            "annotation": {
+              "board_relative_s": [
+                121.46,
+                127.1
+              ],
+              "episode_id": "release-07",
+              "pose_board_relative_s": [
+                120.79,
+                121.29
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 121.34
+            },
+            "max_gap_s": 0.0040000000000048885,
+            "samples": 1411
+          },
+          {
+            "actual_board_relative_s": [
+              138.22,
+              143.1
+            ],
+            "annotation": {
+              "board_relative_s": [
+                138.22,
+                143.1
+              ],
+              "episode_id": "release-08",
+              "pose_board_relative_s": [
+                137.55,
+                138.05
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 138.1
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 1221
+          },
+          {
+            "actual_board_relative_s": [
+              148.772,
+              157.0
+            ],
+            "annotation": {
+              "board_relative_s": [
+                148.77,
+                157.0
+              ],
+              "episode_id": "release-09",
+              "pose_board_relative_s": [
+                148.1,
+                148.6
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 148.65
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 2058
+          },
+          {
+            "actual_board_relative_s": [
+              165.74,
+              172.7
+            ],
+            "annotation": {
+              "board_relative_s": [
+                165.74,
+                172.7
+              ],
+              "episode_id": "release-10",
+              "pose_board_relative_s": [
+                165.07,
+                165.57
+              ],
+              "reason": "Observed held-to-decay transition; exact hand-clear unverified.",
+              "release_board_s": 165.62
+            },
+            "max_gap_s": 0.004000000000019099,
+            "samples": 1741
+          }
+        ],
+        "selection_method": "Frozen from complete raw encoder/camera and release-onset plots before any prediction scoring. All ten complete releases retained. An eleventh release at 181.46s is cut off at182.113s; after the same0.12s onset guard and0.1s initialization it cannot supply one full0.5s forecast, so it is reported separately, without a model-based selection. Fixed0.5s pose ending0.05s before onset; free intervals start0.12s after onset and end before static tails.",
+        "session": {
+          "clock_id": "teensy:214671573",
+          "session_id": "214671573",
+          "topology": {
+            "cart": "cart",
+            "joints": [
+              "pole"
+            ]
+          }
+        },
+        "sha256": "394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d",
+        "source_bytes": 18594538
+      },
+      "source_sha256": "394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d",
+      "unique_camera_frames": 9076,
+      "vision_report_sha256": "2e72ccdbc226c404101f52336fec09aff2da146ce66c3429fb3a38b67e2ef577",
+      "zero_source": "measured initial hanging baseline; no fitted offset"
+    }
+  ]
+}

@@ -159,11 +159,15 @@ class MujocoBackend:
             if self._active is not None and now >= self._active.expires_at_ns:
                 self._active = None
             acceleration = 0. if self._active is None else self._active.acceleration_m_s2
-            # M*qacc + bias = passive + applied; enforce the unactuated hinge row.
+            # M*qacc + bias = passive + applied; include hinge friction before
+            # solving the cart force for the requested acceleration.
             self.data.qfrc_applied[:] = 0.
+            self.data.qfrc_applied[self._pole] = (-self.config.hinge_coulomb_friction_nm
+                * math.tanh(float(self.data.qvel[self._pole])
+                            / self.config.hinge_friction_velocity_scale_rad_s))
             mujoco.mj_forward(self.model, self.data)
             mujoco.mj_fullM(self.model, self.data, self._mass)
-            residual = self.data.qfrc_bias - self.data.qfrc_passive
+            residual = self.data.qfrc_bias - self.data.qfrc_passive - self.data.qfrc_applied
             c, h = self._cart, self._pole
             hinge_acceleration = -(self._mass[h, c] * acceleration + residual[h]) / self._mass[h, h]
             force = float(self._mass[c, c] * acceleration + self._mass[c, h] * hinge_acceleration + residual[c])

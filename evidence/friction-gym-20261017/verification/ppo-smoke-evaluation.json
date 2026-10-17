@@ -1,0 +1,129 @@
+{
+  "checkpoint_sha256": "643f9b9db673e6e09511ee3e180bd133d09d294764e4acac3a5d23bd30709c83",
+  "content_sha256": "96fe84d652a7f33fa01d182af72d5a02dc57cc27822db067a1599028318da816",
+  "episodes": [
+    {
+      "balanced_fraction": 0.0,
+      "fault_reason": null,
+      "final_balance_dwell_s": 0.0,
+      "final_state": {
+        "omega": -0.01393109982602187,
+        "theta": -3.1131591417394366,
+        "time_ns": 503000000,
+        "v": 0.09854634358380657,
+        "x": 0.035976999500873706
+      },
+      "force_saturated_control_steps": 0,
+      "initial_state": [
+        0.013305975168316617,
+        -0.0070289483329213425,
+        3.18146541126559,
+        0.027383455568823534
+      ],
+      "max_abs_speed_m_s": 0.09854634358380657,
+      "max_abs_x_m": 0.035976999500873706,
+      "rail_braking_control_steps": 0,
+      "score": -1.00090262126589,
+      "seed": 101,
+      "start": "hanging",
+      "steps": 50,
+      "success": false
+    },
+    {
+      "balanced_fraction": 0.68,
+      "fault_reason": null,
+      "final_balance_dwell_s": 0.0,
+      "final_state": {
+        "omega": -3.333343931576109,
+        "theta": -0.44094890211194954,
+        "time_ns": 503000000,
+        "v": 0.06142965674273613,
+        "x": -0.00279405217346761
+      },
+      "force_saturated_control_steps": 0,
+      "initial_state": [
+        -0.013784100527068443,
+        -0.007707919166759364,
+        -0.01472872296317921,
+        -0.13856961046070124
+      ],
+      "max_abs_speed_m_s": 0.06142965674273613,
+      "max_abs_x_m": 0.014127398003450385,
+      "rail_braking_control_steps": 0,
+      "score": 2.3440459946316365,
+      "seed": 101,
+      "start": "upright",
+      "steps": 50,
+      "success": false
+    },
+    {
+      "balanced_fraction": 0.0,
+      "fault_reason": null,
+      "final_balance_dwell_s": 0.0,
+      "final_state": {
+        "omega": -0.013781568084759844,
+        "theta": -3.113151220467846,
+        "time_ns": 503000000,
+        "v": 0.11073398884318386,
+        "x": 0.018450000190357523
+      },
+      "force_saturated_control_steps": 0,
+      "initial_state": [
+        -0.01020026564987089,
+        0.004297175742011367,
+        3.1869298023953916,
+        -0.06082192897191113
+      ],
+      "max_abs_speed_m_s": 0.11073398884318386,
+      "max_abs_x_m": 0.018450000190357523,
+      "rail_braking_control_steps": 0,
+      "score": -0.9996522569750426,
+      "seed": 102,
+      "start": "hanging",
+      "steps": 50,
+      "success": false
+    },
+    {
+      "balanced_fraction": 1.0,
+      "fault_reason": null,
+      "final_balance_dwell_s": 0.5000000000000002,
+      "final_state": {
+        "omega": -0.024620583264756416,
+        "theta": -0.0027068569721284083,
+        "time_ns": 503000000,
+        "v": 0.06438275611236316,
+        "x": 0.016507695365091002
+      },
+      "force_saturated_control_steps": 0,
+      "initial_state": [
+        -0.0032301380026895066,
+        0.01500785368516659,
+        0.0032997188804503867,
+        0.04356198249778576
+      ],
+      "max_abs_speed_m_s": 0.06438275611236316,
+      "max_abs_x_m": 0.016507695365091002,
+      "rail_braking_control_steps": 0,
+      "score": 3.999815652665163,
+      "seed": 102,
+      "start": "upright",
+      "steps": 50,
+      "success": false
+    }
+  ],
+  "episodes_count": 4,
+  "experiment_sha256": "2e68aee116c5e028d5d0b9f508276f612efafa430abafa7e35e8c0be8e0d0e63",
+  "hardware_accepted": false,
+  "mean_score": 1.0858266922639668,
+  "model_content_sha256": "7f5e03e436fb3c51fe2ef6d2617e51115ceeff8d1c7e45967a236f17a85b3afc",
+  "objective": "time mean of cos(theta) - .3*(x/rail)^2 - .001*omega^2 - .0002*raw_accel^2 + 2 if abs(theta)<.15 and abs(omega)<1 and abs(x)<.12; uncompleted horizon reward=-3; + final continuous balance seconds/horizon",
+  "schema": "cartpole-ppo-evaluation-v1",
+  "seeds": [
+    101,
+    102
+  ],
+  "status": "DEVELOPMENT_ONLY",
+  "success_definition": "last >=1 s continuously abs(theta)<.15 rad, abs(omega)<1 rad/s, abs(x)<.12 m; full horizon; no fault",
+  "successes": 0,
+  "task_validation": "Global swing-up and balance qualification is not established by this model scope."
+}

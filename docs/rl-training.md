@@ -17,24 +17,91 @@ disabled-motor stopping model is claimed.
 
 Use the [collection, fitting and export workflow](system-identification-workflow.md)
 to produce a content-hashed model export. A rejected fit cannot be used as an
-identified model, and this trainer does not bypass the export gate. Non-unit
-input gain, input delay and Coulomb friction must be represented by the plant
-before an identified export containing those terms can be used; dropping a
-fitted term is not supported.
+identified model, and this trainer does not bypass the export gate. Non-unit input gain and input delay still require explicit plant support.
+The plant now supports smooth dry friction through
+`hinge_coulomb_friction_nm` and `hinge_friction_velocity_scale_rad_s`. The older
+sign/stiction fit report has different near-zero behavior and is still rejected
+by the identified exporter; it is not silently reinterpreted as the smooth law.
 
 The current model export scopes are `passive-down` and `driven`. Neither certifies
 global swing-up/balance or hardware transfer. Consequently this version requires
 the conspicuous `--development-only` flag for those scopes and records
 `task_qualified=false` and `hardware_accepted=false`. The flag permits exploratory
 simulation only; it does not turn a rejected fit into a valid export. A future
-global-qualification schema needs independently validated task coverage. Do not
-start physical-policy training from the currently rejected recordings.
+global-qualification schema needs independently validated task coverage. The frozen experimental profile below is usable for development training while
+its remaining measurement and driven-model qualifications are documented.
 
-There is also a separate `cartpole-development-model-v1` fixture format for
-software tests. Its required fields are `status: "DEVELOPMENT_ONLY"`, a complete
+There is also a separate `cartpole-development-model-v1` format for explicit experimental
+models and software tests. Its required fields are `status: "DEVELOPMENT_ONLY"`, a complete
 `simulation_config`, nonempty `rationale` and `limitations`, and `content_sha256`
 (SHA-256 of canonical sorted compact JSON before adding the hash). It has no
 accepted-fit claim and is never an identification export.
+
+## Installed passive-friction training profile
+
+`training/profiles/passive-20261017` contains ready-to-use model, executor,
+observation and prior inputs. Its source is the frozen batch-6 fit, checked on
+batch 7 before this integration. Batches 8/9 are additional fixed-model checks;
+the profile is not automatically refitted when new recordings arrive.
+
+The model uses L_eff=0.160303873 m, gamma=0.006891975/s and smooth dry-friction
+acceleration 1.626894312 rad/s². With assumed pole mass 0.02275 kg,
+`I_pivot=0.75*m*L_eff²`, the backend applies `-I*c*tanh(omega/0.05)` at every
+1 ms tick and includes it in cart-force compensation. Both Gym environments
+use that backend. Loading the generated MJCF by itself omits this applied torque.
+
+The recorded executor inspection supplies rail half-span 0.308962494 m,
+jerk 150 m/s³ and observer bandwidth 6. Controller gains remain the recorded
+values; their .124 m policy prior is explicitly separate from the fitted plant
+length. The development profile declares 3 ms telemetry delay and 1 ms command
+delay, quantized encoder readings, zero additional noise and no dropout.
+Those timing/noise choices, cart mass, damping and force authority remain
+assumptions. They should be varied before judging transfer robustness.
+
+Run a short local training trial, then increase `--steps` for a substantive run:
+
+```bash
+PROFILE=training/profiles/passive-20261017
+./scripts/train-ppo train \
+  --model "$PROFILE/model.json" \
+  --executor-parameters "$PROFILE/executor-parameters.json" \
+  --observation-config "$PROFILE/observation-config.json" \
+  --prior-parameters "$PROFILE/prior-parameters.json" \
+  --development-only --training-seeds 11 12 13 --seed 20261017 \
+  --steps 100000 --seconds 25 --output runs/ppo-friction-001
+```
+
+The same four files work with the headless Colab CLI instructions below. To
+create the input archive used there:
+
+```bash
+zip -j cartpole-inputs.zip \
+  training/profiles/passive-20261017/model.json \
+  training/profiles/passive-20261017/executor-parameters.json \
+  training/profiles/passive-20261017/observation-config.json \
+  training/profiles/passive-20261017/prior-parameters.json
+```
+
+Use a new ZIP filename if it already exists. Keep the complete profile folder
+with your local evidence; `bundle.json` hashes all generated inputs and the
+copied freeze retains original quality flags. This profile makes no accepted-fit
+or hardware-approval claim. The trainer requires `--development-only` explicitly.
+
+Rebuild the profile into a new directory (or use different explicit assumptions):
+
+```bash
+./scripts/prepare-training-model \
+  --freeze evidence/system-id-model-review-20261017/candidate-freeze-latest6.json \
+  --executor-parameters training/inputs/passive-20261017/executor-parameters.json \
+  --observation-config training/inputs/passive-20261017/observation-config.json \
+  --assumptions training/inputs/passive-20261017/assumptions.json \
+  --output runs/my-friction-training-profile
+```
+
+This command validates the frozen coefficient/parameter mapping, converts torque
+units, preserves source hashes and writes an immutable development bundle. It
+does not collect data or refit the pendulum. Complete legacy zero-friction model
+configs remain readable; partially specified new friction configs are rejected.
 
 ## Prepare four explicit inputs
 

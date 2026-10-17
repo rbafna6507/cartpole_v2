@@ -1,0 +1,30 @@
+{
+  "content_sha256": "7f5e03e436fb3c51fe2ef6d2617e51115ceeff8d1c7e45967a236f17a85b3afc",
+  "limitations": [
+    "Experimental passive candidate; original rejected/qualified evidence is retained in frozen-candidate.json.",
+    "Passive decays support ratios only. Mass, cart damping and force authority remain assumed.",
+    "Acceleration-servo tracking, transport distributions, backlash and missed steps are not identified here.",
+    "Local encoder phase is not applied as a global hanging/upright calibration.",
+    "Observer/noise/delay settings are declared inputs; no global swingup/balance or hardware qualification.",
+    "Smooth dry friction requires MujocoBackend; generated MJCF alone does not include that applied torque."
+  ],
+  "rationale": "Frozen passive model 2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59; provenance cde4418eb4d3dd579aa02e5ad9a5ca02df58a4b8d2dd41da95ffd1ff70c8b7a3. Use for exploratory simulation training; no accepted-fit claim.",
+  "schema": "cartpole-development-model-v1",
+  "simulation_config": {
+    "cart_damping": 0.05,
+    "cart_mass_kg": 0.35,
+    "control_steps": 10,
+    "effective_length_m": 0.16030387335574306,
+    "hinge_coulomb_friction_nm": 0.0007133292581428023,
+    "hinge_damping": 3.0218604984532184e-06,
+    "hinge_friction_velocity_scale_rad_s": 0.05,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 50000000,
+    "max_force_n": 20.0,
+    "max_steps": 2500,
+    "physics_dt_ns": 1000000,
+    "pole_mass_kg": 0.02275,
+    "rail_half_m": 0.308962494
+  },
+  "status": "DEVELOPMENT_ONLY"
+}
