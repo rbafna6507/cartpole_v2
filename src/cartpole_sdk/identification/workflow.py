@@ -74,7 +74,8 @@ def _collection_report(spec,records,identity):
             raise ValueError('failed recording cannot be admitted: '+kind)
         if kind=='termination' and (row.get('error') is not None or row.get('records_dropped',0)!=0):
             raise ValueError('recording termination failed or log records were lost')
-    new_source=any(r.get('type')=='passive_start' or (r.get('type')=='ringdown_start' and
+    protocol_events=[r for r in records if r.get('type')=='collection_protocol']
+    new_source=bool(protocol_events) or any(r.get('type')=='passive_start' or (r.get('type')=='ringdown_start' and
         isinstance(r.get('provenance',{}).get('sources'),dict) and
         'identification/experiments.py' in r['provenance']['sources']) for r in records)
     filename,separator,member=str(spec).partition('::');path=Path(filename)
@@ -89,7 +90,7 @@ def _collection_report(spec,records,identity):
     report=strict_json_loads(raw.decode())
     if not isinstance(report,dict):raise ValueError('collection report must be an object')
     if report.get('schema')!='cartpole-id-run-v1':
-        if new_source:raise ValueError('new collection report schema mismatch')
+        if new_source or 'collection_protocol' in report:raise ValueError('new collection report schema mismatch')
         # Older frozen collectors have different schemas. Preserve their hash
         # and still reject explicit failure/loss; never infer modern completion.
         if report.get('failure') or report.get('records_dropped',0)!=0 or report.get('camera_returncode',0) not in (None,0):
@@ -105,6 +106,20 @@ def _collection_report(spec,records,identity):
         raise ValueError('collection report is incomplete, failed or not bound to this raw source')
     identity['collection_report']={'status':'bound successful collection','completed':True,
         'sha256':hashlib.sha256(raw).hexdigest(),'path':sibling}
+    if protocol_events or 'collection_protocol' in report:
+        from .protocol import validate_protocol
+        if len(protocol_events)!=1:raise ValueError('exactly one raw collection protocol required')
+        event=protocol_events[0];value=event.get('protocol')
+        value=validate_protocol(value,report.get('procedure'))
+        recorded_procedures={dict(passive_start='passive',ringdown_start='pulse')[r['type']]
+            for r in records if r.get('type') in ('passive_start','ringdown_start')}
+        if recorded_procedures and recorded_procedures!={value['procedure']}:
+            raise ValueError('collection protocol contradicts raw procedure')
+        pin=digest(value)
+        if (event.get('protocol_sha256')!=pin or report.get('collection_protocol')!=value or
+                report.get('collection_protocol_sha256')!=pin):raise ValueError('collection protocol hash/report mismatch')
+        identity.update(collection_protocol=value,collection_protocol_sha256=pin)
+
 
 
 def load_records(spec,*,max_bytes=MAX_SOURCE_BYTES,max_line_bytes=MAX_LINE_BYTES,max_records=MAX_RECORDS):
@@ -136,7 +151,8 @@ def annotation_template(source):
     states=[r['state'] for r in records if r.get('type')=='state']
     if not states:raise ValueError('recording contains no states')
     return dict(schema='cartpole-passive-annotations-v1',source_sha256=identity['sha256'],
-        selected_before_scoring=False,operator_cart_restraint='',selection_method='',episodes=[],
+        selected_before_scoring=False,operator_cart_restraint=identity.get('collection_protocol',{}).get('operator_cart_restraint',''),selection_method='',episodes=[],
+        collection_protocol=identity.get('collection_protocol'),requested_releases=identity.get('collection_protocol',{}).get('requested_releases',[]),
         instructions='Before fitting, annotate hand-clear free releases from independent observation. Fill restraint/method, episode_id, board_relative_s=[start,end], reason; then set selected_before_scoring=true. Time zero is the first recorded STATE. Never include handling or static tails.',
         board_duration_s=(states[-1]['unwrapped_us']-states[0]['unwrapped_us'])/1e6)
 

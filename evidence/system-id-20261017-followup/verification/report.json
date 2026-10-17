@@ -1,0 +1,55 @@
+{
+  "schema": "cartpole-operator-workflow-verification-v1",
+  "base_commit": "f8493122952a0a0f3c0fd1206aa9cdd2e531b59b",
+  "full_suite": {
+    "passed": 1104,
+    "skipped": 8,
+    "subtests_passed": 390,
+    "seconds": 73.75,
+    "command": "MPLCONFIGDIR=/tmp/cartpole-id-matplotlib PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q",
+    "log": "full-suite.txt"
+  },
+  "rl": {
+    "parent_targeted_passed": 24,
+    "final_agent_and_independent_reviewer_passed": 25,
+    "actual_training_steps": 64,
+    "resumed_total_steps": 96,
+    "heldout_episodes": 4,
+    "physical_performance_claim": false
+  },
+  "plots": {
+    "raw_physical_recording_review": true,
+    "synthetic_frozen_fit_review": true,
+    "visually_inspected": true
+  },
+  "notebook": {
+    "code_cells_parsed": 7,
+    "colab_executed": false,
+    "source_archive_built_and_installed": true
+  },
+  "jetson": {
+    "path": "/home/rbafna/cartpole-v2-live/staging/operator-id-20261017",
+    "source_files_verified": 162,
+    "extras": [
+      "hardware",
+      "id",
+      "plots"
+    ],
+    "offline_help_verified": true,
+    "existing_stopped_record_review_completed": true,
+    "serial_access_during_install": false
+  },
+  "hardware": {
+    "new_powered_collection": false,
+    "firmware_changed": false,
+    "gains_changed": false,
+    "encoder_reference_changed": false,
+    "earlier_stopped_inspection_completed": true
+  },
+  "physical_model_accepted_for_hardware_rl": false,
+  "intermediate_verification_notes": [
+    "An initial base-suite run had one missing-matplotlib test failure before optional test gating was completed.",
+    "A temporary plotting-only environment passed plotting tests but lacked the installed cartpole-v2 executable used by six CLI test cases.",
+    "Final installed-project suite includes the plotting dependency and passed; no implementation changes were made to conceal environment failures."
+  ]
+}

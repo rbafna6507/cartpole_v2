@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Reusable bounded collection procedures. Import never opens hardware.
 
-The reference is A*sin^4(pi*t/.65), followed by 12 s of active cart feedback.
+The reference is A*sin^4(pi*t/T), defaultT=.65s, followed by active cart feedback.
 The hold is feedback-forced, not proof that the physical cart is fixed. Import
 and --check-waveform are offline. No home, clear, calibration or SET is issued.
 """
@@ -19,9 +19,12 @@ from cartpole_sdk.contracts import (Acceleration,Channel,ValidationError,
                                     select_channels,validate_observation)
 from cartpole_sdk.control.parameters import ControllerParameters
 from cartpole_sdk.rig.policy import run_policy
-from .workflow import provenance,write_json
+from .workflow import provenance,write_json,digest
+from .protocol import make_protocol,validate_protocol,instructions
 
 PULSE_S=.65
+PULSE_DURATIONS=(.45,.65,.8,1.)
+QUIET_PREFLIGHT_S=1.
 HOLD_S=12.
 COMPLETION_PAD_S=.04
 AMPLITUDES_MM=(-30,-20,-10,-5,5,10,20,30)
@@ -41,35 +44,47 @@ def hold_duration(value):
         raise ValidationError('feedback hold must be3..12 finite seconds')
     return float(value)
 
+def pulse_duration(value):
+    if type(value) not in (int,float) or value not in PULSE_DURATIONS:
+        raise ValidationError('pulse duration must be exactly0.45,0.65,0.8 or1.0 seconds')
+    return float(value)
+
+def validate_excitation(amplitude_m,pulse_seconds):
+    amplitude(amplitude_m);pulse_seconds=pulse_duration(pulse_seconds)
+    if 4*abs(amplitude_m)*(math.pi/pulse_seconds)**2>3.:
+        raise ValidationError('amplitude/duration pair exceeds3m/s² reference acceleration bound')
+    return pulse_seconds
+
 def wrap(value):return math.atan2(math.sin(value),math.cos(value))
 
-def waveform(t,amplitude_m):
+def waveform(t,amplitude_m,*,pulse_seconds=PULSE_S):
     """Analytic position, velocity, acceleration and jerk; exactly zero endpoints."""
-    A=amplitude(amplitude_m)
+    A=amplitude(amplitude_m);pulse_seconds=validate_excitation(A,pulse_seconds)
     if not math.isfinite(t):raise ValueError('finite waveform time required')
-    if t<=0 or t>=PULSE_S:return (0.,)*4
-    w=math.pi/PULSE_S;u=w*t;s=math.sin(u)
+    if t<=0 or t>=pulse_seconds:return (0.,)*4
+    w=math.pi/pulse_seconds;u=w*t;s=math.sin(u)
     return (A*s**4,A*w*(math.sin(2*u)-.5*math.sin(4*u)),
             2*A*w*w*(math.cos(2*u)-math.cos(4*u)),
             A*w**3*(-4*math.sin(2*u)+8*math.sin(4*u)))
 
-def waveform_bounds(amplitude_m):
+def waveform_bounds(amplitude_m,*,pulse_seconds=PULSE_S):
     """Exact continuous reference extrema, independently checked on a 10 us grid.
 
     For jerk, extrema satisfy cos(2u)=(1 +/- sqrt(129))/16. These
     certify only the analytic reference; measured trajectories retain guards.
     """
-    A=abs(amplitude(amplitude_m));w=math.pi/PULSE_S
+    pulse_seconds=validate_excitation(amplitude_m,pulse_seconds)
+    A=abs(amplitude(amplitude_m));w=math.pi/pulse_seconds
     c=((1+math.sqrt(129))/16,(1-math.sqrt(129))/16)
     jerk_factor=max(abs(4*math.sqrt(1-z*z)*(4*z-1)) for z in c)
     analytic=(A,3*math.sqrt(3)/4*A*w,4*A*w*w,jerk_factor*A*w**3)
     grid=[0.]*4
-    for i in range(65_001):
-        for k,value in enumerate(waveform(i/100_000,amplitude_m)):grid[k]=max(grid[k],abs(value))
-    return dict(amplitude_m=amplitude_m,pulse_s=PULSE_S,hold_s=HOLD_S,
+    for i in range(round(pulse_seconds*100_000)+1):
+        for k,value in enumerate(waveform(i/100_000,amplitude_m,pulse_seconds=pulse_seconds)):grid[k]=max(grid[k],abs(value))
+    return dict(amplitude_m=amplitude_m,pulse_s=pulse_seconds,hold_s=HOLD_S,
         grid_interval_s=.00001,analytic_abs_max=analytic,grid_abs_max=grid,
         quantities=('position_m','velocity_m_s','acceleration_m_s2','jerk_m_s3'),
-        endpoint_start=waveform(0,amplitude_m),endpoint_end=waveform(PULSE_S,amplitude_m),
+        endpoint_start=waveform(0,amplitude_m,pulse_seconds=pulse_seconds),endpoint_end=waveform(pulse_seconds,amplitude_m,pulse_seconds=pulse_seconds),
         reference_only=True,physical_trajectory_guaranteed=False)
 
 def validate_board(state):
@@ -95,8 +110,8 @@ def validate_preflight(state,info,*,expected_reference=None,expected_home=None):
 
 def stationary_preflight(rig,info,**pins):
     state=rig.state;rig._fresh(state);validate_preflight(state,info,**pins)
-    first=state.unwrapped_us;initial=state.theta;deadline=time.monotonic()+1.5
-    while state.unwrapped_us-first<500_000:
+    first=state.unwrapped_us;initial=state.theta;deadline=time.monotonic()+2.
+    while state.unwrapped_us-first<round(QUIET_PREFLIGHT_S*1e6):
         if time.monotonic()>=deadline:raise ValidationError('quiet preflight deadline exceeded')
         state=rig.wait_state(after_tick=state.unwrapped_tick,timeout=.1)
         rig._fresh(state);validate_preflight(state,info,**pins)
@@ -104,10 +119,11 @@ def stationary_preflight(rig,info,**pins):
     return state.theta
 
 class RingdownPolicy:
-    def __init__(self,channels,*,amplitude_m,initial_hanging,record=None,clock_ns=None):
+    def __init__(self,channels,*,amplitude_m,initial_hanging,record=None,clock_ns=None,pulse_seconds=PULSE_S):
         if tuple(channels)!=CHANNELS:raise ValidationError('exact magnetic/step channels required')
         if not math.isfinite(initial_hanging):raise ValidationError('finite hanging reference required')
         self.channels=tuple(channels);self.amplitude_m=amplitude(amplitude_m)
+        self.pulse_seconds=validate_excitation(amplitude_m,pulse_seconds)
         self.initial_hanging=initial_hanging;self.record=record
         self.clock_ns=clock_ns if clock_ns is not None else lambda:time.monotonic_ns()
     def reset(self,session):
@@ -133,12 +149,12 @@ class RingdownPolicy:
                 raise ValidationError(f'ringdown cadence fault: seq={observation.sequence} previous={sequence} board_gap_ns={board_gap} host_gap_ns={host_gap}')
         if abs(x)>=.05 or abs(v)>=.3 or abs(wrap(theta-self.initial_hanging))>=1. or abs(omega)>=10.:
             raise ValidationError('measured/estimated trajectory exceeded ringdown guard')
-        t=(now-self.origin_ns)/1e9;reference=waveform(t,self.amplitude_m)
-        self.mode='pulse' if t<PULSE_S else 'feedback_cart_hold'
+        t=(now-self.origin_ns)/1e9;reference=waveform(t,self.amplitude_m,pulse_seconds=self.pulse_seconds)
+        self.mode='pulse' if t<self.pulse_seconds else 'feedback_cart_hold'
         unbounded=reference[2]+80*(reference[0]-x)+14*(reference[1]-v)
         command=max(-3.,min(3.,unbounded));clamped=command!=unbounded
         self.clamped_commands+=int(clamped);self.last_elapsed_s=t
-        if t>=PULSE_S:
+        if t>=self.pulse_seconds:
             self.hold_max_abs_x=max(self.hold_max_abs_x,abs(x));self.hold_max_abs_v=max(self.hold_max_abs_v,abs(v))
         if self.record:self.record(phase=self.mode,t_s=t,observation_sequence=observation.sequence,board_ns=now,
             host_policy_ns=host_ns,x_reference=reference[0],v_reference=reference[1],a_reference=reference[2],
@@ -153,11 +169,11 @@ class RingdownPolicy:
 
 def plain(value):return asdict(value) if is_dataclass(value) else vars(value)
 
-def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,provenance=None,expected_reference=None,expected_home=None,check=None,ready=None):
+def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,pulse_seconds=PULSE_S,provenance=None,expected_reference=None,expected_home=None,check=None,ready=None):
     """Trusted bounded runner. STOP on preflight, policy, transport or wait failure."""
     failure=None;policy=None;result=None
     try:
-        amplitude(amplitude_m);hold_seconds=hold_duration(hold_seconds)
+        pulse_seconds=validate_excitation(amplitude_m,pulse_seconds);hold_seconds=hold_duration(hold_seconds)
         if rig.rate_hz!=100:raise ValidationError('ringdown requires 100 Hz telemetry')
         rig._stopped_healthy();parameters=rig.get_parameters()
         names={f.name for f in fields(ControllerParameters)}
@@ -166,7 +182,7 @@ def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,provenance=None,expected_ref
         info=rig.get_info();initial_hanging=stationary_preflight(rig,info,expected_reference=expected_reference,expected_home=expected_home)
         rig._record('ringdown_start',amplitude_m=amplitude_m,parameters=parameters,info=plain(info),
             state=plain(rig.state),initial_hanging=initial_hanging,provenance=provenance or {},rate_hz=100,
-            pulse_s=PULSE_S,feedback_hold_s=hold_seconds,completion_pad_s=COMPLETION_PAD_S,ttl_ms=20,
+            pulse_s=pulse_seconds,quiet_preflight_s=QUIET_PREFLIGHT_S,feedback_hold_s=hold_seconds,completion_pad_s=COMPLETION_PAD_S,ttl_ms=20,
             feedback_kp=80.,feedback_kd=14.,command_limit_m_s2=3.,hardware_validated=False)
         if ready is not None:ready(dict(status='pulse_starting',amplitude_m=amplitude_m,drivers_enabled=False))
         def observe():
@@ -175,17 +191,17 @@ def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,provenance=None,expected_ref
             return rig._observation(state)
         def factory(channels):
             nonlocal policy
-            policy=RingdownPolicy(channels,amplitude_m=amplitude_m,initial_hanging=initial_hanging,
+            policy=RingdownPolicy(channels,amplitude_m=amplitude_m,pulse_seconds=pulse_seconds,initial_hanging=initial_hanging,
                 record=lambda **record:rig._record('ringdown_reference',**record))
             return policy
         # 40 ms of additional feedback hold compensates the runner's bounded
         # wall-deadline margin; it never extends the excitation waveform.
-        run_policy(rig,factory,channels=CHANNELS,duration_s=PULSE_S+hold_seconds+COMPLETION_PAD_S,
+        run_policy(rig,factory,channels=CHANNELS,duration_s=pulse_seconds+hold_seconds+COMPLETION_PAD_S,
             ttl_ms=20,max_acceleration=3.,observation_provider=observe)
-        if policy is None or policy.last_elapsed_s<PULSE_S+hold_seconds:
+        if policy is None or policy.last_elapsed_s<pulse_seconds+hold_seconds:
             raise ValidationError('incomplete board-clock pulse/hold duration')
         result=dict(parameters=parameters,info=plain(info),initial_hanging=initial_hanging,
-            amplitude_m=amplitude_m,hold_seconds=hold_seconds,policy=policy.summary(),hardware_validated=False)
+            amplitude_m=amplitude_m,pulse_seconds=pulse_seconds,hold_seconds=hold_seconds,policy=policy.summary(),hardware_validated=False)
     except BaseException as exc:
         failure=exc;rig._record('ringdown_failure',reason=repr(exc));raise
     finally:
@@ -315,25 +331,27 @@ class CameraRecorder:
 DEFAULT_CAMERA_URL='http://127.0.0.1:3090/api/sensing-stream?max_hz=100'
 
 
-def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S,camera_url=DEFAULT_CAMERA_URL,
-            expected_reference=None,expected_home=None,rig_factory=None,camera_factory=None,ready=None):
+def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S,pulse_seconds=PULSE_S,camera_url=DEFAULT_CAMERA_URL,
+            expected_reference=None,expected_home=None,rig_factory=None,camera_factory=None,ready=None,protocol=None):
     """Create an immutable run directory, preserve failures, and stop before return."""
     if kind not in ('pulse','passive','inspect'):raise ValueError('unknown collection procedure')
-    if kind=='pulse':amplitude(amplitude_m);hold_seconds=hold_duration(hold_seconds)
+    protocol=make_protocol(kind) if protocol is None else validate_protocol(protocol,kind)
+    if kind=='pulse':pulse_seconds=validate_excitation(amplitude_m,pulse_seconds);hold_seconds=hold_duration(hold_seconds)
     if not math.isfinite(seconds) or not 1<=seconds<=180:raise ValueError('duration must be 1..180 seconds')
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     report=dict(schema='cartpole-id-run-v1',procedure=kind,completed=False,provenance=provenance(),
+        collection_protocol=protocol,collection_protocol_sha256=digest(protocol),
         started_ns=time.monotonic_ns(),expected_reference=expected_reference,expected_home=expected_home,
         source_semantics={'fit_source':'direct Rig JSONL raw theta and MCU acceleration; never mirrored/fused packets',
             'board_clock':'unwrapped_us snapshot proxy, session-specific',
             'camera_clock':'raw vision.t host-read proxy; no implicit mapping to the board clock',
             'encoder_mirror':'current-session read-only UDP when camera enabled; display only'},
         camera={'status':'explicitly disabled; independent camera evidence absent'} if camera_url is None else {'url':camera_url},
-        options=dict(port=str(port),seconds=seconds,amplitude_m=amplitude_m,hold_seconds=hold_seconds,rate_hz=100 if kind=='pulse' else 250))
+        options=dict(port=str(port),seconds=seconds,amplitude_m=amplitude_m,pulse_seconds=pulse_seconds,hold_seconds=hold_seconds,rate_hz=100 if kind=='pulse' else 250))
     camera=None;rig=None;failure=None
     try:
         if camera_url is not None and kind!='inspect':
-            camera=(camera_factory or CameraRecorder)(camera_url,output,(PULSE_S+hold_seconds if kind=='pulse' else seconds)+15)
+            camera=(camera_factory or CameraRecorder)(camera_url,output,(pulse_seconds+hold_seconds if kind=='pulse' else seconds)+15)
             camera.start()
         if rig_factory is None:
             from cartpole_sdk.rig import Rig
@@ -342,10 +360,13 @@ def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S
         publisher=EncoderPublisher() if camera is not None else None
         rig=rig_factory(port,rate_hz=100 if kind=='pulse' else 250,log_dir=output,record_capacity=8192,max_host_age_s=.02,vision_publisher=publisher)
         with rig:
+            rig._record('collection_protocol',protocol=protocol,protocol_sha256=digest(protocol))
+            def announce(status):
+                if ready is not None:ready(dict(status,collection_protocol=protocol,requested_release_instructions=instructions(protocol)))
             pins=dict(expected_reference=expected_reference,expected_home=expected_home)
             check=None if camera is None else camera.check
-            if kind=='pulse':report['result']=run_pulse(rig,amplitude_m=amplitude_m,hold_seconds=hold_seconds,provenance=report['provenance'],check=check,ready=ready,**pins)
-            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=ready,**pins)
+            if kind=='pulse':report['result']=run_pulse(rig,amplitude_m=amplitude_m,hold_seconds=hold_seconds,pulse_seconds=pulse_seconds,provenance=report['provenance'],check=check,ready=announce,**pins)
+            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=announce,**pins)
             else:report['result']=inspect_rig(rig,**pins)
             report['stop_state']=plain(rig.state)
             report['stop_confirmed']=not rig.state.enabled

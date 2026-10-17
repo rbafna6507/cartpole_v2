@@ -90,10 +90,18 @@ it remains uncommissioned and does not control motion.
 - [Host-rate Python control and reproducible RL](docs/policies.md): separate
   100/250 Hz controllers, raw-demand executor simulation, training and held-out
   evaluation. The learned artifact is numeric JSON; hardware transfer is unproven.
+- [Model-bound PPO and Colab training](docs/rl-training.md): neural training,
+  checkpoint resume, disjoint evaluation and a portable SDK actor using the
+  governed/observed simulator. Current model scopes remain development only;
+  physical model and learned-policy acceptance are separate gates.
 - [Sensing and physical identification](docs/identification.md): explicit clocks,
   calibration, validity and held-out rejection. The MuJoCo plant remains provisional.
 - [Runnable system-identification workflow](docs/system-identification-workflow.md):
-  guarded collection, independent validation, scoped model export and Gym loading.
+  labelled release protocols, raw-data and frozen-fit plots, independent validation,
+  scoped model export and Gym loading. [PPO and Colab](docs/rl-training.md) adds
+  neural training, resumable checkpoints and a portable SDK actor using the
+  governed, encoder-observed `RigCartpoleEnv`. Physical-model acceptance remains
+  separate from software readiness.
   [October 17 measurements and plots](evidence/system-id-20261017/README.md) record
   the latest physical results; model acceptance for hardware RL remains open.
 - [Portal and isolated worker](docs/portal.md): authenticated immutable uploads,

@@ -1,0 +1,82 @@
+{
+  "scope": "Independent offline interface review; not physical model validation",
+  "blocking_findings": [],
+  "resolved_findings": [
+    "Policy age now uses same board-snapshot proxy as the actual SDK; actual transport age is diagnostic-only.",
+    "Causal reset warmup aligns100Hz decisions with delayed telemetry delivery and removes the false3ms+3ms lease gap.",
+    "Unusable telemetry ignores numeric Gym actions and lets the original lease expire without fresh demand."
+  ],
+  "checks": {
+    "actual_sdk_raw_and_filtered_codec": true,
+    "missing_telemetry_returns_terminal_transition": true,
+    "timing_matrix": [
+      {
+        "telemetry_ms": 0,
+        "command_ms": 0,
+        "decisions": 30,
+        "ended": false,
+        "reason": null,
+        "physical_time_ns": 300000000,
+        "snapshot_ns": 300000000
+      },
+      {
+        "telemetry_ms": 1,
+        "command_ms": 1,
+        "decisions": 30,
+        "ended": false,
+        "reason": null,
+        "physical_time_ns": 301000000,
+        "snapshot_ns": 300000000
+      },
+      {
+        "telemetry_ms": 3,
+        "command_ms": 3,
+        "decisions": 30,
+        "ended": false,
+        "reason": null,
+        "physical_time_ns": 303000000,
+        "snapshot_ns": 300000000
+      },
+      {
+        "telemetry_ms": 9,
+        "command_ms": 0,
+        "decisions": 30,
+        "ended": false,
+        "reason": null,
+        "physical_time_ns": 309000000,
+        "snapshot_ns": 300000000
+      },
+      {
+        "telemetry_ms": 9,
+        "command_ms": 3,
+        "decisions": 2,
+        "ended": true,
+        "reason": "action lease expired",
+        "physical_time_ns": 20000000,
+        "snapshot_ns": 10000000
+      }
+    ]
+  },
+  "reviewed_behavior": [
+    "Raw acceleration enters the binary32 governor once per1ms tick.",
+    "Quantized raw angle initializes a zero-rate causal observer; no true omega in policy channels.",
+    "Step count and commanded velocity/acceleration are explicit estimates; force saturation terminates unsupported tracking.",
+    "Action expiry remains observed_snapshot+TTL; command transport never renews it.",
+    "The shared policy codec selects explicit channels and never reads simulation diagnostics or truth."
+  ],
+  "limitations": [
+    "Plant still assumes ideal cart acceleration tracking below a declared force ceiling; cart step ISR phase/backlash/missed steps and global magnetic calibration are unvalidated.",
+    "Initial healthy snapshot is an explicit preflight assumption; delayed reset advances real model time under zero demand.",
+    "With100Hz control and20ms TTL, combined transport delays above10ms can legitimately create gaps between leases.",
+    "Faulted reset states outside the declared startup assumptions are not a physical safe-start demonstration."
+  ],
+  "source_sha256": {
+    "src/cartpole_sdk/sim/rig_gym_env.py": "c5ed8c2e9f8bd99d5cc423754e0ededfdf1a59095615e29e2c44fa7574a3b47e",
+    "src/cartpole_sdk/policies/rig_observation.py": "41ce5c64dcd47d9daf5bcb65c053f0ce6efde186a1f649904d0daeb3c3af38e2",
+    "src/cartpole_sdk/sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "tests/test_rig_gym_env.py": "c7515f0df751ef45885d320c2711c025fcccd4070207d909a1fe6d1aa92febe0"
+  },
+  "sdk_replay_raw_sha256": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+  "review_script_sha256": "a3ceb72a43b0d10202d833f140238d281e76570113332e77b29ca1d08bc2df04"
+}

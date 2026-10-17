@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+# Help parses arguments without importing optional simulator/neural libraries.
+for argument in "$@"; do
+    if [ "$argument" = "--help" ] || [ "$argument" = "-h" ]; then
+        exec uv run --project "$repo_dir" python "$repo_dir/examples/train_ppo.py" "$@"
+    fi
+done
+exec uv run --project "$repo_dir" --extra rl python "$repo_dir/examples/train_ppo.py" "$@"

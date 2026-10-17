@@ -18,14 +18,27 @@ def parser():
         p.add_argument('--expected-reference',type=int,help='Optional exact saved upright raw encoder reference.')
         p.add_argument('--expected-home',type=int,help='Optional exact current home epoch.')
         if name!='inspect':
+            p.add_argument('--dataset-role',choices=('training','validation','development'),default='development')
+            p.add_argument('--run-label',default='unspecified',help='Descriptive immutable recording label.')
             camera=p.add_mutually_exclusive_group()
             camera.add_argument('--camera-url',default='http://127.0.0.1:3090/api/sensing-stream?max_hz=100',help='Raw sensing-stream URL; must become ready before serial collection.')
             camera.add_argument('--no-camera',action='store_true',help='Explicitly record missing independent camera evidence.')
-        if name=='collect-passive':p.add_argument('--seconds',type=float,default=120.,help='Bounded1..180s; annotate hand-clear release intervals afterward.')
+        if name=='collect-passive':
+            p.add_argument('--seconds',type=float,default=120.,help='Bounded1..180s; annotate hand-clear release intervals afterward.')
+            p.add_argument('--release-angles-deg',type=float,nargs='+',help='Requested degrees away from hanging; labels are not measured angles.')
+            p.add_argument('--release-directions',choices=('left','right'),nargs='+',default=['left','right'],help='Directions in camera view.')
+            p.add_argument('--repetitions',type=int,default=1)
+            p.add_argument('--cart-restraint',default='',help='How you will keep the cart fixed; required with requested angles.')
         if name=='collect-pulse':
+            p.add_argument('--pulse-seconds',type=float,choices=(.45,.65,.8,1.),default=.65,help='Pulse duration; unsafe amplitude/duration pairs fail before serial. Default0.65s.')
             p.add_argument('--hold-seconds',type=float,default=12.,help='Explicit3..12s active cart feedback hold, default12s;20ms leases are unchanged.')
             p.add_argument('--execute',action='store_true',help='Authorize this invocation to issue ARM and acceleration requests.')
             p.add_argument('--amplitude-mm',type=int,required=True,choices=(-30,-20,-10,-5,5,10,20,30),help='Signed pulse amplitude; begin with5mm and inspect before escalating.')
+    p=commands.add_parser('review-recording',help='Check completed raw data and plot observations without fitting or selecting intervals.')
+    p.add_argument('--input',required=True);p.add_argument('--output',type=Path,required=True)
+    p=commands.add_parser('review-fit',help='Plot frozen passive-fit predictions on the exact validation data; never refit or change acceptance.')
+    p.add_argument('--fit',type=Path,required=True);p.add_argument('--validation',required=True)
+    p.add_argument('--validation-annotations',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p=commands.add_parser('annotations-template',help='Create an explicit manual free-release annotation template; never select fit windows automatically.')
     p.add_argument('--input',required=True,help='Rig JSONL, JSONL.gz, or archive.tar.gz::exact/member.jsonl')
     p.add_argument('--output',required=True,type=Path)
@@ -56,14 +69,30 @@ def main(argv=None):
         if args.output.exists():raise FileExistsError(f'output exists; preserve earlier evidence: {args.output}')
         if args.command in ('inspect','collect-passive','collect-pulse'):
             from .experiments import collect
+            from .protocol import make_protocol
             kind={'inspect':'inspect','collect-passive':'passive','collect-pulse':'pulse'}[args.command]
             camera_url=None if kind=='inspect' or getattr(args,'no_camera',False) else args.camera_url
+            protocol=make_protocol(kind,dataset_role=getattr(args,'dataset_role','development'),run_label=getattr(args,'run_label','unspecified'),
+                angles_deg=getattr(args,'release_angles_deg',None),directions=getattr(args,'release_directions',['left','right']),
+                repetitions=getattr(args,'repetitions',1),cart_restraint=getattr(args,'cart_restraint',''))
+            def announce(status):
+                print(json.dumps(dict(output=str(args.output),**status)),flush=True)
+                if status.get('status')=='recording':
+                    for line in status.get('requested_release_instructions',[]):print(line,flush=True)
             result=collect(kind,output=args.output,port=args.port,seconds=getattr(args,'seconds',120.),
-                amplitude_m=getattr(args,'amplitude_mm',5)/1000,hold_seconds=getattr(args,'hold_seconds',12.),camera_url=camera_url,
+                amplitude_m=getattr(args,'amplitude_mm',5)/1000,pulse_seconds=getattr(args,'pulse_seconds',.65),hold_seconds=getattr(args,'hold_seconds',12.),camera_url=camera_url,
                 expected_reference=args.expected_reference,expected_home=args.expected_home,
-                ready=lambda status:print(json.dumps(dict(output=str(args.output),**status)),flush=True))
+                ready=announce,protocol=protocol)
             print(json.dumps(dict(output=str(args.output),completed=result['completed'],stop_confirmed=result.get('stop_confirmed'))));return 0
-        if args.command=='annotations-template':result=workflow.annotation_template(args.input)
+        if args.command=='review-recording':
+            from .review import review_recording
+            result=review_recording(args.input,args.output)
+            print(json.dumps(dict(output=str(args.output),source_sha256=result['source_sha256'],physical_model_validated=False)));return 0
+        elif args.command=='review-fit':
+            from .fit_review import review_fit
+            result=review_fit(args.fit,args.validation,args.validation_annotations,args.output)
+            print(json.dumps(dict(output=str(args.output),accepted=result['saved_admission']['accepted'],physical_model_validated=False)));return 0
+        elif args.command=='annotations-template':result=workflow.annotation_template(args.input)
         elif args.command=='fit-passive':result=workflow.fit_passive_logs(args.training,args.training_annotations,args.validation,args.validation_annotations,model=args.model)
         elif args.command=='fit-driven':result=workflow.fit_driven_logs(args.training,args.validation)
         elif args.command=='assumptions-template':

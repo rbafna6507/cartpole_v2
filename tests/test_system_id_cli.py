@@ -150,3 +150,11 @@ def test_driven_cli_requires_dynamic_validation_and_preserves_underlying_fit(tmp
         assert any('validation excitation' in reason for reason in report['reasons'])
         assert report['supplemental_validation']['angle_span_rad']==0.
         assert report['supplemental_validation']['acceleration_std_m_s2']==0.
+
+
+def test_review_fit_cli_forwards_frozen_sources_without_hardware(tmp_path):
+    from cartpole_sdk.identification import fit_review
+    out=tmp_path/'fit-review'
+    with patch.object(fit_review,'review_fit',return_value={'saved_admission':{'accepted':False},'fit_sha256':'a'*64}) as review, patch('cartpole_sdk.rig.Rig',side_effect=AssertionError('offline review opened hardware')):
+        assert cli()(['review-fit','--fit','fit.json','--validation','valid.jsonl','--validation-annotations','valid-annotations.json','--output',str(out)])==0
+    review.assert_called_once_with(Path('fit.json'),'valid.jsonl',Path('valid-annotations.json'),out)

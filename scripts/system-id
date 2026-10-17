@@ -8,6 +8,8 @@ for argument in "$@"; do
     fi
 done
 case "${1:-}" in
+    review-recording|review-fit)
+        exec uv run --project "$repo_dir" --extra id --extra plots python -m cartpole_sdk.identification.cli "$@" ;;
     assumptions-template|export-model|gym-smoke)
         exec uv run --project "$repo_dir" --extra sim python -m cartpole_sdk.identification.cli "$@" ;;
     inspect|collect-passive|collect-pulse)

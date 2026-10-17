@@ -1,0 +1,77 @@
+{
+  "scope": "diagnosis files only; full-suite check overlapped active development by other agents",
+  "focused": {
+    "command": ".venv/bin/python -m pytest -q evidence/system-id-20261017-followup/diagnosis/test_diagnose_input.py",
+    "passed": 3,
+    "failed": 0,
+    "red_before_implementation": 3
+  },
+  "replay_exact": true,
+  "legacy_baseline_exact": true,
+  "frozen_evidence_git_diff_empty": true,
+  "full_suite": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 1027,
+    "failed": 33,
+    "skipped": 8,
+    "subtests_passed": 390,
+    "elapsed_s": 52.56,
+    "failure_groups": [
+      {
+        "files": [
+          "tests/test_portal_http.py",
+          "tests/test_portal_worker.py",
+          "tests/vision_runtime/test_comparison_process.py",
+          "tests/vision_runtime/test_encoder_feed.py"
+        ],
+        "count": 13,
+        "cause": "localhost socket bind forbidden in sandbox; no network permission escalation attempted"
+      },
+      {
+        "files": [
+          "tests/test_pulse_duration.py"
+        ],
+        "count": 13,
+        "cause": "concurrent test-first implementation was not yet available when full-suite collection started; later independent focused run passed"
+      },
+      {
+        "files": [
+          "tests/test_rig_gym_env.py"
+        ],
+        "count": 7,
+        "cause": "concurrent test-first implementation module was not yet available when full-suite run started"
+      }
+    ]
+  },
+  "pulse_duration_review": {
+    "files": [
+      "src/cartpole_sdk/identification/experiments.py",
+      "src/cartpole_sdk/identification/cli.py",
+      "tests/test_pulse_duration.py"
+    ],
+    "blocking_findings": [],
+    "nonblocking_findings": [
+      "Old camera-step analysis hardcodes0.65s and must not be reused unchanged for variable-duration traces."
+    ],
+    "command": ".venv/bin/python -m pytest -q -p no:cacheprovider tests/test_pulse_duration.py tests/test_system_id_experiments.py tests/test_system_id_cli.py",
+    "passed": 88,
+    "failed": 0,
+    "elapsed_s": 4.8
+  },
+  "sha256": {
+    "input-diagnosis-development-v1.json": "7a883a31f7374da636f076709a2a5d51614f7e0bf4e8c7cf25c20ded09d144c0",
+    "test_diagnose_input.py": "5188770789650f58f20b458e1de4c4e87a9747f7c496d3daa025b80043d3b48e",
+    "README.md": "8d63299e9942a7da68daa45c0b27229fe79f07b19aadd13ba1d2d314223ed30d",
+    "review_sim_interface.py": "f9dfc04a709e4bc3fd8030ffce0c95631ab04f4d80050c769106dc906089d115",
+    "simulation-interface-independent-review.json": "d156ee44479a9a46c050899a41e5c044c6cf46a83b0d30c8232ec6932341662c",
+    "diagnose_input.py": "1f9d47a2be9650cf6bb83b3abbe9750c163955e638d83c08b1d8f316d4895e71"
+  },
+  "simulation_interface_followup": {
+    "report": "simulation-interface-independent-review.json",
+    "focused_passed": 18,
+    "focused_failed": 0,
+    "actual_sdk_codec_replay_passed": true,
+    "timing_matrix_passed": true,
+    "transient_rig_gym_env_missing_module_failures_superseded": true
+  }
+}

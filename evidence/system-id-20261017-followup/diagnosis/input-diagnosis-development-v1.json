@@ -1,0 +1,450 @@
+{
+  "schema": "cartpole-input-diagnosis-development-v1",
+  "status": "DEVELOPMENT; no acceptance or model promotion",
+  "source_report_sha256": "2e643e93c94af8cf39a1432972f41b4734568bb1aab080f38703adba189bc621",
+  "tool_sha256": "1f9d47a2be9650cf6bb83b3abbe9750c163955e638d83c08b1d8f316d4895e71",
+  "raw_inputs": [
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl.gz",
+      "sha256_decompressed": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8"
+    },
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl.gz",
+      "sha256_decompressed": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d"
+    },
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl.gz",
+      "sha256_decompressed": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf"
+    },
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl.gz",
+      "sha256_decompressed": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6"
+    },
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl.gz",
+      "sha256_decompressed": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb"
+    },
+    {
+      "path": "evidence/system-id-20261017/raw-pulse-validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl.gz",
+      "sha256_decompressed": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23"
+    }
+  ],
+  "sampling": [
+    {
+      "run": "pulse-pos10-short-01",
+      "role": "training",
+      "enabled_samples": 368,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010000000000218279,
+      "velocity_increment_rms_m_s": 0.002117852670128354,
+      "sampled_input_increment_error_rms_m_s": 9.99196748897497e-05,
+      "relative_increment_error": 0.04717971004266976,
+      "max_cumulative_velocity_error_m_s": 0.0030323155199346793,
+      "initial_raw_theta_rad": 3.054156,
+      "tail_raw_theta_rad": 3.054156
+    },
+    {
+      "run": "pulse-neg10-short-01",
+      "role": "training",
+      "enabled_samples": 369,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010000000000218279,
+      "velocity_increment_rms_m_s": 0.0021128556423059856,
+      "sampled_input_increment_error_rms_m_s": 0.00010059847997131354,
+      "relative_increment_error": 0.04761256659329534,
+      "max_cumulative_velocity_error_m_s": 0.0030988132200369697,
+      "initial_raw_theta_rad": 3.049554,
+      "tail_raw_theta_rad": 3.041884
+    },
+    {
+      "run": "pulse-pos20-short-01",
+      "role": "training",
+      "enabled_samples": 368,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010000000000218279,
+      "velocity_increment_rms_m_s": 0.004257016318793504,
+      "sampled_input_increment_error_rms_m_s": 0.00017019661972415782,
+      "relative_increment_error": 0.03998026011147494,
+      "max_cumulative_velocity_error_m_s": 0.005710262899971182,
+      "initial_raw_theta_rad": 3.041884,
+      "tail_raw_theta_rad": 3.031146
+    },
+    {
+      "run": "pulse-neg20-short-01",
+      "role": "training",
+      "enabled_samples": 368,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010001000000102067,
+      "velocity_increment_rms_m_s": 0.004239078701932501,
+      "sampled_input_increment_error_rms_m_s": 0.00019931498893079787,
+      "relative_increment_error": 0.04701846862148009,
+      "max_cumulative_velocity_error_m_s": 0.006373253153921311,
+      "initial_raw_theta_rad": 3.029612,
+      "tail_raw_theta_rad": 3.0296119999999993
+    },
+    {
+      "run": "pulse-pos30-validation-01",
+      "role": "validation",
+      "enabled_samples": 368,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010000000000218279,
+      "velocity_increment_rms_m_s": 0.006382761858953942,
+      "sampled_input_increment_error_rms_m_s": 0.00025298652598324125,
+      "relative_increment_error": 0.03963590238422317,
+      "max_cumulative_velocity_error_m_s": 0.006950658999847229,
+      "initial_raw_theta_rad": 3.02501,
+      "tail_raw_theta_rad": 3.0311459999999992
+    },
+    {
+      "run": "pulse-neg30-validation-01",
+      "role": "validation",
+      "enabled_samples": 368,
+      "median_dt_s": 0.010000000000218279,
+      "max_dt_s": 0.010000000000218279,
+      "velocity_increment_rms_m_s": 0.006417730342715419,
+      "sampled_input_increment_error_rms_m_s": 0.00022048913115566224,
+      "relative_increment_error": 0.034356247361800284,
+      "max_cumulative_velocity_error_m_s": 0.005257586700208497,
+      "initial_raw_theta_rad": 3.029612,
+      "tail_raw_theta_rad": 3.02501
+    }
+  ],
+  "variants": {
+    "sampled_acceleration": {
+      "delay_s": 0.0,
+      "parameters": {
+        "effective_length_m": 0.17495666900586254,
+        "angular_damping_per_s": 1.4361917821680357,
+        "input_gain": 1.4090298851472376
+      },
+      "training_nrmse": 0.25280329104826343,
+      "old_validation_development_nrmse": 0.13544884970394708,
+      "per_training_run": [
+        {
+          "run": "pulse-pos10-short-01",
+          "windows": 10,
+          "residual_rms": 0.01443444392705851,
+          "target_rms": 0.019045548148753075,
+          "mean_residual": 0.01323539155408629,
+          "initial_input_window_residuals": [
+            0.006723431715188556,
+            -0.0012299681699104708,
+            0.013445727533837746
+          ]
+        },
+        {
+          "run": "pulse-neg10-short-01",
+          "windows": 10,
+          "residual_rms": 0.010314930592007577,
+          "target_rms": 0.02182079514590446,
+          "mean_residual": 0.008165355661215883,
+          "initial_input_window_residuals": [
+            0.018236081747359162,
+            0.007992474211939948,
+            -0.008723475266980363
+          ]
+        },
+        {
+          "run": "pulse-pos20-short-01",
+          "windows": 10,
+          "residual_rms": 0.008644252340680296,
+          "target_rms": 0.05779223831007987,
+          "mean_residual": -0.0027329641235114147,
+          "initial_input_window_residuals": [
+            0.001544857926435328,
+            -0.010475231619504907,
+            -0.014078310730964022
+          ]
+        },
+        {
+          "run": "pulse-neg20-short-01",
+          "windows": 10,
+          "residual_rms": 0.008738406902580806,
+          "target_rms": 0.05577776980049235,
+          "mean_residual": -0.0034680080980372284,
+          "initial_input_window_residuals": [
+            -0.0043817020618226316,
+            -0.015588188422458127,
+            -0.007468441096005279
+          ]
+        }
+      ],
+      "training_run_offset_nuisance_diagnostic": {
+        "nrmse": 0.1380029563441577,
+        "condition": 3.645621801554961,
+        "effective_length_m": 0.1418757285780314,
+        "angular_damping_per_s": 2.982459458418997,
+        "input_gain": 1.145901552231892,
+        "per_run_additional_phase_rad": {
+          "pulse-pos10-short-01": 0.021077794735653882,
+          "pulse-neg10-short-01": 0.011995990763620054,
+          "pulse-pos20-short-01": -0.002772390152501754,
+          "pulse-neg20-short-01": -0.0060924106176297975
+        },
+        "interpretation": "Same-training-run nuisance fit; no validation prediction and no calibration assertion."
+      }
+    },
+    "velocity_increments": {
+      "delay_s": 0.005,
+      "parameters": {
+        "effective_length_m": 0.17370398852472774,
+        "angular_damping_per_s": 1.5960267819387208,
+        "input_gain": 1.4414500340720513
+      },
+      "training_nrmse": 0.25280204528602046,
+      "old_validation_development_nrmse": 0.13072649754654814,
+      "per_training_run": [
+        {
+          "run": "pulse-pos10-short-01",
+          "windows": 10,
+          "residual_rms": 0.01450471626452693,
+          "target_rms": 0.019045548148753075,
+          "mean_residual": 0.013288215188869712,
+          "initial_input_window_residuals": [
+            0.006565179186770499,
+            -0.0012134960415912683,
+            0.013007597273871779
+          ]
+        },
+        {
+          "run": "pulse-neg10-short-01",
+          "windows": 10,
+          "residual_rms": 0.010344463992334041,
+          "target_rms": 0.02182079514590446,
+          "mean_residual": 0.008276395503309403,
+          "initial_input_window_residuals": [
+            0.01842735991436127,
+            0.00807060007451255,
+            -0.008233092105289962
+          ]
+        },
+        {
+          "run": "pulse-pos20-short-01",
+          "windows": 10,
+          "residual_rms": 0.008733143880295738,
+          "target_rms": 0.05779223831007987,
+          "mean_residual": -0.0029209267119303466,
+          "initial_input_window_residuals": [
+            0.0009528673879680288,
+            -0.011162854153123694,
+            -0.014689835101885915
+          ]
+        },
+        {
+          "run": "pulse-neg20-short-01",
+          "windows": 10,
+          "residual_rms": 0.008495098353456769,
+          "target_rms": 0.05577776980049235,
+          "mean_residual": -0.0033621229502174264,
+          "initial_input_window_residuals": [
+            -0.004556589587331877,
+            -0.014848470723857782,
+            -0.006778237647398003
+          ]
+        }
+      ],
+      "training_run_offset_nuisance_diagnostic": {
+        "nrmse": 0.13608706931113634,
+        "condition": 3.6647789362101952,
+        "effective_length_m": 0.1409953735474862,
+        "angular_damping_per_s": 3.1437032180269227,
+        "input_gain": 1.1733592045318242,
+        "per_run_additional_phase_rad": {
+          "pulse-pos10-short-01": 0.02102084018746617,
+          "pulse-neg10-short-01": 0.012063095465374032,
+          "pulse-pos20-short-01": -0.00298737969999274,
+          "pulse-neg20-short-01": -0.005927021648387477
+        },
+        "interpretation": "Same-training-run nuisance fit; no validation prediction and no calibration assertion."
+      }
+    }
+  },
+  "static_camera_diagnostic": [
+    {
+      "run": "pulse-pos10-short-01",
+      "source_sha256_decompressed": "e2bff57940a79fc8d512f99302335c0d80dfb2f2711b5284153636a013d242b4",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 15,
+          "encoder_raw_median_rad": 3.054156,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.006151446839411733,
+          "negative_image_angle_iqr_rad": 0.0020506167773760315
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 36,
+          "encoder_raw_median_rad": 3.054156,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.012305577620689259,
+          "negative_image_angle_iqr_rad": 0.0038213473846403466
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    },
+    {
+      "run": "pulse-neg10-short-01",
+      "source_sha256_decompressed": "ccb1b010335d948bbc572416a6ef77ee963c399079c0e67dd6f8a2d18f0a2b6c",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 15,
+          "encoder_raw_median_rad": 3.049554,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.01270469607692551,
+          "negative_image_angle_iqr_rad": 0.0010933387314988573
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 32,
+          "encoder_raw_median_rad": 3.041884,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.01775137202312245,
+          "negative_image_angle_iqr_rad": 0.0015504586131703316
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    },
+    {
+      "run": "pulse-pos20-short-01",
+      "source_sha256_decompressed": "0189d724be56b90e10d3f60c8481b1ddf2a05312551a2d1715319d59880c511f",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 14,
+          "encoder_raw_median_rad": 3.041884,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.017951943500470743,
+          "negative_image_angle_iqr_rad": 0.0016773495417849171
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 32,
+          "encoder_raw_median_rad": 3.031146,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.013970247416490531,
+          "negative_image_angle_iqr_rad": 0.0011532062329519602
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    },
+    {
+      "run": "pulse-neg20-short-01",
+      "source_sha256_decompressed": "41161343695a9c1c5bdd68c5298c35d6b0a8db44481d0414e1e70fc75dedc507",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 13,
+          "encoder_raw_median_rad": 3.029612,
+          "encoder_raw_span_rad": 0.0015340000000003684,
+          "negative_image_angle_median_rad": 0.014732326571218018,
+          "negative_image_angle_iqr_rad": 0.0008819652986659463
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 31,
+          "encoder_raw_median_rad": 3.0296119999999993,
+          "encoder_raw_span_rad": 0.0015340000000003684,
+          "negative_image_angle_median_rad": 0.018156285780503944,
+          "negative_image_angle_iqr_rad": 0.0018729163291624704
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    },
+    {
+      "run": "pulse-pos30-validation-01",
+      "source_sha256_decompressed": "8c839c7bf84b6a6af517ef7bb0b370c2d33599074f243275ff68123b97075a9f",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 13,
+          "encoder_raw_median_rad": 3.02501,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.016879766378603927,
+          "negative_image_angle_iqr_rad": 0.000965422724601147
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 28,
+          "encoder_raw_median_rad": 3.0311459999999992,
+          "encoder_raw_span_rad": 0.004601999999999773,
+          "negative_image_angle_median_rad": 0.015455936448096797,
+          "negative_image_angle_iqr_rad": 0.0013726010052222525
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    },
+    {
+      "run": "pulse-neg30-validation-01",
+      "source_sha256_decompressed": "1f42b397af5a0715d7c7649d9fd10ea476c08b209030b36baaa68a5e9f7c97e9",
+      "windows": [
+        {
+          "interval_relative_to_pulse_s": [
+            -0.25,
+            -0.05
+          ],
+          "encoder_samples": 20,
+          "camera_samples": 16,
+          "encoder_raw_median_rad": 3.029612,
+          "encoder_raw_span_rad": 0.0,
+          "negative_image_angle_median_rad": 0.014721533789836788,
+          "negative_image_angle_iqr_rad": 0.0007863300341959863
+        },
+        {
+          "interval_relative_to_pulse_s": [
+            3.15,
+            3.65
+          ],
+          "encoder_samples": 50,
+          "camera_samples": 35,
+          "encoder_raw_median_rad": 3.02501,
+          "encoder_raw_span_rad": 0.0015339999999999243,
+          "negative_image_angle_median_rad": 0.018717900528121893,
+          "negative_image_angle_iqr_rad": 0.001917855200443342
+        }
+      ],
+      "interpretation": "Descriptive same-host receipt proxy with unit-slope median offset; no fitted angle gain/offset; no independent calibration or exposure-time alignment. Last0.5s is a tail, not proof of physical rest."
+    }
+  ]
+}

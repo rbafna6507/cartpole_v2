@@ -1,0 +1,69 @@
+{
+  "scope": "Independent offline operator-workflow review and saved-fit plotting verification; no hardware validation",
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "problem": "A raw collection_protocol event could enter historical compatibility when the sibling completion report was absent or used an old schema.",
+      "resolution": "A protocol event marks the recording modern; a modern completion report is mandatory. Historical compatibility remains only for records without new protocol metadata."
+    },
+    {
+      "problem": "Protocol procedure was validated against itself instead of the report and available raw start events.",
+      "resolution": "Protocol procedure must match report.procedure; passive_start/ringdown_start events must agree when present."
+    }
+  ],
+  "checks": {
+    "protocol_regressions_red": 5,
+    "collection_and_workflow_pytest": {
+      "passed": 46,
+      "failed": 0,
+      "elapsed_s": 4.85,
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/test_collection_protocol.py tests/test_system_id_workflow.py"
+    },
+    "fit_review_plot_enabled_pytest": {
+      "passed": 10,
+      "failed": 0,
+      "elapsed_s": 5.59,
+      "note": "Subsequent test-only change skips the rejected-fit plotting integration case when optional matplotlib is absent; parent performs final complete verification."
+    },
+    "simulation_focused_pytest": {
+      "passed": 19,
+      "failed": 0,
+      "elapsed_s": 1.81,
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/test_rig_gym_env.py evidence/system-id-20261017-followup/diagnosis/test_diagnose_input.py"
+    },
+    "simulation_replay_report": "simulation-interface-independent-review-v2.json",
+    "synthetic_plot_visually_checked": true,
+    "synthetic_forecast_saved_metrics_exact": true
+  },
+  "reviewed_behavior": [
+    "Collection validates requested conditions and the amplitude/duration pair before opening serial; metadata never substitutes for measured angles.",
+    "Raw protocol and completed run report are hash-bound; annotation templates remain explicitly unselected.",
+    "Raw review fits no model and selects no intervals.",
+    "Fit review requires explicit validation raw/annotations, verifies exact source hashes, session/reference/selection identities, fixed gates and original passive-method hash.",
+    "Saved coefficients alone produce ODE short forecasts and contiguous continuous rollouts; no refit, MuJoCo claim, export or acceptance change occurs.",
+    "Existing output paths are never overwritten."
+  ],
+  "limitations": [
+    "Frozen ODE plots currently support packaged passive viscous and viscous/Coulomb fits; driven reports are rejected explicitly.",
+    "Dataset roles and requested release conditions are operator metadata, not independent proof of physical execution or unseen holdout status.",
+    "Raw review may leave an incomplete output directory if rendering or writing fails; absence of report.json means incomplete output.",
+    "Plot review does not certify global encoder calibration, cart stationarity, motor tracking or hardware RL readiness."
+  ],
+  "source_sha256": {
+    "src/cartpole_sdk/identification/protocol.py": "f327ef4be088fdae3c0098c537bb5fa91ccec749218fb43d09b11b955b1587b5",
+    "src/cartpole_sdk/identification/review.py": "7c13a725be24c155c7541919a0a06f3e6f3d4bc4ab803a0d80da72662272cb80",
+    "src/cartpole_sdk/identification/experiments.py": "03eb82fc5168edd0bcf66634d810f2b09bf99d35b135f671e4a8dd81bf9d46f5",
+    "src/cartpole_sdk/identification/workflow.py": "9040d3e5e77fd676c8b1084a3f2b96de197c6258dba3746a84c440ef070e80f1",
+    "src/cartpole_sdk/identification/cli.py": "255dc5d8cdbeae52d9acb6a3311d6852323aa2148842df5829db3fd459c8dd80",
+    "src/cartpole_sdk/identification/fit_review.py": "e9c0882f3a942be3bbc33d94e07c402b83cb4c00457e9abeacd879f11c9d704d",
+    "tests/test_collection_protocol.py": "ee6116d997fd9fc140d44d550f54de24fa0fcc7b42bc1aa47c08a7c7925dc7e9",
+    "tests/test_fit_review.py": "06b5b17727b03f6401779f430638c2c30e32aa2a3dc2d45eace954ec1800d571"
+  },
+  "artifact_sha256": {
+    "simulation-interface-independent-review-v2.json": "81bd3b48515945bd55d1fcad067594e35d15ae57765744168fcbe7c6568fa1e0",
+    "review_sim_interface.py": "a3ceb72a43b0d10202d833f140238d281e76570113332e77b29ca1d08bc2df04",
+    "synthetic-fit-review/recorded-vs-frozen-ode.pdf": "2fffd69e9b1336a92f34c13b5228d5e7591c10f88d11568bd6e6db6e883b47fa",
+    "synthetic-fit-review/recorded-vs-frozen-ode.png": "f54c1dfe82db844a7814a6528450caf5b563f6153d071212b5825f189b0524a0",
+    "synthetic-fit-review/report.json": "d21fb9f21340d91461e6f9cd2de932dba85febb40bf2a0b763220abe25d8294f"
+  }
+}
