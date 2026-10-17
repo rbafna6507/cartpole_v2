@@ -76,7 +76,9 @@ The default raw camera URL is `http://127.0.0.1:3090/api/sensing-stream?max_hz=1
 
 Camera-enabled sessions also publish the current encoder session to the portal through the existing read-only UDP mirror. Mirrored or fused values in camera packets are display data. Fitting uses **direct Rig JSONL raw `theta`**, never `angle_hat`, mirrored encoder packets or filtered `omega`. Board `unwrapped_us` and raw camera `vision.t` have different clock meanings. New recordings save local camera receipt timestamps plus bounded `/api/clock` round trips before and after capture. Review interpolates those offsets to collector time and then maps encoder receipt time to board time. Synchronization uncertainty, source gaps and unknown exposure/serial latency stay explicit. No sensor fusion or fitted time shift is used to manufacture agreement. The NDJSON contains raw marker geometry and angles, not a replayable movie.
 
-Ctrl-C preserves partial records and attempts STOP. A disconnected camera, stale/unhealthy telemetry, or lost logger records fails the run. Inspect `report.json` and `vision-report.json`, not just whether files exist.
+After all intended releases have settled, type **`done` then Enter** in the collection terminal. `--seconds` is the maximum recording duration after the hanging baseline; reaching it also finishes normally. During the `recording` phase, the first Ctrl-C requests the same graceful finish. The collector validates the last telemetry and camera state, confirms STOP, closes the camera capture, and writes the measured baseline, requested duration, actual elapsed duration and finish reason to the result and raw log. Closing standard input does not count as `done`.
+
+Ctrl-C before `recording` (including the hanging baseline) or during a driven pulse remains an interruption failure. A second interrupt, a disconnected camera, stale/unhealthy telemetry, STOP failure or lost logger records also fails the run. Inspect `report.json` and `vision-report.json`, not just whether files exist. Graceful finish means capture completed; it does not establish that enough independent releases were collected or that the model is valid.
 
 ### Batch 2 operator commands
 
@@ -97,7 +99,7 @@ PORT=/dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00
   --cart-restraint "cart held stationary by hand" --output runs/passive-validation-2
 ```
 
-Each requests 30° left/right, 60° left/right, then 90° left/right. Keep the console closed and the camera fixed, with full swing and both markers visible. At 90° the pole is horizontal. Hold the cart still throughout, hold each pose for two seconds, release without pushing, and let the motion settle before the next. Start each command with the pole hanging; wait for `recording` before touching it. If baseline quality fails, fix the stated condition and choose a new output name. Do not overwrite failed evidence.
+Each requests 30° left/right, 60° left/right, then 90° left/right. Keep the console closed and the camera fixed, with full swing and both markers visible. At 90° the pole is horizontal. Hold the cart still throughout, hold each pose for two seconds, release without pushing, and let the motion settle before the next. Start each command with the pole hanging; wait for `recording` before touching it. After the last release settles, type `done` then Enter; you do not need to wait for all 180 seconds. If baseline quality fails, fix the stated condition and choose a new output name. Do not overwrite failed evidence.
 
 For the current collaboration, the operator only collects and reports the directory names. The agent then reviews both raw sources, records held-pose/release/free-motion times before fitting, fits on training, scores independent validation, plots predictions and exports only an accepted model. No new-data fit/export has been performed before those recordings exist.
 
@@ -113,6 +115,15 @@ Open `raw-observations.png` or its PDF beside `report.json`. The plot uses board
 Find the `rig-*.jsonl` file in each run directory. Plain JSONL, `.jsonl.gz` and `archive.tar.gz::exact/member.jsonl` are supported. The hash in an annotation is the decompressed exact JSONL content hash. Loading is bounded to 256 MiB of decompressed JSONL, 4 MiB per line and 500,000 records; archive scans additionally cap entries and total declared bytes. Files are streamed and archive members are never extracted.
 
 Keep each newly collected raw log with its sibling `report.json`, including when archiving or compressing it. Fitting requires that report to match the raw basename and decompressed hash, confirm completion and STOP, and record zero logger drops and no camera/collection failure. Raw termination errors and failed STOP records also reject admission. Historical raw-only recordings retain an explicitly labeled compatibility path; they do not acquire a new completion guarantee.
+
+For an older passive recording stopped by the operator's Ctrl-C, keep all original files unchanged. A separate, explicit recovery review can retain usable evidence when the exact interruption, confirmed disabled STOP, logger integrity, measured baseline and camera evidence satisfy its checks:
+
+```sh
+"$ID" recover-passive --input runs/passive-train-01/rig-EXACT.jsonl \
+  --reason "Pressed Ctrl-C after all intended releases had settled"
+```
+
+Use a truthful reason. The command creates a sibling `recovery.json` bound to the original files and refuses to overwrite it. The original `report.json` stays incomplete. Only interruption failures covered by the recovery checks are eligible; hardware, camera, stale-data and logger faults remain rejected. Subsequent review, annotation and fit commands revalidate the recovery decision against the exact source files. Recovery admits evidence for review; release verification, annotation and model acceptance remain separate checks.
 
 ```sh
 "$ID" annotations-template --input runs/passive-train-01/rig-EXACT.jsonl \

@@ -24,7 +24,7 @@ def parser():
             camera.add_argument('--camera-url',default='http://127.0.0.1:3090/api/sensing-stream?max_hz=100',help='Raw sensing-stream URL; must become ready before serial collection.')
             camera.add_argument('--no-camera',action='store_true',help='Pulse only: explicitly record missing independent camera evidence; passive collection requires camera.')
         if name=='collect-passive':
-            p.add_argument('--seconds',type=float,default=120.,help='Bounded1..180s; annotate hand-clear release intervals afterward.')
+            p.add_argument('--seconds',type=float,default=120.,help='Maximum recording duration, 1..180s; type done then Enter to finish early after recording begins.')
             p.add_argument('--release-angles-deg',type=float,nargs='+',help='Requested degrees away from hanging; labels are not measured angles.')
             p.add_argument('--release-directions',choices=('left','right'),nargs='+',default=['left','right'],help='Directions in camera view.')
             p.add_argument('--repetitions',type=int,default=1)
@@ -34,6 +34,9 @@ def parser():
             p.add_argument('--hold-seconds',type=float,default=12.,help='Explicit3..12s active cart feedback hold, default12s;20ms leases are unchanged.')
             p.add_argument('--execute',action='store_true',help='Authorize this invocation to issue ARM and acceleration requests.')
             p.add_argument('--amplitude-mm',type=int,required=True,choices=(-30,-20,-10,-5,5,10,20,30),help='Signed pulse amplitude; begin with5mm and inspect before escalating.')
+    p=commands.add_parser('recover-passive',help='Explicitly review a passive KeyboardInterrupt and preserve a separate recovery decision; never rewrite raw evidence.')
+    p.add_argument('--input',required=True,help='Local Rig JSONL or JSONL.gz with its original sibling reports and camera evidence.')
+    p.add_argument('--reason',required=True,help='Why the operator interrupted this passive recording; required for the recovery audit.')
     p=commands.add_parser('review-recording',help='Check completed raw data and plot observations without fitting or selecting intervals.')
     p.add_argument('--input',required=True);p.add_argument('--output',type=Path,required=True)
     p=commands.add_parser('review-releases',help='Compare raw camera/encoder relative hanging and qualify explicitly annotated release poses; no fitting.')
@@ -69,10 +72,15 @@ def main(argv=None):
     if args.command=='collect-pulse' and not args.execute:p.error('collect-pulse requires explicit --execute')
     from . import workflow
     try:
+        if args.command=='recover-passive':
+            from .interruption_recovery import recover_passive
+            path=recover_passive(args.input,reason=args.reason)
+            print(json.dumps(dict(recovery=str(path),status='recovered_for_review')));return 0
         if args.output.exists():raise FileExistsError(f'output exists; preserve earlier evidence: {args.output}')
         if args.command in ('inspect','collect-passive','collect-pulse'):
             from .experiments import collect
             from .protocol import make_protocol
+            from .finish import TerminalFinish
             kind={'inspect':'inspect','collect-passive':'passive','collect-pulse':'pulse'}[args.command]
             camera_url=None if kind=='inspect' or getattr(args,'no_camera',False) else args.camera_url
             protocol=make_protocol(kind,dataset_role=getattr(args,'dataset_role','development'),run_label=getattr(args,'run_label','unspecified'),
@@ -81,12 +89,14 @@ def main(argv=None):
             def announce(status):
                 print(json.dumps(dict(output=str(args.output),**status)),flush=True)
                 if status.get('status')=='recording':
+                    if status.get('instruction'):print(status['instruction'],flush=True)
                     for line in status.get('requested_release_instructions',[]):print(line,flush=True)
             result=collect(kind,output=args.output,port=args.port,seconds=getattr(args,'seconds',120.),
                 amplitude_m=getattr(args,'amplitude_mm',5)/1000,pulse_seconds=getattr(args,'pulse_seconds',.65),hold_seconds=getattr(args,'hold_seconds',12.),camera_url=camera_url,
                 expected_reference=args.expected_reference,expected_home=args.expected_home,
-                ready=announce,protocol=protocol)
-            print(json.dumps(dict(output=str(args.output),completed=result['completed'],stop_confirmed=result.get('stop_confirmed'))));return 0
+                ready=announce,protocol=protocol,finish_requested=TerminalFinish(sys.stdin) if kind=='passive' else None)
+            completion={key:result.get('result',{})[key] for key in ('finish_reason','elapsed_seconds','requested_seconds') if key in result.get('result',{})}
+            print(json.dumps(dict(output=str(args.output),completed=result['completed'],stop_confirmed=result.get('stop_confirmed'),**completion)));return 0
         if args.command=='review-releases':
             from .release_review import review_releases
             result=review_releases(args.input,args.annotations,args.output)

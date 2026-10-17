@@ -15,7 +15,7 @@ def camera_reader(clock):
         stamp = clock.now_ns // 20_000_000 * 20_000_000
         return dict(collector_received_ns=stamp, host_t=stamp/1e9+.01,
                     vision=dict(seq=stamp//20_000_000, t=stamp/1e9, detected=True,
-                    stale=False, worker_error=None, confidence=.9, image_angle_rad=.04,
+                    stale=False, worker_error=None, age_since_host_read_s=.01, confidence=.9, image_angle_rad=.04,
                     pivot_px=[100.,100.], bob_px=[100+180*math.sin(.04),100+180*math.cos(.04)],
                     length_px=180., frame_width=960, frame_height=600))
     return sample

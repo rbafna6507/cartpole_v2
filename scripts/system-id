@@ -14,7 +14,7 @@ case "${1:-}" in
         exec uv run --project "$repo_dir" --extra sim python -m cartpole_sdk.identification.cli "$@" ;;
     inspect|collect-passive|collect-pulse)
         exec uv run --project "$repo_dir" --extra hardware --extra id python -m cartpole_sdk.identification.cli "$@" ;;
-    fit-passive|fit-driven|annotations-template)
+    fit-passive|fit-driven|annotations-template|recover-passive)
         exec uv run --project "$repo_dir" --extra id python -m cartpole_sdk.identification.cli "$@" ;;
     *)
         exec uv run --project "$repo_dir" python -m cartpole_sdk.identification.cli "$@" ;;

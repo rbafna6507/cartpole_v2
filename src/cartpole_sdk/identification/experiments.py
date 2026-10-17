@@ -216,7 +216,26 @@ def run_pulse(rig,*,amplitude_m,hold_seconds=HOLD_S,pulse_seconds=PULSE_S,proven
     return result
 
 
-def run_passive(rig,*,seconds=120.,expected_reference=None,expected_home=None,check=None,ready=None,camera_read=None):
+def validate_camera_finish(sample):
+    """Require a fresh source frame at finish; marker loss remains missing data."""
+    if not isinstance(sample,dict) or not isinstance(sample.get('vision'),dict):
+        raise ValidationError('camera frame is missing at passive finish')
+    vision=sample['vision'];received=sample.get('collector_received_ns');now=time.monotonic_ns()
+    if type(received) is not int or not 0<=received<=now:
+        raise ValidationError('camera receipt timestamp is invalid at passive finish')
+    source=vision.get('t');host=sample.get('host_t');age=vision.get('age_since_host_read_s')
+    if any(type(value) not in (int,float) or not math.isfinite(value) or value<0 for value in (source,host,age)):
+        raise ValidationError('camera source clock and age are invalid at passive finish')
+    if (type(vision.get('seq')) is not int or vision['seq']<0 or vision.get('stale') is not False or
+            vision.get('worker_error') or not -.01<=host-source<=.15):
+        raise ValidationError('camera source frame is stale, errored or incoherent at passive finish')
+    # Source and collector clocks need not share an origin. The source age at
+    # publication plus elapsed local receipt time bounds the latest frame age.
+    if max(age,host-source)+(now-received)/1e9>.15:
+        raise ValidationError('camera source frame exceeds 0.15 seconds at passive finish')
+
+
+def run_passive(rig,*,seconds=120.,expected_reference=None,expected_home=None,check=None,ready=None,camera_read=None,finish_requested=None):
     """Manual free-release recording, always disabled; operator restrains cart."""
     if type(seconds) not in (int,float) or not math.isfinite(seconds) or not 1<=seconds<=180:
         raise ValidationError('passive duration must be 1..180 seconds')
@@ -250,27 +269,45 @@ def run_passive(rig,*,seconds=120.,expected_reference=None,expected_home=None,ch
         rig._record('passive_start',info=plain(info),parameters=values,state=plain(state),seconds=seconds,
             measurement_version=2,baseline_sha256=digest(baseline),
             physical_cart_restraint='operator must independently restrain; step count does not prove physical stationarity')
-        if ready is not None:ready(dict(status='recording',drivers_enabled=False,seconds=seconds,reference=info.encoder_upright_raw,home_epoch=info.home_epoch,
-            hanging_zero_measured=True,encoder_hanging_raw_rad=baseline['encoder']['raw_angle_rad'],camera_hanging_image_rad=baseline['camera']['image_angle_rad']))
-        deadline=time.monotonic()+seconds;next_display=time.monotonic()
-        while time.monotonic()<deadline:
-            if check is not None:check()
-            state=rig.wait_state(after_tick=state.unwrapped_tick,timeout=.15)
-            rig._fresh(state);validate_board(state)
-            if state.enabled or state.mode!=0:raise ValidationError('passive recording requires disabled idle executor')
-            if ready is not None and time.monotonic()>=next_display:
-                from .passive_baseline import camera_geometry
-                sample=camera_read();geometry=None
-                if sample is not None and 0<=time.monotonic_ns()-sample.get('collector_received_ns',-1)<=200_000_000:
-                    geometry=camera_geometry(sample.get('vision'))
-                camera_angle=None
-                if geometry is not None and abs(geometry['length_px']/baseline['camera']['length_px']-1)<=.2:
-                    camera_angle=math.degrees(-wrap(geometry['image_angle_rad']-baseline['camera']['image_angle_rad']))
-                ready(dict(status='angles',encoder_from_hanging_deg=round(math.degrees(wrap(state.theta-baseline['encoder']['raw_angle_rad'])),3),
-                    camera_from_hanging_deg=None if camera_angle is None else round(camera_angle,3),
-                    camera_detected=camera_angle is not None,release_angle_verified=False))
-                next_display=time.monotonic()+.5
-        return dict(info=plain(info),parameters=values,baseline=baseline,final_state=plain(rig.state),physical_cart_stationarity_certified=False)
+        from .finish import PassiveFinish
+        recording_started=time.monotonic();deadline=recording_started+seconds;next_display=recording_started
+        with PassiveFinish(finish_requested) as finish:
+            if ready is not None:ready(dict(status='recording',drivers_enabled=False,seconds=seconds,reference=info.encoder_upright_raw,home_epoch=info.home_epoch,
+                hanging_zero_measured=True,encoder_hanging_raw_rad=baseline['encoder']['raw_angle_rad'],camera_hanging_image_rad=baseline['camera']['image_angle_rad'],
+                instruction=f'Type done then Enter to finish; first Ctrl-C also finishes recording. Maximum duration: {seconds:g} seconds.'))
+            while True:
+                # Check evidence before accepting any requested finish. A signal
+                # cannot hide a camera failure or an unhealthy/stale last state.
+                if check is not None:check()
+                state=rig.state;rig._fresh(state);validate_board(state)
+                if state.enabled or state.mode!=0:raise ValidationError('passive recording requires disabled idle executor')
+                reason=finish.poll()
+                rig._require()  # A finish callback cannot bypass a latched I/O/logger fault.
+                if reason is not None or time.monotonic()>=deadline:
+                    validate_camera_finish(camera_read())
+                    rig._require()
+                    finish_reason=reason or 'duration_elapsed'
+                    break
+                state=rig.wait_state(after_tick=state.unwrapped_tick,timeout=.15)
+                rig._fresh(state);validate_board(state)
+                if state.enabled or state.mode!=0:raise ValidationError('passive recording requires disabled idle executor')
+                if ready is not None and time.monotonic()>=next_display:
+                    from .passive_baseline import camera_geometry
+                    sample=camera_read();geometry=None
+                    if sample is not None and 0<=time.monotonic_ns()-sample.get('collector_received_ns',-1)<=200_000_000:
+                        geometry=camera_geometry(sample.get('vision'))
+                    camera_angle=None
+                    if geometry is not None and abs(geometry['length_px']/baseline['camera']['length_px']-1)<=.2:
+                        camera_angle=math.degrees(-wrap(geometry['image_angle_rad']-baseline['camera']['image_angle_rad']))
+                    ready(dict(status='angles',encoder_from_hanging_deg=round(math.degrees(wrap(state.theta-baseline['encoder']['raw_angle_rad'])),3),
+                        camera_from_hanging_deg=None if camera_angle is None else round(camera_angle,3),
+                        camera_detected=camera_angle is not None,release_angle_verified=False))
+                    next_display=time.monotonic()+.5
+            completion=dict(requested_seconds=float(seconds),elapsed_seconds=time.monotonic()-recording_started,finish_reason=finish_reason)
+        rig._record('passive_finish',**completion)
+        rig._require()
+        return dict(info=plain(info),parameters=values,baseline=baseline,final_state=plain(rig.state),
+            physical_cart_stationarity_certified=False,**completion)
     except BaseException as exc:
         failure=exc;rig._record('passive_failure',reason=repr(exc));raise
     finally:
@@ -366,7 +403,9 @@ def record_camera(url,directory,seconds,stop,ready,sample_queue=None,sync_clocks
                         except Full:pass  # Latest-preview queue only; NDJSON above retains every record.
                 previous=sequence;previous_frame=current;previous_host=host_t;ready.set()
     except BaseException as exc:
-        if not stop.is_set() or not isinstance(exc,OSError):report['failure']=repr(exc)
+        # Setting stop only requests exit between reads; it does not cancel a
+        # blocking read. A timeout or transport error is still missing evidence.
+        report['failure']=repr(exc)
     finally:
         if sync_clocks and 'clock_sync' in report:
             try:report['clock_sync']['end']=sample_camera_clock(url)
@@ -376,6 +415,13 @@ def record_camera(url,directory,seconds,stop,ready,sample_queue=None,sync_clocks
         write_json(directory/'vision-report.json',report)
 
 
+def _camera_worker(*args):
+    """Only the spawned child ignores terminal SIGINT; its parent owns cleanup."""
+    import signal
+    signal.signal(signal.SIGINT,signal.SIG_IGN)
+    record_camera(*args)
+
+
 class CameraRecorder:
     """Separate-process camera work cannot run in the controller's GIL thread."""
     def __init__(self,url,directory,seconds):
@@ -383,7 +429,7 @@ class CameraRecorder:
         context=multiprocessing.get_context('spawn')
         self.directory=Path(directory);self.stop=context.Event();self.ready=context.Event()
         self.samples=context.Queue(maxsize=8);self._latest=None
-        self.process=context.Process(target=record_camera,args=(url,str(directory),seconds,self.stop,self.ready,self.samples,True),daemon=True)
+        self.process=context.Process(target=_camera_worker,args=(url,str(directory),seconds,self.stop,self.ready,self.samples,True),daemon=True)
     def start(self):
         self.process.start()
         if not self.ready.wait(3.):raise RuntimeError('camera unavailable before collection')
@@ -408,7 +454,7 @@ DEFAULT_CAMERA_URL='http://127.0.0.1:3090/api/sensing-stream?max_hz=100'
 
 
 def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S,pulse_seconds=PULSE_S,camera_url=DEFAULT_CAMERA_URL,
-            expected_reference=None,expected_home=None,rig_factory=None,camera_factory=None,ready=None,protocol=None):
+            expected_reference=None,expected_home=None,rig_factory=None,camera_factory=None,ready=None,protocol=None,finish_requested=None):
     """Create an immutable run directory, preserve failures, and stop before return."""
     if kind not in ('pulse','passive','inspect'):raise ValueError('unknown collection procedure')
     if kind=='passive' and camera_url is None:raise ValueError('passive collection requires camera recording and hanging baseline')
@@ -444,11 +490,12 @@ def collect(kind,*,output,port,seconds=120.,amplitude_m=.005,hold_seconds=HOLD_S
             pins=dict(expected_reference=expected_reference,expected_home=expected_home)
             check=None if camera is None else camera.check
             if kind=='pulse':report['result']=run_pulse(rig,amplitude_m=amplitude_m,hold_seconds=hold_seconds,pulse_seconds=pulse_seconds,provenance=report['provenance'],check=check,ready=announce,**pins)
-            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=announce,camera_read=camera.latest,**pins)
+            elif kind=='passive':report['result']=run_passive(rig,seconds=seconds,check=check,ready=announce,camera_read=camera.latest,finish_requested=finish_requested,**pins)
             else:report['result']=inspect_rig(rig,**pins)
             report['stop_state']=plain(rig.state)
             report['stop_confirmed']=not rig.state.enabled
         if rig.records_dropped:raise ValidationError('log records lost; collection evidence is incomplete')
+        if getattr(rig,'error',None) is not None:raise RuntimeError(f'latched rig error after close: {rig.error}')
         report['completed']=True
     except BaseException as exc:
         failure=exc;report['failure']=repr(exc);report['traceback']=traceback.format_exc();raise

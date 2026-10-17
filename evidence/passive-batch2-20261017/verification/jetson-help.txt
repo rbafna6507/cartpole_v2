@@ -1,0 +1,44 @@
+usage: cli.py collect-passive [-h] --port PORT --output OUTPUT
+                              [--expected-reference EXPECTED_REFERENCE]
+                              [--expected-home EXPECTED_HOME]
+                              [--dataset-role {training,validation,development}]
+                              [--run-label RUN_LABEL]
+                              [--camera-url CAMERA_URL | --no-camera]
+                              [--seconds SECONDS]
+                              [--release-angles-deg RELEASE_ANGLES_DEG [RELEASE_ANGLES_DEG ...]]
+                              [--release-directions {left,right} [{left,right} ...]]
+                              [--repetitions REPETITIONS]
+                              [--cart-restraint CART_RESTRAINT]
+
+Record operator-released oscillations with the motor disabled; physically
+restrain the cart.
+
+options:
+  -h, --help            show this help message and exit
+  --port PORT           Explicit serial device; no discovery, home, clear or
+                        calibration.
+  --output OUTPUT       New immutable run directory, including failure
+                        evidence.
+  --expected-reference EXPECTED_REFERENCE
+                        Optional exact saved upright raw encoder reference.
+  --expected-home EXPECTED_HOME
+                        Optional exact current home epoch.
+  --dataset-role {training,validation,development}
+  --run-label RUN_LABEL
+                        Descriptive immutable recording label.
+  --camera-url CAMERA_URL
+                        Raw sensing-stream URL; must become ready before
+                        serial collection.
+  --no-camera           Pulse only: explicitly record missing independent
+                        camera evidence; passive collection requires camera.
+  --seconds SECONDS     Maximum recording duration, 1..180s; type done then
+                        Enter to finish early after recording begins.
+  --release-angles-deg RELEASE_ANGLES_DEG [RELEASE_ANGLES_DEG ...]
+                        Requested degrees away from hanging; labels are not
+                        measured angles.
+  --release-directions {left,right} [{left,right} ...]
+                        Directions in camera view.
+  --repetitions REPETITIONS
+  --cart-restraint CART_RESTRAINT
+                        How you will keep the cart fixed; required with
+                        requested angles.

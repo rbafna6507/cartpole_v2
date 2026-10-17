@@ -1,0 +1,199 @@
+{
+  "accepted": false,
+  "exported": false,
+  "parameters": {
+    "effective_length_m": 0.16137969151201143,
+    "gravity_coefficient_per_s2": 60.78831796050277,
+    "angular_damping_per_s": 0.3514087020831519,
+    "coulomb_rad_per_s2": 0.0,
+    "angle_offset_rad": -0.11393476403524426,
+    "linear_coefficients": [
+      60.39419404238634,
+      0.3514087020831519,
+      6.910928044609559
+    ]
+  },
+  "validation_rmse_deg": 5.640984993216544,
+  "validation_p95_deg": 10.73651908377806,
+  "reasons": [
+    "heldout prediction or integral residual exceeds threshold/coverage",
+    "one or more validation episodes fail fixed gates",
+    "required camera consistency or release-pose verification failed"
+  ],
+  "runs": {
+    "training": {
+      "actual_recording_s": 170.033587274,
+      "recovery": "operator-ended partial",
+      "camera_checks_passed": false,
+      "all_release_poses_verified": false,
+      "releases": [
+        {
+          "release": "release-01",
+          "encoder_pose_deg": 38.49607782668213,
+          "camera_pose_deg": 37.99776799738271,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.7909682361780799,
+          "camera_pose_spread_deg": 0.6483992396707154,
+          "camera_comparison_rmse_deg": 2.8342276417170797,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-02",
+          "encoder_pose_deg": -39.46286921009203,
+          "camera_pose_deg": -36.31611236823098,
+          "pose_verified": false,
+          "pose_reasons": [
+            "held pose is not stationary within provisional angular variability bound"
+          ],
+          "encoder_pose_spread_deg": 5.071295281326522,
+          "camera_pose_spread_deg": 0.9188701501772247,
+          "camera_comparison_rmse_deg": 2.702265778392649,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-03",
+          "encoder_pose_deg": 55.19533383622659,
+          "camera_pose_deg": 55.03358753051326,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.8173758609556713,
+          "camera_pose_spread_deg": 0.3700357805319508,
+          "camera_comparison_rmse_deg": 3.939572372217682,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-04",
+          "encoder_pose_deg": -55.195316236132705,
+          "camera_pose_deg": -54.85900972727587,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.4394586288653452,
+          "camera_pose_spread_deg": 0.7102277070729658,
+          "camera_comparison_rmse_deg": 3.7202957456630954,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-05",
+          "encoder_pose_deg": 92.28518374622529,
+          "camera_pose_deg": 91.70293761191301,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.791025531957601,
+          "camera_pose_spread_deg": 0.6127727256753502,
+          "camera_comparison_rmse_deg": 4.947545507733722,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-06",
+          "encoder_pose_deg": -97.73439584828213,
+          "camera_pose_deg": null,
+          "pose_verified": false,
+          "pose_reasons": [
+            "insufficient camera held-pose coverage",
+            "held pose is not stationary within provisional angular variability bound",
+            "camera and encoder held-pose angles disagree"
+          ],
+          "encoder_pose_spread_deg": 4.570312444420033,
+          "camera_pose_spread_deg": null,
+          "camera_comparison_rmse_deg": 5.012020146413096,
+          "camera_comparison_passed": false,
+          "camera_comparison_reasons": [
+            "angular RMSE exceeds 5 degrees or is unavailable"
+          ]
+        }
+      ]
+    },
+    "validation": {
+      "actual_recording_s": 123.030630997,
+      "recovery": "operator-ended partial",
+      "camera_checks_passed": true,
+      "all_release_poses_verified": false,
+      "releases": [
+        {
+          "release": "release-01",
+          "encoder_pose_deg": 42.670877505123364,
+          "camera_pose_deg": 42.75806005284964,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.6591306475184713,
+          "camera_pose_spread_deg": 0.6310860152851742,
+          "camera_comparison_rmse_deg": 2.993559716844367,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-02",
+          "encoder_pose_deg": -42.978538241014796,
+          "camera_pose_deg": -42.908357691704815,
+          "pose_verified": false,
+          "pose_reasons": [
+            "held pose is not stationary within provisional angular variability bound"
+          ],
+          "encoder_pose_spread_deg": 3.2432046810262376,
+          "camera_pose_spread_deg": 1.131966321500506,
+          "camera_comparison_rmse_deg": 3.1354775405740303,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-03",
+          "encoder_pose_deg": 59.58986282910046,
+          "camera_pose_deg": 59.087118880580284,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 1.4941593381421634,
+          "camera_pose_spread_deg": 0.8542193879126888,
+          "camera_comparison_rmse_deg": 3.874038299402753,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-04",
+          "encoder_pose_deg": -55.19531623613273,
+          "camera_pose_deg": -54.10050961729611,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 0.35156690309228117,
+          "camera_pose_spread_deg": 0.16656325805055314,
+          "camera_comparison_rmse_deg": 3.697905994178904,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-05",
+          "encoder_pose_deg": 92.1972920204522,
+          "camera_pose_deg": 91.95475733106343,
+          "pose_verified": true,
+          "pose_reasons": [],
+          "encoder_pose_spread_deg": 1.669942789688266,
+          "camera_pose_spread_deg": 1.280745717650201,
+          "camera_comparison_rmse_deg": 4.8473805735184055,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        },
+        {
+          "release": "release-06",
+          "encoder_pose_deg": -87.53907025016527,
+          "camera_pose_deg": null,
+          "pose_verified": false,
+          "pose_reasons": [
+            "insufficient camera held-pose coverage",
+            "held pose is not stationary within provisional angular variability bound",
+            "camera and encoder held-pose angles disagree"
+          ],
+          "encoder_pose_spread_deg": 4.877933484625783,
+          "camera_pose_spread_deg": null,
+          "camera_comparison_rmse_deg": 4.587400214119171,
+          "camera_comparison_passed": true,
+          "camera_comparison_reasons": []
+        }
+      ]
+    }
+  }
+}

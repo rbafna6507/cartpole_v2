@@ -1,0 +1,77 @@
+{
+  "schema": "cartpole-passive-interruption-recovery-v1",
+  "operator_reason": "Operator explicitly reported all swing data collected and used Ctrl-C because the collector had no finish-early command. Recover only verified disabled passive records; preserve original interruption reports.",
+  "evidence": {
+    "completion_kind": "operator-ended partial",
+    "original_completed": false,
+    "original_collection_failure": "KeyboardInterrupt()",
+    "original_camera_failure": "KeyboardInterrupt()",
+    "requested_duration_s": 180.0,
+    "actual_duration_s": 170.033587274,
+    "interruption_freshness": {
+      "encoder_receipt_age_ns": 505559,
+      "camera_receipt_age_ns": 4034226,
+      "camera_source_age_upper_bound_ns": 38766522.625,
+      "camera_clock_uncertainty_ns": 2767480.881439046,
+      "max_encoder_age_ns": 20000000,
+      "max_camera_age_ns": 150000000
+    },
+    "raw_log_sha256": "37bb661679c0e800c562d9ea6c453f1816f2b938f8b8a9771dde519b760f7925",
+    "raw_record_count": 46524,
+    "raw_source_bytes": 17602038,
+    "collection_report_sha256": "4dffa214d05e760b2a606f3ddb5c7551fe3eb38b520bbd3904e8ab0e189dea54",
+    "camera_sha256": "f0b1c81314743d109675aee117e79e89fac3bb75c15473a9fa7747143f1ec4d4",
+    "vision_report_sha256": "847532e4c5cf7a4048590ba531ce7d46bc4f67d7aa6bda5fe7bf9d390a1a4ecb",
+    "session": {
+      "clock_id": "teensy:739088064",
+      "session_id": "739088064",
+      "topology": {
+        "cart": "cart",
+        "joints": [
+          "pole"
+        ]
+      }
+    },
+    "reference": [
+      330,
+      15,
+      "executor-v6-measuredrail"
+    ],
+    "baseline_sha256": "1a7e983d4f77fd36da0b9d823f75e1bf9031d9f4ff84b7b3c7f7337eda20854b",
+    "collection_protocol_sha256": "c724665670bbe3cda69895ae571f5479688f9ed921fd0858d2422c852018e3ec",
+    "final_stop": {
+      "command_record": 46515,
+      "acknowledgement_record": 46516,
+      "disabled_state_record": 46522,
+      "last_stop_command_record": 46520,
+      "last_command_record": 46521,
+      "confirmation_basis": "ordered STOP acknowledgement and disabled state after last STOP; no rearm",
+      "termination_record": 46523,
+      "confirmed": true
+    },
+    "camera_records": 8494,
+    "camera_frames": 8494,
+    "camera_heartbeat_records": 0,
+    "camera_clock_sync": {
+      "method": "http-roundtrip-midpoint",
+      "start": {
+        "local_before_ns": 358676268735512,
+        "local_after_ns": 358676277933396,
+        "server_monotonic_s": 358676.275852669,
+        "offset_ns": -2518215,
+        "uncertainty_ns": 4598942
+      },
+      "end": {
+        "local_before_ns": 358848571744464,
+        "local_after_ns": 358848577278595,
+        "server_monotonic_s": 358848.575534006,
+        "offset_ns": -1022477,
+        "uncertainty_ns": 2767066
+      }
+    },
+    "records_dropped": 0,
+    "model_accepted": false,
+    "release_poses_verified": false,
+    "physical_cart_stationarity_certified": false
+  }
+}

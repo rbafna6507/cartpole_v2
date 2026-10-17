@@ -68,6 +68,10 @@ def _source_stream(spec,*,max_bytes):
 
 def _collection_report(spec,records,identity):
     """Bind new collectors' post-close failures to raw input, including archives."""
+    if '::' not in str(spec) and Path(spec).with_name('recovery.json').exists():
+        from .interruption_recovery import validate_recovery
+        identity.update(validate_recovery(spec,records,identity))
+        return
     for row in records:
         kind=row.get('type')
         if kind in ('error','policy_failure','ringdown_failure','passive_failure','collection_failure','stop_failure'):
@@ -138,7 +142,7 @@ def _collection_report(spec,records,identity):
 
 
 
-def load_records(spec,*,max_bytes=MAX_SOURCE_BYTES,max_line_bytes=MAX_LINE_BYTES,max_records=MAX_RECORDS):
+def _read_records(spec,*,max_bytes=MAX_SOURCE_BYTES,max_line_bytes=MAX_LINE_BYTES,max_records=MAX_RECORDS):
     for value in (max_bytes,max_line_bytes,max_records):
         if type(value) is not int or value<=0:raise ValueError('positive integer input limits required')
     filename,separator,member=str(spec).partition('::');path=Path(filename)
@@ -158,6 +162,11 @@ def load_records(spec,*,max_bytes=MAX_SOURCE_BYTES,max_line_bytes=MAX_LINE_BYTES
             records.append(row)
     identity=dict(path=str(path.resolve()),member=member if separator else None,
         sha256=pin.hexdigest(),hash_basis='decompressed exact JSONL bytes',source_bytes=total,record_count=len(records))
+    return records,identity
+
+
+def load_records(spec,*,max_bytes=MAX_SOURCE_BYTES,max_line_bytes=MAX_LINE_BYTES,max_records=MAX_RECORDS):
+    records,identity=_read_records(spec,max_bytes=max_bytes,max_line_bytes=max_line_bytes,max_records=max_records)
     _collection_report(spec,records,identity)
     return records,identity
 

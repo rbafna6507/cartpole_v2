@@ -319,20 +319,24 @@ def _analyze(source,annotations):
     if identity['annotations_sha256'] != annotation_hash:
         raise ValueError('annotations changed during review')
     records, raw_identity = workflow.load_records(source)
-    if raw_identity['sha256'] != identity['sha256']:
+    if (raw_identity['sha256'] != identity['sha256'] or
+            raw_identity.get('interruption_recovery') != identity.get('interruption_recovery')):
         raise ValueError('raw source changed during review')
     directory=Path(source).parent
     completion, completion_hash = _metadata(directory/'report.json')
     if completion_hash != identity['collection_report'].get('sha256'):
         raise ValueError('collection report changed during review')
-    baseline = _baseline(records,completion)
+    recovery = identity.get('interruption_recovery')
+    # A validated recovery binds the raw baseline; the original failed report
+    # deliberately has no result and is never relabeled as successful.
+    baseline = _baseline(records, {'result': {'baseline': identity['passive_baseline']}} if recovery else completion)
     vision_report, vision_report_hash = _metadata(directory/'vision-report.json')
     rows, camera_hash = _camera_rows(directory/'vision.ndjson')
     if camera_hash != vision_report.get('sha256') or camera_hash != completion.get('camera',{}).get('sha256'):
         raise ValueError('camera hash mismatch with camera or completion report')
     if vision_report != completion.get('camera'):
         raise ValueError('camera report metadata mismatch with collection completion report')
-    if vision_report.get('failure'):
+    if vision_report.get('failure') and not (recovery and vision_report['failure']=='KeyboardInterrupt()'):
         raise ValueError('camera report records failure')
     anchors = _clock(vision_report.get('clock_sync'))
     states=[]
