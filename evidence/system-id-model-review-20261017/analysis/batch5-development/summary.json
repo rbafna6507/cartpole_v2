@@ -1,0 +1,1130 @@
+{
+  "schema": "cartpole-passive-development-v1",
+  "accepted": false,
+  "model_exported": false,
+  "production_method_changed": false,
+  "source_identities": {
+    "training": {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch5-original/passive-training-5/rig-1792267321743546203-3314167007.jsonl",
+      "member": null,
+      "sha256": "52b976c0c8ab8b95909a6bc3c1869f47a9276d5c762b2749ac39dca5785d2f9e",
+      "hash_basis": "decompressed exact JSONL bytes",
+      "source_bytes": 13022782,
+      "record_count": 34388,
+      "collection_report": {
+        "status": "bound successful collection",
+        "completed": true,
+        "sha256": "755590e3a6d98edd342c1e5911356a8222d12645cc5e891f761b06f6acb87ed5",
+        "path": "runs/passive-batch5-original/passive-training-5/report.json"
+      },
+      "collection_protocol": {
+        "dataset_role": "training",
+        "nominal_angles_only": true,
+        "operator_cart_restraint": "cart held stationary by hand",
+        "procedure": "passive",
+        "requested_releases": [
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-01",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-02",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-03",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-04",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-05",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-06",
+            "repetition": 1
+          }
+        ],
+        "run_label": "passive-training-5",
+        "schema": "cartpole-collection-protocol-v1"
+      },
+      "collection_protocol_sha256": "b176a3601334f0f78f453869d1e81ff96b015ef67ec55e93f7e255adc5795734",
+      "passive_baseline": {
+        "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+        "camera": {
+          "bounds": {
+            "max_angle_spread_rad": 0.035,
+            "max_angle_vector_error_rad": 0.03,
+            "max_gap_s": 0.2,
+            "max_length_spread_fraction": 0.1,
+            "max_length_vector_error_fraction": 0.05,
+            "max_pivot_spread_px": 4.0,
+            "min_confidence": 0.5,
+            "min_duration_fraction": 0.75,
+            "min_duration_s": 1.5,
+            "min_length_px": 5.0,
+            "min_sample_count": 30,
+            "min_valid_fraction": 0.8
+          },
+          "capture_span_s": 1.9800130340154283,
+          "first_frame_seq": 7006737,
+          "first_host_ns": 362617649366075,
+          "first_source_t": 362617.630219489,
+          "frame_height": 600,
+          "frame_width": 960,
+          "image_angle_rad": -0.0266971097232239,
+          "last_frame_seq": 7006894,
+          "last_host_ns": 362619627905396,
+          "last_source_t": 362619.610232523,
+          "length_px": 192.54880361466215,
+          "length_spread_px": 2.921726350874053,
+          "max_gap_s": 0.03746669803513214,
+          "pivot_px": [
+            478.5,
+            296.03848787167453
+          ],
+          "pivot_spread_px": [
+            0.1274509803920978,
+            0.2571428571428669
+          ],
+          "rotation": null,
+          "sample_count": 140,
+          "source_frame_count": 140,
+          "spread_rad": 0.008834810318065552,
+          "valid_fraction": 1.0
+        },
+        "duration_s": 2.004264157,
+        "encoder": {
+          "bounds": {
+            "max_angle_span_rad": 0.03,
+            "max_hanging_offset_rad": 0.35,
+            "min_duration_fraction": 0.95,
+            "min_duration_s": 1.9,
+            "min_sample_count": 100
+          },
+          "first_board_us": 1975534130,
+          "first_host_ns": 362617631649458,
+          "last_board_us": 1977538130,
+          "last_host_ns": 362619635913615,
+          "raw_angle_rad": 3.031146,
+          "sample_count": 502,
+          "span_rad": 0.0015339999999999243,
+          "spread_rad": 0.0015339999999999243
+        },
+        "schema": "cartpole-passive-baseline-v1",
+        "window_host_ns": [
+          362617631649458,
+          362619635913615
+        ],
+        "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+      },
+      "session": {
+        "clock_id": "teensy:3314167007",
+        "session_id": "3314167007",
+        "topology": {
+          "cart": "cart",
+          "joints": [
+            "pole"
+          ]
+        }
+      },
+      "reference": [
+        330,
+        15,
+        "executor-v6-measuredrail"
+      ],
+      "duplicate_snapshots": 1,
+      "annotations_sha256": "94769436b15e1f5a171c7ec6052f614ef91d0c554c78bbcd670e88fa5f7f9ba1",
+      "operator_cart_restraint": "cart held stationary by hand",
+      "selection_method": "Frozen from full-rate raw encoder and independently clock-mapped raw camera geometry before any batch-5 fit or forecast scoring. All six releases retained. Fixed half-second held windows immediately before observed onset; free windows begin about 0.12s after onset and exclude settled static tails. No movie exists to verify hand-clear timing; free release and hand restraint follow the requested operator protocol. No interval selection using model errors. Same viscous model and numerical gates as earlier batches.",
+      "selection": [
+        {
+          "annotation": {
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              13.78,
+              14.28
+            ],
+            "release_board_s": 14.33,
+            "board_relative_s": [
+              14.45,
+              19.0
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1138,
+          "actual_board_relative_s": [
+            14.452,
+            19.0
+          ],
+          "max_gap_s": 0.004000000000001336
+        },
+        {
+          "annotation": {
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              28.15,
+              28.65
+            ],
+            "release_board_s": 28.72,
+            "board_relative_s": [
+              28.84,
+              33.4
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1141,
+          "actual_board_relative_s": [
+            28.84,
+            33.4
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              45.75,
+              46.25
+            ],
+            "release_board_s": 46.32,
+            "board_relative_s": [
+              46.44,
+              53.0
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1641,
+          "actual_board_relative_s": [
+            46.44,
+            53.0
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              63.23,
+              63.73
+            ],
+            "release_board_s": 63.78,
+            "board_relative_s": [
+              63.9,
+              71.7
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1951,
+          "actual_board_relative_s": [
+            63.9,
+            71.7
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              80.95,
+              81.45
+            ],
+            "release_board_s": 81.53,
+            "board_relative_s": [
+              81.65,
+              92.0
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 2588,
+          "actual_board_relative_s": [
+            81.652,
+            92.0
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              106.65,
+              107.15
+            ],
+            "release_board_s": 107.22,
+            "board_relative_s": [
+              107.34,
+              117.3
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 2491,
+          "actual_board_relative_s": [
+            107.34,
+            117.3
+          ],
+          "max_gap_s": 0.0040000000000048885
+        }
+      ]
+    },
+    "validation": {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch5-original/passive-validation-5/rig-1792267470802199688-604716207.jsonl",
+      "member": null,
+      "sha256": "a933b483005a0cb8e054e00943e02c73e98628cf43dad8efeded4043df275925",
+      "hash_basis": "decompressed exact JSONL bytes",
+      "source_bytes": 12344304,
+      "record_count": 32710,
+      "collection_report": {
+        "status": "bound successful collection",
+        "completed": true,
+        "sha256": "1d61865c744c4796b23d3cc204bea3f908d3c4bfa2501e674b6894610a870077",
+        "path": "runs/passive-batch5-original/passive-validation-5/report.json"
+      },
+      "collection_protocol": {
+        "dataset_role": "validation",
+        "nominal_angles_only": true,
+        "operator_cart_restraint": "cart held stationary by hand",
+        "procedure": "passive",
+        "requested_releases": [
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "left",
+            "release_id": "release-01",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 30.0,
+            "direction": "right",
+            "release_id": "release-02",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "left",
+            "release_id": "release-03",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 60.0,
+            "direction": "right",
+            "release_id": "release-04",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "left",
+            "release_id": "release-05",
+            "repetition": 1
+          },
+          {
+            "angle_from_hanging_deg": 90.0,
+            "direction": "right",
+            "release_id": "release-06",
+            "repetition": 1
+          }
+        ],
+        "run_label": "passive-validation-5",
+        "schema": "cartpole-collection-protocol-v1"
+      },
+      "collection_protocol_sha256": "35a0727818eef69c4b4c494f1a11808f4aff1c5ef59ff39cc80d6016f8fbbcfe",
+      "passive_baseline": {
+        "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+        "camera": {
+          "bounds": {
+            "max_angle_spread_rad": 0.035,
+            "max_angle_vector_error_rad": 0.03,
+            "max_gap_s": 0.2,
+            "max_length_spread_fraction": 0.1,
+            "max_length_vector_error_fraction": 0.05,
+            "max_pivot_spread_px": 4.0,
+            "min_confidence": 0.5,
+            "min_duration_fraction": 0.75,
+            "min_duration_s": 1.5,
+            "min_length_px": 5.0,
+            "min_sample_count": 30,
+            "min_valid_fraction": 0.8
+          },
+          "capture_span_s": 1.9704694139654748,
+          "first_frame_seq": 7018562,
+          "first_host_ns": 362766699848247,
+          "first_source_t": 362766.679228759,
+          "frame_height": 600,
+          "frame_width": 960,
+          "image_angle_rad": -0.025888665212472677,
+          "last_frame_seq": 7018718,
+          "last_host_ns": 362768674068549,
+          "last_source_t": 362768.649698173,
+          "length_px": 192.4439282943568,
+          "length_spread_px": 2.6812677587010683,
+          "max_gap_s": 0.07355270202970132,
+          "pivot_px": [
+            478.3835616438356,
+            296.10273972602744
+          ],
+          "pivot_spread_px": [
+            0.1790867579908877,
+            0.3754337899543998
+          ],
+          "rotation": null,
+          "sample_count": 132,
+          "source_frame_count": 132,
+          "spread_rad": 0.005175924095286326,
+          "valid_fraction": 1.0
+        },
+        "duration_s": 2.000594924,
+        "encoder": {
+          "bounds": {
+            "max_angle_span_rad": 0.03,
+            "max_hanging_offset_rad": 0.35,
+            "min_duration_fraction": 0.95,
+            "min_duration_s": 1.9,
+            "min_sample_count": 100
+          },
+          "first_board_us": 2124580130,
+          "first_host_ns": 362766677330242,
+          "last_board_us": 2126580130,
+          "last_host_ns": 362768677925166,
+          "raw_angle_rad": 3.03268,
+          "sample_count": 500,
+          "span_rad": 0.0015339999999999243,
+          "spread_rad": 0.0015339999999999243
+        },
+        "schema": "cartpole-passive-baseline-v1",
+        "window_host_ns": [
+          362766677330242,
+          362768677925166
+        ],
+        "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+      },
+      "session": {
+        "clock_id": "teensy:604716207",
+        "session_id": "604716207",
+        "topology": {
+          "cart": "cart",
+          "joints": [
+            "pole"
+          ]
+        }
+      },
+      "reference": [
+        330,
+        15,
+        "executor-v6-measuredrail"
+      ],
+      "duplicate_snapshots": 1,
+      "annotations_sha256": "f9c0b8d477a72c79a88aa430a3b263bb787b99e28c43a067705e42f4a8634fc2",
+      "operator_cart_restraint": "cart held stationary by hand",
+      "selection_method": "Frozen from full-rate raw encoder and independently clock-mapped raw camera geometry before any batch-5 fit or forecast scoring. All six releases retained. Fixed half-second held windows immediately before observed onset; free windows begin about 0.12s after onset and exclude settled static tails. No movie exists to verify hand-clear timing; free release and hand restraint follow the requested operator protocol. No interval selection using model errors. Same viscous model and numerical gates as earlier batches.",
+      "selection": [
+        {
+          "annotation": {
+            "episode_id": "release-01",
+            "pose_board_relative_s": [
+              10.4,
+              10.9
+            ],
+            "release_board_s": 10.98,
+            "board_relative_s": [
+              11.1,
+              16.3
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1301,
+          "actual_board_relative_s": [
+            11.1,
+            16.3
+          ],
+          "max_gap_s": 0.004000000000001336
+        },
+        {
+          "annotation": {
+            "episode_id": "release-02",
+            "pose_board_relative_s": [
+              24.2,
+              24.7
+            ],
+            "release_board_s": 24.78,
+            "board_relative_s": [
+              24.9,
+              29.9
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1251,
+          "actual_board_relative_s": [
+            24.9,
+            29.9
+          ],
+          "max_gap_s": 0.004000000000001336
+        },
+        {
+          "annotation": {
+            "episode_id": "release-03",
+            "pose_board_relative_s": [
+              41.95,
+              42.45
+            ],
+            "release_board_s": 42.53,
+            "board_relative_s": [
+              42.65,
+              49.7
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 1763,
+          "actual_board_relative_s": [
+            42.652,
+            49.7
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-04",
+            "pose_board_relative_s": [
+              63.3,
+              63.8
+            ],
+            "release_board_s": 63.88,
+            "board_relative_s": [
+              64.0,
+              72.9
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 2226,
+          "actual_board_relative_s": [
+            64.0,
+            72.9
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-05",
+            "pose_board_relative_s": [
+              81.25,
+              81.75
+            ],
+            "release_board_s": 81.83,
+            "board_relative_s": [
+              81.95,
+              92.6
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 2663,
+          "actual_board_relative_s": [
+            81.952,
+            92.6
+          ],
+          "max_gap_s": 0.0040000000000048885
+        },
+        {
+          "annotation": {
+            "episode_id": "release-06",
+            "pose_board_relative_s": [
+              103.25,
+              103.75
+            ],
+            "release_board_s": 103.84,
+            "board_relative_s": [
+              103.96,
+              114.5
+            ],
+            "reason": "Observed held-to-decay transition. Camera/pose quality gates remain unchanged; exact hand-clear and physical cart restraint are not independently certified."
+          },
+          "samples": 2636,
+          "actual_board_relative_s": [
+            103.96,
+            114.5
+          ],
+          "max_gap_s": 0.0040000000000048885
+        }
+      ]
+    }
+  },
+  "model_fits": {
+    "weak_coulomb": {
+      "weak_windows": 121,
+      "rank": 4,
+      "integral_nrmse": 0.08320955215632987,
+      "success": true
+    },
+    "trajectory_viscous": {
+      "success": true,
+      "message": "`ftol` termination condition is satisfied.",
+      "nfev": 7,
+      "cost": 0.010518086739444106,
+      "optimality": 5.197201706421431e-06,
+      "training_initial_states": [
+        [
+          -2.782676141246487,
+          -1.7973369523433678
+        ],
+        [
+          2.8158624928027356,
+          3.4420787957292087
+        ],
+        [
+          -2.622216136969455,
+          -6.265102368040364
+        ],
+        [
+          2.448690914252314,
+          6.371347138130215
+        ],
+        [
+          -2.0367927117411386,
+          -7.87840008012639
+        ],
+        [
+          2.029320622883044,
+          9.204588046347068
+        ]
+      ]
+    },
+    "trajectory_coulomb": {
+      "success": true,
+      "message": "Both `ftol` and `xtol` termination conditions are satisfied.",
+      "nfev": 11,
+      "cost": 0.0017076268637706343,
+      "optimality": 4.59748899101431e-06,
+      "training_initial_states": [
+        [
+          -2.6903064291677006,
+          -2.1588171353053864
+        ],
+        [
+          2.7649657778140035,
+          4.160349147195641
+        ],
+        [
+          -2.6014225501467148,
+          -6.247161453300367
+        ],
+        [
+          2.4329303785605374,
+          6.517696214662354
+        ],
+        [
+          -2.0367845878498083,
+          -6.495592758936547
+        ],
+        [
+          1.9936386494083238,
+          7.857040742464703
+        ]
+      ]
+    },
+    "trajectory_quadratic": {
+      "success": true,
+      "message": "`gtol` termination condition is satisfied.",
+      "nfev": 9,
+      "cost": 0.0016579677193889828,
+      "optimality": 1.793459106528343e-08,
+      "training_initial_states": [
+        [
+          -2.691539996806108,
+          -2.1611034632914095
+        ],
+        [
+          2.7661640236199756,
+          4.159834626956404
+        ],
+        [
+          -2.601814201939075,
+          -6.221166158941041
+        ],
+        [
+          2.433309279546038,
+          6.492613019344103
+        ],
+        [
+          -2.033357878889871,
+          -6.6018192094062815
+        ],
+        [
+          1.9929786861091419,
+          7.963995429401869
+        ]
+      ]
+    }
+  },
+  "frozen_gates": {
+    "min_windows": 20,
+    "min_angle_span_rad": 0.15,
+    "max_condition": 1000,
+    "length_bounds_m": [
+      0.05,
+      1.5
+    ],
+    "angular_damping_bounds_per_s": [
+      0,
+      5
+    ],
+    "coulomb_bounds_rad_per_s2": [
+      0,
+      20
+    ],
+    "max_fitted_offset_abs_rad": 0.35,
+    "max_gap_s": 0.05,
+    "max_integral_nrmse": 0.15,
+    "prediction_horizon_s": 0.5,
+    "max_prediction_rmse_rad": 0.08,
+    "max_prediction_p95_rad": 0.15,
+    "min_prediction_windows": 3,
+    "window_s": 0.35
+  },
+  "method": {
+    "history_s": 0.2,
+    "history_uses_future_samples": false,
+    "short_forecast_horizon_s": 0.5,
+    "continuous_initialization_s": [
+      0.25,
+      0.5
+    ],
+    "dry_friction": "smooth Coulomb: c*tanh(omega/0.05)",
+    "quadratic_drag": "d*omega*abs(omega)",
+    "solver": "SciPy DOP853; analytical sensitivities for full-training-trajectory fit"
+  },
+  "limitations": [
+    "All comparison data are development evidence, not a fresh final holdout.",
+    "Camera/pose quality failures remain failures; lower RMS does not override them.",
+    "Continuous predictions exclude an explicitly reported initialization interval and receive no subsequent observations.",
+    "No source correction, hardware access, firmware change, or simulation export."
+  ],
+  "tool_hashes": {
+    "trajectory.py": "5cfec37add52f5d32663bef72b1d7320466f0d886c564dddd590ad414045bad4",
+    "compare.py": "0cde099906f264c6f19b57c96d85787e6e79352be5b082b1314bd3099d49847c",
+    "dynamics.py": "0bd736be5a6bc438d253ca046e0b09e26d9004c38f34a1974e91893eee5bd335"
+  },
+  "camera_quality": {
+    "training": {
+      "passed": false,
+      "poses_verified": false,
+      "reasons": [
+        "release-06: angular RMSE exceeds 5 degrees or is unavailable"
+      ]
+    },
+    "validation": {
+      "passed": true,
+      "poses_verified": false,
+      "reasons": []
+    }
+  },
+  "results": [
+    {
+      "model": "weak_viscous",
+      "initializer": "original",
+      "coefficients": [
+        60.717138020364665,
+        0.3802642141593586,
+        6.908373933985351
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 6.091885592309782,
+            "p95_deg": 9.992678629460864,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 9.072212425440615,
+            "p95_deg": 19.205711931593555,
+            "samples": 10794
+          },
+          "continuous_after_history": []
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 6.225845909742759,
+            "p95_deg": 13.0703613347778,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 14.886081750609218,
+            "p95_deg": 34.75270410705736,
+            "samples": 11684
+          },
+          "continuous_after_history": []
+        }
+      }
+    },
+    {
+      "model": "weak_viscous",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.717138020364665,
+        0.3802642141593586,
+        6.908373933985351
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 2.4674691983414347,
+            "p95_deg": 5.009509710350764,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 13.06362240449527,
+            "p95_deg": 29.04860828300599,
+            "samples": 10794
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 10.227281719144285,
+                "p95_deg": 22.765816087531732,
+                "samples": 10566
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 9.844631786367456,
+                "p95_deg": 21.698288382814177,
+                "samples": 10194
+              }
+            }
+          ]
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 2.3592174498397287,
+            "p95_deg": 4.7929155107050825,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 10.988635732017656,
+            "p95_deg": 24.34828854857502,
+            "samples": 11684
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 9.40793740539003,
+                "p95_deg": 20.629251960925306,
+                "samples": 11456
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 10.021022997790602,
+                "p95_deg": 22.270508452727338,
+                "samples": 11084
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model": "weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.77883250617613,
+        0.043995859913278375,
+        6.873325545308069,
+        1.5869104669745808
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 2.280622752695087,
+            "p95_deg": 4.755966034727365,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 6.694286276508048,
+            "p95_deg": 16.12242234373736,
+            "samples": 10794
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 3.778289155793056,
+                "p95_deg": 7.835896965098253,
+                "samples": 10566
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 4.966850948139213,
+                "p95_deg": 10.871771056931973,
+                "samples": 10194
+              }
+            }
+          ]
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 2.2342220726493855,
+            "p95_deg": 4.7269069863404525,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 5.8048611596736555,
+            "p95_deg": 11.928408568914282,
+            "samples": 11684
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 4.828751418038324,
+                "p95_deg": 10.197369903561462,
+                "samples": 11456
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 4.676279459733412,
+                "p95_deg": 10.099617600583821,
+                "samples": 11084
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model": "trajectory_viscous",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        59.66895839874806,
+        0.3453820321961714,
+        6.831383736302086
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 2.4226063430139764,
+            "p95_deg": 5.009574923518826,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 7.311003074202852,
+            "p95_deg": 16.052465765621818,
+            "samples": 10794
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 4.913025989729249,
+                "p95_deg": 9.422824657616097,
+                "samples": 10566
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 5.643455542048874,
+                "p95_deg": 12.078554783787467,
+                "samples": 10194
+              }
+            }
+          ]
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 2.371351856422069,
+            "p95_deg": 4.845297687710444,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 5.584121833515879,
+            "p95_deg": 11.462397070653758,
+            "samples": 11684
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 5.399947501874509,
+                "p95_deg": 10.39859424651444,
+                "samples": 11456
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 5.942601581859894,
+                "p95_deg": 12.645867442022173,
+                "samples": 11084
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model": "trajectory_coulomb",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.22937079833128,
+        0.0607549632756562,
+        6.861673656301503,
+        1.3048969127615575
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 2.276339086282783,
+            "p95_deg": 4.841949993677469,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 4.041242349060055,
+            "p95_deg": 9.072589212867653,
+            "samples": 10794
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 4.702124944689008,
+                "p95_deg": 11.190898803421947,
+                "samples": 10566
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 4.2576757813575545,
+                "p95_deg": 10.737025605445439,
+                "samples": 10194
+              }
+            }
+          ]
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 2.2678151971937432,
+            "p95_deg": 4.82227960963764,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 8.513493347571773,
+            "p95_deg": 22.610416991272444,
+            "samples": 11684
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 8.489327862568977,
+                "p95_deg": 21.39034820421146,
+                "samples": 11456
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 4.4592285563910865,
+                "p95_deg": 11.652815966474757,
+                "samples": 11084
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "model": "trajectory_quadratic",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.21696098254651,
+        6.884595915614676e-16,
+        6.85928210133591,
+        1.4059406105385992,
+        0.006834855174511408
+      ],
+      "metrics": {
+        "training": {
+          "short": {
+            "rms_deg": 2.2723694612005114,
+            "p95_deg": 4.857439616204808,
+            "samples": 10250
+          },
+          "continuous": {
+            "rms_deg": 3.903295003726745,
+            "p95_deg": 8.610878511896882,
+            "samples": 10794
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 3.9946852448655314,
+                "p95_deg": 9.23982078279785,
+                "samples": 10566
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 3.892289629647185,
+                "p95_deg": 9.18278837443796,
+                "samples": 10194
+              }
+            }
+          ]
+        },
+        "validation": {
+          "short": {
+            "rms_deg": 2.2540423350470604,
+            "p95_deg": 4.762060535239704,
+            "samples": 11242
+          },
+          "continuous": {
+            "rms_deg": 7.177924251928469,
+            "p95_deg": 18.964992745730985,
+            "samples": 11684
+          },
+          "continuous_after_history": [
+            {
+              "warmup_s": 0.25,
+              "metrics": {
+                "rms_deg": 7.418767969874388,
+                "p95_deg": 18.745819292185434,
+                "samples": 11456
+              }
+            },
+            {
+              "warmup_s": 0.5,
+              "metrics": {
+                "rms_deg": 3.9874558599035876,
+                "p95_deg": 9.990034110511093,
+                "samples": 11084
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "report_sha256": "84274cd92e9f8f15ec2751328dbf5e483bd04a4d55d306188fa37413754baa57"
+}

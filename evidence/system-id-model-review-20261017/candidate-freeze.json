@@ -1,0 +1,54 @@
+{
+  "schema": "cartpole-experimental-passive-freeze-v1",
+  "created_at_utc": "2026-10-17T20:30:21.531967+00:00",
+  "reason": "Choose the smallest physically interpretable candidate: nonnegative viscous plus dry friction. Complex trajectory-fit models did not consistently improve developmental predictions. Freeze before reading training6 angle data or any batch7 data.",
+  "models": [
+    {
+      "model": "weak_viscous",
+      "initializer": "original",
+      "coefficients": [
+        60.717138020364665,
+        0.3802642141593586,
+        6.908373933985351
+      ]
+    },
+    {
+      "model": "weak_viscous",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.717138020364665,
+        0.3802642141593586,
+        6.908373933985351
+      ]
+    },
+    {
+      "model": "weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "coefficients": [
+        60.77883250617613,
+        0.043995859913278375,
+        6.873325545308069,
+        1.5869104669745808
+      ]
+    }
+  ],
+  "development_source_sha256": [
+    "52b976c0c8ab8b95909a6bc3c1869f47a9276d5c762b2749ac39dca5785d2f9e",
+    "a933b483005a0cb8e054e00943e02c73e98628cf43dad8efeded4043df275925"
+  ],
+  "continuous_initialization_s": [
+    0.25,
+    0.5
+  ],
+  "short_prediction_horizon_s": 0.5,
+  "short_rms_limit_rad": 0.08,
+  "short_p95_limit_rad": 0.15,
+  "final_holdout_reserved": "entire batch7; do not tune after examining it",
+  "method_hashes": {
+    "dynamics.py": "0bd736be5a6bc438d253ca046e0b09e26d9004c38f34a1974e91893eee5bd335",
+    "trajectory.py": "5cfec37add52f5d32663bef72b1d7320466f0d886c564dddd590ad414045bad4",
+    "compare.py": "0cde099906f264c6f19b57c96d85787e6e79352be5b082b1314bd3099d49847c",
+    "evaluate.py": "96af0788b48f6d2e2e4468b6e6f9d7d6d4321b13fe301cd424e7ce16b8ee9e5e"
+  },
+  "production_export_allowed": false
+}

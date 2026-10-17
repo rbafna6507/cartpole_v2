@@ -1,0 +1,82 @@
+{
+  "scope": "Development-only camera-coordinate hypothesis. Scores are in transformed angle units; not directly comparable to raw-encoder errors and not an accepted calibration.",
+  "mapping": [
+    -0.025731582960042982,
+    0.21713969480607492,
+    -0.02348870240181777,
+    -0.08158333211047764
+  ],
+  "results": [
+    {
+      "kind": "weak_viscous",
+      "coefficients": [
+        60.42118409425848,
+        0.3862856338173455,
+        0.487226432795032
+      ],
+      "training": {
+        "rms_deg": 2.2665049579508136,
+        "p95_deg": 4.565843610514748,
+        "samples": 10250
+      },
+      "development": {
+        "rms_deg": 2.1323429520104664,
+        "p95_deg": 4.172670887983621,
+        "samples": 11242
+      },
+      "continuous": {
+        "rms_deg": 9.901752722353084,
+        "p95_deg": 22.177238486753403,
+        "samples": 11684
+      }
+    },
+    {
+      "kind": "weak_coulomb",
+      "coefficients": [
+        60.478381495643355,
+        0.06524580193458246,
+        0.4501071238750375,
+        1.4465511262646304
+      ],
+      "training": {
+        "rms_deg": 2.0556463167643133,
+        "p95_deg": 4.214651927650933,
+        "samples": 10250
+      },
+      "development": {
+        "rms_deg": 1.9646503242707816,
+        "p95_deg": 3.988260098495572,
+        "samples": 11242
+      },
+      "continuous": {
+        "rms_deg": 4.968552863841281,
+        "p95_deg": 9.543649430848534,
+        "samples": 11684
+      }
+    },
+    {
+      "kind": "trajectory_coulomb",
+      "coefficients": [
+        60.111742304917726,
+        0.10157962349913453,
+        0.497543744999316,
+        1.1296150681678219
+      ],
+      "training": {
+        "rms_deg": 2.0187106820765943,
+        "p95_deg": 4.179656080741612,
+        "samples": 10250
+      },
+      "development": {
+        "rms_deg": 1.9372136587751259,
+        "p95_deg": 3.956844841009138,
+        "samples": 11242
+      },
+      "continuous": {
+        "rms_deg": 4.950747727476199,
+        "p95_deg": 12.891432191439787,
+        "samples": 11684
+      }
+    }
+  ]
+}

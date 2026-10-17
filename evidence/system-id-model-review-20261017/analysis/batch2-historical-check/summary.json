@@ -1,0 +1,450 @@
+{
+  "source_identity": {
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch2-original/passive-validation-2/rig-1792263558187181521-1213093182.jsonl",
+    "member": null,
+    "sha256": "b0ec62aac23e4f0338d99f090a34a7e5ad8782cc4a710abec46ad7b8dc043a74",
+    "hash_basis": "decompressed exact JSONL bytes",
+    "source_bytes": 12826864,
+    "record_count": 33869,
+    "collection_report": {
+      "status": "original failed collection; explicit recovery validated",
+      "completed": false,
+      "sha256": "b02dc8d612caf5f41acb4fcb52ece27d6e4d8fa074f989b06df034c743bb3b15",
+      "path": "runs/passive-batch2-original/passive-validation-2/report.json"
+    },
+    "passive_baseline": {
+      "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+      "camera": {
+        "bounds": {
+          "max_angle_spread_rad": 0.035,
+          "max_angle_vector_error_rad": 0.03,
+          "max_gap_s": 0.2,
+          "max_length_spread_fraction": 0.1,
+          "max_length_vector_error_fraction": 0.05,
+          "max_pivot_spread_px": 4.0,
+          "min_confidence": 0.5,
+          "min_duration_fraction": 0.75,
+          "min_duration_s": 1.5,
+          "min_length_px": 5.0,
+          "min_sample_count": 30,
+          "min_valid_fraction": 0.8
+        },
+        "capture_span_s": 1.981442645948846,
+        "first_frame_seq": 6706899,
+        "first_host_ns": 358854076708192,
+        "first_source_t": 358854.053794204,
+        "frame_height": 600,
+        "frame_width": 960,
+        "image_angle_rad": -0.0203227320120425,
+        "last_frame_seq": 6707057,
+        "last_host_ns": 358856056582030,
+        "last_source_t": 358856.03523685,
+        "length_px": 194.58968938002587,
+        "length_spread_px": 0.8148397960723628,
+        "max_gap_s": 0.03829366498393938,
+        "pivot_px": [
+          485.28749999999997,
+          295.6875
+        ],
+        "pivot_spread_px": [
+          0.13461538461535838,
+          0.3298076923076678
+        ],
+        "rotation": null,
+        "sample_count": 140,
+        "source_frame_count": 140,
+        "spread_rad": 0.002483451230789125,
+        "valid_fraction": 1.0
+      },
+      "duration_s": 2.003178912,
+      "encoder": {
+        "bounds": {
+          "max_angle_span_rad": 0.03,
+          "max_hanging_offset_rad": 0.35,
+          "min_duration_fraction": 0.95,
+          "min_duration_s": 1.9,
+          "min_sample_count": 100
+        },
+        "first_board_us": 2506961426,
+        "first_host_ns": 358854067239333,
+        "last_board_us": 2508965426,
+        "last_host_ns": 358856070418245,
+        "raw_angle_rad": 3.029612,
+        "sample_count": 502,
+        "span_rad": 0.0015339999999999243,
+        "spread_rad": 0.0015339999999999243
+      },
+      "schema": "cartpole-passive-baseline-v1",
+      "window_host_ns": [
+        358854067239333,
+        358856070418245
+      ],
+      "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+    },
+    "collection_protocol": {
+      "dataset_role": "validation",
+      "nominal_angles_only": true,
+      "operator_cart_restraint": "cart held stationary by hand",
+      "procedure": "passive",
+      "requested_releases": [
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-01",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-02",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-03",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-04",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-05",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-06",
+          "repetition": 1
+        }
+      ],
+      "run_label": "passive-validation-2",
+      "schema": "cartpole-collection-protocol-v1"
+    },
+    "collection_protocol_sha256": "4948c738120ac07fb8d7fa86573db630b4a846b7689abfe4c87618c3eb0e7150",
+    "interruption_recovery": {
+      "completion_kind": "operator-ended partial",
+      "original_completed": false,
+      "original_collection_failure": "KeyboardInterrupt()",
+      "original_camera_failure": "KeyboardInterrupt()",
+      "requested_duration_s": 180.0,
+      "actual_duration_s": 123.030630997,
+      "interruption_freshness": {
+        "encoder_receipt_age_ns": 5120433,
+        "camera_receipt_age_ns": 9861492,
+        "camera_source_age_upper_bound_ns": 41995529.375,
+        "camera_clock_uncertainty_ns": 3381686.847748439,
+        "max_encoder_age_ns": 20000000,
+        "max_camera_age_ns": 150000000
+      },
+      "raw_log_sha256": "b0ec62aac23e4f0338d99f090a34a7e5ad8782cc4a710abec46ad7b8dc043a74",
+      "raw_record_count": 33869,
+      "raw_source_bytes": 12826864,
+      "collection_report_sha256": "b02dc8d612caf5f41acb4fcb52ece27d6e4d8fa074f989b06df034c743bb3b15",
+      "camera_sha256": "55314680d3fbbede3ca94e85f6ea944ee8181ecaf6adf56dade48dc70a132950",
+      "vision_report_sha256": "98ae4a9ad6eb5b62ddf1e07dbfbda26562b11a8b06713f3bd2077879a3264ee0",
+      "session": {
+        "clock_id": "teensy:1213093182",
+        "session_id": "1213093182",
+        "topology": {
+          "cart": "cart",
+          "joints": [
+            "pole"
+          ]
+        }
+      },
+      "reference": [
+        330,
+        15,
+        "executor-v6-measuredrail"
+      ],
+      "baseline_sha256": "e92aec9b57182d613543da18b60c947fecefd07f962e20a6ca1476555c7ed80f",
+      "collection_protocol_sha256": "4948c738120ac07fb8d7fa86573db630b4a846b7689abfe4c87618c3eb0e7150",
+      "final_stop": {
+        "command_record": 33864,
+        "acknowledgement_record": 33865,
+        "disabled_state_record": 33867,
+        "last_stop_command_record": 33864,
+        "last_command_record": 33866,
+        "confirmation_basis": "ordered STOP acknowledgement and disabled state after last STOP; no rearm",
+        "termination_record": 33868,
+        "confirmed": true
+      },
+      "camera_records": 6280,
+      "camera_frames": 6280,
+      "camera_heartbeat_records": 0,
+      "camera_clock_sync": {
+        "method": "http-roundtrip-midpoint",
+        "start": {
+          "local_before_ns": 358853881269489,
+          "local_after_ns": 358853890966007,
+          "server_monotonic_s": 358853.889152744,
+          "offset_ns": -3034996,
+          "uncertainty_ns": 4848259
+        },
+        "end": {
+          "local_before_ns": 358979131197359,
+          "local_after_ns": 358979137959736,
+          "server_monotonic_s": 358979.136241789,
+          "offset_ns": -1663242,
+          "uncertainty_ns": 3381189
+        }
+      },
+      "records_dropped": 0,
+      "model_accepted": false,
+      "release_poses_verified": false,
+      "physical_cart_stationarity_certified": false,
+      "operator_reason": "Operator explicitly reported all swing data collected and used Ctrl-C because the collector had no finish-early command. Recover only verified disabled passive records; preserve original interruption reports.",
+      "sha256": "fafc668f88e9d01a411ad8cb711c05ff109d0c5eb2a4713fb7cb10d507e1b611",
+      "path": "runs/passive-batch2-original/passive-validation-2/recovery.json"
+    },
+    "session": {
+      "clock_id": "teensy:1213093182",
+      "session_id": "1213093182",
+      "topology": {
+        "cart": "cart",
+        "joints": [
+          "pole"
+        ]
+      }
+    },
+    "reference": [
+      330,
+      15,
+      "executor-v6-measuredrail"
+    ],
+    "duplicate_snapshots": 2,
+    "annotations_sha256": "e58f8baad11c075cf747a149cc55e32c9b0a59398da5c9b2bb55444d6de0ddb6",
+    "operator_cart_restraint": "cart held stationary by hand",
+    "selection_method": "Frozen from full-rate raw encoder and independently clock-mapped camera geometry before any model fit/scoring. All six releases retained. Held-pose, release onset and free-decay intervals visually inspected; exclude manual lift and settled static tails. Operator reports free releases; no movie exists to prove exact hand-clear time. Start free interval about0.1s after observed release. Missing camera and unstable poses intentionally remain unverified; no replacement by later peaks or interval optimization against prediction error.",
+    "selection": [
+      {
+        "annotation": {
+          "episode_id": "release-01",
+          "pose_board_relative_s": [
+            11.7,
+            12.05
+          ],
+          "release_board_s": 12.12,
+          "board_relative_s": [
+            12.22,
+            18.15
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 1483,
+        "actual_board_relative_s": [
+          12.222,
+          18.15
+        ],
+        "max_gap_s": 0.004000000000001336
+      },
+      {
+        "annotation": {
+          "episode_id": "release-02",
+          "pose_board_relative_s": [
+            23.91,
+            24.08
+          ],
+          "release_board_s": 24.12,
+          "board_relative_s": [
+            24.22,
+            29.6
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 1345,
+        "actual_board_relative_s": [
+          24.222,
+          29.598
+        ],
+        "max_gap_s": 0.004000000000001336
+      },
+      {
+        "annotation": {
+          "episode_id": "release-03",
+          "pose_board_relative_s": [
+            36.55,
+            36.86
+          ],
+          "release_board_s": 36.9,
+          "board_relative_s": [
+            37.0,
+            44.2
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 1800,
+        "actual_board_relative_s": [
+          37.002,
+          44.198
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-04",
+          "pose_board_relative_s": [
+            49.8,
+            50.0
+          ],
+          "release_board_s": 50.18,
+          "board_relative_s": [
+            50.3,
+            57.2
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 1725,
+        "actual_board_relative_s": [
+          50.302,
+          57.198
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-05",
+          "pose_board_relative_s": [
+            64.65,
+            64.95
+          ],
+          "release_board_s": 65.0,
+          "board_relative_s": [
+            65.12,
+            75.1
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 2495,
+        "actual_board_relative_s": [
+          65.122,
+          75.098
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-06",
+          "pose_board_relative_s": [
+            84.55,
+            84.85
+          ],
+          "release_board_s": 84.98,
+          "board_relative_s": [
+            85.1,
+            95.2
+          ],
+          "reason": "Observed held-to-decay transition; operator-reported release with cart held fixed. Static terminal tail excluded. Release-pose and camera checks may reject; no model-error-based selection."
+        },
+        "samples": 2525,
+        "actual_board_relative_s": [
+          85.102,
+          95.198
+        ],
+        "max_gap_s": 0.0040000000000048885
+      }
+    ]
+  },
+  "accepted": false,
+  "model_exported": false,
+  "camera_passed": true,
+  "poses_verified": false,
+  "camera_reasons": [],
+  "freeze_sha256": "109cba9de449834bfa3c867804bf031c0ada831f530311c00e819ecba209715b",
+  "results": [
+    {
+      "model": "weak_viscous",
+      "initializer": "original",
+      "short": {
+        "rms_deg": 5.5603244234956435,
+        "p95_deg": 10.634499994496865,
+        "samples": 10750
+      },
+      "short_numeric_gates_pass": false,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 9.143881116731484,
+            "p95_deg": 20.472152036392057,
+            "samples": 10989
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 9.426731758602047,
+            "p95_deg": 21.227050211665578,
+            "samples": 10617
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_viscous",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.173800440800631,
+        "p95_deg": 4.407562139960836,
+        "samples": 10750
+      },
+      "short_numeric_gates_pass": true,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 9.143881116731484,
+            "p95_deg": 20.472152036392057,
+            "samples": 10989
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 9.426731758602047,
+            "p95_deg": 21.227050211665578,
+            "samples": 10617
+          }
+        }
+      ]
+    },
+    {
+      "model": "weak_coulomb",
+      "initializer": "history_rawq:0.20",
+      "short": {
+        "rms_deg": 2.077278419039201,
+        "p95_deg": 4.368245001239378,
+        "samples": 10750
+      },
+      "short_numeric_gates_pass": true,
+      "short_coverage_gates_pass": true,
+      "continuous_after_history": [
+        {
+          "warmup_s": 0.25,
+          "metrics": {
+            "rms_deg": 4.582006248634862,
+            "p95_deg": 10.041474123840217,
+            "samples": 10989
+          }
+        },
+        {
+          "warmup_s": 0.5,
+          "metrics": {
+            "rms_deg": 3.8634393861842113,
+            "p95_deg": 7.557506158663256,
+            "samples": 10617
+          }
+        }
+      ]
+    }
+  ]
+}

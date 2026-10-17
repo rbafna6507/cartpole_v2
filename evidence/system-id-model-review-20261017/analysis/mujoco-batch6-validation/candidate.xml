@@ -1,0 +1,6 @@
+<mujoco model="experimental_fixed_cart_passive_candidate">
+<compiler angle="radian" inertiafromgeom="false"/>
+<option timestep="0.001" gravity="0 0 -9.81" integrator="Euler"><flag eulerdamp="disable" autoreset="disable"/></option>
+<worldbody><body name="pole"><joint name="pole_hinge" type="hinge" axis="0 1 0" damping="1.9309405423633153e-05" limited="false"/>
+<inertial pos="0 0 0.12028693988219678" mass="0.022749999999999999" diaginertia="0.0001097228549555261 0.0001097228549555261 1.0972285495552609e-10"/>
+<geom type="capsule" fromto="0 0 0 0 0 0.24057387976439357" size=".004" contype="0" conaffinity="0"/></body></worldbody></mujoco>
