@@ -1,0 +1,1055 @@
+{
+  "schema": "cartpole-release-review-v1",
+  "source_sha256": "1199f6d5712599802c1b8eebb8ac81d9d8b4388415e171157041ea079b17760c",
+  "source_identity": {
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch3-original/passive-training-3/rig-1792265710930256965-2163800031.jsonl",
+    "member": null,
+    "sha256": "1199f6d5712599802c1b8eebb8ac81d9d8b4388415e171157041ea079b17760c",
+    "hash_basis": "decompressed exact JSONL bytes",
+    "source_bytes": 18563224,
+    "record_count": 49210,
+    "collection_report": {
+      "status": "bound successful collection",
+      "completed": true,
+      "sha256": "d5ab1c711fe4ad43b8369d385310cc8d94ae3c72f03a91e39742833b6e0f206f",
+      "path": "runs/passive-batch3-original/passive-training-3/report.json"
+    },
+    "collection_protocol": {
+      "dataset_role": "training",
+      "nominal_angles_only": true,
+      "operator_cart_restraint": "cart held stationary by hand",
+      "procedure": "passive",
+      "requested_releases": [
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-01",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-02",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-03",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-04",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-05",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-06",
+          "repetition": 1
+        }
+      ],
+      "run_label": "passive-training-3",
+      "schema": "cartpole-collection-protocol-v1"
+    },
+    "collection_protocol_sha256": "8bf42dfeadb0d5d3f90fdcaa852f9e2e029700624cb62f72d44215a7ea6092c2",
+    "passive_baseline": {
+      "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+      "camera": {
+        "bounds": {
+          "max_angle_spread_rad": 0.035,
+          "max_angle_vector_error_rad": 0.03,
+          "max_gap_s": 0.2,
+          "max_length_spread_fraction": 0.1,
+          "max_length_vector_error_fraction": 0.05,
+          "max_pivot_spread_px": 4.0,
+          "min_confidence": 0.5,
+          "min_duration_fraction": 0.75,
+          "min_duration_s": 1.5,
+          "min_length_px": 5.0,
+          "min_sample_count": 30,
+          "min_valid_fraction": 0.8
+        },
+        "capture_span_s": 1.9942522540222853,
+        "first_frame_seq": 6878488,
+        "first_host_ns": 361006815762443,
+        "first_source_t": 361006.799152249,
+        "frame_height": 600,
+        "frame_width": 960,
+        "image_angle_rad": -0.020116239740486347,
+        "last_frame_seq": 6878647,
+        "last_host_ns": 361008812824901,
+        "last_source_t": 361008.793404503,
+        "length_px": 194.67378668018992,
+        "length_spread_px": 0.8296925229529961,
+        "max_gap_s": 0.028996018,
+        "pivot_px": [
+          485.07692307692304,
+          296.03246753246754
+        ],
+        "pivot_spread_px": [
+          0.18649211028258605,
+          0.3661141490088653
+        ],
+        "rotation": null,
+        "sample_count": 140,
+        "source_frame_count": 140,
+        "spread_rad": 0.0019673114431112623,
+        "valid_fraction": 1.0
+      },
+      "duration_s": 2.000651782,
+      "encoder": {
+        "bounds": {
+          "max_angle_span_rad": 0.03,
+          "max_hanging_offset_rad": 0.35,
+          "min_duration_fraction": 0.95,
+          "min_duration_s": 1.9,
+          "min_sample_count": 100
+        },
+        "first_board_us": 364736130,
+        "first_host_ns": 361006814674125,
+        "last_board_us": 366736130,
+        "last_host_ns": 361008815325907,
+        "raw_angle_rad": 3.029612,
+        "sample_count": 501,
+        "span_rad": 0.0015340000000003684,
+        "spread_rad": 0.0015340000000003684
+      },
+      "schema": "cartpole-passive-baseline-v1",
+      "window_host_ns": [
+        361006814674125,
+        361008815325907
+      ],
+      "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+    },
+    "session": {
+      "clock_id": "teensy:2163800031",
+      "session_id": "2163800031",
+      "topology": {
+        "cart": "cart",
+        "joints": [
+          "pole"
+        ]
+      }
+    },
+    "reference": [
+      330,
+      15,
+      "executor-v6-measuredrail"
+    ],
+    "duplicate_snapshots": 1,
+    "annotations_sha256": "b23d06ee175a0e6365a9833c87da25cedbad68116adf9fc3df98e5856ed844af",
+    "operator_cart_restraint": "cart held stationary by hand",
+    "selection_method": "Frozen from full-rate raw encoder and independently clock-mapped raw camera geometry before fitting or scoring. All six releases retained. Select held pose immediately before observed onset, then start free interval about 0.12 seconds after onset and exclude settled static tails. No movie exists to verify exact hand-clear time; free release and cart restraint follow the requested operator protocol. Windows are not optimized against model errors. Historical comparison uses the unchanged viscous model and gates; old validation is development evidence.",
+    "selection": [
+      {
+        "annotation": {
+          "episode_id": "release-01",
+          "pose_board_relative_s": [
+            55.15,
+            55.65
+          ],
+          "release_board_s": 55.7,
+          "board_relative_s": [
+            55.82,
+            60.4
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 1145,
+        "actual_board_relative_s": [
+          55.823,
+          60.399
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-02",
+          "pose_board_relative_s": [
+            66.85,
+            67.35
+          ],
+          "release_board_s": 67.45,
+          "board_relative_s": [
+            67.56,
+            72.0
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 1110,
+        "actual_board_relative_s": [
+          67.563,
+          71.999
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-03",
+          "pose_board_relative_s": [
+            80.5,
+            81.0
+          ],
+          "release_board_s": 81.02,
+          "board_relative_s": [
+            81.14,
+            89.8
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 2165,
+        "actual_board_relative_s": [
+          81.143,
+          89.799
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-04",
+          "pose_board_relative_s": [
+            101.0,
+            101.5
+          ],
+          "release_board_s": 101.56,
+          "board_relative_s": [
+            101.68,
+            110.0
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 2080,
+        "actual_board_relative_s": [
+          101.683,
+          109.999
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-05",
+          "pose_board_relative_s": [
+            122.6,
+            123.1
+          ],
+          "release_board_s": 123.23,
+          "board_relative_s": [
+            123.35,
+            134.4
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 2763,
+        "actual_board_relative_s": [
+          123.351,
+          134.399
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-06",
+          "pose_board_relative_s": [
+            162.7,
+            163.2
+          ],
+          "release_board_s": 163.22,
+          "board_relative_s": [
+            163.34,
+            174.8
+          ],
+          "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+        },
+        "samples": 2865,
+        "actual_board_relative_s": [
+          163.343,
+          174.799
+        ],
+        "max_gap_s": 0.004000000000019099
+      }
+    ]
+  },
+  "annotations_sha256": "b23d06ee175a0e6365a9833c87da25cedbad68116adf9fc3df98e5856ed844af",
+  "camera_sha256": "ed42d35675f2a73bfac16b90bf66c2ca307f22bce73115e53d1585a58b2adde0",
+  "vision_report_sha256": "9783f9379af75a33fdcda78e35e1cc942674bd6755527d642fc93f97c1e30a28",
+  "collection_report_sha256": "d5ab1c711fe4ad43b8369d385310cc8d94ae3c72f03a91e39742833b6e0f206f",
+  "baseline": {
+    "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+    "camera": {
+      "bounds": {
+        "max_angle_spread_rad": 0.035,
+        "max_angle_vector_error_rad": 0.03,
+        "max_gap_s": 0.2,
+        "max_length_spread_fraction": 0.1,
+        "max_length_vector_error_fraction": 0.05,
+        "max_pivot_spread_px": 4.0,
+        "min_confidence": 0.5,
+        "min_duration_fraction": 0.75,
+        "min_duration_s": 1.5,
+        "min_length_px": 5.0,
+        "min_sample_count": 30,
+        "min_valid_fraction": 0.8
+      },
+      "capture_span_s": 1.9942522540222853,
+      "first_frame_seq": 6878488,
+      "first_host_ns": 361006815762443,
+      "first_source_t": 361006.799152249,
+      "frame_height": 600,
+      "frame_width": 960,
+      "image_angle_rad": -0.020116239740486347,
+      "last_frame_seq": 6878647,
+      "last_host_ns": 361008812824901,
+      "last_source_t": 361008.793404503,
+      "length_px": 194.67378668018992,
+      "length_spread_px": 0.8296925229529961,
+      "max_gap_s": 0.028996018,
+      "pivot_px": [
+        485.07692307692304,
+        296.03246753246754
+      ],
+      "pivot_spread_px": [
+        0.18649211028258605,
+        0.3661141490088653
+      ],
+      "rotation": null,
+      "sample_count": 140,
+      "source_frame_count": 140,
+      "spread_rad": 0.0019673114431112623,
+      "valid_fraction": 1.0
+    },
+    "duration_s": 2.000651782,
+    "encoder": {
+      "bounds": {
+        "max_angle_span_rad": 0.03,
+        "max_hanging_offset_rad": 0.35,
+        "min_duration_fraction": 0.95,
+        "min_duration_s": 1.9,
+        "min_sample_count": 100
+      },
+      "first_board_us": 364736130,
+      "first_host_ns": 361006814674125,
+      "last_board_us": 366736130,
+      "last_host_ns": 361008815325907,
+      "raw_angle_rad": 3.029612,
+      "sample_count": 501,
+      "span_rad": 0.0015340000000003684,
+      "spread_rad": 0.0015340000000003684
+    },
+    "schema": "cartpole-passive-baseline-v1",
+    "window_host_ns": [
+      361006814674125,
+      361008815325907
+    ],
+    "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+  },
+  "camera_sign": -1,
+  "camera_scale": 1.0,
+  "zero_source": "measured initial hanging baseline; no fitted offset",
+  "clock_sync": {
+    "method": "http-roundtrip-midpoint",
+    "start": {
+      "local_before_ns": 361006608647245,
+      "local_after_ns": 361006619241737,
+      "server_monotonic_s": 361006.617370559,
+      "offset_ns": -3426068,
+      "uncertainty_ns": 5297246
+    },
+    "end": {
+      "local_before_ns": 361188882663676,
+      "local_after_ns": 361188888227593,
+      "server_monotonic_s": 361188.886018123,
+      "offset_ns": -572489,
+      "uncertainty_ns": 2781959
+    }
+  },
+  "clock_mapping": {
+    "method": "linearly interpolated HTTP clock offsets, then encoder receipt-to-board interpolation",
+    "max_sync_uncertainty_ns": 5297246,
+    "max_allowed_clock_drift_ppm": 100.0,
+    "exposure_latency_known": false,
+    "serial_receipt_latency_known": false,
+    "note": "Source camera t is a host-read proxy. HTTP bounds do not bound exposure or serial receipt latency."
+  },
+  "camera_rotation": null,
+  "camera_rotation_status": "declared baseline camera geometry",
+  "camera_records": 8871,
+  "unique_camera_frames": 8871,
+  "duplicate_camera_frames": 0,
+  "camera_preroll": {
+    "frames": 1,
+    "source_time_bounds_s": [
+      361006.59812895,
+      361006.59812895
+    ],
+    "mapped": false,
+    "comparison_included": false,
+    "max_allowed_before_start_s": 0.15
+  },
+  "gates": {
+    "min_camera_coverage_fraction": 0.7,
+    "max_camera_gap_s": 0.15,
+    "min_camera_frames": 10,
+    "max_angular_rmse_rad": 0.08726646259971647,
+    "max_angular_p95_rad": 0.17453292519943295,
+    "min_pose_duration_s": 0.15,
+    "min_pose_camera_frames": 3,
+    "max_pose_spread_rad": 0.03490658503988659,
+    "max_pose_disagreement_rad": 0.08726646259971647,
+    "max_pose_to_release_gap_s": 0.5,
+    "max_camera_length_deviation_fraction": 0.2,
+    "pivot_radial_p95_floor_px": 4.0,
+    "pivot_radial_p95_length_fraction": 0.02
+  },
+  "episodes": [
+    {
+      "episode_id": "release-01",
+      "annotation": {
+        "episode_id": "release-01",
+        "pose_board_relative_s": [
+          55.15,
+          55.65
+        ],
+        "release_board_s": 55.7,
+        "board_relative_s": [
+          55.82,
+          60.4
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        55.82,
+        60.4
+      ],
+      "recorded_start_board_s": 55.823,
+      "recorded_start_excursion_rad": 0.3604853071795857,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 217,
+      "valid_camera_frames": 216,
+      "camera_coverage_fraction": 0.9953917050691244,
+      "camera_time_coverage_fraction": 0.9968201156166646,
+      "valid_geometry_fraction": 0.9953917050691244,
+      "max_camera_gap_s": 0.049767528821568874,
+      "missing_camera_intervals_board_s": [
+        [
+          55.82,
+          55.83429841273646
+        ],
+        [
+          60.39973454226078,
+          60.4
+        ]
+      ],
+      "angular_comparison_samples": 216,
+      "angular_rmse_rad": 0.04028725414378256,
+      "angular_p95_rad": 0.07225365670856612,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          484.9935897435897,
+          295.95625
+        ],
+        "radial_p95_px": 0.22916815392851292,
+        "radial_max_px": 0.37006764161650535,
+        "baseline_displacement_p95_px": 0.28265978946094295,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": true,
+        "status": "verified relative held pose",
+        "board_relative_s": [
+          55.15,
+          55.65
+        ],
+        "encoder_median_rad": 0.5997863071795868,
+        "camera_median_rad": 0.5220141279281927,
+        "encoder_spread_rad": 0.0030680000000006258,
+        "camera_spread_rad": 0.0016485770681406997,
+        "reasons": [],
+        "release_board_s": 55.7,
+        "pose_to_release_gap_s": 0.05000000000000426,
+        "release_to_free_gap_s": 0.11999999999999744,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 29,
+        "camera_coverage_fraction": 0.97730368740703,
+        "max_camera_gap_s": 0.03595216374719712,
+        "missing_camera_intervals_board_s": [
+          [
+            55.15,
+            55.158171795755266
+          ],
+          [
+            55.64682363945878,
+            55.65
+          ]
+        ],
+        "signed_disagreement_rad": 0.07777217925139414
+      },
+      "pose_verified": true,
+      "passed": true,
+      "reasons": []
+    },
+    {
+      "episode_id": "release-02",
+      "annotation": {
+        "episode_id": "release-02",
+        "pose_board_relative_s": [
+          66.85,
+          67.35
+        ],
+        "release_board_s": 67.45,
+        "board_relative_s": [
+          67.56,
+          72.0
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        67.56,
+        72.0
+      ],
+      "recorded_start_board_s": 67.563,
+      "recorded_start_excursion_rad": -0.303728,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 216,
+      "valid_camera_frames": 215,
+      "camera_coverage_fraction": 0.9953703703703703,
+      "camera_time_coverage_fraction": 0.9970292328034067,
+      "valid_geometry_fraction": 0.9953703703703703,
+      "max_camera_gap_s": 0.05018163114424112,
+      "missing_camera_intervals_board_s": [
+        [
+          67.56,
+          67.57230508760922
+        ],
+        [
+          71.99911488125635,
+          72.0
+        ]
+      ],
+      "angular_comparison_samples": 215,
+      "angular_rmse_rad": 0.04384113905889969,
+      "angular_p95_rad": 0.08148970913289699,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          484.9935897435897,
+          295.974358974359
+        ],
+        "radial_p95_px": 0.23523367862943037,
+        "radial_max_px": 0.3790457506108347,
+        "baseline_displacement_p95_px": 0.2998051050483243,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": false,
+        "status": "not verified",
+        "board_relative_s": [
+          66.85,
+          67.35
+        ],
+        "encoder_median_rad": -0.5568350000000004,
+        "camera_median_rad": -0.5470033858959853,
+        "encoder_spread_rad": 0.04295100000000007,
+        "camera_spread_rad": 0.0026309499820068916,
+        "reasons": [
+          "held pose is not stationary within provisional angular variability bound"
+        ],
+        "release_board_s": 67.45,
+        "pose_to_release_gap_s": 0.10000000000000853,
+        "release_to_free_gap_s": 0.10999999999999943,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 23,
+        "camera_coverage_fraction": 0.9536535242537809,
+        "max_camera_gap_s": 0.026979589570487406,
+        "missing_camera_intervals_board_s": [
+          [
+            66.85,
+            66.86962343887085
+          ],
+          [
+            67.34645020099774,
+            67.35
+          ]
+        ],
+        "signed_disagreement_rad": -0.009831614104015118
+      },
+      "pose_verified": false,
+      "passed": true,
+      "reasons": []
+    },
+    {
+      "episode_id": "release-03",
+      "annotation": {
+        "episode_id": "release-03",
+        "pose_board_relative_s": [
+          80.5,
+          81.0
+        ],
+        "release_board_s": 81.02,
+        "board_relative_s": [
+          81.14,
+          89.8
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        81.14,
+        89.8
+      ],
+      "recorded_start_board_s": 81.143,
+      "recorded_start_excursion_rad": 0.7409123071795867,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 410,
+      "valid_camera_frames": 410,
+      "camera_coverage_fraction": 0.9993373259847189,
+      "camera_time_coverage_fraction": 0.9993373259847189,
+      "valid_geometry_fraction": 1.0,
+      "max_camera_gap_s": 0.03867796451871186,
+      "missing_camera_intervals_board_s": [
+        [
+          81.14,
+          81.14086352589007
+        ],
+        [
+          89.79512476891773,
+          89.8
+        ]
+      ],
+      "angular_comparison_samples": 410,
+      "angular_rmse_rad": 0.06613628159572463,
+      "angular_p95_rad": 0.12139689260215704,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          484.9935897435897,
+          296.03246753246754
+        ],
+        "radial_p95_px": 0.2519072820597288,
+        "radial_max_px": 0.4640081490525419,
+        "baseline_displacement_p95_px": 0.3058107604982519,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": true,
+        "status": "verified relative held pose",
+        "board_relative_s": [
+          80.5,
+          81.0
+        ],
+        "encoder_median_rad": 1.0645823071795866,
+        "camera_median_rad": 1.0969326337515644,
+        "encoder_spread_rad": 0.012271000000000143,
+        "camera_spread_rad": 0.004421860564742407,
+        "reasons": [],
+        "release_board_s": 81.02,
+        "pose_to_release_gap_s": 0.01999999999999602,
+        "release_to_free_gap_s": 0.12000000000000455,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 24,
+        "camera_coverage_fraction": 0.9523103294685882,
+        "max_camera_gap_s": 0.03743256299269149,
+        "missing_camera_intervals_board_s": [
+          [
+            80.5,
+            80.51352312517422
+          ],
+          [
+            80.98967828990851,
+            81.0
+          ]
+        ],
+        "signed_disagreement_rad": -0.03235032657197779
+      },
+      "pose_verified": true,
+      "passed": true,
+      "reasons": []
+    },
+    {
+      "episode_id": "release-04",
+      "annotation": {
+        "episode_id": "release-04",
+        "pose_board_relative_s": [
+          101.0,
+          101.5
+        ],
+        "release_board_s": 101.56,
+        "board_relative_s": [
+          101.68,
+          110.0
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        101.68,
+        110.0
+      ],
+      "recorded_start_board_s": 101.683,
+      "recorded_start_excursion_rad": -0.651942,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 386,
+      "valid_camera_frames": 379,
+      "camera_coverage_fraction": 0.9818652849740933,
+      "camera_time_coverage_fraction": 0.9843147801527037,
+      "valid_geometry_fraction": 0.9818652849740933,
+      "max_camera_gap_s": 0.12643181009485716,
+      "missing_camera_intervals_board_s": [
+        [
+          101.68,
+          101.80643181009486
+        ],
+        [
+          109.99593078096535,
+          110.0
+        ]
+      ],
+      "angular_comparison_samples": 379,
+      "angular_rmse_rad": 0.058659106503073086,
+      "angular_p95_rad": 0.10637329841625376,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          485.0189873417722,
+          296.03246753246754
+        ],
+        "radial_p95_px": 0.2801774254850089,
+        "radial_max_px": 0.5429685242977721,
+        "baseline_displacement_p95_px": 0.32203569145993793,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": false,
+        "status": "not verified",
+        "board_relative_s": [
+          101.0,
+          101.5
+        ],
+        "encoder_median_rad": -1.015495,
+        "camera_median_rad": -0.988745630672079,
+        "encoder_spread_rad": 0.05798419999999976,
+        "camera_spread_rad": 0.015211250918617636,
+        "reasons": [
+          "held pose is not stationary within provisional angular variability bound"
+        ],
+        "release_board_s": 101.56,
+        "pose_to_release_gap_s": 0.060000000000002274,
+        "release_to_free_gap_s": 0.12000000000000455,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 26,
+        "camera_coverage_fraction": 0.9535572325689259,
+        "max_camera_gap_s": 0.0256621593498636,
+        "missing_camera_intervals_board_s": [
+          [
+            101.0,
+            101.00441201852958
+          ],
+          [
+            101.48119063481404,
+            101.5
+          ]
+        ],
+        "signed_disagreement_rad": -0.026749369327921046
+      },
+      "pose_verified": false,
+      "passed": true,
+      "reasons": []
+    },
+    {
+      "episode_id": "release-05",
+      "annotation": {
+        "episode_id": "release-05",
+        "pose_board_relative_s": [
+          122.6,
+          123.1
+        ],
+        "release_board_s": 123.23,
+        "board_relative_s": [
+          123.35,
+          134.4
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        123.35,
+        134.4
+      ],
+      "recorded_start_board_s": 123.351,
+      "recorded_start_excursion_rad": 1.2425243071795864,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 519,
+      "valid_camera_frames": 517,
+      "camera_coverage_fraction": 0.9961464354527938,
+      "camera_time_coverage_fraction": 0.99879812174827,
+      "valid_geometry_fraction": 0.9961464354527938,
+      "max_camera_gap_s": 0.051024784442716964,
+      "missing_camera_intervals_board_s": [
+        [
+          123.35,
+          123.36328068854571
+        ],
+        [
+          134.3999999338641,
+          134.4
+        ]
+      ],
+      "angular_comparison_samples": 517,
+      "angular_rmse_rad": 0.08275609621896357,
+      "angular_p95_rad": 0.15315471670374134,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          485.03246753246754,
+          296.07236842105266
+        ],
+        "radial_p95_px": 0.2933295998288245,
+        "radial_max_px": 0.6703135973820142,
+        "baseline_displacement_p95_px": 0.32331117557707206,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": true,
+        "status": "verified relative held pose",
+        "board_relative_s": [
+          122.6,
+          123.1
+        ],
+        "encoder_median_rad": 1.616816307179586,
+        "camera_median_rad": 1.6006130106438614,
+        "encoder_spread_rad": 0.02147499999999969,
+        "camera_spread_rad": 0.018579302331892533,
+        "reasons": [],
+        "release_board_s": 123.23,
+        "pose_to_release_gap_s": 0.13000000000000966,
+        "release_to_free_gap_s": 0.11999999999999034,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 26,
+        "camera_coverage_fraction": 0.9270657796880926,
+        "max_camera_gap_s": 0.02746635097545891,
+        "missing_camera_intervals_board_s": [
+          [
+            122.6,
+            122.62379035061359
+          ],
+          [
+            123.08732324045764,
+            123.1
+          ]
+        ],
+        "signed_disagreement_rad": 0.01620329653572461
+      },
+      "pose_verified": true,
+      "passed": true,
+      "reasons": []
+    },
+    {
+      "episode_id": "release-06",
+      "annotation": {
+        "episode_id": "release-06",
+        "pose_board_relative_s": [
+          162.7,
+          163.2
+        ],
+        "release_board_s": 163.22,
+        "board_relative_s": [
+          163.34,
+          174.8
+        ],
+        "reason": "Observed held-to-free transition, followed by decaying oscillation. Exact hand-clear and physical cart restraint are not independently certified; camera/pose gates remain unchanged."
+      },
+      "board_relative_s": [
+        163.34,
+        174.8
+      ],
+      "recorded_start_board_s": 163.343,
+      "recorded_start_excursion_rad": -0.9648740000000001,
+      "recorded_start_note": "First recorded excursion in free interval; not an inferred release angle.",
+      "camera_frames": 539,
+      "valid_camera_frames": 536,
+      "camera_coverage_fraction": 0.9944341372912802,
+      "camera_time_coverage_fraction": 0.9990212718870378,
+      "valid_geometry_fraction": 0.9944341372912802,
+      "max_camera_gap_s": 0.04967037740902924,
+      "missing_camera_intervals_board_s": [
+        [
+          163.34,
+          163.3413521115121
+        ],
+        [
+          174.79013588733756,
+          174.8
+        ]
+      ],
+      "angular_comparison_samples": 536,
+      "angular_rmse_rad": 0.08415082354976595,
+      "angular_p95_rad": 0.15490968519789047,
+      "pivot_motion": {
+        "metric_stationarity_established": false,
+        "provisional_fixed_pivot_screen_passed": true,
+        "radial_p95_limit_px": 4.0,
+        "median_pivot_px": [
+          485.08609649122803,
+          296.1466666666667
+        ],
+        "radial_p95_px": 0.33301890026199055,
+        "radial_max_px": 0.6218048330015625,
+        "baseline_displacement_p95_px": 0.4171124791816907,
+        "note": "Pixel pivot motion is not metric proof of cart restraint or out-of-plane stability."
+      },
+      "release_pose": {
+        "verified": false,
+        "status": "not verified",
+        "board_relative_s": [
+          162.7,
+          163.2
+        ],
+        "encoder_median_rad": -1.483359,
+        "camera_median_rad": -1.5783003899815693,
+        "encoder_spread_rad": 0.00920399999999999,
+        "camera_spread_rad": 0.011870054282854193,
+        "reasons": [
+          "camera and encoder held-pose angles disagree"
+        ],
+        "release_board_s": 163.22,
+        "pose_to_release_gap_s": 0.020000000000010232,
+        "release_to_free_gap_s": 0.12000000000000455,
+        "handling_independently_verified": false,
+        "timing_note": "Held-pose timing is bound to an annotated release only; handling between the held pose, release and free interval is not independently verified.",
+        "encoder_samples": 125,
+        "camera_frames": 32,
+        "camera_coverage_fraction": 0.979744269261289,
+        "max_camera_gap_s": 0.026236784244844102,
+        "missing_camera_intervals_board_s": [
+          [
+            162.7,
+            162.70160858859353
+          ],
+          [
+            163.19148072322417,
+            163.2
+          ]
+        ],
+        "signed_disagreement_rad": 0.0949413899815692
+      },
+      "pose_verified": false,
+      "passed": true,
+      "reasons": []
+    }
+  ],
+  "passed": true,
+  "all_release_poses_verified": false,
+  "reasons": [],
+  "absolute_angle_calibration": false,
+  "physical_cart_stationarity_certified": false,
+  "model_accepted": false,
+  "model_fitted": false,
+  "intervals_selected": false,
+  "note": "Passed means provisional camera/encoder consistency and a fixed-pivot pixel screen only. Relative angles are apparent projected angles, not absolute physical-angle calibration or model acceptance. Release poses are only reported for explicit stationary pre-release annotations.",
+  "provenance": {
+    "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "platform": "macOS-26.1-arm64-arm-64bit",
+    "sources": {
+      "__init__.py": "824ed9d13a4843244c5528134f57ac2d565a94e514219bd2ec2601678737269e",
+      "adapters.py": "17dee09aefbbacb7315831492db662693449cfd221503c350f5b71d2b5c23fec",
+      "cli.py": "0cf51892f98ebde997a07a46b99d5fad54582b1a8b5ed4a437f249aa6e95adbc",
+      "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+      "control/__init__.py": "313880d7986477c4fc543e36961bdfe03a351dc0cfb7bd37d9fb63f8fa5e0bad",
+      "control/forecast.py": "ddbb88bafda97b8fc24e7e1a52bb62a015dc0c7248ed9ea109633e1793717a77",
+      "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+      "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+      "control/policy.py": "2173b5f5eaafb8c9eb32cdf65584ee690131109595ecce5ea630efbe6c3d0a3c",
+      "control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+      "identification/__init__.py": "f0b85dad78f84dfa71c0af0df02ca52e5fc281fae580d78669e01eb5e8d8a325",
+      "identification/adapters.py": "904009b203c1a1190ce6094e6bcbf3b36cbf5f259a5876d843900923786b519d",
+      "identification/cli.py": "74a0780fa17d288438e5c2eb221d455b7f093086f4d02e03e7109fcc61b82be4",
+      "identification/experiments.py": "8c2b1c28650ea6decf9e1a01d9ed24a067eaafd64f1e0639d743b95f17ea8757",
+      "identification/finish.py": "3456f4128a531a244abe5028bd4b6bd05ffbe3dcc5a370e5a27207d62c2b878b",
+      "identification/fit.py": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+      "identification/fit_review.py": "e9c0882f3a942be3bbc33d94e07c402b83cb4c00457e9abeacd879f11c9d704d",
+      "identification/interruption_recovery.py": "af172abde559bf8eb73753c32fed1ea01c5bd14974c9677cdae194853d33436a",
+      "identification/passive.py": "5dc850ec634e1b71ff417bac0f6a31c4bc53b0bad7e82516235e3606dbf66deb",
+      "identification/passive_baseline.py": "23c4e8508f5a0943859e6d54899126e0e85037ad7927185eab3d9cbbc0df1c7a",
+      "identification/protocol.py": "f327ef4be088fdae3c0098c537bb5fa91ccec749218fb43d09b11b955b1587b5",
+      "identification/release_review.py": "dfb905689e2ddf87b4c4a8e6f5ddd6e2f44951746403cd6834d93b4eb406fcf7",
+      "identification/review.py": "3a7278780cf6fbb6d4a4a1b5d430bd599e04efd10f09dc17bd8b0305063c5a04",
+      "identification/rig_logs.py": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+      "identification/workflow.py": "e4b559e25d2b9a74ef2d66a592cca204246fe2b71f592ca1eebb6108c90d2280",
+      "learning/__init__.py": "5d9158d09f19d2799530a6abea916487d3e3b20e1f3bbaac502554eca4fb0b7a",
+      "learning/artifact.py": "77793377c16d6736fe5f81fcb6fd989a9b66aba9fbf81fc3db1a69c7b4619c6a",
+      "learning/export.py": "0486e6fc685668f67689dd7390f05d37a23a877b5a3fa744f542138f69f7aa7a",
+      "learning/model_experiment.py": "3fcfd81e9539a7b32da3afc9ba235d9c04d7a00880394376e898e9ac0a806c04",
+      "learning/model_search.py": "82a818031084794dcf85d98bcb79fd8d3350521ae8ca63585cb4b35bd22ed9fd",
+      "learning/ppo.py": "cdd6c8e35a0936de1bebc4876e9b4014af559cd81e998395836caab61d36e387",
+      "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+      "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+      "policies/__init__.py": "1ce209d208710327b8a2cd9cae7c091e54b1d944a2955910407c2ac52de22db3",
+      "policies/damping.py": "d263ccbb3acbb80cd44c8e98d8e9634146ad89a6f1ddf26d08ee181dffd56cb1",
+      "policies/executor_feedback.py": "a8168cb11d053c086ecb3e589d0fcb19a768a829b71a98c45db658a09bc773b4",
+      "policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+      "policies/neural.py": "acc03290e1b09fd7c42689f22fa1cfa8209ba1992284bc2c469bf0c3f89b1190",
+      "policies/rig_observation.py": "41ce5c64dcd47d9daf5bcb65c053f0ce6efde186a1f649904d0daeb3c3af38e2",
+      "portal/__init__.py": "4e0ea0f986dbc89c4ac868068e81bee9bd8edc899053b0bbcf76ff90834c3adb",
+      "portal/budget.py": "10f48a08f3b3314e37c9ba405a8915321e43ae40afa89015f23a954ae13a3cda",
+      "portal/harness.py": "5e220d943f84911ef5bc7e9e6c2ad965bdaf6ffa6616f4fcff0f46b993a7bd7b",
+      "portal/queue.py": "e12c4b6c2a5346aeca7f9b02718522d8e53278cec65db4c9c516e649d6b332b8",
+      "portal/sandbox.py": "900c0918aa3e6c7df6a02ee5e5864ece55f69ae827dc297695ae59b2f659dbce",
+      "portal/security.py": "582329b7c99f26c5b0f4210eb5d192c8659634d404db3e28557d51a7dfd3d776",
+      "portal/server.py": "4f529ab6b4494f0d4296fbc1b8d13004fd8ebbec5dd731685ca204b651727595",
+      "portal/worker.py": "e4f8786ad7ccca10a0c99a57d491ae6f9a4fa627662d8bf984b0903e8ad55b93",
+      "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+      "replay.py": "d6bef8d411655bd07c970f32994efa98e6b1a6c221eed56e43bc52a75dd7c94a",
+      "rig/__init__.py": "8f197f0d954e5457dfd10bd3d798dd8d3b759014e3e118a847105fe3a8290638",
+      "rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+      "rig/console.py": "180909487d7e7a028f98f2df86924baba6e024fef4d4dc87481a0c66e8285fa0",
+      "rig/parameters.py": "5ed4c1d1030ac06178459e039e6af06077a3ff70840f4cf9328798fc7c6be1a0",
+      "rig/policy.py": "f1a29f0acdaab0522a6765e23048d1d058dd41c0c80f90f8f97cfda723020de8",
+      "rig/protocol.py": "bea00edbd75eeb5325709e1befcca5f1e4dbfcc3947ea9a167ca62c24c060b80",
+      "rig/startup.py": "6efa27bab733523f9e2e42b85673e7692e1ee7bc9778a24b8927149bf51ef95e",
+      "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+      "sensing/__init__.py": "c758e1c4e278d635d67c1e2c11b135b6a84bd177cd919e8f6433628712e90b10",
+      "sensing/calibration.py": "230e0b482726e295d7d19940228938294fa5819a9380efa970371e3ebc2f156a",
+      "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+      "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+      "sensing/shadow.py": "1a30d7855266280b4503f35cc01d83369d82ed09d1ffb46bd5537630af7d04b7",
+      "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+      "sensing/telemetry.py": "7ed4f9890787f19090c18e315942220699597e76b1d7e8138e6b5e22bbd4a84b",
+      "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2",
+      "sim/__init__.py": "0ab628cd7e0f160ee8528868ab2051f10de98c69ce04b44d054bfcd21f2411a8",
+      "sim/backend.py": "1eadad422f96d8003b652bd43e5fec84b530acec75801737bc8be6b6a081b34f",
+      "sim/config.py": "48863494088e95a806cbe66fcf74d6e247d1406dad24807f819edbda55e7cb91",
+      "sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+      "sim/gym_env.py": "1bca5929575464e6ba14da384a3c7d46854b4866fcc78f8da1fa941d06d97883",
+      "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+      "sim/rig_gym_env.py": "c5ed8c2e9f8bd99d5cc423754e0ededfdf1a59095615e29e2c44fa7574a3b47e",
+      "sim/viewer.py": "795d23539f77bbdbc801e8db8adeeb3d741bee2005c3ffc44d524bfa8eca1ee4",
+      "simulation.py": "1c32358336577d14c45130db084ad3ef028e5e9753a8f9038ab92323547aa63b"
+    }
+  }
+}
