@@ -1,0 +1,428 @@
+{
+  "scope": "development diagnostics only; not a new independent validation",
+  "coefficients_unchanged": [
+    60.64177253375597,
+    0.4631556778357131,
+    6.8885413950367065
+  ],
+  "config_unchanged": {
+    "min_windows": 20,
+    "min_angle_span_rad": 0.15,
+    "max_condition": 1000,
+    "length_bounds_m": [
+      0.05,
+      1.5
+    ],
+    "angular_damping_bounds_per_s": [
+      0,
+      5
+    ],
+    "coulomb_bounds_rad_per_s2": [
+      0,
+      20
+    ],
+    "max_fitted_offset_abs_rad": 0.35,
+    "max_gap_s": 0.05,
+    "max_integral_nrmse": 0.15,
+    "prediction_horizon_s": 0.5,
+    "max_prediction_rmse_rad": 0.08,
+    "max_prediction_p95_rad": 0.15,
+    "min_prediction_windows": 3,
+    "window_s": 0.35
+  },
+  "results": [
+    {
+      "history_s": 0.04,
+      "degree": 2,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.046061563377241974,
+        "p95_rad": 0.10029156858917598,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.037063245696876836,
+            "p95_rad": 0.08162473904470768
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.05097712570743088,
+            "p95_rad": 0.1127943106106267
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.07037924761926316,
+        "p95_rad": 0.13276840877105933,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.06989230672146271,
+            "p95_rad": 0.17417804926425695
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.0460856628499323,
+            "p95_rad": 0.10434132854812603
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.0872782209632342,
+            "p95_rad": 0.17550133519339955
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.06,
+      "degree": 2,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.04844519235515512,
+        "p95_rad": 0.10865610376022018,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.03921652444559039,
+            "p95_rad": 0.08887630626604794
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.053505589203627156,
+            "p95_rad": 0.12822436912232865
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.07930032024209983,
+        "p95_rad": 0.1911967661189239,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.09153971364741904,
+            "p95_rad": 0.22680258745033713
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.05110403109556293,
+            "p95_rad": 0.11611861068221005
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.08985641194979041,
+            "p95_rad": 0.23882557120226686
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.08,
+      "degree": 2,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.043626566518370144,
+        "p95_rad": 0.08841021228106316,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.04517681008138386,
+            "p95_rad": 0.09134506046878586
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.04260851066407492,
+            "p95_rad": 0.08701382623095091
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.0717919630108074,
+        "p95_rad": 0.1578075672134934,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.0860919311804891,
+            "p95_rad": 0.22576820445063467
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.05874596610835545,
+            "p95_rad": 0.1267317049720754
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.0706354344510603,
+            "p95_rad": 0.15972071284290967
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.1,
+      "degree": 2,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.05956128470957036,
+        "p95_rad": 0.13846686161805508,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.05297727621712026,
+            "p95_rad": 0.11071309095469752
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.06340397561151902,
+            "p95_rad": 0.15238363763323762
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.06594632890423595,
+        "p95_rad": 0.15285636105934053,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.08103822325313016,
+            "p95_rad": 0.20144187576602926
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.06742392160288838,
+            "p95_rad": 0.16523313016293867
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.04960488625599096,
+            "p95_rad": 0.10073316420691199
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.06,
+      "degree": 3,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.06476675596486968,
+        "p95_rad": 0.14232708396737648,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.03826473292561856,
+            "p95_rad": 0.0772787248917285
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.07704569350986722,
+            "p95_rad": 0.17783242086197462
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.07402150192697986,
+        "p95_rad": 0.13018907159547405,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.060329823191811,
+            "p95_rad": 0.13929140219861236
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.04820563970534904,
+            "p95_rad": 0.10773400259580047
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.09902956672204637,
+            "p95_rad": 0.19432797497561183
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.08,
+      "degree": 3,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.07691273643196635,
+        "p95_rad": 0.15205543322843662,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.04123198296440804,
+            "p95_rad": 0.08661917671881869
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.0927569344135424,
+            "p95_rad": 0.18153535150804317
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.08641078557254855,
+        "p95_rad": 0.21249764800166548,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.09571020314989141,
+            "p95_rad": 0.2159110352265485
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.04594159561282888,
+            "p95_rad": 0.10242300113540106
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.10539553444594632,
+            "p95_rad": 0.25580754974369163
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.1,
+      "degree": 3,
+      "oracle_future_samples": false,
+      "training": {
+        "rmse_rad": 0.05347577497854834,
+        "p95_rad": 0.10955393527590963,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.046673124417609076,
+            "p95_rad": 0.09907139799674358
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.057394417859530845,
+            "p95_rad": 0.12175641406503943
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.093893057495129,
+        "p95_rad": 0.23442303920522145,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.10859441726777044,
+            "p95_rad": 0.24871345584142035
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.05488389732949069,
+            "p95_rad": 0.1207439445653437
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.10901035157348438,
+            "p95_rad": 0.30069156355217935
+          }
+        ]
+      }
+    },
+    {
+      "history_s": 0.04,
+      "degree": 3,
+      "oracle_future_samples": true,
+      "training": {
+        "rmse_rad": 0.055201021740835396,
+        "p95_rad": 0.1156330292756539,
+        "samples": 2866,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 9,
+            "rmse_rad": 0.032297690723852045,
+            "p95_rad": 0.07650409112969359
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 14,
+            "rmse_rad": 0.06576579556669682,
+            "p95_rad": 0.15082807889318467
+          }
+        ]
+      },
+      "old_validation_as_development": {
+        "rmse_rad": 0.0561226107585104,
+        "p95_rad": 0.09582396921124553,
+        "samples": 4375,
+        "episodes": [
+          {
+            "id": "free_decay_1",
+            "windows": 10,
+            "rmse_rad": 0.03709357935790552,
+            "p95_rad": 0.07512406745787549
+          },
+          {
+            "id": "free_decay_2",
+            "windows": 12,
+            "rmse_rad": 0.0339608101821854,
+            "p95_rad": 0.07671328216090235
+          },
+          {
+            "id": "free_decay_3",
+            "windows": 13,
+            "rmse_rad": 0.07973117550085068,
+            "p95_rad": 0.22215376589079186
+          }
+        ]
+      }
+    }
+  ],
+  "source_sha256": "4a5d380c5e52c3c68d72bc8cefcb845aaaa0126593ceed40d014ecaa5f3d6496"
+}

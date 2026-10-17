@@ -1,0 +1,42 @@
+{
+  "schema": "cartpole-passive-annotations-v1",
+  "source_sha256": "63edec18d9665fc362bef3546c05b7d74b44bf27605af87ab4002c7b3bffcb39",
+  "selected_before_scoring": true,
+  "operator_cart_restraint": "Operator held cart by hand as instructed and replied done and clear after three releases; camera pivot will be checked separately.",
+  "selection_method": "Selected from unscored strided raw encoder/image-angle preview and confirmed operator protocol, before any new-release model prediction. Start after the clear hand-hold-to-free-oscillation transition; stop at final moving half-cycle before the static tail. No model residual was used.",
+  "episodes": [
+    {
+      "episode_id": "left_nominal30",
+      "board_relative_s": [
+        74.1,
+        80.3
+      ],
+      "reason": "Unforced decay after operator release; onset handling and long static tail excluded."
+    },
+    {
+      "episode_id": "right_nominal60",
+      "board_relative_s": [
+        85.06,
+        93.5
+      ],
+      "reason": "Unforced decay after operator release; onset handling and long static tail excluded."
+    },
+    {
+      "episode_id": "left_nominal60",
+      "board_relative_s": [
+        100.82,
+        108.7
+      ],
+      "reason": "Unforced decay after operator release; onset handling and long static tail excluded."
+    }
+  ],
+  "created_utc": "2026-10-17T15:46:25.280975+00:00",
+  "preview_sha256": "143929ca083cda73378499820e4e468eb9eb9f272df40a933e87463efc99c7bd",
+  "selection_time_resolution_s": 0.04,
+  "requested_angles_only": true,
+  "limitations": [
+    "Nominal amplitudes describe instructions, not a calibrated measured angle.",
+    "Angle-history transitions plus operator confirmation do not independently show hand contact.",
+    "Camera and serial timing remain receipt proxies; neither preview nor fitted local phase is global metrology."
+  ]
+}

@@ -1,0 +1,35 @@
+Independent review of the manual repeatability evaluator, 2026-10-17
+Reviewer: capture_forecast_fast (separate from evaluator author)
+Repository: /Users/rbafna/projects/cartpole_v2
+Scope: local source/data inspection and offline tests only; no serial, SSH, hardware, calibration, model fitting, or primary-result edits.
+
+Final reviewed files:
+  evidence/system-id-20261017/tools/evaluate_manual_repeatability.py
+  SHA256 c85462fec229bfe00b953c7c3493414b94f2729f2ace74e507fad3ea31332546
+  tests/test_manual_repeatability_analysis.py
+  SHA256 90ad97401cae2369751ee00c22f75e62f9051f889ff9b1179d2723353502f607
+
+Conclusion: no unresolved substantive source-integrity, causality, or model-mapping concern found in the final candidate. This is a code/evidence-method review, not physical model acceptance. The frozen primary aggregate fails its existing prediction gate; the largest left60 release fails individually. Review does not override those results.
+
+Checks performed:
+- Annotation SHA is checked before raw loading; workflow passive admission binds exact decompressed raw bytes to annotations and a successful completed collection report, preserves duplicate-snapshot counts, and checks disabled/homed/source-reference conditions. The new assessment additionally requires the bound modern completion report and unchanged encoder reference330.
+- The original Oct16 freeze SHA and all manifest-listed artifacts are verified, with exact primary coefficient equality. No regression solve/refit is performed. Frozen short-horizon scoring is reported aggregate and per episode. Future angles cannot alter causal initial conditions or predictions in the regression tests.
+- Continuous primary uses one reset, a past11-sample raw-angle derivative, the actual MuJoCo backend, and a fixed-cart acceleration/force-saturation check. I independently matched current backend.py, config.py, model.py SHA256 values to the Oct16 MuJoCo provenance. Final code now enforces those exact source hashes, the original provenance hash, and equality of the full resolved simulator configuration.
+- Camera analysis uses raw source frame timestamps and raw image geometry/angle, with explicit same-host-clock assertion. The board-to-receipt fit is labeled a proxy, not a camera exposure clock or fitted sensor latency. Coverage, missing intervals including edges, and pixel stability are per episode. Raw angle regression is descriptive only. No stale mirrored encoder packet or old camera calibration is used for model inference.
+- The optional secondary is a separately pinned, predeclared four-coefficient Coulomb ODE. It remains separate from the viscous MuJoCo model, without parameter fitting, model selection, or promotion. Primary metrics/gates are unchanged.
+- Plot display normalization is an integer2pi branch change only. It changes neither raw-phase inference nor wrapped prediction errors.
+
+Findings resolved by author and independently checked:
+1. Missing camera frames produced geometry.coverage=None and percentage-formatting failure during plotting. Final code displays missing coverage without crashing; an end-to-end missing-frame plot regression passes.
+2. The original model-config JSON specified only length and hinge damping, leaving mutable defaults implicit. Final code pins historical simulator source files and provenance and compares every resolved configuration field against the historical full configuration. Current replay already matched those pins before the hardening.
+
+Fresh independent verification:
+  UV_CACHE_DIR=/tmp/cartpole-id-plot-cache MPLCONFIGDIR=/tmp/cartpole-id-matplotlib PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages:/Users/rbafna/projects/cartpole_v2/src uv -q run --offline --no-project --with matplotlib --with numpy --python /Users/rbafna/projects/cartpole_v2/.venv/bin/python python -m pytest -q -p no:cacheprovider tests/test_manual_repeatability_analysis.py tests/test_camera_step_pulse_analysis.py tests/test_pulse_batch_analysis.py tests/test_turning_point_initialization.py
+  Result: 33 passed in 3.80s. This includes all9 final manual-evaluator tests, all7 camera tests, all13 batch tests, and4 separately authored initialization-diagnostic tests.
+
+Remaining physical limitations are explicit, not bypassed:
+- Operator restraint and image-plane pivot stability do not establish metric cart stationarity.
+- The frozen local encoder phase is model-inferred, not independent global angle calibration.
+- Missing camera crossings can yield multicycle period intervals; these remain visible.
+- Short forecasts repeatedly initialize from past measurements; continuous trajectories answer a different sensitivity question.
+- Primary left60 mismatch cannot be dismissed based on an exploratory alternative initializer or secondary friction model.

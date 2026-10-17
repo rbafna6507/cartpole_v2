@@ -1,0 +1,715 @@
+{
+  "schema": "cartpole-frozen-pulse-batch-execution-v1",
+  "created_utc": "2026-10-17T15:39:59.392720+00:00",
+  "protocol": "evidence/system-id-20261017/analysis/pulse-batch-protocol-20261017.json",
+  "protocol_content_sha256": "2beb46c03502e6e6ee5e0b2fef09ac8589e713bdb109d5b27a276464edc8f65f",
+  "analyzer": {
+    "path": "evidence/system-id-20261017/tools/analyze_pulse_batch.py",
+    "sha256": "75e2418db08d325339d7d7bcff08a7f8d007f7a809593083cfa304dd2b745fa1"
+  },
+  "commands": [
+    {
+      "label": "primary-zero-offset",
+      "command": [
+        "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+        "/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/tools/analyze_pulse_batch.py",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl",
+        "--validation",
+        "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+        "--validation",
+        "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+        "--angle-offset-rad",
+        "0.0",
+        "--output",
+        "/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/analysis/pulse-batch-primary-zero-offset.json"
+      ],
+      "cwd": "/tmp",
+      "returncode": 2,
+      "stdout": "{\"output\": \"/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/analysis/pulse-batch-primary-zero-offset.json\", \"accepted\": false, \"reasons\": [\"angle zero bias diagnostic exceeds threshold; independently establish calibration/offset\", \"effective length outside prior bounds\", \"input gain outside prior bounds\", \"angular damping outside nonnegative bounds\", \"training integral residual exceeds threshold\", \"held-out prediction or integral residual exceeds threshold/coverage\"], \"canonical_sha256\": \"ebb9c14ca6483e6b8aa2e840f9d1f17a9bdff44eb95361ef22bb782e858d18de\", \"content_sha256\": \"6d898704e2f8e112d6f698610d32b61373ee18a29a85461e0e62b6f12bc6bf55\"}\n",
+      "stderr": ""
+    },
+    {
+      "label": "secondary-historic-offset",
+      "command": [
+        "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+        "/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/tools/analyze_pulse_batch.py",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl",
+        "--training",
+        "/private/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl",
+        "--validation",
+        "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+        "--validation",
+        "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+        "--angle-offset-rad",
+        "-0.11310915597373176",
+        "--output",
+        "/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/analysis/pulse-batch-secondary-historic-offset.json"
+      ],
+      "cwd": "/tmp",
+      "returncode": 2,
+      "stdout": "{\"output\": \"/Users/rbafna/projects/cartpole_v2/evidence/system-id-20261017/analysis/pulse-batch-secondary-historic-offset.json\", \"accepted\": false, \"reasons\": [\"angle zero bias diagnostic exceeds threshold; independently establish calibration/offset\", \"training integral residual exceeds threshold\"], \"canonical_sha256\": \"ebb9c14ca6483e6b8aa2e840f9d1f17a9bdff44eb95361ef22bb782e858d18de\", \"content_sha256\": \"8ff0d9117a7bae0a80384acd3d778f438241507de2dcad9ae56e3aa7fddcda17\"}\n",
+      "stderr": ""
+    }
+  ],
+  "comparisons": [
+    {
+      "label": "primary-zero-offset",
+      "angle_offset_rad": 0.0,
+      "accepted": false,
+      "fit_accepted": false,
+      "reasons": [
+        "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+        "effective length outside prior bounds",
+        "input gain outside prior bounds",
+        "angular damping outside nonnegative bounds",
+        "training integral residual exceeds threshold",
+        "held-out prediction or integral residual exceeds threshold/coverage"
+      ],
+      "parameters": {
+        "effective_length_m": 2.741457583751791,
+        "input_gain": 24.61250111479926,
+        "angular_damping_per_s": -4.174919693667564,
+        "damping_ratio": -1.103505220582319,
+        "delay_s": 0.0
+      },
+      "training": {
+        "segment_count": 4,
+        "sample_count": 1473,
+        "delay_profile": [
+          {
+            "delay_s": 0.0,
+            "mean_squared_integral_residual": 0.0004770928144731729
+          },
+          {
+            "delay_s": 0.005,
+            "mean_squared_integral_residual": 0.0004910439989557295
+          },
+          {
+            "delay_s": 0.01,
+            "mean_squared_integral_residual": 0.0005084370261452127
+          },
+          {
+            "delay_s": 0.015,
+            "mean_squared_integral_residual": 0.000531284910306218
+          },
+          {
+            "delay_s": 0.02,
+            "mean_squared_integral_residual": 0.00056050951299066
+          },
+          {
+            "delay_s": 0.025,
+            "mean_squared_integral_residual": 0.0005986371023575266
+          },
+          {
+            "delay_s": 0.03,
+            "mean_squared_integral_residual": 0.0006473289301470147
+          },
+          {
+            "delay_s": 0.035,
+            "mean_squared_integral_residual": 0.0007073320131774884
+          },
+          {
+            "delay_s": 0.04,
+            "mean_squared_integral_residual": 0.0007769119750512459
+          },
+          {
+            "delay_s": 0.045,
+            "mean_squared_integral_residual": 0.0008452438297491385
+          },
+          {
+            "delay_s": 0.05,
+            "mean_squared_integral_residual": 0.0008969310726691631
+          },
+          {
+            "delay_s": 0.055,
+            "mean_squared_integral_residual": 0.000912250694755776
+          },
+          {
+            "delay_s": 0.06,
+            "mean_squared_integral_residual": 0.0008865790332521948
+          },
+          {
+            "delay_s": 0.065,
+            "mean_squared_integral_residual": 0.0008332634388283891
+          },
+          {
+            "delay_s": 0.07,
+            "mean_squared_integral_residual": 0.0007673007936612434
+          },
+          {
+            "delay_s": 0.075,
+            "mean_squared_integral_residual": 0.0007058829647142346
+          },
+          {
+            "delay_s": 0.08,
+            "mean_squared_integral_residual": 0.0006506360720360283
+          },
+          {
+            "delay_s": 0.085,
+            "mean_squared_integral_residual": 0.0006065233329457306
+          },
+          {
+            "delay_s": 0.09,
+            "mean_squared_integral_residual": 0.000569395870824868
+          },
+          {
+            "delay_s": 0.095,
+            "mean_squared_integral_residual": 0.0005402349032848202
+          },
+          {
+            "delay_s": 0.1,
+            "mean_squared_integral_residual": 0.0005156829144248365
+          }
+        ],
+        "angle_zero_diagnostic": {
+          "rank": 5,
+          "condition": 8.850454972001726,
+          "identifiable": true,
+          "gravity_offset_rad": -0.10507440699669382,
+          "input_offset_rad": 1.0619943881986105
+        },
+        "window_count": 40,
+        "rank": 3,
+        "condition": 1.9205674542950482,
+        "integral_nrmse": 0.5116802448538146,
+        "angle_span_rad": 0.36815530717958644,
+        "acceleration_std_m_s2": 0.3353512344194643
+      },
+      "validation": {
+        "prediction_windows": 14,
+        "prediction_samples": 700,
+        "prediction_rmse_rad": 0.6455186651539409,
+        "prediction_p95_rad": 1.4813362305861872,
+        "horizon_s": 0.5,
+        "segment_count": 2,
+        "integral_nrmse": 0.7079115137015374
+      },
+      "supplemental_validation": {
+        "passed": true,
+        "per_run": [
+          {
+            "run_id": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+            "spec": "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+            "segment_count": 1,
+            "eligible_samples": 368,
+            "angle_span_rad": 0.5522323071795863,
+            "acceleration_std_m_s2": 0.6387461269266841,
+            "passed": true
+          },
+          {
+            "run_id": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+            "spec": "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+            "segment_count": 1,
+            "eligible_samples": 368,
+            "angle_span_rad": 0.547630307179586,
+            "acceleration_std_m_s2": 0.6419339373740857,
+            "passed": true
+          }
+        ],
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_std_m_s2": 0.05,
+        "rationale": "Each reserved validation run must excite angle and input; static perfect forecasts cannot validate dynamics."
+      },
+      "per_run": [
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl",
+          "source_sha256": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.13959543703972818,
+            "prediction_p95_rad": 0.3605850143727162,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.16260200000000014,
+          "acceleration_std_m_s2": 0.21169417486476208
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl",
+          "source_sha256": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.2505780305455281,
+            "prediction_p95_rad": 0.5719223809545442,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.1672039999999999,
+          "acceleration_std_m_s2": 0.2114806337532442
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl",
+          "source_sha256": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.3767596804083228,
+            "prediction_p95_rad": 0.831377563476904,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.36815530717958644,
+          "acceleration_std_m_s2": 0.42579571809856276
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl",
+          "source_sha256": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.44327001143456624,
+            "prediction_p95_rad": 1.1102514463989694,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.35281530717958676,
+          "acceleration_std_m_s2": 0.4233027722357019
+        },
+        {
+          "role": "validation",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+          "source_sha256": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.6347445985120709,
+            "prediction_p95_rad": 1.4077760479198247,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.5522323071795863,
+          "acceleration_std_m_s2": 0.6387461269266841
+        },
+        {
+          "role": "validation",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+          "source_sha256": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.6561158348828361,
+            "prediction_p95_rad": 1.6074913874094552,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.547630307179586,
+          "acceleration_std_m_s2": 0.6419339373740857
+        }
+      ],
+      "report": "evidence/system-id-20261017/analysis/pulse-batch-primary-zero-offset.json",
+      "report_sha256": "2aa72ca8f21c1a6f85c24d972bf57f42ec86ced32781185f3c2f222e8551664f"
+    },
+    {
+      "label": "secondary-historic-offset",
+      "angle_offset_rad": -0.11310915597373176,
+      "accepted": false,
+      "fit_accepted": false,
+      "reasons": [
+        "angle zero bias diagnostic exceeds threshold; independently establish calibration/offset",
+        "training integral residual exceeds threshold"
+      ],
+      "parameters": {
+        "effective_length_m": 0.17495666900586254,
+        "input_gain": 1.4090298851472376,
+        "angular_damping_per_s": 1.4361917821680357,
+        "damping_ratio": 0.09589880353942447,
+        "delay_s": 0.0
+      },
+      "training": {
+        "segment_count": 4,
+        "sample_count": 1473,
+        "delay_profile": [
+          {
+            "delay_s": 0.0,
+            "mean_squared_integral_residual": 0.00011645845458143967
+          },
+          {
+            "delay_s": 0.005,
+            "mean_squared_integral_residual": 0.00011677415068814178
+          },
+          {
+            "delay_s": 0.01,
+            "mean_squared_integral_residual": 0.00011815996003222127
+          },
+          {
+            "delay_s": 0.015,
+            "mean_squared_integral_residual": 0.00012131333398664534
+          },
+          {
+            "delay_s": 0.02,
+            "mean_squared_integral_residual": 0.00012713270107252782
+          },
+          {
+            "delay_s": 0.025,
+            "mean_squared_integral_residual": 0.00013723515067885647
+          },
+          {
+            "delay_s": 0.03,
+            "mean_squared_integral_residual": 0.00015380745302788192
+          },
+          {
+            "delay_s": 0.035,
+            "mean_squared_integral_residual": 0.00017983165040570218
+          },
+          {
+            "delay_s": 0.04,
+            "mean_squared_integral_residual": 0.00021917841270841388
+          },
+          {
+            "delay_s": 0.045,
+            "mean_squared_integral_residual": 0.00027282602913785055
+          },
+          {
+            "delay_s": 0.05,
+            "mean_squared_integral_residual": 0.0003390044002114632
+          },
+          {
+            "delay_s": 0.055,
+            "mean_squared_integral_residual": 0.0004026583801527665
+          },
+          {
+            "delay_s": 0.06,
+            "mean_squared_integral_residual": 0.0004493350221488754
+          },
+          {
+            "delay_s": 0.065,
+            "mean_squared_integral_residual": 0.0004669263623029524
+          },
+          {
+            "delay_s": 0.07,
+            "mean_squared_integral_residual": 0.00045993726144825145
+          },
+          {
+            "delay_s": 0.075,
+            "mean_squared_integral_residual": 0.00043879099010574836
+          },
+          {
+            "delay_s": 0.08,
+            "mean_squared_integral_residual": 0.00041109904461598663
+          },
+          {
+            "delay_s": 0.085,
+            "mean_squared_integral_residual": 0.00038393488394600184
+          },
+          {
+            "delay_s": 0.09,
+            "mean_squared_integral_residual": 0.0003577252666035331
+          },
+          {
+            "delay_s": 0.095,
+            "mean_squared_integral_residual": 0.0003349127820933071
+          },
+          {
+            "delay_s": 0.1,
+            "mean_squared_integral_residual": 0.0003140044431602861
+          }
+        ],
+        "angle_zero_diagnostic": {
+          "rank": 5,
+          "condition": 3.2428899724372364,
+          "identifiable": true,
+          "gravity_offset_rad": 0.008034748977038092,
+          "input_offset_rad": 1.1751035441723425
+        },
+        "window_count": 40,
+        "rank": 3,
+        "condition": 3.1165718416753965,
+        "integral_nrmse": 0.25280329104826343,
+        "angle_span_rad": 0.36815530717958644,
+        "acceleration_std_m_s2": 0.3353512344194643
+      },
+      "validation": {
+        "prediction_windows": 14,
+        "prediction_samples": 700,
+        "prediction_rmse_rad": 0.027372090141153643,
+        "prediction_p95_rad": 0.058077144712785515,
+        "horizon_s": 0.5,
+        "segment_count": 2,
+        "integral_nrmse": 0.13544884970394708
+      },
+      "supplemental_validation": {
+        "passed": true,
+        "per_run": [
+          {
+            "run_id": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+            "spec": "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+            "segment_count": 1,
+            "eligible_samples": 368,
+            "angle_span_rad": 0.5522323071795863,
+            "acceleration_std_m_s2": 0.6387461269266841,
+            "passed": true
+          },
+          {
+            "run_id": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+            "spec": "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+            "segment_count": 1,
+            "eligible_samples": 368,
+            "angle_span_rad": 0.547630307179586,
+            "acceleration_std_m_s2": 0.6419339373740857,
+            "passed": true
+          }
+        ],
+        "min_angle_span_rad": 0.15,
+        "min_acceleration_std_m_s2": 0.05,
+        "rationale": "Each reserved validation run must excite angle and input; static perfect forecasts cannot validate dynamics."
+      },
+      "per_run": [
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl",
+          "source_sha256": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.0316022071218517,
+            "prediction_p95_rad": 0.050595117838407845,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.16260200000000014,
+          "acceleration_std_m_s2": 0.21169417486476208
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl",
+          "source_sha256": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.022802237362417183,
+            "prediction_p95_rad": 0.045540383241174195,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.1672039999999999,
+          "acceleration_std_m_s2": 0.2114806337532442
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl",
+          "source_sha256": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.025910914903443858,
+            "prediction_p95_rad": 0.06528765380899222,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.36815530717958644,
+          "acceleration_std_m_s2": 0.42579571809856276
+        },
+        {
+          "role": "training",
+          "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl",
+          "source_sha256": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.018625919507890484,
+            "prediction_p95_rad": 0.044267551261241225,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.35281530717958676,
+          "acceleration_std_m_s2": 0.4233027722357019
+        },
+        {
+          "role": "validation",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+          "source_sha256": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.032276240433102704,
+            "prediction_p95_rad": 0.07829246251384468,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.5522323071795863,
+          "acceleration_std_m_s2": 0.6387461269266841
+        },
+        {
+          "role": "validation",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+          "source_sha256": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+          "prediction": {
+            "prediction_windows": 7,
+            "prediction_samples": 350,
+            "prediction_rmse_rad": 0.021370702863860773,
+            "prediction_p95_rad": 0.047336418505467194,
+            "horizon_s": 0.5
+          },
+          "angle_span_rad": 0.547630307179586,
+          "acceleration_std_m_s2": 0.6419339373740857
+        }
+      ],
+      "report": "evidence/system-id-20261017/analysis/pulse-batch-secondary-historic-offset.json",
+      "report_sha256": "2e643e93c94af8cf39a1432972f41b4734568bb1aab080f38703adba189bc621"
+    }
+  ],
+  "protocol_deviations": [
+    {
+      "run": "pulse-pos30-validation-01",
+      "identity": {
+        "path": "/private/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/rig-1792251392485915069-2460486791.jsonl",
+        "member": null,
+        "sha256": "da0cce0f7cc0b053eb8f143e11d2609ecb03ffd01783b5072516a5c0c61912eb",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 548514,
+        "record_count": 1814,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "10e7177f8598a0de1fd59d4071de5179aa56ab47dc537bcf356428f3b85c4028",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-pos30-validation-01/report.json"
+        }
+      },
+      "ringdown_summary": [
+        {
+          "clamped_commands": 2,
+          "elapsed_board_s": 3.67,
+          "fit_protocol_deviation_clamped": true,
+          "hold_max_abs_v_m_s": 0.007330867,
+          "hold_max_abs_x_m": 0.00045,
+          "hold_type": "feedback_cart_hold",
+          "host_monotonic_ns": 346692554043263,
+          "physical_cart_fixed": false,
+          "type": "ringdown_summary"
+        }
+      ],
+      "clamped_reference_count": 2,
+      "clamped_references": [
+        {
+          "a_reference": -2.7950213147143637,
+          "board_ns": 3226971314000,
+          "clamped": true,
+          "command": -3.0,
+          "host_monotonic_ns": 346689193226451,
+          "host_policy_ns": 346689193115500,
+          "jerk_reference": -3.2698083642845197,
+          "observation_sequence": 153546309,
+          "omega": 0.02216429,
+          "phase": "pulse",
+          "t_s": 0.32,
+          "tail_is_independent_physical_proof": false,
+          "theta": 3.124719,
+          "type": "ringdown_reference",
+          "unclamped_command": -3.0249381602992007,
+          "v": 0.02422487,
+          "v_reference": 0.014002369414362626,
+          "x": 0.03105,
+          "x_reference": 0.029964977032676077
+        },
+        {
+          "a_reference": -2.7950213147143637,
+          "board_ns": 3226981314000,
+          "clamped": true,
+          "command": -3.0,
+          "host_monotonic_ns": 346689203914407,
+          "host_policy_ns": 346689203775542,
+          "jerk_reference": 3.269808364284473,
+          "observation_sequence": 153546319,
+          "omega": -0.1864879,
+          "phase": "pulse",
+          "t_s": 0.33,
+          "tail_is_independent_physical_proof": false,
+          "theta": 3.110913,
+          "type": "ringdown_reference",
+          "unclamped_command": -3.0066536699013513,
+          "v": -0.005728761,
+          "v_reference": -0.014002369414362427,
+          "x": 0.0311625,
+          "x_reference": 0.029964977032676077
+        }
+      ],
+      "interpretation": "Two demand-clamped samples are a recorded protocol deviation. MCU acceleration remains commanded input; no independent metric cart gain or physical acceleration is established."
+    },
+    {
+      "run": "pulse-neg30-validation-01",
+      "identity": {
+        "path": "/private/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/rig-1792251425299015395-452682805.jsonl",
+        "member": null,
+        "sha256": "fb65e5b131b3a572282cd7189cba658a39067913acb88ba6bc5fa266923bfd23",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 547067,
+        "record_count": 1813,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "bea494bfcdcc57c5e076764a47af894237dafeda5bcc481f821f71e7e7241a85",
+          "path": "/tmp/cartpole-id-20261017-data/validation/pulse-neg30-validation-01/report.json"
+        }
+      },
+      "ringdown_summary": [
+        {
+          "clamped_commands": 2,
+          "elapsed_board_s": 3.67,
+          "fit_protocol_deviation_clamped": true,
+          "hold_max_abs_v_m_s": 0.007838797,
+          "hold_max_abs_x_m": 0.0005625,
+          "hold_type": "feedback_cart_hold",
+          "host_monotonic_ns": 346725379287040,
+          "physical_cart_fixed": false,
+          "type": "ringdown_summary"
+        }
+      ],
+      "clamped_reference_count": 2,
+      "clamped_references": [
+        {
+          "a_reference": 2.7950213147143637,
+          "board_ns": 3259785314000,
+          "clamped": true,
+          "command": 3.0,
+          "host_monotonic_ns": 346722019181949,
+          "host_policy_ns": 346722019063699,
+          "jerk_reference": 3.2698083642845197,
+          "observation_sequence": 153579123,
+          "omega": 0.207904,
+          "phase": "pulse",
+          "t_s": 0.32,
+          "tail_is_independent_physical_proof": false,
+          "theta": 2.931437,
+          "type": "ringdown_reference",
+          "unclamped_command": 3.044649000299201,
+          "v": -0.02498993,
+          "v_reference": -0.014002369414362626,
+          "x": -0.0311625,
+          "x_reference": -0.029964977032676077
+        },
+        {
+          "a_reference": 2.7950213147143637,
+          "board_ns": 3259795314000,
+          "clamped": true,
+          "command": 3.0,
+          "host_monotonic_ns": 346722029126599,
+          "host_policy_ns": 346722028989910,
+          "jerk_reference": -3.269808364284473,
+          "observation_sequence": 153579133,
+          "omega": 0.4298654,
+          "phase": "pulse",
+          "t_s": 0.33,
+          "tail_is_independent_physical_proof": false,
+          "theta": 2.939107,
+          "type": "ringdown_reference",
+          "unclamped_command": 3.025806483901351,
+          "v": 0.00500356,
+          "v_reference": 0.014002369414362427,
+          "x": -0.031275,
+          "x_reference": -0.029964977032676077
+        }
+      ],
+      "interpretation": "Two demand-clamped samples are a recorded protocol deviation. MCU acceleration remains commanded input; no independent metric cart gain or physical acceleration is established."
+    }
+  ],
+  "interpretation": "Primary/secondary comparisons were frozen before validation. Secondary historic phase is diagnostic only. Both validation pulses clamped2 samples each; preserve this deviation even if statistical gates pass. No model promotion or physical cart calibration.",
+  "prediction_method": "Existing fitter _predict,0.5s horizons; initialization uses past7 raw angle samples with causal quadratic derivative; MCU filtered omega omitted. Separate run/invalid/gap boundaries preserved.",
+  "content_sha256": "f81989e0a13a93b159674c420a6dac76ed8f4cb5ab559f138a82c0ff028627b2"
+}

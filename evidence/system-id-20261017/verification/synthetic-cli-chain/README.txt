@@ -1,0 +1,1 @@
+Synthetic software verification only. Independent midpoint integration generated raw passive data. All commands used the real scripts/system-id launcher with cwd=/tmp and package syncing disabled. The accepted model is synthetic; never use it as physical identification evidence. See verification.json for commands, hashes and outcomes.

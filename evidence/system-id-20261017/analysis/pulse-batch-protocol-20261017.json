@@ -1,0 +1,253 @@
+{
+  "schema": "cartpole-pulse-batch-protocol-v1",
+  "status": "frozen before signed30mm validation collection",
+  "analyzer": {
+    "path": "evidence/system-id-20261017/tools/analyze_pulse_batch.py",
+    "sha256": "75e2418db08d325339d7d7bcff08a7f8d007f7a809593083cfa304dd2b745fa1"
+  },
+  "frozen_sdk_sources": {
+    "src/cartpole_sdk/identification/fit.py": "0ad92368e93593235438f6dc12601091f03f9aee2c844a42a6392efd6cde1a76",
+    "src/cartpole_sdk/identification/rig_logs.py": "51c5ebf1dfef771fbc3271c2658ceb57e9fe783737ea5ed2bb6db434dd8d77dc",
+    "src/cartpole_sdk/identification/workflow.py": "8b9d1bbc9d643a1604cc766e4fb6ee4bfd39284827e99c4bd9805e30c308556d"
+  },
+  "training": [
+    {
+      "run": "pulse-pos10-short-01",
+      "source": {
+        "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/rig-1792250840099537825-603601495.jsonl",
+        "member": null,
+        "sha256": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 543570,
+        "record_count": 1814,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "c365564bc8f6d0cf6ee913306e183112220aded1473c3eed83e340b8dc78c928",
+          "path": "/tmp/cartpole-id-20261017-data/training/pulse-pos10-short-01/report.json"
+        }
+      },
+      "admission": {
+        "run_id": "32ac167b7c4ef9d4520a5c22a80d1534156f204c542bae4555abd653ac16ada8",
+        "session_id": "603601495",
+        "clock_id": "teensy:603601495",
+        "total_states": 467,
+        "eligible_states": 368,
+        "excluded_states": 99,
+        "duplicate_states": 1,
+        "exclusion_counts": {
+          "outside control interval": 99,
+          "unhealthy, unhomed, disabled or calibrating": 99,
+          "reference not yet available": 3
+        },
+        "calibration_ids": [
+          "executor-v6-measuredrail:upright:330"
+        ],
+        "angle_field": "theta",
+        "acceleration_field": "acceleration",
+        "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+        "rate_channel": "omitted: filtered omega has unknown effective delay"
+      }
+    },
+    {
+      "run": "pulse-neg10-short-01",
+      "source": {
+        "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/rig-1792251144579226926-1769055283.jsonl",
+        "member": null,
+        "sha256": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 547759,
+        "record_count": 1817,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "67ec89cff128205f36c612b931064833b9a82d2f27a85cade2f5d747aeb622a9",
+          "path": "/tmp/cartpole-id-20261017-data/training/pulse-neg10-short-01/report.json"
+        }
+      },
+      "admission": {
+        "run_id": "69ad535d78dd9ce698b1eb010edc36d8315e1c2b3609eee2dc7606c1e1a7193d",
+        "session_id": "1769055283",
+        "clock_id": "teensy:1769055283",
+        "total_states": 468,
+        "eligible_states": 369,
+        "excluded_states": 99,
+        "duplicate_states": 0,
+        "exclusion_counts": {
+          "outside control interval": 99,
+          "unhealthy, unhomed, disabled or calibrating": 99,
+          "reference not yet available": 3
+        },
+        "calibration_ids": [
+          "executor-v6-measuredrail:upright:330"
+        ],
+        "angle_field": "theta",
+        "acceleration_field": "acceleration",
+        "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+        "rate_channel": "omitted: filtered omega has unknown effective delay"
+      }
+    },
+    {
+      "run": "pulse-pos20-short-01",
+      "source": {
+        "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/rig-1792251163070272409-3595009480.jsonl",
+        "member": null,
+        "sha256": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 543776,
+        "record_count": 1810,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "8079ff06b72875086565c50eefc95128496c579364ae356c86cb9f1319e88879",
+          "path": "/tmp/cartpole-id-20261017-data/training/pulse-pos20-short-01/report.json"
+        }
+      },
+      "admission": {
+        "run_id": "d9cb8ad784b42c0de2d269e4b36ee0500561ab7a8e53f242ca5476fa201285cf",
+        "session_id": "3595009480",
+        "clock_id": "teensy:3595009480",
+        "total_states": 467,
+        "eligible_states": 368,
+        "excluded_states": 99,
+        "duplicate_states": 0,
+        "exclusion_counts": {
+          "outside control interval": 99,
+          "unhealthy, unhomed, disabled or calibrating": 99,
+          "reference not yet available": 3
+        },
+        "calibration_ids": [
+          "executor-v6-measuredrail:upright:330"
+        ],
+        "angle_field": "theta",
+        "acceleration_field": "acceleration",
+        "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+        "rate_channel": "omitted: filtered omega has unknown effective delay"
+      }
+    },
+    {
+      "run": "pulse-neg20-short-01",
+      "source": {
+        "path": "/private/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/rig-1792251191873287279-352096939.jsonl",
+        "member": null,
+        "sha256": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6",
+        "hash_basis": "decompressed exact JSONL bytes",
+        "source_bytes": 544715,
+        "record_count": 1816,
+        "collection_report": {
+          "status": "bound successful collection",
+          "completed": true,
+          "sha256": "a4481a7c247912cd90c76f1bad92e510eb2f28f88516eeba7364fab8130a5f11",
+          "path": "/tmp/cartpole-id-20261017-data/training/pulse-neg20-short-01/report.json"
+        }
+      },
+      "admission": {
+        "run_id": "fa6050e60b520123e6babef3aa2131fd220305368bb598674b7b45373d6ec7b6",
+        "session_id": "352096939",
+        "clock_id": "teensy:352096939",
+        "total_states": 467,
+        "eligible_states": 368,
+        "excluded_states": 99,
+        "duplicate_states": 1,
+        "exclusion_counts": {
+          "outside control interval": 99,
+          "unhealthy, unhomed, disabled or calibrating": 99,
+          "reference not yet available": 3
+        },
+        "calibration_ids": [
+          "executor-v6-measuredrail:upright:330"
+        ],
+        "angle_field": "theta",
+        "acceleration_field": "acceleration",
+        "time_basis": "board acquisition snapshot proxy; sensor/input latency not independently calibrated",
+        "rate_channel": "omitted: filtered omega has unknown effective delay"
+      }
+    }
+  ],
+  "validation_reserved": [
+    {
+      "amplitude_mm": 30,
+      "source_identity": "not yet collected"
+    },
+    {
+      "amplitude_mm": -30,
+      "source_identity": "not yet collected"
+    }
+  ],
+  "fitter_config": {
+    "gravity_m_s2": 9.81,
+    "length_bounds_m": [
+      0.05,
+      1.5
+    ],
+    "gain_bounds": [
+      0.05,
+      3.0
+    ],
+    "max_damping_per_s": 5.0,
+    "angle_offset_rad": 0.0,
+    "max_angle_zero_bias_rad": 0.02,
+    "max_gap_s": 0.05,
+    "window_s": 0.35,
+    "delay_candidates_s": [
+      0.0,
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055,
+      0.06,
+      0.065,
+      0.07,
+      0.075,
+      0.08,
+      0.085,
+      0.09,
+      0.095,
+      0.1
+    ],
+    "min_windows": 20,
+    "max_condition": 1000.0,
+    "min_angle_span_rad": 0.15,
+    "min_acceleration_rms_m_s2": 0.05,
+    "prediction_horizon_s": 0.5,
+    "max_prediction_rmse_rad": 0.08,
+    "max_prediction_p95_rad": 0.15,
+    "max_integral_nrmse": 0.15
+  },
+  "supplemental_validation": {
+    "each_run_required": true,
+    "min_angle_span_rad": 0.15,
+    "min_acceleration_std_m_s2": 0.05
+  },
+  "analysis_clock": {
+    "inter_run_gap_s": 1.0,
+    "preserve_within_run_deltas": true,
+    "resample": false
+  },
+  "comparisons": [
+    {
+      "role": "primary",
+      "angle_offset_rad": 0.0,
+      "diagnostic_only": false
+    },
+    {
+      "role": "predeclared secondary diagnostic",
+      "angle_offset_rad": -0.11310915597373176,
+      "diagnostic_only": true,
+      "global_calibration_established": false
+    }
+  ],
+  "decisions": [
+    "Use all four declared completed training runs and both independent signed30mm validation runs.",
+    "Do not adjust thresholds, select a favorable validation subset, or promote the historic phase as global calibration.",
+    "Preserve rejected outputs and underlying fitter results; MCU acceleration is commanded input, not a physical cart measurement."
+  ],
+  "content_sha256": "2beb46c03502e6e6ee5e0b2fef09ac8589e713bdb109d5b27a276464edc8f65f"
+}

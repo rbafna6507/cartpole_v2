@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+# Help needs only the base SDK, even for a hardware/simulation subcommand.
+for argument in "$@"; do
+    if [ "$argument" = "--help" ] || [ "$argument" = "-h" ]; then
+        exec uv run --project "$repo_dir" python -m cartpole_sdk.identification.cli "$@"
+    fi
+done
+case "${1:-}" in
+    assumptions-template|export-model|gym-smoke)
+        exec uv run --project "$repo_dir" --extra sim python -m cartpole_sdk.identification.cli "$@" ;;
+    inspect|collect-passive|collect-pulse)
+        exec uv run --project "$repo_dir" --extra hardware --extra id python -m cartpole_sdk.identification.cli "$@" ;;
+    fit-passive|fit-driven|annotations-template)
+        exec uv run --project "$repo_dir" --extra id python -m cartpole_sdk.identification.cli "$@" ;;
+    *)
+        exec uv run --project "$repo_dir" python -m cartpole_sdk.identification.cli "$@" ;;
+esac

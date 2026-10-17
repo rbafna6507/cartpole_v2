@@ -1,0 +1,18 @@
+{
+  "simulation_config": {
+    "physics_dt_ns": 1000000,
+    "control_steps": 10,
+    "max_steps": 10000,
+    "rail_half_m": 0.26,
+    "effective_length_m": 0.124,
+    "cart_mass_kg": 0.35,
+    "pole_mass_kg": 0.02275,
+    "cart_damping": 0.05,
+    "hinge_damping": 0.0001,
+    "max_force_n": 20.0,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 1000000000
+  },
+  "rationale": "",
+  "instructions": "Review all assumed masses, force, rail and actuator limits; provide rationale. Export replaces only effective length and mapped hinge damping. control_steps=10 with1ms physics gives100Hz."
+}

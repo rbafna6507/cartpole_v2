@@ -33,6 +33,12 @@ _NS_TICK = 1_000_000
 _RETURN_SECONDS = 15.
 _RETURN_CONFIRMATION_SECONDS = .25
 
+def _acceleration_text(value):
+    # Fixed decimal precision avoids strtof ERANGE on nonzero subnormals.
+    # Rounding adds at most 5e-10 m/s² before the firmware's float32 conversion;
+    # every nonzero token is at least 1e-9. Callers validate finiteness/bounds.
+    return f'{value:.9f}'
+
 class Rig:
     """Context management connects stopped and stops in finally.
 
@@ -708,7 +714,8 @@ class Rig:
         sequence = self._sequence+1
         if sequence>UINT32:
             raise ValidationError('action sequence exhausted; stop before a new lease')
-        self._send(f'V2 {command} {self._sid} {sequence} {state.tick} {ttl_ms} {value:.9g}')
+        value_text = _acceleration_text(value) if command == 'A' else f'{value:.9g}'
+        self._send(f'V2 {command} {self._sid} {sequence} {state.tick} {ttl_ms} {value_text}')
         self._sequence = sequence
         return sequence
 
@@ -746,7 +753,7 @@ class Rig:
         ttl = (request.expires_at_ns-observation.available_ns)//_NS_TICK
         if ticks>20 or not 1<=ttl<=50 or ticks>=ttl:
             raise ValidationError('observed tick age or anchored TTL invalid')
-        self._send(f'V2 A {self._sid} {request.sequence} {observed.tick} {ttl} {request.acceleration_m_s2:.9g}')
+        self._send(f'V2 A {self._sid} {request.sequence} {observed.tick} {ttl} {_acceleration_text(request.acceleration_m_s2)}')
         self._sequence = request.sequence
         self._record('action_request', request=asdict(request))
         return self.observation()

@@ -1,0 +1,58 @@
+{
+  "source_hashes": {
+    "comparison": "5a4633a8a29239662caac3ed6846cb4319baee46c1b6d846f5999db4006973c9",
+    "data": "183dc05f790630640cc22ae8a1e90c469cac9dc92faec26c80436f7b427e1a5f",
+    "annotation": "8d26fa57c18055de73355657584cc3e2bd7b3e176c5dadb8c414691490c40d9b",
+    "config": "cc878a16d1611f8f03534a44611f9172c0eab2d2c968a6ce1f0c351b5880c7e0"
+  },
+  "continuous": [
+    {
+      "episode": "free_decay_1",
+      "initial_time": 31.102,
+      "excluded_initial_s": 0.10200000000000031,
+      "past_velocity_support_s": 0.03999999999999915,
+      "duration_s": 5.296000000000003,
+      "samples": 1324,
+      "rms_deg": 2.9020006462786445,
+      "p95_deg": 5.055965791252356,
+      "max_prediction_discrepancy_rad": 3.566591466608315e-15,
+      "force_saturated": false,
+      "max_abs_cart_x_m": 3.846136635188771e-18
+    },
+    {
+      "episode": "free_decay_2",
+      "initial_time": 44.902,
+      "excluded_initial_s": 0.10200000000000387,
+      "past_velocity_support_s": 0.03999999999999915,
+      "duration_s": 6.295999999999999,
+      "samples": 1574,
+      "rms_deg": 3.2684612465465936,
+      "p95_deg": 5.501411469200268,
+      "max_prediction_discrepancy_rad": 1.0661610483353456e-14,
+      "force_saturated": false,
+      "max_abs_cart_x_m": 4.633325657709288e-18
+    },
+    {
+      "episode": "free_decay_3",
+      "initial_time": 63.106,
+      "excluded_initial_s": 0.10600000000000165,
+      "past_velocity_support_s": 0.03999999999999915,
+      "duration_s": 6.892000000000003,
+      "samples": 1723,
+      "rms_deg": 7.818908248069232,
+      "p95_deg": 13.302398491596447,
+      "max_prediction_discrepancy_rad": 2.3120394487818885e-14,
+      "force_saturated": false,
+      "max_abs_cart_x_m": 1.226999540129542e-18
+    }
+  ],
+  "initialization": "one raw-angle initial condition per release, past11 samples only; no coefficient fitting or per-window reset",
+  "scope": "continuous diagnostic excludes first approximately0.1s initialization prefix; fixed-cart assumption, local hanging phase, no hardware/RL promotion",
+  "verified_artifact": {
+    "path": "evidence/system-id-20261017/analysis/comparison-verified/comparison.json",
+    "sha256": "ea4031dce17846fa170f62e52ebeb1b9032b25bcaa04b36055787f6c8c7504ae",
+    "readings_exactly_match_independently_reproduced_artifact": true,
+    "annotation_phase_checks_present": true,
+    "sdk_source_pins_verified": true
+  }
+}

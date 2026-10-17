@@ -1,0 +1,562 @@
+{
+  "status": "frozen heldout statistical assessment; physical promotion remains separate",
+  "selected_model_unchanged": "viscous",
+  "recommended_model": null,
+  "parameters_refitted": false,
+  "independent_angle_calibration": false,
+  "physical_stationarity_certified": false,
+  "provenance": {
+    "freeze_manifest_sha256": "04befe14b16a54e5288d4326a7ca5d826e8c5a169dc20206dd1108ea160aa744",
+    "export_sha256": "183dc05f790630640cc22ae8a1e90c469cac9dc92faec26c80436f7b427e1a5f",
+    "source_hashes": {
+      "rig-1792183281283189743-703304915.jsonl": "968cbd1ed2742a2121e18c974532663393f16e208082000d29c4c50f81f64f60",
+      "vision.ndjson": "8b7515dc11dc01bb603d5000b3f208e23980067ffd26698897e9b1a3a1ca13e5",
+      "report.json": "cc391181984d2fe98e9b66438e4fb747290bed4adad052a4cf09d3281d568f34",
+      "vision-report.json": "321480816ebf7b9a601a83fd8ea375813efca2c0c947f23f2c1635de4a990886"
+    },
+    "annotation_sha256": "8d26fa57c18055de73355657584cc3e2bd7b3e176c5dadb8c414691490c40d9b",
+    "evaluator_sha256": "89d707d9e8f7bcb7973b0af6a3b1793e6aea00c7f9fe4e6c020c0e97d79f9073",
+    "frozen_source_pins": {
+      "passive-plan.json": {
+        "sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+        "bytes": 3417
+      },
+      "passive_fit.py": {
+        "sha256": "5b8c42c450fb43cad78499af287c09def094c7e62ce64c799ab5faf8de96d3d9",
+        "bytes": 12118
+      },
+      "test_passive_fit.py": {
+        "sha256": "d44e33e0f15be1219f6c8b3270109f938b0775d7b6d82a556d3b1404c7d70394",
+        "bytes": 7391
+      },
+      "analyze_manual_train_02.py": {
+        "sha256": "63b09341b1005a9d492d70b4c4c39788472332cea23135cf28c91034df029fb5",
+        "bytes": 8739
+      },
+      "manual-ringdown-train-02-summary.json": {
+        "sha256": "b1a7bd946b928e77dadc5218def70e6e2269a498dd033fbf68e47efaaaae7723",
+        "bytes": 21671
+      },
+      "manual-ringdown-train-02-selected.json.gz": {
+        "sha256": "9e95d088526ab9d8535a668188e74f432595ff1d7c875ce28ef47ca8efd7bd8c",
+        "bytes": 27012
+      },
+      "manual-ringdown-train-02-report.md": {
+        "sha256": "f10d584d3f476ea1f33dd488a293e7b4fb0961e6af011ce9c5e83ab2db609e47",
+        "bytes": 10310
+      },
+      "README.md": {
+        "sha256": "58d6ada88d6f72839ef2659288504ebea4b5815bdd933eca9e2e7eb75d3e5182",
+        "bytes": 6207
+      }
+    }
+  },
+  "recording": {
+    "unique_states": 20073,
+    "duplicate_identical_board_snapshots": 1,
+    "camera_rows": 4106,
+    "duration_s": 80.161,
+    "counted_x_span_m": 0.0,
+    "operator_cart_restraint": "User confirmed holding cart by hand throughout; no clamp. Requested three alternating camera-view releases and then reported done."
+  },
+  "selection": [
+    {
+      "annotation": {
+        "episode_id": "free_decay_1",
+        "board_relative_s": [
+          31.0,
+          36.4
+        ],
+        "reason": "Free periodic motion begins approximately30.3s; start after first positive extreme near30.7s. End before the final small cycle and settling near37s."
+      },
+      "actual_board_relative_s": [
+        31.002,
+        36.398
+      ],
+      "source_tick": [
+        85465614,
+        85471010
+      ],
+      "samples": 1350,
+      "max_board_gap_s": 0.0040000000000048885,
+      "camera": {
+        "unique_camera_frames": 268,
+        "valid_pivot_frames": 264,
+        "duplicate_frames": 0,
+        "reversed_timestamps": 0,
+        "valid_geometry_fraction": 0.9850746268656716,
+        "metric_stationarity_established": false,
+        "independent_angle_calibration": false,
+        "pixel_stationarity_check_pass": true,
+        "source": "raw pivot_px with confidence >=0.5",
+        "caveat": "Image-plane stability cannot establish metric cart motion or hidden out-of-plane motion; old calibration is ignored.",
+        "median_pivot_px": [
+          523.8215909090909,
+          235.6206896551724
+        ],
+        "radial_p95_px": 0.31064208194297394,
+        "radial_max_px": 0.42487544944230204,
+        "max_camera_gap_s": 0.05023841594811529
+      },
+      "camera_angle_status": "raw projection only; no metric/angular calibration or fitted offset adjustment"
+    },
+    {
+      "annotation": {
+        "episode_id": "free_decay_2",
+        "board_relative_s": [
+          44.8,
+          51.2
+        ],
+        "reason": "Free periodic motion begins approximately44.2s; start after first negative extreme near44.5s. End before final small cycle and settling near51.8s."
+      },
+      "actual_board_relative_s": [
+        44.802,
+        51.198
+      ],
+      "source_tick": [
+        85479414,
+        85485810
+      ],
+      "samples": 1600,
+      "max_board_gap_s": 0.0040000000000048885,
+      "camera": {
+        "unique_camera_frames": 323,
+        "valid_pivot_frames": 323,
+        "duplicate_frames": 0,
+        "reversed_timestamps": 0,
+        "valid_geometry_fraction": 1.0,
+        "metric_stationarity_established": false,
+        "independent_angle_calibration": false,
+        "pixel_stationarity_check_pass": true,
+        "source": "raw pivot_px with confidence >=0.5",
+        "caveat": "Image-plane stability cannot establish metric cart motion or hidden out-of-plane motion; old calibration is ignored.",
+        "median_pivot_px": [
+          523.7777777777778,
+          235.44230769230768
+        ],
+        "radial_p95_px": 0.2828675704033325,
+        "radial_max_px": 0.41720585764383894,
+        "max_camera_gap_s": 0.038031033996958286
+      },
+      "camera_angle_status": "raw projection only; no metric/angular calibration or fitted offset adjustment"
+    },
+    {
+      "annotation": {
+        "episode_id": "free_decay_3",
+        "board_relative_s": [
+          63.0,
+          70.0
+        ],
+        "reason": "Held/manually repositioned through approximately62.4s; free motion thereafter. Start after first positive extreme near62.8s; end before final small cycle and settling near70.8s."
+      },
+      "actual_board_relative_s": [
+        63.002,
+        69.998
+      ],
+      "source_tick": [
+        85497614,
+        85504610
+      ],
+      "samples": 1750,
+      "max_board_gap_s": 0.0040000000000048885,
+      "camera": {
+        "unique_camera_frames": 354,
+        "valid_pivot_frames": 354,
+        "duplicate_frames": 0,
+        "reversed_timestamps": 0,
+        "valid_geometry_fraction": 1.0,
+        "metric_stationarity_established": false,
+        "independent_angle_calibration": false,
+        "pixel_stationarity_check_pass": true,
+        "source": "raw pivot_px with confidence >=0.5",
+        "caveat": "Image-plane stability cannot establish metric cart motion or hidden out-of-plane motion; old calibration is ignored.",
+        "median_pivot_px": [
+          523.7457627118645,
+          235.80327868852459
+        ],
+        "radial_p95_px": 0.43907746746169946,
+        "radial_max_px": 0.47814455098900555,
+        "max_camera_gap_s": 0.03802476095734164
+      },
+      "camera_angle_status": "raw projection only; no metric/angular calibration or fitted offset adjustment"
+    }
+  ],
+  "magnetic_reports": {
+    "viscous_coulomb": {
+      "model": "viscous_coulomb",
+      "training_checks_pass": false,
+      "statistical_checks_pass": false,
+      "recommended_model": null,
+      "parameters": {
+        "effective_length_m": 0.16049873073394127,
+        "gravity_coefficient_per_s2": 61.121978691918976,
+        "angular_damping_per_s": -0.15334390446676427,
+        "coulomb_rad_per_s2": 2.1248699344276534,
+        "angle_offset_rad": -0.11236603096224441,
+        "linear_coefficients": [
+          60.73651765237396,
+          -0.15334390446676427,
+          6.853590495372735,
+          2.1248699344276534
+        ]
+      },
+      "training": {
+        "window_count": 32,
+        "segment_count": 2,
+        "sample_count": 3000,
+        "rank": 4,
+        "condition": 4.481178688188728,
+        "angle_span_rad": 2.0156513071795863,
+        "integral_nrmse": 0.09758489279452653
+      },
+      "validation": {
+        "prediction_windows": 35,
+        "prediction_samples": 4375,
+        "prediction_rmse_rad": 0.0720428887383322,
+        "prediction_p95_rad": 0.13182957678123416,
+        "integral_nrmse": 0.08416343439251474,
+        "weak_window_count": 51,
+        "angle_span_rad": 1.9174753071795863
+      },
+      "reasons": [
+        "viscous damping outside frozen physical bounds"
+      ],
+      "provenance": {
+        "training_sha256": "0cabcdf17b0b994f7959cb6d8c1a5894eb774e9e674413150733ce28a0490d0a",
+        "validation_sha256": "8fadde115ec01e5cbe80e8559ddd640cab8b69ea342384f47be4973402b98983",
+        "plan_sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+        "config": {
+          "min_windows": 20,
+          "min_angle_span_rad": 0.15,
+          "max_condition": 1000,
+          "length_bounds_m": [
+            0.05,
+            1.5
+          ],
+          "angular_damping_bounds_per_s": [
+            0,
+            5
+          ],
+          "coulomb_bounds_rad_per_s2": [
+            0,
+            20
+          ],
+          "max_fitted_offset_abs_rad": 0.35,
+          "max_gap_s": 0.05,
+          "max_integral_nrmse": 0.15,
+          "prediction_horizon_s": 0.5,
+          "max_prediction_rmse_rad": 0.08,
+          "max_prediction_p95_rad": 0.15,
+          "min_prediction_windows": 3,
+          "window_s": 0.35
+        },
+        "training_run_ids": [
+          "fc3f5cd4cb663f2f6e518a5b98f2738b3e173ad0bf6aeec5d5ede69fc0261229"
+        ],
+        "validation_run_ids": [
+          "968cbd1ed2742a2121e18c974532663393f16e208082000d29c4c50f81f64f60"
+        ]
+      },
+      "assumptions": [
+        "Cart is physically fixed and all selected episodes are free releases.",
+        "Raw magnetic angle has constant bias, unit scale and no nonlinear mapping distortion.",
+        "Friction is viscous plus symmetric Coulomb/stiction; no input gain is estimated.",
+        "Fitted bias is training-only model inference, not independent global angle calibration.",
+        "Conditional regression uncertainty omits calibration, correlated sensor noise, release annotation and model bias."
+      ],
+      "unidentifiable": [
+        "input_gain",
+        "physical_actuator_delay",
+        "cart_mass",
+        "pole_mass",
+        "hinge_torque_damping",
+        "motor_force_or_friction"
+      ],
+      "uncertainty": {
+        "coefficient_standard_errors": [
+          1.132025540561249,
+          0.3477116236424266,
+          0.43024989006073394,
+          1.0839676330046712
+        ],
+        "method": "conditional OLS weak-window covariance"
+      },
+      "parameters_refitted": false
+    },
+    "viscous": {
+      "model": "viscous",
+      "training_checks_pass": true,
+      "statistical_checks_pass": true,
+      "recommended_model": null,
+      "parameters": {
+        "effective_length_m": 0.16073596568158666,
+        "gravity_coefficient_per_s2": 61.03176696268046,
+        "angular_damping_per_s": 0.4631556778357131,
+        "coulomb_rad_per_s2": 0.0,
+        "angle_offset_rad": -0.11310915597373176,
+        "linear_coefficients": [
+          60.64177253375597,
+          0.4631556778357131,
+          6.8885413950367065
+        ]
+      },
+      "training": {
+        "window_count": 32,
+        "segment_count": 2,
+        "sample_count": 3000,
+        "rank": 3,
+        "condition": 1.3943053272208294,
+        "angle_span_rad": 2.0156513071795863,
+        "integral_nrmse": 0.10406585349424709
+      },
+      "validation": {
+        "prediction_windows": 35,
+        "prediction_samples": 4375,
+        "prediction_rmse_rad": 0.07037924761926316,
+        "prediction_p95_rad": 0.13276840877105933,
+        "integral_nrmse": 0.09141581449684615,
+        "weak_window_count": 51,
+        "angle_span_rad": 1.9174753071795863
+      },
+      "reasons": [],
+      "provenance": {
+        "training_sha256": "0cabcdf17b0b994f7959cb6d8c1a5894eb774e9e674413150733ce28a0490d0a",
+        "validation_sha256": "8fadde115ec01e5cbe80e8559ddd640cab8b69ea342384f47be4973402b98983",
+        "plan_sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+        "config": {
+          "min_windows": 20,
+          "min_angle_span_rad": 0.15,
+          "max_condition": 1000,
+          "length_bounds_m": [
+            0.05,
+            1.5
+          ],
+          "angular_damping_bounds_per_s": [
+            0,
+            5
+          ],
+          "coulomb_bounds_rad_per_s2": [
+            0,
+            20
+          ],
+          "max_fitted_offset_abs_rad": 0.35,
+          "max_gap_s": 0.05,
+          "max_integral_nrmse": 0.15,
+          "prediction_horizon_s": 0.5,
+          "max_prediction_rmse_rad": 0.08,
+          "max_prediction_p95_rad": 0.15,
+          "min_prediction_windows": 3,
+          "window_s": 0.35
+        },
+        "training_run_ids": [
+          "fc3f5cd4cb663f2f6e518a5b98f2738b3e173ad0bf6aeec5d5ede69fc0261229"
+        ],
+        "validation_run_ids": [
+          "968cbd1ed2742a2121e18c974532663393f16e208082000d29c4c50f81f64f60"
+        ]
+      },
+      "assumptions": [
+        "Cart is physically fixed and all selected episodes are free releases.",
+        "Raw magnetic angle has constant bias, unit scale and no nonlinear mapping distortion.",
+        "Friction is viscous plus symmetric Coulomb/stiction; no input gain is estimated.",
+        "Fitted bias is training-only model inference, not independent global angle calibration.",
+        "Conditional regression uncertainty omits calibration, correlated sensor noise, release annotation and model bias."
+      ],
+      "unidentifiable": [
+        "input_gain",
+        "physical_actuator_delay",
+        "cart_mass",
+        "pole_mass",
+        "hinge_torque_damping",
+        "motor_force_or_friction"
+      ],
+      "uncertainty": {
+        "coefficient_standard_errors": [
+          1.1851291996068387,
+          0.15540560236838613,
+          0.4504568763662718
+        ],
+        "method": "conditional OLS weak-window covariance"
+      },
+      "parameters_refitted": false
+    }
+  },
+  "provisional_camera_reports": {
+    "viscous_coulomb": {
+      "model": "viscous_coulomb",
+      "training_checks_pass": false,
+      "statistical_checks_pass": false,
+      "recommended_model": null,
+      "parameters": {},
+      "training": {
+        "window_count": 0,
+        "segment_count": 15,
+        "sample_count": 521,
+        "rank": 0,
+        "condition": null,
+        "angle_span_rad": 1.708988870448989
+      },
+      "validation": {
+        "status": "not scored: no admissible frozen coefficient estimate"
+      },
+      "reasons": [
+        "insufficient training weak windows",
+        "training rank/conditioning inadequate"
+      ],
+      "provenance": {
+        "training_sha256": "ea9647ff942236db92bbed2e0df9def75ec2301c7ca23107e08760a186d6d619",
+        "validation_sha256": "892feac611c7f74f3ed7c6582e95c5b44de83b624b9d3c6498c93879cb60fe2a",
+        "plan_sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+        "config": {
+          "min_windows": 20,
+          "min_angle_span_rad": 0.15,
+          "max_condition": 1000,
+          "length_bounds_m": [
+            0.05,
+            1.5
+          ],
+          "angular_damping_bounds_per_s": [
+            0,
+            5
+          ],
+          "coulomb_bounds_rad_per_s2": [
+            0,
+            20
+          ],
+          "max_fitted_offset_abs_rad": 0.35,
+          "max_gap_s": 0.05,
+          "max_integral_nrmse": 0.15,
+          "prediction_horizon_s": 0.5,
+          "max_prediction_rmse_rad": 0.08,
+          "max_prediction_p95_rad": 0.15,
+          "min_prediction_windows": 3,
+          "window_s": 0.35
+        },
+        "training_run_ids": [
+          "1e764ceece29240740925a53400dcb94a465343fadbfc11d7dbe4b7631c61852"
+        ],
+        "validation_run_ids": [
+          "8b7515dc11dc01bb603d5000b3f208e23980067ffd26698897e9b1a3a1ca13e5"
+        ]
+      },
+      "assumptions": [
+        "Cart is physically fixed and all selected episodes are free releases.",
+        "Raw magnetic angle has constant bias, unit scale and no nonlinear mapping distortion.",
+        "Friction is viscous plus symmetric Coulomb/stiction; no input gain is estimated.",
+        "Fitted bias is training-only model inference, not independent global angle calibration.",
+        "Conditional regression uncertainty omits calibration, correlated sensor noise, release annotation and model bias."
+      ],
+      "unidentifiable": [
+        "input_gain",
+        "physical_actuator_delay",
+        "cart_mass",
+        "pole_mass",
+        "hinge_torque_damping",
+        "motor_force_or_friction"
+      ],
+      "parameters_refitted": false
+    },
+    "viscous": {
+      "model": "viscous",
+      "training_checks_pass": true,
+      "statistical_checks_pass": true,
+      "recommended_model": null,
+      "parameters": {
+        "effective_length_m": 0.1588148280927987,
+        "gravity_coefficient_per_s2": 61.770050805758636,
+        "angular_damping_per_s": 0.5663001511618595,
+        "coulomb_rad_per_s2": 0.0,
+        "angle_offset_rad": 0.014154947447730147,
+        "linear_coefficients": [
+          61.76386270702891,
+          0.5663001511618595,
+          -0.8743226254000243
+        ]
+      },
+      "training": {
+        "window_count": 20,
+        "segment_count": 15,
+        "sample_count": 521,
+        "rank": 3,
+        "condition": 1.2360629258450337,
+        "angle_span_rad": 1.708988870448989,
+        "integral_nrmse": 0.041166493338412616
+      },
+      "validation": {
+        "prediction_windows": 34,
+        "prediction_samples": 826,
+        "prediction_rmse_rad": 0.04993794175338866,
+        "prediction_p95_rad": 0.10166634764260096,
+        "integral_nrmse": 0.04133566044442734,
+        "weak_window_count": 49,
+        "angle_span_rad": 1.7905953289480028
+      },
+      "reasons": [],
+      "provenance": {
+        "training_sha256": "ea9647ff942236db92bbed2e0df9def75ec2301c7ca23107e08760a186d6d619",
+        "validation_sha256": "892feac611c7f74f3ed7c6582e95c5b44de83b624b9d3c6498c93879cb60fe2a",
+        "plan_sha256": "9f6cad7f95531bb33ef4ca3ad75ff36e6dd53e9c6de32a136e2a66fb317220a4",
+        "config": {
+          "min_windows": 20,
+          "min_angle_span_rad": 0.15,
+          "max_condition": 1000,
+          "length_bounds_m": [
+            0.05,
+            1.5
+          ],
+          "angular_damping_bounds_per_s": [
+            0,
+            5
+          ],
+          "coulomb_bounds_rad_per_s2": [
+            0,
+            20
+          ],
+          "max_fitted_offset_abs_rad": 0.35,
+          "max_gap_s": 0.05,
+          "max_integral_nrmse": 0.15,
+          "prediction_horizon_s": 0.5,
+          "max_prediction_rmse_rad": 0.08,
+          "max_prediction_p95_rad": 0.15,
+          "min_prediction_windows": 3,
+          "window_s": 0.35
+        },
+        "training_run_ids": [
+          "1e764ceece29240740925a53400dcb94a465343fadbfc11d7dbe4b7631c61852"
+        ],
+        "validation_run_ids": [
+          "8b7515dc11dc01bb603d5000b3f208e23980067ffd26698897e9b1a3a1ca13e5"
+        ]
+      },
+      "assumptions": [
+        "Cart is physically fixed and all selected episodes are free releases.",
+        "Raw magnetic angle has constant bias, unit scale and no nonlinear mapping distortion.",
+        "Friction is viscous plus symmetric Coulomb/stiction; no input gain is estimated.",
+        "Fitted bias is training-only model inference, not independent global angle calibration.",
+        "Conditional regression uncertainty omits calibration, correlated sensor noise, release annotation and model bias."
+      ],
+      "unidentifiable": [
+        "input_gain",
+        "physical_actuator_delay",
+        "cart_mass",
+        "pole_mass",
+        "hinge_torque_damping",
+        "motor_force_or_friction"
+      ],
+      "uncertainty": {
+        "coefficient_standard_errors": [
+          0.6172337559366976,
+          0.08692821017585926,
+          0.1868463826555598
+        ],
+        "method": "conditional OLS weak-window covariance"
+      },
+      "parameters_refitted": false
+    }
+  },
+  "caveats": [
+    "No coefficients, offsets, gates or model choices were selected from heldout.",
+    "Image-plane pivot stability does not certify physical metric stationarity or global angle validity.",
+    "A passed statistical score alone cannot identify masses, actuator input gain/delay or motor force."
+  ]
+}

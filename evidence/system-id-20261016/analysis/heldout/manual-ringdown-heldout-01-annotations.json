@@ -1,0 +1,70 @@
+{
+  "recording": "manual-ringdown-heldout-01",
+  "created_at_utc": "2026-10-16T20:45:32.535690+00:00",
+  "selected_before_scoring": true,
+  "source_export_sha256": "183dc05f790630640cc22ae8a1e90c469cac9dc92faec26c80436f7b427e1a5f",
+  "raw_recording_sha256": "968cbd1ed2742a2121e18c974532663393f16e208082000d29c4c50f81f64f60",
+  "original_remote": "/home/rbafna/cartpole-v2-runs/system-id-20261016/manual-ringdown-heldout-01/columns.json.gz",
+  "first_unwrapped_us": 3834751050,
+  "operator_cart_restraint": "User confirmed holding cart by hand throughout; no clamp. Requested three alternating camera-view releases and then reported done.",
+  "selection_method": "Selected from 1-second and 0.2-second raw magnetic angle bins around handling-to-periodic transitions; independently checked against primary raw full-record plot. No residual, forecast or coefficient fit was computed. Starts exclude first release transient/first extreme; ends exclude final small/static suffix. Do not tune these boundaries after scoring.",
+  "episodes": [
+    {
+      "episode_id": "free_decay_1",
+      "board_relative_s": [
+        31.0,
+        36.4
+      ],
+      "reason": "Free periodic motion begins approximately30.3s; start after first positive extreme near30.7s. End before the final small cycle and settling near37s."
+    },
+    {
+      "episode_id": "free_decay_2",
+      "board_relative_s": [
+        44.8,
+        51.2
+      ],
+      "reason": "Free periodic motion begins approximately44.2s; start after first negative extreme near44.5s. End before final small cycle and settling near51.8s."
+    },
+    {
+      "episode_id": "free_decay_3",
+      "board_relative_s": [
+        63.0,
+        70.0
+      ],
+      "reason": "Held/manually repositioned through approximately62.4s; free motion thereafter. Start after first positive extreme near62.8s; end before final small cycle and settling near70.8s."
+    }
+  ],
+  "excluded": [
+    {
+      "board_relative_s": [
+        0,
+        31.0
+      ],
+      "reason": "Initial static record, first manual lift/hold and first release transient."
+    },
+    {
+      "board_relative_s": [
+        36.4,
+        44.8
+      ],
+      "reason": "Final small/static suffix, second manual lift/hold and second release transient."
+    },
+    {
+      "board_relative_s": [
+        51.2,
+        63.0
+      ],
+      "reason": "Final small/static suffix, third manual lift/hold and third release transient."
+    },
+    {
+      "board_relative_s": [
+        70.0,
+        80.161
+      ],
+      "reason": "Final small/static suffix and stopped recording end."
+    }
+  ],
+  "candidate_changes": false,
+  "calibration_changes": false,
+  "raw_camera_mapping": "Only predeclared q_camera=unwrap(pi-image_angle_rad) with integer2pi branch selection; no fitted offset adjustment."
+}

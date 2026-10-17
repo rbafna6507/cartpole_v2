@@ -1,0 +1,59 @@
+{
+  "run": "manual-repeatability-01",
+  "failure": null,
+  "records_dropped": 0,
+  "source_hashes": {
+    "rig-1792251521290789944-1148199442.jsonl": "63edec18d9665fc362bef3546c05b7d74b44bf27605af87ab4002c7b3bffcb39",
+    "vision.ndjson": "f46295c5fa213c029d53cac9557cfa9ce0b37bc2acdfc53a46758ffdd43b701e",
+    "report.json": "6c68586670c3e3037a2cbd4e0217e1fbce76bb46689c44274ff4e551175b97cd",
+    "vision-report.json": "f200b406ae7d0d9dfb7e526945663b36e3a3eebeaaba5a58c9f5304408d84fc0"
+  },
+  "samples": 45063,
+  "policy_samples": 0,
+  "duration_board_s": null,
+  "max_policy_board_gap_ms": null,
+  "max_policy_host_gap_ms": null,
+  "pulse": {
+    "x": null,
+    "v": null,
+    "theta": null,
+    "omega": null,
+    "command": null
+  },
+  "tail": {
+    "x": null,
+    "v": null,
+    "theta": null,
+    "omega": null,
+    "command": null
+  },
+  "reference_start": null,
+  "stop": null,
+  "fault_codes": [
+    0
+  ],
+  "max_abs_applied_acceleration_m_s2": 0.0,
+  "vision": {
+    "frames": 9673,
+    "valid_geometry": 8676,
+    "coverage": 0.8969295978496847,
+    "image_angle": {
+      "min": -1.276216166407244,
+      "max": 0.949717938419358,
+      "span": 2.225934104826602
+    },
+    "pivot_x": {
+      "min": 505.188524590164,
+      "max": 506.52000000000004,
+      "span": 1.3314754098360595
+    },
+    "pivot_y": {
+      "min": 227.96491228070175,
+      "max": 229.20689655172413,
+      "span": 1.2419842710223747
+    },
+    "max_valid_gap_s": 2.4539860779768787,
+    "failure": null
+  },
+  "interpretation": "Cart x/v/a use step-count/command telemetry; camera pixels have no independent metric scale. Feedback tail is forced and not a passive cart-fixed experiment."
+}

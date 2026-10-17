@@ -54,7 +54,7 @@ trial with return. These are measured bounded results, not unlimited stability.
 The working encoder reference is 330 counts, an experimental constant trim;
 there is still no accepted hanging-only or nonlinear calibration model.
 
-See the [current task checkpoint](docs/checkpoint-20261016.md),
+See the [October 16 checkpoint](docs/checkpoint-20261016.md),
 [tuning and jitter evidence](evidence/phase3/jitter-20261016/README.txt), and
 [preserved Jetson releases](releases/README.md). The experimental Python AUTO/BAL implementation now runs through the SDK on the
 physical rig. One 25-second Python AUTO trial captured at 3.17 seconds and held
@@ -92,6 +92,10 @@ it remains uncommissioned and does not control motion.
   evaluation. The learned artifact is numeric JSON; hardware transfer is unproven.
 - [Sensing and physical identification](docs/identification.md): explicit clocks,
   calibration, validity and held-out rejection. The MuJoCo plant remains provisional.
+- [Runnable system-identification workflow](docs/system-identification-workflow.md):
+  guarded collection, independent validation, scoped model export and Gym loading.
+  [October 17 measurements and plots](evidence/system-id-20261017/README.md) record
+  the latest physical results; model acceptance for hardware RL remains open.
 - [Portal and isolated worker](docs/portal.md): authenticated immutable uploads,
   durable single-rig queue, results and a Linux sandbox. The service defaults to
   loopback. Public hosting and learned-policy hardware acceptance remain deployment gates.

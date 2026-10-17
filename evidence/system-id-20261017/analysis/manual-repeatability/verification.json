@@ -1,0 +1,42 @@
+{
+  "status": "verified",
+  "hardware_access": false,
+  "parameters_refitted": false,
+  "source_replay": "Complete decompressed raw first run versus preserved gzip final run; source hashes and numerical predictions identical",
+  "exact_equal_sections": {
+    "frozen_parameters": true,
+    "short_forecasts": true,
+    "short_forecast_readings": true,
+    "continuous_rollouts": true,
+    "secondary_coulomb_ode": true
+  },
+  "camera_numeric_replay_equal": true,
+  "tests": {
+    "command": "UV_CACHE_DIR=/tmp/cartpole-id-plot-cache MPLCONFIGDIR=/tmp/cartpole-id-matplotlib PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/Users/rbafna/projects/cartpole_v2/.venv/lib/python3.11/site-packages:/Users/rbafna/projects/cartpole_v2/src uv -q run --offline --no-project --with matplotlib --with numpy --python /Users/rbafna/projects/cartpole_v2/.venv/bin/python python -m pytest -q -p no:cacheprovider tests/test_manual_repeatability_analysis.py tests/test_camera_step_pulse_analysis.py tests/test_pulse_batch_analysis.py",
+    "passed": 29,
+    "skipped": 0,
+    "seconds": 3.72,
+    "manual_test_count": 9,
+    "red_before_green": [
+      "missing implementation",
+      "secondary pin/ODE and camera support",
+      "integer-turn plot branch",
+      "changed simulator source rejection",
+      "actual missing-camera plot TypeError"
+    ]
+  },
+  "source_hashes": {
+    "evidence/system-id-20261017/tools/evaluate_manual_repeatability.py": "c85462fec229bfe00b953c7c3493414b94f2729f2ace74e507fad3ea31332546",
+    "tests/test_manual_repeatability_analysis.py": "90ad97401cae2369751ee00c22f75e62f9051f889ff9b1179d2723353502f607"
+  },
+  "artifacts": {
+    "README.md": "6ac6e15561756a74808a017effd7e10cd0325d31b4b2b64b85e41bf0ed0c5257",
+    "assessment.json": "2a803bd6e0555d7a1714f99571ec6fa33bd85ffbf23d6d2a819c034267b2ecc7",
+    "camera-encoder-comparison.pdf": "fa64414b234ca42ad465a0c8e22dde19ab441be7558e284f451320bae8d4293c",
+    "camera-encoder-comparison.png": "aca8b2d542b4638ef5fa750a5a8dfbc2a2dbfeb870c162da2b3c45dfaa26c178",
+    "frozen-model-comparison.pdf": "0d144c11aba50c3a912632b9458bc9b8997aa02548e2130c38ebcb06d80180b7",
+    "frozen-model-comparison.png": "200eda50295271fb29003c8de66344bcf08cfe25a428cf50fdea1acba09b532a",
+    "secondary-coulomb-ode.pdf": "082e3df8b73e7c2c8258355bad1b67a9b611cd064f2202cc33737faac09c05bd",
+    "secondary-coulomb-ode.png": "af08b82907e5b0f775eb2790f5f4cfd3f26ba09be4a6667467c13f2d3f98cc18"
+  }
+}

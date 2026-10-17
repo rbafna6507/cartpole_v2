@@ -1,0 +1,78 @@
+[
+  {
+    "command": [
+      "/Users/rbafna/projects/cartpole_v2/scripts/system-id",
+      "--help"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "stdout": "usage: cli.py [-h]\n              {inspect,collect-passive,collect-pulse,annotations-template,fit-passive,fit-driven,assumptions-template,export-model,gym-smoke}\n              ...\n\nOperator procedures for immutable collection, fitting and scoped simulation.\n\npositional arguments:\n  {inspect,collect-passive,collect-pulse,annotations-template,fit-passive,fit-driven,assumptions-template,export-model,gym-smoke}\n    inspect             Read saved reference, home, health and live parameters\n                        in a stopped session.\n    collect-passive     Record operator-released oscillations with the motor\n                        disabled; physically restrain the cart.\n    collect-pulse       Execute one allowlisted cart pulse then12s feedback\n                        hold; requires --execute.\n    annotations-template\n                        Create an explicit manual free-release annotation\n                        template; never select fit windows automatically.\n    fit-passive         Fit training-only passive dynamics and score\n                        independently annotated validation releases.\n    fit-driven          Run the existing strict driven pendulum fitter using\n                        raw theta and MCU acceleration.\n    assumptions-template\n                        Create an editable complete provisional simulation\n                        configuration at100Hz; values remain assumptions.\n    export-model        Export an accepted scoped fit with explicit\n                        assumptions; unsupported dynamics fail closed.\n    gym-smoke           Load an exported model and run a bounded headless\n                        zero-action check; no hardware/RL claim.\n\noptions:\n  -h, --help            show this help message and exit\n\nHelp and offline commands never open serial. See docs/system-identification-\nworkflow.md for purpose, annotations and model limits.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/rbafna/projects/cartpole_v2/scripts/system-id",
+      "fit-passive",
+      "--training",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-train.jsonl",
+      "--training-annotations",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-train.annotations.json",
+      "--validation",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-validation.jsonl",
+      "--validation-annotations",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-validation.annotations.json",
+      "--output",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-fit.json"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "stdout": "{\"output\": \"/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-fit.json\", \"accepted\": true, \"reasons\": []}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/rbafna/projects/cartpole_v2/scripts/system-id",
+      "assumptions-template",
+      "--output",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-assumptions-template.json"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "stdout": "{\"output\": \"/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-assumptions-template.json\", \"accepted\": null, \"reasons\": []}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/rbafna/projects/cartpole_v2/scripts/system-id",
+      "export-model",
+      "--report",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-fit.json",
+      "--scope",
+      "passive-down",
+      "--assumptions",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-assumptions-reviewed.json",
+      "--output",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-model.json"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "stdout": "{\"output\": \"/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-model.json\", \"scope\": \"passive-down\", \"recommended_for_hardware_rl\": false}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/rbafna/projects/cartpole_v2/scripts/system-id",
+      "gym-smoke",
+      "--model",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-model.json",
+      "--steps",
+      "100",
+      "--output",
+      "/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-gym-smoke.json"
+    ],
+    "cwd": "/tmp",
+    "returncode": 0,
+    "stdout": "{\"output\": \"/tmp/cartpole-system-id-workflow-verification-20261017-5al572i_/synthetic-gym-smoke.json\", \"accepted\": null, \"reasons\": []}\n",
+    "stderr": ""
+  }
+]

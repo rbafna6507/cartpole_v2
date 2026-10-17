@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/ringdown_probe.py", line 227, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/ringdown_probe.py", line 214, in main
+    with rig:report['result']=run_ringdown(rig,amplitude_m=args.amplitude_mm/1000,provenance=report['provenance'])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/ringdown_probe.py", line 170, in run_ringdown
+    run_policy(rig,factory,channels=CHANNELS,duration_s=PULSE_S+HOLD_S+COMPLETION_PAD_S,
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/policy.py", line 112, in run_policy
+    rig.step(request)
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py", line 759, in step
+    return self.observation()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py", line 421, in observation
+    self._require()
+  File "/home/rbafna/cartpole-v2-live/staging/python-feedback-20261016/src/cartpole_sdk/rig/client.py", line 161, in _require
+    raise RigError(f'latched rig error: {self.error}')
+cartpole_sdk.rig.client.RigError: latched rig error: executor fault 1

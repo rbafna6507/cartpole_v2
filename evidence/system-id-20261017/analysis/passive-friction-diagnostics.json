@@ -1,0 +1,63 @@
+{
+  "scope": "training-constrained friction candidate; old validation is now development, new independent validation required",
+  "coefficients": [
+    60.70229513666145,
+    0.0,
+    6.858692717887795,
+    1.6924943487382909
+  ],
+  "active_zero_constraints": [
+    1
+  ],
+  "effective_length_m": 0.16058657214463512,
+  "angle_offset_rad": -0.11251184237405323,
+  "angular_damping_per_s": 0.0,
+  "coulomb_rad_per_s2": 1.6924943487382909,
+  "training_integral_nrmse": 0.09792322004558146,
+  "training": {
+    "rmse_rad": 0.046345137711209496,
+    "p95_rad": 0.10522028872835909,
+    "samples": 2866,
+    "episodes": [
+      {
+        "id": "free_decay_1",
+        "windows": 9,
+        "rmse_rad": 0.03690667863328218,
+        "p95_rad": 0.08656247978656706
+      },
+      {
+        "id": "free_decay_2",
+        "windows": 14,
+        "rmse_rad": 0.051468124289369935,
+        "p95_rad": 0.1131513341741726
+      }
+    ]
+  },
+  "old_validation_as_development": {
+    "rmse_rad": 0.07106381011792899,
+    "p95_rad": 0.1314660649891605,
+    "samples": 4375,
+    "episodes": [
+      {
+        "id": "free_decay_1",
+        "windows": 10,
+        "rmse_rad": 0.06972878004220723,
+        "p95_rad": 0.17351724173302116
+      },
+      {
+        "id": "free_decay_2",
+        "windows": 12,
+        "rmse_rad": 0.04537748893461517,
+        "p95_rad": 0.10020478612375729
+      },
+      {
+        "id": "free_decay_3",
+        "windows": 13,
+        "rmse_rad": 0.08919376190278483,
+        "p95_rad": 0.17692106784587266
+      }
+    ]
+  },
+  "accepted": false,
+  "source_sha256": "b7a7b59d794cb5e2e886573906c5b64a95cf8fc43bd43b341f25f99137b9e38e"
+}
