@@ -1,0 +1,14 @@
+{
+  "inspected_at_utc": "2026-10-17T21:46:28.238489+00:00",
+  "plots": [
+    "training8-comparison.png",
+    "training9-comparison.png",
+    "training6-comparison.png",
+    "validation8-comparison.png",
+    "validation9-comparison.png",
+    "development6-comparison.png"
+  ],
+  "findings": "The candidate reduces primary regression RMS by 3.77%, below the fixed 5% criterion, while P95 increases from 7.138\u00b0 to 7.204\u00b0. The descriptive paired-release interval for its RMS change spans zero. On validation8 it worsens releases 05 and 11 (4.44\u00b0\u21925.53\u00b0 and 4.20\u00b0\u21925.08\u00b0) while improving release 06 (7.07\u00b0\u21925.08\u00b0); that release\u2019s failed held-pose screen remains failed. This pattern does not establish whether residual error comes from sensing, initialization or plant dynamics.",
+  "display_correction": "Aligned each plotted release to the recorded hanging angle modulo 2pi; prediction arrays, fit coefficients, scores, annotations and freeze unchanged.",
+  "complete": true
+}

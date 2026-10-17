@@ -40,6 +40,13 @@ def complete_config(value, cls, label):
     neutral = dict(hinge_coulomb_friction_nm=0., hinge_friction_velocity_scale_rad_s=.05)
     if cls is SimulationConfig and isinstance(value, dict) and set(value) == names - neutral.keys():
         value = dict(value, **neutral)
+    legacy_observation = {'angle_source', 'encoder_counts', 'angle_noise_std',
+                          'telemetry_delay_steps', 'command_delay_steps', 'dropout_probability'}
+    if (cls.__name__ == 'RigObservationConfig' and isinstance(value, dict) and
+            set(value) == legacy_observation and value.get('angle_source') in ('raw', 'filtered')):
+        # Only the exact frozen encoder schema gains camera-inert defaults.
+        # Missing/partial camera configurations remain errors.
+        value = dict(asdict(cls()), **value)
     if not isinstance(value, dict) or set(value) != names:
         raise ValueError(f'{label} requires all and only explicit fields')
     return cls(**value)
@@ -153,7 +160,10 @@ def build_experiment(model_path, *, executor_parameters, observation_config,
         observation_config=asdict(observations), prior_parameters=asdict(prior),
         prior_length_matches_model=prior.effective_length_m == config.effective_length_m,
         environment='RigCartpoleEnv', rate_hz=100, ttl_ms=20,
-        startup_policy='Healthy pre-arm snapshot after causal telemetry warmup under the 20 ms ARM lease; observer rate starts at zero, plant evolves during delay; later unusable telemetry faults policy without truth substitution.',
+        startup_policy=('Camera modes acquire actual causal pre-arm history with no executor lease under the zero-acceleration servo assumption; no disabled-motor model is claimed. '
+                        if observations.angle_source in ('vision', 'fused') else
+                        'Encoder telemetry warms causally under the initial 20 ms ARM lease; observer rate starts at zero. ')
+                       +'Plant evolves during acquisition; unusable policy channels fault without ground-truth substitution.',
         simulation_only=True, hardware_accepted=False)
     validate_experiment(experiment)
     return experiment

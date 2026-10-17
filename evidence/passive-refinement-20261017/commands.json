@@ -1,0 +1,62 @@
+{
+  "created_at_utc": "2026-10-17T21:39:19.585603+00:00",
+  "cwd": "/Users/rbafna/projects/cartpole_v2",
+  "network_used": false,
+  "hardware_used": false,
+  "commands": [
+    {
+      "stage": "initial training attempt",
+      "argv": [
+        "/Users/rbafna/.cache/uv/environments-v2/evaluate-1fe8d54a4625edc4/bin/python",
+        "-u",
+        "evidence/passive-refinement-20261017/tools/refine-before-coverage-fix.py",
+        "train"
+      ],
+      "stdout_stderr": "evidence/passive-refinement-20261017/training-initial-attempt.log",
+      "outcome": "fits completed; scorer stopped on inherited partial-release coverage failure"
+    },
+    {
+      "stage": "resumed training scoring",
+      "argv": [
+        "/Users/rbafna/.cache/uv/environments-v2/evaluate-1fe8d54a4625edc4/bin/python",
+        "-u",
+        "evidence/passive-refinement-20261017/tools/refine.py",
+        "train",
+        "--reuse-fits",
+        "evidence/passive-refinement-20261017/fits.json"
+      ],
+      "stdout_stderr": "evidence/passive-refinement-20261017/training-resumed.log"
+    },
+    {
+      "stage": "causality verification",
+      "argv": [
+        "/Users/rbafna/.cache/uv/environments-v2/evaluate-1fe8d54a4625edc4/bin/python",
+        "evidence/passive-refinement-20261017/tools/verify_causality.py",
+        "--output",
+        "evidence/passive-refinement-20261017/causality-verification.json"
+      ]
+    },
+    {
+      "stage": "frozen regression",
+      "argv": [
+        "/Users/rbafna/.cache/uv/environments-v2/evaluate-1fe8d54a4625edc4/bin/python",
+        "-u",
+        "evidence/passive-refinement-20261017/tools/refine.py",
+        "regression"
+      ],
+      "stdout_stderr": "evidence/passive-refinement-20261017/regression.log",
+      "outcome": "completed without fitting"
+    },
+    {
+      "stage": "report and plots",
+      "argv": [
+        "/Users/rbafna/.cache/uv/environments-v2/preview-1799bba519842e5b/bin/python",
+        "evidence/passive-refinement-20261017/tools/report.py"
+      ],
+      "environment": {
+        "MPLCONFIGDIR": "/tmp/passive-refinement-mpl"
+      },
+      "stdout_stderr": "evidence/passive-refinement-20261017/report.log"
+    }
+  ]
+}

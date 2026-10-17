@@ -1,0 +1,134 @@
+{
+  "selected": "pooled_weak/frozen_rawq",
+  "models": [
+    {
+      "name": "baseline/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": true,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.350345516569671,
+        ".25": 5.220344671388352,
+        ".5": 3.3812772618360105
+      }
+    },
+    {
+      "name": "baseline/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.3681483916048514,
+        ".25": 4.205537281216868,
+        ".5": 3.184308593375536
+      }
+    },
+    {
+      "name": "pooled_weak/frozen_rawq",
+      "eligible": true,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": true,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.340756153144073,
+        ".25": 4.8006369019721395,
+        ".5": 3.026587713964221
+      }
+    },
+    {
+      "name": "pooled_weak/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.359549949463706,
+        ".25": 3.6746693476036807,
+        ".5": 3.0852817896678957
+      }
+    },
+    {
+      "name": "robust_weak/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.3667946555109163,
+        ".25": 6.555255133503311,
+        ".5": 4.695405622051682
+      }
+    },
+    {
+      "name": "robust_weak/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.3878698867923873,
+        ".25": 6.244326472454902,
+        ".5": 4.033779390227059
+      }
+    },
+    {
+      "name": "robust_trajectory/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.3693971921798207,
+        ".25": 5.53700513359202,
+        ".5": 3.4481215754624093
+      }
+    },
+    {
+      "name": "robust_trajectory/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.394443367463688,
+        ".25": 5.047962567472232,
+        ".5": 3.0017798292079423
+      }
+    }
+  ],
+  "freeze_sha256": "826103849c27b7f85f495acc9bd3ab4ff7ade4b3ae37eec5567661320f12c056"
+}

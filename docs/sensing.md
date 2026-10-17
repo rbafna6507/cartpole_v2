@@ -206,3 +206,83 @@ values and timestamps. Only the observation sequence differed: 917 live versus
 The unchanged 30 ms interpolation-gap gate, explicit clock uncertainty, source
 calibration requirements and shadow-only control status still apply. This test
 establishes transport performance and reproducibility, not dynamic sensor accuracy.
+
+## Neural policy sensor bindings
+
+The development neural runner now shares the SDK provider, angular alignment and
+fusion with `RigCartpoleEnv`. This is separate from the display-only shadow
+packet. Train/export with an explicit modality, then use
+`scripts/run-neural-policy --sensing-config PATH` for vision/fused actors.
+The command defaults to stopped shadow inference. A camera binding is required
+before opening serial; it never fabricates an upright reference from hanging.
+
+The binding has this structure. The identifiers/measurements below must come
+from the current setup; this is a construction guide, not a ready calibration:
+
+```python
+from cartpole_sdk.sensing.vision import calibration_fingerprint
+
+reference = {'upright_raw': measured_saved_upright_raw,
+             'firmware': actual_firmware_identity}
+config = {
+    'schema': 'cartpole-neural-sensing-v1',
+    'stream_url': 'http://127.0.0.1:3090/api/sensing-stream',
+    'vision_calibration': complete_camera_calibration,
+    'encoder_reference': reference,
+    'vision_alignment': {
+        'source': 'vision', 'source_id': verified_camera_identity,
+        'source_frame_id': 'camera-native',
+        'source_calibration_id': calibration_fingerprint(complete_camera_calibration),
+        'target_frame_id': 'physical-upright',
+        'reference_id': direct_upright_capture_id,
+        'zero_rad': measured_camera_theta_at_upright, 'sign': verified_camera_sign,
+    },
+    'encoder_alignment': {
+        'source': 'magnetic', 'source_id': verified_encoder_identity,
+        'source_frame_id': 'encoder-zero',
+        'source_calibration_id': calibration_fingerprint(reference),
+        'target_frame_id': 'physical-upright',
+        'reference_id': direct_upright_capture_id,
+        'zero_rad': measured_encoder_theta_at_same_upright,
+        'sign': verified_encoder_sign,
+    },
+    'clock': {
+        'source_clock_id': camera_host_clock_identity,
+        'source_to_client_offset_ns': measured_camera_to_runner_host_offset,
+        'source_mapping_established_ns': local_monotonic_time_when_checked,
+        'source_mapping_valid_for_ns': chosen_bounded_lifetime,
+        'board_receipt_delay_ns': declared_serial_transport_delay,
+        'max_board_residual_ns': allowed_serial_receipt_jitter_and_drift,
+        'max_camera_transport_ns': allowed_camera_publication_to_receipt_delay,
+        'uncertainty_ns': measured_source_clock_mapping_uncertainty,
+    },
+}
+# For vision-only angle/rate, encoder_alignment may be None. The rig's saved
+# reference/configuration health remains checked for all motor execution.
+```
+
+Obtain a valid camera hanging calibration first, then record its `theta_rad`
+while the pole is at the same directly measured upright reference used for the
+magnetic anchor. Verify angular signs with a small manual rotation while the
+motor is disabled. Changing camera calibration/geometry or the encoder reference
+invalidates the binding. Existing natural-upright measurements are useful only
+if their exact camera calibration and physical setup still match.
+
+Run the reader on the same Jetson as the camera where possible: both processes
+then share the host monotonic clock, making the source-to-client offset zero
+under that explicit same-host/same-boot condition. A remote reader needs measured
+clock mapping, for example bounded HTTP round-trip anchors; never reuse an old
+host offset across boots. The source mapping expires within at most one hour.
+The SDK anchors board time to the current session's serial receipt and checks
+subsequent residuals. Source uncertainty plus allowed board residual must fit
+within20ms. Those bounds delay camera eligibility and reduce effective freshness
+conservatively; nominal camera timestamps remain unchanged for interpolation.
+Camera publication/receipt checks also include source-clock uncertainty. None
+of this establishes the camera's true exposure time from a host-read timestamp.
+
+A bounded background stream reader prevents HTTP waits in the control loop.
+Clock rollback, invalid calibration, changed source identity, stale data, queue
+overflow or expired mappings fail explicitly. Vision mode never substitutes
+magnetic angle/rate. Fused mode keeps a recent accepted bounded angle correction
+on current magnetic data only until its age budget expires; rates remain magnetic.
+All exported actors remain `hardware_accepted: false`.

@@ -252,3 +252,57 @@ def test_declared_action_space_endpoint_stays_inside_exact_sdk_limit():
     _, _, ended, _, _ = env.step(env.action_space.high)
     assert not ended and env.ground_truth.time_ns == 10_000_000
     assert env.diagnostics.raw_acceleration_m_s2 <= .3
+
+
+@pytest.mark.parametrize('mode', ['vision', 'fused'])
+def test_camera_modes_warm_causally_and_use_shared_sdk_pipeline(mode):
+    from cartpole_sdk.policies.rig_observation import encode_rig_observation, select_rig_observation
+    _, Obs = api()
+    env = make(observation_config=Obs(angle_source=mode, angle_frame_id='upright',
+        vision_frame_period_ns=30_000_000, vision_latency_ns=12_000_000,
+        vision_angle_quantum_rad=.01))
+    obs, info = env.reset(seed=5, options={'state': (0., 0., .2, 2.)})
+    assert info['reset_warmup_ns'] >= (100_000_000 if mode == 'vision' else 20_000_000)
+    selected = select_rig_observation(env.sdk_observation, env.channels, contract=env.observation_contract)
+    assert all(s.validity == 'valid' for s in selected)
+    for key, values in encode_rig_observation(env.sdk_observation, env.channels).items():
+        np.testing.assert_array_equal(values, obs[key])
+    if mode == 'vision':
+        assert selected[3].effective_ns < selected[2].effective_ns < env.sdk_observation.available_ns
+        assert abs(selected[3].value-env.ground_truth.omega) > .01
+    else:
+        assert env._camera_observer.fusion.accepted_vision >= 1
+    for _ in range(5):
+        _, _, terminated, _, _ = env.step([0.])
+        assert not terminated
+
+
+def test_camera_dropout_never_exposes_encoder_angle_and_expires_action_lease():
+    _, Obs = api()
+    env = make(observation_config=Obs(angle_source='vision', angle_frame_id='upright'))
+    first, _ = env.reset(seed=2)
+    assert first['valid'].all()
+    # Loss starts after real pre-arm acquisition; later invalid frames cannot
+    # select the still healthy magnetic angle or ground-truth angular velocity.
+    env.observation_config = replace(env.observation_config, vision_dropout_probability=1.)
+    for _ in range(20):
+        obs, _, ended, _, info = env.step([0.])
+        if ended:
+            break
+    assert ended and info['fault_reason'] == 'action lease expired'
+    assert not obs['valid'][2] and not obs['valid'][4]
+    assert obs['state'][2] == 0. and obs['state'][4] == 0.
+
+
+def test_camera_noise_and_asynchronous_capture_are_seeded():
+    _, Obs = api()
+    env = make(observation_config=Obs(angle_source='vision', angle_frame_id='upright',
+        vision_frame_period_ns=16_666_667, vision_latency_ns=7_000_000,
+        vision_angle_noise_std=.003, vision_dropout_probability=.05))
+    first, _ = env.reset(seed=52)
+    after = env.step([0.])[0]
+    repeated, _ = env.reset(seed=52)
+    again = env.step([0.])[0]
+    for key in first:
+        np.testing.assert_array_equal(first[key], repeated[key])
+        np.testing.assert_array_equal(after[key], again[key])

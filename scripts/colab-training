@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec uv run --project "$repo_dir" python "$repo_dir/examples/colab_training.py" "$@"

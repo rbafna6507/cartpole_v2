@@ -1,0 +1,33 @@
+{
+  "schema": "cartpole-shadow-boundary-diagnosis-v1",
+  "inference_calls": 201,
+  "span_s": 1.998095332,
+  "error": "no newer validated state at duration deadline",
+  "arm_commands": 0,
+  "action_commands": 0,
+  "final_state": {
+    "acceleration": 0.0,
+    "angle_hat": 3.037702,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 31053258,
+    "fault": 0,
+    "flags": 205,
+    "last_seq": 0,
+    "misses": 0,
+    "mode": 0,
+    "omega": -0.004856247,
+    "received_ns": 369535151925183,
+    "sid": 2149325607,
+    "theta": 3.037282,
+    "tick": 176392211,
+    "unwrapped_tick": 176392211,
+    "unwrapped_us": 303069538,
+    "us": 303069538,
+    "velocity": 0.0,
+    "x": 0.0
+  },
+  "all_states_disabled": true,
+  "cause": "Shadow-only final wait used the remaining deadline as timeout without recognizing normal run completion; ordinary execute runner already handles this boundary.",
+  "intended_fix": "Treat TimeoutError after requested shadow deadline as completion; earlier timeout still propagates and STOP remains finally."
+}

@@ -1,0 +1,190 @@
+{
+  "short_gate_counts": {
+    "baseline": {
+      "numeric_pass": 66,
+      "coverage_pass": 65,
+      "releases": 66
+    },
+    "candidate": {
+      "numeric_pass": 66,
+      "coverage_pass": 65,
+      "releases": 66
+    }
+  },
+  "created_at_utc": "2026-10-17T21:43:41.634964+00:00",
+  "candidate_name": "pooled_weak/frozen_rawq",
+  "parameters": {
+    "effective_length_m": 0.16056592343957413,
+    "viscous_per_s": 0.036911492938167034,
+    "coulomb_rad_per_s2": 1.5153591168556024,
+    "local_angle_offset_rad": -0.1128529799422302
+  },
+  "recommendation": "retain frozen baseline",
+  "regression_checks": {
+    "primary_improves_at_least_5pct": false,
+    "each_recording_primary_within_10pct": true,
+    "short_within_5pct": true,
+    "quarter_history_within_5pct": true,
+    "preserves_short_gates": true
+  },
+  "regression_pooled": {
+    "baseline": {
+      "short": {
+        "rms_deg": 2.3225656260344483,
+        "p95_deg": 4.967918732153603,
+        "samples": 39848
+      },
+      ".25": {
+        "rms_deg": 3.6555731046845277,
+        "p95_deg": 7.151496018423474,
+        "samples": 40543
+      },
+      ".5": {
+        "rms_deg": 3.6435842295464362,
+        "p95_deg": 7.138040114331174,
+        "samples": 39117
+      }
+    },
+    "candidate": {
+      "short": {
+        "rms_deg": 2.310856847893549,
+        "p95_deg": 4.929850033227577,
+        "samples": 39848
+      },
+      ".25": {
+        "rms_deg": 3.4639512099367176,
+        "p95_deg": 6.94294396026927,
+        "samples": 40543
+      },
+      ".5": {
+        "rms_deg": 3.506284477857054,
+        "p95_deg": 7.2040378646176535,
+        "samples": 39117
+      }
+    }
+  },
+  "latest4_pooled": {
+    "baseline": {
+      "short": {
+        "rms_deg": 2.356473269723847,
+        "p95_deg": 4.940189729345257,
+        "samples": 80707
+      },
+      ".25": {
+        "rms_deg": 4.323591899151453,
+        "p95_deg": 7.648018595542974,
+        "samples": 81920
+      },
+      ".5": {
+        "rms_deg": 3.3124397799455516,
+        "p95_deg": 6.528255466459529,
+        "samples": 79006
+      }
+    },
+    "candidate": {
+      "short": {
+        "rms_deg": 2.344850423465385,
+        "p95_deg": 4.91085822434542,
+        "samples": 80707
+      },
+      ".25": {
+        "rms_deg": 4.146806140745787,
+        "p95_deg": 7.822575070903583,
+        "samples": 81920
+      },
+      ".5": {
+        "rms_deg": 3.159882201195434,
+        "p95_deg": 6.366840307094994,
+        "samples": 79006
+      }
+    }
+  },
+  "all_training_pooled": {
+    "baseline": {
+      "short": {
+        "rms_deg": 2.352156698539259,
+        "p95_deg": 4.884059938876366,
+        "samples": 71598
+      },
+      ".25": {
+        "rms_deg": 5.6779043888411245,
+        "p95_deg": 9.333323128785254,
+        "samples": 72563
+      },
+      ".5": {
+        "rms_deg": 3.353997851134361,
+        "p95_deg": 6.587723088208593,
+        "samples": 69897
+      }
+    },
+    "candidate": {
+      "short": {
+        "rms_deg": 2.3420536084543717,
+        "p95_deg": 4.863628429209175,
+        "samples": 71598
+      },
+      ".25": {
+        "rms_deg": 5.167347650016402,
+        "p95_deg": 9.4159809848186,
+        "samples": 72563
+      },
+      ".5": {
+        "rms_deg": 3.0067840118923552,
+        "p95_deg": 5.917349647093319,
+        "samples": 69897
+      }
+    }
+  },
+  "quality": {
+    "regression": {
+      "releases": 23,
+      "camera_pass": 22,
+      "pose_pass": 19
+    },
+    "latest4": {
+      "releases": 47,
+      "camera_pass": 43,
+      "pose_pass": 38
+    },
+    "all6": {
+      "releases": 66,
+      "camera_pass": 61,
+      "pose_pass": 52
+    }
+  },
+  "uncertainty": {
+    "metrics": {
+      "short": {
+        "candidate_minus_baseline_rms_deg": -0.011708778140899323,
+        "paired_release_bootstrap_95pct_interval_deg": [
+          -0.013972540445846527,
+          -0.009264194122888854
+        ],
+        "resamples": 4000,
+        "seed": 20261017
+      },
+      ".25": {
+        "candidate_minus_baseline_rms_deg": -0.1916218947478101,
+        "paired_release_bootstrap_95pct_interval_deg": [
+          -0.6022699486868189,
+          0.23316409939582122
+        ],
+        "resamples": 4000,
+        "seed": 20261017
+      },
+      ".5": {
+        "candidate_minus_baseline_rms_deg": -0.13729975168938235,
+        "paired_release_bootstrap_95pct_interval_deg": [
+          -0.6968323493155543,
+          0.37066503293368414
+        ],
+        "resamples": 4000,
+        "seed": 20261017
+      }
+    },
+    "interpretation": "Descriptive conditional paired release bootstrap stratified within each of only two regression recordings. It does not account for recording-level dependence, calibration bias, prior inspection or model selection; not a confidence guarantee for new sessions."
+  },
+  "freeze_sha256": "826103849c27b7f85f495acc9bd3ab4ff7ade4b3ae37eec5567661320f12c056",
+  "accepted": false,
+  "exported": false
+}

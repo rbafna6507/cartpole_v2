@@ -29,7 +29,8 @@ def _timing_snapshot(policy):
 
 
 def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=1.,
-               ttl_ms=20, max_acceleration=.25, observation_provider=None):
+               ttl_ms=20, max_acceleration=.25, observation_provider=None,
+               channel_max_age_ns=None):
     """Explicitly arm and execute a trusted policy with selected sensor channels.
 
     Observation and request clocks are the board clock. This runner is paced by
@@ -43,6 +44,15 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
         raise ValidationError('policy_factory must be an explicit trusted callable')
     if type(channels) is not tuple or not channels or not all(isinstance(c,Channel) for c in channels):
         raise ValidationError('policy requires explicit source/frame channels')
+    ages = (20_000_000,) * len(channels) if channel_max_age_ns is None else channel_max_age_ns
+    if (type(ages) is not tuple or len(ages) != len(channels) or
+            any(type(age) is not int or not 0 < age <= 500_000_000 for age in ages)):
+        raise ValidationError('one explicit positive bounded effective-age limit per channel required')
+    if any(age > 20_000_000 and channel.source != 'vision' for channel, age in zip(channels, ages)):
+        raise ValidationError('cart, magnetic and fused channels retain the 20 ms freshness bound')
+    def selected(observation):
+        return tuple(select_channels(observation, (channel,), now_ns=observation.available_ns,
+                                     max_age_ns=age)[0] for channel, age in zip(channels, ages))
     if type(ttl_ms) is not int or not 1<=ttl_ms<=50:
         raise ValidationError('TTL must be 1..50 integer milliseconds')
     if type(max_acceleration) not in (int,float) or not math.isfinite(max_acceleration) or not 0<max_acceleration<=25:
@@ -64,7 +74,7 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
         fetch_started_host_ns=time.monotonic_ns()
         observation=observe()
         fetch_finished_host_ns=time.monotonic_ns()
-        select_channels(observation,channels,now_ns=observation.available_ns,max_age_ns=20_000_000)
+        selected(observation)
         stage='act'
         policy=policy_factory(channels)
         if not callable(getattr(policy,'reset',None)) or not callable(getattr(policy,'act',None)):
@@ -74,6 +84,7 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
             policy.validate_start(observation)
         rig._record('policy_start',channels=[dict(entity=c.entity,quantity=c.quantity,source=c.source,frame_id=c.frame_id) for c in channels],
                     policy=type(policy).__name__,duration_s=duration_s,ttl_ms=ttl_ms,max_acceleration=max_acceleration,
+                    channel_max_age_ns=list(ages),
                     timing=_timing_snapshot(policy))
         stage='step'
         rig.arm(duration_s)
@@ -85,7 +96,7 @@ def run_policy(rig, policy_factory, *, channels: tuple[Channel,...], duration_s=
             fetch_started_host_ns=time.monotonic_ns()
             observation=observe()
             fetch_finished_host_ns=time.monotonic_ns()
-            select_channels(observation,channels,now_ns=observation.available_ns,max_age_ns=20_000_000)
+            selected(observation)
             stage='act'
             began=time.perf_counter_ns()
             act_started_host_ns=time.monotonic_ns()

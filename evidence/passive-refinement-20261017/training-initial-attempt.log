@@ -1,0 +1,32 @@
+loaded training6 9 d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184
+loaded development6 10 394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d
+loaded training8 12 7cc5112f451dd10489bf48b8f3326030f54936ce15ed2f843d71ec01a0c56a21
+loaded training9 12 58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384
+pooled_weak {'coefficients': [60.70775783316895, 0.036911492938167034, 6.88028483948719, 1.5153591168556024], 'fit': {'success': True, 'weak_windows': 828, 'rank': 4, 'condition': 3.5772806210629224, 'nrmse': 0.08745513946926553, 'loss': 'linear', 'f_scale': None}}
+robust_weak {'coefficients': [60.58297103041046, 0.027759998805268724, 6.981436820589767, 1.364096738089437], 'fit': {'success': True, 'weak_windows': 828, 'rank': 4, 'condition': 3.5772806210629224, 'nrmse': 0.08780111608621416, 'loss': 'soft_l1', 'f_scale': 0.027009581600098156}}
+trajectory evaluation 1 rms 12.123123938682655 coefficients [60.58297103041046, 0.027759998805268724, 6.981436820589767, 1.364096738089437]
+trajectory evaluation 4 rms 6.080177798398915 coefficients [60.05583007906355, 0.07377445152918734, 6.892668216306502, 1.3442863071241988]
+trajectory evaluation 7 rms 3.476968557632314 coefficients [60.28760193338388, 0.06985699320515114, 6.834635961923167, 1.2619328079138108]
+trajectory evaluation 10 rms 2.034529003480747 coefficients [60.28838702600279, 0.06909475630111564, 6.871187336817127, 1.2542546985827647]
+trajectory evaluation 13 rms 1.8269805108310495 coefficients [60.30523262947527, 0.0686082182599552, 6.8495812501916555, 1.2524878666879462]
+trajectory evaluation 16 rms 1.57153791897938 coefficients [60.361100734665925, 0.05483249891526172, 6.913600112476994, 1.326507820631483]
+trajectory evaluation 19 rms 1.4783391115677584 coefficients [60.33738872356813, 0.0542450860088608, 6.939782303691918, 1.3259349465695525]
+trajectory evaluation 22 rms 1.4508051383158405 coefficients [60.320840015138394, 0.05003508046850969, 6.972556652416496, 1.3463690129860282]
+evaluating baseline frozen_rawq
+Traceback (most recent call last):
+  File "/Users/rbafna/projects/cartpole_v2/evidence/passive-refinement-20261017/tools/refine.py", line 221, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/passive-refinement-20261017/tools/refine.py", line 219, in main
+    if a.stage=='train':train(a.output)
+                        ^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/passive-refinement-20261017/tools/refine.py", line 189, in train
+    rows=evaluate(records,item['coefficients'],method)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/passive-refinement-20261017/tools/refine.py", line 114, in evaluate
+    start=time.time();x=score_record(r,c,method);rows.append(x)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/passive-refinement-20261017/tools/refine.py", line 100, in score_record
+    if len(windows)<3: raise ValueError('coverage failure '+str(ident))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: coverage failure ('d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184', 'release-09')

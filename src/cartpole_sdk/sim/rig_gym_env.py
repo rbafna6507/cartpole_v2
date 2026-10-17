@@ -1,9 +1,11 @@
-"""100 Hz Gym adapter for raw SDK actions, a 1 kHz governor and encoder observer.
+"""100 Hz Gym adapter for governed actions and causal encoder/camera sensing.
 
 This opt-in environment leaves the frozen direct-acceleration model unchanged.
 Raw angle plus estimated angular rate matches Rig.observation/HostRatePolicy;
 filtered angle is an explicit alternative for ExecutorFeedbackPolicy. All SDK
 channels retain source='simulation': names do not certify physical sensors.
+Vision uses the maintained tracker's causal derivative, VisionProvider and
+explicit anchors. Fused angle uses AngleFusion plus aligned magnetic rate.
 
 The plant is still an ideal acceleration servo with an assumed force ceiling.
 Step position is an ideal commanded pulse count, without ISR phase/direction
@@ -25,24 +27,40 @@ import numpy as np
 from cartpole_sdk.contracts import ActionRequest, Observation, Sample, ValidationError
 from cartpole_sdk.control.parameters import ControllerParameters
 from cartpole_sdk.control.reference import estimate, wrap
-from cartpole_sdk.policies.rig_observation import encode_rig_observation, simulation_channels
+from cartpole_sdk.policies.rig_observation import (encode_rig_observation, simulation_channels,
+    contract_from_config, rig_channels, select_rig_observation)
+from cartpole_sdk.sensing.policy_observation import PolicyObservationAssembler
+from cartpole_sdk.sensing.frames import AngularAlignment
+from cartpole_sdk.sensing.vision import ClockMapping, VisionProvider, calibration_fingerprint
 from .config import SimulationConfig, integer, number
 from .executor import ExecutorSimulation
 
 
 @dataclass(frozen=True, slots=True)
 class RigObservationConfig:
-    """Encoder processing at 1 kHz, complete telemetry snapshots at 100 Hz."""
+    """1 kHz encoder, 100 Hz telemetry, independently timed camera captures.
+
+    Camera dropout means an explicit invalid tracking frame, not loss of a
+    network packet. Vision mode stops on such a frame; fused mode retains only
+    an unexpired previously accepted correction, following AngleFusion.
+    """
     angle_source: str = 'raw'
     encoder_counts: int = 4096
     angle_noise_std: float = 0.
     telemetry_delay_steps: int = 0
     command_delay_steps: int = 0
     dropout_probability: float = 0.
+    angle_frame_id: str = 'encoder-zero'
+    vision_frame_period_ns: int = 20_000_000
+    vision_latency_ns: int = 10_000_000
+    vision_dropout_probability: float = 0.
+    vision_angle_noise_std: float = 0.
+    vision_angle_quantum_rad: float = .001
+    vision_max_age_ns: int = 150_000_000
+    vision_warmup_steps: int = 500
 
     def __post_init__(self):
-        if self.angle_source not in ('raw', 'filtered'):
-            raise ValidationError('angle_source must be raw or filtered')
+        contract_from_config(asdict(self))
         integer(self.encoder_counts, 'encoder_counts', positive=True)
         integer(self.telemetry_delay_steps, 'telemetry_delay_steps')
         integer(self.command_delay_steps, 'command_delay_steps')
@@ -52,19 +70,32 @@ class RigObservationConfig:
         number(self.dropout_probability, 'dropout_probability')
         if self.dropout_probability > 1:
             raise ValidationError('dropout_probability must be at most one')
+        for name in ('vision_frame_period_ns', 'vision_latency_ns', 'vision_warmup_steps'):
+            integer(getattr(self, name), name, positive=name != 'vision_latency_ns')
+        if not 1_000_000 <= self.vision_frame_period_ns <= 100_000_000:
+            raise ValidationError('vision frame period must be 1..100 ms')
+        if self.vision_latency_ns > 500_000_000 or self.vision_warmup_steps > 5000:
+            raise ValidationError('camera latency/warmup exceeds bounded simulation horizon')
+        for name in ('vision_dropout_probability', 'vision_angle_noise_std', 'vision_angle_quantum_rad'):
+            number(getattr(self, name), name)
+        if self.vision_dropout_probability > 1 or self.vision_angle_quantum_rad > math.pi:
+            raise ValidationError('invalid camera dropout probability or angle quantum')
 
 
 class RigCartpoleEnv(gym.Env):
     """Raw acceleration actions; state=[x,v,sin(angle),cos(angle),omega,a,brake].
 
-    x/v/a are commanded estimates, omega is the causal encoder observer output.
-    Reset acquires a healthy initial snapshot and advances a zero-demand ARM
+    x/v/a are commanded estimates; angle/rate follow the declared sensor source.
+    Encoder reset acquires a healthy snapshot and advances a zero-demand ARM
     lease until its first delivery (at most 20 ms). Decisions then follow that
     delivery phase. ``step(None)`` and numeric actions on unusable telemetry
     advance the held lease without renewing it. Actions anchor expiry to the
     latest delivered telemetry snapshot. SDK timestamps match Rig's board
     snapshot proxies; true transport age appears only in diagnostic info.
     Ground truth is available only in diagnostics/reward, never state channels.
+    Camera reset first advances real causal pre-arm sensor history under the
+    zero-acceleration plant assumption; no executor lease exists during this
+    bounded warmup. This does not model physical disabled-motor dynamics.
     """
     metadata = {'render_modes': []}
     step_m = 120 / 3_200_000
@@ -86,9 +117,13 @@ class RigCartpoleEnv(gym.Env):
         if not isinstance(self.observation_config, RigObservationConfig):
             raise ValidationError('expected RigObservationConfig')
         self.config, self.parameters, self.ttl_ms = config, parameters, ttl_ms
+        self.observation_contract = contract_from_config(asdict(self.observation_config))
+        self.channels = simulation_channels(angle_source=self.observation_config.angle_source)
+        self._camera_mode = self.observation_config.angle_source in ('vision', 'fused')
         self.render_mode = None
         self.backend = ExecutorSimulation(replace(config, control_steps=1,
-            max_steps=config.max_steps*config.control_steps+min(self.observation_config.telemetry_delay_steps, 20)), parameters=parameters)
+            max_steps=config.max_steps*config.control_steps+min(self.observation_config.telemetry_delay_steps, 20)
+                +(self.observation_config.vision_warmup_steps if self._camera_mode else 0)), parameters=parameters)
         limit = min(config.max_acceleration_m_s2, max(parameters.amax_s, parameters.amax_b))
         # The physical SDK ceiling is a Python float. Float32 Box endpoints can
         # round outward (e.g. .3 -> .3000000119) and fail SDK action validation.
@@ -116,11 +151,11 @@ class RigCartpoleEnv(gym.Env):
         return wrap(round(angle/quantum)*quantum)
 
     def _samples(self, timestamp, *, valid=True):
-        angle = self._raw_angle if self.observation_config.angle_source == 'raw' else self._angle_hat
+        angle = self._angle_hat if self.observation_config.angle_source == 'filtered' else self._raw_angle
         rows = (
             ('cart', 'position', self._step_position*self.step_m, 'm', 'step_count'),
             ('cart', 'velocity', float(self.backend.motion.velocity), 'm/s', 'commanded_velocity'),
-            ('pole', 'angle', angle, 'rad', 'magnetic_decoded' if self.observation_config.angle_source == 'raw' else 'filtered_magnetic_angle'),
+            ('pole', 'angle', angle, 'rad', 'filtered_magnetic_angle' if self.observation_config.angle_source == 'filtered' else 'magnetic_decoded'),
             ('pole', 'angular_velocity', self._rate_hat, 'rad/s', 'filtered_magnetic_rate'),
             ('cart', 'acceleration', float(self.backend.motion.acceleration), 'm/s^2', 'commanded_acceleration'),
             ('cart', 'brake_direction', self.backend.motion.brake_direction, '1', 'governor_brake_direction'),
@@ -139,6 +174,10 @@ class RigCartpoleEnv(gym.Env):
 
     def _deliver(self):
         now = self.ground_truth.time_ns
+        if self._camera_mode:
+            while self._camera_snapshots and self._camera_snapshots[0][0] <= now:
+                receipt, snapshot = self._camera_snapshots.popleft()
+                self._camera_observer.enqueue_vision(snapshot, received_ns=receipt, source_clock_id='sim-camera')
         while self._snapshots and self._snapshots[0][0] <= now:
             receipt, self._observed_ns, samples = self._snapshots.popleft()
             # Rig._observation reports board snapshot proxies for all three
@@ -147,9 +186,19 @@ class RigCartpoleEnv(gym.Env):
         snapshot_time = 0 if self._observed_ns is None else self._observed_ns
         self.sdk_observation = Observation(self.session.session_id, self.session.clock_id,
             snapshot_time//1_000_000, snapshot_time, 'board acquisition snapshot proxy', self._delivered)
+        if self._camera_mode and self._observed_ns is not None:
+            # Internally exercise the same explicit SDK channels/provider/anchors
+            # as deployment. Public simulation channels remain labelled simulated.
+            board = replace(self.sdk_observation, samples=tuple(replace(s, source=c.source,
+                frame_id=c.frame_id) for s, c in zip(self._delivered, rig_channels())))
+            combined = self._camera_observer.compose(board)
+            lookup = {s.channel: s for s in combined.samples}
+            selected = tuple(lookup[c] for c in self._camera_observer.channels)
+            self.sdk_observation = replace(combined, samples=tuple(replace(s, source=c.source,
+                frame_id=c.frame_id, method='simulation: '+s.method) for s, c in zip(selected, self.channels)))
 
     def _observation(self):
-        encoded = encode_rig_observation(self.sdk_observation, simulation_channels())
+        encoded = encode_rig_observation(self.sdk_observation, self.channels)
         return {key: np.array(value, dtype=np.int8 if key == 'valid' else np.float64)
                 for key, value in encoded.items()}
 
@@ -160,6 +209,8 @@ class RigCartpoleEnv(gym.Env):
                     physical_time_ns=self.ground_truth.time_ns,
                     telemetry_transport_age_ns=None if self._observed_ns is None else self.ground_truth.time_ns-self._observed_ns,
                     reset_warmup_ns=self._reset_warmup_ns,
+                    observation_contract=dict(self.observation_contract),
+                    sensor_diagnostics=None if not self._camera_mode else self._camera_observer.diagnostics,
                     action_ignored_reason=self._action_ignored_reason, action_semantics=self.action_semantics)
 
     def reset(self, *, seed=None, options=None):
@@ -183,18 +234,33 @@ class RigCartpoleEnv(gym.Env):
         self._action_ignored_reason = None
         self._reset_warmup_ns = 0
         self._initialized = True
+        if self._camera_mode:
+            self._reset_camera()
         self._publish(initial=True)
         self._deliver()
         # Run actual causal sensor/plant ticks; never invent a sensor history.
         # At 3 ms delay the first decision is t=3, then t=13, 23, ... as a
         # telemetry-paced host. An impossible >=20 ms startup expires on step.
-        for _ in range(min(self.observation_config.telemetry_delay_steps, 20)):
+        for _ in range(0 if self._camera_mode else min(self.observation_config.telemetry_delay_steps, 20)):
             request = None
             if not self._arm_lease_installed:
                 request = self._request(0., min(20_000_000, self.backend.action_limits.max_ttl_ns))
                 self._arm_lease_installed = True
             self._tick(request)
             if self.terminated: break
+        if self._camera_mode:
+            # Acquire actual evolving pre-arm history under zero cart
+            # acceleration. No action lease is installed or silently renewed.
+            # This is the simulator's zero-acceleration servo assumption, not a
+            # model of physical motor-disabled dynamics.
+            for _ in range(self.observation_config.vision_warmup_steps):
+                try:
+                    select_rig_observation(self.sdk_observation, self.channels, contract=self.observation_contract)
+                    break
+                except ValidationError:
+                    self._tick(None, prearm=True)
+                    if self.terminated:
+                        break
         self._reset_warmup_ns = self.ground_truth.time_ns
         return self._observation(), self._info()
 
@@ -206,7 +272,9 @@ class RigCartpoleEnv(gym.Env):
         acceleration = float(array[0])
         if abs(acceleration) > float(self.action_space.high[0]):
             raise ValidationError('action exceeds acceleration limit')
-        if self._observed_ns is None or any(s.validity != 'valid' for s in self._delivered):
+        try:
+            select_rig_observation(self.sdk_observation, self.channels, contract=self.observation_contract)
+        except ValidationError:
             self._action_ignored_reason = 'unusable telemetry'
             return None
         return acceleration
@@ -237,7 +305,8 @@ class RigCartpoleEnv(gym.Env):
                 request = self._request(value, expires)
             if self.terminated: break
             if not self._arm_lease_installed:
-                if request is None: request = self._request(0., min(20_000_000, self.backend.action_limits.max_ttl_ns))
+                if request is None:
+                    request = self._request(0., now+min(20_000_000, self.backend.action_limits.max_ttl_ns))
                 self._arm_lease_installed = True
             self._tick(request)
             if self.terminated: break
@@ -249,9 +318,52 @@ class RigCartpoleEnv(gym.Env):
         reward = math.cos(truth.theta)-(truth.x/self.config.rail_half_m)**2-.001*demand*demand
         return self._observation(), float(reward), self.terminated, self.truncated, self._info()
 
-    def _tick(self, request):
-        self.backend.step(request)
-        self.terminated, self.fault_reason = self.backend.terminated, self.backend.fault_reason
+    def _reset_camera(self):
+        from cartpole_vision.state import Derivative
+        self._camera_derivative = Derivative(angular=True)
+        self._camera_snapshots = deque()
+        self._next_camera_ns = 0
+        self._camera_calibration = dict(home_angle_rad=0., home_length_px=100., simulated=True)
+        frame = self.observation_config.angle_frame_id
+        provider = VisionProvider(self.session, frame_id='sim-camera-calibrated',
+            clock_mapping=ClockMapping('sim-camera', self.session.clock_id, 0),
+            calibration=self._camera_calibration, max_age_ns=self.observation_config.vision_max_age_ns)
+        vision = AngularAlignment('vision', 'simulated-camera', 'sim-camera-calibrated',
+            calibration_fingerprint(self._camera_calibration), frame, 'simulated-upright-reference', 0., 1)
+        encoder = AngularAlignment('magnetic', 'simulated-encoder', 'encoder-zero',
+            'simulated-encoder-zero', frame, 'simulated-upright-reference', 0., 1)
+        self._camera_observer = PolicyObservationAssembler(self.session, contract=self.observation_contract,
+            vision_provider=provider, vision_alignment=vision, encoder_alignment=encoder)
+        self._capture_camera()
+
+    def _capture_camera(self):
+        now = self.ground_truth.time_ns
+        if now < self._next_camera_ns:
+            return
+        c = self.observation_config
+        self._next_camera_ns += c.vision_frame_period_ns
+        valid = self.np_random.random() >= c.vision_dropout_probability
+        angle = rate = effective = None
+        if valid:
+            angle = self.ground_truth.theta + self.np_random.normal(0., c.vision_angle_noise_std)
+            if c.vision_angle_quantum_rad:
+                angle = round(angle/c.vision_angle_quantum_rad)*c.vision_angle_quantum_rad
+            angle = wrap(angle)
+            rate = self._camera_derivative.observe(now/1e9, angle)
+            effective = self._camera_derivative.effective_t
+        snapshot = dict(t=now/1e9, calibration=self._camera_calibration, calibrated=True,
+            angle_valid=valid, theta_rad=angle, omega_rad_s=rate, omega_effective_t=effective,
+            host_read_to_result_ms=c.vision_latency_ns/1e6, cart_valid=False)
+        self._camera_snapshots.append((now+c.vision_latency_ns, snapshot))
+
+    def _tick(self, request, *, prearm=False):
+        if prearm:
+            self.backend.observation = self.backend.plant.step(None)
+            self.terminated = self.backend.plant.terminated
+            self.fault_reason = 'rail exceeded during camera pre-arm acquisition' if self.terminated else None
+        else:
+            self.backend.step(request)
+            self.terminated, self.fault_reason = self.backend.terminated, self.backend.fault_reason
         if self.terminated: return
         velocity = float(self.backend.motion.velocity)
         self._step_fraction += abs(velocity)*.001/self.step_m
@@ -261,8 +373,10 @@ class RigCartpoleEnv(gym.Env):
         self._raw_angle = self._measure_angle()
         self._angle_hat, self._rate_hat = estimate(self._raw_angle, self._angle_hat,
                                                    self._rate_hat, self.parameters.bw)
-        if self.diagnostics.force_saturated:
+        if self.backend.plant.diagnostics.force_saturated:
             self.terminated, self.fault_reason = True, 'force saturation: tracking model unsupported'
+        if self._camera_mode:
+            self._capture_camera()
         if self.ground_truth.time_ns % 10_000_000 == 0: self._publish()
         self._deliver()
 

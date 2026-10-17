@@ -4,6 +4,7 @@ Only a fixed two-layer tanh MLP is supported. No Torch, pickle, executable graph
 simulator, device object or automatic hardware source selection is loaded.
 """
 from hashlib import sha256
+from dataclasses import fields
 import json
 import math
 from pathlib import Path
@@ -11,10 +12,16 @@ from pathlib import Path
 from cartpole_sdk.contracts import (Acceleration, Session, ValidationError,
     select_channels, validate_observation)
 from cartpole_sdk.recording import strict_json_loads
-from .rig_observation import SCHEMA as OBSERVATION_SCHEMA, QUANTITIES, encode_rig_observation
+from .rig_observation import (SCHEMA as OBSERVATION_SCHEMA, QUANTITIES, encode_rig_observation,
+    ANGLE_SOURCES, observation_contract, validate_observation_contract,
+    select_rig_observation, channel_age_limits)
 
 SCHEMA = 'cartpole-numeric-ppo-actor-v1'
-RUNTIME_FILES = ('contracts.py', 'recording.py', 'policies/rig_observation.py', 'policies/neural.py')
+RUNTIME_FILES = ('contracts.py', 'recording.py', 'policies/rig_observation.py', 'policies/neural.py',
+    'control/parameters.py', 'control/motion.py', 'sensing/vision.py', 'sensing/frames.py',
+    'sensing/fusion.py', 'sensing/policy_observation.py', 'sensing/stream.py',
+    'rig/policy.py', 'rig/neural_runner.py', 'rig/client.py', 'rig/protocol.py',
+    'rig/parameters.py', 'rig/transport.py', 'rig/__init__.py')
 MAX_BYTES = 1_000_000
 
 
@@ -26,13 +33,28 @@ def validate_actor(actor):
     if (not isinstance(actor, dict) or actor.get('schema') != SCHEMA or
             actor.get('observation_schema') != OBSERVATION_SCHEMA or
             actor.get('status') != 'DEVELOPMENT_ONLY' or actor.get('hardware_accepted') is not False or
-            actor.get('rate_hz') != 100 or actor.get('angle_source') not in ('raw', 'filtered') or
+            actor.get('rate_hz') != 100 or actor.get('angle_source') not in ANGLE_SOURCES or
             actor.get('feature_order') != ['age_s', 'state', 'valid']):
         raise ValidationError('unsupported numeric PPO actor contract')
     content = dict(actor)
     pin = content.pop('content_sha256', None)
     if _digest(content) != pin:
         raise ValidationError('numeric actor content hash mismatch')
+    contract = actor.get('observation_contract')
+    executor = actor.get('executor_parameters')
+    if contract is None and executor is None and actor['angle_source'] in ('raw', 'filtered'):
+        pass  # Explicit v1 encoder-only compatibility; no hardware parameter snapshot.
+    else:
+        contract = validate_observation_contract(contract)
+        if contract['angle_source'] != actor['angle_source']:
+            raise ValidationError('actor angle source differs from observation contract')
+        from cartpole_sdk.control.parameters import ControllerParameters
+        if not isinstance(executor, dict) or set(executor) != {f.name for f in fields(ControllerParameters)}:
+            raise ValidationError('actor requires complete executor parameter snapshot')
+        try:
+            ControllerParameters(**executor)
+        except ValueError as exc:
+            raise ValidationError('invalid actor executor parameter snapshot: '+str(exc)) from exc
     scale = actor.get('action_scale_m_s2')
     if type(scale) not in (float, int) or not math.isfinite(scale) or not 0 < scale <= 25:
         raise ValidationError('invalid numeric actor action scale')
@@ -55,10 +77,10 @@ class NeuralPolicy:
     def __init__(self, actor, *, channels):
         self.actor = validate_actor(actor)
         if type(channels) is not tuple or tuple(c.quantity for c in channels) != QUANTITIES:
-            raise ValidationError('choose all six explicit encoder/governor channels')
-        expected = 'magnetic' if actor['angle_source'] == 'raw' else 'magnetic_filtered'
-        if channels[2].source not in (expected, 'simulation'):
-            raise ValidationError('angle source differs from trained actor input')
+            raise ValidationError('choose all six explicit sensor/governor channels')
+        self.observation_contract = actor.get('observation_contract') or observation_contract(angle_source=actor['angle_source'])
+        channel_age_limits(channels, contract=self.observation_contract)
+        self.executor_parameters = actor.get('executor_parameters')
         self.channels = channels
         self.rate_hz = 100
         self.session = None
@@ -96,11 +118,7 @@ class NeuralPolicy:
                 sequence, previous_ns = self._previous
                 if observation.sequence <= sequence or abs(now - previous_ns - 10_000_000) > 5_000_000:
                     raise ValidationError('replayed observation or incompatible 100 Hz cadence')
-            samples = select_channels(observation, self.channels, now_ns=now, max_age_ns=20_000_000)
-            if max(s.effective_ns for s in samples) - min(s.effective_ns for s in samples) > 10_000_000:
-                raise ValidationError('sensor timestamp skew exceeds one control period')
-            if samples[-1].value not in (-1, 0, 1):
-                raise ValidationError('invalid brake direction')
+            select_rig_observation(observation, self.channels, contract=self.observation_contract)
             demand = self.predict_encoded(encode_rig_observation(observation, self.channels))
             self._previous = observation.sequence, now
             return Acceleration(demand)

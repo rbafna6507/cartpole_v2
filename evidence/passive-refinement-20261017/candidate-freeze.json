@@ -1,0 +1,218 @@
+{
+  "schema": "passive-refinement-freeze-v1",
+  "created_at_utc": "2026-10-17T21:42:14.420427+00:00",
+  "scope": "DEVELOPMENT_ONLY; validation8/9 are previously inspected regression holdouts",
+  "coefficients": [
+    60.70775783316895,
+    0.036911492938167034,
+    6.88028483948719,
+    1.5153591168556024
+  ],
+  "initializer": "frozen_rawq",
+  "candidate_name": "pooled_weak/frozen_rawq",
+  "parameters": {
+    "effective_length_m": 0.16056592343957413,
+    "viscous_per_s": 0.036911492938167034,
+    "coulomb_rad_per_s2": 1.5153591168556024,
+    "local_angle_offset_rad": -0.1128529799422302
+  },
+  "baseline": {
+    "coefficients": [
+      60.806177009128575,
+      0.006891975341585199,
+      6.898766153634008,
+      1.6268943123178277
+    ],
+    "initializer": "frozen_rawq",
+    "freeze_path": "evidence/system-id-model-review-20261017/candidate-freeze-latest6.json",
+    "freeze_sha256": "2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59"
+  },
+  "selection": [
+    {
+      "name": "baseline/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": true,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.350345516569671,
+        ".25": 5.220344671388352,
+        ".5": 3.3812772618360105
+      }
+    },
+    {
+      "name": "baseline/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.3681483916048514,
+        ".25": 4.205537281216868,
+        ".5": 3.184308593375536
+      }
+    },
+    {
+      "name": "pooled_weak/frozen_rawq",
+      "eligible": true,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": true,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.340756153144073,
+        ".25": 4.8006369019721395,
+        ".5": 3.026587713964221
+      }
+    },
+    {
+      "name": "pooled_weak/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.359549949463706,
+        ".25": 3.6746693476036807,
+        ".5": 3.0852817896678957
+      }
+    },
+    {
+      "name": "robust_weak/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.3667946555109163,
+        ".25": 6.555255133503311,
+        ".5": 4.695405622051682
+      }
+    },
+    {
+      "name": "robust_weak/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.3878698867923873,
+        ".25": 6.244326472454902,
+        ".5": 4.033779390227059
+      }
+    },
+    {
+      "name": "robust_trajectory/frozen_rawq",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": false,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": false,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": true
+      },
+      "equal_recording_rms": {
+        "short": 2.3693971921798207,
+        ".25": 5.53700513359202,
+        ".5": 3.4481215754624093
+      }
+    },
+    {
+      "name": "robust_trajectory/robust_history",
+      "eligible": false,
+      "checks": {
+        "primary_improves_5pct": true,
+        "short_mean_no_more_2pct_worse": true,
+        "quarter_history_mean_no_more_5pct_worse": true,
+        "every_recording_primary_within_10pct": false,
+        "preserves_baseline_short_gates": false
+      },
+      "equal_recording_rms": {
+        "short": 2.394443367463688,
+        ".25": 5.047962567472232,
+        ".5": 3.0017798292079423
+      }
+    }
+  ],
+  "development_source_sha256": [
+    "d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184",
+    "394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d",
+    "7cc5112f451dd10489bf48b8f3326030f54936ce15ed2f843d71ec01a0c56a21",
+    "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384"
+  ],
+  "training_sources": [
+    {
+      "label": "training6",
+      "annotations": "evidence/system-id-model-review-20261017/batch6/training-annotations.json",
+      "annotations_sha256": "d18d0b1b3c22bcd693917d1785440ada81cedf163731d3f3577e04cd11aaf9a4",
+      "archive": "evidence/system-id-model-review-20261017/batch6/training-original.tar.xz",
+      "archive_sha256": "28ff4559f4da79eeaa03d9bac588e30b5a2b40178a8b07e8d02ac366c50f35df",
+      "raw_sha256": "d4d7f4c6c6af51a80cbce15baea26f16de49bba0edc7626fb9c19b9c9f433184"
+    },
+    {
+      "label": "development6",
+      "annotations": "evidence/system-id-model-review-20261017/batch6/validation-annotations.json",
+      "annotations_sha256": "39fb49a8030b2b94d5e1132874c32c40d2f1d7bf24141a3bb83b4c9e3a703658",
+      "archive": "evidence/system-id-model-review-20261017/batch6/validation-original.tar.xz",
+      "archive_sha256": "840a4253a2f5ba977fe90bdd9dcf3a352b44d2fc57a2c25a0c7b199a191dd399",
+      "raw_sha256": "394695ca1c4f690233dbf396cf7fe5d6344b4d28f42be0b7c3743d914600585d"
+    },
+    {
+      "label": "training8",
+      "annotations": "evidence/passive-batches8-9-20261017/training8/annotations.json",
+      "annotations_sha256": "2f856574fd6dde3cef7ac48146e49fb627a31e56c549b8c8fa22a876659910d0",
+      "archive": "evidence/passive-batches8-9-20261017/training8/original.tar.xz",
+      "archive_sha256": "cbfb4b60363dcd566b77d45129f43a5d08e9e74dd53d0452360030b37dd55f41",
+      "raw_sha256": "7cc5112f451dd10489bf48b8f3326030f54936ce15ed2f843d71ec01a0c56a21"
+    },
+    {
+      "label": "training9",
+      "annotations": "evidence/passive-batches8-9-20261017/training9/annotations.json",
+      "annotations_sha256": "145bbe7d19c18da8ead69b044dea30ce3c039db25d8f05fe7f4976141429d8e5",
+      "archive": "evidence/passive-batches8-9-20261017/training9/original.tar.xz",
+      "archive_sha256": "778197d639431530e76c847f6ee1d0f806d5d4e14b39b9a89a7fd1de17956514",
+      "raw_sha256": "58e9f55951b85846e40b280db86de19f2bb5477dcf8fd0d021203ced610fa384"
+    }
+  ],
+  "training_report_sha256": "ffc9224e366068b73982d8cf68bee84be72d4dc6fe00aa357c744d67e86bf8be",
+  "method_hashes": {
+    "evidence/passive-refinement-20261017/METHOD.md": "1b0198c8ecb0f90b2268fcd154fc5a0ad36c1e6987a8747223b0f891a306e648",
+    "evidence/passive-refinement-20261017/tools/refine.py": "99e2d617e02b8443579f4b8a75e27d4856529e84b93c66319d9428f6f6f2b0c1",
+    "evidence/system-id-model-review-20261017/tools/dynamics.py": "0bd736be5a6bc438d253ca046e0b09e26d9004c38f34a1974e91893eee5bd335",
+    "evidence/system-id-model-review-20261017/tools/trajectory.py": "5cfec37add52f5d32663bef72b1d7320466f0d886c564dddd590ad414045bad4",
+    "src/cartpole_sdk/identification/passive.py": "5dc850ec634e1b71ff417bac0f6a31c4bc53b0bad7e82516235e3606dbf66deb",
+    "src/cartpole_sdk/identification/workflow.py": "654ed80bf1235c5e1b028a5676b8cf5fc4f26b3870ac6d8fa932c3f93e1bea1a",
+    "src/cartpole_sdk/identification/release_review.py": "dfb905689e2ddf87b4c4a8e6f5ddd6e2f44951746403cd6834d93b4eb406fcf7"
+  },
+  "histories_s": [
+    0.25,
+    0.5
+  ],
+  "primary_history_s": 0.5,
+  "friction_law": "-c*tanh(omega/0.05)",
+  "production_export_allowed": false,
+  "accepted": false
+}
