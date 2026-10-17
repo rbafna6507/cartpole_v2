@@ -39,12 +39,34 @@ Purpose: identify passive pole gravity/damping from free motion while the operat
   --dataset-role validation --run-label fresh-passive-holdout \
   --release-angles-deg 30 60 --release-directions left right --repetitions 2 \
   --cart-restraint "cart held stationary by hand" \
-  --output runs/passive-validation-01
+  --output runs/passive-validate-01
 ```
 
 The script prints the sequence after recording starts: 30° left, 30° right, 60° left, 60° right, then repeats. These angles are **requested conditions**, not measurements or automatic fit windows. Conditions, dataset role and restraint are hashed into both the raw log and completion report. The role is descriptive; actual source/session independence is checked during fitting. At most 12 releases fit in one labelled recording, and recording is bounded to 180 seconds. If full settling takes longer, split the procedure across recordings instead of rushing. The collector neither measures nor automatically confirms when each requested release occurred.
 
 Aim for repeatable cart restraint; a rigid clamp is stronger evidence than holding it by hand. If you use your hand, say so. Keep the camera fixed and markers visible. Nominal left/right is the **camera view**, not a hardcoded encoder sign.
+
+### A horizontal (90°) release
+
+The existing collector already accepts 90° from hanging. With the pole hanging vertically down as 0°, 90° is **horizontal**, to either side. This is easier to reproduce visually than 60°. Keep the cart fixed, hold the horizontal pose for two seconds, then release without pushing. The motor stays disabled. Leave enough clearance for the full free swing and keep both markers visible.
+
+Collect a separate large-angle pilot so it does not replace the first batch:
+
+```sh
+"$ID" collect-passive --port "$PORT" --seconds 120 \
+  --dataset-role development --run-label horizontal-90-pilot \
+  --release-angles-deg 90 --release-directions left right --repetitions 2 \
+  --cart-restraint "cart held stationary by hand" \
+  --output runs/passive-horizontal-90-01
+```
+
+The four requested releases are left, right, left, right. Once the procedure is repeatable, collect separate training and validation recordings using the matching dataset role and new output names. Keep smaller-angle data as well; horizontal releases add coverage rather than making lower-amplitude data obsolete. The passive equations use sine/cosine gravity terms and do not require a small-angle approximation, but a fit still has to pass each held-out release. Stronger swings also make independent cart restraint more important.
+
+### Requested angle versus plotted angle
+
+A request for 60° is a label, not a mathematical assumption in the fitter. A clean release actually around 40° is useful for identifying and validating that measured range; it cannot establish 60° or 90° accuracy. Do not change encoder measurements or relabel measured angles to force agreement with the requested pose.
+
+`raw-observations.png` plots raw encoder angle minus an integer hanging branch (normally π), **not angle minus the observed settled resting angle**. For example, a resting baseline at −7° and a held pose at +40° are separated by about 47 encoder degrees. Also, the first peak after falling is smaller than the release height because energy has already been lost. Use the pre-release pose and local resting baseline to assess encoder displacement, not just a later peak. This is not an independent physical-angle calibration; the hanging/upright mapping question remains open.
 
 The default raw camera URL is `http://127.0.0.1:3090/api/sensing-stream?max_hz=100`. Camera work runs in a separate process. It inherits the launching process’s CPU affinity: run the integrated collector without `taskset -c 2`, which would pin both camera and control to the same CPU. The package does not change CPU affinity or scheduler settings. A fresh actual camera frame with valid source age is required before serial collection; advancing HTTP heartbeat envelopes alone do not establish camera readiness; camera failure during collection stops the procedure. Use `--camera-url URL` for an explicit endpoint, or `--no-camera` to deliberately record the absence of independent camera evidence. Raw images/geometry can support stationarity assessment, but uncalibrated pixels do not establish metric cart motion or global angle calibration.
 
@@ -68,9 +90,26 @@ Keep each newly collected raw log with its sibling `report.json`, including when
 ```sh
 "$ID" annotations-template --input runs/passive-train-01/rig-EXACT.jsonl \
   --output runs/train-annotations.json
-"$ID" annotations-template --input runs/passive-validation-01/rig-EXACT.jsonl \
+"$ID" annotations-template --input runs/passive-validate-01/rig-EXACT.jsonl \
   --output runs/validation-annotations.json
 ```
+
+**Do not draw on or edit the PNG.** “Mark intervals” means read the start/end times from the plot's horizontal axis and enter those numbers in the annotation JSON. The PNG is a static picture, not an interactive selection tool.
+
+For example, on the Jetson:
+
+```sh
+nano runs/train-annotations.json
+```
+
+Keep the generated `source_sha256` unchanged. For each release:
+
+1. Find the held pose followed by regular decaying oscillations. Start just after release, when your hand is clear; exclude the preceding lift and hold. If the hand-clear time is uncertain, choose a conservative later start and state that uncertainty.
+2. End before you touch/lift the pole again, before the recording ends, or when the motion becomes a flat stationary tail. Keep multiple complete oscillations; very short fragments may fail the required validation-window count.
+3. Add a unique `episode_id`, `board_relative_s: [start, end]`, and a truthful `reason`. Use your memory/video of the release to distinguish free motion from handling; an encoder trace alone cannot prove your hand or the cart was clear.
+4. Describe how the cart was restrained and how you selected the windows. Once the intervals are fixed **before any fit scoring**, set `selected_before_scoring` to `true`.
+
+In nano, save with Ctrl-O then Enter and exit with Ctrl-X. Repeat for the validation annotation file. The numbers below are illustrative, not timestamps to copy into a different recording. If you already created `train-annotations.json`, edit it; `annotations-template` intentionally refuses to overwrite it.
 
 Edit each new template manually. Its time zero is the first recorded STATE. Supply a truthful restraint description and selection method, then add nonoverlapping hand-clear intervals:
 
@@ -79,7 +118,7 @@ Edit each new template manually. Its time zero is the first recorded STATE. Supp
   "source_sha256": "keep the generated source hash",
   "selected_before_scoring": true,
   "operator_cart_restraint": "cart base physically restrained by operator",
-  "selection_method": "hand-clear intervals marked from raw video before scoring",
+  "selection_method": "free-motion boundaries read from raw plot and my release observations before scoring",
   "episodes": [
     {"episode_id":"release-1", "board_relative_s":[8.2,11.2], "reason":"hand clear; freely decaying pole"},
     {"episode_id":"release-2", "board_relative_s":[16.1,19.1], "reason":"opposite direction free release"}
@@ -89,6 +128,14 @@ Edit each new template manually. Its time zero is the first recorded STATE. Supp
 
 Do not choose intervals by whichever ones fit best. Static tails cannot validate a dynamic model. Separate recordings and source identities are required for training and validation; renaming a copy does not create a holdout. Exact repeated STATUS snapshots are counted and deduplicated only when every board field agrees; contradictory repeats and reversed clocks fail without rewriting the source.
 
+### Keep batch 1; extend its coverage with batch 2
+
+The [2026-10-17 batch-1 review](../evidence/operator-batch1-20261017/README.md) checks the actual `passive-train-01` and `passive-validate-01` recordings and includes an illustrated annotation example. Both are candidates for annotation and an initial fit; neither has been fitted by that review.
+
+Use the first training and validation recordings for an initial fit if completion/STOP, health, clock integrity, reference consistency, restraint and free-interval selection check out. Requested-angle undershoot alone is not a reason to discard them. A quality review before scoring does not consume the validation set; using its prediction errors to change the model does. If you tune the model after inspecting batch-1 validation errors, that validation recording becomes development evidence, and batch 2 can supply a fresh holdout.
+
+Collect improved 60° and separate 90° releases to cover the missing amplitudes. Validate the same physical model on both lower and higher ranges, rather than replacing every smaller swing with a large one. Preserve every original recording and do not overwrite batch 1. Until the intervals are annotated and the fit is scored, “candidate data” does not mean an accepted model.
+
 ## 4. Fit and validate passive dynamics
 
 Declare the model before scoring validation. The default viscous model is directly representable in the current simulator. The optional `viscous_coulomb` model is useful for diagnosis but a nonzero Coulomb term cannot currently be exported.
@@ -97,7 +144,7 @@ Declare the model before scoring validation. The default viscous model is direct
 "$ID" fit-passive \
   --training runs/passive-train-01/rig-EXACT.jsonl \
   --training-annotations runs/train-annotations.json \
-  --validation runs/passive-validation-01/rig-EXACT.jsonl \
+  --validation runs/passive-validate-01/rig-EXACT.jsonl \
   --validation-annotations runs/validation-annotations.json \
   --model viscous --output runs/passive-fit-01.json
 ```
@@ -108,7 +155,7 @@ Before exporting, plot the **saved** fit against the exact held-out recording:
 
 ```sh
 "$ID" review-fit --fit runs/passive-fit-01.json \
-  --validation runs/passive-validation-01/rig-EXACT.jsonl \
+  --validation runs/passive-validate-01/rig-EXACT.jsonl \
   --validation-annotations runs/validation-annotations.json \
   --output runs/passive-fit-01-review
 ```

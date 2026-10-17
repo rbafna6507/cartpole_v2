@@ -180,25 +180,220 @@ does not add a portal submission path or authorize a hardware runner. Recorded
 shadow testing, timing measurements and bounded physical acceptance remain
 separate work.
 
-## Colab
+## Headless Google Colab CLI
 
-Open [`notebooks/train_ppo_colab.ipynb`](../notebooks/train_ppo_colab.ipynb). From
-this checkout, prepare the source archive (include the new files):
+Use Google's official [`google-colab-cli`](https://github.com/googlecolab/google-colab-cli)
+from a local terminal. The commands below target **0.7.4**, verified on
+2026-10-17 against the published package's help and source. It requires Python
+3.12+ on the local CLI host (Linux or macOS); the separate training environment
+below uses Python 3.11.7. [Published release](https://pypi.org/project/google-colab-cli/0.7.4/).
+
+This is a ready-to-run recipe **after fitting, reviewing and exporting the model**
+and preparing the four inputs above. The rejected recordings are not training
+inputs. Local package/help checks and the PPO pipeline have been tested; **no
+Colab login, runtime allocation or cloud training has been tested**. A short
+execution check still provides no evidence of model fidelity or policy quality.
+
+### Install locally and authorize once
+
+From the repository root, use a separate CLI environment:
+
+```sh
+uv venv --python 3.12 runs/colab-cli-venv
+uv pip install --python runs/colab-cli-venv/bin/python google-colab-cli==0.7.4
+colab() { runs/colab-cli-venv/bin/colab --auth oauth2 "$@"; }
+colab --help
+colab version
+```
+
+Version 0.7.4's installed help and `cli.py` default to `oauth2`; the README's
+`adc` default is stale. The explicit flag avoids that ambiguity. On the first
+authenticated command, the CLI prints a Google authorization URL. **You open
+that URL, approve access, and paste the authorization code into your terminal.**
+It caches credentials locally for later commands. This human consent step uses
+a browser; uploading and running training do not require a notebook browser.
+The bundled OAuth client supports this flow, so creating a client configuration
+or setting up ADC is unnecessary for this recipe. This local Colab API login is
+separate from granting cloud-service credentials inside a VM; the training
+recipe does not need VM credentials or a Drive mount.
+[Official authentication design](https://github.com/googlecolab/google-colab-cli/blob/main/docs/04_automation_and_utility.md),
+[CLI default](https://github.com/googlecolab/google-colab-cli/blob/main/src/colab_cli/cli.py).
+
+### Package inputs, allocate CPU and upload
+
+These archives contain selected source and reviewed inputs. Do not add keys,
+environment files, CLI credential caches, or unrelated raw recordings. A private
+repository does not need to become public or be cloned using a token in Colab.
+`README.md` is required by the Python build metadata.
 
 ```sh
 python -m zipfile -c cartpole-source.zip pyproject.toml README.md uv.lock src examples scripts
+python -m zipfile -c cartpole-inputs.zip \
+  runs/model.json runs/executor-parameters.json \
+  runs/observation-config.json runs/prior-parameters.json
+
+# This command authenticates if needed and allocates a real CPU runtime.
+colab new -s cartpole-ppo
+colab upload -s cartpole-ppo cartpole-source.zip /content/cartpole-source.zip
+colab upload -s cartpole-ppo cartpole-inputs.zip /content/cartpole-inputs.zip
 ```
 
-Upload that archive and the four reviewed input JSON files when the notebook
-prompts. The notebook installs CPU Torch and the optional RL extra, trains via
-the same CLI, supports resume, evaluates on disjoint seeds, and downloads the
-checkpoint/actor/report bundle. No Google Drive mounting, SSH or device control
-is required. Colab execution itself has not been claimed tested by local smoke
-results; the same training CLI and real learn/save/reload/resume path were tested
-locally.
-The source archive contains only the selected project files; do not add SSH
-keys, environment files, credentials, or unrelated raw recordings. A private
-repository does not need to be made public or cloned with a token inside Colab.
+Omitting `--gpu` and `--tpu` requests CPU. The current PPO implementation uses
+`device='cpu'`; requesting a GPU will not accelerate this implementation.
+Keep the named session until its outputs have been downloaded. Upload and
+download operate on files, so the result directory will also be zipped.
+[Official command reference](https://github.com/googlecolab/google-colab-cli#command-index).
+
+### Install the locked training environment
+
+`exec` executes Python in the remote kernel. Its verified default timeout is
+30 seconds; use an explicit timeout for installation and training. This setup
+creates an isolated project environment, leaving Colab's notebook packages out
+of the training process. The locked Linux Torch wheel can include CUDA
+dependencies, but the policy still runs on CPU; do not switch Torch builds
+between a checkpoint and its resume/evaluation.
+
+```sh
+colab exec -s cartpole-ppo --timeout 1800 <<'PY'
+from pathlib import Path
+import subprocess, sys, zipfile
+
+project = Path('/content/cartpole-training')
+project.mkdir(exist_ok=False)
+with zipfile.ZipFile('/content/cartpole-source.zip') as archive:
+    archive.extractall(project)
+with zipfile.ZipFile('/content/cartpole-inputs.zip') as archive:
+    archive.extractall(project / 'inputs')
+subprocess.run([sys.executable, '-m', 'pip', 'install', 'uv==0.8.11'], check=True)
+subprocess.run(['uv', 'sync', '--locked', '--extra', 'rl', '--no-dev',
+                '--python', '3.11.7'], cwd=project, check=True)
+(project / 'training-python.txt').write_text('3.11.7\n')
+(project / 'training-uv.txt').write_text('0.8.11\n')
+subprocess.run(['sh', 'scripts/train-ppo', '--help'], cwd=project, check=True)
+PY
+```
+
+### Train, evaluate and download
+
+Save this small **local** launcher from the repository root. `exec -f` sends its
+contents to Colab; the paths inside it are remote paths. It invokes the existing
+training wrapper and preserves all admission checks and manifests.
+
+```sh
+cat > runs/colab-train.py <<'PY'
+from pathlib import Path
+import os, subprocess
+
+project = Path('/content/cartpole-training')
+run = os.environ['CARTPOLE_RUN']
+resume = os.environ['CARTPOLE_RESUME']
+command = ['sh', 'scripts/train-ppo', 'train',
+    '--model', 'inputs/model.json',
+    '--executor-parameters', 'inputs/executor-parameters.json',
+    '--observation-config', 'inputs/observation-config.json',
+    '--prior-parameters', 'inputs/prior-parameters.json',
+    '--development-only', '--training-seeds', '11', '12', '13',
+    '--seed', '20261017', '--seconds', '10', '--steps', '2048',
+    '--n-steps', '1024', '--batch-size', '64', '--epochs', '10',
+    '--checkpoint-every', '1024', '--output', f'runs/{run}']
+if resume:
+    command += ['--resume', f'runs/{resume}']
+subprocess.run(command, cwd=project, check=True,
+               env=dict(os.environ, UV_LOCKED='1', PYTHONUNBUFFERED='1'))
+PY
+
+colab exec -s cartpole-ppo --timeout 3600 -f runs/colab-train.py \
+  --env CARTPOLE_RUN=ppo-001 --env CARTPOLE_RESUME=
+colab exec -s cartpole-ppo --timeout 3600 <<'PY'
+from pathlib import Path
+import os, subprocess
+project = Path('/content/cartpole-training')
+subprocess.run(['sh', 'scripts/train-ppo', 'evaluate', 'runs/ppo-001',
+    '--seeds', '1001', '1002', '1003', '1004', '1005', '1006',
+    '--output', 'runs/ppo-001-heldout.json'], cwd=project, check=True,
+    env=dict(os.environ, UV_LOCKED='1'))
+PY
+```
+
+Run the following packaging/download block after training or resuming, and
+before releasing the VM. It includes source, lockfile, input manifests,
+checkpoints, portable actor and evaluation report, excluding the environment
+and credentials. Only extract bundles you created or trust.
+
+```sh
+colab exec -s cartpole-ppo --timeout 300 <<'PY'
+from pathlib import Path
+import zipfile
+project = Path('/content/cartpole-training')
+selected = ['pyproject.toml', 'README.md', 'uv.lock', 'training-python.txt',
+            'training-uv.txt', 'src', 'examples', 'scripts', 'inputs', 'runs']
+with zipfile.ZipFile('/content/cartpole-results.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
+    for name in selected:
+        path = project / name
+        for item in (sorted(path.rglob('*')) if path.is_dir() else [path]):
+            if item.is_file() and '__pycache__' not in item.parts:
+                archive.write(item, item.relative_to(project))
+PY
+colab download -s cartpole-ppo /content/cartpole-results.zip cartpole-results-001.zip
+python -m zipfile -t cartpole-results-001.zip
+# Run only after downloading and checking the bundle:
+colab stop -s cartpole-ppo
+```
+
+The remote disk is temporary. Download periodic checkpoints during longer work
+using the same packaging block; an interrupted run may only have complete
+`runs/ppo-001/checkpoints/step-XXXXXXXXX` directories. Use a complete directory
+as the resume input. If a terminal command disconnects or times out, inspect
+the session before retrying; a client timeout is not proof that training stopped.
+
+### Resume with the same source and versions
+
+On the **same running session**, append another 2,048 steps into a new directory:
+
+```sh
+colab exec -s cartpole-ppo --timeout 3600 -f runs/colab-train.py \
+  --env CARTPOLE_RUN=ppo-002 --env CARTPOLE_RESUME=ppo-001
+```
+
+If the VM was stopped, allocate a new CPU session, upload the downloaded bundle,
+restore it, and recreate its exact environment before that resume command:
+
+```sh
+colab new -s cartpole-ppo
+colab upload -s cartpole-ppo cartpole-results-001.zip /content/cartpole-results.zip
+colab exec -s cartpole-ppo --timeout 1800 <<'PY'
+from pathlib import Path
+import subprocess, sys, zipfile
+project = Path('/content/cartpole-training')
+project.mkdir(exist_ok=False)
+with zipfile.ZipFile('/content/cartpole-results.zip') as archive:
+    archive.extractall(project)
+uv_version = (project / 'training-uv.txt').read_text().strip()
+python_version = (project / 'training-python.txt').read_text().strip()
+subprocess.run([sys.executable, '-m', 'pip', 'install', f'uv=={uv_version}'], check=True)
+subprocess.run(['uv', 'sync', '--locked', '--extra', 'rl', '--no-dev',
+                '--python', python_version], cwd=project, check=True)
+PY
+colab exec -s cartpole-ppo --timeout 3600 -f runs/colab-train.py \
+  --env CARTPOLE_RUN=ppo-002 --env CARTPOLE_RESUME=ppo-001
+```
+
+Resume and evaluation reject changed model/configuration, source, Python patch
+version or recorded dependency versions. Do not regenerate `uv.lock`, upgrade
+packages or silently bypass a mismatch. Reproduce the original environment or
+start a new experiment. Cross-platform continuation is not promised. Preserve
+the local launcher too; it fixes algorithm settings and seeds. For the resumed
+policy, evaluate `runs/ppo-002` into a new report using a fresh disjoint set such
+as `2001 2002 2003 2004 2005 2006` if the first evaluation informed further
+training, then package/download again before `colab stop`.
+
+### Optional browser notebook
+
+[`notebooks/train_ppo_colab.ipynb`](../notebooks/train_ppo_colab.ipynb) remains an
+optional interactive route using the same training CLI. It installs CPU Torch
+separately, so its resolved versions can differ from this locked CLI recipe;
+do not interchange checkpoints without satisfying the manifest version checks.
+Neither route opens or controls the physical rig.
 
 Official references: [SB3 PPO](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html),
 [SB3 checkpoint format](https://stable-baselines3.readthedocs.io/en/master/guide/save_format.html),

@@ -1,0 +1,210 @@
+{
+  "schema": "operator-batch1-quality-review-v1",
+  "model_fitted": false,
+  "intervals_selected": false,
+  "physical_cart_stationarity_certified": false,
+  "recordings": [
+    {
+      "name": "passive-train-01",
+      "source_sha256": "1cf8cdabb60130eee58a5faa09d7cacfe4093689e7c02b4ec1390c04d6412fb7",
+      "completed": true,
+      "stop_confirmed": true,
+      "logger_records_dropped": 0,
+      "state_count": 45047,
+      "duration_s": 180.054,
+      "median_snapshot_hz": 250.00000000002754,
+      "max_snapshot_gap_ms": 4.000000000019099,
+      "gaps_over_5ms": 0,
+      "duplicate_timestamps": 0,
+      "reversed_timestamps": 0,
+      "unhealthy_passive_states": 0,
+      "modes": [
+        0
+      ],
+      "faults": [
+        0
+      ],
+      "reference_counts": [
+        330
+      ],
+      "home_epochs": [
+        15
+      ],
+      "session_ids": [
+        2147540300
+      ],
+      "board_drop_counter_delta": 1,
+      "raw_branch_angle_range_deg": [
+        -71.10352686587666,
+        56.425780549113156
+      ],
+      "initial_rest_median_deg": -6.591802289357779,
+      "final_rest_median_deg": -6.41601883781132,
+      "counted_cart_range_m": [
+        0.0,
+        0.0
+      ],
+      "angle_range_includes_manual_handling": true
+    },
+    {
+      "name": "passive-validate-01",
+      "source_sha256": "fd4ec3cad5aae4602b303a51c3340656f371bf2b0d9761cc839549bcbb01b41f",
+      "completed": true,
+      "stop_confirmed": true,
+      "logger_records_dropped": 0,
+      "state_count": 45046,
+      "duration_s": 180.054,
+      "median_snapshot_hz": 250.00000000002754,
+      "max_snapshot_gap_ms": 4.000000000019099,
+      "gaps_over_5ms": 0,
+      "duplicate_timestamps": 0,
+      "reversed_timestamps": 0,
+      "unhealthy_passive_states": 0,
+      "modes": [
+        0
+      ],
+      "faults": [
+        0
+      ],
+      "reference_counts": [
+        330
+      ],
+      "home_epochs": [
+        15
+      ],
+      "session_ids": [
+        1148692496
+      ],
+      "board_drop_counter_delta": 1,
+      "raw_branch_angle_range_deg": [
+        -66.70899787300282,
+        51.85546810469279
+      ],
+      "initial_rest_median_deg": -6.416018837811626,
+      "final_rest_median_deg": -6.503910563584665,
+      "counted_cart_range_m": [
+        0.0,
+        0.0
+      ],
+      "angle_range_includes_manual_handling": true
+    }
+  ],
+  "annotation_snapshot": {
+    "schema": "cartpole-passive-annotations-v1",
+    "source_sha256": "1cf8cdabb60130eee58a5faa09d7cacfe4093689e7c02b4ec1390c04d6412fb7",
+    "selected_before_scoring": false,
+    "operator_cart_restraint": "cart held stationary by hand",
+    "selection_method": "",
+    "episodes": [],
+    "collection_protocol": {
+      "dataset_role": "training",
+      "nominal_angles_only": true,
+      "operator_cart_restraint": "cart held stationary by hand",
+      "procedure": "passive",
+      "requested_releases": [
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-01",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-02",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-03",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-04",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-05",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-06",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-07",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-08",
+          "repetition": 2
+        }
+      ],
+      "run_label": "passive-set-a",
+      "schema": "cartpole-collection-protocol-v1"
+    },
+    "requested_releases": [
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "release_id": "release-01",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "release_id": "release-02",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "release_id": "release-03",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "release_id": "release-04",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "release_id": "release-05",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "release_id": "release-06",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "release_id": "release-07",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "release_id": "release-08",
+        "repetition": 2
+      }
+    ],
+    "instructions": "Before fitting, annotate hand-clear free releases from independent observation. Fill restraint/method, episode_id, board_relative_s=[start,end], reason; then set selected_before_scoring=true. Time zero is the first recorded STATE. Never include handling or static tails.",
+    "board_duration_s": 180.054
+  }
+}

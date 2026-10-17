@@ -1,0 +1,118 @@
+{
+  "schema": "cartpole-passive-annotations-v1",
+  "source_sha256": "1cf8cdabb60130eee58a5faa09d7cacfe4093689e7c02b4ec1390c04d6412fb7",
+  "selected_before_scoring": false,
+  "operator_cart_restraint": "cart held stationary by hand",
+  "selection_method": "",
+  "episodes": [],
+  "collection_protocol": {
+    "dataset_role": "training",
+    "nominal_angles_only": true,
+    "operator_cart_restraint": "cart held stationary by hand",
+    "procedure": "passive",
+    "requested_releases": [
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "release_id": "release-01",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "release_id": "release-02",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "release_id": "release-03",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "release_id": "release-04",
+        "repetition": 1
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "left",
+        "release_id": "release-05",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 30.0,
+        "direction": "right",
+        "release_id": "release-06",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "left",
+        "release_id": "release-07",
+        "repetition": 2
+      },
+      {
+        "angle_from_hanging_deg": 60.0,
+        "direction": "right",
+        "release_id": "release-08",
+        "repetition": 2
+      }
+    ],
+    "run_label": "passive-set-a",
+    "schema": "cartpole-collection-protocol-v1"
+  },
+  "requested_releases": [
+    {
+      "angle_from_hanging_deg": 30.0,
+      "direction": "left",
+      "release_id": "release-01",
+      "repetition": 1
+    },
+    {
+      "angle_from_hanging_deg": 30.0,
+      "direction": "right",
+      "release_id": "release-02",
+      "repetition": 1
+    },
+    {
+      "angle_from_hanging_deg": 60.0,
+      "direction": "left",
+      "release_id": "release-03",
+      "repetition": 1
+    },
+    {
+      "angle_from_hanging_deg": 60.0,
+      "direction": "right",
+      "release_id": "release-04",
+      "repetition": 1
+    },
+    {
+      "angle_from_hanging_deg": 30.0,
+      "direction": "left",
+      "release_id": "release-05",
+      "repetition": 2
+    },
+    {
+      "angle_from_hanging_deg": 30.0,
+      "direction": "right",
+      "release_id": "release-06",
+      "repetition": 2
+    },
+    {
+      "angle_from_hanging_deg": 60.0,
+      "direction": "left",
+      "release_id": "release-07",
+      "repetition": 2
+    },
+    {
+      "angle_from_hanging_deg": 60.0,
+      "direction": "right",
+      "release_id": "release-08",
+      "repetition": 2
+    }
+  ],
+  "instructions": "Before fitting, annotate hand-clear free releases from independent observation. Fill restraint/method, episode_id, board_relative_s=[start,end], reason; then set selected_before_scoring=true. Time zero is the first recorded STATE. Never include handling or static tails.",
+  "board_duration_s": 180.054
+}
