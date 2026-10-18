@@ -1,0 +1,444 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "note": "Same initial observations, tiny arithmetic differences in actions, potentially divergent closed-loop outcomes. Per-observation emission parity is distinct from trajectory robustness.",
+  "cases": [
+    {
+      "run": "balance-seed17",
+      "seed": 54000,
+      "training_hold": false,
+      "numeric_sdk_hold": false,
+      "training_trace_sha256": "c90d553be979c57054617551e45f8c11d8f65a7212e78d0ed32a431a6dc89367",
+      "sdk_trace_sha256": "9155a4ff79814e8d8da9b66cddf0abff29aa3586972217939dc771d2b197180a",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 7.305818796157837,
+          "sdk_raw_command": 7.305820011174591
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 7.169395685195923,
+          "sdk_raw_command": 7.169396161889469
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 9.5367431640625e-07,
+          "cart_position_difference_m": -1.3275146398816773e-09,
+          "training_raw_command": 7.777047902345657,
+          "sdk_raw_command": 7.777047151662568
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 2.384185791015625e-06,
+          "cart_position_difference_m": -8.621156621924086e-09,
+          "training_raw_command": 8.667538315057755,
+          "sdk_raw_command": 8.667538647160258
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 2.384185791015625e-06,
+          "cart_position_difference_m": 1.1578017755642378e-07,
+          "training_raw_command": -4.85936664044857,
+          "sdk_raw_command": -4.859364110832145
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 3.551700379134104e-06,
+          "cart_position_difference_m": 4.061387177806391e-07,
+          "training_raw_command": 8.717255294322968,
+          "sdk_raw_command": 8.717256162234593
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 0.001533958528706066,
+          "cart_position_difference_m": 1.0257529403645549e-07,
+          "training_raw_command": 7.79561921954155,
+          "sdk_raw_command": 7.845746093156312
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 3.7500000000023626e-05,
+          "cart_position_difference_m": 2.441091260796391e-07,
+          "training_raw_command": 7.606088370084763,
+          "sdk_raw_command": 7.606152698309372
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 3.7500000000023626e-05,
+          "cart_position_difference_m": -2.5265704367560815e-07,
+          "training_raw_command": 7.593457400798798,
+          "sdk_raw_command": 7.593519181582112
+        }
+      ]
+    },
+    {
+      "run": "balance-seed17",
+      "seed": 54001,
+      "training_hold": true,
+      "numeric_sdk_hold": false,
+      "training_trace_sha256": "c0ba6bfe6b3e9004390cb3228fa1e1fecdb87b6db50f6b9dbef05d50a29d4eaf",
+      "sdk_trace_sha256": "4cee53a22180a89330e0f50d4031be5a47f9551e0e77e8980017f5c3900f47d8",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 9.001024067401886,
+          "sdk_raw_command": 9.00102350109067
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 8.85951742529869,
+          "sdk_raw_command": 8.85951659559968
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 9.5367431640625e-07,
+          "cart_position_difference_m": -6.895065352008345e-10,
+          "training_raw_command": 8.976893872022629,
+          "sdk_raw_command": 8.976894940201955
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 6.67572021484375e-06,
+          "cart_position_difference_m": 2.7041435646246725e-08,
+          "training_raw_command": 7.799952477216721,
+          "sdk_raw_command": 7.799944799052073
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 0.06839466094970703,
+          "cart_position_difference_m": -0.00045430410906460716,
+          "training_raw_command": -5.517882481217384,
+          "sdk_raw_command": -5.555626828028445
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 0.39575983754526245,
+          "cart_position_difference_m": 0.0036413615490656637,
+          "training_raw_command": -25.0,
+          "sdk_raw_command": -25.0
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 22.027306620874334,
+          "cart_position_difference_m": -0.33169802172961166,
+          "training_raw_command": 9.883789718151093,
+          "sdk_raw_command": -2.946542827771575
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 11.327878237446498,
+          "cart_position_difference_m": 0.12375674541480215,
+          "training_raw_command": -6.4480505883693695,
+          "sdk_raw_command": -6.370839760897892
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 1.999994117261278,
+          "cart_position_difference_m": -0.34358488223258865,
+          "training_raw_command": 0.09662862867116928,
+          "sdk_raw_command": 7.5626717697637496
+        }
+      ]
+    },
+    {
+      "run": "curriculum-seed17",
+      "seed": 54000,
+      "training_hold": false,
+      "numeric_sdk_hold": true,
+      "training_trace_sha256": "54fda84fdb0eb0e63b7713661bca7b7e2ae183bb5dba7032b5a3b36e67d24e7c",
+      "sdk_trace_sha256": "d479d2a66b739782111fab88ec683b1c90006677ebe5b0259dd47a6b85b4089d",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 7.354189455509186,
+          "sdk_raw_command": 7.354189999529116
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 7.192900776863098,
+          "sdk_raw_command": 7.192901571320401
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 5.722061713342441e-12,
+          "training_raw_command": 7.562078535556793,
+          "sdk_raw_command": 7.562078589742669
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 1.430511474609375e-06,
+          "cart_position_difference_m": -1.3779505925182178e-08,
+          "training_raw_command": 8.822804689407349,
+          "sdk_raw_command": 8.822804065850342
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 1.1920928955078125e-06,
+          "cart_position_difference_m": -1.8186419925569908e-08,
+          "training_raw_command": -4.601802676916122,
+          "sdk_raw_command": -4.601804174315575
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 0.005246352377588082,
+          "cart_position_difference_m": -4.289079362243542e-05,
+          "training_raw_command": -5.203427001833916,
+          "sdk_raw_command": -5.239839267708871
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 1.4999103546154486,
+          "cart_position_difference_m": -0.28140321090415343,
+          "training_raw_command": 25.0,
+          "sdk_raw_command": 25.0
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 1.999957644551964,
+          "cart_position_difference_m": 0.3155018310277217,
+          "training_raw_command": 7.7287256717681885,
+          "sdk_raw_command": -0.10566141089369202
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 2.0,
+          "cart_position_difference_m": 0.2887118918768955,
+          "training_raw_command": 7.729049026966095,
+          "sdk_raw_command": -0.033194717723908446
+        }
+      ]
+    },
+    {
+      "run": "curriculum-seed17",
+      "seed": 54001,
+      "training_hold": false,
+      "numeric_sdk_hold": true,
+      "training_trace_sha256": "f3a2f10201a6376ba3474724c57745170b74334280ce701813f0c982caca7eb4",
+      "sdk_trace_sha256": "dcac41812aea80e80e06477412a641db4ffc107d922d1366dfc3ca2d4d7b398d",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 9.043881297111511,
+          "sdk_raw_command": 9.043882979465941
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 0.0,
+          "training_raw_command": 8.875778317451477,
+          "sdk_raw_command": 8.875777783173197
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 5.960464477539063e-08,
+          "cart_position_difference_m": -4.625320473850003e-10,
+          "training_raw_command": 8.752666413784027,
+          "sdk_raw_command": 8.752665803910352
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 2.682209014892578e-07,
+          "cart_position_difference_m": 2.260851961199961e-08,
+          "training_raw_command": 6.954067945480347,
+          "sdk_raw_command": 6.954068110595614
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 1.430511474609375e-06,
+          "cart_position_difference_m": -4.164585648558372e-08,
+          "training_raw_command": -5.230437219142914,
+          "sdk_raw_command": -5.230437768868758
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 0.28612080216407776,
+          "cart_position_difference_m": -0.00014104429244821137,
+          "training_raw_command": -25.0,
+          "sdk_raw_command": -25.0
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 8.662947693060833,
+          "cart_position_difference_m": 0.1136322094464746,
+          "training_raw_command": -25.0,
+          "sdk_raw_command": 1.2268180554376225
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 1.9975067499498795,
+          "cart_position_difference_m": 0.23913999150503373,
+          "training_raw_command": 8.950300514698029,
+          "sdk_raw_command": -0.033596496407702764
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 1.9999976469034038,
+          "cart_position_difference_m": 0.2923303735688299,
+          "training_raw_command": 7.698914408683777,
+          "sdk_raw_command": 0.06830687313014597
+        }
+      ]
+    },
+    {
+      "run": "anchored-seed17",
+      "seed": 54000,
+      "training_hold": true,
+      "numeric_sdk_hold": true,
+      "training_trace_sha256": "8d296b1105b964ce3f30ea4ba5f03caa88c848d1109fd7f55b593eec5cc14814",
+      "sdk_trace_sha256": "8a959bbdd98d843b56932423f365ad29ae994fe0cb975527ce6358bd850f1f16",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": -4.23789042053313e-11,
+          "training_raw_command": -0.15871264040470123,
+          "sdk_raw_command": -0.15871145866350397
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 1.1771917343139648e-06,
+          "cart_position_difference_m": -1.8654763931508223e-10,
+          "training_raw_command": -0.1640845090150833,
+          "sdk_raw_command": -0.16408365354121293
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 2.384185791015625e-07,
+          "cart_position_difference_m": -4.809930923173333e-09,
+          "training_raw_command": -0.48949792981147766,
+          "sdk_raw_command": -0.48949814397565866
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 2.9802322387695312e-06,
+          "cart_position_difference_m": -3.6269278413936235e-09,
+          "training_raw_command": 2.17093862593174,
+          "sdk_raw_command": 2.17093632425666
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 6.556510925292969e-07,
+          "cart_position_difference_m": 9.587897398244394e-08,
+          "training_raw_command": -8.309024572372437,
+          "sdk_raw_command": -8.309025859298192
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 0.0005047685653174483,
+          "cart_position_difference_m": 6.060498821763849e-06,
+          "training_raw_command": 10.05859524011612,
+          "sdk_raw_command": 10.058446201808932
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 0.2070159912109375,
+          "cart_position_difference_m": -0.05174362537136157,
+          "training_raw_command": -2.3670224472880363,
+          "sdk_raw_command": -2.2756661175689024
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 0.034125,
+          "cart_position_difference_m": 0.033968357269632286,
+          "training_raw_command": -0.013269484043121338,
+          "sdk_raw_command": -0.013911495816488519
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 0.0037950223162594235,
+          "cart_position_difference_m": 0.00121471863038476,
+          "training_raw_command": -0.03387145698070526,
+          "sdk_raw_command": -0.0412239055190498
+        }
+      ]
+    },
+    {
+      "run": "anchored-seed17",
+      "seed": 54001,
+      "training_hold": true,
+      "numeric_sdk_hold": true,
+      "training_trace_sha256": "45d937c5af62b82720feb7e2e9cc2d06c94df8868723bab0d0ce9fdbb54bc23a",
+      "sdk_trace_sha256": "05ce359ead72cb54399cd7b2668eac484d391b7a17a665b3544e18ecc7c497da",
+      "samples": [
+        {
+          "step": 0,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 9.655951385689754e-12,
+          "training_raw_command": 0.2799961715936661,
+          "sdk_raw_command": 0.2799958799195701
+        },
+        {
+          "step": 1,
+          "encoded_observation_max_abs_difference": 2.682209014892578e-07,
+          "cart_position_difference_m": 9.95099523615206e-11,
+          "training_raw_command": 0.3825392574071884,
+          "sdk_raw_command": 0.38253781466069325
+        },
+        {
+          "step": 10,
+          "encoded_observation_max_abs_difference": 1.5497207641601562e-06,
+          "cart_position_difference_m": 6.861507893980712e-09,
+          "training_raw_command": 0.7310103625059128,
+          "sdk_raw_command": 0.7310089975717381
+        },
+        {
+          "step": 50,
+          "encoded_observation_max_abs_difference": 2.0489096641540527e-08,
+          "cart_position_difference_m": 6.930463761212202e-08,
+          "training_raw_command": -5.420204997062683,
+          "sdk_raw_command": -5.420205916271921
+        },
+        {
+          "step": 100,
+          "encoded_observation_max_abs_difference": 1.9073486328125e-06,
+          "cart_position_difference_m": 1.980585236423943e-07,
+          "training_raw_command": -0.2506062388420105,
+          "sdk_raw_command": -0.25060820289155616
+        },
+        {
+          "step": 200,
+          "encoded_observation_max_abs_difference": 0.0,
+          "cart_position_difference_m": 3.7737629954293084e-07,
+          "training_raw_command": 7.344788312911987,
+          "sdk_raw_command": 7.344788090354042
+        },
+        {
+          "step": 500,
+          "encoded_observation_max_abs_difference": 0.032254479825496674,
+          "cart_position_difference_m": 0.022258285281043427,
+          "training_raw_command": -0.14148075133562088,
+          "sdk_raw_command": -0.16759620039982578
+        },
+        {
+          "step": 1000,
+          "encoded_observation_max_abs_difference": 0.02061185985803604,
+          "cart_position_difference_m": 0.003654637316027696,
+          "training_raw_command": 0.0665741041302681,
+          "sdk_raw_command": 0.08616685819692547
+        },
+        {
+          "step": 2000,
+          "encoded_observation_max_abs_difference": 0.0015698671340942383,
+          "cart_position_difference_m": 0.0003585677026117876,
+          "training_raw_command": 0.06995741277933121,
+          "sdk_raw_command": 0.06848381525631744
+        }
+      ]
+    }
+  ]
+}

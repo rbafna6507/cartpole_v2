@@ -1,0 +1,99 @@
+{
+  "schema": "cartpole-local-feedback-diagnostic-v1",
+  "rows": [
+    {
+      "run": "runs/local-swing-20261018/balance-seed17",
+      "steps": 0,
+      "checkpoint_sha256": "3870afc08cb727390e28b1c5e8957bf9c4abc77133b66e734c46afcb8bc63257",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": 1.0843991041183472,
+        "v": 1.9527299404144287,
+        "sin_theta": 40.474117279052734,
+        "cos_theta": -5.192685127258301,
+        "omega": 1.9780844449996948,
+        "previous_acceleration": -0.007981657981872559,
+        "rail_brake": -2.1221351623535156
+      }
+    },
+    {
+      "run": "runs/local-swing-20261018/balance-seed17",
+      "steps": 20480,
+      "checkpoint_sha256": "897eeb3f092d9956756a06de403af6a6893aa4f8d53c703ba643a11969d11508",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": 1.1131820678710938,
+        "v": 1.8295000791549683,
+        "sin_theta": 39.986915588378906,
+        "cos_theta": -5.081459999084473,
+        "omega": 1.8327441215515137,
+        "previous_acceleration": -0.15927493572235107,
+        "rail_brake": -2.180283308029175
+      }
+    },
+    {
+      "run": "runs/local-swing-20261018/demonstrations-seed17",
+      "steps": 0,
+      "checkpoint_sha256": "1bc8ad3f48e498aedacc649c2fad8e2dc8c9c92b735ded09bc51aadde22492b5",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": -0.16462492942810059,
+        "v": 0.2616233229637146,
+        "sin_theta": 0.04926896095275879,
+        "cos_theta": -0.12524189054965973,
+        "omega": 0.8094684481620789,
+        "previous_acceleration": 0.7723802924156189,
+        "rail_brake": 13.152446746826172
+      }
+    },
+    {
+      "run": "runs/local-swing-20261018/demonstrations-seed17",
+      "steps": 20480,
+      "checkpoint_sha256": "19e3d1ee099389aa99e5c8832236b201ff61625c8191859d7434026eccc15eb8",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": -0.14267206192016602,
+        "v": 0.24597841501235962,
+        "sin_theta": 0.032726287841796875,
+        "cos_theta": -0.18428151309490204,
+        "omega": 0.9039172530174255,
+        "previous_acceleration": 0.7589784264564514,
+        "rail_brake": 13.0953369140625
+      }
+    },
+    {
+      "run": "runs/local-swing-20261018/anchored-seed17",
+      "steps": 0,
+      "checkpoint_sha256": "59a7cb67ba224444d6d543056df986e17a4fb7b09eff58aaaea4bc97298ba6ac",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": 0.8673520088195801,
+        "v": 2.011497974395752,
+        "sin_theta": 39.24653244018555,
+        "cos_theta": 0.07171481847763062,
+        "omega": 2.0160889625549316,
+        "previous_acceleration": 0.013108968734741211,
+        "rail_brake": 2.3969953060150146
+      }
+    },
+    {
+      "run": "runs/local-swing-20261018/anchored-seed17",
+      "steps": 20480,
+      "checkpoint_sha256": "84444dbd0f0638021a12a899b41b2c32b41b91259a34aec4b0a7e7f5e12d7284",
+      "equilibrium_raw_action_m_s2": 0.0,
+      "derivatives": {
+        "x": 1.0360832214355469,
+        "v": 2.041490077972412,
+        "sin_theta": 39.76325988769531,
+        "cos_theta": 0.11865687370300293,
+        "omega": 2.0295119285583496,
+        "previous_acceleration": -0.07383757829666138,
+        "rail_brake": 2.4593398571014404
+      }
+    }
+  ],
+  "scope": "Autograd at observed upright equilibrium. Local derivatives of the actor only, not stability proof or full closed-loop plant linearization.",
+  "angle_interpretation": "At theta=0, derivative with respect to sin(theta) equals first-order angle feedback; cos(theta) has zero first-order angle variation.",
+  "action_scale_m_s2": 25.0,
+  "hardware_accepted": false
+}

@@ -1,0 +1,184 @@
+{
+  "schema": "cartpole-swing-teacher-final-summary-v1",
+  "status": "DEVELOPMENT_ONLY",
+  "hardware_accepted": false,
+  "deployable": false,
+  "simulation_only": true,
+  "teacher": {
+    "name": "mirror_pos20",
+    "actor": "host_latch",
+    "parameters": {
+      "settled_angle_rad": 0.15,
+      "settled_rate_rad_s": 0.75,
+      "settled_x_m": 0.25,
+      "settled_v_m_s": 0.05,
+      "swing_position_gain": 20.0
+    },
+    "reflection": "initial_x"
+  },
+  "hidden_state_required": true,
+  "controller_recipe": "Use profile HostRatePolicy with swing_position_gain20. Canonical direction is -1 when initial observed x<0, else+1; reflect x,v,theta,omega and invert raw output. In host balance mode, when abs(theta)<.15,abs(omega)<.75,abs(x)<.25,abs(v)<.05, latch raw=clip(x+2v+40theta+2omega,-25,25) until host leaves balance.",
+  "fresh_evaluation": {
+    "hanging": {
+      "episodes": 8,
+      "holds": 8,
+      "first5_mean_s": 12.02,
+      "first5_range_s": [
+        7.57,
+        14.61
+      ],
+      "mean_final5_x_rms_m": 0.004250239840264027,
+      "max_abs_x_m": 0.29396234917566194,
+      "rail_braking_control_steps": 485,
+      "force_saturated_control_steps": 0,
+      "initial_states": {
+        "55000": [
+          -0.013519016814633855,
+          0.011071301248922373,
+          3.1834805022950534,
+          0.09967479021098181
+        ],
+        "55001": [
+          -0.005103947544600883,
+          -0.023663147914358387,
+          3.2026676896432167,
+          0.004866666055803581
+        ],
+        "55002": [
+          -0.012431644480887802,
+          0.018351357417895713,
+          3.136221083103504,
+          -0.059642976254356356
+        ],
+        "55003": [
+          0.008714074764536001,
+          0.022960389850956327,
+          3.111363942037523,
+          0.04547535449723975
+        ],
+        "55004": [
+          0.01018540626252525,
+          -0.009588135463483877,
+          3.173717822153175,
+          0.05472823707342221
+        ],
+        "55005": [
+          -0.0025646062816399827,
+          -0.016456892588812805,
+          3.122793407612422,
+          -0.004846190808971728
+        ],
+        "55006": [
+          -0.014053956578721988,
+          0.024822242733618417,
+          3.1814086194157136,
+          -0.06128016286700852
+        ],
+        "55007": [
+          0.004796316233337075,
+          0.004921561359312205,
+          3.1388449619437857,
+          0.03081879294094739
+        ]
+      }
+    },
+    "upright": {
+      "episodes": 8,
+      "holds": 8,
+      "first5_mean_s": 5.0,
+      "first5_range_s": [
+        5.0,
+        5.0
+      ],
+      "mean_final5_x_rms_m": 0.004226859690466935,
+      "max_abs_x_m": 0.11804866838886027,
+      "rail_braking_control_steps": 0,
+      "force_saturated_control_steps": 0,
+      "initial_states": {
+        "55000": [
+          0.01102045551922818,
+          -0.015019397017150271,
+          0.02874059189878299,
+          0.057490904075440274
+        ],
+        "55001": [
+          -0.010465612070550533,
+          -0.005581906277909782,
+          0.04404215378367574,
+          0.1373306254181013
+        ],
+        "55002": [
+          0.011106961068091859,
+          0.010016964812776514,
+          0.016640150446903302,
+          0.04767189232159253
+        ],
+        "55003": [
+          0.013936320679757478,
+          0.020282347836096587,
+          -0.0475693097500324,
+          0.14821301254006033
+        ],
+        "55004": [
+          0.000979280046237425,
+          -0.0015768164510508,
+          0.0034584327287359475,
+          -0.10226312198503365
+        ],
+        "55005": [
+          -0.013658080639659028,
+          -0.022649493700836815,
+          -0.05564433858684353,
+          0.040694007758461645
+        ],
+        "55006": [
+          -0.0062849010777653366,
+          -0.00555548880442407,
+          0.04211789553495373,
+          -0.09012509903203221
+        ],
+        "55007": [
+          0.009915606832945956,
+          -0.02095841066643312,
+          -0.04135786324221985,
+          0.08483414661120799
+        ]
+      }
+    }
+  },
+  "datasets": {
+    "demonstrations": {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/local-swing-teacher-20261018/demonstrations/demonstrations.npz",
+      "sha256": "664078ace4e10becb5a2bee419a1914b4f7af5a68dd8b5a91525e8508a074d00",
+      "rows": 80000,
+      "train_rows": 60000,
+      "validation_rows": 20000,
+      "holds": {
+        "hanging": 9,
+        "upright": 16
+      },
+      "metadata_sha256": "624f473c492f68af88a333b2cd2d9f54ddc2c1d50114cdb8f501c962040cec32"
+    },
+    "demonstrations-pos20": {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/local-swing-teacher-20261018/demonstrations-pos20/demonstrations.npz",
+      "sha256": "1217c814cff4caded43d44c414d47743142e911c23f99aa77f904dfacecf0d51",
+      "rows": 80000,
+      "train_rows": 60000,
+      "validation_rows": 20000,
+      "holds": {
+        "hanging": 16,
+        "upright": 16
+      },
+      "metadata_sha256": "fd06dfc5558164d6bd5ee284b98c8528506d4089b4cbd21adabc5a1868f6f12a"
+    }
+  },
+  "audit_sha256": "80dd4576f50a0fd5d5d2801776c6b7e23dfae8c60bd5b00005701b98c9480657",
+  "fresh_report_sha256": "a8e4dfd3b6e301f99cb438c5fddfc486fb9f48f400e64453b95d6305ab84a5d9",
+  "caveats": [
+    "Adaptive nominal development, limited small reset families; no model/timing randomization or hardware validation.",
+    "Initial reflection, timed kick, hysteretic capture and settled latch are hidden state; plain MLP need not exactly imitate.",
+    "Hanging transient geometric rail margin about15mm; upright strict-centering transient margin1.95mm.",
+    "Original teacher had9/16hanging demonstration holds; all7failures preserved; revised teacher has16/16 on same poses.",
+    "Fresh55000 outcomes did not tune this teacher; learner53000 and stress54000 seeds untouched."
+  ]
+}

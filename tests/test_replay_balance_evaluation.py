@@ -40,18 +40,28 @@ def write_json(path, value):
     path.write_text(json.dumps(value))
 
 
-def fixture_run(tmp_path, *, cli=ARCHIVED_CLI, extra_members=()):
+def fixture_run(tmp_path, *, cli=ARCHIVED_CLI, extra_members=(), family='balance', demonstration=None):
     run=tmp_path/'run'; run.mkdir()
     cp=run/'checkpoints'/'step-000000016.zip'; cp.parent.mkdir(); cp.write_bytes(b'fake checkpoint for subprocess contract')
-    recipe=dict(schema='cartpole-balance-learning-v1', initialization='teacher',
+    recipe=dict(schema=f'cartpole-{family}-learning-v1', initialization='teacher',
         optimizer_seed=3, training_seeds=[11], evaluation_seeds=[101],
         steps=16, provenance={'fixture':True})
+    if family=='swing':
+        recipe['demonstrations']=None
+        if demonstration is not None:
+            (run/'demonstrations.npz').write_bytes(demonstration)
+            recipe['demonstrations']={'sha256':sha256(demonstration).hexdigest(),
+                'train_episodes':[21], 'validation_episodes':[22], 'updates':1}
     write_json(run/'recipe.json',recipe)
     with zipfile.ZipFile(run/'source.zip','w',zipfile.ZIP_DEFLATED) as archive:
         archive.writestr('examples/balance_learning.py',cli)
         archive.writestr('src/cartpole_sdk/__init__.py','')
         archive.writestr('src/cartpole_sdk/learning/__init__.py','')
         archive.writestr('src/cartpole_sdk/learning/balance_experiment.py',"MARKER = 'frozen fixture'\n")
+        if family=='swing':
+            archive.writestr('examples/swing_learning.py',cli.replace('balance_experiment','swing_experiment'))
+            archive.writestr('scripts/swing-learning','#!/bin/sh\n')
+            archive.writestr('src/cartpole_sdk/learning/swing_experiment.py',"MARKER = 'frozen swing fixture'\n")
         for name,contents in extra_members:
             archive.writestr(name,contents)
     report=dict(recipe, completed=True,
@@ -60,6 +70,58 @@ def fixture_run(tmp_path, *, cli=ARCHIVED_CLI, extra_members=()):
         evaluations=[dict(steps=16,checkpoint='checkpoints/'+cp.name,checkpoint_sha256=sha256(cp.read_bytes()).hexdigest())])
     write_json(run/'report.json',report)
     return run
+
+
+@pytest.mark.parametrize('demonstration',[None,b'frozen observed demonstration fixture'])
+def test_swing_replay_dispatches_frozen_cli_and_records_demonstration_binding(tmp_path,demonstration):
+    m=api();run=fixture_run(tmp_path,family='swing',demonstration=demonstration)
+    output=tmp_path/'swing-evaluation'
+    result=m.replay(run,output,seeds=(102,),seconds=.01,starts=('hanging','upright'))
+    observed=json.loads((output/'evaluation.json').read_text())
+    assert observed['marker']=='frozen swing fixture'
+    assert Path(result['command'][1]).name=='swing_learning.py'
+    assert result['run_schema']=='cartpole-swing-learning-v1'
+    assert result['demonstrations_sha256']==(None if demonstration is None else sha256(demonstration).hexdigest())
+    assert not Path(observed['cwd']).exists()
+
+
+@pytest.mark.parametrize('corruption',['bytes','symlink','missing'])
+def test_swing_demonstration_binding_checked_before_execution(tmp_path,corruption):
+    m=api();run=fixture_run(tmp_path,family='swing',demonstration=b'original')
+    data=run/'demonstrations.npz';data.unlink()
+    if corruption=='bytes':data.write_bytes(b'changed')
+    if corruption=='symlink':
+        elsewhere=tmp_path/'elsewhere.npz';elsewhere.write_bytes(b'original');data.symlink_to(elsewhere)
+    output=tmp_path/'never-created'
+    with pytest.raises((ValueError,OSError),match='demonstration|regular input'):
+        m.replay(run,output,seeds=(102,),seconds=.01)
+    assert not output.exists()
+
+
+def test_swing_demonstration_mutation_during_evaluation_blocks_success_provenance(tmp_path):
+    cli=ARCHIVED_CLI+"\n(Path(args[1])/'demonstrations.npz').write_bytes(b'changed during evaluation')\n"
+    m=api();run=fixture_run(tmp_path,family='swing',demonstration=b'original',cli=cli)
+    output=tmp_path/'evaluation'
+    with pytest.raises(ValueError,match='changed during replay'):
+        m.replay(run,output,seeds=(102,),seconds=.01)
+    assert (output/'evaluation.json').exists()
+    assert not (output/'replay-provenance.json').exists()
+
+
+@pytest.mark.parametrize('missing',['examples/swing_learning.py','src/cartpole_sdk/learning/swing_experiment.py'])
+def test_swing_replay_requires_the_corresponding_frozen_evaluator(tmp_path,missing):
+    m=api();run=fixture_run(tmp_path,family='swing')
+    archive_path=run/'source.zip'
+    with zipfile.ZipFile(archive_path) as archive:
+        members={name:archive.read(name) for name in archive.namelist() if name!=missing}
+    with zipfile.ZipFile(archive_path,'w') as archive:
+        for name,contents in members.items():archive.writestr(name,contents)
+    report=json.loads((run/'report.json').read_text())
+    report['source_zip_sha256']=sha256(archive_path.read_bytes()).hexdigest()
+    write_json(run/'report.json',report)
+    with pytest.raises(ValueError,match='frozen swing evaluator'):
+        m.replay(run,tmp_path/'never-created',seeds=(102,),seconds=.01)
+    assert not (tmp_path/'never-created').exists()
 
 
 def test_replay_uses_only_frozen_imports_current_python_and_records_bindings(tmp_path, monkeypatch):
@@ -82,9 +144,10 @@ def test_replay_uses_only_frozen_imports_current_python_and_records_bindings(tmp
     assert all(p.read_bytes()==content for p,content in before.items())
 
 
+@pytest.mark.parametrize('family',['balance','swing'])
 @pytest.mark.parametrize('corruption',['recipe','source','report_metadata','checkpoint'])
-def test_corrupt_bindings_fail_before_starting_archived_evaluator(tmp_path,corruption):
-    m=api(); run=fixture_run(tmp_path); output=tmp_path/'never-created'
+def test_corrupt_bindings_fail_before_starting_archived_evaluator(tmp_path,corruption,family):
+    m=api(); run=fixture_run(tmp_path,family=family); output=tmp_path/'never-created'
     if corruption=='recipe':
         with (run/'recipe.json').open('ab') as stream:stream.write(b' ')
     elif corruption=='source':
@@ -99,17 +162,19 @@ def test_corrupt_bindings_fail_before_starting_archived_evaluator(tmp_path,corru
     assert not output.exists()
 
 
+@pytest.mark.parametrize('family',['balance','swing'])
 @pytest.mark.parametrize('name',['../outside.py','/absolute.py','src/cartpole_sdk/../escape.py',
     'src/cartpole_sdk/./alias.py','src\\cartpole_sdk\\escape.py','src/sitecustomize.py'])
-def test_unsafe_archive_paths_are_rejected_before_execution(tmp_path,name):
-    m=api(); run=fixture_run(tmp_path,extra_members=((name,b'unsafe'),));output=tmp_path/'never-created'
+def test_unsafe_archive_paths_are_rejected_before_execution(tmp_path,name,family):
+    m=api(); run=fixture_run(tmp_path,family=family,extra_members=((name,b'unsafe'),));output=tmp_path/'never-created'
     with pytest.raises(ValueError,match='archive|member'):
         m.replay(run,output,seeds=(102,),seconds=.01)
     assert not output.exists()
     assert not (tmp_path/'outside.py').exists()
 
 
-def test_archive_symlinks_and_duplicate_members_are_rejected(tmp_path):
+@pytest.mark.parametrize('family',['balance','swing'])
+def test_archive_symlinks_and_duplicate_members_are_rejected(tmp_path,family):
     m=api()
     for kind in ('symlink','duplicate'):
         base=tmp_path/kind;base.mkdir()
@@ -121,7 +186,7 @@ def test_archive_symlinks_and_duplicate_members_are_rejected(tmp_path):
             extra=(('src/cartpole_sdk/learning/balance_experiment.py','duplicate'),)
         with warnings.catch_warnings():
             warnings.simplefilter('ignore',UserWarning)
-            run=fixture_run(base,extra_members=extra)
+            run=fixture_run(base,family=family,extra_members=extra)
         with pytest.raises(ValueError,match='archive|member'):
             m.replay(run,base/'never-created',seeds=(102,),seconds=.01)
         assert not (base/'never-created').exists()
@@ -154,3 +219,20 @@ def test_cli_and_wrapper_evaluate_without_network_or_environment_installation(tm
     assert process.returncode==0,process.stderr
     assert (output/'evaluation.json').is_file()
     assert (output/'replay-provenance.json').is_file()
+
+
+def test_unknown_schema_is_rejected_even_with_valid_hashes(tmp_path):
+    m=api();run=fixture_run(tmp_path,family='unknown')
+    with pytest.raises(ValueError,match='metadata'):
+        m.replay(run,tmp_path/'never-created',seeds=(102,),seconds=.01)
+    assert not (tmp_path/'never-created').exists()
+
+
+@pytest.mark.parametrize('family',['balance','swing'])
+@pytest.mark.parametrize('limit',['MAX_ARCHIVE_BYTES','MAX_MEMBER_BYTES','MAX_EXTRACTED_BYTES'])
+def test_source_size_limits_apply_to_every_evaluator(tmp_path,monkeypatch,family,limit):
+    m=api();run=fixture_run(tmp_path,family=family)
+    monkeypatch.setattr(m,limit,1)
+    with pytest.raises(ValueError,match='size limit'):
+        m.replay(run,tmp_path/'never-created',seeds=(102,),seconds=.01)
+    assert not (tmp_path/'never-created').exists()

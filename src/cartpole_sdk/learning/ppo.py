@@ -89,7 +89,7 @@ class TrainingEnv(gym.Env):
             randomization_seed=self.randomization_seed, simulation_config=asdict(config),
             observation_config=asdict(observations))
         self._episode_index += 1
-        state = initial_state(episode_seed, start)
+        state = self.initial_state(episode_seed, start)
         observation, info = self.core.reset(seed=episode_seed, options={'state': state})
         self._previous = None
         self.steps, self.total_reward, self.dwell, self.balanced = 0, 0., 0., 0
@@ -101,6 +101,10 @@ class TrainingEnv(gym.Env):
         self._ended = False
         info['episode_parameters'] = self.episode_parameters
         return observation, info
+
+    def initial_state(self, episode_seed, start):
+        """Reset-family hook; default retains the original seeded task starts."""
+        return initial_state(episode_seed, start)
 
     def step(self, action):
         if self._ended:

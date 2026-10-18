@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay a trusted local balance run with its verified archived evaluator.
+"""Replay a trusted local balance or swing run with its verified archived evaluator.
 
 Uses this Python environment without installing dependencies or accessing the
 network. The archived evaluator retains its source/dependency/checkpoint guards.
@@ -22,10 +22,17 @@ import zipfile
 MAX_ARCHIVE_BYTES = 64 * 1024 * 1024
 MAX_MEMBER_BYTES = 8 * 1024 * 1024
 MAX_EXTRACTED_BYTES = 64 * 1024 * 1024
-REQUIRED_SOURCE = {'examples/balance_learning.py', 'src/cartpole_sdk/__init__.py',
-                   'src/cartpole_sdk/learning/balance_experiment.py'}
+EVALUATORS = {'cartpole-balance-learning-v1': 'examples/balance_learning.py',
+              'cartpole-swing-learning-v1': 'examples/swing_learning.py'}
+REQUIRED_SOURCE = {
+    'cartpole-balance-learning-v1': {'examples/balance_learning.py', 'src/cartpole_sdk/__init__.py',
+                                  'src/cartpole_sdk/learning/balance_experiment.py'},
+    'cartpole-swing-learning-v1': {'examples/swing_learning.py', 'src/cartpole_sdk/__init__.py',
+                                'src/cartpole_sdk/learning/balance_experiment.py',
+                                'src/cartpole_sdk/learning/swing_experiment.py'}}
 EXTRA_SOURCE = {'pyproject.toml', 'README.md', 'uv.lock',
                 'examples/balance_learning.py', 'examples/rl_diagnostics.py',
+                'examples/swing_learning.py', 'scripts/swing-learning',
                 'scripts/balance-learning', 'scripts/rl-diagnostics'}
 
 
@@ -35,7 +42,7 @@ def _read_file(path):
     return path.read_bytes()
 
 
-def _archive_members(archive):
+def _archive_members(archive, schema='cartpole-balance-learning-v1'):
     """Validate the whole snapshot before extracting any member."""
     members = archive.infolist()
     if not members or len(members) > 4096:
@@ -72,8 +79,9 @@ def _archive_members(archive):
             files.add(name)
         if not allowed:
             raise ValueError(f'unexpected archive member: {name}')
-    if not REQUIRED_SOURCE <= files:
-        raise ValueError('archive lacks the frozen balance evaluator')
+    if not REQUIRED_SOURCE[schema] <= files:
+        family = 'swing' if schema == 'cartpole-swing-learning-v1' else 'balance'
+        raise ValueError(f'archive lacks the frozen {family} evaluator')
     for name in files:
         if any(parent.as_posix() in files for parent in PurePosixPath(name).parents):
             raise ValueError('archive file/directory collision')
@@ -98,7 +106,8 @@ def replay(run, output, *, seeds, seconds=60., checkpoint=None, starts=('upright
         raise ValueError('nonnegative checkpoint step required')
     raw_recipe, raw_report = (_read_file(run / name) for name in ('recipe.json', 'report.json'))
     recipe, report = json.loads(raw_recipe), json.loads(raw_report)
-    if (recipe.get('schema') != 'cartpole-balance-learning-v1' or
+    schema = recipe.get('schema')
+    if (schema not in EVALUATORS or
             sha256(raw_recipe).hexdigest() != report.get('recipe_sha256') or
             any(report.get(key) != value for key, value in recipe.items())):
         raise ValueError('recipe hash or report metadata mismatch')
@@ -124,8 +133,16 @@ def replay(run, output, *, seeds, seconds=60., checkpoint=None, starts=('upright
     pins = {run / 'recipe.json': sha256(raw_recipe).hexdigest(),
             run / 'report.json': sha256(raw_report).hexdigest(),
             archive_path: sha256(source).hexdigest(), checkpoint_path: checkpoint_sha}
+    demonstration_sha = None
+    if schema == 'cartpole-swing-learning-v1' and recipe['demonstrations'] is not None:
+        demonstration_path = run / 'demonstrations.npz'
+        demonstration_sha = sha256(_read_file(demonstration_path)).hexdigest()
+        if (not isinstance(recipe['demonstrations'], dict) or
+                demonstration_sha != recipe['demonstrations'].get('sha256')):
+            raise ValueError('demonstration hash mismatch')
+        pins[demonstration_path] = demonstration_sha
     with zipfile.ZipFile(io.BytesIO(source)) as archive:
-        members = _archive_members(archive)
+        members = _archive_members(archive, schema)
         with tempfile.TemporaryDirectory(prefix='cartpole-balance-replay-') as directory:
             frozen = Path(directory).resolve()
             for member in members:
@@ -136,7 +153,7 @@ def replay(run, output, *, seeds, seconds=60., checkpoint=None, starts=('upright
                     destination.parent.mkdir(parents=True, exist_ok=True)
                     with destination.open('xb') as stream:
                         stream.write(archive.read(member))
-            command = [sys.executable, str(frozen / 'examples/balance_learning.py'),
+            command = [sys.executable, str(frozen / EVALUATORS[schema]),
                        'evaluate', str(run), '--output', str(output),
                        '--seeds', *map(str, seeds), '--seconds', str(float(seconds)),
                        '--starts', *starts]
@@ -150,6 +167,7 @@ def replay(run, output, *, seeds, seconds=60., checkpoint=None, starts=('upright
         raise ValueError('run inputs changed during replay; no success provenance written')
     evaluation = _read_file(output / 'evaluation.json')
     provenance = dict(schema='cartpole-balance-source-replay-v1', run=str(run),
+        run_schema=schema, demonstrations_sha256=demonstration_sha,
         recipe_sha256=pins[run / 'recipe.json'], report_sha256=pins[run / 'report.json'],
         source_zip_sha256=pins[archive_path], checkpoint_sha256=checkpoint_sha,
         checkpoint_steps=selected['steps'], runner_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),

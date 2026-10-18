@@ -1,0 +1,83 @@
+[
+  {
+    "run": "stress-curriculum-seed17",
+    "checkpoint_sha256": "57a940cf938ffa128c5224b05813f3b47d2a4fb5a9a2d6382c55acaf94c5fa64",
+    "compared_actions": 10000,
+    "max_abs_raw_discrepancy_m_s2": 4.072434094837263e-06,
+    "emission_parity_pass": true,
+    "task_hold_successes": 4,
+    "inference_latency": {
+      "host": "macOS-26.1-arm64-arm-64bit",
+      "measured_operation": "Actual NeuralPolicy.act, including validation and encoding; first call included.",
+      "scope": "Mac only, not Jetson deadline guarantee",
+      "thread_cpu_ns": {
+        "count": 10000,
+        "max": 1262334,
+        "mean": 379426.2178,
+        "p50": 342979.5,
+        "p95": 649472.5999999997
+      },
+      "wall_ns": {
+        "count": 10000,
+        "max": 24572208,
+        "mean": 399593.6058,
+        "p50": 344437.5,
+        "p95": 696050.2999999999
+      }
+    }
+  },
+  {
+    "run": "stress-anchored-seed17",
+    "checkpoint_sha256": "84444dbd0f0638021a12a899b41b2c32b41b91259a34aec4b0a7e7f5e12d7284",
+    "compared_actions": 10000,
+    "max_abs_raw_discrepancy_m_s2": 5.207431080123115e-06,
+    "emission_parity_pass": true,
+    "task_hold_successes": 4,
+    "inference_latency": {
+      "host": "macOS-26.1-arm64-arm-64bit",
+      "measured_operation": "Actual NeuralPolicy.act, including validation and encoding; first call included.",
+      "scope": "Mac only, not Jetson deadline guarantee",
+      "thread_cpu_ns": {
+        "count": 10000,
+        "max": 957000,
+        "mean": 364611.6397,
+        "p50": 331937.5,
+        "p95": 638544.0499999999
+      },
+      "wall_ns": {
+        "count": 10000,
+        "max": 3097791,
+        "mean": 369818.4756,
+        "p50": 333166.0,
+        "p95": 647044.0499999999
+      }
+    }
+  },
+  {
+    "run": "stress-balance-seed17",
+    "checkpoint_sha256": "897eeb3f092d9956756a06de403af6a6893aa4f8d53c703ba643a11969d11508",
+    "compared_actions": 10000,
+    "max_abs_raw_discrepancy_m_s2": 5.634337206572582e-06,
+    "emission_parity_pass": true,
+    "task_hold_successes": 2,
+    "inference_latency": {
+      "host": "macOS-26.1-arm64-arm-64bit",
+      "measured_operation": "Actual NeuralPolicy.act, including validation and encoding; first call included.",
+      "scope": "Mac only, not Jetson deadline guarantee",
+      "thread_cpu_ns": {
+        "count": 10000,
+        "max": 1316833,
+        "mean": 381395.4578,
+        "p50": 343729.5,
+        "p95": 659837.2
+      },
+      "wall_ns": {
+        "count": 10000,
+        "max": 17821833,
+        "mean": 399454.8692,
+        "p50": 345187.5,
+        "p95": 703935.7499999998
+      }
+    }
+  }
+]
