@@ -10,6 +10,15 @@ return to center. USB telemetry delivered up to 1,000 Hz in stopped tests; a
 250 Hz zero-command loop and action expiry were also verified. This does not
 establish hard real-time host control or hardware acceptance of learned policies.
 
+## Collect the remaining system identification data
+
+Use `./scripts/system-id-campaign` for repeatable cart-response/timing/AUTO
+campaigns and guided motor-disabled angular/cart measurements. Start with
+`./scripts/system-id-campaign plan`; an offline `rehearse` command exercises the
+artifact/review workflow without hardware. See [collection commands, review,
+and portable evidence bundles](docs/system-id-campaign.md). Collection does not
+change the existing simulation or trained policy profiles.
+
 ## Open the interactive demo
 
 ```bash

@@ -1,5 +1,9 @@
 # Run system identification yourself
 
+For the remaining actuator, timing, angular-map and near-upright friction data,
+use the newer [guided and autonomous campaign workflow](system-id-campaign.md).
+The passive collection and scoped export procedures below remain available.
+
 Use `scripts/system-id` to collect reproducible records, fit independent training and validation data, and export an explicitly scoped MuJoCo/Gym configuration. It resolves its repository from the script location, so it works from another directory. It uses `uv`: collection selects `hardware` plus `id` (NumPy), fitting selects `id`, plotting selects `id` plus `plots`, and simulation/model commands select `sim`. Hardware collection does not require MuJoCo or Gymnasium, and help needs no optional extra. An installed SDK also provides `cartpole-id`.
 
 ```sh

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+for argument in "$@"; do
+    if [ "$argument" = "--help" ] || [ "$argument" = "-h" ]; then
+        exec uv run --project "$repo_dir" python -m cartpole_sdk.identification.campaign_cli "$@"
+    fi
+done
+case "${1:-}" in
+    collect) exec uv run --project "$repo_dir" --extra hardware python -m cartpole_sdk.identification.campaign_cli "$@" ;;
+    review) exec uv run --project "$repo_dir" --extra plots python -m cartpole_sdk.identification.campaign_cli "$@" ;;
+    *) exec uv run --project "$repo_dir" python -m cartpole_sdk.identification.campaign_cli "$@" ;;
+esac
