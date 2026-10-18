@@ -1,0 +1,20 @@
+{
+  "schema": "cartpole-balance-cycle-verification-v1",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 1445,
+    "skipped": 7,
+    "subtests_passed": 456,
+    "log": "pytest.log",
+    "log_sha256": "0071f246af201c89575d9cd8579f34a753011032e3379697956987c2e8dff2ae"
+  },
+  "independent_review": {
+    "code": "No correctness blockers; RNG, final checkpoint, source and replay checks reviewed.",
+    "evidence": "All 20 trial bindings and teacher confirmations verified. Long evaluation metrics recomputed from full trajectories; summary and commands reviewed."
+  },
+  "archives": {
+    "verified": true,
+    "method": "Read every archive member and compare SHA-256 against the original run file; member counts and container digests are in archives.json."
+  },
+  "hardware_accepted": false
+}

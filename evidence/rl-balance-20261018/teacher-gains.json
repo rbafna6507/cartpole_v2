@@ -1,0 +1,54 @@
+{
+  "schema": "cartpole-observed-balance-teacher-v1",
+  "status": "DEVELOPMENT_ONLY",
+  "deployable": false,
+  "hardware_accepted": false,
+  "simulation_only": true,
+  "name": "refine_1_2_40_2",
+  "gains": {
+    "position_gain": 1,
+    "velocity_gain": 2,
+    "theta_gain": 40,
+    "omega_gain": 2
+  },
+  "formula": "clip(position_gain*x + velocity_gain*v + theta_gain*atan2(sin(theta),cos(theta)) + omega_gain*omega,-25,25)",
+  "input": "Observed x,v,sin(theta),cos(theta),omega only; truth metrics after acting",
+  "rate_hz": 100,
+  "raw_limit_m_s2": 25,
+  "summary": {
+    "episodes": 6,
+    "hold_successes": 6,
+    "faults": 0,
+    "min_balanced_fraction": 1.0,
+    "min_final_balance_dwell_s": 25.00000000000111,
+    "max_abs_x_m": 0.07250431516043704,
+    "worst_centering_margin_m": 0.04749568483956296,
+    "mean_x_rms_m": 0.014513658843669985,
+    "worst_last5s_x_peak_to_peak_m": 0.009675735863849282,
+    "mean_raw_action_delta_rms": 0.06863407161887354,
+    "mean_raw_action_rms": 0.10872991909656189,
+    "rail_braking_control_steps": 0
+  },
+  "report_sha256": "603276ba9a33f59b628a52a43ed25fd4e787cf469b8dbf9c46248ee2ba2bbb4e",
+  "recipe_sha256": "eb4e252bd14e203db06e78d2e247a598b759575c713e9edbade45a1f7d0d6bce",
+  "script_sha256": "d0c64765acaf2233be953936fb27e613a42e5e548cd7c8ddbd753224c67438cb",
+  "confirmation_development_seeds": [
+    42000,
+    42001,
+    42002,
+    42003,
+    42004,
+    42005
+  ],
+  "confirmation_seconds": 25,
+  "report_path": "confirmation/report.json",
+  "recipe_path": "confirmation/recipe.json",
+  "source_zip_path": "confirmation/source.zip",
+  "source_zip_sha256": "978277c37d708449d8896c2916b5d01e49606bb0fc9122c3838c84b725f45a5c",
+  "limitations": [
+    "Nominal balance-only development evidence; no hanging starts or randomization.",
+    "These six seeds were inspected; 45000+ remain unused for separate evaluation.",
+    "Raw action change RMS increases despite lower cart oscillation and acceleration RMS.",
+    "No hardware acceptance or production actor export."
+  ]
+}

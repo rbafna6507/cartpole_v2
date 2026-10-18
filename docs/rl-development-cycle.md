@@ -107,3 +107,11 @@ See [the full evidence and limitations](../evidence/rl-diagnostics-20261017/READ
 Nine short PPO runs did not establish sustained balance. Supervised initialization
 from the working controller was substantially stronger, but also failed the
 strict hold gate. No diagnostic recipe or checkpoint was promoted to production.
+
+## Controller initialization and continued learning
+
+The next experiment cycle is implemented in [Local balance-first learning](balance-learning.md).
+It adds a better-centered teacher, matched scratch/initialized runs, explicit
+zero-action equilibrium projection, frozen-source evaluation, and longer hold
+checks. See its evidence before treating any initialized or fine-tuned network
+as a swing-up controller.
