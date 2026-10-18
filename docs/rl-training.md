@@ -76,7 +76,9 @@ Run these on your laptop from this checkout. The wrapper targets
 is3.12; the isolated remote training environment is locked to Python3.11.7 and
 uv0.8.11. First authentication prints an OAuth URL: approve it yourself and paste
 the code into the terminal. Training itself needs no notebook browser or Drive
-mount. Cloud login/allocation have not been performed as part of these checks.
+mount. Cloud setup and training were exercised. The original three October17 runtimes
+were gone by the next morning without a local checkpoint download; their final
+training outcomes are unknown. See [recovery evidence](../evidence/colab-recovery-20261018/README.md).
 
 Install the CLI once:
 
@@ -114,8 +116,47 @@ Check progress and download checkpoints/results:
   --session cartpole-encoder-001 --output runs/colab-encoder-results-001.zip
 ```
 
-Download periodically to a **new filename**, and once more when status says
-`completed`. The ZIP contains source, inputs, manifests, checkpoints, portable
+For new bundles, keep a local watcher running while training. It checks real
+supervisor liveness and optimizer progress, and downloads a SHA256/CRC-verified
+snapshot whenever a new complete checkpoint appears and on completion/failure:
+
+```sh
+./scripts/colab-training watch runs/colab-encoder-001 \
+  --session cartpole-encoder-001 --output runs/colab-encoder-001-backups
+```
+
+The output directory must be new. Keep this laptop awake and connected; on macOS,
+prefix the command with `caffeinate -i` to prevent idle sleep while it runs.
+Closing the watcher or losing connectivity stops future local backups; it does
+not stop remote training. Existing snapshots remain usable. Restart the watcher
+with a new output directory after checking session status. The watcher stops on
+errors or its eight-hour default polling deadline (`--max-seconds` changes this).
+The deadline is checked between operations; an in-flight bounded operation can
+overrun it (downloads have a600-second timeout). It never
+allocates or relaunches a VM. Check its `watch-status.json` and `events.jsonl`.
+Polling does not guarantee VM survival or extend Colab's resource limits.
+
+Old immutable bundles support `status` and manual `download`, but lack structured
+status for `watch`; prepare a new bundle rather than editing their pinned files.
+`--checkpoint-every 20480` during preparation gives more frequent recovery points
+than the original102400 default. Each saved ZIP includes all checkpoints so far,
+so frequent downloads increase local disk use. For example, use the same learning
+recipe with a shorter first budget:
+
+```sh
+./scripts/prepare-colab-training \
+  --profile training/profiles/rl-encoder-20261017 \
+  --steps 102400 --checkpoint-every 20480 \
+  --output runs/colab-encoder-002
+./scripts/colab-training start runs/colab-encoder-002 --session cartpole-encoder-002
+./scripts/colab-training watch runs/colab-encoder-002 \
+  --session cartpole-encoder-002 --output runs/colab-encoder-002-backups
+```
+
+Training/evaluation seeds remain disjoint. `--evaluation-seeds` during preparation
+can bound an execution pilot's evaluation cost; a tiny pilot is not qualification.
+For manual downloads, use a **new filename**, and download once more when status
+says `completed`. The ZIP contains source, inputs, manifests, checkpoints, portable
 actor, episode records, optimizer CSV and the final nominal evaluation report.
 An active-job download may include an unfinished final run; only a checkpoint
 with all validated manifest/actor/archive files is resumable. Preserve the ZIP

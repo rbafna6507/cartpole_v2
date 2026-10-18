@@ -1,5 +1,6 @@
 """Generated bundle's remote helper. Only stdlib; runs on an explicitly allocated VM."""
 import hashlib
+import csv
 import json
 import os
 from pathlib import Path
@@ -87,15 +88,45 @@ def start():
 
 def status():
     path = PROJECT/'job-status.json'
-    print(path.read_text() if path.exists() else 'No status file; setup or launch may be incomplete.')
+    state = json.loads(path.read_text()) if path.exists() else {'status':'installed'}
+    recorded = state.get('status')
+    state['recorded_status'] = recorded
+    state['checked_at'] = time.time()
+    if recorded in {'training','evaluating'}:
+        try:
+            command = Path('/proc', str(int(state['pid'])), 'cmdline').read_bytes()
+            alive = b'cartpole-launch.py' in command and b'job' in command.split(b'\0')
+        except (OSError, KeyError, ValueError):
+            alive = False
+        state['supervisor_alive'] = alive
+        if not alive:
+            state['status'] = 'interrupted'
+    run = PROJECT/'runs/ppo-001'
+    progress = run/'logs/progress.csv'
+    state['latest_progress'] = None
+    if progress.exists():
+        # Ignore an incomplete row while the trainer appends optimizer output.
+        with progress.open() as stream:
+            for row in csv.DictReader(stream):
+                if None not in row and all(value is not None for value in row.values()) and row.get('time/total_timesteps'):
+                    state['latest_progress'] = row
+        state['progress_age_s'] = max(0.,time.time()-progress.stat().st_mtime)
+    state['checkpoints'] = []
+    checkpoints = run/'checkpoints'
+    if checkpoints.exists():
+        for folder in sorted(checkpoints.iterdir()):
+            try:
+                manifest = json.loads((folder/'manifest.json').read_text())
+                if all((folder/name).is_file() for name in ('checkpoint.zip','actor.json')) and manifest.get('timesteps_completed'):
+                    state['checkpoints'].append(folder.name)
+            except (OSError, ValueError):
+                pass
+    print('CARTPOLE_STATUS '+json.dumps(state,allow_nan=False),flush=True)
     log = PROJECT/'training.log'
     if log.exists():
         with log.open('rb') as stream:
             stream.seek(max(0,log.stat().st_size-5000))
             print(stream.read().decode(errors='replace'))
-    checkpoints = PROJECT/'runs/ppo-001/checkpoints'
-    if checkpoints.exists():
-        print('Checkpoints:',*[p.name for p in sorted(checkpoints.iterdir()) if (p/'manifest.json').exists()])
 
 
 def package():
@@ -110,7 +141,7 @@ def package():
                 if item.is_file() and not item.is_symlink() and '__pycache__' not in item.parts:
                     z.write(item,item.relative_to(PROJECT))
     temporary.replace(destination)
-    print(json.dumps(dict(path=str(destination),bytes=destination.stat().st_size,
+    print('CARTPOLE_PACKAGE '+json.dumps(dict(path=str(destination),bytes=destination.stat().st_size,
         sha256=hashlib.sha256(destination.read_bytes()).hexdigest(),
         note='A live snapshot may include an incomplete final run; resume only a complete checkpoint.')))
 

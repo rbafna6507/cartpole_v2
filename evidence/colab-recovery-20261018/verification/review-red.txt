@@ -1,0 +1,153 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_download_promotes_only_hash_verified_archive[False] ___________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-354/test_download_promotes_only_ha0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106a97050>
+corrupt = False
+
+    @pytest.mark.parametrize('corrupt',[False, True])
+    def test_download_promotes_only_hash_verified_archive(tmp_path, monkeypatch, corrupt):
+        from hashlib import sha256
+        import io,zipfile
+        cli=cli_module();build(tmp_path,steps=1024)
+        fake=tmp_path/'colab';fake.touch()
+        buffer=io.BytesIO()
+        with zipfile.ZipFile(buffer,'w') as archive:archive.writestr('training.log','recorded progress')
+        payload=buffer.getvalue()
+        def execute(command, **kwargs):
+            if 'exec' in command:
+                nonce=next(x.split('=',1)[1] for x in command if x.startswith('CARTPOLE_NONCE='))
+                metadata=dict(path='/content/cartpole-results.zip',bytes=len(payload),sha256=sha256(payload).hexdigest())
+                return SimpleNamespace(stdout='CARTPOLE_PACKAGE '+json.dumps(metadata)+'\nCARTPOLE_REMOTE_OK '+json.dumps(dict(action='package',nonce=nonce))+'\n',stderr='')
+            assert 'download' in command
+            assert 0 < kwargs.get('timeout',float('inf')) <= 600
+            Path(command[-1]).write_bytes(payload+b'corrupt' if corrupt else payload)
+            return SimpleNamespace(returncode=0)
+        monkeypatch.setattr(cli.subprocess,'run',execute)
+        output=tmp_path/'result.zip'
+        args=['download',str(tmp_path/'bundle'),'--session','test','--colab',str(fake),'--output',str(output)]
+        if corrupt:
+            with pytest.raises(SystemExit):cli.main(args)
+            assert not output.exists()
+            assert output.with_suffix('.zip.part').exists()
+        else:
+>           assert cli.main(args)==0
+                   ^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:121:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+examples/colab_training.py:108: in main
+    elif a.command=='download':download(a.output)
+                               ^^^^^^^^^^^^^^^^^^
+examples/colab_training.py:81: in download
+    call('download','-s',a.session,'/content/cartpole-results.zip',str(temporary))
+examples/colab_training.py:34: in call
+    subprocess.run(base+list(args),check=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+command = ['/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-354/test_download_promotes_only_ha0/colab', '--auth', 'oauth2', '--config', '/Users/rbafna/.config/colab-cli/sessions.json', 'download', ...]
+kwargs = {'check': True}
+
+    def execute(command, **kwargs):
+        if 'exec' in command:
+            nonce=next(x.split('=',1)[1] for x in command if x.startswith('CARTPOLE_NONCE='))
+            metadata=dict(path='/content/cartpole-results.zip',bytes=len(payload),sha256=sha256(payload).hexdigest())
+            return SimpleNamespace(stdout='CARTPOLE_PACKAGE '+json.dumps(metadata)+'\nCARTPOLE_REMOTE_OK '+json.dumps(dict(action='package',nonce=nonce))+'\n',stderr='')
+        assert 'download' in command
+>       assert 0 < kwargs.get('timeout',float('inf')) <= 600
+E       AssertionError: assert inf <= 600
+E        +  where inf = <built-in method get of dict object at 0x106ab5a40>('timeout', inf)
+E        +    where <built-in method get of dict object at 0x106ab5a40> = {'check': True}.get
+E        +    and   inf = float('inf')
+
+tests/test_colab_recovery.py:110: AssertionError
+----------------------------- Captured stdout call -----------------------------
+CARTPOLE_PACKAGE {"path": "/content/cartpole-results.zip", "bytes": 139, "sha256": "116f993e41c98b465317065fa966844025fca4dcc730d9d48f30f83808f5b128"}
+CARTPOLE_REMOTE_OK {"action": "package", "nonce": "a787251e37bc4486a5e43698da6b1395"}
+___________ test_download_promotes_only_hash_verified_archive[True] ____________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-354/test_download_promotes_only_ha1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107aabad0>
+corrupt = True
+
+    @pytest.mark.parametrize('corrupt',[False, True])
+    def test_download_promotes_only_hash_verified_archive(tmp_path, monkeypatch, corrupt):
+        from hashlib import sha256
+        import io,zipfile
+        cli=cli_module();build(tmp_path,steps=1024)
+        fake=tmp_path/'colab';fake.touch()
+        buffer=io.BytesIO()
+        with zipfile.ZipFile(buffer,'w') as archive:archive.writestr('training.log','recorded progress')
+        payload=buffer.getvalue()
+        def execute(command, **kwargs):
+            if 'exec' in command:
+                nonce=next(x.split('=',1)[1] for x in command if x.startswith('CARTPOLE_NONCE='))
+                metadata=dict(path='/content/cartpole-results.zip',bytes=len(payload),sha256=sha256(payload).hexdigest())
+                return SimpleNamespace(stdout='CARTPOLE_PACKAGE '+json.dumps(metadata)+'\nCARTPOLE_REMOTE_OK '+json.dumps(dict(action='package',nonce=nonce))+'\n',stderr='')
+            assert 'download' in command
+            assert 0 < kwargs.get('timeout',float('inf')) <= 600
+            Path(command[-1]).write_bytes(payload+b'corrupt' if corrupt else payload)
+            return SimpleNamespace(returncode=0)
+        monkeypatch.setattr(cli.subprocess,'run',execute)
+        output=tmp_path/'result.zip'
+        args=['download',str(tmp_path/'bundle'),'--session','test','--colab',str(fake),'--output',str(output)]
+        if corrupt:
+>           with pytest.raises(SystemExit):cli.main(args)
+                                           ^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:117:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+examples/colab_training.py:108: in main
+    elif a.command=='download':download(a.output)
+                               ^^^^^^^^^^^^^^^^^^
+examples/colab_training.py:81: in download
+    call('download','-s',a.session,'/content/cartpole-results.zip',str(temporary))
+examples/colab_training.py:34: in call
+    subprocess.run(base+list(args),check=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+command = ['/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-354/test_download_promotes_only_ha1/colab', '--auth', 'oauth2', '--config', '/Users/rbafna/.config/colab-cli/sessions.json', 'download', ...]
+kwargs = {'check': True}
+
+    def execute(command, **kwargs):
+        if 'exec' in command:
+            nonce=next(x.split('=',1)[1] for x in command if x.startswith('CARTPOLE_NONCE='))
+            metadata=dict(path='/content/cartpole-results.zip',bytes=len(payload),sha256=sha256(payload).hexdigest())
+            return SimpleNamespace(stdout='CARTPOLE_PACKAGE '+json.dumps(metadata)+'\nCARTPOLE_REMOTE_OK '+json.dumps(dict(action='package',nonce=nonce))+'\n',stderr='')
+        assert 'download' in command
+>       assert 0 < kwargs.get('timeout',float('inf')) <= 600
+E       AssertionError: assert inf <= 600
+E        +  where inf = <built-in method get of dict object at 0x106c262c0>('timeout', inf)
+E        +    where <built-in method get of dict object at 0x106c262c0> = {'check': True}.get
+E        +    and   inf = float('inf')
+
+tests/test_colab_recovery.py:110: AssertionError
+----------------------------- Captured stdout call -----------------------------
+CARTPOLE_PACKAGE {"path": "/content/cartpole-results.zip", "bytes": 139, "sha256": "116f993e41c98b465317065fa966844025fca4dcc730d9d48f30f83808f5b128"}
+CARTPOLE_REMOTE_OK {"action": "package", "nonce": "48867469e6004b75923478c2a64ced67"}
+______________ test_cli_timeout_preserves_partial_provider_output ______________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-354/test_cli_timeout_preserves_par0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106c3c150>
+capsys = <_pytest.capture.CaptureFixture object at 0x107b6c190>
+
+    def test_cli_timeout_preserves_partial_provider_output(tmp_path,monkeypatch,capsys):
+        cli=cli_module();build(tmp_path,steps=1024)
+        fake=tmp_path/'colab';fake.touch()
+        def timeout(*args,**kwargs):
+            raise subprocess.TimeoutExpired(args[0],150,output=b'partial remote traceback\n',stderr=b'provider timeout detail\n')
+        monkeypatch.setattr(cli.subprocess,'run',timeout)
+        with pytest.raises(SystemExit):
+            cli.main(['status',str(tmp_path/'bundle'),'--session','test','--colab',str(fake)])
+        captured=capsys.readouterr()
+>       assert 'partial remote traceback' in captured.out
+E       assert 'partial remote traceback' in ''
+E        +  where '' = CaptureResult(out='', err="Command '['/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest...']' timed out after 150 seconds\nNo cloud action is retried automatically. Inspect status before retrying a launch.\n").out
+
+tests/test_colab_recovery.py:144: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_colab_recovery.py::test_download_promotes_only_hash_verified_archive[False]
+FAILED tests/test_colab_recovery.py::test_download_promotes_only_hash_verified_archive[True]
+FAILED tests/test_colab_recovery.py::test_cli_timeout_preserves_partial_provider_output
+3 failed, 10 deselected in 0.51s

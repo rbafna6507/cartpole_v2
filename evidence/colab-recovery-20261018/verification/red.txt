@@ -1,0 +1,186 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+_____________ test_nonzero_cli_error_preserves_provider_diagnostic _____________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_nonzero_cli_error_preserv0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108200ad0>
+capsys = <_pytest.capture.CaptureFixture object at 0x1081d89d0>
+
+    def test_nonzero_cli_error_preserves_provider_diagnostic(tmp_path, monkeypatch, capsys):
+        cli = cli_module(); build(tmp_path, steps=1024)
+        fake = tmp_path/'colab'; fake.touch()
+        def fail(*args, **kwargs):
+            raise subprocess.CalledProcessError(1, args[0], output="[colab] Session 'gone' not found.\n", stderr='provider details\n')
+        monkeypatch.setattr(cli.subprocess, 'run', fail)
+        with pytest.raises(SystemExit):
+            cli.main(['status',str(tmp_path/'bundle'),'--session','gone','--colab',str(fake)])
+        captured = capsys.readouterr()
+>       assert "Session 'gone' not found" in captured.out
+E       assert "Session 'gone' not found" in ''
+E        +  where '' = CaptureResult(out='', err="Command '['/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest...eturned non-zero exit status 1.\nNo cloud action is retried automatically. Inspect status before retrying a launch.\n").out
+
+tests/test_colab_recovery.py:27: AssertionError
+_____ test_remote_status_distinguishes_dead_job_and_incomplete_checkpoint ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_remote_status_distinguish0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1082a2d90>
+capsys = <_pytest.capture.CaptureFixture object at 0x1082a0350>
+
+    def test_remote_status_distinguishes_dead_job_and_incomplete_checkpoint(tmp_path, monkeypatch, capsys):
+        from cartpole_sdk.learning import colab_remote as remote
+        monkeypatch.setattr(remote, 'PROJECT', tmp_path)
+        (tmp_path/'job-status.json').write_text(json.dumps({'status':'training','pid':999999999,'run':'runs/ppo-001'}))
+        run = tmp_path/'runs/ppo-001'; (run/'logs').mkdir(parents=True)
+        (run/'logs/progress.csv').write_text('time/total_timesteps,time/fps\n1024,100\n2048,99\n')
+        partial = run/'checkpoints/step-000002048'; partial.mkdir(parents=True)
+        (partial/'checkpoint.zip').write_bytes(b'unfinished')
+        remote.status()
+        rows = [line for line in capsys.readouterr().out.splitlines() if line.startswith('CARTPOLE_STATUS ')]
+>       assert len(rows)==1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/test_colab_recovery.py:41: AssertionError
+_ test_watch_saves_new_checkpoint_and_terminal_state_without_duplicate_snapshots _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_watch_saves_new_checkpoin0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109351d50>
+
+    def test_watch_saves_new_checkpoint_and_terminal_state_without_duplicate_snapshots(tmp_path, monkeypatch):
+>       from cartpole_sdk.learning import colab_watch as watch
+E       ImportError: cannot import name 'colab_watch' from 'cartpole_sdk.learning' (/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/learning/__init__.py)
+
+tests/test_colab_recovery.py:50: ImportError
+________ test_watch_preserves_saved_checkpoint_when_runtime_disappears _________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_watch_preserves_saved_che0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108293fd0>
+
+    def test_watch_preserves_saved_checkpoint_when_runtime_disappears(tmp_path, monkeypatch):
+>       from cartpole_sdk.learning import colab_watch as watch
+E       ImportError: cannot import name 'colab_watch' from 'cartpole_sdk.learning' (/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/learning/__init__.py)
+
+tests/test_colab_recovery.py:68: ImportError
+__________ test_bundle_can_bound_checkpoint_and_evaluation_intervals ___________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_can_bound_checkpoi0')
+
+    def test_bundle_can_bound_checkpoint_and_evaluation_intervals(tmp_path):
+>       build(tmp_path,steps=2048,checkpoint_every=1024,evaluation_seeds=(21000,21001))
+
+tests/test_colab_recovery.py:84:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_can_bound_checkpoi0')
+kw = {'steps': 2048, 'checkpoint_every': 1024, 'evaluation_seeds': (21000, 21001)}
+
+    def build(tmp_path, **kw):
+        from cartpole_sdk.learning.colab_bundle import prepare_bundle
+>       return prepare_bundle(ROOT, ROOT/'training/profiles/passive-20261017',
+                              tmp_path/'bundle', **kw)
+E       TypeError: prepare_bundle() got an unexpected keyword argument 'checkpoint_every'
+
+tests/test_colab_bundle.py:14: TypeError
+______ test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs0] ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re0')
+kwargs = {'checkpoint_every': 0}
+
+    @pytest.mark.parametrize('kwargs', [{'checkpoint_every':0},{'checkpoint_every':1025},{'evaluation_seeds':(10000,)},{'evaluation_seeds':()}])
+    def test_bundle_rejects_invalid_recovery_recipe_before_writes(tmp_path,kwargs):
+>       with pytest.raises(ValueError):build(tmp_path,steps=2048,**kwargs)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re0')
+kw = {'steps': 2048, 'checkpoint_every': 0}
+
+    def build(tmp_path, **kw):
+        from cartpole_sdk.learning.colab_bundle import prepare_bundle
+>       return prepare_bundle(ROOT, ROOT/'training/profiles/passive-20261017',
+                              tmp_path/'bundle', **kw)
+E       TypeError: prepare_bundle() got an unexpected keyword argument 'checkpoint_every'
+
+tests/test_colab_bundle.py:14: TypeError
+______ test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs1] ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re1')
+kwargs = {'checkpoint_every': 1025}
+
+    @pytest.mark.parametrize('kwargs', [{'checkpoint_every':0},{'checkpoint_every':1025},{'evaluation_seeds':(10000,)},{'evaluation_seeds':()}])
+    def test_bundle_rejects_invalid_recovery_recipe_before_writes(tmp_path,kwargs):
+>       with pytest.raises(ValueError):build(tmp_path,steps=2048,**kwargs)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re1')
+kw = {'steps': 2048, 'checkpoint_every': 1025}
+
+    def build(tmp_path, **kw):
+        from cartpole_sdk.learning.colab_bundle import prepare_bundle
+>       return prepare_bundle(ROOT, ROOT/'training/profiles/passive-20261017',
+                              tmp_path/'bundle', **kw)
+E       TypeError: prepare_bundle() got an unexpected keyword argument 'checkpoint_every'
+
+tests/test_colab_bundle.py:14: TypeError
+______ test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs2] ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re2')
+kwargs = {'evaluation_seeds': (10000,)}
+
+    @pytest.mark.parametrize('kwargs', [{'checkpoint_every':0},{'checkpoint_every':1025},{'evaluation_seeds':(10000,)},{'evaluation_seeds':()}])
+    def test_bundle_rejects_invalid_recovery_recipe_before_writes(tmp_path,kwargs):
+>       with pytest.raises(ValueError):build(tmp_path,steps=2048,**kwargs)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re2')
+kw = {'steps': 2048, 'evaluation_seeds': (10000,)}
+
+    def build(tmp_path, **kw):
+        from cartpole_sdk.learning.colab_bundle import prepare_bundle
+>       return prepare_bundle(ROOT, ROOT/'training/profiles/passive-20261017',
+                              tmp_path/'bundle', **kw)
+E       TypeError: prepare_bundle() got an unexpected keyword argument 'evaluation_seeds'
+
+tests/test_colab_bundle.py:14: TypeError
+______ test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs3] ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re3')
+kwargs = {'evaluation_seeds': ()}
+
+    @pytest.mark.parametrize('kwargs', [{'checkpoint_every':0},{'checkpoint_every':1025},{'evaluation_seeds':(10000,)},{'evaluation_seeds':()}])
+    def test_bundle_rejects_invalid_recovery_recipe_before_writes(tmp_path,kwargs):
+>       with pytest.raises(ValueError):build(tmp_path,steps=2048,**kwargs)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colab_recovery.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-348/test_bundle_rejects_invalid_re3')
+kw = {'steps': 2048, 'evaluation_seeds': ()}
+
+    def build(tmp_path, **kw):
+        from cartpole_sdk.learning.colab_bundle import prepare_bundle
+>       return prepare_bundle(ROOT, ROOT/'training/profiles/passive-20261017',
+                              tmp_path/'bundle', **kw)
+E       TypeError: prepare_bundle() got an unexpected keyword argument 'evaluation_seeds'
+
+tests/test_colab_bundle.py:14: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_colab_recovery.py::test_nonzero_cli_error_preserves_provider_diagnostic
+FAILED tests/test_colab_recovery.py::test_remote_status_distinguishes_dead_job_and_incomplete_checkpoint
+FAILED tests/test_colab_recovery.py::test_watch_saves_new_checkpoint_and_terminal_state_without_duplicate_snapshots
+FAILED tests/test_colab_recovery.py::test_watch_preserves_saved_checkpoint_when_runtime_disappears
+FAILED tests/test_colab_recovery.py::test_bundle_can_bound_checkpoint_and_evaluation_intervals
+FAILED tests/test_colab_recovery.py::test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs0]
+FAILED tests/test_colab_recovery.py::test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs1]
+FAILED tests/test_colab_recovery.py::test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs2]
+FAILED tests/test_colab_recovery.py::test_bundle_rejects_invalid_recovery_recipe_before_writes[kwargs3]
+9 failed in 0.59s

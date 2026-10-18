@@ -18,7 +18,8 @@ def _hash(path):
     return sha256(path.read_bytes()).hexdigest()
 
 
-def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, seconds=25.):
+def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, seconds=25.,
+                   checkpoint_every=102400, evaluation_seeds=tuple(range(20000,20016))):
     repo, profile, output = map(Path, (repo, profile, output))
     if output.exists():
         raise FileExistsError(output)
@@ -26,6 +27,12 @@ def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, sec
         raise ValueError('steps must be a positive multiple of the 1024-step PPO rollout')
     if type(seed) is not int or not 0 <= seed < 2**32:
         raise ValueError('seed must be an unsigned 32-bit integer')
+    if type(checkpoint_every) is not int or checkpoint_every < 1024 or checkpoint_every % 1024:
+        raise ValueError('checkpoint_every must be a positive multiple of1024')
+    from .model_search import _seeds
+    evaluation_seeds = _seeds(evaluation_seeds, 'evaluation seeds')
+    if set(evaluation_seeds) & set(range(10000,10128)):
+        raise ValueError('training and evaluation seeds overlap')
     extra_profile = []
     if (profile/'bundle.json').exists():
         manifest,_ = read_json(profile/'bundle.json')
@@ -48,8 +55,8 @@ def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, sec
     recipe = dict(schema='cartpole-colab-recipe-v1', steps=steps, seed=seed, seconds=seconds,
         n_steps=1024, batch_size=64, epochs=10, gamma=.999, gae_lambda=.98,
         learning_rate=.0003, reward_scale=.01, randomize=True, training_seeds=list(range(10000,10128)),
-        evaluation_seeds=list(range(20000,20016)), hold_seconds=5.,
-        checkpoint_every=102400, angle_source=experiment['observation_config']['angle_source'],
+        evaluation_seeds=list(evaluation_seeds), hold_seconds=5.,
+        checkpoint_every=checkpoint_every, angle_source=experiment['observation_config']['angle_source'],
         run='ppo-001', python='3.11.7', uv='0.8.11', colab_cli='0.7.4',
         hardware_accepted=False, task_qualified=False)
     selected = [repo/name for name in ('pyproject.toml','README.md','uv.lock')]

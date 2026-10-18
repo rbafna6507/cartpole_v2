@@ -1,0 +1,245 @@
+{
+  "timezone": "America/Detroit",
+  "sessions": [
+    {
+      "session": "cartpole-encoder-001",
+      "events": [
+        {
+          "at": "2026-10-17T18:38:20.593048-04:00",
+          "event": "session_created"
+        },
+        {
+          "at": "2026-10-17T18:38:22.885748-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-encoder-001/source.zip",
+          "remote": "/content/source.zip"
+        },
+        {
+          "at": "2026-10-17T18:38:23.746896-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-encoder-001/inputs.zip",
+          "remote": "/content/inputs.zip"
+        },
+        {
+          "at": "2026-10-17T18:38:24.675052-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-encoder-001/remote.py",
+          "remote": "/content/cartpole-launch.py"
+        },
+        {
+          "at": "2026-10-17T18:39:36.736196-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "CARTPOLE_REMOTE_OK {\"action\": \"setup\", \"nonce\": \"104c95155a4e48bd8211f5580803a0ae\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:39:36.971517-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"status\": \"installed\",\n  \"hardware_accepted\": false,\n  \"time\": 1792276776.681087\n}\nCARTPOLE_REMOTE_OK {\"action\": \"status\", \"nonce\": \"b04f0b4df25440db9eb898e6c493fa0c\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:39:38.745329-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\"started_pid\": 1182, \"status\": \"launched\", \"note\": \"Use status; VM lifetime is controlled by Colab. Download checkpoints regularly.\"}\nCARTPOLE_REMOTE_OK {\"action\": \"start\", \"nonce\": \"1ea47b20541e477180a26193e659fc39\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:40:07.571902-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"status\": \"training\",\n  \"pid\": 1182,\n  \"run\": \"runs/ppo-001\",\n  \"hardware_accepted\": false,\n  \"time\": 1792276778.802904\n}\nDEVELOPMENT_ONLY: PPO in simulation; model scope does not qualify global swing-up or hardware.\n\nCARTPOLE_REMOTE_OK {\"action\": \"status\", \"nonce\": \"6d7eb656968d4e33afe63c6f979f53ae\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:41:18.702929-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"status\": \"training\",\n  \"pid\": 1182,\n  \"run\": \"runs/ppo-001\",\n  \"hardware_accepted\": false,\n  \"time\": 1792276778.802904\n}\nDEVELOPMENT_ONLY: PPO in simulation; model scope does not qualify global swing-up or hardware.\n\nCARTPOLE_REMOTE_OK {\"action\": \"status\", \"nonce\": \"ef42c22b1a13433a9071472a08340d74\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:41:40.998146-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"job\": {\n    \"status\": \"training\",\n    \"pid\": 1182,\n    \"run\": \"runs/ppo-001\",\n    \"hardware_accepted\": false,\n    \"time\": 1792276778.802904\n  },\n  \"checked_at\": 1792276900.9150999,\n  \"supervisor_alive\": true,\n  \"processes\": [\n    \"   1182     805     122  0.0 Ss   /usr/bin/python3 -u /content/cartpole-launch.py job\",\n    \"   1187    1182     122 96.3 Rl   /content/cartpole-training/.venv/bin/python -u examples/train_ppo.py train --model inputs/model.json --executor-parameters inputs/executor-parameters.json --observation-config inputs/observation-config.json --prior-parameters inputs/prior-parameters.json --development-only --randomize --training-seeds 10000 10001 10002 10003 10004 10005 10006 10007 10008 10009 10010 10011 10012 10013 10014 10015 10016 10017 10018 10019 10020 10021 10022 10023 10024 10025 10026 10027 10028 10029 10030 10031 10032 10033 10034 10035 10036 10037 10038 10039 10040 10041 10042 10043 10044 10045 10046 10047 10048 10049 10050 10051 10052 10053 10054 10055 10056 10057 10058 10059 10060 10061 10062 10063 10064 10065 10066 10067 10068 10069 10070 10071 10072 10073 10074 10075 10076 10077 10078 10079 10080 10081 10082 10083 10084 10085 10086 10087 10088 10089 10090 10091 10092 10093 10094 10095 10096 10097 10098 10099 10100 10101 10102 10103 10104 10105 10106 10107 10108 10109 10110 10111 10112 10113 10114 10115 10116 10117 10118 10119 10120 10121 10122 10123 10124 10125 10126 10127 --seed 20261017 --steps 2097152 --seconds 25.0 --n-steps 1024 --batch-size 64 --epochs 10 --gamma 0.999 --gae-lambda 0.98 --learning-rate 0.0003 --reward-scale 0.01 --checkpoint-every 102400 --output runs/ppo-001\"\n  ],\n  \"optimizer_rows\": 10,\n  \"latest_progress\": {\n    \"time/fps\": \"104\",\n    \"time/total_timesteps\": \"10240\",\n    \"time/iterations\": \"10\",\n    \"time/time_elapsed\": \"98\",\n    \"train/value_loss\": \"0.008409748977283017\",\n    \"train/n_updates\": \"90\",\n    \"train/loss\": \"-0.013614963740110397\",\n    \"train/clip_fraction\": \"0.0330078125\",\n    \"train/entropy_loss\": \"-1.4027443580329417\",\n    \"train/std\": \"0.9817236065864563\",\n    \"train/policy_gradient_loss\": \"-0.0053610009606927635\",\n    \"train/explained_variance\": \"-0.2946624755859375\",\n    \"train/approx_kl\": \"0.0041874386\",\n    \"train/clip_range\": \"0.2\",\n    \"train/learning_rate\": \"0.0003\",\n    \"rollout/ep_rew_mean\": \"-11.12870075\",\n    \"rollout/ep_len_mean\": \"2500.0\"\n  },\n  \"progress_age_s\": 7.94046688079834,\n  \"previous_steps\": [\n    \"8192\",\n    \"9216\",\n    \"10240\"\n  ],\n  \"episodes\": 4,\n  \"latest_episode\": {\n    \"balanced_fraction\": 0.0048,\n    \"episode_parameters\": {\n      \"observation_config\": {\n        \"angle_frame_id\": \"encoder-zero\",\n        \"angle_noise_std\": 0.002018913462246495,\n        \"angle_source\": \"raw\",\n        \"command_delay_steps\": 3,\n        \"dropout_probability\": 0.0,\n        \"encoder_counts\": 4096,\n        \"telemetry_delay_steps\": 5,\n        \"vision_angle_noise_std\": 0.003,\n        \"vision_angle_quantum_rad\": 0.001,\n        \"vision_dropout_probability\": 0.0,\n        \"vision_frame_period_ns\": 12500000,\n        \"vision_latency_ns\": 20000000,\n        \"vision_max_age_ns\": 150000000,\n        \"vision_warmup_steps\": 500\n      },\n      \"randomization_episode\": 3,\n      \"randomization_seed\": 20261017,\n      \"simulation_config\": {\n        \"cart_damping\": 0.05,\n        \"cart_mass_kg\": 0.35,\n        \"control_steps\": 10,\n        \"effective_length_m\": 0.16261099941499946,\n        \"hinge_coulomb_friction_nm\": 0.0006239909620247883,\n        \"hinge_damping\": 3.243010621275752e-06,\n        \"hinge_friction_velocity_scale_rad_s\": 0.05,\n        \"max_acceleration_m_s2\": 25.0,\n        \"max_action_ttl_ns\": 50000000,\n        \"max_force_n\": 20.0,\n        \"max_steps\": 2500,\n        \"physics_dt_ns\": 1000000,\n        \"pole_mass_kg\": 0.02275,\n        \"rail_half_m\": 0.308962494\n      }\n    },\n    \"fault_reason\": null,\n    \"final_balance_dwell_s\": 0.0,\n    \"final_state\": {\n      \"omega\": 5.343815559002402,\n      \"theta\": 1.2288267432625357,\n      \"time_ns\": 25005000000,\n      \"v\": -0.4401525067045411,\n      \"x\": -0.2799592071636651\n    },\n    \"final_window_balanced_fraction\": 0.0,\n    \"final_window_complete\": true,\n    \"first_one_second_capture_s\": null,\n    \"force_saturated_control_steps\": 0,\n    \"hold_seconds\": 5.0,\n    \"hold_success\": false,\n    \"initial_state\": [\n      -0.006407971646861766,\n      0.023250246454860395,\n      -0.02248006368029625,\n      -0.0836952338171776\n    ],\n    \"longest_balance_dwell_s\": 0.060000000000000005,\n    \"max_abs_speed_m_s\": 1.4998855965779072,\n    \"max_abs_x_m\": 0.2939623538310831,\n    \"rail_braking_control_steps\": 640,\n    \"score\": -0.273921770999234,\n    \"seed\": 10001,\n    \"start\": \"upright\",\n    \"steps\": 2500,\n    \"success\": false,\n    \"timesteps\": 10000\n  },\n  \"episode_age_s\": 9.952272415161133,\n  \"checkpoints\": []\n}\nCARTPOLE_READ_ONLY_PROGRESS_OK\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:41:51.938842-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"status\": \"training\",\n  \"pid\": 1182,\n  \"run\": \"runs/ppo-001\",\n  \"hardware_accepted\": false,\n  \"time\": 1792276778.802904\n}\nDEVELOPMENT_ONLY: PPO in simulation; model scope does not qualify global swing-up or hardware.\n\nCARTPOLE_REMOTE_OK {\"action\": \"status\", \"nonce\": \"0ddbb7cb4cfb4b5bb08b35f54659677e\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-18T09:03:16.399552-04:00",
+          "event": "session_terminated",
+          "reason": "pruned"
+        }
+      ]
+    },
+    {
+      "session": "cartpole-fused-001",
+      "events": [
+        {
+          "at": "2026-10-17T18:45:37.486667-04:00",
+          "event": "session_created"
+        },
+        {
+          "at": "2026-10-17T18:45:39.255852-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-fused-001/source.zip",
+          "remote": "/content/source.zip"
+        },
+        {
+          "at": "2026-10-17T18:45:40.476716-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-fused-001/inputs.zip",
+          "remote": "/content/inputs.zip"
+        },
+        {
+          "at": "2026-10-17T18:45:41.070269-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-fused-001/remote.py",
+          "remote": "/content/cartpole-launch.py"
+        },
+        {
+          "at": "2026-10-17T18:47:12.805167-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "CARTPOLE_REMOTE_OK {\"action\": \"setup\", \"nonce\": \"f1ee7d96a1f845808335c55499c4e861\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:47:14.083343-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\"started_pid\": 6361, \"status\": \"launched\", \"note\": \"Use status; VM lifetime is controlled by Colab. Download checkpoints regularly.\"}\nCARTPOLE_REMOTE_OK {\"action\": \"start\", \"nonce\": \"5a3e919d422240f0902b7b276c8d0bf9\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-18T10:35:20.595773-04:00",
+          "event": "session_terminated",
+          "reason": "pruned"
+        }
+      ]
+    },
+    {
+      "session": "cartpole-vision-001",
+      "events": [
+        {
+          "at": "2026-10-17T18:43:33.739189-04:00",
+          "event": "session_created"
+        },
+        {
+          "at": "2026-10-17T18:43:35.572459-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-vision-001/source.zip",
+          "remote": "/content/source.zip"
+        },
+        {
+          "at": "2026-10-17T18:43:36.303419-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-vision-001/inputs.zip",
+          "remote": "/content/inputs.zip"
+        },
+        {
+          "at": "2026-10-17T18:43:36.922047-04:00",
+          "event": "file_operation",
+          "op": "upload",
+          "local": "runs/colab-vision-001/remote.py",
+          "remote": "/content/cartpole-launch.py"
+        },
+        {
+          "at": "2026-10-17T18:45:15.734623-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "CARTPOLE_REMOTE_OK {\"action\": \"setup\", \"nonce\": \"b62072d77c5e499ca614b02412accf29\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:45:17.248377-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\"started_pid\": 9322, \"status\": \"launched\", \"note\": \"Use status; VM lifetime is controlled by Colab. Download checkpoints regularly.\"}\nCARTPOLE_REMOTE_OK {\"action\": \"start\", \"nonce\": \"a10ce745fe344e24ba52fdf082c285d3\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-17T18:47:23.578086-04:00",
+          "event": "execution",
+          "outputs": [
+            {
+              "output_type": "stream",
+              "name": "stdout",
+              "text": "{\n  \"status\": \"training\",\n  \"pid\": 9322,\n  \"run\": \"runs/ppo-001\",\n  \"hardware_accepted\": false,\n  \"time\": 1792277117.371659\n}\nDEVELOPMENT_ONLY: PPO in simulation; model scope does not qualify global swing-up or hardware.\n\nCARTPOLE_REMOTE_OK {\"action\": \"status\", \"nonce\": \"f4bc28938e484e859111f9f168be6a6a\"}\n"
+            }
+          ]
+        },
+        {
+          "at": "2026-10-18T09:02:55.337781-04:00",
+          "event": "session_terminated",
+          "reason": "pruned"
+        }
+      ]
+    }
+  ],
+  "server_inventory": "No active sessions found on server at investigation start.",
+  "user_report": "No downloads saved.",
+  "interpretation": "pruned records when the CLI noticed a missing server assignment, not the exact VM termination time. No recorded training exception or final outcome exists."
+}
