@@ -1,0 +1,1361 @@
+{
+  "schema": "passive-slow-rotation-v1",
+  "hardware_accepted": false,
+  "calibration_accepted": false,
+  "calibration_produced": false,
+  "trial": "manual-map-after-tightening-01",
+  "source": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/manual-map-after-tightening-01",
+  "entirely_disabled_healthy": true,
+  "reference_counts": 533,
+  "collector_report_summary": {
+    "purpose": "slow manual full rotations both directions; no powered motion or calibration writes",
+    "before": {
+      "sid": 2072354796,
+      "tick": 504668649,
+      "us": 2161993042,
+      "mode": 0,
+      "flags": 205,
+      "theta": 0.007669904,
+      "angle_hat": 0.007470622,
+      "omega": -0.02488742,
+      "x": 0.0,
+      "velocity": 0.0,
+      "acceleration": 0.0,
+      "demand": 0.0,
+      "last_seq": 0,
+      "fault": 0,
+      "misses": 0,
+      "dropped": 63933833,
+      "brake_direction": 0,
+      "received_ns": 697812896283773,
+      "unwrapped_tick": 504668649,
+      "unwrapped_us": 2161993042
+    },
+    "info_before": {
+      "sid": 2072354796,
+      "firmware": "executor-v6-measuredrail",
+      "encoder_upright_raw": 533,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 6,
+      "home_epoch": 27,
+      "measured_span_steps": 16509,
+      "rail_half_m": 0.3090375,
+      "received_ns": 697812897290893,
+      "encoder_boot_conf": 768,
+      "encoder_conf": 768,
+      "encoder_conf_valid": true,
+      "encoder_raw": 538,
+      "encoder_raw_age_us": 5806,
+      "encoder_recoveries": 0
+    },
+    "after": {
+      "sid": 2072354796,
+      "tick": 504848659,
+      "us": 2342003042,
+      "mode": 0,
+      "flags": 205,
+      "theta": 3.018874,
+      "angle_hat": 3.018874,
+      "omega": -9.619762e-05,
+      "x": 0.0,
+      "velocity": 0.0,
+      "acceleration": 0.0,
+      "demand": 0.0,
+      "last_seq": 0,
+      "fault": 0,
+      "misses": 0,
+      "dropped": 63933833,
+      "brake_direction": 0,
+      "received_ns": 697992906242505,
+      "unwrapped_tick": 504848659,
+      "unwrapped_us": 2342003042
+    },
+    "info_after": {
+      "sid": 2072354796,
+      "firmware": "executor-v6-measuredrail",
+      "encoder_upright_raw": 533,
+      "reference_saved": true,
+      "mag_status": 103,
+      "i2c_errors": 6,
+      "home_epoch": 27,
+      "measured_span_steps": 16509,
+      "rail_half_m": 0.3090375,
+      "received_ns": 697992907465309,
+      "encoder_boot_conf": 768,
+      "encoder_conf": 768,
+      "encoder_conf_valid": true,
+      "encoder_raw": 2501,
+      "encoder_raw_age_us": 634269,
+      "encoder_recoveries": 0
+    },
+    "camera": {
+      "url": "http://127.0.0.1:3090/api/sensing-stream?max_hz=100",
+      "frames": 10010,
+      "heartbeat_records": 0,
+      "stream_records": 10010,
+      "started_ns": 697812836285454,
+      "clock": "camera t is a host-read proxy; round-trip clock anchors do not measure exposure latency",
+      "clock_sync": {
+        "method": "http-roundtrip-midpoint",
+        "start": {
+          "local_before_ns": 697812836460753,
+          "local_after_ns": 697812848065581,
+          "server_monotonic_s": 697812.846064461,
+          "offset_ns": -3801294,
+          "uncertainty_ns": 5802414
+        },
+        "end": {
+          "local_before_ns": 697992923702729,
+          "local_after_ns": 697992929793134,
+          "server_monotonic_s": 697992.927727148,
+          "offset_ns": -979217,
+          "uncertainty_ns": 3045203
+        }
+      },
+      "finished_ns": 697992929925296,
+      "sha256": "ff10951433c3c49bd3b482d6961cbee84505e186f15c794f1fe4a3d74f9f7c4e"
+    }
+  },
+  "collector_info_samples": 714,
+  "camera_filters": {
+    "raw_records": 10010,
+    "accepted_frames": 6993,
+    "rejected": {
+      "missing_or_invalid_track": 2911,
+      "confidence_below_0.8": 45,
+      "length_outside_20pct_median": 61
+    },
+    "median_length_px": 157.3233056291106,
+    "clock_anchors": [
+      {
+        "local_before_ns": 697812836460753,
+        "local_after_ns": 697812848065581,
+        "server_monotonic_s": 697812.846064461,
+        "offset_ns": -3801294,
+        "uncertainty_ns": 5802414
+      },
+      {
+        "local_before_ns": 697992923702729,
+        "local_after_ns": 697992929793134,
+        "server_monotonic_s": 697992.927727148,
+        "offset_ns": -979217,
+        "uncertainty_ns": 3045203
+      }
+    ],
+    "clock_assumption": null
+  },
+  "clock": {
+    "method": "1-second receipt minima drift fit, 1st-percentile intercept",
+    "board_origin_s": 2161.988042,
+    "host_origin_s": 697812.8904877834,
+    "scale": 1.0000040616168004,
+    "drift_ppm": 4.061616800443701,
+    "unconstrained_scale": 1.0000040616168004,
+    "lower_envelope_bins": 181,
+    "receipt_delay_s": {
+      "n": 45007,
+      "median": 0.00018969562370330095,
+      "p05": 2.587843919172883e-05,
+      "p95": 0.000965440785512328,
+      "min": -5.5907410569489e-05,
+      "max": 0.005092644365504384,
+      "rms": 0.0004917066905252831
+    },
+    "limitation": "Host receipt lower envelope is not independently measured board-to-host synchronization."
+  },
+  "encoder_unwrapped_range_deg": 372.6562366239833,
+  "all_speed_camera_angle_support": {
+    "n": 6988,
+    "counts_per_30deg_bin": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      58,
+      1440,
+      0,
+      0,
+      0,
+      0,
+      5490
+    ],
+    "bins_with_at_least5": 3,
+    "maximum_unobserved_angular_gap_deg": 177.9387814025733,
+    "supported_for_descriptive_periodic_fit": false,
+    "rule": "At least100 moving pairs, at least11/12 angular bins with5 pairs, and maximum unobserved gap<=45degrees. This is data support, not hardware acceptance."
+  },
+  "tracking_by_encoder_angle": [
+    {
+      "encoder_bin_low_deg": -180,
+      "encoder_bin_high_deg": -150,
+      "raw_frames": 101,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": -150,
+      "encoder_bin_high_deg": -120,
+      "raw_frames": 90,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": -120,
+      "encoder_bin_high_deg": -90,
+      "raw_frames": 84,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": -90,
+      "encoder_bin_high_deg": -60,
+      "raw_frames": 84,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": -60,
+      "encoder_bin_high_deg": -30,
+      "raw_frames": 87,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": -30,
+      "encoder_bin_high_deg": 0,
+      "raw_frames": 195,
+      "retained_frames": 58,
+      "retained_fraction": 0.29743589743589743
+    },
+    {
+      "encoder_bin_low_deg": 0,
+      "encoder_bin_high_deg": 30,
+      "raw_frames": 1609,
+      "retained_frames": 1440,
+      "retained_fraction": 0.8949658172778123
+    },
+    {
+      "encoder_bin_low_deg": 30,
+      "encoder_bin_high_deg": 60,
+      "raw_frames": 89,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": 60,
+      "encoder_bin_high_deg": 90,
+      "raw_frames": 98,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": 90,
+      "encoder_bin_high_deg": 120,
+      "raw_frames": 85,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": 120,
+      "encoder_bin_high_deg": 150,
+      "raw_frames": 76,
+      "retained_frames": 0,
+      "retained_fraction": 0.0
+    },
+    {
+      "encoder_bin_low_deg": 150,
+      "encoder_bin_high_deg": 180,
+      "raw_frames": 7407,
+      "retained_frames": 5490,
+      "retained_fraction": 0.741190765492102
+    }
+  ],
+  "telemetry_gap_s": {
+    "n": 45006,
+    "median": 0.0039999999999054126,
+    "p05": 0.0039999999999054126,
+    "p95": 0.00400000000036016,
+    "min": 0.0010000000002037268,
+    "max": 0.0041570000003048335,
+    "rms": 0.0039998921664740955
+  },
+  "camera_gap_s": {
+    "n": 6992,
+    "median": 0.022420319903176278,
+    "p05": 0.012072980584343895,
+    "p95": 0.047607166337547795,
+    "min": 0.00844023923855275,
+    "max": 12.226119509665295,
+    "rms": 0.19226890617671158
+  },
+  "step_cart_position_m": {
+    "n": 45007,
+    "median": 0.0,
+    "p05": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "rms": 0.0
+  },
+  "raw_native_info_counts": {
+    "n": 716,
+    "median": 2501.0000000000005,
+    "p95_minus_p05": 2123.0,
+    "span": 4042.0,
+    "std": 823.3189920134331,
+    "p95_abs_about_median": 1962.0000000000002
+  },
+  "raw_native_info_note": "Whole-rotation count median is not a rest zero; INFO readbacks are separate observations, not independent acquisition cadence. encoder_raw_age_us measures unchanged-value duration only.",
+  "training_direction": 1,
+  "opposite_direction_validation_available": false,
+  "direction_support": {
+    "-1": {
+      "n": 96,
+      "counts_per_30deg_bin": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        46,
+        21,
+        0,
+        0,
+        0,
+        0,
+        29
+      ],
+      "bins_with_at_least5": 3,
+      "maximum_unobserved_angular_gap_deg": 178.84097720934452,
+      "supported_for_descriptive_periodic_fit": false,
+      "rule": "At least100 moving pairs, at least11/12 angular bins with5 pairs, and maximum unobserved gap<=45degrees. This is data support, not hardware acceptance."
+    },
+    "1": {
+      "n": 97,
+      "counts_per_30deg_bin": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        84,
+        0,
+        0,
+        0,
+        0,
+        7
+      ],
+      "bins_with_at_least5": 3,
+      "maximum_unobserved_angular_gap_deg": 179.84517936410228,
+      "supported_for_descriptive_periodic_fit": false,
+      "rule": "At least100 moving pairs, at least11/12 angular bins with5 pairs, and maximum unobserved gap<=45degrees. This is data support, not hardware acceptance."
+    }
+  },
+  "models": {},
+  "holds": [
+    {
+      "first_index": 0,
+      "last_index": 573,
+      "start_s": 697812.8904877834,
+      "end_s": 697815.1794970804,
+      "duration_s": 2.289009297033772,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 574,
+        "median": 0.007669903999999672,
+        "p95_minus_p05": 0.0015339810000001286,
+        "span": 0.004601946999999829,
+        "std": 0.0007792582707362314,
+        "p95_abs_about_median": 0.0015339810000001286
+      },
+      "maximum_abs_omega_rad_s": 0.03739532,
+      "measurement_window_s": [
+        697812.9904877833,
+        697815.0794970804
+      ],
+      "native_info_counts": {
+        "n": 8,
+        "median": 538.5,
+        "p95_minus_p05": 1.0000000000001052,
+        "span": 1.0000000000001052,
+        "std": 0.5000000000000526,
+        "p95_abs_about_median": 0.5000000000000526
+      },
+      "reconstructed_state_counts": {
+        "n": 523,
+        "median": 538.0000000394866,
+        "p95_minus_p05": 1.000000138276858,
+        "span": 2.000002884148519,
+        "std": 0.4989524802531257,
+        "p95_abs_about_median": 1.000000138276858
+      },
+      "camera_image_angle_rad": {
+        "n": 120,
+        "median": -0.005858047734982108,
+        "p95_minus_p05": 0.0034364321871166005,
+        "span": 0.0067484706219804735,
+        "std": 0.0010686881363144417,
+        "p95_abs_about_median": 0.0019157850852917985
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 120,
+        "median": 549.5773504273504,
+        "p05": 549.3928137212332,
+        "p95": 549.7557566422796,
+        "min": 549.2358490566038,
+        "max": 549.8061224489796,
+        "rms": 549.5853962126671
+      },
+      "camera_pivot_y_px": {
+        "n": 120,
+        "median": 205.71064814814812,
+        "p05": 205.4064247921391,
+        "p95": 206.05806623931625,
+        "min": 205.2959183673469,
+        "max": 206.29464285714286,
+        "rms": 205.7330689495093
+      },
+      "marker_length_px": {
+        "n": 120,
+        "median": 154.2889626427634,
+        "p05": 153.93918917350024,
+        "p95": 154.6899654396222,
+        "min": 153.65907388358033,
+        "max": 155.1631479392845,
+        "rms": 154.30197827453546
+      },
+      "native_encoder_angle_rad": 0.008436894333371026,
+      "camera_minus_native_encoder_deg": -0.8190398489006461,
+      "native_info_unchanged_duration_us": {
+        "n": 8,
+        "median": 9929.5,
+        "p05": 471.95,
+        "p95": 22448.299999999996,
+        "min": 368.0,
+        "max": 24332.0,
+        "rms": 13081.343040758467
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 1680,
+      "last_index": 3268,
+      "start_s": 697819.6075150652,
+      "end_s": 697825.9595408646,
+      "duration_s": 6.352025799336843,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 1589,
+        "median": 0.0092038849999998,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.004601945999999746,
+        "std": 0.0007127532953281265,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03897724,
+      "measurement_window_s": [
+        697819.7075150652,
+        697825.8595408646
+      ],
+      "native_info_counts": {
+        "n": 24,
+        "median": 539.0000000000001,
+        "p95_minus_p05": 1.0000000000001052,
+        "span": 1.0000000000001052,
+        "std": 0.4545296714432025,
+        "p95_abs_about_median": 1.0000000000001052
+      },
+      "reconstructed_state_counts": {
+        "n": 1539,
+        "median": 539.0000001777638,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 2.0000028841488087,
+        "std": 0.455873065912557,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 331,
+        "median": -0.006117344716955131,
+        "p95_minus_p05": 0.004172947618260592,
+        "span": 0.007207807091772267,
+        "std": 0.0012308686273819602,
+        "p95_abs_about_median": 0.0024011068316098783
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 331,
+        "median": 549.4642857142858,
+        "p05": 549.3256313131315,
+        "p95": 549.616600790514,
+        "min": 549.0593220338983,
+        "max": 549.75,
+        "rms": 549.4809540732082
+      },
+      "camera_pivot_y_px": {
+        "n": 331,
+        "median": 204.83695652173913,
+        "p05": 204.64772727272728,
+        "p95": 205.1914893617021,
+        "min": 204.56976744186048,
+        "max": 206.04237288135593,
+        "rms": 204.8785156976876
+      },
+      "marker_length_px": {
+        "n": 331,
+        "median": 153.9123548074205,
+        "p05": 153.3373404641996,
+        "p95": 154.33155595193813,
+        "min": 152.3955176092023,
+        "max": 155.18990292616323,
+        "rms": 153.8841996160995
+      },
+      "native_encoder_angle_rad": 0.009203884727313927,
+      "camera_minus_native_encoder_deg": -0.8778417841081847,
+      "native_info_unchanged_duration_us": {
+        "n": 24,
+        "median": 5049.5,
+        "p05": 701.1,
+        "p95": 29716.35,
+        "min": 282.0,
+        "max": 30751.0,
+        "rms": 13969.411279649546
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 4222,
+      "last_index": 4428,
+      "start_s": 697829.7755563637,
+      "end_s": 697830.5995597105,
+      "duration_s": 0.8240033467300236,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 207,
+        "median": 0.009203885000000245,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.004601945999999746,
+        "std": 0.0008766404180865808,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03985594,
+      "measurement_window_s": [
+        697829.8755563637,
+        697830.4995597105
+      ],
+      "native_info_counts": {
+        "n": 2,
+        "median": 539.5,
+        "p95_minus_p05": 0.9000000000000947,
+        "span": 1.0000000000001052,
+        "std": 0.5000000000000526,
+        "p95_abs_about_median": 0.5000000000000526
+      },
+      "reconstructed_state_counts": {
+        "n": 157,
+        "median": 539.0000001777637,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 3.0000023705272554,
+        "std": 0.5580445149344121,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 38,
+        "median": -0.006096194562529078,
+        "p95_minus_p05": 0.003335084517169506,
+        "span": 0.005185056970736568,
+        "std": 0.0011317153557441875,
+        "p95_abs_about_median": 0.0022272008990780186
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 38,
+        "median": 549.5212765957448,
+        "p05": 549.3054763056093,
+        "p95": 549.6808510638298,
+        "min": 549.2558139534884,
+        "max": 549.6808510638298,
+        "rms": 549.5039214504341
+      },
+      "camera_pivot_y_px": {
+        "n": 38,
+        "median": 204.89772727272728,
+        "p05": 204.64772727272728,
+        "p95": 205.22780769230772,
+        "min": 204.64772727272728,
+        "max": 205.35714285714286,
+        "rms": 204.90879439415474
+      },
+      "marker_length_px": {
+        "n": 38,
+        "median": 153.95671445679875,
+        "p05": 153.46601769502414,
+        "p95": 154.25567850407631,
+        "min": 153.45261603170187,
+        "max": 154.36551553403058,
+        "rms": 153.8999154596088
+      },
+      "native_encoder_angle_rad": 0.009970875121256828,
+      "camera_minus_native_encoder_deg": -0.9205752820235266,
+      "native_info_unchanged_duration_us": {
+        "n": 2,
+        "median": 8312.0,
+        "p05": 2359.4,
+        "p95": 14264.599999999999,
+        "min": 1698.0,
+        "max": 14926.0,
+        "rms": 10622.35096388742
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 4440,
+      "last_index": 4652,
+      "start_s": 697830.6475599055,
+      "end_s": 697831.4955633497,
+      "duration_s": 0.8480034441454336,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 213,
+        "median": 0.009203885000000245,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.00460194600000019,
+        "std": 0.0008357197384357408,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03880936,
+      "measurement_window_s": [
+        697830.7475599055,
+        697831.3955633497
+      ],
+      "native_info_counts": {
+        "n": 3,
+        "median": 540.0,
+        "p95_minus_p05": 0.8999999999998342,
+        "span": 0.9999999999998157,
+        "std": 0.4714045207909448,
+        "p95_abs_about_median": 0.899999999999834
+      },
+      "reconstructed_state_counts": {
+        "n": 163,
+        "median": 539.0000001777636,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 1.0000027458716612,
+        "std": 0.4972745956118925,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 36,
+        "median": -0.006153719784729006,
+        "p95_minus_p05": 0.0032247327974157525,
+        "span": 0.0043379813967998615,
+        "std": 0.0010931523009546223,
+        "p95_abs_about_median": 0.0020139564855685688
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 36,
+        "median": 549.5422222222223,
+        "p05": 549.3953488372093,
+        "p95": 549.75,
+        "min": 549.3777777777777,
+        "max": 549.75,
+        "rms": 549.5465850209504
+      },
+      "camera_pivot_y_px": {
+        "n": 36,
+        "median": 204.82558139534882,
+        "p05": 204.62902462121212,
+        "p95": 205.1650598404255,
+        "min": 204.54255319148933,
+        "max": 205.54999999999995,
+        "rms": 204.87552726963534
+      },
+      "marker_length_px": {
+        "n": 36,
+        "median": 153.90071767129808,
+        "p05": 153.40377000721915,
+        "p95": 154.5126440680254,
+        "min": 153.1031912703907,
+        "max": 154.7599346420412,
+        "rms": 153.90450183315346
+      },
+      "native_encoder_angle_rad": 0.010737865515199285,
+      "camera_minus_native_encoder_deg": -0.9678165469711139,
+      "native_info_unchanged_duration_us": {
+        "n": 3,
+        "median": 6151.0,
+        "p05": 1169.5,
+        "p95": 16052.8,
+        "min": 616.0,
+        "max": 17153.0,
+        "rms": 10526.78592923785
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 4663,
+      "last_index": 6042,
+      "start_s": 697831.5395635285,
+      "end_s": 697837.0555859323,
+      "duration_s": 5.516022403840907,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 1380,
+        "median": 0.0092038849999998,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.004601945999999746,
+        "std": 0.00081187885489293,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03904819,
+      "measurement_window_s": [
+        697831.6395635285,
+        697836.9555859324
+      ],
+      "native_info_counts": {
+        "n": 21,
+        "median": 540.0,
+        "p95_minus_p05": 0.9999999999998156,
+        "span": 0.9999999999998156,
+        "std": 0.4948716593053023,
+        "p95_abs_about_median": 0.9999999999998156
+      },
+      "reconstructed_state_counts": {
+        "n": 1330,
+        "median": 539.0000001777636,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 3.000002370526966,
+        "std": 0.5178194286231581,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 287,
+        "median": -0.006460665008997779,
+        "p95_minus_p05": 0.004136043790171406,
+        "span": 0.011514236145614198,
+        "std": 0.0014848432087059237,
+        "p95_abs_about_median": 0.0024478136922927883
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 287,
+        "median": 549.5444444444445,
+        "p05": 549.3068181818182,
+        "p95": 549.75,
+        "min": 548.7460317460318,
+        "max": 549.78125,
+        "rms": 549.53357131259
+      },
+      "camera_pivot_y_px": {
+        "n": 287,
+        "median": 204.89772727272728,
+        "p05": 204.64772727272728,
+        "p95": 205.20328014184395,
+        "min": 204.56976744186048,
+        "max": 206.38888888888889,
+        "rms": 204.91508019585754
+      },
+      "marker_length_px": {
+        "n": 287,
+        "median": 153.99372295708997,
+        "p05": 153.4463675203662,
+        "p95": 154.41390256145385,
+        "min": 152.15272883117012,
+        "max": 155.72881016503263,
+        "rms": 153.98071561407002
+      },
+      "native_encoder_angle_rad": 0.010737865515199285,
+      "camera_minus_native_encoder_deg": -0.9854032128634111,
+      "native_info_unchanged_duration_us": {
+        "n": 21,
+        "median": 17454.0,
+        "p05": 184.0,
+        "p95": 27691.0,
+        "min": 153.0,
+        "max": 28666.0,
+        "rms": 18541.2271207398
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 6044,
+      "last_index": 6503,
+      "start_s": 697837.0635859648,
+      "end_s": 697838.899593422,
+      "duration_s": 1.8360074571100995,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 460,
+        "median": 0.009203885000000245,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.00460194600000019,
+        "std": 0.0008850348834179431,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03795094,
+      "measurement_window_s": [
+        697837.1635859648,
+        697838.799593422
+      ],
+      "native_info_counts": {
+        "n": 6,
+        "median": 539.0,
+        "p95_minus_p05": 1.5000000000001579,
+        "span": 2.0000000000002105,
+        "std": 0.5773502691896865,
+        "p95_abs_about_median": 1.0000000000001052
+      },
+      "reconstructed_state_counts": {
+        "n": 410,
+        "median": 539.0000001777636,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 3.000002370526966,
+        "std": 0.5702793920148347,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 89,
+        "median": -0.006681375620384955,
+        "p95_minus_p05": 0.0036601903560860008,
+        "span": 0.0094438855284249,
+        "std": 0.001407787235102577,
+        "p95_abs_about_median": 0.0024003403057540665
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 0,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 89,
+        "median": 549.6136363636365,
+        "p05": 549.3953488372093,
+        "p95": 549.75,
+        "min": 548.9590163934427,
+        "max": 549.75,
+        "rms": 549.5811421955908
+      },
+      "camera_pivot_y_px": {
+        "n": 89,
+        "median": 204.82558139534882,
+        "p05": 204.64772727272728,
+        "p95": 205.20697586727,
+        "min": 204.56976744186048,
+        "max": 205.9262295081967,
+        "rms": 204.87157463727297
+      },
+      "marker_length_px": {
+        "n": 89,
+        "median": 153.97028639354912,
+        "p05": 153.37077863656464,
+        "p95": 154.46781240983057,
+        "min": 152.2000039058349,
+        "max": 154.97888603558755,
+        "rms": 153.94366100005792
+      },
+      "native_encoder_angle_rad": 0.009203884727313927,
+      "camera_minus_native_encoder_deg": -0.9101583743896646,
+      "native_info_unchanged_duration_us": {
+        "n": 6,
+        "median": 7410.0,
+        "p05": 1223.25,
+        "p95": 25510.25,
+        "min": 414.0,
+        "max": 30154.0,
+        "rms": 13944.33478752811
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 6868,
+      "last_index": 7109,
+      "start_s": 697840.3595993519,
+      "end_s": 697841.3236032673,
+      "duration_s": 0.9640039154328406,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 242,
+        "median": 0.0092038849999998,
+        "p95_minus_p05": 0.0015339850000000155,
+        "span": 0.010737869999999816,
+        "std": 0.0010066483808733033,
+        "p95_abs_about_median": 0.0015339850000000155
+      },
+      "maximum_abs_omega_rad_s": 0.03624506,
+      "measurement_window_s": [
+        697840.4595993519,
+        697841.2236032673
+      ],
+      "native_info_counts": {
+        "n": 3,
+        "median": 539.0000000000001,
+        "p95_minus_p05": 0.0,
+        "span": 0.0,
+        "std": 0.0,
+        "p95_abs_about_median": 0.0
+      },
+      "reconstructed_state_counts": {
+        "n": 192,
+        "median": 539.0000001777637,
+        "p95_minus_p05": 1.0000027458716612,
+        "span": 2.0000028841488087,
+        "std": 0.5266099090010564,
+        "p95_abs_about_median": 1.0000027458716612
+      },
+      "camera_image_angle_rad": {
+        "n": 42,
+        "median": -0.006674296020921844,
+        "p95_minus_p05": 0.004110684428062306,
+        "span": 0.005873877781559234,
+        "std": 0.0013780780675838164,
+        "p95_abs_about_median": 0.002463003272031638
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 0,
+      "direction_after": 1,
+      "role": "unassigned",
+      "camera_pivot_x_px": {
+        "n": 42,
+        "median": 549.6097027972029,
+        "p05": 549.3959895586141,
+        "p95": 549.75,
+        "min": 549.2978723404256,
+        "max": 549.75,
+        "rms": 549.5930201017821
+      },
+      "camera_pivot_y_px": {
+        "n": 42,
+        "median": 204.90099129593813,
+        "p05": 204.64887749445677,
+        "p95": 205.18752713851495,
+        "min": 204.61363636363637,
+        "max": 205.35576923076925,
+        "rms": 204.90449144458026
+      },
+      "marker_length_px": {
+        "n": 42,
+        "median": 154.015950880414,
+        "p05": 153.55916508520676,
+        "p95": 154.5994165514208,
+        "min": 153.02440007778662,
+        "max": 154.71528012417173,
+        "rms": 154.02504260822585
+      },
+      "native_encoder_angle_rad": 0.009203884727313927,
+      "camera_minus_native_encoder_deg": -0.9097527432197852,
+      "native_info_unchanged_duration_us": {
+        "n": 3,
+        "median": 5927.0,
+        "p05": 1022.0,
+        "p95": 24588.5,
+        "min": 477.0,
+        "max": 26662.0,
+        "rms": 15771.483781390598
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 7502,
+      "last_index": 8988,
+      "start_s": 697842.8956096522,
+      "end_s": 697848.8396337944,
+      "duration_s": 5.944024142227136,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 1487,
+        "median": 3.029612,
+        "p95_minus_p05": 0.0,
+        "span": 0.004601999999999773,
+        "std": 0.0001640158223756213,
+        "p95_abs_about_median": 0.0
+      },
+      "maximum_abs_omega_rad_s": 0.03875577,
+      "measurement_window_s": [
+        697842.9956096521,
+        697848.7396337944
+      ],
+      "native_info_counts": {
+        "n": 23,
+        "median": 2508.0,
+        "p95_minus_p05": 0.0,
+        "span": 0.0,
+        "std": 0.0,
+        "p95_abs_about_median": 0.0
+      },
+      "reconstructed_state_counts": {
+        "n": 1437,
+        "median": 2507.9999634453425,
+        "p95_minus_p05": 0.0,
+        "span": 1.0000125243521738,
+        "std": 0.06448283353080211,
+        "p95_abs_about_median": 0.0
+      },
+      "camera_image_angle_rad": {
+        "n": 180,
+        "median": -3.1297844548057787,
+        "p95_minus_p05": 0.009361184551999234,
+        "span": 0.018863010384404966,
+        "std": 0.003262789379300055,
+        "p95_abs_about_median": 0.006486696805735946
+      },
+      "camera_stationary_qualified": true,
+      "stationary_comparison_qualified": true,
+      "direction_before": 1,
+      "direction_after": -1,
+      "role": "training_direction",
+      "camera_pivot_x_px": {
+        "n": 180,
+        "median": 549.9270833333334,
+        "p05": 549.6477272727274,
+        "p95": 550.3937142857144,
+        "min": 549.5697674418606,
+        "max": 550.9772727272727,
+        "rms": 549.923675000129
+      },
+      "camera_pivot_y_px": {
+        "n": 180,
+        "median": 204.7156862745098,
+        "p05": 204.54444444444445,
+        "p95": 204.84186792452832,
+        "min": 204.0701754385965,
+        "max": 205.27272727272728,
+        "rms": 204.69038160604907
+      },
+      "marker_length_px": {
+        "n": 180,
+        "median": 157.4036178701528,
+        "p05": 156.7216714370385,
+        "p95": 159.61524898612663,
+        "min": 152.6766355988122,
+        "max": 160.62085599563122,
+        "rms": 157.67816852420154
+      },
+      "native_encoder_angle_rad": 3.029612056074141,
+      "camera_minus_native_encoder_deg": 7.092575578975549,
+      "native_info_unchanged_duration_us": {
+        "n": 23,
+        "median": 141759.0,
+        "p05": 11298.2,
+        "p95": 601635.6999999998,
+        "min": 588.0,
+        "max": 645925.0,
+        "rms": 295297.74025203194
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 11980,
+      "last_index": 12404,
+      "start_s": 697860.8076824038,
+      "end_s": 697862.5036892924,
+      "duration_s": 1.6960068885236979,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 425,
+        "median": 3.002001,
+        "p95_minus_p05": 0.0015339999999999243,
+        "span": 0.003067999999999848,
+        "std": 0.0007113929918086161,
+        "p95_abs_about_median": 0.0015339999999999243
+      },
+      "maximum_abs_omega_rad_s": 0.03874796,
+      "measurement_window_s": [
+        697860.9076824038,
+        697862.4036892924
+      ],
+      "native_info_counts": {
+        "n": 6,
+        "median": 2490.9999999999995,
+        "p95_minus_p05": 0.9999999999995262,
+        "span": 0.9999999999995262,
+        "std": 0.4714045207908083,
+        "p95_abs_about_median": 0.9999999999995262
+      },
+      "reconstructed_state_counts": {
+        "n": 375,
+        "median": 2490.0003899056655,
+        "p95_minus_p05": 1.0000125243521738,
+        "span": 1.0000125243521738,
+        "std": 0.44900450983305207,
+        "p95_abs_about_median": 1.0000125243521738
+      },
+      "camera_image_angle_rad": {
+        "n": 59,
+        "median": 3.139533277753948,
+        "p95_minus_p05": 0.027890802821461454,
+        "span": 0.04591415681409039,
+        "std": 0.01004472044154628,
+        "p95_abs_about_median": 0.016103725735565885
+      },
+      "camera_stationary_qualified": false,
+      "stationary_comparison_qualified": false,
+      "direction_before": -1,
+      "direction_after": 1,
+      "role": "opposite_direction",
+      "camera_pivot_x_px": {
+        "n": 59,
+        "median": 549.9270833333334,
+        "p05": 549.7073170731708,
+        "p95": 550.0204081632654,
+        "min": 549.5697674418606,
+        "max": 550.1,
+        "rms": 549.9059903205662
+      },
+      "camera_pivot_y_px": {
+        "n": 59,
+        "median": 204.68367346938777,
+        "p05": 204.58357248886693,
+        "p95": 204.75,
+        "min": 204.45121951219514,
+        "max": 204.75,
+        "rms": 204.67392719168097
+      },
+      "marker_length_px": {
+        "n": 59,
+        "median": 156.51568004781942,
+        "p05": 152.46521120223161,
+        "p95": 158.36464265608234,
+        "min": 151.7168714065692,
+        "max": 159.55004144535775,
+        "rms": 155.91701024733612
+      },
+      "native_encoder_angle_rad": 3.003534382680085,
+      "camera_minus_native_encoder_deg": 7.792162706174865,
+      "native_info_unchanged_duration_us": {
+        "n": 6,
+        "median": 1149.5,
+        "p05": 315.5,
+        "p95": 5630.75,
+        "min": 287.0,
+        "max": 6939.0,
+        "rms": 3009.561208326999
+      },
+      "predicted_residual_after_model_deg": {}
+    },
+    {
+      "first_index": 14799,
+      "last_index": 45006,
+      "start_s": 697872.0837282026,
+      "end_s": 697992.9082189434,
+      "duration_s": 120.82449074077886,
+      "encoder_stationary_qualified": true,
+      "encoder_angle_rad": {
+        "n": 30208,
+        "median": 3.0188740000000003,
+        "p95_minus_p05": 0.0,
+        "span": 0.0015339999999999245,
+        "std": 5.9162553599491824e-05,
+        "p95_abs_about_median": 0.0
+      },
+      "maximum_abs_omega_rad_s": 0.03637936,
+      "measurement_window_s": [
+        697872.1837282026,
+        697992.8082189434
+      ],
+      "native_info_counts": {
+        "n": 478,
+        "median": 2501.0,
+        "p95_minus_p05": 0.0,
+        "span": 0.0,
+        "std": 0.0,
+        "p95_abs_about_median": 0.0
+      },
+      "reconstructed_state_counts": {
+        "n": 30157,
+        "median": 2500.9998757748835,
+        "p95_minus_p05": 0.0,
+        "span": 1.0000125243521738,
+        "std": 0.03860053828786943,
+        "p95_abs_about_median": 0.0
+      },
+      "camera_image_angle_rad": {
+        "n": 5198,
+        "median": -3.1394791274493263,
+        "p95_minus_p05": 0.014176304605597108,
+        "span": 0.07026337732874932,
+        "std": 0.005143354162138093,
+        "p95_abs_about_median": 0.010190304967413173
+      },
+      "camera_stationary_qualified": false,
+      "stationary_comparison_qualified": false,
+      "direction_before": 1,
+      "direction_after": 0,
+      "role": "training_direction",
+      "camera_pivot_x_px": {
+        "n": 5198,
+        "median": 549.75,
+        "p05": 549.5697674418606,
+        "p95": 549.9270833333334,
+        "min": 549.5444444444445,
+        "max": 550.186274509804,
+        "rms": 549.7493944907286
+      },
+      "camera_pivot_y_px": {
+        "n": 5198,
+        "median": 204.64772727272728,
+        "p05": 204.56976744186048,
+        "p95": 204.75,
+        "min": 204.28,
+        "max": 204.92708333333331,
+        "rms": 204.6733789415923
+      },
+      "marker_length_px": {
+        "n": 5198,
+        "median": 157.47232551311353,
+        "p05": 155.85015202645317,
+        "p95": 160.682962714978,
+        "min": 145.92924877080242,
+        "max": 163.31050499746686,
+        "rms": 157.7919447028
+      },
+      "native_encoder_angle_rad": 3.0188741905589414,
+      "camera_minus_native_encoder_deg": 7.152346127739348,
+      "native_info_unchanged_duration_us": {
+        "n": 478,
+        "median": 560454.0,
+        "p05": 42641.5,
+        "p95": 3331461.75,
+        "min": 3383.0,
+        "max": 5656771.0,
+        "rms": 1413559.3603633055
+      },
+      "predicted_residual_after_model_deg": {}
+    }
+  ],
+  "paused_separation_comparisons": [
+    {
+      "first_hold_index": 0,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 173.10058593749997,
+      "camera_separation_positive_deg": 181.01220136537617,
+      "camera_minus_encoder_separation_deg": 7.911615427876221,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 1,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 173.05664062499997,
+      "camera_separation_positive_deg": 181.02705798808373,
+      "camera_minus_encoder_separation_deg": 7.970417363083734,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 2,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 173.0126953125,
+      "camera_separation_positive_deg": 181.02584617349905,
+      "camera_minus_encoder_separation_deg": 8.01315086099905,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 3,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 172.96874999999997,
+      "camera_separation_positive_deg": 181.02914212594666,
+      "camera_minus_encoder_separation_deg": 8.060392125946688,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 4,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 172.96874999999997,
+      "camera_separation_positive_deg": 181.04672879183897,
+      "camera_minus_encoder_separation_deg": 8.077978791838985,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 5,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 173.05664062499997,
+      "camera_separation_positive_deg": 181.0593745783652,
+      "camera_minus_encoder_separation_deg": 8.002733953365214,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    },
+    {
+      "first_hold_index": 6,
+      "second_hold_index": 7,
+      "encoder_separation_positive_deg": 173.05664062499997,
+      "camera_separation_positive_deg": 181.05896894719532,
+      "camera_minus_encoder_separation_deg": 8.002328322195334,
+      "interpretation": "Difference of quiet-pose sensor separations. A constant zero offset cannot change this discrepancy. Timing influence is reduced by stationary qualification; neither sensor is certified as ground truth."
+    }
+  ],
+  "opposite_approach_paused_comparisons": [],
+  "timing_sensitivity": [],
+  "method": {
+    "camera": "Raw atan2(bob_x-pivot_x,pivot_y-bob_y), image-vertical proxy. No camera fusion, saved calibration, upright anchor, or mirrored encoder. User requested fixed cart/camera; step counts cannot independently prove physical cart restraint.",
+    "direction": "Direction sign from firmware omega; first direction accumulating90degrees of raw encoder motion is training. All eligible opposite-sign observations remain held out. This does not assume requested rotations were completed.",
+    "moving_filter": "Motor disabled, valid paired camera, 0.05<=|firmware omega|<=1.0rad/s. Base camera confidence>=0.8/fresh valid geometry/length within20% median. Telemetry gaps>30ms never interpolated; rejected camera frames or gaps>75ms break continuity.",
+    "fitting": "Equal30-degree-bin weighted OLS, constant/order1/order2 cyclic residuals, first direction only. Dense derivative check marks mathematical monotonicity but never accepts an encoder map.",
+    "paused": "Consecutive |omega|<=0.04rad/s for>=0.6s, telemetry gaps break holds. Encoder full span<=0.03rad; measurement trimmed0.1s each end. Camera>=20frames, std<=0.005rad and p95\u2212p05<=0.015rad; at least one native INFO count. Failed holds retained. Approach labels require>=10degrees net encoder movement in the adjacent2s; smaller jitter is unassigned.",
+    "timing": "Frozen lag-0.017s from earlier AUTO is a proxy, not an independently bounded latency. Zero and\u00b150ms sensitivity do not establish actual delay bounds. At1rad/s a hypothetical50ms offset contributes2.86degrees; paused poses reduce this confound.",
+    "limitations": "Direction, load, camera projection, magnet/encoder response and fixture motion can produce similar residuals. Correlated frames are not independent replicates. No nonlinear map is systematically validated or deployed."
+  },
+  "source_hashes": [
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/manual-map-after-tightening-01/rig-1792602517080320864-2072354796.jsonl",
+      "sha256": "01c69447ffc3154c04a79a4b722723d9b7bbdbbea63713ed398b43119719b13f",
+      "bytes": 18895322
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/manual-map-after-tightening-01/report.json",
+      "sha256": "9c9ab2633570b8c395aeef796de38df024c5dee30aefd1a012db2da01a3b6832",
+      "bytes": 844955
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/manual-map-after-tightening-01/vision.ndjson",
+      "sha256": "ff10951433c3c49bd3b482d6961cbee84505e186f15c794f1fe4a3d74f9f7c4e",
+      "bytes": 68234614
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/manual-map-after-tightening-01/vision-report.json",
+      "sha256": "41a4496035fbf3256e1156c6023a5a9fcc0891e285b5bc13b3b3f49ea4e74acf",
+      "bytes": 872
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/report.json",
+      "sha256": "5a57e454e47d1002a78c1aaacd7bbe75e69a1eeed6fe0957ed67ad216998d34e",
+      "bytes": 152838
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze_manual_map.py",
+      "sha256": "b88fae6e0b1e75093f0d3f992e59f9492ae737490853e37592247ad692d3fc0f",
+      "bytes": 21507
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze.py",
+      "sha256": "d3489d8e635e7807b95d75de07b64605fe74e658b3021af40ee3b53c93568889",
+      "bytes": 31137
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/capture-manual-map-used.py",
+      "sha256": "53d79abf12dc48e0008f250eaa667a5807c7accfe9d8ee075410c0a8ed2c7a7d",
+      "bytes": 1808
+    }
+  ]
+}

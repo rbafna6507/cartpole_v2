@@ -1,0 +1,2435 @@
+{
+  "schema": "original520-frame-disagreement-supplement-v2",
+  "hardware_accepted": false,
+  "nonlinear_calibration_validated": false,
+  "upright": {
+    "trial": "upright-check-02",
+    "reference_during_measurement": 520,
+    "native_encoder_counts": {
+      "n": 42,
+      "median": 533.0000000000001,
+      "p95_minus_p05": 0.0,
+      "span": 1.000000000000105,
+      "std": 0.21295885500000233,
+      "p95_abs_about_median": 0.0
+    },
+    "encoder_angle_rad": {
+      "n": 2527,
+      "median": 0.01994175000000009,
+      "p95_minus_p05": 0.0015339800000000456,
+      "span": 0.0015339800000000456,
+      "std": 0.0003680761238861004,
+      "p95_abs_about_median": 0.0015339800000000456
+    },
+    "camera_image_angle_rad": {
+      "n": 573,
+      "median": -0.010804974815030732,
+      "p95_minus_p05": 0.004122772503008232,
+      "span": 0.010000949439188833,
+      "std": 0.0013225702651133281,
+      "p95_abs_about_median": 0.0025415958230269983
+    },
+    "camera_pivot_x_px": {
+      "n": 573,
+      "median": 549.9270833333334,
+      "p05": 549.7388888888889,
+      "p95": 550.1061538461539,
+      "min": 549.4727272727273,
+      "max": 550.2450980392158,
+      "rms": 549.9256755099142
+    },
+    "camera_pivot_y_px": {
+      "n": 573,
+      "median": 206.25,
+      "p05": 206.12282608695654,
+      "p95": 206.45,
+      "min": 206.04444444444445,
+      "max": 207.23275862068968,
+      "rms": 206.27773854248431
+    },
+    "camera_vector_length_px": {
+      "n": 573,
+      "median": 153.99532142712485,
+      "p05": 153.63108942231153,
+      "p95": 154.64459418012015,
+      "min": 153.15830967560552,
+      "max": 155.8045084738351,
+      "rms": 154.05042700756746
+    },
+    "upright_camera_minus_encoder_deg": -1.7616575657514228,
+    "encoder_rate_abs_rad_s": {
+      "n": 2527,
+      "median": 0.001470373,
+      "p05": 0.00010122331000000001,
+      "p95": 0.007915208199999992,
+      "min": 8.440767e-07,
+      "max": 0.02327099,
+      "rms": 0.0037153428471724077
+    },
+    "disabled_healthy_all": true,
+    "camera_filters": {
+      "raw_records": 580,
+      "accepted_frames": 573,
+      "rejected": {
+        "missing_or_invalid_track": 7
+      },
+      "median_length_px": 153.99532142712485,
+      "clock_anchors": [
+        {
+          "local_before_ns": 696707281386407,
+          "local_after_ns": 696707292866321,
+          "server_monotonic_s": 696707.290851597,
+          "offset_ns": -3725233,
+          "uncertainty_ns": 5739957
+        },
+        {
+          "local_before_ns": 696717450361822,
+          "local_after_ns": 696717456650509,
+          "server_monotonic_s": 696717.45442471,
+          "offset_ns": -918545,
+          "uncertainty_ns": 3144344
+        }
+      ],
+      "clock_assumption": null
+    },
+    "basis": "User-presented natural upright pose. No independent gravity-vertical instrument is recorded.",
+    "firmware_calibration_produced": false
+  },
+  "frozen_lag": {
+    "available": true,
+    "lag_s": -0.017,
+    "trimmed_centered_rms_rad": 0.06267126135026514,
+    "n": 433,
+    "training_trial": "bw8-home-auto15-02",
+    "frozen_for_later_trials": true,
+    "boundary_optimum": false,
+    "within_5pct_objective_range_s": [
+      -0.020000000000000004,
+      -0.015
+    ],
+    "objective": "First AUTO trial only; modes2/3; 0.3<=|firmware omega|<=20; residual centered per lag, largest5% removed.",
+    "convention": "Compare camera at source t to encoder at mapped host t+lag. A negative lag means camera corresponds to earlier encoder data.",
+    "limitation": "Descriptive timing alignment, not exposure-latency calibration. Support range is not a confidence interval.",
+    "grid": [
+      {
+        "lag_s": -0.1,
+        "trimmed_centered_rms_rad": 0.5651272887453784,
+        "n": 436
+      },
+      {
+        "lag_s": -0.099,
+        "trimmed_centered_rms_rad": 0.5581550350365148,
+        "n": 435
+      },
+      {
+        "lag_s": -0.098,
+        "trimmed_centered_rms_rad": 0.5524200549940509,
+        "n": 432
+      },
+      {
+        "lag_s": -0.097,
+        "trimmed_centered_rms_rad": 0.5459953116772289,
+        "n": 431
+      },
+      {
+        "lag_s": -0.096,
+        "trimmed_centered_rms_rad": 0.5383565803287829,
+        "n": 434
+      },
+      {
+        "lag_s": -0.095,
+        "trimmed_centered_rms_rad": 0.5308781176317183,
+        "n": 435
+      },
+      {
+        "lag_s": -0.094,
+        "trimmed_centered_rms_rad": 0.523341009337011,
+        "n": 436
+      },
+      {
+        "lag_s": -0.093,
+        "trimmed_centered_rms_rad": 0.5182745207998668,
+        "n": 432
+      },
+      {
+        "lag_s": -0.092,
+        "trimmed_centered_rms_rad": 0.5106807243880239,
+        "n": 433
+      },
+      {
+        "lag_s": -0.091,
+        "trimmed_centered_rms_rad": 0.5031391627458262,
+        "n": 434
+      },
+      {
+        "lag_s": -0.09000000000000001,
+        "trimmed_centered_rms_rad": 0.49574948696204174,
+        "n": 437
+      },
+      {
+        "lag_s": -0.08900000000000001,
+        "trimmed_centered_rms_rad": 0.48876838048647286,
+        "n": 436
+      },
+      {
+        "lag_s": -0.08800000000000001,
+        "trimmed_centered_rms_rad": 0.4794454671310733,
+        "n": 439
+      },
+      {
+        "lag_s": -0.08700000000000001,
+        "trimmed_centered_rms_rad": 0.4714314430741186,
+        "n": 440
+      },
+      {
+        "lag_s": -0.08600000000000001,
+        "trimmed_centered_rms_rad": 0.46401034781065914,
+        "n": 441
+      },
+      {
+        "lag_s": -0.085,
+        "trimmed_centered_rms_rad": 0.45781750141055577,
+        "n": 439
+      },
+      {
+        "lag_s": -0.084,
+        "trimmed_centered_rms_rad": 0.4503512758992088,
+        "n": 440
+      },
+      {
+        "lag_s": -0.083,
+        "trimmed_centered_rms_rad": 0.4439035302264938,
+        "n": 438
+      },
+      {
+        "lag_s": -0.082,
+        "trimmed_centered_rms_rad": 0.4373829824249971,
+        "n": 438
+      },
+      {
+        "lag_s": -0.081,
+        "trimmed_centered_rms_rad": 0.42963533239339885,
+        "n": 440
+      },
+      {
+        "lag_s": -0.08,
+        "trimmed_centered_rms_rad": 0.42299210560351225,
+        "n": 439
+      },
+      {
+        "lag_s": -0.079,
+        "trimmed_centered_rms_rad": 0.415396410625699,
+        "n": 440
+      },
+      {
+        "lag_s": -0.07800000000000001,
+        "trimmed_centered_rms_rad": 0.40844885690403243,
+        "n": 440
+      },
+      {
+        "lag_s": -0.07700000000000001,
+        "trimmed_centered_rms_rad": 0.40311342239275616,
+        "n": 435
+      },
+      {
+        "lag_s": -0.07600000000000001,
+        "trimmed_centered_rms_rad": 0.39595647647078513,
+        "n": 436
+      },
+      {
+        "lag_s": -0.07500000000000001,
+        "trimmed_centered_rms_rad": 0.3887943368681761,
+        "n": 436
+      },
+      {
+        "lag_s": -0.07400000000000001,
+        "trimmed_centered_rms_rad": 0.38168969704942884,
+        "n": 436
+      },
+      {
+        "lag_s": -0.07300000000000001,
+        "trimmed_centered_rms_rad": 0.3748445525918107,
+        "n": 435
+      },
+      {
+        "lag_s": -0.07200000000000001,
+        "trimmed_centered_rms_rad": 0.36823106388563953,
+        "n": 434
+      },
+      {
+        "lag_s": -0.07100000000000001,
+        "trimmed_centered_rms_rad": 0.36160036351607105,
+        "n": 432
+      },
+      {
+        "lag_s": -0.07,
+        "trimmed_centered_rms_rad": 0.3558787587793743,
+        "n": 431
+      },
+      {
+        "lag_s": -0.069,
+        "trimmed_centered_rms_rad": 0.3488988513633702,
+        "n": 431
+      },
+      {
+        "lag_s": -0.068,
+        "trimmed_centered_rms_rad": 0.3421190837626626,
+        "n": 431
+      },
+      {
+        "lag_s": -0.067,
+        "trimmed_centered_rms_rad": 0.33536780109914016,
+        "n": 430
+      },
+      {
+        "lag_s": -0.066,
+        "trimmed_centered_rms_rad": 0.3283307186203766,
+        "n": 429
+      },
+      {
+        "lag_s": -0.065,
+        "trimmed_centered_rms_rad": 0.320041621695491,
+        "n": 433
+      },
+      {
+        "lag_s": -0.064,
+        "trimmed_centered_rms_rad": 0.3132037286627645,
+        "n": 433
+      },
+      {
+        "lag_s": -0.063,
+        "trimmed_centered_rms_rad": 0.30581333966775676,
+        "n": 434
+      },
+      {
+        "lag_s": -0.062000000000000006,
+        "trimmed_centered_rms_rad": 0.29841184744889165,
+        "n": 435
+      },
+      {
+        "lag_s": -0.061000000000000006,
+        "trimmed_centered_rms_rad": 0.2929053304896703,
+        "n": 435
+      },
+      {
+        "lag_s": -0.060000000000000005,
+        "trimmed_centered_rms_rad": 0.2854042170397604,
+        "n": 435
+      },
+      {
+        "lag_s": -0.059000000000000004,
+        "trimmed_centered_rms_rad": 0.27855805997259603,
+        "n": 435
+      },
+      {
+        "lag_s": -0.058,
+        "trimmed_centered_rms_rad": 0.2728991926128408,
+        "n": 433
+      },
+      {
+        "lag_s": -0.057,
+        "trimmed_centered_rms_rad": 0.26673789422785715,
+        "n": 434
+      },
+      {
+        "lag_s": -0.05600000000000001,
+        "trimmed_centered_rms_rad": 0.260829578456303,
+        "n": 433
+      },
+      {
+        "lag_s": -0.05500000000000001,
+        "trimmed_centered_rms_rad": 0.2539672733765957,
+        "n": 434
+      },
+      {
+        "lag_s": -0.054000000000000006,
+        "trimmed_centered_rms_rad": 0.24692859192736782,
+        "n": 434
+      },
+      {
+        "lag_s": -0.053000000000000005,
+        "trimmed_centered_rms_rad": 0.2406900215602062,
+        "n": 432
+      },
+      {
+        "lag_s": -0.052000000000000005,
+        "trimmed_centered_rms_rad": 0.23432621161147021,
+        "n": 432
+      },
+      {
+        "lag_s": -0.051000000000000004,
+        "trimmed_centered_rms_rad": 0.22818398012260177,
+        "n": 430
+      },
+      {
+        "lag_s": -0.05,
+        "trimmed_centered_rms_rad": 0.22169304742516807,
+        "n": 431
+      },
+      {
+        "lag_s": -0.049,
+        "trimmed_centered_rms_rad": 0.21473054520945567,
+        "n": 432
+      },
+      {
+        "lag_s": -0.048,
+        "trimmed_centered_rms_rad": 0.20778602898672555,
+        "n": 434
+      },
+      {
+        "lag_s": -0.04700000000000001,
+        "trimmed_centered_rms_rad": 0.20162543499398103,
+        "n": 435
+      },
+      {
+        "lag_s": -0.046000000000000006,
+        "trimmed_centered_rms_rad": 0.19538981107907843,
+        "n": 432
+      },
+      {
+        "lag_s": -0.045000000000000005,
+        "trimmed_centered_rms_rad": 0.18950871212173181,
+        "n": 434
+      },
+      {
+        "lag_s": -0.044000000000000004,
+        "trimmed_centered_rms_rad": 0.18372429094141376,
+        "n": 433
+      },
+      {
+        "lag_s": -0.043000000000000003,
+        "trimmed_centered_rms_rad": 0.17731024969501652,
+        "n": 435
+      },
+      {
+        "lag_s": -0.042,
+        "trimmed_centered_rms_rad": 0.17175488099258035,
+        "n": 434
+      },
+      {
+        "lag_s": -0.041,
+        "trimmed_centered_rms_rad": 0.16553126470792576,
+        "n": 432
+      },
+      {
+        "lag_s": -0.04000000000000001,
+        "trimmed_centered_rms_rad": 0.15905492114186345,
+        "n": 434
+      },
+      {
+        "lag_s": -0.03900000000000001,
+        "trimmed_centered_rms_rad": 0.1529293027995991,
+        "n": 434
+      },
+      {
+        "lag_s": -0.038000000000000006,
+        "trimmed_centered_rms_rad": 0.1466401909432233,
+        "n": 434
+      },
+      {
+        "lag_s": -0.037000000000000005,
+        "trimmed_centered_rms_rad": 0.14035165009250078,
+        "n": 435
+      },
+      {
+        "lag_s": -0.036000000000000004,
+        "trimmed_centered_rms_rad": 0.13420928556217485,
+        "n": 433
+      },
+      {
+        "lag_s": -0.035,
+        "trimmed_centered_rms_rad": 0.12841390263777694,
+        "n": 431
+      },
+      {
+        "lag_s": -0.034,
+        "trimmed_centered_rms_rad": 0.12186985656062702,
+        "n": 429
+      },
+      {
+        "lag_s": -0.033,
+        "trimmed_centered_rms_rad": 0.11656213035419918,
+        "n": 427
+      },
+      {
+        "lag_s": -0.032,
+        "trimmed_centered_rms_rad": 0.11112614478790139,
+        "n": 426
+      },
+      {
+        "lag_s": -0.031,
+        "trimmed_centered_rms_rad": 0.10579091363796002,
+        "n": 429
+      },
+      {
+        "lag_s": -0.03,
+        "trimmed_centered_rms_rad": 0.1020240571179289,
+        "n": 430
+      },
+      {
+        "lag_s": -0.028999999999999998,
+        "trimmed_centered_rms_rad": 0.09722346246588064,
+        "n": 430
+      },
+      {
+        "lag_s": -0.027999999999999997,
+        "trimmed_centered_rms_rad": 0.09290353555006733,
+        "n": 428
+      },
+      {
+        "lag_s": -0.02700000000000001,
+        "trimmed_centered_rms_rad": 0.08870591906336923,
+        "n": 427
+      },
+      {
+        "lag_s": -0.02600000000000001,
+        "trimmed_centered_rms_rad": 0.08425009320070846,
+        "n": 429
+      },
+      {
+        "lag_s": -0.02500000000000001,
+        "trimmed_centered_rms_rad": 0.08030532232818571,
+        "n": 430
+      },
+      {
+        "lag_s": -0.024000000000000007,
+        "trimmed_centered_rms_rad": 0.07640702092291615,
+        "n": 428
+      },
+      {
+        "lag_s": -0.023000000000000007,
+        "trimmed_centered_rms_rad": 0.07261649635564865,
+        "n": 431
+      },
+      {
+        "lag_s": -0.022000000000000006,
+        "trimmed_centered_rms_rad": 0.06881159935628141,
+        "n": 432
+      },
+      {
+        "lag_s": -0.021000000000000005,
+        "trimmed_centered_rms_rad": 0.0659904944537587,
+        "n": 432
+      },
+      {
+        "lag_s": -0.020000000000000004,
+        "trimmed_centered_rms_rad": 0.06407717005961129,
+        "n": 431
+      },
+      {
+        "lag_s": -0.019000000000000003,
+        "trimmed_centered_rms_rad": 0.06312782145566094,
+        "n": 431
+      },
+      {
+        "lag_s": -0.018000000000000002,
+        "trimmed_centered_rms_rad": 0.06270716438874174,
+        "n": 432
+      },
+      {
+        "lag_s": -0.017,
+        "trimmed_centered_rms_rad": 0.06267126135026514,
+        "n": 433
+      },
+      {
+        "lag_s": -0.016,
+        "trimmed_centered_rms_rad": 0.06343950682539254,
+        "n": 434
+      },
+      {
+        "lag_s": -0.015,
+        "trimmed_centered_rms_rad": 0.06499825953634501,
+        "n": 434
+      },
+      {
+        "lag_s": -0.013999999999999999,
+        "trimmed_centered_rms_rad": 0.06727415257540408,
+        "n": 434
+      },
+      {
+        "lag_s": -0.012999999999999998,
+        "trimmed_centered_rms_rad": 0.07030424925366725,
+        "n": 436
+      },
+      {
+        "lag_s": -0.01200000000000001,
+        "trimmed_centered_rms_rad": 0.07410440469274399,
+        "n": 435
+      },
+      {
+        "lag_s": -0.01100000000000001,
+        "trimmed_centered_rms_rad": 0.07799197560418983,
+        "n": 436
+      },
+      {
+        "lag_s": -0.010000000000000009,
+        "trimmed_centered_rms_rad": 0.08226230253770851,
+        "n": 437
+      },
+      {
+        "lag_s": -0.009000000000000008,
+        "trimmed_centered_rms_rad": 0.08691271028227497,
+        "n": 436
+      },
+      {
+        "lag_s": -0.008000000000000007,
+        "trimmed_centered_rms_rad": 0.09156399801980084,
+        "n": 434
+      },
+      {
+        "lag_s": -0.007000000000000006,
+        "trimmed_centered_rms_rad": 0.09661652288529139,
+        "n": 432
+      },
+      {
+        "lag_s": -0.006000000000000005,
+        "trimmed_centered_rms_rad": 0.10194100889908403,
+        "n": 433
+      },
+      {
+        "lag_s": -0.0050000000000000044,
+        "trimmed_centered_rms_rad": 0.10826604648019296,
+        "n": 432
+      },
+      {
+        "lag_s": -0.0040000000000000036,
+        "trimmed_centered_rms_rad": 0.11404160110876707,
+        "n": 431
+      },
+      {
+        "lag_s": -0.0030000000000000027,
+        "trimmed_centered_rms_rad": 0.12028286905758663,
+        "n": 432
+      },
+      {
+        "lag_s": -0.0020000000000000018,
+        "trimmed_centered_rms_rad": 0.12612443542820131,
+        "n": 436
+      },
+      {
+        "lag_s": -0.0010000000000000009,
+        "trimmed_centered_rms_rad": 0.13198029681322757,
+        "n": 439
+      },
+      {
+        "lag_s": 0.0,
+        "trimmed_centered_rms_rad": 0.13809233715563854,
+        "n": 438
+      },
+      {
+        "lag_s": 0.0010000000000000009,
+        "trimmed_centered_rms_rad": 0.14406734014289557,
+        "n": 439
+      },
+      {
+        "lag_s": 0.0020000000000000018,
+        "trimmed_centered_rms_rad": 0.14989034048191097,
+        "n": 439
+      },
+      {
+        "lag_s": 0.0030000000000000027,
+        "trimmed_centered_rms_rad": 0.15569938829870522,
+        "n": 439
+      },
+      {
+        "lag_s": 0.0040000000000000036,
+        "trimmed_centered_rms_rad": 0.16182630334875894,
+        "n": 438
+      },
+      {
+        "lag_s": 0.0049999999999999906,
+        "trimmed_centered_rms_rad": 0.16784192646161641,
+        "n": 439
+      },
+      {
+        "lag_s": 0.0059999999999999915,
+        "trimmed_centered_rms_rad": 0.17443420019953765,
+        "n": 437
+      },
+      {
+        "lag_s": 0.006999999999999992,
+        "trimmed_centered_rms_rad": 0.18070585804523126,
+        "n": 438
+      },
+      {
+        "lag_s": 0.007999999999999993,
+        "trimmed_centered_rms_rad": 0.18706526537724305,
+        "n": 436
+      },
+      {
+        "lag_s": 0.008999999999999994,
+        "trimmed_centered_rms_rad": 0.19349381542446137,
+        "n": 436
+      },
+      {
+        "lag_s": 0.009999999999999995,
+        "trimmed_centered_rms_rad": 0.20008028463989447,
+        "n": 435
+      },
+      {
+        "lag_s": 0.010999999999999996,
+        "trimmed_centered_rms_rad": 0.20707147571948964,
+        "n": 434
+      },
+      {
+        "lag_s": 0.011999999999999997,
+        "trimmed_centered_rms_rad": 0.2135120864372982,
+        "n": 434
+      },
+      {
+        "lag_s": 0.012999999999999998,
+        "trimmed_centered_rms_rad": 0.22024752234822195,
+        "n": 433
+      },
+      {
+        "lag_s": 0.013999999999999999,
+        "trimmed_centered_rms_rad": 0.22724325134833112,
+        "n": 432
+      },
+      {
+        "lag_s": 0.015,
+        "trimmed_centered_rms_rad": 0.23405207143818416,
+        "n": 431
+      },
+      {
+        "lag_s": 0.016,
+        "trimmed_centered_rms_rad": 0.23974875920251928,
+        "n": 434
+      },
+      {
+        "lag_s": 0.017,
+        "trimmed_centered_rms_rad": 0.24672941465717135,
+        "n": 432
+      },
+      {
+        "lag_s": 0.018000000000000002,
+        "trimmed_centered_rms_rad": 0.25367538992989486,
+        "n": 431
+      },
+      {
+        "lag_s": 0.019000000000000003,
+        "trimmed_centered_rms_rad": 0.2603764868153445,
+        "n": 431
+      },
+      {
+        "lag_s": 0.01999999999999999,
+        "trimmed_centered_rms_rad": 0.2667515818452809,
+        "n": 432
+      },
+      {
+        "lag_s": 0.02099999999999999,
+        "trimmed_centered_rms_rad": 0.27316231750417125,
+        "n": 433
+      },
+      {
+        "lag_s": 0.021999999999999992,
+        "trimmed_centered_rms_rad": 0.279861375172573,
+        "n": 433
+      },
+      {
+        "lag_s": 0.022999999999999993,
+        "trimmed_centered_rms_rad": 0.28655298493680115,
+        "n": 434
+      },
+      {
+        "lag_s": 0.023999999999999994,
+        "trimmed_centered_rms_rad": 0.29307424990273134,
+        "n": 435
+      },
+      {
+        "lag_s": 0.024999999999999994,
+        "trimmed_centered_rms_rad": 0.29887678200922657,
+        "n": 438
+      },
+      {
+        "lag_s": 0.025999999999999995,
+        "trimmed_centered_rms_rad": 0.30583186107285315,
+        "n": 437
+      },
+      {
+        "lag_s": 0.026999999999999996,
+        "trimmed_centered_rms_rad": 0.3126931125651287,
+        "n": 437
+      },
+      {
+        "lag_s": 0.027999999999999997,
+        "trimmed_centered_rms_rad": 0.32068395959032503,
+        "n": 434
+      },
+      {
+        "lag_s": 0.028999999999999998,
+        "trimmed_centered_rms_rad": 0.32672952210516604,
+        "n": 436
+      },
+      {
+        "lag_s": 0.03,
+        "trimmed_centered_rms_rad": 0.33390348423949073,
+        "n": 435
+      },
+      {
+        "lag_s": 0.031,
+        "trimmed_centered_rms_rad": 0.3399514429622982,
+        "n": 437
+      },
+      {
+        "lag_s": 0.032,
+        "trimmed_centered_rms_rad": 0.3471671984451859,
+        "n": 436
+      },
+      {
+        "lag_s": 0.033,
+        "trimmed_centered_rms_rad": 0.3543964124445445,
+        "n": 435
+      },
+      {
+        "lag_s": 0.034,
+        "trimmed_centered_rms_rad": 0.3624298593731144,
+        "n": 432
+      },
+      {
+        "lag_s": 0.035,
+        "trimmed_centered_rms_rad": 0.3692719614829994,
+        "n": 432
+      },
+      {
+        "lag_s": 0.036000000000000004,
+        "trimmed_centered_rms_rad": 0.3758160503125526,
+        "n": 433
+      },
+      {
+        "lag_s": 0.037000000000000005,
+        "trimmed_centered_rms_rad": 0.3823308697364406,
+        "n": 434
+      },
+      {
+        "lag_s": 0.038000000000000006,
+        "trimmed_centered_rms_rad": 0.3889150333415943,
+        "n": 435
+      },
+      {
+        "lag_s": 0.03900000000000001,
+        "trimmed_centered_rms_rad": 0.3968112257925874,
+        "n": 433
+      },
+      {
+        "lag_s": 0.04000000000000001,
+        "trimmed_centered_rms_rad": 0.40556949758146,
+        "n": 430
+      },
+      {
+        "lag_s": 0.04100000000000001,
+        "trimmed_centered_rms_rad": 0.41218482482747426,
+        "n": 431
+      },
+      {
+        "lag_s": 0.04200000000000001,
+        "trimmed_centered_rms_rad": 0.4178138708246762,
+        "n": 434
+      },
+      {
+        "lag_s": 0.04300000000000001,
+        "trimmed_centered_rms_rad": 0.42531417083516915,
+        "n": 433
+      },
+      {
+        "lag_s": 0.04400000000000001,
+        "trimmed_centered_rms_rad": 0.43225015556876506,
+        "n": 433
+      },
+      {
+        "lag_s": 0.044999999999999984,
+        "trimmed_centered_rms_rad": 0.4387745318408739,
+        "n": 434
+      },
+      {
+        "lag_s": 0.045999999999999985,
+        "trimmed_centered_rms_rad": 0.44477596367017014,
+        "n": 436
+      },
+      {
+        "lag_s": 0.046999999999999986,
+        "trimmed_centered_rms_rad": 0.45176295601241234,
+        "n": 436
+      },
+      {
+        "lag_s": 0.04799999999999999,
+        "trimmed_centered_rms_rad": 0.45881330399744974,
+        "n": 436
+      },
+      {
+        "lag_s": 0.04899999999999999,
+        "trimmed_centered_rms_rad": 0.465258132036539,
+        "n": 437
+      },
+      {
+        "lag_s": 0.04999999999999999,
+        "trimmed_centered_rms_rad": 0.4724080102620916,
+        "n": 437
+      },
+      {
+        "lag_s": 0.05099999999999999,
+        "trimmed_centered_rms_rad": 0.480683421283786,
+        "n": 435
+      },
+      {
+        "lag_s": 0.05199999999999999,
+        "trimmed_centered_rms_rad": 0.4873696640541414,
+        "n": 436
+      },
+      {
+        "lag_s": 0.05299999999999999,
+        "trimmed_centered_rms_rad": 0.49569286155385284,
+        "n": 434
+      },
+      {
+        "lag_s": 0.05399999999999999,
+        "trimmed_centered_rms_rad": 0.5035598006914455,
+        "n": 433
+      },
+      {
+        "lag_s": 0.05499999999999999,
+        "trimmed_centered_rms_rad": 0.5108561738934486,
+        "n": 433
+      },
+      {
+        "lag_s": 0.055999999999999994,
+        "trimmed_centered_rms_rad": 0.5188244445788422,
+        "n": 432
+      },
+      {
+        "lag_s": 0.056999999999999995,
+        "trimmed_centered_rms_rad": 0.5274546806327692,
+        "n": 430
+      },
+      {
+        "lag_s": 0.057999999999999996,
+        "trimmed_centered_rms_rad": 0.5348470304494033,
+        "n": 430
+      },
+      {
+        "lag_s": 0.059,
+        "trimmed_centered_rms_rad": 0.5420834401171826,
+        "n": 430
+      },
+      {
+        "lag_s": 0.06,
+        "trimmed_centered_rms_rad": 0.5494925174992638,
+        "n": 430
+      },
+      {
+        "lag_s": 0.061,
+        "trimmed_centered_rms_rad": 0.5550170811004583,
+        "n": 433
+      },
+      {
+        "lag_s": 0.062,
+        "trimmed_centered_rms_rad": 0.5625742155383673,
+        "n": 433
+      },
+      {
+        "lag_s": 0.063,
+        "trimmed_centered_rms_rad": 0.5675289273987559,
+        "n": 437
+      },
+      {
+        "lag_s": 0.064,
+        "trimmed_centered_rms_rad": 0.5757358554735771,
+        "n": 436
+      },
+      {
+        "lag_s": 0.065,
+        "trimmed_centered_rms_rad": 0.5859016280243342,
+        "n": 432
+      },
+      {
+        "lag_s": 0.066,
+        "trimmed_centered_rms_rad": 0.5939998197431771,
+        "n": 431
+      },
+      {
+        "lag_s": 0.067,
+        "trimmed_centered_rms_rad": 0.6006898681192069,
+        "n": 432
+      },
+      {
+        "lag_s": 0.068,
+        "trimmed_centered_rms_rad": 0.6068230276814817,
+        "n": 434
+      },
+      {
+        "lag_s": 0.069,
+        "trimmed_centered_rms_rad": 0.6144669813884743,
+        "n": 434
+      },
+      {
+        "lag_s": 0.07,
+        "trimmed_centered_rms_rad": 0.6212044926832383,
+        "n": 435
+      },
+      {
+        "lag_s": 0.07100000000000001,
+        "trimmed_centered_rms_rad": 0.6295620056711798,
+        "n": 434
+      },
+      {
+        "lag_s": 0.07200000000000001,
+        "trimmed_centered_rms_rad": 0.638174978859628,
+        "n": 433
+      },
+      {
+        "lag_s": 0.07300000000000001,
+        "trimmed_centered_rms_rad": 0.6476308348062152,
+        "n": 431
+      },
+      {
+        "lag_s": 0.07400000000000001,
+        "trimmed_centered_rms_rad": 0.6563476829291218,
+        "n": 430
+      },
+      {
+        "lag_s": 0.07500000000000001,
+        "trimmed_centered_rms_rad": 0.6651555164367704,
+        "n": 429
+      },
+      {
+        "lag_s": 0.07599999999999998,
+        "trimmed_centered_rms_rad": 0.6721095811433777,
+        "n": 430
+      },
+      {
+        "lag_s": 0.07699999999999999,
+        "trimmed_centered_rms_rad": 0.6791765053466575,
+        "n": 431
+      },
+      {
+        "lag_s": 0.07799999999999999,
+        "trimmed_centered_rms_rad": 0.6853167588978991,
+        "n": 433
+      },
+      {
+        "lag_s": 0.07899999999999999,
+        "trimmed_centered_rms_rad": 0.6947629505856253,
+        "n": 431
+      },
+      {
+        "lag_s": 0.07999999999999999,
+        "trimmed_centered_rms_rad": 0.7054868349634752,
+        "n": 428
+      },
+      {
+        "lag_s": 0.08099999999999999,
+        "trimmed_centered_rms_rad": 0.7125853406438101,
+        "n": 429
+      },
+      {
+        "lag_s": 0.08199999999999999,
+        "trimmed_centered_rms_rad": 0.7203667546930785,
+        "n": 429
+      },
+      {
+        "lag_s": 0.08299999999999999,
+        "trimmed_centered_rms_rad": 0.7297988246819324,
+        "n": 427
+      },
+      {
+        "lag_s": 0.08399999999999999,
+        "trimmed_centered_rms_rad": 0.7375638310050115,
+        "n": 427
+      },
+      {
+        "lag_s": 0.08499999999999999,
+        "trimmed_centered_rms_rad": 0.7438042654820537,
+        "n": 429
+      },
+      {
+        "lag_s": 0.086,
+        "trimmed_centered_rms_rad": 0.7501695594164135,
+        "n": 431
+      },
+      {
+        "lag_s": 0.087,
+        "trimmed_centered_rms_rad": 0.757996997613014,
+        "n": 431
+      },
+      {
+        "lag_s": 0.088,
+        "trimmed_centered_rms_rad": 0.7634307658159919,
+        "n": 434
+      },
+      {
+        "lag_s": 0.089,
+        "trimmed_centered_rms_rad": 0.7705926409945526,
+        "n": 435
+      },
+      {
+        "lag_s": 0.09,
+        "trimmed_centered_rms_rad": 0.7787746028805891,
+        "n": 435
+      },
+      {
+        "lag_s": 0.091,
+        "trimmed_centered_rms_rad": 0.7885419841316517,
+        "n": 433
+      },
+      {
+        "lag_s": 0.092,
+        "trimmed_centered_rms_rad": 0.796754037079231,
+        "n": 433
+      },
+      {
+        "lag_s": 0.093,
+        "trimmed_centered_rms_rad": 0.8057832463069411,
+        "n": 432
+      },
+      {
+        "lag_s": 0.094,
+        "trimmed_centered_rms_rad": 0.8128631061578414,
+        "n": 433
+      },
+      {
+        "lag_s": 0.095,
+        "trimmed_centered_rms_rad": 0.82008829837181,
+        "n": 434
+      },
+      {
+        "lag_s": 0.096,
+        "trimmed_centered_rms_rad": 0.8279388940796075,
+        "n": 434
+      },
+      {
+        "lag_s": 0.097,
+        "trimmed_centered_rms_rad": 0.83606163454141,
+        "n": 434
+      },
+      {
+        "lag_s": 0.098,
+        "trimmed_centered_rms_rad": 0.8441832400612432,
+        "n": 434
+      },
+      {
+        "lag_s": 0.099,
+        "trimmed_centered_rms_rad": 0.8540415402623934,
+        "n": 432
+      },
+      {
+        "lag_s": 0.1,
+        "trimmed_centered_rms_rad": 0.8629215566313945,
+        "n": 431
+      }
+    ],
+    "reused_from_report": "/private/tmp/encoder-tightening-auto15-analysis/report.json"
+  },
+  "static_up_down_contrasts": [
+    {
+      "trial": "bw8-home-auto15-02",
+      "phase": "initial_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -24.129210992907815,
+        19.180232558139522
+      ],
+      "pivot_distance_from_upright_px": 30.823694524254854
+    },
+    {
+      "trial": "bw8-home-auto15-02",
+      "phase": "before_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.21875000000006,
+        18.13043478260869
+      ],
+      "pivot_distance_from_upright_px": 66.72900806222833
+    },
+    {
+      "trial": "bw8-home-auto15-02",
+      "phase": "after_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-01",
+      "phase": "initial_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-01",
+      "phase": "before_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-01",
+      "phase": "after_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "phase": "initial_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "phase": "before_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "phase": "after_auto_rest",
+      "available": false,
+      "reason": "Operator confirmed camera framing moved before the upright check. No cross-frame angle anchoring is permitted.",
+      "pivot_delta_from_upright_px": [
+        -64.57481060606062,
+        18.136363636363654
+      ],
+      "pivot_distance_from_upright_px": 67.0733467985534
+    }
+  ],
+  "models": {
+    "constant_timing": {
+      "training_trial": "bw8-home-auto15-02",
+      "features": [
+        "constant"
+      ],
+      "coefficients": [
+        0.1224694983892818
+      ],
+      "rank": 1,
+      "condition_number": 1.0,
+      "evaluation": [
+        {
+          "trial": "bw8-home-auto15-02",
+          "in_sample": true,
+          "n": 454,
+          "median_deg": 0.3978205306134572,
+          "rms_deg": 4.564405784272259,
+          "p95_abs_deg": 8.625802657323767
+        },
+        {
+          "trial": "bw8-auto25-01",
+          "in_sample": false,
+          "n": 726,
+          "median_deg": 0.26853847774005335,
+          "rms_deg": 4.318439781577674,
+          "p95_abs_deg": 8.757917199855857
+        },
+        {
+          "trial": "bw8-auto25-02",
+          "in_sample": false,
+          "n": 692,
+          "median_deg": 0.5647814595895422,
+          "rms_deg": 4.025592323806347,
+          "p95_abs_deg": 7.682235089910393
+        }
+      ],
+      "units": "Angle target is radians. Omega coefficient is rad/(rad/s), numerically seconds; sign coefficient is radians.",
+      "acceptance": false,
+      "interpretation": "Descriptive sensor-disagreement model, never an encoder correction. No coefficients refit on later trials."
+    },
+    "constant_plus_omega": {
+      "training_trial": "bw8-home-auto15-02",
+      "features": [
+        "constant",
+        "omega"
+      ],
+      "coefficients": [
+        0.12360583558775767,
+        -0.002387553256079218
+      ],
+      "rank": 2,
+      "condition_number": 7.5765230811767434,
+      "evaluation": [
+        {
+          "trial": "bw8-home-auto15-02",
+          "in_sample": true,
+          "n": 454,
+          "median_deg": 0.4597501766008321,
+          "rms_deg": 4.4461479133933866,
+          "p95_abs_deg": 8.471258166494556
+        },
+        {
+          "trial": "bw8-auto25-01",
+          "in_sample": false,
+          "n": 726,
+          "median_deg": 0.09392386778708427,
+          "rms_deg": 4.384763186979166,
+          "p95_abs_deg": 9.155809984127414
+        },
+        {
+          "trial": "bw8-auto25-02",
+          "in_sample": false,
+          "n": 692,
+          "median_deg": 0.4121668407876179,
+          "rms_deg": 3.928400543409438,
+          "p95_abs_deg": 7.72173690787322
+        }
+      ],
+      "units": "Angle target is radians. Omega coefficient is rad/(rad/s), numerically seconds; sign coefficient is radians.",
+      "acceptance": false,
+      "interpretation": "Descriptive sensor-disagreement model, never an encoder correction. No coefficients refit on later trials."
+    },
+    "angle_shape": {
+      "training_trial": "bw8-home-auto15-02",
+      "features": [
+        "constant",
+        "sin(q)",
+        "cos(q)",
+        "sin(2q)",
+        "cos(2q)"
+      ],
+      "coefficients": [
+        0.10891237420532116,
+        0.011509385173778409,
+        -0.03386235124807137,
+        -0.0736195980691349,
+        -0.04243638989518753
+      ],
+      "rank": 5,
+      "condition_number": 2.385877105186169,
+      "evaluation": [
+        {
+          "trial": "bw8-home-auto15-02",
+          "in_sample": true,
+          "n": 454,
+          "median_deg": 0.019218547984006927,
+          "rms_deg": 3.285274560231209,
+          "p95_abs_deg": 6.646409402450198
+        },
+        {
+          "trial": "bw8-auto25-01",
+          "in_sample": false,
+          "n": 726,
+          "median_deg": 0.42158594963365276,
+          "rms_deg": 3.064954235334797,
+          "p95_abs_deg": 5.700897551892368
+        },
+        {
+          "trial": "bw8-auto25-02",
+          "in_sample": false,
+          "n": 692,
+          "median_deg": -0.014548431314354151,
+          "rms_deg": 3.0067340934778537,
+          "p95_abs_deg": 5.965870309729488
+        }
+      ],
+      "units": "Angle target is radians. Omega coefficient is rad/(rad/s), numerically seconds; sign coefficient is radians.",
+      "acceptance": false,
+      "interpretation": "Descriptive sensor-disagreement model, never an encoder correction. No coefficients refit on later trials."
+    },
+    "angle_shape_plus_omega": {
+      "training_trial": "bw8-home-auto15-02",
+      "features": [
+        "constant",
+        "sin(q)",
+        "cos(q)",
+        "sin(2q)",
+        "cos(2q)",
+        "omega"
+      ],
+      "coefficients": [
+        0.10959702507409397,
+        0.007941353373777575,
+        -0.033043740406345085,
+        -0.07211444210195275,
+        -0.0422192387470666,
+        -0.001535415864955629
+      ],
+      "rank": 6,
+      "condition_number": 15.782517548428634,
+      "evaluation": [
+        {
+          "trial": "bw8-home-auto15-02",
+          "in_sample": true,
+          "n": 454,
+          "median_deg": 0.09060031846663641,
+          "rms_deg": 3.222747952394972,
+          "p95_abs_deg": 6.329269859937499
+        },
+        {
+          "trial": "bw8-auto25-01",
+          "in_sample": false,
+          "n": 726,
+          "median_deg": 0.3705176986909004,
+          "rms_deg": 3.1163765143960305,
+          "p95_abs_deg": 5.740297517093062
+        },
+        {
+          "trial": "bw8-auto25-02",
+          "in_sample": false,
+          "n": 692,
+          "median_deg": 0.06528426275107185,
+          "rms_deg": 2.9293746171857498,
+          "p95_abs_deg": 5.82782294411069
+        }
+      ],
+      "units": "Angle target is radians. Omega coefficient is rad/(rad/s), numerically seconds; sign coefficient is radians.",
+      "acceptance": false,
+      "interpretation": "Descriptive sensor-disagreement model, never an encoder correction. No coefficients refit on later trials."
+    },
+    "angle_shape_omega_direction": {
+      "training_trial": "bw8-home-auto15-02",
+      "features": [
+        "constant",
+        "sin(q)",
+        "cos(q)",
+        "sin(2q)",
+        "cos(2q)",
+        "omega",
+        "sign(omega)"
+      ],
+      "coefficients": [
+        0.11016016927538906,
+        0.008745146359275865,
+        -0.0326757476671982,
+        -0.07348693483933186,
+        -0.04163870451036184,
+        -0.0007984906669451248,
+        -0.00678289529709106
+      ],
+      "rank": 7,
+      "condition_number": 16.06426122622809,
+      "evaluation": [
+        {
+          "trial": "bw8-home-auto15-02",
+          "in_sample": true,
+          "n": 454,
+          "median_deg": 0.10334748249920768,
+          "rms_deg": 3.2144596708978943,
+          "p95_abs_deg": 6.132866511282452
+        },
+        {
+          "trial": "bw8-auto25-01",
+          "in_sample": false,
+          "n": 726,
+          "median_deg": 0.43460771099084383,
+          "rms_deg": 3.153170982784932,
+          "p95_abs_deg": 5.962299633966638
+        },
+        {
+          "trial": "bw8-auto25-02",
+          "in_sample": false,
+          "n": 692,
+          "median_deg": 0.10254179412938802,
+          "rms_deg": 2.9580611412261812,
+          "p95_abs_deg": 5.999755712704291
+        }
+      ],
+      "units": "Angle target is radians. Omega coefficient is rad/(rad/s), numerically seconds; sign coefficient is radians.",
+      "acceptance": false,
+      "interpretation": "Descriptive sensor-disagreement model, never an encoder correction. No coefficients refit on later trials."
+    }
+  },
+  "angle_direction_speed_groups": [
+    {
+      "trial": "bw8-home-auto15-02",
+      "angle_bins": [
+        {
+          "center_deg": -165,
+          "all": {
+            "n": 24,
+            "median_deg": 3.5069607924469164,
+            "rms_deg": 4.188833751674441,
+            "p95_abs_deg": 6.939237294152626
+          },
+          "positive": {
+            "n": 14,
+            "median_deg": 3.811894368527945,
+            "rms_deg": 4.486590331385148,
+            "p95_abs_deg": 6.919612835582174
+          },
+          "negative": {
+            "n": 9,
+            "median_deg": 3.176691797739245,
+            "rms_deg": 3.8081253638302845,
+            "p95_abs_deg": 6.476542725996393
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": -135,
+          "all": {
+            "n": 39,
+            "median_deg": 1.9760535624113982,
+            "rms_deg": 2.974585888810648,
+            "p95_abs_deg": 6.266027485199802
+          },
+          "positive": {
+            "n": 20,
+            "median_deg": 1.812494274768186,
+            "rms_deg": 2.328530521434759,
+            "p95_abs_deg": 4.5259508788480876
+          },
+          "negative": {
+            "n": 19,
+            "median_deg": 2.4199566264841925,
+            "rms_deg": 3.529106040087663,
+            "p95_abs_deg": 6.38808359759041
+          },
+          "positive_minus_negative_median_deg": -0.6074623517160063
+        },
+        {
+          "center_deg": -105,
+          "all": {
+            "n": 78,
+            "median_deg": 7.242600656582445,
+            "rms_deg": 7.202872377079783,
+            "p95_abs_deg": 9.983017193666441
+          },
+          "positive": {
+            "n": 40,
+            "median_deg": 7.202317030148184,
+            "rms_deg": 6.76389848650173,
+            "p95_abs_deg": 8.584412216970259
+          },
+          "negative": {
+            "n": 37,
+            "median_deg": 7.2620618640417876,
+            "rms_deg": 7.499117489733187,
+            "p95_abs_deg": 10.86200236089691
+          },
+          "positive_minus_negative_median_deg": -0.05974483389360376
+        },
+        {
+          "center_deg": -75,
+          "all": {
+            "n": 60,
+            "median_deg": 8.330556150021218,
+            "rms_deg": 8.779530708970444,
+            "p95_abs_deg": 10.649577564183794
+          },
+          "positive": {
+            "n": 39,
+            "median_deg": 8.455733759108107,
+            "rms_deg": 8.849569641963509,
+            "p95_abs_deg": 10.489269379616237
+          },
+          "negative": {
+            "n": 18,
+            "median_deg": 8.02563390308221,
+            "rms_deg": 8.709441411607914,
+            "p95_abs_deg": 11.13722460952337
+          },
+          "positive_minus_negative_median_deg": 0.43009985602589457
+        },
+        {
+          "center_deg": -45,
+          "all": {
+            "n": 26,
+            "median_deg": 8.062162250418053,
+            "rms_deg": 7.583010151877892,
+            "p95_abs_deg": 9.477803789344994
+          },
+          "positive": {
+            "n": 17,
+            "median_deg": 7.664948232769968,
+            "rms_deg": 7.172461528485911,
+            "p95_abs_deg": 9.358930532386148
+          },
+          "negative": {
+            "n": 9,
+            "median_deg": 8.36705836532025,
+            "rms_deg": 8.303290128558714,
+            "p95_abs_deg": 9.237859046149353
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": -15,
+          "all": {
+            "n": 6,
+            "median_deg": 6.301069233117654,
+            "rms_deg": 5.879427042048364,
+            "p95_abs_deg": 7.342414168270087
+          },
+          "positive": {
+            "n": 6,
+            "median_deg": 6.301069233117654,
+            "rms_deg": 5.879427042048364,
+            "p95_abs_deg": 7.342414168270087
+          },
+          "negative": {
+            "n": 0
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 15,
+          "all": {
+            "n": 12,
+            "median_deg": 4.7876640067396785,
+            "rms_deg": 4.568243253073466,
+            "p95_abs_deg": 5.664130249063999
+          },
+          "positive": {
+            "n": 5,
+            "median_deg": 1.831149980085408,
+            "rms_deg": 3.6802530361365497,
+            "p95_abs_deg": 4.834287189875078
+          },
+          "negative": {
+            "n": 6,
+            "median_deg": 5.139949427101027,
+            "rms_deg": 5.080991694735458,
+            "p95_abs_deg": 5.712200097673993
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 45,
+          "all": {
+            "n": 34,
+            "median_deg": 2.55012289553805,
+            "rms_deg": 7.371572205571098,
+            "p95_abs_deg": 11.956748373744677
+          },
+          "positive": {
+            "n": 18,
+            "median_deg": -4.699884062330653,
+            "rms_deg": 7.820818054173809,
+            "p95_abs_deg": 11.830094597191495
+          },
+          "negative": {
+            "n": 16,
+            "median_deg": 6.344741306767393,
+            "rms_deg": 6.830945669933844,
+            "p95_abs_deg": 11.122955152035157
+          },
+          "positive_minus_negative_median_deg": -11.044625369098046
+        },
+        {
+          "center_deg": 75,
+          "all": {
+            "n": 77,
+            "median_deg": 6.494380143176404,
+            "rms_deg": 7.964830221612076,
+            "p95_abs_deg": 12.089567606056866
+          },
+          "positive": {
+            "n": 20,
+            "median_deg": 5.863368566827083,
+            "rms_deg": 8.211175395469102,
+            "p95_abs_deg": 12.058106814758453
+          },
+          "negative": {
+            "n": 44,
+            "median_deg": 7.085609446266829,
+            "rms_deg": 8.06637677469983,
+            "p95_abs_deg": 12.048332147084546
+          },
+          "positive_minus_negative_median_deg": -1.2222408794397457
+        },
+        {
+          "center_deg": 105,
+          "all": {
+            "n": 66,
+            "median_deg": 12.2082648759487,
+            "rms_deg": 12.18479121532529,
+            "p95_abs_deg": 15.72607448551169
+          },
+          "positive": {
+            "n": 38,
+            "median_deg": 10.986240062398611,
+            "rms_deg": 11.001064683441859,
+            "p95_abs_deg": 14.628469108426774
+          },
+          "negative": {
+            "n": 28,
+            "median_deg": 13.631093454868212,
+            "rms_deg": 13.627798429520801,
+            "p95_abs_deg": 16.104346953675954
+          },
+          "positive_minus_negative_median_deg": -2.6448533924696003
+        },
+        {
+          "center_deg": 135,
+          "all": {
+            "n": 15,
+            "median_deg": 12.904786562244213,
+            "rms_deg": 13.498873547049076,
+            "p95_abs_deg": 16.98376638053598
+          },
+          "positive": {
+            "n": 7,
+            "median_deg": 12.161102092817682,
+            "rms_deg": 12.76218352814384,
+            "p95_abs_deg": 15.355502991155648
+          },
+          "negative": {
+            "n": 8,
+            "median_deg": 14.088650905276019,
+            "rms_deg": 14.111965254466407,
+            "p95_abs_deg": 17.455508808002307
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 165,
+          "all": {
+            "n": 17,
+            "median_deg": 6.753383048610891,
+            "rms_deg": 8.251266928581458,
+            "p95_abs_deg": 13.440285565651502
+          },
+          "positive": {
+            "n": 8,
+            "median_deg": 6.351318256497659,
+            "rms_deg": 8.878031758420358,
+            "p95_abs_deg": 13.814539923676556
+          },
+          "negative": {
+            "n": 7,
+            "median_deg": 6.812937556656272,
+            "rms_deg": 7.823389921318143,
+            "p95_abs_deg": 10.361044550573618
+          },
+          "positive_minus_negative_median_deg": null
+        }
+      ],
+      "speed_bins_abs_rad_s": {
+        "0_to_0.5": {
+          "n": 35,
+          "median_deg": 5.56266042383496,
+          "rms_deg": 7.048434575791861,
+          "p95_abs_deg": 11.42934791320081
+        },
+        "0.5_to_3": {
+          "n": 118,
+          "median_deg": 7.3337835683234935,
+          "rms_deg": 7.929920814814044,
+          "p95_abs_deg": 12.904577386296978
+        },
+        "3_to_8": {
+          "n": 170,
+          "median_deg": 7.6907731715958185,
+          "rms_deg": 8.313551480070743,
+          "p95_abs_deg": 12.47901407999932
+        },
+        "8_plus": {
+          "n": 131,
+          "median_deg": 7.321949391538189,
+          "rms_deg": 9.12340198589423,
+          "p95_abs_deg": 15.329739080355148
+        }
+      },
+      "near_upright_low_speed": {
+        "n": 0
+      },
+      "interpretation": "Angle/speed/direction bins are descriptive and unequally sampled. They do not isolate hysteresis from dynamics, cart location, projection, motion blur, or timing jitter."
+    },
+    {
+      "trial": "bw8-auto25-01",
+      "angle_bins": [
+        {
+          "center_deg": -165,
+          "all": {
+            "n": 32,
+            "median_deg": 2.9727871346129398,
+            "rms_deg": 3.78139943499332,
+            "p95_abs_deg": 6.3839527994273615
+          },
+          "positive": {
+            "n": 19,
+            "median_deg": 3.493608483138906,
+            "rms_deg": 4.448819013668263,
+            "p95_abs_deg": 6.892718270676794
+          },
+          "negative": {
+            "n": 13,
+            "median_deg": 1.9892045972751788,
+            "rms_deg": 2.504144138635618,
+            "p95_abs_deg": 3.993653258068006
+          },
+          "positive_minus_negative_median_deg": 1.5044038858637268
+        },
+        {
+          "center_deg": -135,
+          "all": {
+            "n": 78,
+            "median_deg": 4.013972709948402,
+            "rms_deg": 4.815516661176504,
+            "p95_abs_deg": 7.71745103524571
+          },
+          "positive": {
+            "n": 38,
+            "median_deg": 3.637240232696803,
+            "rms_deg": 4.031524438136432,
+            "p95_abs_deg": 6.403532296525178
+          },
+          "negative": {
+            "n": 40,
+            "median_deg": 4.963007601183933,
+            "rms_deg": 5.456959919397146,
+            "p95_abs_deg": 7.805012499913913
+          },
+          "positive_minus_negative_median_deg": -1.3257673684871307
+        },
+        {
+          "center_deg": -105,
+          "all": {
+            "n": 131,
+            "median_deg": 7.387674244840384,
+            "rms_deg": 7.463823553500433,
+            "p95_abs_deg": 9.970995981916115
+          },
+          "positive": {
+            "n": 68,
+            "median_deg": 7.725516122655669,
+            "rms_deg": 7.498206159479018,
+            "p95_abs_deg": 9.002199838252054
+          },
+          "negative": {
+            "n": 63,
+            "median_deg": 7.219715957721783,
+            "rms_deg": 7.426533538888514,
+            "p95_abs_deg": 10.633582709999676
+          },
+          "positive_minus_negative_median_deg": 0.5058001649338862
+        },
+        {
+          "center_deg": -75,
+          "all": {
+            "n": 108,
+            "median_deg": 8.67055814152434,
+            "rms_deg": 8.77728809235147,
+            "p95_abs_deg": 10.86512109626128
+          },
+          "positive": {
+            "n": 73,
+            "median_deg": 8.98501484522226,
+            "rms_deg": 9.187913155428525,
+            "p95_abs_deg": 10.861883428669008
+          },
+          "negative": {
+            "n": 27,
+            "median_deg": 7.337136171319204,
+            "rms_deg": 8.005566056264842,
+            "p95_abs_deg": 11.068515784952561
+          },
+          "positive_minus_negative_median_deg": 1.6478786739030558
+        },
+        {
+          "center_deg": -45,
+          "all": {
+            "n": 22,
+            "median_deg": 8.65326676693445,
+            "rms_deg": 8.039457850419799,
+            "p95_abs_deg": 9.821681642375168
+          },
+          "positive": {
+            "n": 11,
+            "median_deg": 6.736267018440129,
+            "rms_deg": 7.266797094190881,
+            "p95_abs_deg": 9.804312832958535
+          },
+          "negative": {
+            "n": 10,
+            "median_deg": 8.999559108636157,
+            "rms_deg": 8.758207459670913,
+            "p95_abs_deg": 9.803825439268381
+          },
+          "positive_minus_negative_median_deg": -2.2632920901960283
+        },
+        {
+          "center_deg": -15,
+          "all": {
+            "n": 29,
+            "median_deg": 6.84399392232925,
+            "rms_deg": 6.483129021535963,
+            "p95_abs_deg": 8.143559262321503
+          },
+          "positive": {
+            "n": 8,
+            "median_deg": 6.889894355982404,
+            "rms_deg": 6.281541184048072,
+            "p95_abs_deg": 7.445434408054431
+          },
+          "negative": {
+            "n": 16,
+            "median_deg": 7.269647318799626,
+            "rms_deg": 7.089611394064738,
+            "p95_abs_deg": 8.486088969726882
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 15,
+          "all": {
+            "n": 45,
+            "median_deg": 2.7427131116554304,
+            "rms_deg": 4.29153152834148,
+            "p95_abs_deg": 6.819412168762668
+          },
+          "positive": {
+            "n": 17,
+            "median_deg": 0.21371810280731457,
+            "rms_deg": 4.969718908004807,
+            "p95_abs_deg": 8.800481940668904
+          },
+          "negative": {
+            "n": 27,
+            "median_deg": 3.059664306329814,
+            "rms_deg": 3.8914734711508716,
+            "p95_abs_deg": 5.974953899133182
+          },
+          "positive_minus_negative_median_deg": -2.8459462035224994
+        },
+        {
+          "center_deg": 45,
+          "all": {
+            "n": 23,
+            "median_deg": 4.219174030379496,
+            "rms_deg": 7.420762026903757,
+            "p95_abs_deg": 11.671434630478382
+          },
+          "positive": {
+            "n": 7,
+            "median_deg": -5.413024024694251,
+            "rms_deg": 8.589491324634327,
+            "p95_abs_deg": 11.66608755961384
+          },
+          "negative": {
+            "n": 15,
+            "median_deg": 6.060268063409391,
+            "rms_deg": 6.977401592136169,
+            "p95_abs_deg": 10.866821151213177
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 75,
+          "all": {
+            "n": 96,
+            "median_deg": 6.095895979847785,
+            "rms_deg": 7.251048767798815,
+            "p95_abs_deg": 11.900774422978085
+          },
+          "positive": {
+            "n": 13,
+            "median_deg": 9.072532445296059,
+            "rms_deg": 9.763359176145926,
+            "p95_abs_deg": 13.006079154724196
+          },
+          "negative": {
+            "n": 67,
+            "median_deg": 5.802559763858004,
+            "rms_deg": 6.588065113253533,
+            "p95_abs_deg": 10.88124074203524
+          },
+          "positive_minus_negative_median_deg": 3.2699726814380554
+        },
+        {
+          "center_deg": 105,
+          "all": {
+            "n": 118,
+            "median_deg": 11.244713344612029,
+            "rms_deg": 11.338914876519523,
+            "p95_abs_deg": 15.619524225887607
+          },
+          "positive": {
+            "n": 48,
+            "median_deg": 12.171446582228217,
+            "rms_deg": 12.39217615544291,
+            "p95_abs_deg": 15.589315202686334
+          },
+          "negative": {
+            "n": 65,
+            "median_deg": 10.717929853913462,
+            "rms_deg": 10.717335132621198,
+            "p95_abs_deg": 15.754735446152523
+          },
+          "positive_minus_negative_median_deg": 1.4535167283147543
+        },
+        {
+          "center_deg": 135,
+          "all": {
+            "n": 19,
+            "median_deg": 14.738744885309476,
+            "rms_deg": 14.465648363207963,
+            "p95_abs_deg": 17.92157761833979
+          },
+          "positive": {
+            "n": 12,
+            "median_deg": 15.500936287525032,
+            "rms_deg": 16.042449002292688,
+            "p95_abs_deg": 18.201970151981318
+          },
+          "negative": {
+            "n": 7,
+            "median_deg": 11.084817120772568,
+            "rms_deg": 11.260059812691331,
+            "p95_abs_deg": 13.470186276992331
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 165,
+          "all": {
+            "n": 25,
+            "median_deg": 7.954613707011312,
+            "rms_deg": 8.887859904681775,
+            "p95_abs_deg": 13.499801174217973
+          },
+          "positive": {
+            "n": 13,
+            "median_deg": 9.13361956142607,
+            "rms_deg": 10.143794361665373,
+            "p95_abs_deg": 15.538111681785047
+          },
+          "negative": {
+            "n": 8,
+            "median_deg": 7.401265790884233,
+            "rms_deg": 6.886197842613381,
+            "p95_abs_deg": 9.540756130386681
+          },
+          "positive_minus_negative_median_deg": null
+        }
+      ],
+      "speed_bins_abs_rad_s": {
+        "0_to_0.5": {
+          "n": 65,
+          "median_deg": 7.251485008242243,
+          "rms_deg": 7.160257091143055,
+          "p95_abs_deg": 10.762286098636373
+        },
+        "0.5_to_3": {
+          "n": 207,
+          "median_deg": 6.754718246299016,
+          "rms_deg": 7.930588426528759,
+          "p95_abs_deg": 12.632286485524732
+        },
+        "3_to_8": {
+          "n": 272,
+          "median_deg": 7.734913908583397,
+          "rms_deg": 8.410275193098606,
+          "p95_abs_deg": 14.326371336654589
+        },
+        "8_plus": {
+          "n": 182,
+          "median_deg": 6.58501509863276,
+          "rms_deg": 8.516093496796243,
+          "p95_abs_deg": 15.298100460970543
+        }
+      },
+      "near_upright_low_speed": {
+        "n": 8,
+        "median_deg": 3.304015468115179,
+        "rms_deg": 4.534683961911425,
+        "p95_abs_deg": 6.909721605054511
+      },
+      "interpretation": "Angle/speed/direction bins are descriptive and unequally sampled. They do not isolate hysteresis from dynamics, cart location, projection, motion blur, or timing jitter."
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "angle_bins": [
+        {
+          "center_deg": -165,
+          "all": {
+            "n": 31,
+            "median_deg": 2.5607100152939153,
+            "rms_deg": 3.8834419331198724,
+            "p95_abs_deg": 7.376239236654273
+          },
+          "positive": {
+            "n": 18,
+            "median_deg": 3.2980968292078194,
+            "rms_deg": 4.237667135522686,
+            "p95_abs_deg": 7.046879779834468
+          },
+          "negative": {
+            "n": 12,
+            "median_deg": 1.7642985277785874,
+            "rms_deg": 3.443984575248991,
+            "p95_abs_deg": 6.345783576949538
+          },
+          "positive_minus_negative_median_deg": 1.533798301429232
+        },
+        {
+          "center_deg": -135,
+          "all": {
+            "n": 66,
+            "median_deg": 2.801606690855171,
+            "rms_deg": 3.8295802085505266,
+            "p95_abs_deg": 6.803142449141034
+          },
+          "positive": {
+            "n": 37,
+            "median_deg": 2.2034187001991326,
+            "rms_deg": 2.8277714980377646,
+            "p95_abs_deg": 4.761226295729141
+          },
+          "negative": {
+            "n": 29,
+            "median_deg": 3.6505065750479937,
+            "rms_deg": 4.814032616669585,
+            "p95_abs_deg": 8.20621203305086
+          },
+          "positive_minus_negative_median_deg": -1.4470878748488611
+        },
+        {
+          "center_deg": -105,
+          "all": {
+            "n": 126,
+            "median_deg": 7.729060315994049,
+            "rms_deg": 7.540749679510698,
+            "p95_abs_deg": 10.288449230116962
+          },
+          "positive": {
+            "n": 66,
+            "median_deg": 6.864499815980371,
+            "rms_deg": 6.9113809018889025,
+            "p95_abs_deg": 8.62633836816226
+          },
+          "negative": {
+            "n": 59,
+            "median_deg": 7.990985012313748,
+            "rms_deg": 8.143629278399041,
+            "p95_abs_deg": 10.442484995429869
+          },
+          "positive_minus_negative_median_deg": -1.1264851963333764
+        },
+        {
+          "center_deg": -75,
+          "all": {
+            "n": 106,
+            "median_deg": 8.440108009082802,
+            "rms_deg": 8.703650179061224,
+            "p95_abs_deg": 10.748818336486199
+          },
+          "positive": {
+            "n": 75,
+            "median_deg": 8.847498376721374,
+            "rms_deg": 8.924561988937496,
+            "p95_abs_deg": 10.692295352408927
+          },
+          "negative": {
+            "n": 26,
+            "median_deg": 7.699069286661994,
+            "rms_deg": 8.030988525425839,
+            "p95_abs_deg": 10.272620099238319
+          },
+          "positive_minus_negative_median_deg": 1.1484290900593792
+        },
+        {
+          "center_deg": -45,
+          "all": {
+            "n": 30,
+            "median_deg": 8.313141521358439,
+            "rms_deg": 8.067667410366292,
+            "p95_abs_deg": 10.700051636788908
+          },
+          "positive": {
+            "n": 14,
+            "median_deg": 7.898404240289308,
+            "rms_deg": 7.503374603243616,
+            "p95_abs_deg": 9.837187187049102
+          },
+          "negative": {
+            "n": 15,
+            "median_deg": 8.633226309070762,
+            "rms_deg": 8.50195513963303,
+            "p95_abs_deg": 11.42660012898458
+          },
+          "positive_minus_negative_median_deg": -0.7348220687814553
+        },
+        {
+          "center_deg": -15,
+          "all": {
+            "n": 29,
+            "median_deg": 7.540899021918609,
+            "rms_deg": 7.510502910057892,
+            "p95_abs_deg": 10.289172600180171
+          },
+          "positive": {
+            "n": 13,
+            "median_deg": 7.547224473623424,
+            "rms_deg": 6.576991724228275,
+            "p95_abs_deg": 8.217599141505156
+          },
+          "negative": {
+            "n": 15,
+            "median_deg": 7.352177953574066,
+            "rms_deg": 8.150296796904684,
+            "p95_abs_deg": 10.692758046206551
+          },
+          "positive_minus_negative_median_deg": 0.19504652004935794
+        },
+        {
+          "center_deg": 15,
+          "all": {
+            "n": 34,
+            "median_deg": 4.100518491592981,
+            "rms_deg": 4.915894614114798,
+            "p95_abs_deg": 7.246892912940094
+          },
+          "positive": {
+            "n": 18,
+            "median_deg": 1.2585326513734842,
+            "rms_deg": 4.604436934618001,
+            "p95_abs_deg": 7.389063192212291
+          },
+          "negative": {
+            "n": 15,
+            "median_deg": 5.846317418353964,
+            "rms_deg": 5.277940898335524,
+            "p95_abs_deg": 6.822633991748207
+          },
+          "positive_minus_negative_median_deg": -4.58778476698048
+        },
+        {
+          "center_deg": 45,
+          "all": {
+            "n": 19,
+            "median_deg": 2.9300545246101857,
+            "rms_deg": 7.844086591597934,
+            "p95_abs_deg": 11.435286481679597
+          },
+          "positive": {
+            "n": 10,
+            "median_deg": -2.784920763971773,
+            "rms_deg": 8.10366427365803,
+            "p95_abs_deg": 11.556828262419572
+          },
+          "negative": {
+            "n": 9,
+            "median_deg": 7.91362144215151,
+            "rms_deg": 7.5452004470217,
+            "p95_abs_deg": 9.906005362489118
+          },
+          "positive_minus_negative_median_deg": null
+        },
+        {
+          "center_deg": 75,
+          "all": {
+            "n": 93,
+            "median_deg": 5.340762719645568,
+            "rms_deg": 6.563156231136764,
+            "p95_abs_deg": 12.088092049830077
+          },
+          "positive": {
+            "n": 19,
+            "median_deg": 5.6259916336155555,
+            "rms_deg": 7.0319777063886315,
+            "p95_abs_deg": 11.953959353235298
+          },
+          "negative": {
+            "n": 65,
+            "median_deg": 5.5184347367377615,
+            "rms_deg": 6.610989999751379,
+            "p95_abs_deg": 12.225645775837583
+          },
+          "positive_minus_negative_median_deg": 0.10755689687779398
+        },
+        {
+          "center_deg": 105,
+          "all": {
+            "n": 120,
+            "median_deg": 10.53622601042472,
+            "rms_deg": 10.746742064464005,
+            "p95_abs_deg": 14.577456106563387
+          },
+          "positive": {
+            "n": 53,
+            "median_deg": 10.745185070106995,
+            "rms_deg": 10.93405249346212,
+            "p95_abs_deg": 14.074205846895715
+          },
+          "negative": {
+            "n": 59,
+            "median_deg": 11.017469277649925,
+            "rms_deg": 10.90810906140945,
+            "p95_abs_deg": 15.181420095303741
+          },
+          "positive_minus_negative_median_deg": -0.27228420754292965
+        },
+        {
+          "center_deg": 135,
+          "all": {
+            "n": 25,
+            "median_deg": 14.000933053023912,
+            "rms_deg": 13.811892821313016,
+            "p95_abs_deg": 16.778193232792276
+          },
+          "positive": {
+            "n": 13,
+            "median_deg": 14.30399909860736,
+            "rms_deg": 13.956227130311373,
+            "p95_abs_deg": 16.599748437121914
+          },
+          "negative": {
+            "n": 12,
+            "median_deg": 13.806460282328365,
+            "rms_deg": 13.653808987540925,
+            "p95_abs_deg": 16.34511674245764
+          },
+          "positive_minus_negative_median_deg": 0.4975388162789952
+        },
+        {
+          "center_deg": 165,
+          "all": {
+            "n": 13,
+            "median_deg": 7.417087455041556,
+            "rms_deg": 7.630680181640242,
+            "p95_abs_deg": 10.61779739735575
+          },
+          "positive": {
+            "n": 7,
+            "median_deg": 7.417087455041556,
+            "rms_deg": 8.09991512693298,
+            "p95_abs_deg": 10.78937426903356
+          },
+          "negative": {
+            "n": 6,
+            "median_deg": 6.939324693875292,
+            "rms_deg": 7.043842050609158,
+            "p95_abs_deg": 9.611685579047514
+          },
+          "positive_minus_negative_median_deg": null
+        }
+      ],
+      "speed_bins_abs_rad_s": {
+        "0_to_0.5": {
+          "n": 45,
+          "median_deg": 7.405167942898434,
+          "rms_deg": 7.125767761758149,
+          "p95_abs_deg": 9.873719700367406
+        },
+        "0.5_to_3": {
+          "n": 218,
+          "median_deg": 7.503841988570046,
+          "rms_deg": 7.700450014512409,
+          "p95_abs_deg": 11.704209862365612
+        },
+        "3_to_8": {
+          "n": 256,
+          "median_deg": 7.917914691301523,
+          "rms_deg": 8.215374034499598,
+          "p95_abs_deg": 12.88955010399559
+        },
+        "8_plus": {
+          "n": 173,
+          "median_deg": 6.726778431344202,
+          "rms_deg": 8.70542721994652,
+          "p95_abs_deg": 15.334052272511448
+        }
+      },
+      "near_upright_low_speed": {
+        "n": 0
+      },
+      "interpretation": "Angle/speed/direction bins are descriptive and unequally sampled. They do not isolate hysteresis from dynamics, cart location, projection, motion blur, or timing jitter."
+    }
+  ],
+  "heldout_shape_improvement": [
+    {
+      "trial": "bw8-auto25-01",
+      "offset_timing_rms_deg": 4.318439781577674,
+      "angle_shape_rms_deg": 3.064954235334797,
+      "relative_rms_reduction": 0.29026352331927985
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "offset_timing_rms_deg": 4.025592323806347,
+      "angle_shape_rms_deg": 3.0067340934778537,
+      "relative_rms_reduction": 0.25309523378788756
+    }
+  ],
+  "conclusions": {
+    "offset_and_timing_sufficient": false,
+    "evidence": "A frozen constant+lag leaves several degrees of discrepancy. First-trial angle features reduce RMS on later trials more consistently than a residual rate or direction term; this supports repeatable angle-associated disagreement in these trajectories.",
+    "scope": "The evidence identifies sensor-pair disagreement, not which sensor is wrong. Camera projection/marker geometry, view changes, timing jitter, coupling/loading, and magnetic encoder response remain possible contributors.",
+    "static_caution": "Camera framing moved before the new upright check. Its camera anchor is never applied to old520 images. Cross-frame up/down angular comparisons are unavailable.",
+    "operational": "Saving a measured upright can correct its zero. It cannot by itself establish accuracy away from upright or prove balance performance."
+  },
+  "method": {
+    "anchor": "Original520 cohort retains its saved encoder zero and raw image vertical; no new upright anchoring is applied. Later upright summary is independent context only. Raw camera is derived from marker geometry; no fusion or saved camera calibration.",
+    "models": "OLS on first native AUTO trial only, coefficients frozen on later trials; circular residuals kept on their small-error branch. No parameter or firmware calibration is emitted.",
+    "uncertainty": "Frames are temporally correlated and pose/speed/cart state are not independently varied. No formal confidence interval or systematic nonlinear calibration validation.",
+    "provenance": "Prior source hashes are retained in the linked base report; this manifest hashes that report, its paired data, upright raw sources, and both scripts."
+  },
+  "source_hashes": [
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/report.json",
+      "sha256": "5a57e454e47d1002a78c1aaacd7bbe75e69a1eeed6fe0957ed67ad216998d34e",
+      "bytes": 152838
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/bw8-home-auto15-02-pairs.ndjson",
+      "sha256": "4670ba68b7abe870011add0c046da674498f5a5a3edce681959896579ad4e01e",
+      "bytes": 1300085
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/bw8-auto25-01-pairs.ndjson",
+      "sha256": "c9f22bc66c8a5ee04296222fb83622d06bc073e515eb9c0b3e025a89c3598cf1",
+      "bytes": 594261
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/bw8-auto25-02-pairs.ndjson",
+      "sha256": "ee8a958c9a33fb215eede89e0ca4bf3bfac807bc50f197d8dcf6f34441d43ace",
+      "bytes": 538843
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/upright-check-02/rig-1792601411523662834-3622163908.jsonl",
+      "sha256": "6dbe98a6044da7708e235784b37c4f63ae303c76039262900b4047c902100375",
+      "bytes": 1069193
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/upright-check-02/report.json",
+      "sha256": "7ccffb6b4d344a026281b7e6f752ce612051abac59ed41757b863c37f5bdc16e",
+      "bytes": 50198
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/upright-check-02/vision.ndjson",
+      "sha256": "1436f7cd91f126541286cb68d1d15d5ddd95aab73ed7d177b77584df3c5756c2",
+      "bytes": 3923104
+    },
+    {
+      "path": "/private/tmp/post-tightening-data/runs/encoder-tightening-20261021/upright-check-02/vision-report.json",
+      "sha256": "d5f22dd21e335b210792ba66766e94cd1472598ada42d8b8feec8222cf40fc87",
+      "bytes": 867
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze_upright.py",
+      "sha256": "dee7cfca34b0c7e43e5dab31e9179d046222b2e3a0950af6c52dec01f2ec0d49",
+      "bytes": 14311
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze.py",
+      "sha256": "d3489d8e635e7807b95d75de07b64605fe74e658b3021af40ee3b53c93568889",
+      "bytes": 31137
+    }
+  ]
+}

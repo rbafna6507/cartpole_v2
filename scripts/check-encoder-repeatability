@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+exec uv run --locked --project "$repo_dir" --extra hardware python \
+  "$repo_dir/evidence/encoder-tightening-20261021/collect.py" "$@"

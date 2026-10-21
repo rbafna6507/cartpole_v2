@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-21",
+  "change": "User tightened pendulum-to-encoder coupling",
+  "user_reported_previous_reference": 354,
+  "live_reference_before_test": 520,
+  "live_bw_before_test": 8,
+  "jerk_limit_m_s3": 150,
+  "preflight_i2c_errors": 6,
+  "calibration_writes": true,
+  "firmware_updates": false,
+  "purpose": "Test same-pose encoder/camera repeatability before and after bounded native AUTO, not certify full encoder map or update simulation without validation",
+  "initial_collector_failure": "timestamp key collision before any motion; corrected, failed capture retained",
+  "upright_capture": {
+    "user_pose": "natural upright, ready and clear",
+    "raw_median": 533,
+    "old_saved_reference": 520,
+    "difference_counts": 13,
+    "difference_degrees": 1.142578125,
+    "new_saved_reference": 533,
+    "calibration_write_confirmed": true,
+    "camera_framing_changed_during_upright_setup": true
+  },
+  "excluded_trials": {
+    "ref533-bw6-auto25-01": "User confirmed handling pole between tests; collector stopped before AUTO; exclude from calibration/performance. No bandwidth change executed."
+  },
+  "upright_repeat": {
+    "native_median": 538,
+    "camera_pose_change_degrees": 0.2838018787468964,
+    "encoder_change_degrees": 0.439453125,
+    "unexplained_encoder_minus_camera_degrees": 0.15565124625310361,
+    "reference_preserved": 533,
+    "camera_pivot_shift_px": [
+      -0.39647109,
+      -0.29901961
+    ]
+  },
+  "controller_results": {
+    "reference520_longest_bal_s": [
+      0,
+      0.608,
+      0.644
+    ],
+    "reference533_bw8_first_two_longest_bal_s": [
+      23.704,
+      21.4
+    ],
+    "reference533_bw6_longest_bal_s": 0,
+    "reference533_bw8_final_longest_bal_s": 0.112,
+    "notes": "Manual handling interrupted campaign before bw6/finalbw8; filter-only causal attribution is not warranted."
+  },
+  "manual_map_result": {
+    "report": "analysis-passive-map/report.json",
+    "calibration_produced": false,
+    "camera_accepted_frames": 6993,
+    "camera_records": 10010,
+    "supported_30deg_bins": 3,
+    "total_30deg_bins": 12,
+    "quiet_pose_separation_disagreement_deg": [
+      7.911615427876221,
+      8.077978791838985
+    ],
+    "raw_video_recorded": false,
+    "next_data_requirement": "Record raw video and verify intermediate-angle tracking before repeating the manual sweep."
+  },
+  "final_readback": "final-readback.json"
+}
