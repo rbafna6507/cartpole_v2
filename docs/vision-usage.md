@@ -85,7 +85,7 @@ For calibration through the original loopback endpoint, an SSH tunnel remains
 available:
 
 ```sh
-scripts/vision-tunnel.sh jetson 13091
+scripts/vision-tunnel.sh rbafna@jetson 13091
 ```
 
 Open **http://127.0.0.1:13091**. Verify the SSH host key normally on a new machine.
@@ -94,6 +94,39 @@ responses could stall the portal. The direct tailnet proxy, gzip JSON, bounded
 chart initialization, and incremental histories avoid those stalls. Tailscale
 Serve was attempted but denied the current user's admin rights; the supported
 proxy route needs no privileged changes.
+
+## Missing measurements despite a visible overlay
+
+The overlay uses detected image geometry. Numeric angles also require a camera
+hanging-zero calibration. If `/api/state` says `set hanging zero`,
+`calibrated: false`, or `angle_valid: false` with null calibration, the overlay
+alone does not establish an angle reference. Set **Hanging zero** with the cart
+stopped and the pole freely hanging and still, using the calibration-capable SSH
+endpoint. Save it to the service calibration file. Do not do this while the pole
+is swinging. A hanging camera zero does not recalibrate the Teensy encoder or
+prove the hanging-to-upright encoder mapping.
+
+On October 21 the live file had lost its angle reference. After a stopped,
+quiet-pole check, the saved camera zero was restored to −0.018565937574014667 rad
+and marker spacing 155.96037524530877 px. This supersedes the original reference
+above. Cart scale remains unset pending an independent physical distance
+measurement. Missing cart meters therefore has a separate cause from missing
+camera angle.
+
+Encoder plots require an active serial owner that publishes telemetry. The
+console, system-ID campaigns, and balance-policy CLI publish accepted snapshots
+to loopback UDP 3096. The camera service does not open the Teensy itself, so the
+encoder correctly becomes **stale** after that owner exits. Do not open a second
+console alongside a running experiment just to populate the plot. The balance
+launcher now publishes by default; `--no-vision-telemetry` opts out. Camera
+measurements enter neither this encoder-only actor nor the native controller.
+The purple comparison curve is display fusion, distinct from the SDK fusion
+stream described below.
+
+Use the direct Tailscale proxy above for normal viewing. If an existing SSH
+forward occupies port 13090, stop that forward first or choose another local
+port. A fresh tracking miss can still produce a null angle for that frame;
+calibration does not turn rejected detections into measurements.
 
 ## Sensor and SDK interfaces
 

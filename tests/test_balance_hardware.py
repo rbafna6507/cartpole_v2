@@ -17,8 +17,9 @@ from test_rig_console import ScriptedClock
 
 
 def saved_actor(tmp_path, *, demand=0., mode='raw', legacy=False, bad_runtime=False,
-                executor_parameters=None):
+                executor_parameters=None, action_scale=1.):
     actor = numeric_actor(mode, legacy=legacy)
+    actor['action_scale_m_s2'] = action_scale
     if executor_parameters:
         actor['executor_parameters'].update(executor_parameters)
     actor['layers'][-1]['bias'] = [demand]
@@ -187,7 +188,7 @@ def test_existing_live_admission_and_expected_reference_cannot_be_bypassed(tmp_p
 def test_acceleration_ceiling_faults_instead_of_clipping(tmp_path):
     actor = saved_actor(tmp_path, demand=.5)
     with rehearsal() as rig:
-        with pytest.raises(ValidationError, match='commissioning bound'):
+        with pytest.raises(ValidationError, match='selected --max-acceleration'):
             run(rig, actor, execute=True)
         assert not any(c[1] == 'A' for c in rig.commands)
         assert rig.commands[-1][1] == 'STOP'
@@ -405,7 +406,86 @@ def test_cli_rig_profile_records_choice_and_keeps_explicit_acceleration_ceiling(
 def test_rig_profile_does_not_expand_default_acceleration_authority(tmp_path):
     actor = saved_actor(tmp_path, demand=.5)
     with rehearsal() as rig:
-        with pytest.raises(ValidationError, match='commissioning bound'):
+        with pytest.raises(ValidationError, match='selected --max-acceleration'):
             run(rig, actor, execute=True, guard_profile='rig')
         assert not any(c[1] == 'A' for c in rig.commands)
         assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
+
+
+@pytest.mark.parametrize('guard_profile', ['commissioning', 'rig'])
+@pytest.mark.parametrize('demand', [.13, -.13])
+def test_refused_demand_reports_exact_value_and_selected_ceiling_before_send(tmp_path, guard_profile, demand):
+    actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+    with rehearsal() as rig:
+        with pytest.raises(ValidationError) as error:
+            run(rig, actor, execute=True, guard_profile=guard_profile, max_acceleration=3.)
+        message = str(error.value)
+        assert f'policy acceleration {demand * 25!r} m/s²' in message
+        assert 'selected --max-acceleration 3.0 m/s²' in message
+        assert f'guard profile: {guard_profile}' in message
+        assert 'commissioning bound' not in message
+        assert not any(c[1] == 'A' for c in rig.commands)
+        assert not any(r['type'] == 'action_request' for r in rig.records)
+        assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
+        failure = next(r for r in rig.records if r['type'] == 'policy_failure')
+        assert failure['reason'] == message
+
+
+@pytest.mark.parametrize('demand', [.12, -.12])
+def test_exact_acceleration_ceiling_remains_allowed_without_clipping(tmp_path, demand):
+    actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+    with rehearsal() as rig:
+        run(rig, actor, execute=True, guard_profile='rig', max_acceleration=3.)
+        requests = [r['request'] for r in rig.records if r['type'] == 'action_request']
+        assert requests and all(r['acceleration_m_s2'] == demand * 25 for r in requests)
+        assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
+
+
+def test_shadow_still_observes_demands_above_execution_ceiling_without_arming(tmp_path):
+    actor = saved_actor(tmp_path, demand=.13, action_scale=25.)
+    with rehearsal() as rig:
+        result = run(rig, actor, guard_profile='rig', max_acceleration=3.)
+        assert result['max_abs_raw_acceleration_m_s2'] == 3.25
+        assert not any(c[1] in ('ARM', 'A') for c in rig.commands)
+        assert rig.commands[-1][1] == 'STOP'
+
+
+@pytest.mark.parametrize('extra,port', [([], 3096), (['--no-vision-telemetry'], 0)])
+@pytest.mark.parametrize('refusal', [False, True])
+def test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop(tmp_path, extra, port, refusal):
+    from cartpole_sdk.learning.balance_hardware import main
+    from cartpole_sdk.sensing.telemetry import EncoderPublisher
+    actor = saved_actor(tmp_path, demand=.5 if refusal else .1)
+    publishers = []
+    with rehearsal() as rig:
+        def factory(*args, **kwargs):
+            publisher = kwargs.get('vision_publisher')
+            assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+            assert publisher.port == port
+            publishers.append(publisher)
+            # Scripted connect has no I/O; production Rig.close still owns the mirror.
+            rig._vision_publisher = publisher
+            return rig
+        argv = ['--actor', str(actor), '--port', 'scripted', '--development-only',
+                '--expected-upright-raw', '123', '--duration', '.04', '--execute', *extra]
+        if refusal:
+            with pytest.raises(SystemExit) as error:
+                main(argv, rig_factory=factory)
+            assert error.value.code == 2
+        else:
+            assert main(argv, rig_factory=factory) == 0
+        assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
+        assert publishers[0]._end.is_set(), 'Rig close must close its publisher on success and failure'
+
+
+def test_direct_api_preserves_caller_owned_encoder_publisher_lifecycle(tmp_path):
+    from cartpole_sdk.sensing.telemetry import EncoderPublisher
+    actor = saved_actor(tmp_path)
+    with rehearsal() as rig:
+        publisher = EncoderPublisher(0)
+        rig._vision_publisher = publisher
+        run(rig, actor)
+        assert rig._vision_publisher is publisher
+        assert publisher._thread is None and not publisher._end.is_set()
+        assert rig.commands[-1][1] == 'STOP'
+    assert publisher._end.is_set()

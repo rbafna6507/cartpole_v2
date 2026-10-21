@@ -12,7 +12,7 @@ import json
 import math
 from pathlib import Path
 
-from cartpole_sdk.contracts import ValidationError, validate_observation
+from cartpole_sdk.contracts import Acceleration, ValidationError, validate_observation
 from cartpole_sdk.policies.neural import NeuralPolicy, load_neural_policy
 from cartpole_sdk.policies.rig_observation import rig_channels, select_rig_observation
 from cartpole_sdk.rig.neural_runner import run_neural_policy
@@ -33,11 +33,13 @@ def _profile_duration(guard_profile):
 
 class BalanceOnlyPolicy(NeuralPolicy):
     """The unchanged numeric actor with start and per-action stop boundaries."""
-    def __init__(self, actor, *, channels, reference_guard=None, guard_profile='commissioning'):
+    def __init__(self, actor, *, channels, reference_guard=None, guard_profile='commissioning',
+                 max_acceleration=None):
         super().__init__(actor, channels=channels)
         _profile_duration(guard_profile)
         self.guard_profile = guard_profile
         self.reference_guard = reference_guard
+        self.max_acceleration = max_acceleration
         if (self.observation_contract['angle_source'] != 'raw' or
                 self.observation_contract['angle_frame_id'] != 'encoder-zero'):
             raise ValidationError('balance-only currently requires the raw encoder-zero actor contract')
@@ -111,18 +113,29 @@ class BalanceOnlyPolicy(NeuralPolicy):
                 if brake != 0 and self.stop_on_rail_braking:
                     violations.append(f'brake_direction={brake:.9g} (must be 0)')
                 raise ValidationError('balance-only envelope lost: '+'; '.join(violations))
-            return super().act(observation)
+            intent = super().act(observation)
+            # Explain the same execution ceiling before the pinned runner's
+            # backstop. Shadow retains its existing unrestricted observation of
+            # actor demands; neither path clips or changes the numeric actor.
+            if (isinstance(intent, Acceleration) and self.max_acceleration is not None and
+                    abs(intent.acceleration_m_s2) > self.max_acceleration):
+                raise ValidationError(
+                    f'balance-only policy acceleration {intent.acceleration_m_s2!r} m/s² exceeds '
+                    f'selected --max-acceleration {self.max_acceleration!r} m/s² '
+                    f'(guard profile: {self.guard_profile}); action refused, no clipping')
+            return intent
         except ValidationError as error:
             self.fault_reason = str(error)
             return None
 
 
-def _load_policy(actor_path, *, reference_guard=None, guard_profile='commissioning'):
+def _load_policy(actor_path, *, reference_guard=None, guard_profile='commissioning',
+                 max_acceleration=None):
     # Use the ordinary bounded JSON/content/runtime-hash loader before adding
     # constraints. No source hashes or acceptance fields are rewritten.
     policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
     return BalanceOnlyPolicy(policy.actor, channels=policy.channels, reference_guard=reference_guard,
-                             guard_profile=guard_profile)
+                             guard_profile=guard_profile, max_acceleration=max_acceleration)
 
 
 def _validate_options(*, development_only, execute, expected_upright_raw,
@@ -163,7 +176,8 @@ def run_balance_policy(rig, actor_path, *, expected_upright_raw, development_onl
             if (actual is None or actual.encoder_upright_raw != expected_upright_raw or
                     actual.reference_saved is not True or actual.encoder_conf_valid is not True):
                 raise ValidationError('balance-only current saved upright reference differs or is invalid')
-        policy = _load_policy(actor_path, reference_guard=reference_guard, guard_profile=guard_profile)
+        policy = _load_policy(actor_path, reference_guard=reference_guard, guard_profile=guard_profile,
+                              max_acceleration=max_acceleration if execute else None)
         rig._stopped_healthy()
         info = rig.get_info()
         if info.encoder_upright_raw != expected_upright_raw:
@@ -207,6 +221,8 @@ def main(argv=None, *, rig_factory=None):
                         help='Raw demand ceiling in m/s², at most 25. Excess faults; no clipping (default .25).')
     parser.add_argument('--preflight-seconds', type=float, default=2., help='Stopped sensor acquisition deadline.')
     parser.add_argument('--log-dir', type=Path, help='SDK JSONL trace directory.')
+    parser.add_argument('--no-vision-telemetry', action='store_true',
+                        help='Disable the read-only loopback encoder mirror (default UDP port 3096).')
     args = parser.parse_args(argv)
     options = dict(development_only=args.development_only, execute=args.execute,
         expected_upright_raw=args.expected_upright_raw, duration_s=args.duration,
@@ -217,8 +233,11 @@ def main(argv=None, *, rig_factory=None):
         _load_policy(args.actor, guard_profile=args.guard_profile)  # Reject invalid configuration before opening serial.
         from cartpole_sdk.rig import Rig
         from cartpole_sdk.rig.runtime import defer_cyclic_gc
+        from cartpole_sdk.sensing.telemetry import EncoderPublisher
         factory = Rig if rig_factory is None else rig_factory
-        with defer_cyclic_gc(), factory(args.port, rate_hz=100, log_dir=args.log_dir) as rig:
+        publisher = EncoderPublisher(0 if args.no_vision_telemetry else 3096)
+        with defer_cyclic_gc(), factory(args.port, rate_hz=100, log_dir=args.log_dir,
+                                       vision_publisher=publisher) as rig:
             result = run_balance_policy(rig, args.actor, **options)
         print(json.dumps(result, sort_keys=True))
         return 0

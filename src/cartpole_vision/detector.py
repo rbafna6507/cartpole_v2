@@ -163,6 +163,11 @@ class ArmDetector:
             direction = vector/length
             # Check support along the rigid shaft; disconnected green blobs cannot pass.
             points=np.rint(pivot+np.linspace(.12,.75,30)[:,None]*vector).astype(int)
+            # A partial rim can fit a circle outside this contour's crop. Reject
+            # those samples; negative NumPy indices would silently wrap around.
+            if (np.any(points < 0) or np.any(points[:,0] >= filled.shape[1])
+                    or np.any(points[:,1] >= filled.shape[0])):
+                continue
             support=filled[points[:,1],points[:,0]]>0
             if np.mean(support) < .95:
                 continue

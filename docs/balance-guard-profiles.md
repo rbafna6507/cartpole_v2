@@ -30,18 +30,32 @@ turn a balance-only actor into a swing-up policy or admit a hanging start.
 
 Acceleration authority is independently selected with `--max-acceleration`.
 Its default remains 0.25 m/s²; it must be positive and no greater than 25 m/s².
-Exceeding the requested ceiling refuses the action rather than clipping it;
-the executor retains its actual configured bounds. Selecting `rig` does not
+Exceeding the requested ceiling refuses the action rather than clipping it.
+The exception and `policy_failure` log name the exact raw demand, selected
+`--max-acceleration`, and guard profile; the refused demand is never sent.
+The executor retains its actual configured bounds. Selecting `rig` does not
 increase acceleration authority automatically.
 
 For an explicitly authorized balance experiment, add the profile and chosen
 duration/ceiling to the existing command, for example
 `--guard-profile rig --duration 30 --max-acceleration 3`. All existing actor,
 reference, port, `--development-only` and explicit `--execute` arguments still
-apply. This is a runner configuration example, not a hardware acceptance claim.
+apply. A 3 m/s² ceiling can stop an actor whose declared output range reaches
+25 m/s²; authorizing that complete range requires an explicit
+`--max-acceleration 25`. This example is not a hardware acceptance claim.
 
 The `balance_only_boundary` log records the selected profile, resolved limits
 and comparisons, startup limits, requested/maximum duration, requested
 acceleration ceiling, actor executor acceleration limit, and source hashes.
 The returned result includes the profile, resolved runtime limits and requested
 duration. Existing failure messages retain the crossed limit and actual value.
+
+The CLI now supplies the existing `EncoderPublisher` to its `Rig` by default,
+mirroring accepted encoder snapshots to UDP `127.0.0.1:3096` for the vision
+viewer, as the console does. Use `--no-vision-telemetry` to disable this mirror.
+This is read-only display telemetry; the actor still uses its pinned raw encoder
+contract, and no camera measurements enter inference. `Rig` starts and closes
+the publisher with the connection, including after a refusal. Direct callers
+of `run_balance_policy` retain ownership of their existing `Rig` and publisher
+lifecycle. Stopped shadow inference still reports demands above the execution
+ceiling without arming.

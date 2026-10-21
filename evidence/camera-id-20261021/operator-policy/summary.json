@@ -1,0 +1,1181 @@
+{
+  "actor_content_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+  "actor_file_sha256": "b6d1179873eadbfebe0798e7cc39c17f05cc1bf7d9983733550e26e5681e6f08",
+  "actor_path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261020/actor.json",
+  "actor_runtime_pins_verified": true,
+  "actor_scale_m_s2": 25.0,
+  "archive_sha256": "012c406f0762bfa67a2a7b4c4896f82f4ef43f31198f480e7d7ab3d62d6a1ad5",
+  "boundary_pinned_in_actor": false,
+  "boundary_source_sha256": "de7dca751a106b25c0f5a03adf420433d0fe9021eefcce130b775e4a73d7d904",
+  "runs": [
+    {
+      "accepted_action_requests": 0,
+      "arm_ack_count": 0,
+      "boundary": {
+        "actor_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+        "boundary_source_sha256": "d606ca496155acbbc8629543e03ab725a8981e87729da08f9e188dbeb173b793",
+        "expected_upright_raw": 330,
+        "gc_policy": {
+          "cyclic_gc_enabled": false,
+          "scope": "CLI defers cyclic GC from before Rig creation until after STOP/close; direct API callers own their context."
+        },
+        "hardware_accepted": false,
+        "host_monotonic_ns": 639848524302195,
+        "max_duration_s": 10.0,
+        "run_limits": {
+          "angle_rad": 0.15,
+          "angular_rate_rad_s": 1.0,
+          "position_m": 0.12,
+          "velocity_m_s": 0.25
+        },
+        "runtime_helper_sha256": "802328896a1c2e19e56236797afbd729e4d219a531c68a0716f64f25535a8546",
+        "start_limits": {
+          "angle_rad": 0.07,
+          "angular_rate_rad_s": 0.15,
+          "position_m": 0.015,
+          "velocity_m_s": 0.025
+        },
+        "state_basis": "Observed encoder and commanded cart state; no truth or stopping-distance guarantee",
+        "type": "balance_only_boundary"
+      },
+      "enabled_first_to_last_board_s": null,
+      "enabled_samples": 0,
+      "failed_prediction": null,
+      "failure": [],
+      "file_sha256": "5f66163dafc8eeb3f4f40d5e86906f74de1be1bc7c9a847dd1a38bd33f6adb10",
+      "final_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.02608568,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 58035905,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": -0.001007518,
+        "received_ns": 639848590683298,
+        "sid": 212481860,
+        "theta": 0.02607767,
+        "tick": 446704555,
+        "unwrapped_tick": 446704555,
+        "unwrapped_us": 32473890,
+        "us": 32473890,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "initial_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.02608166,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 58035904,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": -0.0006637682,
+        "received_ns": 639848479418600,
+        "sid": 212481860,
+        "theta": 0.02607767,
+        "tick": 446704441,
+        "unwrapped_tick": 446704441,
+        "unwrapped_us": 32359890,
+        "us": 32359890,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "max_abs_enabled_state": {
+        "acceleration": null,
+        "omega": null,
+        "theta": null,
+        "velocity": null,
+        "x": null
+      },
+      "misses_delta": 0,
+      "path": "/tmp/cartpole-balance-operator-20261021/runs/my-balance-01/rig-1792544552665961586-212481860.jsonl",
+      "policy_end": [],
+      "policy_start": [],
+      "replayed_actions": [],
+      "start_wall_local": "2026-10-20T21:02:32.665962-04:00",
+      "stop_ack_count": 3,
+      "stop_failures": [],
+      "telemetry_dropped_delta": 1,
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 639848599224201,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "unique_faults": [
+        0
+      ]
+    },
+    {
+      "accepted_action_requests": 7,
+      "arm_ack_count": 1,
+      "arm_ack_to_failure_s": 0.071907136,
+      "arm_ack_to_first_stop_ack_s": 0.07278051,
+      "boundary": {
+        "actor_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+        "boundary_source_sha256": "d606ca496155acbbc8629543e03ab725a8981e87729da08f9e188dbeb173b793",
+        "expected_upright_raw": 330,
+        "gc_policy": {
+          "cyclic_gc_enabled": false,
+          "scope": "CLI defers cyclic GC from before Rig creation until after STOP/close; direct API callers own their context."
+        },
+        "hardware_accepted": false,
+        "host_monotonic_ns": 640002574934476,
+        "max_duration_s": 10.0,
+        "run_limits": {
+          "angle_rad": 0.15,
+          "angular_rate_rad_s": 1.0,
+          "position_m": 0.12,
+          "velocity_m_s": 0.25
+        },
+        "runtime_helper_sha256": "802328896a1c2e19e56236797afbd729e4d219a531c68a0716f64f25535a8546",
+        "start_limits": {
+          "angle_rad": 0.07,
+          "angular_rate_rad_s": 0.15,
+          "position_m": 0.015,
+          "velocity_m_s": 0.025
+        },
+        "state_basis": "Observed encoder and commanded cart state; no truth or stopping-distance guarantee",
+        "type": "balance_only_boundary"
+      },
+      "enabled_first_to_last_board_s": 0.07,
+      "enabled_samples": 8,
+      "failed_prediction": {
+        "demand_m_s2": null,
+        "inferred_intent_type": "NoneType",
+        "replay_fault_reason": "balance-only envelope lost: angular_rate_rad_s=-1.345348 (abs must be < 1)",
+        "state": {
+          "acceleration": -1.819893,
+          "angle_hat": -0.037011,
+          "brake_direction": 0,
+          "demand": -2.765381,
+          "dropped": 58052043,
+          "fault": 0,
+          "flags": 207,
+          "last_seq": 7,
+          "misses": 0,
+          "mode": 12,
+          "omega": -1.345348,
+          "received_ns": 640002698045255,
+          "sid": 3871944831,
+          "theta": -0.0398835,
+          "tick": 446858659,
+          "unwrapped_tick": 446858659,
+          "unwrapped_us": 186577890,
+          "us": 186577890,
+          "velocity": 0.03983461,
+          "x": 0.002025
+        }
+      },
+      "failure": [
+        {
+          "act_finished_host_ns": 640002699300242,
+          "act_started_host_ns": 640002698990503,
+          "failed_observation_board_ns": 186577890000,
+          "failed_observation_sequence": 446858659,
+          "fetch_finished_host_ns": 640002698810177,
+          "fetch_started_host_ns": 640002698593114,
+          "host_monotonic_ns": 640002699335315,
+          "previous_sent_observation_board_ns": 186567890000,
+          "previous_sent_observation_sequence": 446858649,
+          "reason": "host policy fault: balance-only observed angle/rate/cart/commanded-speed envelope lost or rail braking active",
+          "stage": "act",
+          "timing": null,
+          "type": "policy_failure"
+        }
+      ],
+      "failure_to_stop_ack_ms": 0.873374,
+      "file_sha256": "e02b440421330da24d33540087a6da8a343d104bd5c5c81d8891c4a652baabae",
+      "final_state": {
+        "acceleration": 0.0,
+        "angle_hat": -0.04806878,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 58052043,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": -1.432304,
+        "received_ns": 640002704158521,
+        "sid": 3871944831,
+        "theta": -0.05062137,
+        "tick": 446858665,
+        "unwrapped_tick": 446858665,
+        "unwrapped_us": 186583890,
+        "us": 186583890,
+        "velocity": 0.0,
+        "x": 0.0021
+      },
+      "first_action_anchor_to_failure_board_s": 0.07,
+      "initial_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.02683345,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 58052042,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": -0.003787043,
+        "received_ns": 640002534920528,
+        "sid": 3871944831,
+        "theta": 0.02761165,
+        "tick": 446858491,
+        "unwrapped_tick": 446858491,
+        "unwrapped_us": 186409890,
+        "us": 186409890,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "max_abs_enabled_state": {
+        "acceleration": 1.819893,
+        "omega": 1.345348,
+        "theta": 0.0398835,
+        "velocity": 0.05151451,
+        "x": 0.002025
+      },
+      "misses_delta": 0,
+      "path": "/tmp/cartpole-balance-operator-20261021/runs/my-balance-01/rig-1792544706721154771-3871944831.jsonl",
+      "policy_end": [
+        {
+          "calls": 8,
+          "host_monotonic_ns": 640002701062926,
+          "max_compute_ns": 2172906,
+          "mean_compute_ns": 1486339.0,
+          "timing": null,
+          "type": "policy_end"
+        }
+      ],
+      "policy_start": [
+        {
+          "channel_max_age_ns": [
+            20000000,
+            20000000,
+            20000000,
+            20000000,
+            20000000,
+            20000000
+          ],
+          "channels": [
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "position",
+              "source": "step"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "velocity",
+              "source": "step"
+            },
+            {
+              "entity": "pole",
+              "frame_id": "encoder-zero",
+              "quantity": "angle",
+              "source": "magnetic"
+            },
+            {
+              "entity": "pole",
+              "frame_id": "encoder-zero",
+              "quantity": "angular_velocity",
+              "source": "magnetic"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "acceleration",
+              "source": "step"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "brake_direction",
+              "source": "step"
+            }
+          ],
+          "duration_s": 1.0,
+          "host_monotonic_ns": 640002623988317,
+          "max_acceleration": 3.0,
+          "policy": "BalanceOnlyPolicy",
+          "timing": null,
+          "ttl_ms": 20,
+          "type": "policy_start"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "board_ns": 186507890000,
+          "demand_m_s2": 1.111422244714616,
+          "host_request_ns": 640002631367034,
+          "replay_difference_m_s2": 1.9984014443252818e-15,
+          "sequence": 446858589,
+          "state": {
+            "acceleration": 0.0,
+            "angle_hat": 0.0265917,
+            "brake_direction": 0,
+            "demand": 0.0,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 0,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.002882681,
+            "received_ns": 640002627876002,
+            "sid": 3871944831,
+            "theta": 0.02761165,
+            "tick": 446858589,
+            "unwrapped_tick": 446858589,
+            "unwrapped_us": 186507890,
+            "us": 186507890,
+            "velocity": 0.0,
+            "x": 0.0
+          }
+        },
+        {
+          "board_ns": 186517890000,
+          "demand_m_s2": 0.8768024420259887,
+          "host_request_ns": 640002641062534,
+          "replay_difference_m_s2": -6.661338147750939e-16,
+          "sequence": 446858599,
+          "state": {
+            "acceleration": 1.05,
+            "angle_hat": 0.02374187,
+            "brake_direction": 0,
+            "demand": 1.111422,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 1,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.07940271,
+            "received_ns": 640002638132578,
+            "sid": 3871944831,
+            "theta": 0.02454369,
+            "tick": 446858599,
+            "unwrapped_tick": 446858599,
+            "unwrapped_us": 186517890,
+            "us": 186517890,
+            "velocity": 0.0042,
+            "x": 0.0
+          }
+        },
+        {
+          "board_ns": 186527890000,
+          "demand_m_s2": 1.447271517766185,
+          "host_request_ns": 640002651916218,
+          "replay_difference_m_s2": 0.0,
+          "sequence": 446858609,
+          "state": {
+            "acceleration": 0.8768024,
+            "angle_hat": 0.02734835,
+            "brake_direction": 0,
+            "demand": 0.8768024,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 2,
+            "misses": 0,
+            "mode": 12,
+            "omega": 0.04479542,
+            "received_ns": 640002648321631,
+            "sid": 3871944831,
+            "theta": 0.0322136,
+            "tick": 446858609,
+            "unwrapped_tick": 446858609,
+            "unwrapped_us": 186527890,
+            "us": 186527890,
+            "velocity": 0.01375651,
+            "x": 7.5e-05
+          }
+        },
+        {
+          "board_ns": 186537890000,
+          "demand_m_s2": 1.4074150430538488,
+          "host_request_ns": 640002661728394,
+          "replay_difference_m_s2": -8.881784197001252e-16,
+          "sequence": 446858619,
+          "state": {
+            "acceleration": 1.447271,
+            "angle_hat": 0.02969647,
+            "brake_direction": 0,
+            "demand": 1.447271,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 3,
+            "misses": 0,
+            "mode": 12,
+            "omega": 0.09446529,
+            "received_ns": 640002658390360,
+            "sid": 3871944831,
+            "theta": 0.02761165,
+            "tick": 446858619,
+            "unwrapped_tick": 446858619,
+            "unwrapped_us": 186537890,
+            "us": 186537890,
+            "velocity": 0.02513594,
+            "x": 0.0002625
+          }
+        },
+        {
+          "board_ns": 186547890000,
+          "demand_m_s2": 0.6146264654811717,
+          "host_request_ns": 640002671631102,
+          "replay_difference_m_s2": 8.881784197001252e-16,
+          "sequence": 446858629,
+          "state": {
+            "acceleration": 1.407415,
+            "angle_hat": 0.02383296,
+            "brake_direction": 0,
+            "demand": 1.407415,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 4,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.0955767,
+            "received_ns": 640002668174919,
+            "sid": 3871944831,
+            "theta": 0.01687379,
+            "tick": 446858629,
+            "unwrapped_tick": 446858629,
+            "unwrapped_us": 186547890,
+            "us": 186547890,
+            "velocity": 0.03932966,
+            "x": 0.0005625
+          }
+        },
+        {
+          "board_ns": 186557890000,
+          "demand_m_s2": -0.76989306808043,
+          "host_request_ns": 640002680886139,
+          "replay_difference_m_s2": 1.1102230246251565e-16,
+          "sequence": 446858639,
+          "state": {
+            "acceleration": 0.6146265,
+            "angle_hat": 0.009221468,
+            "brake_direction": 0,
+            "demand": 0.6146265,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 5,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.4705976,
+            "received_ns": 640002678002168,
+            "sid": 3871944831,
+            "theta": 0.001533981,
+            "tick": 446858639,
+            "unwrapped_tick": 446858639,
+            "unwrapped_us": 186557890,
+            "us": 186557890,
+            "velocity": 0.04956824,
+            "x": 0.0010125
+          }
+        },
+        {
+          "board_ns": 186567890000,
+          "demand_m_s2": -2.76538118890368,
+          "host_request_ns": 640002691276287,
+          "replay_difference_m_s2": 1.7763568394002505e-15,
+          "sequence": 446858649,
+          "state": {
+            "acceleration": -0.4353736,
+            "angle_hat": -0.01316264,
+            "brake_direction": 0,
+            "demand": -0.7698931,
+            "dropped": 58052043,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 6,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.9591751,
+            "received_ns": 640002688095154,
+            "sid": 3871944831,
+            "theta": -0.02300971,
+            "tick": 446858649,
+            "unwrapped_tick": 446858649,
+            "unwrapped_us": 186567890,
+            "us": 186567890,
+            "velocity": 0.05151451,
+            "x": 0.0015375
+          }
+        }
+      ],
+      "start_wall_local": "2026-10-20T21:05:06.721155-04:00",
+      "stop_ack_count": 4,
+      "stop_failures": [],
+      "telemetry_dropped_delta": 1,
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 640002712516151,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "unique_faults": [
+        0
+      ]
+    },
+    {
+      "accepted_action_requests": 0,
+      "arm_ack_count": 0,
+      "boundary": {
+        "actor_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+        "boundary_source_sha256": "de7dca751a106b25c0f5a03adf420433d0fe9021eefcce130b775e4a73d7d904",
+        "executor_acceleration_limit_m_s2": 25.0,
+        "expected_upright_raw": 330,
+        "gc_policy": {
+          "cyclic_gc_enabled": false,
+          "scope": "CLI defers cyclic GC from before Rig creation until after STOP/close; direct API callers own their context."
+        },
+        "guard_profile": "rig",
+        "hardware_accepted": false,
+        "host_monotonic_ns": 687736756871926,
+        "max_acceleration_m_s2": 3.0,
+        "max_duration_s": 60.0,
+        "requested_duration_s": 55.0,
+        "run_limit_comparison": "abs <=",
+        "run_limits": {
+          "angle_rad": null,
+          "angular_rate_rad_s": null,
+          "position_m": 0.2990000247955322,
+          "velocity_m_s": 1.5
+        },
+        "runtime_helper_sha256": "802328896a1c2e19e56236797afbd729e4d219a531c68a0716f64f25535a8546",
+        "start_limits": {
+          "angle_rad": 0.07,
+          "angular_rate_rad_s": 0.15,
+          "position_m": 0.015,
+          "velocity_m_s": 0.025
+        },
+        "state_basis": "Observed encoder and commanded cart state; no truth or stopping-distance guarantee",
+        "stop_on_rail_braking": false,
+        "type": "balance_only_boundary"
+      },
+      "enabled_first_to_last_board_s": null,
+      "enabled_samples": 0,
+      "failed_prediction": {
+        "demand_m_s2": null,
+        "inferred_intent_type": null,
+        "replay_fault_reason": null,
+        "state": {
+          "acceleration": 0.0,
+          "angle_hat": 0.0769816,
+          "brake_direction": 0,
+          "demand": 0.0,
+          "dropped": 62800898,
+          "fault": 0,
+          "flags": 205,
+          "last_seq": 0,
+          "misses": 0,
+          "mode": 0,
+          "omega": 0.001617442,
+          "received_ns": 687736814104368,
+          "sid": 2139398878,
+          "theta": 0.07669904,
+          "tick": 494592625,
+          "unwrapped_tick": 494592625,
+          "unwrapped_us": 675903634,
+          "us": 675903634,
+          "velocity": 0.0,
+          "x": 0.0
+        }
+      },
+      "failure": [
+        {
+          "act_finished_host_ns": null,
+          "act_started_host_ns": null,
+          "failed_observation_board_ns": 675903634000,
+          "failed_observation_sequence": 494592625,
+          "fetch_finished_host_ns": 687736817064895,
+          "fetch_started_host_ns": 687736816929595,
+          "host_monotonic_ns": 687736817487178,
+          "previous_sent_observation_board_ns": null,
+          "previous_sent_observation_sequence": null,
+          "reason": "balance-only requires a centered, nearly stationary upright start (|x|<=.015 m, |commanded v|<=.025 m/s, |angle|<=.07 rad, |rate|<=.15 rad/s, no rail braking)",
+          "stage": "act",
+          "timing": null,
+          "type": "policy_failure"
+        }
+      ],
+      "file_sha256": "7f755e06b0075d5206c1f122592faf7dd10253d33327b4838151be674b27f007",
+      "final_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.07718791,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62800898,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": 0.006747664,
+        "received_ns": 687736821965922,
+        "sid": 2139398878,
+        "theta": 0.07669904,
+        "tick": 494592633,
+        "unwrapped_tick": 494592633,
+        "unwrapped_us": 675911634,
+        "us": 675911634,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "initial_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.07794946,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62800898,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": 0.02301625,
+        "received_ns": 687736702433767,
+        "sid": 2139398878,
+        "theta": 0.07823303,
+        "tick": 494592508,
+        "unwrapped_tick": 494592508,
+        "unwrapped_us": 675786634,
+        "us": 675786634,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "max_abs_enabled_state": {
+        "acceleration": null,
+        "omega": null,
+        "theta": null,
+        "velocity": null,
+        "x": null
+      },
+      "misses_delta": 0,
+      "path": "/tmp/cartpole-balance-operator-20261021/runs/my-balance-01/rig-1792592440889111951-2139398878.jsonl",
+      "policy_end": [
+        {
+          "calls": 0,
+          "host_monotonic_ns": 687736818754732,
+          "max_compute_ns": 0,
+          "mean_compute_ns": null,
+          "timing": null,
+          "type": "policy_end"
+        }
+      ],
+      "policy_start": [],
+      "replayed_actions": [],
+      "start_wall_local": "2026-10-21T10:20:40.889112-04:00",
+      "stop_ack_count": 4,
+      "stop_failures": [],
+      "telemetry_dropped_delta": 0,
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 687736831141047,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "unique_faults": [
+        0
+      ]
+    },
+    {
+      "accepted_action_requests": 0,
+      "arm_ack_count": 0,
+      "boundary": {
+        "actor_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+        "boundary_source_sha256": "de7dca751a106b25c0f5a03adf420433d0fe9021eefcce130b775e4a73d7d904",
+        "executor_acceleration_limit_m_s2": 25.0,
+        "expected_upright_raw": 330,
+        "gc_policy": {
+          "cyclic_gc_enabled": false,
+          "scope": "CLI defers cyclic GC from before Rig creation until after STOP/close; direct API callers own their context."
+        },
+        "guard_profile": "rig",
+        "hardware_accepted": false,
+        "host_monotonic_ns": 687845626662696,
+        "max_acceleration_m_s2": 3.0,
+        "max_duration_s": 60.0,
+        "requested_duration_s": 55.0,
+        "run_limit_comparison": "abs <=",
+        "run_limits": {
+          "angle_rad": null,
+          "angular_rate_rad_s": null,
+          "position_m": 0.2990000247955322,
+          "velocity_m_s": 1.5
+        },
+        "runtime_helper_sha256": "802328896a1c2e19e56236797afbd729e4d219a531c68a0716f64f25535a8546",
+        "start_limits": {
+          "angle_rad": 0.07,
+          "angular_rate_rad_s": 0.15,
+          "position_m": 0.015,
+          "velocity_m_s": 0.025
+        },
+        "state_basis": "Observed encoder and commanded cart state; no truth or stopping-distance guarantee",
+        "stop_on_rail_braking": false,
+        "type": "balance_only_boundary"
+      },
+      "enabled_first_to_last_board_s": null,
+      "enabled_samples": 0,
+      "failed_prediction": {
+        "demand_m_s2": null,
+        "inferred_intent_type": null,
+        "replay_fault_reason": null,
+        "state": {
+          "acceleration": 0.0,
+          "angle_hat": 3.07103,
+          "brake_direction": 0,
+          "demand": 0.0,
+          "dropped": 62809976,
+          "fault": 0,
+          "flags": 205,
+          "last_seq": 0,
+          "misses": 0,
+          "mode": 0,
+          "omega": 9.01922e-05,
+          "received_ns": 687845681241922,
+          "sid": 4249800223,
+          "theta": 3.07103,
+          "tick": 494701491,
+          "unwrapped_tick": 494701491,
+          "unwrapped_us": 784769634,
+          "us": 784769634,
+          "velocity": 0.0,
+          "x": 0.0
+        }
+      },
+      "failure": [
+        {
+          "act_finished_host_ns": null,
+          "act_started_host_ns": null,
+          "failed_observation_board_ns": 784769634000,
+          "failed_observation_sequence": 494701491,
+          "fetch_finished_host_ns": 687845684167886,
+          "fetch_started_host_ns": 687845683862854,
+          "host_monotonic_ns": 687845684776894,
+          "previous_sent_observation_board_ns": null,
+          "previous_sent_observation_sequence": null,
+          "reason": "balance-only requires a centered, nearly stationary upright start (|x|<=.015 m, |commanded v|<=.025 m/s, |angle|<=.07 rad, |rate|<=.15 rad/s, no rail braking)",
+          "stage": "act",
+          "timing": null,
+          "type": "policy_failure"
+        }
+      ],
+      "file_sha256": "32e1bfd1181f52d759dda87b3b563c631a30f549b51a5b07d81171664fb0f064",
+      "final_state": {
+        "acceleration": 0.0,
+        "angle_hat": 3.07103,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62809976,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": 9.01922e-05,
+        "received_ns": 687845693289406,
+        "sid": 4249800223,
+        "theta": 3.07103,
+        "tick": 494701503,
+        "unwrapped_tick": 494701503,
+        "unwrapped_us": 784781634,
+        "us": 784781634,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "initial_state": {
+        "acceleration": 0.0,
+        "angle_hat": 3.07103,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62809975,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": 9.01922e-05,
+        "received_ns": 687845577712994,
+        "sid": 4249800223,
+        "theta": 3.07103,
+        "tick": 494701384,
+        "unwrapped_tick": 494701384,
+        "unwrapped_us": 784662634,
+        "us": 784662634,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "max_abs_enabled_state": {
+        "acceleration": null,
+        "omega": null,
+        "theta": null,
+        "velocity": null,
+        "x": null
+      },
+      "misses_delta": 0,
+      "path": "/tmp/cartpole-balance-operator-20261021/runs/my-balance-01/rig-1792592549763586908-4249800223.jsonl",
+      "policy_end": [
+        {
+          "calls": 0,
+          "host_monotonic_ns": 687845689476058,
+          "max_compute_ns": 0,
+          "mean_compute_ns": null,
+          "timing": null,
+          "type": "policy_end"
+        }
+      ],
+      "policy_start": [],
+      "replayed_actions": [],
+      "start_wall_local": "2026-10-21T10:22:29.763587-04:00",
+      "stop_ack_count": 4,
+      "stop_failures": [],
+      "telemetry_dropped_delta": 1,
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 687845701373074,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "unique_faults": [
+        0
+      ]
+    },
+    {
+      "accepted_action_requests": 3,
+      "arm_ack_count": 1,
+      "arm_ack_to_failure_s": 0.032763768,
+      "arm_ack_to_first_stop_ack_s": 0.033440554,
+      "boundary": {
+        "actor_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+        "boundary_source_sha256": "de7dca751a106b25c0f5a03adf420433d0fe9021eefcce130b775e4a73d7d904",
+        "executor_acceleration_limit_m_s2": 25.0,
+        "expected_upright_raw": 330,
+        "gc_policy": {
+          "cyclic_gc_enabled": false,
+          "scope": "CLI defers cyclic GC from before Rig creation until after STOP/close; direct API callers own their context."
+        },
+        "guard_profile": "rig",
+        "hardware_accepted": false,
+        "host_monotonic_ns": 687882210260229,
+        "max_acceleration_m_s2": 3.0,
+        "max_duration_s": 60.0,
+        "requested_duration_s": 55.0,
+        "run_limit_comparison": "abs <=",
+        "run_limits": {
+          "angle_rad": null,
+          "angular_rate_rad_s": null,
+          "position_m": 0.2990000247955322,
+          "velocity_m_s": 1.5
+        },
+        "runtime_helper_sha256": "802328896a1c2e19e56236797afbd729e4d219a531c68a0716f64f25535a8546",
+        "start_limits": {
+          "angle_rad": 0.07,
+          "angular_rate_rad_s": 0.15,
+          "position_m": 0.015,
+          "velocity_m_s": 0.025
+        },
+        "state_basis": "Observed encoder and commanded cart state; no truth or stopping-distance guarantee",
+        "stop_on_rail_braking": false,
+        "type": "balance_only_boundary"
+      },
+      "enabled_first_to_last_board_s": 0.03,
+      "enabled_samples": 4,
+      "failed_prediction": {
+        "demand_m_s2": 3.120775815247386,
+        "inferred_intent_type": "Acceleration",
+        "replay_fault_reason": null,
+        "state": {
+          "acceleration": -0.4871881,
+          "angle_hat": 0.02113137,
+          "brake_direction": 0,
+          "demand": -0.4871881,
+          "dropped": 62813620,
+          "fault": 0,
+          "flags": 207,
+          "last_seq": 3,
+          "misses": 0,
+          "mode": 12,
+          "omega": 0.7718396,
+          "received_ns": 687882293776236,
+          "sid": 2520874797,
+          "theta": 0.0398835,
+          "tick": 494738103,
+          "unwrapped_tick": 494738103,
+          "unwrapped_us": 821381634,
+          "us": 821381634,
+          "velocity": -0.0051809,
+          "x": 0.0
+        }
+      },
+      "failure": [
+        {
+          "act_finished_host_ns": 687882296290350,
+          "act_started_host_ns": 687882294765286,
+          "failed_observation_board_ns": 821381634000,
+          "failed_observation_sequence": 494738103,
+          "fetch_finished_host_ns": 687882294592130,
+          "fetch_started_host_ns": 687882294400509,
+          "host_monotonic_ns": 687882296328111,
+          "previous_sent_observation_board_ns": 821371634000,
+          "previous_sent_observation_sequence": 494738093,
+          "reason": "policy output exceeds commissioning bound or is not Acceleration",
+          "stage": "act",
+          "timing": null,
+          "type": "policy_failure"
+        }
+      ],
+      "failure_to_stop_ack_ms": 0.676786,
+      "file_sha256": "f6d404cbe9fe3d7f2d9a207f53ce724d22bfcb0e6fa98de10e9f040d8e29e74c",
+      "final_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.03875006,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62813620,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": 1.109483,
+        "received_ns": 687882300979657,
+        "sid": 2520874797,
+        "theta": 0.0322136,
+        "tick": 494738110,
+        "unwrapped_tick": 494738110,
+        "unwrapped_us": 821388634,
+        "us": 821388634,
+        "velocity": 0.0,
+        "x": -3.75e-05
+      },
+      "first_action_anchor_to_failure_board_s": 0.03,
+      "initial_state": {
+        "acceleration": 0.0,
+        "angle_hat": 9.433308e-06,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 62813620,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 0,
+        "mode": 0,
+        "omega": -0.002943095,
+        "received_ns": 687882157405536,
+        "sid": 2520874797,
+        "theta": 0.0,
+        "tick": 494737963,
+        "unwrapped_tick": 494737963,
+        "unwrapped_us": 821241634,
+        "us": 821241634,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "max_abs_enabled_state": {
+        "acceleration": 0.4871881,
+        "omega": 0.7718396,
+        "theta": 0.0398835,
+        "velocity": 0.0051809,
+        "x": 0.0
+      },
+      "misses_delta": 0,
+      "path": "/tmp/cartpole-balance-operator-20261021/runs/my-balance-01/rig-1792592586345230640-2520874797.jsonl",
+      "policy_end": [
+        {
+          "calls": 4,
+          "host_monotonic_ns": 687882298002555,
+          "max_compute_ns": 2323548,
+          "mean_compute_ns": 1656187.25,
+          "timing": null,
+          "type": "policy_end"
+        }
+      ],
+      "policy_start": [
+        {
+          "channel_max_age_ns": [
+            20000000,
+            20000000,
+            20000000,
+            20000000,
+            20000000,
+            20000000
+          ],
+          "channels": [
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "position",
+              "source": "step"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "velocity",
+              "source": "step"
+            },
+            {
+              "entity": "pole",
+              "frame_id": "encoder-zero",
+              "quantity": "angle",
+              "source": "magnetic"
+            },
+            {
+              "entity": "pole",
+              "frame_id": "encoder-zero",
+              "quantity": "angular_velocity",
+              "source": "magnetic"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "acceleration",
+              "source": "step"
+            },
+            {
+              "entity": "cart",
+              "frame_id": "cart-step-home",
+              "quantity": "brake_direction",
+              "source": "step"
+            }
+          ],
+          "duration_s": 55.0,
+          "host_monotonic_ns": 687882260674827,
+          "max_acceleration": 3.0,
+          "policy": "BalanceOnlyPolicy",
+          "timing": null,
+          "ttl_ms": 20,
+          "type": "policy_start"
+        }
+      ],
+      "replayed_actions": [
+        {
+          "board_ns": 821351634000,
+          "demand_m_s2": 0.00680486544568093,
+          "host_request_ns": 687882267853959,
+          "replay_difference_m_s2": -5.204170427930421e-16,
+          "sequence": 494738073,
+          "state": {
+            "acceleration": 0.0,
+            "angle_hat": 0.0001663463,
+            "brake_direction": 0,
+            "demand": 0.0,
+            "dropped": 62813620,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 0,
+            "misses": 0,
+            "mode": 12,
+            "omega": 0.003436504,
+            "received_ns": 687882264204871,
+            "sid": 2520874797,
+            "theta": 0.0,
+            "tick": 494738073,
+            "unwrapped_tick": 494738073,
+            "unwrapped_us": 821351634,
+            "us": 821351634,
+            "velocity": 0.0,
+            "x": 0.0
+          }
+        },
+        {
+          "board_ns": 821361634000,
+          "demand_m_s2": -0.20258204470481486,
+          "host_request_ns": 687882276670317,
+          "replay_difference_m_s2": -1.304512053934559e-15,
+          "sequence": 494738083,
+          "state": {
+            "acceleration": 0.006804865,
+            "angle_hat": 0.001130731,
+            "brake_direction": 0,
+            "demand": 0.006804865,
+            "dropped": 62813620,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 1,
+            "misses": 0,
+            "mode": 12,
+            "omega": 0.02306765,
+            "received_ns": 687882274057353,
+            "sid": 2520874797,
+            "theta": -0.006135923,
+            "tick": 494738083,
+            "unwrapped_tick": 494738083,
+            "unwrapped_us": 821361634,
+            "us": 821361634,
+            "velocity": 4.082919e-05,
+            "x": 0.0
+          }
+        },
+        {
+          "board_ns": 821371634000,
+          "demand_m_s2": -0.48718805774612467,
+          "host_request_ns": 687882286506254,
+          "replay_difference_m_s2": 6.106226635438361e-16,
+          "sequence": 494738093,
+          "state": {
+            "acceleration": -0.202582,
+            "angle_hat": -0.02109328,
+            "brake_direction": 0,
+            "demand": -0.202582,
+            "dropped": 62813620,
+            "fault": 0,
+            "flags": 207,
+            "last_seq": 2,
+            "misses": 0,
+            "mode": 12,
+            "omega": -0.5219973,
+            "received_ns": 687882283614307,
+            "sid": 2520874797,
+            "theta": 0.01380583,
+            "tick": 494738093,
+            "unwrapped_tick": 494738093,
+            "unwrapped_us": 821371634,
+            "us": 821371634,
+            "velocity": -0.001297444,
+            "x": 0.0
+          }
+        }
+      ],
+      "start_wall_local": "2026-10-21T10:23:06.345231-04:00",
+      "stop_ack_count": 4,
+      "stop_failures": [],
+      "telemetry_dropped_delta": 0,
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 687882309239392,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "unique_faults": [
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "cartpole-id-campaign-review-v1",
+  "integrity_ok": true,
+  "sensor_mode": "encoder_camera",
+  "independent_cart_motion_measured": false,
+  "recording_complete": true,
+  "synthetic": false,
+  "analysis_usable": false,
+  "ready_for_fit": false,
+  "hardware_accepted": false,
+  "blockers": [
+    "Camera coverage lacks valid frames, span, rate or gap continuity in a measurement phase; inspect before fitting."
+  ],
+  "timing": {
+    "schema_version": 1,
+    "clock_basis": "host monotonic receipt and board counters reported separately",
+    "instrumentation_overhead_included": true,
+    "counts": {
+      "state_records": 3154,
+      "write_starts": 942,
+      "write_ends": 942,
+      "write_errors": 0,
+      "partial_writes": 0,
+      "incomplete_write_events": 0,
+      "read_chunks": 6573,
+      "read_bytes": 428122,
+      "read_errors": 0,
+      "policy_calls": 0,
+      "policy_errors": 0,
+      "invalid_timing_records": 0,
+      "session_boundaries": 1,
+      "lease_boundaries": 2,
+      "sequence_boundaries": 0,
+      "board_counter_boundaries": 0,
+      "action_requests": 0,
+      "recorded_drops": 0
+    },
+    "state_receipt_interval_ns": {
+      "count": 3153,
+      "p50": 9989385.0,
+      "p95": 10645809.0,
+      "p99": 11680492.84,
+      "max": 13399023.0
+    },
+    "board_tick_gap": {
+      "count": 3153,
+      "p50": 10.0,
+      "p95": 10.0,
+      "p99": 10.0,
+      "max": 10.0
+    },
+    "board_us_gap": {
+      "count": 3153,
+      "p50": 10000.0,
+      "p95": 10000.0,
+      "p99": 10000.0,
+      "max": 10000.0
+    },
+    "command_write_duration_ns": {
+      "count": 942,
+      "p50": 297609.0,
+      "p95": 1247780.35,
+      "p99": 1986449.9000000008,
+      "max": 3852115.0
+    },
+    "policy_duration_ns": {
+      "count": 0,
+      "p50": null,
+      "p95": null,
+      "p99": null,
+      "max": null
+    },
+    "read_call_duration_ns": {
+      "count": 6573,
+      "p50": 435789.0,
+      "p95": 3022970.0,
+      "p99": 3303933.88,
+      "max": 9054061.0
+    },
+    "acknowledgements": {
+      "basis": "first exact last_seq receipt relative to the host write interval",
+      "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+      "written_actions": 0,
+      "observed_sequences": 0,
+      "unobserved_sequences": 0,
+      "telemetry_skipped_sequences": 0,
+      "right_censored_sequences": 0,
+      "ambiguous_sequences": 0,
+      "missed_commands": null,
+      "samples": []
+    }
+  },
+  "camera_quality": {
+    "unique_frames": 1866,
+    "valid_frames": 1760,
+    "valid_fraction": 0.9431939978563773,
+    "trials": [
+      {
+        "id": "001-coupled",
+        "frames": 1850,
+        "valid_fraction": 0.9432432432432433
+      }
+    ],
+    "measurement_phases": [
+      {
+        "phase": "coupled",
+        "start_ns": 689017111307487,
+        "end_ns": 689042111307487,
+        "trial_id": "001-coupled",
+        "samples": 1445,
+        "duration_s": 25.0,
+        "span_s": 24.989970482,
+        "rate_hz": 57.8,
+        "max_gap_s": 0.1596747,
+        "qualified": false,
+        "valid_fraction": 0.9377027903958468
+      }
+    ]
+  },
+  "telemetry_quality": [
+    {
+      "phase": "coupled",
+      "start_ns": 689017111307487,
+      "end_ns": 689042111307487,
+      "trial_id": "001-coupled",
+      "samples": 2500,
+      "duration_s": 25.0,
+      "span_s": 24.989694633,
+      "rate_hz": 100.0,
+      "max_gap_s": 0.013399023,
+      "qualified": true
+    }
+  ],
+  "interpretation": "Collection quality is not model qualification. Independent metric/angle references and held-out prediction checks are still required.",
+  "analysis_request": {
+    "schema": "cartpole-id-analysis-request-v1",
+    "dataset_role": "training",
+    "sensor_mode": "encoder_camera",
+    "independent_cart_motion_measured": false,
+    "synthetic": false,
+    "hardware_accepted": false,
+    "questions": [
+      "Compare measured camera cart displacement against step count by direction and speed; qualify metric anchors first.",
+      "Estimate actuator tracking/lag only within camera sampling and clock uncertainty; report unresolved fast dynamics.",
+      "Fit raw encoder versus independently referenced pose by angle and approach; hold out repetitions; keep hanging phase separate.",
+      "Compare near-upright free releases with the frozen hinge-friction law; test stiction/hysteresis before adding model terms.",
+      "Summarize 100 Hz host timing and observed sequence acknowledgements; do not infer physical or one-way delay.",
+      "Validate the assembled model on coupled runs reserved as validation; do not tune on those holdouts."
+    ],
+    "model_update": {
+      "automatic": false,
+      "overwrite_defaults": false,
+      "next_step": "Review real training/validation evidence, fit supported terms, implement missing plant terms if supported, then export a new versioned profile and test RigCartpoleEnv.",
+      "preserved": "existing model.json, motion-profile.json and observation-config.json remain unchanged"
+    }
+  }
+}

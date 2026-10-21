@@ -1,0 +1,302 @@
+......................................F............................FFFFF [ 90%]
+...FFFF.                                                                 [100%]
+=================================== FAILURES ===================================
+_____________ test_acceleration_ceiling_faults_instead_of_clipping _____________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_acceleration_ceiling_faul0')
+
+    def test_acceleration_ceiling_faults_instead_of_clipping(tmp_path):
+        actor = saved_actor(tmp_path, demand=.5)
+        with rehearsal() as rig:
+>           with pytest.raises(ValidationError, match='selected --max-acceleration'):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'selected --max-acceleration'
+E             Actual message: 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:191: AssertionError
+_______ test_rig_profile_does_not_expand_default_acceleration_authority ________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_rig_profile_does_not_expa0')
+
+    def test_rig_profile_does_not_expand_default_acceleration_authority(tmp_path):
+        actor = saved_actor(tmp_path, demand=.5)
+        with rehearsal() as rig:
+>           with pytest.raises(ValidationError, match='selected --max-acceleration'):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'selected --max-acceleration'
+E             Actual message: 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:409: AssertionError
+_ test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[0.13-commissioning] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_refused_demand_reports_ex0')
+guard_profile = 'commissioning', demand = 0.13
+
+    @pytest.mark.parametrize('guard_profile', ['commissioning', 'rig'])
+    @pytest.mark.parametrize('demand', [.13, -.13])
+    def test_refused_demand_reports_exact_value_and_selected_ceiling_before_send(tmp_path, guard_profile, demand):
+        actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+        with rehearsal() as rig:
+            with pytest.raises(ValidationError) as error:
+                run(rig, actor, execute=True, guard_profile=guard_profile, max_acceleration=3.)
+            message = str(error.value)
+>           assert f'policy acceleration {demand * 25!r} m/s²' in message
+E           AssertionError: assert 'policy acceleration 3.25 m/s²' in 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:423: AssertionError
+_ test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[0.13-rig] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_refused_demand_reports_ex1')
+guard_profile = 'rig', demand = 0.13
+
+    @pytest.mark.parametrize('guard_profile', ['commissioning', 'rig'])
+    @pytest.mark.parametrize('demand', [.13, -.13])
+    def test_refused_demand_reports_exact_value_and_selected_ceiling_before_send(tmp_path, guard_profile, demand):
+        actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+        with rehearsal() as rig:
+            with pytest.raises(ValidationError) as error:
+                run(rig, actor, execute=True, guard_profile=guard_profile, max_acceleration=3.)
+            message = str(error.value)
+>           assert f'policy acceleration {demand * 25!r} m/s²' in message
+E           AssertionError: assert 'policy acceleration 3.25 m/s²' in 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:423: AssertionError
+_ test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[-0.13-commissioning] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_refused_demand_reports_ex2')
+guard_profile = 'commissioning', demand = -0.13
+
+    @pytest.mark.parametrize('guard_profile', ['commissioning', 'rig'])
+    @pytest.mark.parametrize('demand', [.13, -.13])
+    def test_refused_demand_reports_exact_value_and_selected_ceiling_before_send(tmp_path, guard_profile, demand):
+        actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+        with rehearsal() as rig:
+            with pytest.raises(ValidationError) as error:
+                run(rig, actor, execute=True, guard_profile=guard_profile, max_acceleration=3.)
+            message = str(error.value)
+>           assert f'policy acceleration {demand * 25!r} m/s²' in message
+E           AssertionError: assert 'policy acceleration -3.25 m/s²' in 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:423: AssertionError
+_ test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[-0.13-rig] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_refused_demand_reports_ex3')
+guard_profile = 'rig', demand = -0.13
+
+    @pytest.mark.parametrize('guard_profile', ['commissioning', 'rig'])
+    @pytest.mark.parametrize('demand', [.13, -.13])
+    def test_refused_demand_reports_exact_value_and_selected_ceiling_before_send(tmp_path, guard_profile, demand):
+        actor = saved_actor(tmp_path, demand=demand, action_scale=25.)
+        with rehearsal() as rig:
+            with pytest.raises(ValidationError) as error:
+                run(rig, actor, execute=True, guard_profile=guard_profile, max_acceleration=3.)
+            message = str(error.value)
+>           assert f'policy acceleration {demand * 25!r} m/s²' in message
+E           AssertionError: assert 'policy acceleration -3.25 m/s²' in 'policy output exceeds commissioning bound or is not Acceleration'
+
+tests/test_balance_hardware.py:423: AssertionError
+_ test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[False-extra0-3096] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_cli_wires_encoder_publish0')
+extra = [], port = 3096, refusal = False
+
+    @pytest.mark.parametrize('extra,port', [([], 3096), (['--no-vision-telemetry'], 0)])
+    @pytest.mark.parametrize('refusal', [False, True])
+    def test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop(tmp_path, extra, port, refusal):
+        from cartpole_sdk.learning.balance_hardware import main
+        from cartpole_sdk.sensing.telemetry import EncoderPublisher
+        actor = saved_actor(tmp_path, demand=.5 if refusal else .1)
+        publishers = []
+        with rehearsal() as rig:
+            def factory(*args, **kwargs):
+                publisher = kwargs.get('vision_publisher')
+                assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+                assert publisher.port == port
+                publishers.append(publisher)
+                # Scripted connect has no I/O; production Rig.close still owns the mirror.
+                rig._vision_publisher = publisher
+                return rig
+            argv = ['--actor', str(actor), '--port', 'scripted', '--development-only',
+                    '--expected-upright-raw', '123', '--duration', '.04', '--execute', *extra]
+            if refusal:
+                with pytest.raises(SystemExit) as error:
+                    main(argv, rig_factory=factory)
+                assert error.value.code == 2
+            else:
+>               assert main(argv, rig_factory=factory) == 0
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_hardware.py:476: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:221: in main
+    with defer_cyclic_gc(), factory(args.port, rate_hz=100, log_dir=args.log_dir) as rig:
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ('scripted',), kwargs = {'rate_hz': 100, 'log_dir': None}
+
+    def factory(*args, **kwargs):
+        publisher = kwargs.get('vision_publisher')
+>       assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+E       AssertionError: CLI must pass the existing mirror to Rig
+E       assert False
+E        +  where False = isinstance(None, <class 'cartpole_sdk.sensing.telemetry.EncoderPublisher'>)
+
+tests/test_balance_hardware.py:463: AssertionError
+_ test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[False-extra1-0] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_cli_wires_encoder_publish1')
+extra = ['--no-vision-telemetry'], port = 0, refusal = False
+
+    @pytest.mark.parametrize('extra,port', [([], 3096), (['--no-vision-telemetry'], 0)])
+    @pytest.mark.parametrize('refusal', [False, True])
+    def test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop(tmp_path, extra, port, refusal):
+        from cartpole_sdk.learning.balance_hardware import main
+        from cartpole_sdk.sensing.telemetry import EncoderPublisher
+        actor = saved_actor(tmp_path, demand=.5 if refusal else .1)
+        publishers = []
+        with rehearsal() as rig:
+            def factory(*args, **kwargs):
+                publisher = kwargs.get('vision_publisher')
+                assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+                assert publisher.port == port
+                publishers.append(publisher)
+                # Scripted connect has no I/O; production Rig.close still owns the mirror.
+                rig._vision_publisher = publisher
+                return rig
+            argv = ['--actor', str(actor), '--port', 'scripted', '--development-only',
+                    '--expected-upright-raw', '123', '--duration', '.04', '--execute', *extra]
+            if refusal:
+                with pytest.raises(SystemExit) as error:
+                    main(argv, rig_factory=factory)
+                assert error.value.code == 2
+            else:
+>               assert main(argv, rig_factory=factory) == 0
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_hardware.py:476: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:210: in main
+    args = parser.parse_args(argv)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:1872: in parse_args
+    self.error(msg % ' '.join(argv))
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2630: in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ArgumentParser(prog='__main__.py', usage=None, description='Bounded, development-only balance rehearsal through the no...sical stopping distance.\n', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+status = 2
+message = '__main__.py: error: unrecognized arguments: --no-vision-telemetry\n'
+
+    def exit(self, status=0, message=None):
+        if message:
+            self._print_message(message, _sys.stderr)
+>       _sys.exit(status)
+E       SystemExit: 2
+
+../../.pyenv/versions/3.11.7/lib/python3.11/argparse.py:2617: SystemExit
+----------------------------- Captured stderr call -----------------------------
+usage: __main__.py [-h] --actor ACTOR --port PORT --expected-upright-raw
+                   EXPECTED_UPRIGHT_RAW [--development-only] [--execute]
+                   [--guard-profile {commissioning,rig}] [--duration DURATION]
+                   [--max-acceleration MAX_ACCELERATION]
+                   [--preflight-seconds PREFLIGHT_SECONDS] [--log-dir LOG_DIR]
+__main__.py: error: unrecognized arguments: --no-vision-telemetry
+_ test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[True-extra0-3096] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_cli_wires_encoder_publish2')
+extra = [], port = 3096, refusal = True
+
+    @pytest.mark.parametrize('extra,port', [([], 3096), (['--no-vision-telemetry'], 0)])
+    @pytest.mark.parametrize('refusal', [False, True])
+    def test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop(tmp_path, extra, port, refusal):
+        from cartpole_sdk.learning.balance_hardware import main
+        from cartpole_sdk.sensing.telemetry import EncoderPublisher
+        actor = saved_actor(tmp_path, demand=.5 if refusal else .1)
+        publishers = []
+        with rehearsal() as rig:
+            def factory(*args, **kwargs):
+                publisher = kwargs.get('vision_publisher')
+                assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+                assert publisher.port == port
+                publishers.append(publisher)
+                # Scripted connect has no I/O; production Rig.close still owns the mirror.
+                rig._vision_publisher = publisher
+                return rig
+            argv = ['--actor', str(actor), '--port', 'scripted', '--development-only',
+                    '--expected-upright-raw', '123', '--duration', '.04', '--execute', *extra]
+            if refusal:
+                with pytest.raises(SystemExit) as error:
+>                   main(argv, rig_factory=factory)
+
+tests/test_balance_hardware.py:473: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:221: in main
+    with defer_cyclic_gc(), factory(args.port, rate_hz=100, log_dir=args.log_dir) as rig:
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ('scripted',), kwargs = {'rate_hz': 100, 'log_dir': None}
+
+    def factory(*args, **kwargs):
+        publisher = kwargs.get('vision_publisher')
+>       assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+E       AssertionError: CLI must pass the existing mirror to Rig
+E       assert False
+E        +  where False = isinstance(None, <class 'cartpole_sdk.sensing.telemetry.EncoderPublisher'>)
+
+tests/test_balance_hardware.py:463: AssertionError
+_ test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[True-extra1-0] _
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-472/test_cli_wires_encoder_publish3')
+extra = ['--no-vision-telemetry'], port = 0, refusal = True
+
+    @pytest.mark.parametrize('extra,port', [([], 3096), (['--no-vision-telemetry'], 0)])
+    @pytest.mark.parametrize('refusal', [False, True])
+    def test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop(tmp_path, extra, port, refusal):
+        from cartpole_sdk.learning.balance_hardware import main
+        from cartpole_sdk.sensing.telemetry import EncoderPublisher
+        actor = saved_actor(tmp_path, demand=.5 if refusal else .1)
+        publishers = []
+        with rehearsal() as rig:
+            def factory(*args, **kwargs):
+                publisher = kwargs.get('vision_publisher')
+                assert isinstance(publisher, EncoderPublisher), 'CLI must pass the existing mirror to Rig'
+                assert publisher.port == port
+                publishers.append(publisher)
+                # Scripted connect has no I/O; production Rig.close still owns the mirror.
+                rig._vision_publisher = publisher
+                return rig
+            argv = ['--actor', str(actor), '--port', 'scripted', '--development-only',
+                    '--expected-upright-raw', '123', '--duration', '.04', '--execute', *extra]
+            if refusal:
+                with pytest.raises(SystemExit) as error:
+                    main(argv, rig_factory=factory)
+                assert error.value.code == 2
+            else:
+                assert main(argv, rig_factory=factory) == 0
+>           assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
+                   ^^^^^^^^^^^^^^^^
+E           IndexError: list index out of range
+
+tests/test_balance_hardware.py:477: IndexError
+----------------------------- Captured stderr call -----------------------------
+usage: __main__.py [-h] --actor ACTOR --port PORT --expected-upright-raw
+                   EXPECTED_UPRIGHT_RAW [--development-only] [--execute]
+                   [--guard-profile {commissioning,rig}] [--duration DURATION]
+                   [--max-acceleration MAX_ACCELERATION]
+                   [--preflight-seconds PREFLIGHT_SECONDS] [--log-dir LOG_DIR]
+__main__.py: error: unrecognized arguments: --no-vision-telemetry
+=========================== short test summary info ============================
+FAILED tests/test_balance_hardware.py::test_acceleration_ceiling_faults_instead_of_clipping
+FAILED tests/test_balance_hardware.py::test_rig_profile_does_not_expand_default_acceleration_authority
+FAILED tests/test_balance_hardware.py::test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[0.13-commissioning]
+FAILED tests/test_balance_hardware.py::test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[0.13-rig]
+FAILED tests/test_balance_hardware.py::test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[-0.13-commissioning]
+FAILED tests/test_balance_hardware.py::test_refused_demand_reports_exact_value_and_selected_ceiling_before_send[-0.13-rig]
+FAILED tests/test_balance_hardware.py::test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[False-extra0-3096]
+FAILED tests/test_balance_hardware.py::test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[False-extra1-0]
+FAILED tests/test_balance_hardware.py::test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[True-extra0-3096]
+FAILED tests/test_balance_hardware.py::test_cli_wires_encoder_publisher_to_rig_and_rig_closes_it_after_stop[True-extra1-0]
+10 failed, 70 passed in 3.62s

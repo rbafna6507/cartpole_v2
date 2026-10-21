@@ -21,6 +21,18 @@ def scene(angle=0, pivot=(320,240), clutter=True):
         cv2.circle(image,tuple(hole.astype(int)),3,(25,25,25),-1)
     return image
 
+def partial_rim_scene(radius=16, length=60, shaft_width=4):
+    """A narrow real contour whose fitted circle center falls outside its crop."""
+    image = np.full((600,800,3), 35, np.uint8)
+    rim = np.zeros(image.shape[:2], np.uint8)
+    cv2.circle(rim, (400+radius, 200+length), radius, 255, -1)
+    rim[:,409:] = 0
+    image[rim > 0] = (90,200,10)
+    cv2.line(image, (402,200), (402,200+length), (90,200,10), shaft_width)
+    cv2.circle(image, (402,202), 2, (25,25,25), -1)
+    return image
+
+
 class DetectorTests(unittest.TestCase):
     def test_rotations_and_background(self):
         for deg in range(-180,180,30):
@@ -30,6 +42,24 @@ class DetectorTests(unittest.TestCase):
                 self.assertLess(np.linalg.norm(np.array(result.pose.pivot)-[320,240]),3)
                 error=math.atan2(math.sin(result.pose.angle-math.radians(deg)),math.cos(result.pose.angle-math.radians(deg)))
                 self.assertLess(abs(math.degrees(error)),1.5)
+    def test_out_of_bounds_shaft_samples_reject_candidate_and_recover(self):
+        # Real contour fitting produces high indices for the short partial rim
+        # and negative indices for the mirrored longer rim. Rotate to exercise
+        # both image axes; no fitted coordinates or confidence gates are mocked.
+        for negative in (False, True):
+            malformed = (cv2.flip(partial_rim_scene(36,160,3), 1) if negative
+                         else partial_rim_scene())
+            for rotate in (False, True):
+                with self.subTest(negative=negative, rotate=rotate):
+                    image = (cv2.rotate(malformed, cv2.ROTATE_90_CLOCKWISE)
+                             if rotate else malformed)
+                    detector = ArmDetector()
+                    result = detector.detect(image)
+                    self.assertIsNone(result.pose)
+                    self.assertEqual(result.reason, 'no reliable arm geometry')
+                    self.assertEqual(result.candidates, 0)
+                    self.assertIsNotNone(detector.detect(scene(clutter=False)).pose)
+
     def test_zero_area_green_fragments_preserve_valid_geometry(self):
         clean = scene(clutter=False)
         noisy = clean.copy()

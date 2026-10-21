@@ -57,7 +57,7 @@ runtime; use the prerequisite check in the vision README.
 
    To check the selected command without opening the tunnel, run
    `./archive/vision-tunnel.sh --print-command`. If discovery is unavailable,
-   `./archive/vision-tunnel.sh jetson` explicitly uses your configured route
+   `./archive/vision-tunnel.sh rbafna@jetson` explicitly uses your configured route
    (which can have poor video performance), or pass a current destination using
    `JETSON_SSH_TARGET`. See `archive/README.md` for overrides. Do not disable host
    verification to work around a mismatch.
