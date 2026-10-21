@@ -1,0 +1,957 @@
+{
+  "schema": "cartpole-saved-forecast-horizon-audit-v1",
+  "provenance": {
+    "input_analysis_path": "evidence/balance-error-20261020/driven-validation/analysis.json",
+    "input_analysis_sha256": "4492de695d2103416cea7375e3676b2d226c168e769635a2493bee075f7ef9ff",
+    "frozen_analysis_source_path": "src/cartpole_sdk/identification/driven_validation.py",
+    "frozen_analysis_source_sha256": "46f79474ae00415a6ead5f3360439a13c1bb574d89db22b62bc783506efd3439",
+    "audit_script_sha256": "2213a8d8bbbe826be8c2dbf9f28f88ff90d06ff1c3b3b280d8c0581b1d2d6d0d",
+    "python_version": "3.11.7",
+    "source_hash_verification": "analysis and analysis-source bytes hashed here; raw/manifest/report hashes inherited from bound analysis, not independently re-read",
+    "matplotlib_version": "3.11.2"
+  },
+  "frozen_model": {
+    "effective_length_m": 0.160303873,
+    "angular_damping_per_s": 0.006891975,
+    "coulomb_rad_s2": 1.6268943,
+    "friction_width_rad_s": 0.05,
+    "gravity_m_s2": 9.81,
+    "commanded_input_gain": 1.0
+  },
+  "frozen_model_sha256": "ad41557a386da4c927d56ebb4a0fa3e64c349e7e234c65c2c0d5e0f70123a43d",
+  "model_law": "qdd=(g*sin(q)-commanded_input_gain*a_mcu*cos(q))/L-gamma*omega-c*tanh(omega/friction_width), q=encoder-phase",
+  "parameters_fitted": false,
+  "model_reintegrated": false,
+  "phase_selected_from_scores": false,
+  "hardware_accepted": false,
+  "recommended_model": null,
+  "physical_acceleration_measured": false,
+  "global_encoder_phase_calibrated": false,
+  "horizons_ms": [
+    10,
+    50,
+    100,
+    200,
+    500
+  ],
+  "exact_lead_tolerance_s": 1e-08,
+  "selection": "Existing nonoverlapping 0.5s windows with every saved prediction point labelled native_mode_3. Same windows/origins for every horizon and both initializers; no residual-based selection. Origin phase itself is not separately stored in this prediction artifact.",
+  "scope": "Completed scored coupled validation trials only; training/development roles are not pooled or relabelled.",
+  "definitions": {
+    "exact_lead": "One saved circular angle residual per origin at precisely the requested lead (within tolerance); no interpolation.",
+    "pooled_prefix": "All saved circular angle residuals with 0 < lead <= requested horizon, pooled across the same origins. The zero-error initialized point is excluded.",
+    "causal_encoder": "Original primary: quadratic endpoint derivative of seven past/current encoder samples.",
+    "recorded_omega": "Original comparator: current filtered firmware omega; not an independently measured angular-rate truth."
+  },
+  "source_limitations": [
+    "MCU acceleration is a command-state proxy; unit input gain and zero delay are assumptions, not measured actuator properties.",
+    "Left-held 100Hz input omits intersample 1kHz governor ramps. Input history over each forecast is conditioned on recorded commands.",
+    "Every 0.5s forecast reinitializes from past raw encoder data; full-episode open-loop accuracy is not established.",
+    "Firmware-reference and pertrial local-hanging sensitivities are both retained; resting equilibrium may be shifted by friction. Neither establishes global angle calibration.",
+    "Recorded firmware omega is a comparator only; the primary estimate uses seven past/current encoder samples.",
+    "Pertrial forecast checks do not replace original full-model residual/calibration/physical-validity gates. Partial campaigns remain partial diagnostics.",
+    "No vision is loaded; physical cart tracking, masses, force authority, input delay and metric actuator gain remain unmeasured."
+  ],
+  "audit_limitations": [
+    "Post-hoc diagnostic of previously inspected validation data; no new holdout, model selection, fit, calibration, or acceptance test.",
+    "This is conditional replay of recorded closed-loop command acceleration, not independent physical acceleration or closed-loop simulated feedback.",
+    "Upright instability can amplify initialization and input/model discrepancy over 0.5s. This audit does not identify their separate contributions.",
+    "Shorter lead errors and initializer sensitivity do not establish actuator calibration or hardware suitability; original failed forecast checks remain failed.",
+    "The wholly-balance window subset differs slightly from the original pool of all points labelled balance, which can include phase-crossing windows.",
+    "Circular residuals are bounded by pi; long-horizon error is not an unwrapped rotation error. Overlapping prefix scores are correlated, not independent experiments."
+  ],
+  "trials": [
+    {
+      "run": "coupled-validation-01",
+      "trial": "001-coupled",
+      "dataset_role": "validation",
+      "campaign_completed": true,
+      "sensor_mode": "encoder_only",
+      "inherited_source_hashes": {
+        "source_manifest_sha256": "9624b801f754e910c6a1a7da111689bc6dc37411cb2988856c54785787076f92",
+        "source_raw_sha256": "07d178e018eee28def9fd1ebc8d2fa6e731d448c89c415d846a8b92076162ae7",
+        "source_report_sha256": "636c9e27fffc8dd09c22e45dd875fcf608458d5ae53259d9d7a56d8a1ff63f00"
+      },
+      "baseline": "firmware_reference",
+      "phase_offset_rad": 0.0,
+      "original_forecast_checks_pass": false,
+      "original_forecast_check_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ],
+      "source_window_count": 49,
+      "selected_window_count": 44,
+      "excluded_mixed_or_other_phase_windows": 5,
+      "origins": [
+        {
+          "start_s": 2.5499999999999545,
+          "end_s": 3.0499999999999545,
+          "initial_encoder_angle_rad": 6.453457207179587,
+          "causal_initial_omega_rad_s": 0.8327321428579963,
+          "recorded_initial_omega_rad_s": -1.155918
+        },
+        {
+          "start_s": 3.0599999999999454,
+          "end_s": 3.5599999999999454,
+          "initial_encoder_angle_rad": 6.142059107179586,
+          "causal_initial_omega_rad_s": -3.204922232145707,
+          "recorded_initial_omega_rad_s": -2.722129
+        },
+        {
+          "start_s": 3.5699999999999363,
+          "end_s": 4.069999999999936,
+          "initial_encoder_angle_rad": 6.315398907179587,
+          "causal_initial_omega_rad_s": 0.19722530000020977,
+          "recorded_initial_omega_rad_s": 1.981748
+        },
+        {
+          "start_s": 4.079999999999927,
+          "end_s": 4.579999999999927,
+          "initial_encoder_angle_rad": 6.375224157179586,
+          "causal_initial_omega_rad_s": 2.158531142859154,
+          "recorded_initial_omega_rad_s": -0.09941386
+        },
+        {
+          "start_s": 4.589999999999918,
+          "end_s": 5.089999999999918,
+          "initial_encoder_angle_rad": 6.303127057179586,
+          "causal_initial_omega_rad_s": 3.725382164289173,
+          "recorded_initial_omega_rad_s": 0.4060723
+        },
+        {
+          "start_s": 5.099999999999909,
+          "end_s": 5.599999999999909,
+          "initial_encoder_angle_rad": 6.278583365179586,
+          "causal_initial_omega_rad_s": -1.9010408428587329,
+          "recorded_initial_omega_rad_s": -0.1442108
+        },
+        {
+          "start_s": 5.6099999999999,
+          "end_s": 6.1099999999999,
+          "initial_encoder_angle_rad": 6.335340657179586,
+          "causal_initial_omega_rad_s": 0.5642857857148511,
+          "recorded_initial_omega_rad_s": 0.3441895
+        },
+        {
+          "start_s": 6.119999999999891,
+          "end_s": 6.619999999999891,
+          "initial_encoder_angle_rad": 6.332272697179587,
+          "causal_initial_omega_rad_s": 0.9258671428581157,
+          "recorded_initial_omega_rad_s": -0.2887892
+        },
+        {
+          "start_s": 6.629999999999882,
+          "end_s": 7.129999999999882,
+          "initial_encoder_angle_rad": 6.290855211179586,
+          "causal_initial_omega_rad_s": -1.3860598857154367,
+          "recorded_initial_omega_rad_s": -1.595992
+        },
+        {
+          "start_s": 7.139999999999873,
+          "end_s": 7.639999999999873,
+          "initial_encoder_angle_rad": 6.254039667179586,
+          "causal_initial_omega_rad_s": -0.010957135714240862,
+          "recorded_initial_omega_rad_s": -0.1113709
+        },
+        {
+          "start_s": 7.649999999999864,
+          "end_s": 8.149999999999864,
+          "initial_encoder_angle_rad": 6.178874607179586,
+          "causal_initial_omega_rad_s": 4.508809000004141,
+          "recorded_initial_omega_rad_s": -0.232874
+        },
+        {
+          "start_s": 8.159999999999854,
+          "end_s": 8.659999999999854,
+          "initial_encoder_angle_rad": 6.289321230179587,
+          "causal_initial_omega_rad_s": 2.4214982464309394,
+          "recorded_initial_omega_rad_s": 1.011252
+        },
+        {
+          "start_s": 8.669999999999845,
+          "end_s": 9.169999999999845,
+          "initial_encoder_angle_rad": 6.1497290071795865,
+          "causal_initial_omega_rad_s": -4.475935314289653,
+          "recorded_initial_omega_rad_s": -1.967469
+        },
+        {
+          "start_s": 9.179999999999836,
+          "end_s": 9.679999999999836,
+          "initial_encoder_angle_rad": 6.399767807179586,
+          "causal_initial_omega_rad_s": -2.202358392859047,
+          "recorded_initial_omega_rad_s": 0.9410076
+        },
+        {
+          "start_s": 9.689999999999827,
+          "end_s": 10.189999999999827,
+          "initial_encoder_angle_rad": 6.361418337179586,
+          "causal_initial_omega_rad_s": 1.5613737464299506,
+          "recorded_initial_omega_rad_s": 1.433395
+        },
+        {
+          "start_s": 10.199999999999818,
+          "end_s": 10.699999999999818,
+          "initial_encoder_angle_rad": 6.221826077179586,
+          "causal_initial_omega_rad_s": -3.6103333464317706,
+          "recorded_initial_omega_rad_s": -0.4865927
+        },
+        {
+          "start_s": 10.709999999999809,
+          "end_s": 11.209999999999809,
+          "initial_encoder_angle_rad": 6.2954571571795865,
+          "causal_initial_omega_rad_s": -0.33966675000021423,
+          "recorded_initial_omega_rad_s": -0.2065485
+        },
+        {
+          "start_s": 11.220000000000027,
+          "end_s": 11.720000000000027,
+          "initial_encoder_angle_rad": 6.332272697179587,
+          "causal_initial_omega_rad_s": 0.07122085714091972,
+          "recorded_initial_omega_rad_s": 0.1306072
+        },
+        {
+          "start_s": 11.730000000000018,
+          "end_s": 12.230000000000018,
+          "initial_encoder_angle_rad": 6.347612507179586,
+          "causal_initial_omega_rad_s": -1.205270250000551,
+          "recorded_initial_omega_rad_s": 0.2030409
+        },
+        {
+          "start_s": 12.240000000000009,
+          "end_s": 12.740000000000009,
+          "initial_encoder_angle_rad": 6.3844280071795865,
+          "causal_initial_omega_rad_s": 0.9642154999879587,
+          "recorded_initial_omega_rad_s": 1.097269
+        },
+        {
+          "start_s": 12.75,
+          "end_s": 13.25,
+          "initial_encoder_angle_rad": 6.269379477179586,
+          "causal_initial_omega_rad_s": -0.44923741785653487,
+          "recorded_initial_omega_rad_s": -0.1658895
+        },
+        {
+          "start_s": 13.259999999999991,
+          "end_s": 13.759999999999991,
+          "initial_encoder_angle_rad": 6.2617095771795865,
+          "causal_initial_omega_rad_s": -2.5529824428599897,
+          "recorded_initial_omega_rad_s": -0.963698
+        },
+        {
+          "start_s": 13.769999999999982,
+          "end_s": 14.269999999999982,
+          "initial_encoder_angle_rad": 6.313864927179586,
+          "causal_initial_omega_rad_s": -1.5558945357131828,
+          "recorded_initial_omega_rad_s": -0.3855309
+        },
+        {
+          "start_s": 14.279999999999973,
+          "end_s": 14.779999999999973,
+          "initial_encoder_angle_rad": 6.367554247179586,
+          "causal_initial_omega_rad_s": 1.802427142858695,
+          "recorded_initial_omega_rad_s": 0.1683611
+        },
+        {
+          "start_s": 14.789999999999964,
+          "end_s": 15.289999999999964,
+          "initial_encoder_angle_rad": 6.220292097179586,
+          "causal_initial_omega_rad_s": 2.711858892859586,
+          "recorded_initial_omega_rad_s": -0.7021996
+        },
+        {
+          "start_s": 15.299999999999955,
+          "end_s": 15.799999999999955,
+          "initial_encoder_angle_rad": 6.3598843471795865,
+          "causal_initial_omega_rad_s": 0.7834257857148751,
+          "recorded_initial_omega_rad_s": 0.5628148
+        },
+        {
+          "start_s": 15.809999999999945,
+          "end_s": 16.309999999999945,
+          "initial_encoder_angle_rad": 6.369088237179586,
+          "causal_initial_omega_rad_s": -1.3477110714297595,
+          "recorded_initial_omega_rad_s": 0.4809633
+        },
+        {
+          "start_s": 16.319999999999936,
+          "end_s": 16.819999999999936,
+          "initial_encoder_angle_rad": 6.318466867179586,
+          "causal_initial_omega_rad_s": 2.6954234464308877,
+          "recorded_initial_omega_rad_s": 1.10384
+        },
+        {
+          "start_s": 16.829999999999927,
+          "end_s": 17.329999999999927,
+          "initial_encoder_angle_rad": 6.303127057179586,
+          "causal_initial_omega_rad_s": -2.6899450000023504,
+          "recorded_initial_omega_rad_s": -0.0849508
+        },
+        {
+          "start_s": 17.339999999999918,
+          "end_s": 17.839999999999918,
+          "initial_encoder_angle_rad": 6.349146477179586,
+          "causal_initial_omega_rad_s": 2.859778242859829,
+          "recorded_initial_omega_rad_s": 0.8759974
+        },
+        {
+          "start_s": 17.84999999999991,
+          "end_s": 18.34999999999991,
+          "initial_encoder_angle_rad": 6.349146477179586,
+          "causal_initial_omega_rad_s": -0.7067269642862691,
+          "recorded_initial_omega_rad_s": 0.7335626
+        },
+        {
+          "start_s": 18.3599999999999,
+          "end_s": 18.8599999999999,
+          "initial_encoder_angle_rad": 6.339942597179586,
+          "causal_initial_omega_rad_s": -0.06026367857150028,
+          "recorded_initial_omega_rad_s": 0.1486206
+        },
+        {
+          "start_s": 18.86999999999989,
+          "end_s": 19.36999999999989,
+          "initial_encoder_angle_rad": 6.339942597179586,
+          "causal_initial_omega_rad_s": -1.879126496430307,
+          "recorded_initial_omega_rad_s": 0.3788711
+        },
+        {
+          "start_s": 19.37999999999988,
+          "end_s": 19.87999999999988,
+          "initial_encoder_angle_rad": 6.300059097179586,
+          "causal_initial_omega_rad_s": 5.116921792861747,
+          "recorded_initial_omega_rad_s": 0.3801867
+        },
+        {
+          "start_s": 19.889999999999873,
+          "end_s": 20.389999999999873,
+          "initial_encoder_angle_rad": 6.266311517179586,
+          "causal_initial_omega_rad_s": -2.8159504142881793,
+          "recorded_initial_omega_rad_s": -0.9367201
+        },
+        {
+          "start_s": 20.399999999999864,
+          "end_s": 20.899999999999864,
+          "initial_encoder_angle_rad": 6.364486287179586,
+          "causal_initial_omega_rad_s": -0.20270500000017413,
+          "recorded_initial_omega_rad_s": 0.5481543
+        },
+        {
+          "start_s": 20.909999999999854,
+          "end_s": 21.409999999999854,
+          "initial_encoder_angle_rad": 6.275515403179586,
+          "causal_initial_omega_rad_s": -1.621636878572867,
+          "recorded_initial_omega_rad_s": -0.8282502
+        },
+        {
+          "start_s": 21.419999999999845,
+          "end_s": 21.919999999999845,
+          "initial_encoder_angle_rad": 6.220292097179586,
+          "causal_initial_omega_rad_s": -4.399238214289765,
+          "recorded_initial_omega_rad_s": -2.441361
+        },
+        {
+          "start_s": 21.929999999999836,
+          "end_s": 22.429999999999836,
+          "initial_encoder_angle_rad": 6.171204707179586,
+          "causal_initial_omega_rad_s": 2.7282950000025954,
+          "recorded_initial_omega_rad_s": -0.342516
+        },
+        {
+          "start_s": 22.439999999999827,
+          "end_s": 22.939999999999827,
+          "initial_encoder_angle_rad": 6.280117345179586,
+          "causal_initial_omega_rad_s": -2.4708050214307886,
+          "recorded_initial_omega_rad_s": -0.9437277
+        },
+        {
+          "start_s": 22.949999999999818,
+          "end_s": 23.449999999999818,
+          "initial_encoder_angle_rad": 6.338408617179586,
+          "causal_initial_omega_rad_s": 2.443412342859342,
+          "recorded_initial_omega_rad_s": 0.4214575
+        },
+        {
+          "start_s": 23.45999999999981,
+          "end_s": 23.95999999999981,
+          "initial_encoder_angle_rad": 6.303127057179586,
+          "causal_initial_omega_rad_s": -2.3831487500020985,
+          "recorded_initial_omega_rad_s": -0.4849306
+        },
+        {
+          "start_s": 23.970000000000027,
+          "end_s": 24.470000000000027,
+          "initial_encoder_angle_rad": 6.289321230179587,
+          "causal_initial_omega_rad_s": -3.7199034321262765,
+          "recorded_initial_omega_rad_s": -0.7737325
+        },
+        {
+          "start_s": 24.480000000000018,
+          "end_s": 24.980000000000018,
+          "initial_encoder_angle_rad": 6.315398907179587,
+          "causal_initial_omega_rad_s": 1.6106799499942703,
+          "recorded_initial_omega_rad_s": 0.8712234
+        }
+      ],
+      "initializers": {
+        "causal_encoder": {
+          "exact_lead": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.020717240135020694,
+              "rmse_deg": 1.1870104228957254
+            },
+            "50": {
+              "sample_count": 44,
+              "rmse_rad": 0.13302263984122634,
+              "rmse_deg": 7.621635842591064
+            },
+            "100": {
+              "sample_count": 44,
+              "rmse_rad": 0.2665258041155362,
+              "rmse_deg": 15.270803707150733
+            },
+            "200": {
+              "sample_count": 44,
+              "rmse_rad": 0.6301385614418549,
+              "rmse_deg": 36.10428007906339
+            },
+            "500": {
+              "sample_count": 44,
+              "rmse_rad": 1.9545950943128714,
+              "rmse_deg": 111.99004956110262
+            }
+          },
+          "pooled_prefix": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.020717240135020694,
+              "rmse_deg": 1.1870104228957254
+            },
+            "50": {
+              "sample_count": 220,
+              "rmse_rad": 0.0860662772049713,
+              "rmse_deg": 4.931234442247859
+            },
+            "100": {
+              "sample_count": 440,
+              "rmse_rad": 0.16504541899416023,
+              "rmse_deg": 9.456405936333693
+            },
+            "200": {
+              "sample_count": 880,
+              "rmse_rad": 0.3380854853325324,
+              "rmse_deg": 19.370871424186205
+            },
+            "500": {
+              "sample_count": 2200,
+              "rmse_rad": 1.303052909588798,
+              "rmse_deg": 74.65943220168016
+            }
+          }
+        },
+        "recorded_omega": {
+          "exact_lead": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.02079164346995076,
+              "rmse_deg": 1.1912734199689166
+            },
+            "50": {
+              "sample_count": 44,
+              "rmse_rad": 0.08827551902259706,
+              "rmse_deg": 5.057814674321626
+            },
+            "100": {
+              "sample_count": 44,
+              "rmse_rad": 0.12793643799838522,
+              "rmse_deg": 7.330217943244607
+            },
+            "200": {
+              "sample_count": 44,
+              "rmse_rad": 0.2713967603140526,
+              "rmse_deg": 15.549888939518807
+            },
+            "500": {
+              "sample_count": 44,
+              "rmse_rad": 1.826642368793078,
+              "rmse_deg": 104.6588984116226
+            }
+          },
+          "pooled_prefix": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.02079164346995076,
+              "rmse_deg": 1.1912734199689166
+            },
+            "50": {
+              "sample_count": 220,
+              "rmse_rad": 0.06126914192232581,
+              "rmse_deg": 3.5104632465373284
+            },
+            "100": {
+              "sample_count": 440,
+              "rmse_rad": 0.08986597552155356,
+              "rmse_deg": 5.148941119210987
+            },
+            "200": {
+              "sample_count": 880,
+              "rmse_rad": 0.15200910083942273,
+              "rmse_deg": 8.709479925677462
+            },
+            "500": {
+              "sample_count": 2200,
+              "rmse_rad": 0.8466821067466904,
+              "rmse_deg": 48.511311305830404
+            }
+          }
+        }
+      },
+      "initial_rate_difference_rms_rad_s": 2.0362361050667626
+    },
+    {
+      "run": "coupled-validation-01",
+      "trial": "002-coupled",
+      "dataset_role": "validation",
+      "campaign_completed": true,
+      "sensor_mode": "encoder_only",
+      "inherited_source_hashes": {
+        "source_manifest_sha256": "9624b801f754e910c6a1a7da111689bc6dc37411cb2988856c54785787076f92",
+        "source_raw_sha256": "07d178e018eee28def9fd1ebc8d2fa6e731d448c89c415d846a8b92076162ae7",
+        "source_report_sha256": "636c9e27fffc8dd09c22e45dd875fcf608458d5ae53259d9d7a56d8a1ff63f00"
+      },
+      "baseline": "firmware_reference",
+      "phase_offset_rad": 0.0,
+      "original_forecast_checks_pass": false,
+      "original_forecast_check_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ],
+      "source_window_count": 49,
+      "selected_window_count": 44,
+      "excluded_mixed_or_other_phase_windows": 5,
+      "origins": [
+        {
+          "start_s": 2.5410000000001673,
+          "end_s": 3.0410000000001673,
+          "initial_encoder_angle_rad": 6.425845507179586,
+          "causal_initial_omega_rad_s": 2.421497500007696,
+          "recorded_initial_omega_rad_s": -1.865067
+        },
+        {
+          "start_s": 3.0510000000001583,
+          "end_s": 3.5510000000001583,
+          "initial_encoder_angle_rad": 6.145127007179586,
+          "causal_initial_omega_rad_s": -7.154926071426263,
+          "recorded_initial_omega_rad_s": -3.005606
+        },
+        {
+          "start_s": 3.561000000000149,
+          "end_s": 4.061000000000149,
+          "initial_encoder_angle_rad": 6.292389192179586,
+          "causal_initial_omega_rad_s": -0.914909074976336,
+          "recorded_initial_omega_rad_s": 1.165327
+        },
+        {
+          "start_s": 4.07100000000014,
+          "end_s": 4.57100000000014,
+          "initial_encoder_angle_rad": 6.407437707179586,
+          "causal_initial_omega_rad_s": 0.46567000000779607,
+          "recorded_initial_omega_rad_s": 0.3407572
+        },
+        {
+          "start_s": 4.581000000000131,
+          "end_s": 5.081000000000131,
+          "initial_encoder_angle_rad": 6.278583365179586,
+          "causal_initial_omega_rad_s": 3.374757871431624,
+          "recorded_initial_omega_rad_s": 0.01032185
+        },
+        {
+          "start_s": 5.091000000000122,
+          "end_s": 5.591000000000122,
+          "initial_encoder_angle_rad": 6.2080202471795864,
+          "causal_initial_omega_rad_s": -0.9368238571436216,
+          "recorded_initial_omega_rad_s": -0.4640869
+        },
+        {
+          "start_s": 5.601000000000113,
+          "end_s": 6.101000000000113,
+          "initial_encoder_angle_rad": 6.292389192179586,
+          "causal_initial_omega_rad_s": 3.9938283250035354,
+          "recorded_initial_omega_rad_s": 1.612714
+        },
+        {
+          "start_s": 6.111000000000104,
+          "end_s": 6.611000000000104,
+          "initial_encoder_angle_rad": 6.3092629771795865,
+          "causal_initial_omega_rad_s": 0.027392142857325313,
+          "recorded_initial_omega_rad_s": -0.1352592
+        },
+        {
+          "start_s": 6.621000000000095,
+          "end_s": 7.121000000000095,
+          "initial_encoder_angle_rad": 6.344544537179586,
+          "causal_initial_omega_rad_s": -1.457281714286933,
+          "recorded_initial_omega_rad_s": -0.3074518
+        },
+        {
+          "start_s": 7.1310000000000855,
+          "end_s": 7.6310000000000855,
+          "initial_encoder_angle_rad": 6.350680467179586,
+          "causal_initial_omega_rad_s": -1.9941751071446523,
+          "recorded_initial_omega_rad_s": -0.1983671
+        },
+        {
+          "start_s": 7.641000000000076,
+          "end_s": 8.141000000000076,
+          "initial_encoder_angle_rad": 6.2248940371795864,
+          "causal_initial_omega_rad_s": -0.8601250357150871,
+          "recorded_initial_omega_rad_s": -0.3612147
+        },
+        {
+          "start_s": 8.151000000000067,
+          "end_s": 8.651000000000067,
+          "initial_encoder_angle_rad": 6.300059097179586,
+          "causal_initial_omega_rad_s": 0.2958390250002788,
+          "recorded_initial_omega_rad_s": 0.09253515
+        },
+        {
+          "start_s": 8.661000000000058,
+          "end_s": 9.161000000000058,
+          "initial_encoder_angle_rad": 6.361418337179586,
+          "causal_initial_omega_rad_s": -1.8681697500016525,
+          "recorded_initial_omega_rad_s": -0.1629345
+        },
+        {
+          "start_s": 9.17100000000005,
+          "end_s": 9.67100000000005,
+          "initial_encoder_angle_rad": 6.298525117179587,
+          "causal_initial_omega_rad_s": 0.9861304857151705,
+          "recorded_initial_omega_rad_s": -0.1603345
+        },
+        {
+          "start_s": 9.68100000000004,
+          "end_s": 10.18100000000004,
+          "initial_encoder_angle_rad": 6.284719288179586,
+          "causal_initial_omega_rad_s": -2.4105411321450703,
+          "recorded_initial_omega_rad_s": 0.02716109
+        },
+        {
+          "start_s": 10.191000000000031,
+          "end_s": 10.691000000000031,
+          "initial_encoder_angle_rad": 6.341476577179586,
+          "causal_initial_omega_rad_s": 1.6161582142871398,
+          "recorded_initial_omega_rad_s": 0.13592
+        },
+        {
+          "start_s": 10.701000000000022,
+          "end_s": 11.201000000000022,
+          "initial_encoder_angle_rad": 6.336874637179586,
+          "causal_initial_omega_rad_s": 2.8926495357169415,
+          "recorded_initial_omega_rad_s": -0.2949973
+        },
+        {
+          "start_s": 11.211000000000013,
+          "end_s": 11.711000000000013,
+          "initial_encoder_angle_rad": 6.273981422179586,
+          "causal_initial_omega_rad_s": 1.5285023750015068,
+          "recorded_initial_omega_rad_s": -0.4351826
+        },
+        {
+          "start_s": 11.721000000000004,
+          "end_s": 12.221000000000004,
+          "initial_encoder_angle_rad": 6.249437727179586,
+          "causal_initial_omega_rad_s": 0.5314145785718773,
+          "recorded_initial_omega_rad_s": -0.4807183
+        },
+        {
+          "start_s": 12.230999999999995,
+          "end_s": 12.730999999999995,
+          "initial_encoder_angle_rad": 6.254039667179586,
+          "causal_initial_omega_rad_s": 5.582595892862124,
+          "recorded_initial_omega_rad_s": 0.3142574
+        },
+        {
+          "start_s": 12.740999999999985,
+          "end_s": 13.240999999999985,
+          "initial_encoder_angle_rad": 6.289321230179587,
+          "causal_initial_omega_rad_s": 1.9613041928590764,
+          "recorded_initial_omega_rad_s": -0.7332004
+        },
+        {
+          "start_s": 13.250999999999976,
+          "end_s": 13.750999999999976,
+          "initial_encoder_angle_rad": 6.2862532691795865,
+          "causal_initial_omega_rad_s": -4.3718433714324645,
+          "recorded_initial_omega_rad_s": -1.790423
+        },
+        {
+          "start_s": 13.760999999999967,
+          "end_s": 14.260999999999967,
+          "initial_encoder_angle_rad": 6.221826077179586,
+          "causal_initial_omega_rad_s": -3.588419321431793,
+          "recorded_initial_omega_rad_s": -1.031376
+        },
+        {
+          "start_s": 14.271000000000186,
+          "end_s": 14.771000000000186,
+          "initial_encoder_angle_rad": 6.3430105571795865,
+          "causal_initial_omega_rad_s": -0.9696951071369162,
+          "recorded_initial_omega_rad_s": 0.04361657
+        },
+        {
+          "start_s": 14.781000000000176,
+          "end_s": 15.281000000000176,
+          "initial_encoder_angle_rad": 6.316932887179586,
+          "causal_initial_omega_rad_s": 2.3393208607135048,
+          "recorded_initial_omega_rad_s": -0.2757175
+        },
+        {
+          "start_s": 15.291000000000167,
+          "end_s": 15.791000000000167,
+          "initial_encoder_angle_rad": 6.250971707179586,
+          "causal_initial_omega_rad_s": 0.5040220821508407,
+          "recorded_initial_omega_rad_s": -1.176021
+        },
+        {
+          "start_s": 15.801000000000158,
+          "end_s": 16.30100000000016,
+          "initial_encoder_angle_rad": 6.296991137179586,
+          "causal_initial_omega_rad_s": 3.1172681428535025,
+          "recorded_initial_omega_rad_s": 1.199422
+        },
+        {
+          "start_s": 16.31100000000015,
+          "end_s": 16.81100000000015,
+          "initial_encoder_angle_rad": 6.2617095771795865,
+          "causal_initial_omega_rad_s": -5.281276660694063,
+          "recorded_initial_omega_rad_s": 0.0548736
+        },
+        {
+          "start_s": 16.82100000000014,
+          "end_s": 17.32100000000014,
+          "initial_encoder_angle_rad": 6.275515403179586,
+          "causal_initial_omega_rad_s": 7.13301145712931,
+          "recorded_initial_omega_rad_s": 1.291945
+        },
+        {
+          "start_s": 17.33100000000013,
+          "end_s": 17.83100000000013,
+          "initial_encoder_angle_rad": 6.339942597179586,
+          "causal_initial_omega_rad_s": -0.10957017857140992,
+          "recorded_initial_omega_rad_s": -0.530861
+        },
+        {
+          "start_s": 17.841000000000122,
+          "end_s": 18.341000000000122,
+          "initial_encoder_angle_rad": 6.183476557179587,
+          "causal_initial_omega_rad_s": -3.3254509642885672,
+          "recorded_initial_omega_rad_s": -1.965743
+        },
+        {
+          "start_s": 18.351000000000113,
+          "end_s": 18.851000000000113,
+          "initial_encoder_angle_rad": 6.336874637179586,
+          "causal_initial_omega_rad_s": -0.5040219428575462,
+          "recorded_initial_omega_rad_s": 0.6734824
+        },
+        {
+          "start_s": 18.861000000000104,
+          "end_s": 19.361000000000104,
+          "initial_encoder_angle_rad": 6.389030007179586,
+          "causal_initial_omega_rad_s": -1.4134534642869518,
+          "recorded_initial_omega_rad_s": 0.4745769
+        },
+        {
+          "start_s": 19.371000000000095,
+          "end_s": 19.871000000000095,
+          "initial_encoder_angle_rad": 6.2448357871795865,
+          "causal_initial_omega_rad_s": -0.7889045107149324,
+          "recorded_initial_omega_rad_s": -0.6918646
+        },
+        {
+          "start_s": 19.881000000000085,
+          "end_s": 20.381000000000085,
+          "initial_encoder_angle_rad": 6.246369767179586,
+          "causal_initial_omega_rad_s": -2.5420253928594057,
+          "recorded_initial_omega_rad_s": -1.14877
+        },
+        {
+          "start_s": 20.391000000000076,
+          "end_s": 20.891000000000076,
+          "initial_encoder_angle_rad": 6.350680467179586,
+          "causal_initial_omega_rad_s": -1.309361678572475,
+          "recorded_initial_omega_rad_s": 0.1399978
+        },
+        {
+          "start_s": 20.901000000000067,
+          "end_s": 21.401000000000067,
+          "initial_encoder_angle_rad": 6.332272697179587,
+          "causal_initial_omega_rad_s": 4.536200621432704,
+          "recorded_initial_omega_rad_s": 1.103903
+        },
+        {
+          "start_s": 21.411000000000058,
+          "end_s": 21.911000000000058,
+          "initial_encoder_angle_rad": 6.158932907179587,
+          "causal_initial_omega_rad_s": -6.1907062607199705,
+          "recorded_initial_omega_rad_s": -1.710393
+        },
+        {
+          "start_s": 21.92100000000005,
+          "end_s": 22.42100000000005,
+          "initial_encoder_angle_rad": 6.324602787179586,
+          "causal_initial_omega_rad_s": -0.19722611071437768,
+          "recorded_initial_omega_rad_s": 0.2946826
+        },
+        {
+          "start_s": 22.43100000000004,
+          "end_s": 22.93100000000004,
+          "initial_encoder_angle_rad": 6.2110882071795865,
+          "causal_initial_omega_rad_s": 0.12052721428594289,
+          "recorded_initial_omega_rad_s": -0.3542646
+        },
+        {
+          "start_s": 22.94100000000003,
+          "end_s": 23.44100000000003,
+          "initial_encoder_angle_rad": 6.290855211179586,
+          "causal_initial_omega_rad_s": -1.249098442858182,
+          "recorded_initial_omega_rad_s": 1.458197
+        },
+        {
+          "start_s": 23.451000000000022,
+          "end_s": 23.951000000000022,
+          "initial_encoder_angle_rad": 6.3430105571795865,
+          "causal_initial_omega_rad_s": 0.1314837142859299,
+          "recorded_initial_omega_rad_s": 1.764702
+        },
+        {
+          "start_s": 23.961000000000013,
+          "end_s": 24.461000000000013,
+          "initial_encoder_angle_rad": 6.260175597179586,
+          "causal_initial_omega_rad_s": -2.6351583285737505,
+          "recorded_initial_omega_rad_s": -2.373514
+        },
+        {
+          "start_s": 24.471000000000004,
+          "end_s": 24.971000000000004,
+          "initial_encoder_angle_rad": 6.293923177179586,
+          "causal_initial_omega_rad_s": 3.161096464288682,
+          "recorded_initial_omega_rad_s": 1.147697
+        }
+      ],
+      "initializers": {
+        "causal_encoder": {
+          "exact_lead": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.025938311582261238,
+              "rmse_deg": 1.4861557813588693
+            },
+            "50": {
+              "sample_count": 44,
+              "rmse_rad": 0.1475376274365015,
+              "rmse_deg": 8.453283371485075
+            },
+            "100": {
+              "sample_count": 44,
+              "rmse_rad": 0.31188478794242197,
+              "rmse_deg": 17.869682043433446
+            },
+            "200": {
+              "sample_count": 44,
+              "rmse_rad": 0.7435071104281291,
+              "rmse_deg": 42.59981946549904
+            },
+            "500": {
+              "sample_count": 44,
+              "rmse_rad": 1.8489806748855662,
+              "rmse_deg": 105.93878907219354
+            }
+          },
+          "pooled_prefix": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.025938311582261238,
+              "rmse_deg": 1.4861557813588693
+            },
+            "50": {
+              "sample_count": 220,
+              "rmse_rad": 0.09810590360123397,
+              "rmse_deg": 5.621054221668011
+            },
+            "100": {
+              "sample_count": 440,
+              "rmse_rad": 0.18877408490388475,
+              "rmse_deg": 10.815958346436863
+            },
+            "200": {
+              "sample_count": 880,
+              "rmse_rad": 0.4083567506333974,
+              "rmse_deg": 23.397118346969876
+            },
+            "500": {
+              "sample_count": 2200,
+              "rmse_rad": 1.2807137534551787,
+              "rmse_deg": 73.37949283734
+            }
+          }
+        },
+        "recorded_omega": {
+          "exact_lead": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.024605807013227676,
+              "rmse_deg": 1.4098088933713477
+            },
+            "50": {
+              "sample_count": 44,
+              "rmse_rad": 0.07791316679009874,
+              "rmse_deg": 4.464095625571505
+            },
+            "100": {
+              "sample_count": 44,
+              "rmse_rad": 0.12097804985713825,
+              "rmse_deg": 6.931531670537273
+            },
+            "200": {
+              "sample_count": 44,
+              "rmse_rad": 0.24039827872662758,
+              "rmse_deg": 13.773806773245363
+            },
+            "500": {
+              "sample_count": 44,
+              "rmse_rad": 1.8049751834890793,
+              "rmse_deg": 103.4174601397756
+            }
+          },
+          "pooled_prefix": {
+            "10": {
+              "sample_count": 44,
+              "rmse_rad": 0.024605807013227676,
+              "rmse_deg": 1.4098088933713477
+            },
+            "50": {
+              "sample_count": 220,
+              "rmse_rad": 0.05865975041928514,
+              "rmse_deg": 3.3609561263157994
+            },
+            "100": {
+              "sample_count": 440,
+              "rmse_rad": 0.0832996066436112,
+              "rmse_deg": 4.772715895778835
+            },
+            "200": {
+              "sample_count": 880,
+              "rmse_rad": 0.14444402666064046,
+              "rmse_deg": 8.27603310352984
+            },
+            "500": {
+              "sample_count": 2200,
+              "rmse_rad": 0.8172059570528687,
+              "rmse_deg": 46.82245233207858
+            }
+          }
+        }
+      },
+      "initial_rate_difference_rms_rad_s": 2.486571001563347
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "trials": [
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "001-actuator",
+      "reference": {
+        "id": "pulse-10mm-positive",
+        "kind": "pulse",
+        "amplitude_m": 0.01,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 6.549504818156327,
+        "local_hanging_anchor": 0.42647792293632464
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "encoder angle span below 0.15 rad"
+      ]
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "002-actuator",
+      "reference": {
+        "id": "pulse-10mm-negative",
+        "kind": "pulse",
+        "amplitude_m": -0.01,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 6.994208618671033,
+        "local_hanging_anchor": 1.2242154213030332
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "encoder angle span below 0.15 rad"
+      ]
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "003-actuator",
+      "reference": {
+        "id": "pulse-20mm-positive",
+        "kind": "pulse",
+        "amplitude_m": 0.02,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 7.917692677587419,
+        "local_hanging_anchor": 1.2283810588748068
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "004-actuator",
+      "reference": {
+        "id": "pulse-20mm-negative",
+        "kind": "pulse",
+        "amplitude_m": -0.02,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 8.24191845710204,
+        "local_hanging_anchor": 1.749742611568665
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "005-actuator",
+      "reference": {
+        "id": "reversal-20mm-positive",
+        "kind": "reversal",
+        "amplitude_m": 0.02,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 9.292978393241404,
+        "local_hanging_anchor": 2.103856466151076
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "006-actuator",
+      "reference": {
+        "id": "reversal-20mm-negative",
+        "kind": "reversal",
+        "amplitude_m": -0.02,
+        "segment_s": 0.4,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 8.743331602368622,
+        "local_hanging_anchor": 0.9440779907910051
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "007-actuator",
+      "reference": {
+        "id": "pulse-30mm-positive",
+        "kind": "pulse",
+        "amplitude_m": 0.03,
+        "segment_s": 0.25,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 11.913379539814137,
+        "local_hanging_anchor": 6.832523995881371
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ]
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "008-actuator",
+      "reference": {
+        "id": "pulse-30mm-negative",
+        "kind": "pulse",
+        "amplitude_m": -0.03,
+        "segment_s": 0.25,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 8.611547853922952,
+        "local_hanging_anchor": 1.544122637388549
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "009-actuator",
+      "reference": {
+        "id": "reversal-40mm-positive",
+        "kind": "reversal",
+        "amplitude_m": 0.04,
+        "segment_s": 0.35,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 10.63399033958746,
+        "local_hanging_anchor": 6.451250806500112
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ]
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "010-actuator",
+      "reference": {
+        "id": "reversal-40mm-negative",
+        "kind": "reversal",
+        "amplitude_m": -0.04,
+        "segment_s": 0.35,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 8.830114789215317,
+        "local_hanging_anchor": 2.7430486285418345
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "011-actuator",
+      "reference": {
+        "id": "reversal-60mm-positive",
+        "kind": "reversal",
+        "amplitude_m": 0.06,
+        "segment_s": 0.5,
+        "hold_s": 3.0
+      },
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 8.029894975728663,
+        "local_hanging_anchor": 3.178621354489846
+      },
+      "local_pass": true,
+      "local_reasons": []
+    },
+    {
+      "role": "training",
+      "run": "actuator-training-01",
+      "trial": "012-actuator",
+      "reference": {
+        "id": "reversal-60mm-negative",
+        "kind": "reversal",
+        "amplitude_m": -0.06,
+        "segment_s": 0.5,
+        "hold_s": 3.0
+      },
+      "status": "excluded_incomplete",
+      "reason": "failed/incomplete trial is never model validation"
+    },
+    {
+      "role": "training",
+      "run": "coupled-training-01",
+      "trial": "001-coupled",
+      "reference": null,
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 69.05972800421766,
+        "local_hanging_anchor": 72.85378248588508
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ]
+    },
+    {
+      "role": "validation",
+      "run": "coupled-validation-01",
+      "trial": "001-coupled",
+      "reference": null,
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 70.9413603410968,
+        "local_hanging_anchor": 71.02407652521723
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ]
+    },
+    {
+      "role": "validation",
+      "run": "coupled-validation-01",
+      "trial": "002-coupled",
+      "reference": null,
+      "status": "scored",
+      "rms_deg": {
+        "firmware_reference": 69.9462733023421,
+        "local_hanging_anchor": 69.28387641059302
+      },
+      "local_pass": false,
+      "local_reasons": [
+        "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+      ]
+    }
+  ],
+  "model_updated": false,
+  "physical_cart_measured": false
+}
