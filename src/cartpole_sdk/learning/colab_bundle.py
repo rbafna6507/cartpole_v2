@@ -37,14 +37,25 @@ def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, sec
     if (profile/'bundle.json').exists():
         manifest,_ = read_json(profile/'bundle.json')
         content=dict(manifest);expected=content.pop('content_sha256',None)
-        allowed=set(INPUTS)|{'provenance.json','frozen-candidate.json','assumptions.json'}
-        if (manifest.get('schema')!='cartpole-passive-training-bundle-v1' or
-                digest(content)!=expected or set(manifest.get('files_sha256',{}))!=allowed):
+        profile_extras = {
+            'cartpole-passive-training-bundle-v1': {'provenance.json', 'frozen-candidate.json', 'assumptions.json'},
+            'cartpole-evidence-training-bundle-v1': {'provenance.json', 'randomization.json'},
+        }
+        extras = profile_extras.get(manifest.get('schema'))
+        allowed = set(INPUTS) | (extras or set())
+        if (extras is None or digest(content)!=expected or
+                set(manifest.get('files_sha256',{}))!=allowed):
             raise ValueError('source profile hash manifest is invalid or unsupported')
         for name,expected in manifest['files_sha256'].items():
             if _hash(profile/name)!=expected:
                 raise ValueError('source profile input hash mismatch: '+name)
-        extra_profile=['bundle.json','provenance.json','frozen-candidate.json','assumptions.json']
+        extra_profile = ['bundle.json', *sorted(extras)]
+    randomization = None
+    if (profile/'randomization.json').exists():
+        from .training_recipe import validate_randomization
+        randomization = validate_randomization(read_json(profile/'randomization.json')[0])
+        if 'randomization.json' not in extra_profile:
+            extra_profile.append('randomization.json')
     values = {name: read_json(profile/name)[0] for name in INPUTS}
     executor = values['executor-parameters.json']
     if executor.get('schema_version') == 1:
@@ -54,11 +65,13 @@ def prepare_bundle(repo, profile, output, *, steps=2_097_152, seed=20261017, sec
         development_only=True, seconds=seconds)
     recipe = dict(schema='cartpole-colab-recipe-v1', steps=steps, seed=seed, seconds=seconds,
         n_steps=1024, batch_size=64, epochs=10, gamma=.999, gae_lambda=.98,
-        learning_rate=.0003, reward_scale=.01, randomize=True, training_seeds=list(range(10000,10128)),
+        learning_rate=.0003, reward_scale=.01, randomize=randomization is None, training_seeds=list(range(10000,10128)),
         evaluation_seeds=list(evaluation_seeds), hold_seconds=5.,
         checkpoint_every=checkpoint_every, angle_source=experiment['observation_config']['angle_source'],
         run='ppo-001', python='3.11.7', uv='0.8.11', colab_cli='0.7.4',
         hardware_accepted=False, task_qualified=False)
+    if randomization is not None:
+        recipe['randomization'] = randomization
     selected = [repo/name for name in ('pyproject.toml','README.md','uv.lock')]
     for folder in ('src','examples','scripts'):
         for path in sorted((repo/folder).rglob('*')):

@@ -12,6 +12,22 @@ are 100 Hz raw acceleration requests with 20 ms action leases.
 
 ## Current model and evidence
 
+Use the **20261021 profiles** below for new training. They retain the supported
+passive plant, refresh the recorded rail/executor settings, and add per-episode
+encoder bias and angle-dependent distortion before quantization and the 1 kHz
+observer. Both reported angle and rate therefore change coherently. Nominal
+encoder distortion is zero; the failed fitted calibration is not applied.
+The bounds (bias ±1°, sine coefficient ±4°, cosine coefficient ±5°) are engineering
+coverage, not measured confidence intervals. Camera-only movement is recorded as
+a view change. See [the refresh evidence and tests](../evidence/simulation-refresh-20261021/README.md).
+
+Each profile contains `randomization.json` and a complete hash manifest. The Colab
+builder now freezes that exact recipe. Existing immutable bundles retain their
+original recipes; prepare a fresh bundle to use these changes. The two local
+4096-step execution checks produced checkpoints but no sustained holds, so they
+are not deployment candidates.
+
+
 The default retains the frozen batch-6 smooth-friction model, checked against
 later recordings. A new training-only refit using batch6 plus training8/9
 improved training RMS by 10.5%, but validation8/9 RMS only by 3.77% and P95
@@ -36,9 +52,9 @@ missed steps, slip and motor-disabled stopping are not modeled. Jerk remains
 
 | Profile under `training/profiles/` | Actor angle | Actor angular rate |
 |---|---|---|
-| `rl-encoder-20261017` | Raw magnetic angle | Firmware-style magnetic observer |
-| `rl-vision-20261017` | Tracked camera angle | Maintained camera derivative estimator |
-| `rl-fused-20261017` | SDK complementary fused angle | Aligned magnetic observer |
+| `rl-encoder-20261021` | Raw magnetic angle | Firmware-style magnetic observer |
+| `rl-vision-20261021` | Tracked camera angle | Maintained camera derivative estimator |
+| `rl-fused-20261021` | SDK complementary fused angle | Aligned magnetic observer |
 
 All retain emitted-step cart position, commanded velocity/acceleration and brake
 direction. Camera-only here means **vision for pole angle/rate**, not vision for
@@ -68,6 +84,19 @@ alignment. The camera service was tracking at~79 FPS but had no valid angle zero
 when inspected. Training these variants works without the camera; powered
 vision/fused use is not commissioned by the simulator tests.
 
+
+To regenerate a profile from the preserved evidence (no hardware access), use a
+new output directory:
+
+```sh
+./scripts/prepare-rig-training --angle-source raw --output runs/regenerated-profile
+```
+
+Use `--angle-source vision` or `fused` for those variants. For local training with
+these profiles, pass `--randomization PROFILE/randomization.json` to
+`examples/train_ppo.py train`; `--randomize` intentionally means the older generic
+preset and does not load the profile's additional encoder terms.
+
 ## Launch through the official headless Colab CLI
 
 Run these on your laptop from this checkout. The wrapper targets
@@ -91,11 +120,12 @@ Prepare an immutable bundle, then launch a uniquely named CPU session:
 
 ```sh
 ./scripts/prepare-colab-training \
-  --profile training/profiles/rl-encoder-20261017 \
-  --output runs/colab-encoder-001
+  --profile training/profiles/rl-encoder-20261021 \
+  --steps 102400 --checkpoint-every 20480 --seed 20261021 \
+  --output runs/colab-encoder-20261021-001
 
-./scripts/colab-training start runs/colab-encoder-001 \
-  --session cartpole-encoder-001
+./scripts/colab-training start runs/colab-encoder-20261021-001 \
+  --session cartpole-encoder-20261021-001
 ```
 
 `prepare` validates model/configuration and profile hashes, then packages selected
@@ -109,11 +139,11 @@ would not accelerate this implementation.
 Check progress and download checkpoints/results:
 
 ```sh
-./scripts/colab-training status runs/colab-encoder-001 \
-  --session cartpole-encoder-001
+./scripts/colab-training status runs/colab-encoder-20261021-001 \
+  --session cartpole-encoder-20261021-001
 
-./scripts/colab-training download runs/colab-encoder-001 \
-  --session cartpole-encoder-001 --output runs/colab-encoder-results-001.zip
+./scripts/colab-training download runs/colab-encoder-20261021-001 \
+  --session cartpole-encoder-20261021-001 --output runs/colab-encoder-20261021-results-001.zip
 ```
 
 For new bundles, keep a local watcher running while training. It checks real
@@ -121,8 +151,8 @@ supervisor liveness and optimizer progress, and downloads a SHA256/CRC-verified
 snapshot whenever a new complete checkpoint appears and on completion/failure:
 
 ```sh
-./scripts/colab-training watch runs/colab-encoder-001 \
-  --session cartpole-encoder-001 --output runs/colab-encoder-001-backups
+./scripts/colab-training watch runs/colab-encoder-20261021-001 \
+  --session cartpole-encoder-20261021-001 --output runs/colab-encoder-20261021-001-backups
 ```
 
 The output directory must be new. Keep this laptop awake and connected; on macOS,
@@ -145,12 +175,12 @@ recipe with a shorter first budget:
 
 ```sh
 ./scripts/prepare-colab-training \
-  --profile training/profiles/rl-encoder-20261017 \
+  --profile training/profiles/rl-encoder-20261021 \
   --steps 102400 --checkpoint-every 20480 \
-  --output runs/colab-encoder-002
-./scripts/colab-training start runs/colab-encoder-002 --session cartpole-encoder-002
-./scripts/colab-training watch runs/colab-encoder-002 \
-  --session cartpole-encoder-002 --output runs/colab-encoder-002-backups
+  --output runs/colab-encoder-20261021-002
+./scripts/colab-training start runs/colab-encoder-20261021-002 --session cartpole-encoder-20261021-002
+./scripts/colab-training watch runs/colab-encoder-20261021-002 \
+  --session cartpole-encoder-20261021-002 --output runs/colab-encoder-20261021-002-backups
 ```
 
 Training/evaluation seeds remain disjoint. `--evaluation-seeds` during preparation
@@ -163,8 +193,8 @@ with all validated manifest/actor/archive files is resumable. Preserve the ZIP
 before stopping the VM:
 
 ```sh
-./scripts/colab-training stop runs/colab-encoder-001 \
-  --session cartpole-encoder-001
+./scripts/colab-training stop runs/colab-encoder-20261021-001 \
+  --session cartpole-encoder-20261021-001
 ```
 
 Never repeat `start` after a timeout: inspect status first. The wrapper reserves
@@ -176,8 +206,8 @@ alternative for all commands. Remote actions require a nonce-bound success
 receipt because CLI0.7.4 can return exit0 for remote Python exceptions. Subsequent
 commands also verify that the selected VM belongs to the supplied bundle.
 
-For vision or fusion, repeat preparation with `rl-vision-20261017` or
-`rl-fused-20261017`, a new output and a distinct session name. The same commands
+For vision or fusion, repeat preparation with `rl-vision-20261021` or
+`rl-fused-20261021`, a new output and a distinct session name. The same commands
 then train that modality. You can run them sequentially to compare results.
 
 ## Training recipe and acceptance
@@ -222,7 +252,7 @@ calling inspected seeds blind validation. A good nominal score alone is insuffic
 The same inputs and implementation run locally:
 
 ```sh
-PROFILE=training/profiles/rl-encoder-20261017
+PROFILE=training/profiles/rl-encoder-20261021
 ./scripts/train-ppo train \
   --model "$PROFILE/model.json" \
   --executor-parameters "$PROFILE/executor-parameters.json" \

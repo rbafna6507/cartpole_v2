@@ -1,0 +1,934 @@
+{
+  "schema": "cartpole-production-passive-replay-v1",
+  "scope": "Production backend passive numerical verification; no hardware or full-rig model approval",
+  "accepted": false,
+  "hardware_rl_approved": false,
+  "coefficients_refitted": false,
+  "source_identity": {
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/passive-batch7-original/passive-training-7/rig-1792268992424581030-2783727930.jsonl",
+    "member": null,
+    "sha256": "51c72260ddc9c25c861298b38518643bfe3aae92280559a9a9a99aba09562f62",
+    "hash_basis": "decompressed exact JSONL bytes",
+    "source_bytes": 18645115,
+    "record_count": 49206,
+    "collection_report": {
+      "status": "bound successful collection",
+      "completed": true,
+      "sha256": "27c9d6b1c40af874aa9f3ac1e47b81ba7bc26dc23c5a33cf5f9b9c572a278757",
+      "path": "runs/passive-batch7-original/passive-training-7/report.json"
+    },
+    "collection_protocol": {
+      "dataset_role": "training",
+      "nominal_angles_only": true,
+      "operator_cart_restraint": "cart held stationary by hand",
+      "procedure": "passive",
+      "requested_releases": [
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-01",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-02",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-03",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-04",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-05",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-06",
+          "repetition": 1
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "left",
+          "release_id": "release-07",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 30.0,
+          "direction": "right",
+          "release_id": "release-08",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "left",
+          "release_id": "release-09",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 60.0,
+          "direction": "right",
+          "release_id": "release-10",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "left",
+          "release_id": "release-11",
+          "repetition": 2
+        },
+        {
+          "angle_from_hanging_deg": 90.0,
+          "direction": "right",
+          "release_id": "release-12",
+          "repetition": 2
+        }
+      ],
+      "run_label": "passive-validation-7",
+      "schema": "cartpole-collection-protocol-v1"
+    },
+    "collection_protocol_sha256": "2b6d7bbeaccb1e199cad46aed2b9ad8bc2e81fb7cdab75cfe09a308ff425344f",
+    "passive_baseline": {
+      "bounds_interpretation": "Declared collection quality bounds, not angle calibration or an accuracy guarantee",
+      "camera": {
+        "bounds": {
+          "max_angle_spread_rad": 0.035,
+          "max_angle_vector_error_rad": 0.03,
+          "max_gap_s": 0.2,
+          "max_length_spread_fraction": 0.1,
+          "max_length_vector_error_fraction": 0.05,
+          "max_pivot_spread_px": 4.0,
+          "min_confidence": 0.5,
+          "min_duration_fraction": 0.75,
+          "min_duration_s": 1.5,
+          "min_length_px": 5.0,
+          "min_sample_count": 30,
+          "min_valid_fraction": 0.8
+        },
+        "capture_span_s": 1.9818154700333253,
+        "first_frame_seq": 7139632,
+        "first_host_ns": 364288307011669,
+        "first_source_t": 364288.289130317,
+        "frame_height": 600,
+        "frame_width": 960,
+        "image_angle_rad": -0.024586591624191377,
+        "last_frame_seq": 7139789,
+        "last_host_ns": 364290295597347,
+        "last_source_t": 364290.270945787,
+        "length_px": 194.80372678827374,
+        "length_spread_px": 0.5393804667561142,
+        "max_gap_s": 0.040617852995637804,
+        "pivot_px": [
+          478.26428571428573,
+          296.04545454545456
+        ],
+        "pivot_spread_px": [
+          0.24178904940532675,
+          0.3003533231474762
+        ],
+        "rotation": null,
+        "sample_count": 136,
+        "source_frame_count": 136,
+        "spread_rad": 0.0017321365164434943,
+        "valid_fraction": 1.0
+      },
+      "duration_s": 2.003408186,
+      "encoder": {
+        "bounds": {
+          "max_angle_span_rad": 0.03,
+          "max_hanging_offset_rad": 0.35,
+          "min_duration_fraction": 0.95,
+          "min_duration_s": 1.9,
+          "min_sample_count": 100
+        },
+        "first_board_us": 3646208130,
+        "first_host_ns": 364288302397865,
+        "last_board_us": 3648212130,
+        "last_host_ns": 364290305806051,
+        "raw_angle_rad": 3.023476,
+        "sample_count": 502,
+        "span_rad": 0.0030679999999998486,
+        "spread_rad": 0.0015339999999999243
+      },
+      "schema": "cartpole-passive-baseline-v1",
+      "window_host_ns": [
+        364288302397865,
+        364290305806051
+      ],
+      "zeroing": "experiment-relative only; raw readings and saved upright unchanged"
+    },
+    "session": {
+      "clock_id": "teensy:2783727930",
+      "session_id": "2783727930",
+      "topology": {
+        "cart": "cart",
+        "joints": [
+          "pole"
+        ]
+      }
+    },
+    "reference": [
+      330,
+      15,
+      "executor-v6-measuredrail"
+    ],
+    "duplicate_snapshots": 0,
+    "annotations_sha256": "fd7e6a41b563eee815004d9f4677249b8257de84871bec38006fdf373f0d83df",
+    "operator_cart_restraint": "cart held stationary by hand per collection protocol; independently unverified",
+    "selection_method": "Frozen from complete raw encoder/camera and release-onset plots before any batch7 prediction scoring. All11 releases retained including the final partial decay at collection timeout. Coefficients and evaluation were frozen before inspecting batch7. Fixed0.5s pose ending0.05s before onset; free intervals start0.12s after onset and end before static tails or final recording boundary.",
+    "selection": [
+      {
+        "annotation": {
+          "episode_id": "release-01",
+          "pose_board_relative_s": [
+            14.67,
+            15.17
+          ],
+          "release_board_s": 15.22,
+          "board_relative_s": [
+            15.34,
+            19.65
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1078,
+        "actual_board_relative_s": [
+          15.342,
+          19.65
+        ],
+        "max_gap_s": 0.004000000000001336
+      },
+      {
+        "annotation": {
+          "episode_id": "release-02",
+          "pose_board_relative_s": [
+            27.94,
+            28.44
+          ],
+          "release_board_s": 28.49,
+          "board_relative_s": [
+            28.61,
+            32.9
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1073,
+        "actual_board_relative_s": [
+          28.61,
+          32.898
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-03",
+          "pose_board_relative_s": [
+            41.43,
+            41.93
+          ],
+          "release_board_s": 41.98,
+          "board_relative_s": [
+            42.1,
+            49.9
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1950,
+        "actual_board_relative_s": [
+          42.102,
+          49.898
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-04",
+          "pose_board_relative_s": [
+            62.29,
+            62.79
+          ],
+          "release_board_s": 62.84,
+          "board_relative_s": [
+            62.96,
+            71.3
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2085,
+        "actual_board_relative_s": [
+          62.962,
+          71.298
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-05",
+          "pose_board_relative_s": [
+            82.95,
+            83.45
+          ],
+          "release_board_s": 83.5,
+          "board_relative_s": [
+            83.62,
+            94.3
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2670,
+        "actual_board_relative_s": [
+          83.622,
+          94.298
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-06",
+          "pose_board_relative_s": [
+            104.83,
+            105.33
+          ],
+          "release_board_s": 105.38,
+          "board_relative_s": [
+            105.5,
+            116.2
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2675,
+        "actual_board_relative_s": [
+          105.502,
+          116.198
+        ],
+        "max_gap_s": 0.004000999999988153
+      },
+      {
+        "annotation": {
+          "episode_id": "release-07",
+          "pose_board_relative_s": [
+            123.25,
+            123.75
+          ],
+          "release_board_s": 123.8,
+          "board_relative_s": [
+            123.92,
+            128.0
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1020,
+        "actual_board_relative_s": [
+          123.922,
+          127.998
+        ],
+        "max_gap_s": 0.0040000000000048885
+      },
+      {
+        "annotation": {
+          "episode_id": "release-08",
+          "pose_board_relative_s": [
+            137.08,
+            137.58
+          ],
+          "release_board_s": 137.63,
+          "board_relative_s": [
+            137.75,
+            141.8
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1013,
+        "actual_board_relative_s": [
+          137.75,
+          141.798
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-09",
+          "pose_board_relative_s": [
+            148.78,
+            149.28
+          ],
+          "release_board_s": 149.33,
+          "board_relative_s": [
+            149.45,
+            157.7
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 2063,
+        "actual_board_relative_s": [
+          149.45,
+          157.698
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-10",
+          "pose_board_relative_s": [
+            164.16,
+            164.66
+          ],
+          "release_board_s": 164.71,
+          "board_relative_s": [
+            164.83,
+            172.8
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified."
+        },
+        "samples": 1993,
+        "actual_board_relative_s": [
+          164.83,
+          172.798
+        ],
+        "max_gap_s": 0.004000000000019099
+      },
+      {
+        "annotation": {
+          "episode_id": "release-11",
+          "pose_board_relative_s": [
+            178.15,
+            178.65
+          ],
+          "release_board_s": 178.7,
+          "board_relative_s": [
+            178.82,
+            182.08
+          ],
+          "reason": "Observed held-to-decay transition; exact hand-clear unverified. Partial decay at recording timeout; retained and coverage reported."
+        },
+        "samples": 815,
+        "actual_board_relative_s": [
+          178.822,
+          182.078
+        ],
+        "max_gap_s": 0.004000000000019099
+      }
+    ]
+  },
+  "freeze_sha256": "2874d85349664109404ea0066fb4037fec568f422cdbbc740f57a55790db1b59",
+  "annotations_sha256": "fd7e6a41b563eee815004d9f4677249b8257de84871bec38006fdf373f0d83df",
+  "qualification_report_sha256": "fcc3436124585406269480e3227d373ef2aa9c23108b9893a00b670e185e552f",
+  "qualification_report_path": "/Users/rbafna/projects/cartpole_v2/evidence/system-id-model-review-20261017/analysis/batch7-latest6-check/report.json.gz",
+  "coefficients": [
+    60.806177009128575,
+    0.006891975341585199,
+    6.898766153634008,
+    1.6268943123178277
+  ],
+  "simulation_config": {
+    "physics_dt_ns": 1000000,
+    "control_steps": 1,
+    "max_steps": 100000,
+    "rail_half_m": 0.308962494,
+    "effective_length_m": 0.16030387335574306,
+    "cart_mass_kg": 0.35,
+    "pole_mass_kg": 0.02275,
+    "cart_damping": 0.05,
+    "hinge_damping": 3.0218604984532184e-06,
+    "max_force_n": 20.0,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 1000000000,
+    "hinge_coulomb_friction_nm": 0.0007133292581428023,
+    "hinge_friction_velocity_scale_rad_s": 0.05
+  },
+  "inertia_kg_m2": 0.0004384607240568233,
+  "raw_to_physical_phase_rad": 0.11297194821931156,
+  "phase_mapping_is_absolute_calibration": false,
+  "initialization_method": "Frozen dynamics.initial_state(history_rawq:0.5); once per release; no later corrections",
+  "measured_error": {
+    "rms_deg": 2.662406199326006,
+    "p95_deg": 5.1022291897045315,
+    "samples": 17049
+  },
+  "ode_measured_error": {
+    "rms_deg": 2.6294040212498264,
+    "p95_deg": 5.0237582485785595,
+    "samples": 17049
+  },
+  "ode_parity": {
+    "rms_deg": 0.08771096726201662,
+    "p95_deg": 0.2052027347394505,
+    "samples": 17049
+  },
+  "ode_max_difference_deg": 0.28798654913905836,
+  "physics": {
+    "max_abs_cart_position_m": 1.1609757879034651e-17,
+    "max_abs_cart_velocity_m_s": 2.7114795437577398e-18,
+    "max_abs_cart_acceleration_m_s2": 1.1210616291716719e-16,
+    "max_abs_cart_force_n": 0.2296608197428885,
+    "total_physics_steps": 68196,
+    "force_saturation_count": 0,
+    "fractional_sample_count": 1
+  },
+  "numerical_checks": {
+    "ode_rms_below_half_degree": true,
+    "ode_max_below_one_degree": true,
+    "cart_position_below_one_nm": true,
+    "cart_velocity_below_one_nm_per_s": true,
+    "cart_acceleration_below_one_um_per_s2": true,
+    "no_force_saturation": true
+  },
+  "numerical_checks_passed": true,
+  "camera_quality_summary": {
+    "passed": false,
+    "all_release_poses_verified": false,
+    "reasons": [
+      "release-11: angular RMSE exceeds 5 degrees or is unavailable",
+      "release-11: angular P95 exceeds 10 degrees or is unavailable"
+    ],
+    "absolute_angle_calibration": false,
+    "physical_cart_stationarity_certified": false,
+    "failed_free_intervals": [
+      "release-11"
+    ],
+    "failed_poses": [
+      {
+        "episode_id": "release-02",
+        "reasons": [
+          "held pose is not stationary within provisional angular variability bound"
+        ]
+      },
+      {
+        "episode_id": "release-06",
+        "reasons": [
+          "camera and encoder held-pose angles disagree"
+        ]
+      }
+    ],
+    "original_qualifications_waived": false
+  },
+  "production_source_hashes": {
+    "sim/backend.py": "4ecb77076bd2d7f0f1a29ce66ca8d39abe02fd78bfd8796e5dff466d313abfd2",
+    "sim/config.py": "972893d8328e639e24a0d643cb81e836260475fd9e964f2f64559521ff945717",
+    "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+    "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+    "identification/workflow.py": "654ed80bf1235c5e1b028a5676b8cf5fc4f26b3870ac6d8fa932c3f93e1bea1a",
+    "identification/passive.py": "5dc850ec634e1b71ff417bac0f6a31c4bc53b0bad7e82516235e3606dbf66deb"
+  },
+  "frozen_method_hashes": {
+    "dynamics.py": "0bd736be5a6bc438d253ca046e0b09e26d9004c38f34a1974e91893eee5bd335",
+    "trajectory.py": "5cfec37add52f5d32663bef72b1d7320466f0d886c564dddd590ad414045bad4",
+    "compare.py": "0cde099906f264c6f19b57c96d85787e6e79352be5b082b1314bd3099d49847c",
+    "evaluate.py": "ebbc655e2d53bcf7a934d49b90fe0cf4d04d37bf4250388f46e12410cfafb319",
+    "refit_latest.py": "c96aa1f5260198ac4256d508564c5b106ff03fbca9d845f2dcabf7ade546ce47"
+  },
+  "replay_script_sha256": "ec5da6e19b8fab5eed716cc0d35b86ab9aa616f87c093ec7516e98fa156ea5c8",
+  "command": [
+    "/Users/rbafna/.cache/uv/builds-v0/.tmptCSjZl/bin/python",
+    "evidence/friction-gym-20261017/production-replay/replay.py",
+    "--freeze",
+    "evidence/system-id-model-review-20261017/candidate-freeze-latest6.json",
+    "--source",
+    "runs/passive-batch7-original/passive-training-7/rig-1792268992424581030-2783727930.jsonl",
+    "--annotations",
+    "evidence/system-id-model-review-20261017/batch7/training-annotations.json",
+    "--output",
+    "runs/simulation-refresh-20261021/passive-replay"
+  ],
+  "versions": {
+    "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "numpy": "2.4.6",
+    "scipy": "1.16.3",
+    "mujoco": "3.15.0"
+  },
+  "limitations": [
+    "Assumed mass, rod inertia, force limit and cart damping are not identified by passive decays.",
+    "Zero acceleration uses an ideal inverse-force cart servo; it does not validate physical actuator tracking.",
+    "Camera/pose failures and unverified physical cart restraint remain unwaived.",
+    "Smooth tanh friction does not model exact static sticking.",
+    "Recorded hanging zero is a display convention, not an absolute calibration."
+  ],
+  "episodes": [
+    {
+      "episode_id": "release-01",
+      "initial_state_raw": [
+        -3.2551073071795864,
+        4.211809997365576
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 1.7353785388294007,
+        "p95_deg": 3.441629045087889,
+        "samples": 952
+      },
+      "ode_parity": {
+        "rms_deg": 0.025696183034836954,
+        "p95_deg": 0.04448515488109634,
+        "samples": 952
+      },
+      "physics_steps": 3808,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 1.3977714801983994e-18,
+      "max_abs_cart_velocity_m_s": 6.645247475601845e-19,
+      "max_abs_cart_acceleration_m_s2": 7.947134986693201e-17,
+      "max_abs_cart_force_n": 0.07587054812957604,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 953,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 2.384185791015625e-06,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-02",
+      "initial_state_raw": [
+        3.0894369999999993,
+        -4.166311994902678
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 1.3699838772310164,
+        "p95_deg": 2.601832468588053,
+        "samples": 947
+      },
+      "ode_parity": {
+        "rms_deg": 0.02417524220017212,
+        "p95_deg": 0.04193732678188242,
+        "samples": 947
+      },
+      "physics_steps": 3788,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 2.4314320927150477e-18,
+      "max_abs_cart_velocity_m_s": 1.1316937627511678e-18,
+      "max_abs_cart_acceleration_m_s2": 6.107189611939649e-17,
+      "max_abs_cart_force_n": 0.07540316816395821,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 948,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 4.291534423828125e-06,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-03",
+      "initial_state_raw": [
+        -3.4775343071795852,
+        7.238214942289269
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 3.0662730278819206,
+        "p95_deg": 5.306152727612754,
+        "samples": 1824
+      },
+      "ode_parity": {
+        "rms_deg": 0.035581536667934795,
+        "p95_deg": 0.05636038004733645,
+        "samples": 1824
+      },
+      "physics_steps": 7296,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 2.88699312294955e-18,
+      "max_abs_cart_velocity_m_s": 1.4142137065317195e-18,
+      "max_abs_cart_acceleration_m_s2": 1.1210616291716719e-16,
+      "max_abs_cart_force_n": 0.1307089466381966,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 1825,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 6.794929504394531e-06,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-04",
+      "initial_state_raw": [
+        3.002001,
+        -7.70882691256627
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.3456088680896596,
+        "p95_deg": 4.436676815233642,
+        "samples": 1959
+      },
+      "ode_parity": {
+        "rms_deg": 0.05359305574757916,
+        "p95_deg": 0.09607533355600369,
+        "samples": 1959
+      },
+      "physics_steps": 7836,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 1.1485160779306771e-17,
+      "max_abs_cart_velocity_m_s": 2.0387926747715797e-18,
+      "max_abs_cart_acceleration_m_s2": 9.590176067563808e-17,
+      "max_abs_cart_force_n": 0.13839040877214837,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 1960,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 1.049041748046875e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-05",
+      "initial_state_raw": [
+        -3.687690307179586,
+        9.73042196853506
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.37674511009143,
+        "p95_deg": 4.2443434900120325,
+        "samples": 2544
+      },
+      "ode_parity": {
+        "rms_deg": 0.12337913024221041,
+        "p95_deg": 0.22847376906734035,
+        "samples": 2544
+      },
+      "physics_steps": 10176,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 3.599721033705537e-18,
+      "max_abs_cart_velocity_m_s": 1.436354414540922e-18,
+      "max_abs_cart_acceleration_m_s2": 9.540752097840131e-17,
+      "max_abs_cart_force_n": 0.2169490163259364,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 2545,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 7.62939453125e-06,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-06",
+      "initial_state_raw": [
+        3.448388307179586,
+        -10.107519530888583
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 4.130039248974334,
+        "p95_deg": 8.808633205933237,
+        "samples": 2549
+      },
+      "ode_parity": {
+        "rms_deg": 0.13861225172481573,
+        "p95_deg": 0.25649728264294347,
+        "samples": 2549
+      },
+      "physics_steps": 10196,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 1.6050209100031415e-18,
+      "max_abs_cart_velocity_m_s": 1.4057129859171105e-18,
+      "max_abs_cart_acceleration_m_s2": 1.0850744657899013e-16,
+      "max_abs_cart_force_n": 0.2296608197428885,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 2550,
+        "fractional_sample_count": 1,
+        "maximum_timestamp_roundoff_ns": 1.1920928955078125e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-07",
+      "initial_state_raw": [
+        -3.074098,
+        3.3552856563798277
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.214159835721313,
+        "p95_deg": 4.176524325897429,
+        "samples": 894
+      },
+      "ode_parity": {
+        "rms_deg": 0.042604887904228485,
+        "p95_deg": 0.06503321568931238,
+        "samples": 894
+      },
+      "physics_steps": 3576,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 2.4965067370987346e-19,
+      "max_abs_cart_velocity_m_s": 3.3321783821502216e-19,
+      "max_abs_cart_acceleration_m_s2": 4.4569575911974604e-17,
+      "max_abs_cart_force_n": 0.06979020865485977,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 895,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 1.0013580322265625e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-08",
+      "initial_state_raw": [
+        2.856272,
+        -3.772262098771264
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 1.70425554472968,
+        "p95_deg": 3.5654868228380194,
+        "samples": 887
+      },
+      "ode_parity": {
+        "rms_deg": 0.044934535659049556,
+        "p95_deg": 0.0683971574846034,
+        "samples": 887
+      },
+      "physics_steps": 3548,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 4.165482777229151e-19,
+      "max_abs_cart_velocity_m_s": 7.248377918693013e-19,
+      "max_abs_cart_acceleration_m_s2": 5.773590882611911e-17,
+      "max_abs_cart_force_n": 0.07424450965573502,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 888,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 1.430511474609375e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-09",
+      "initial_state_raw": [
+        -3.206019307179586,
+        7.72688050898756
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.167975667299361,
+        "p95_deg": 3.8047085745506806,
+        "samples": 1937
+      },
+      "ode_parity": {
+        "rms_deg": 0.05868751592010419,
+        "p95_deg": 0.10409292658561237,
+        "samples": 1937
+      },
+      "physics_steps": 7748,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 6.3950253410403754e-18,
+      "max_abs_cart_velocity_m_s": 1.9161289960593076e-18,
+      "max_abs_cart_acceleration_m_s2": 1.006803476416461e-16,
+      "max_abs_cart_force_n": 0.13911005922283598,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 1938,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 2.574920654296875e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-10",
+      "initial_state_raw": [
+        2.92837,
+        -7.314489529779131
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.4014091893140215,
+        "p95_deg": 4.183654390282369,
+        "samples": 1867
+      },
+      "ode_parity": {
+        "rms_deg": 0.06410279294330845,
+        "p95_deg": 0.11269356742646647,
+        "samples": 1867
+      },
+      "physics_steps": 7468,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 1.1609757879034651e-17,
+      "max_abs_cart_velocity_m_s": 2.7114795437577398e-18,
+      "max_abs_cart_acceleration_m_s2": 1.0487012978786444e-16,
+      "max_abs_cart_force_n": 0.1301295028655693,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 1868,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 2.6702880859375e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    },
+    {
+      "episode_id": "release-11",
+      "initial_state_raw": [
+        -3.772058307179586,
+        9.485420093290365
+      ],
+      "initialization_index": 125,
+      "initialization_history_s": 0.5,
+      "actual_initialization_history_span_s": 0.5,
+      "measured_error": {
+        "rms_deg": 2.285462808760163,
+        "p95_deg": 4.548412957711887,
+        "samples": 689
+      },
+      "ode_parity": {
+        "rms_deg": 0.15515309749810474,
+        "p95_deg": 0.2676556327277913,
+        "samples": 689
+      },
+      "physics_steps": 2756,
+      "force_saturation_count": 0,
+      "max_abs_cart_position_m": 3.2392025855370835e-19,
+      "max_abs_cart_velocity_m_s": 9.689120808107228e-19,
+      "max_abs_cart_acceleration_m_s2": 9.852324554881983e-17,
+      "max_abs_cart_force_n": 0.21651944151966596,
+      "timing": {
+        "physics_dt_ns": 1000000,
+        "sample_count": 690,
+        "fractional_sample_count": 0,
+        "maximum_timestamp_roundoff_ns": 1.6927719116210938e-05,
+        "fractional_sample_method": "Linear interpolation of adjacent 1 ms backend states; physics timestep is never changed",
+        "timestamps": "Exact recorded board time relative to initialization, rounded only to the nearest nanosecond"
+      }
+    }
+  ]
+}

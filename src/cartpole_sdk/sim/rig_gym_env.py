@@ -32,7 +32,7 @@ from cartpole_sdk.policies.rig_observation import (encode_rig_observation, simul
 from cartpole_sdk.sensing.policy_observation import PolicyObservationAssembler
 from cartpole_sdk.sensing.frames import AngularAlignment
 from cartpole_sdk.sensing.vision import ClockMapping, VisionProvider, calibration_fingerprint
-from .config import SimulationConfig, integer, number
+from .config import SimulationConfig, integer, number, finite
 from .executor import ExecutorSimulation
 
 
@@ -58,9 +58,20 @@ class RigObservationConfig:
     vision_angle_quantum_rad: float = .001
     vision_max_age_ns: int = 150_000_000
     vision_warmup_steps: int = 500
+    # A forward sensor law, not a correction to physical truth. Shape terms
+    # vanish at upright. Defaults preserve the historical identity encoder.
+    encoder_bias_rad: float = 0.
+    encoder_sin_error_rad: float = 0.
+    encoder_cos_error_rad: float = 0.
 
     def __post_init__(self):
         contract_from_config(asdict(self))
+        # With both shape coefficients <=10 degrees, the derivative remains
+        # >=1-|sin_error|-|cos_error|>0: no folds or ambiguous sensor branches.
+        for name in ('encoder_bias_rad', 'encoder_sin_error_rad', 'encoder_cos_error_rad'):
+            finite(getattr(self, name), name)
+            if abs(getattr(self, name)) > math.radians(10.):
+                raise ValidationError('encoder error coefficients must be within ±10 degrees')
         integer(self.encoder_counts, 'encoder_counts', positive=True)
         integer(self.telemetry_delay_steps, 'telemetry_delay_steps')
         integer(self.command_delay_steps, 'command_delay_steps')
@@ -146,7 +157,10 @@ class RigCartpoleEnv(gym.Env):
 
     def _measure_angle(self):
         c = self.observation_config
-        angle = self.ground_truth.theta + self.np_random.normal(0., c.angle_noise_std)
+        theta = self.ground_truth.theta
+        angle = (theta + c.encoder_bias_rad + c.encoder_sin_error_rad*math.sin(theta)
+                 + c.encoder_cos_error_rad*(math.cos(theta)-1.)
+                 + self.np_random.normal(0., c.angle_noise_std))
         quantum = 2*math.pi/c.encoder_counts
         return wrap(round(angle/quantum)*quantum)
 

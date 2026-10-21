@@ -58,8 +58,20 @@ def job():
     command = [python,'-u','examples/train_ppo.py','train']
     for name in ('model','executor-parameters','observation-config','prior-parameters'):
         command += ['--'+name,'inputs/'+name+'.json']
-    command += ['--development-only','--randomize','--training-seeds']
-    command += list(map(str, recipe['training_seeds']))
+    command += ['--development-only']
+    if 'randomization' in recipe:
+        settings = recipe['randomization']
+        if (not isinstance(settings, dict) or
+                settings.get('schema') != 'cartpole-training-randomization-v1'):
+            raise ValueError('invalid frozen randomization recipe')
+        frozen = json.loads((PROJECT/'inputs/randomization.json').read_text())
+        if frozen != settings:
+            raise ValueError('randomization input differs from frozen recipe')
+        command += ['--randomization', 'inputs/randomization.json']
+    else:
+        # Immutable older bundles declare the original engineering preset.
+        command += ['--randomize']
+    command += ['--training-seeds', *map(str, recipe['training_seeds'])]
     for key in ('seed','steps','seconds','n_steps','batch_size','epochs','gamma','gae_lambda','learning_rate','reward_scale','checkpoint_every'):
         command += ['--'+key.replace('_','-'),str(recipe[key])]
     command += ['--output',run]

@@ -24,13 +24,17 @@ braking limits. The recorded profile has jerk 150 m/s³, speed 1.5 m/s,
 acceleration 25 m/s² and rail half-range about 0.309 m. These are a recorded
 executor snapshot, not a current hardware readback.
 
-The encoder path quantizes to 4096 counts, runs the causal bandwidth-6 Hz
-observer at 1 kHz, and exposes raw angle plus estimated angular rate. Cart
+The 20261021 encoder profile applies an explicit forward sensor error law before
+4096-count quantization, runs the causal bandwidth-10 Hz observer at 1 kHz, and
+exposes raw angle plus estimated angular rate. Nominal error coefficients are
+zero; training varies constant bias and upright-anchored periodic shape terms.
+Older profiles retain their saved bandwidths. This exercises coupled angle/rate
+errors, unlike the older actor-input-only bias stress. Cart
 position is an ideal pulse-count estimate; velocity and acceleration are command
 states. Shared observation encoding supplies state, validity and age features.
-The nominal profile actually adds 0.001 rad Gaussian encoder noise, despite an
-older sentence in its `assumptions.json` saying no extra noise. The explicit
-`observation-config.json` determines execution and is retained in every recipe.
+The nominal profile adds 0.001 rad Gaussian encoder noise. The explicit
+`observation-config.json` and `randomization.json` determine execution and are
+retained in every new Colab recipe. See [the refresh evidence](../evidence/simulation-refresh-20261021/README.md).
 
 Transport age is hidden from encoder age features: SDK timestamps use board
 snapshot proxies. The simulator preserves that limitation. Camera/fused modes

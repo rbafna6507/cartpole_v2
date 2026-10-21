@@ -1,0 +1,66 @@
+{
+  "encoder_correction_accepted": false,
+  "hardware_accepted": false,
+  "hardware_contacted": false,
+  "interpretation": "Short from-scratch execution checks, not convergence or a comparison proving better learning. Nominal evaluation; no candidate qualified for extended stress/hardware testing.",
+  "passive_replay": {
+    "p95_deg": 5.1022291897045315,
+    "rms_deg": 2.662406199326006,
+    "samples": 17049
+  },
+  "physical_refit": false,
+  "ppo_smokes": [
+    {
+      "decisions": 4096,
+      "evaluation_episodes": 8,
+      "evaluation_seconds": 5,
+      "evaluation_seeds": [
+        81000,
+        81001,
+        81002,
+        81003
+      ],
+      "faults": 0,
+      "holds": 0,
+      "seed": 20261021,
+      "training_episode_seconds": 5
+    },
+    {
+      "decisions": 4096,
+      "evaluation_episodes": 8,
+      "evaluation_seconds": 5,
+      "evaluation_seeds": [
+        81000,
+        81001,
+        81002,
+        81003
+      ],
+      "faults": 0,
+      "holds": 0,
+      "seed": 20261022,
+      "training_episode_seconds": 5
+    }
+  ],
+  "profiles": {
+    "encoder": {
+      "path": "training/profiles/rl-encoder-20261021/bundle.json",
+      "sha256": "a715a4ae9025a824a47556e6a6b05a3d3c1cfc4ffbed5d6b04cd3f9c5d7a2de6"
+    },
+    "fused": {
+      "path": "training/profiles/rl-fused-20261021/bundle.json",
+      "sha256": "6b90c605ba723bfa6324295e358408551448bdfbf3db82edd2d8d9abc83daf3a"
+    },
+    "vision": {
+      "path": "training/profiles/rl-vision-20261021/bundle.json",
+      "sha256": "588cf4cfdb7325c25ac028383356cfaa374afecabd4fd89e756933532572c16c"
+    }
+  },
+  "schema": "cartpole-simulation-refresh-verification-v1",
+  "tests": {
+    "focused": 61,
+    "full": 1961,
+    "independent_review_tests": 51,
+    "skipped": 8,
+    "subtests": 460
+  }
+}

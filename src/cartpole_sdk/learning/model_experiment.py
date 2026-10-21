@@ -47,6 +47,12 @@ def complete_config(value, cls, label):
         # Only the exact frozen encoder schema gains camera-inert defaults.
         # Missing/partial camera configurations remain errors.
         value = dict(asdict(cls()), **value)
+    encoder_neutral = dict(encoder_bias_rad=0., encoder_sin_error_rad=0., encoder_cos_error_rad=0.)
+    if (cls.__name__ == 'RigObservationConfig' and isinstance(value, dict) and
+            set(value) == names - encoder_neutral.keys()):
+        # Exactly the previously complete camera-aware schema gains inert
+        # encoder terms. A partially specified new mapping is never completed.
+        value = dict(value, **encoder_neutral)
     if not isinstance(value, dict) or set(value) != names:
         raise ValueError(f'{label} requires all and only explicit fields')
     return cls(**value)

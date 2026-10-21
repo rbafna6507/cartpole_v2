@@ -12,7 +12,7 @@ import numpy as np
 from cartpole_sdk.sim.config import integer
 
 DEFAULT_TRAINING_SEEDS = tuple(range(10000, 10128))
-SAMPLING_ALGORITHM = 'numpy PCG64 SeedSequence([run_seed, episode_index, 7919]); sorted plant keys, sorted observation keys, optional sorted camera keys; uniform independent ranges; inclusive integer timing bounds'
+SAMPLING_ALGORITHM = 'numpy PCG64 SeedSequence([run_seed, episode_index, 7919]); sorted plant keys, sorted observation keys, optional sorted camera keys, optional sorted encoder keys; uniform independent ranges; inclusive integer timing bounds'
 
 
 def default_randomization(*, angle_source='raw'):
@@ -37,9 +37,9 @@ def default_randomization(*, angle_source='raw'):
 def validate_randomization(value):
     if value is None:
         return None
-    if (not isinstance(value, dict) or set(value) not in (
-            {'schema', 'rationale', 'plant', 'observation'},
-            {'schema', 'rationale', 'plant', 'observation', 'camera'}) or
+    required = {'schema', 'rationale', 'plant', 'observation'}
+    if (not isinstance(value, dict) or not required <= set(value) or
+            not set(value) <= required | {'camera', 'encoder'} or
             value['schema'] != 'cartpole-training-randomization-v1' or
             not isinstance(value['rationale'], str) or not value['rationale'].strip()):
         raise ValueError('randomization requires schema, rationale, plant and observation ranges')
@@ -51,6 +51,10 @@ def validate_randomization(value):
         limits['camera'] = dict(vision_frame_period_ns=(1_000_000, 100_000_000),
             vision_latency_ns=(0, 100_000_000), vision_angle_noise_std=(0., .1),
             vision_dropout_probability=(0., .25))
+    if 'encoder' in value:
+        bound = math.radians(10.)
+        limits['encoder'] = {name: (-bound, bound) for name in
+            ('encoder_bias_rad', 'encoder_sin_error_rad', 'encoder_cos_error_rad')}
     for group, fields in limits.items():
         if not isinstance(value[group], dict) or set(value[group]) != set(fields):
             raise ValueError(f'unsupported {group} randomization fields')
@@ -86,4 +90,8 @@ def sample_configs(config, observations, randomization, *, seed, episode):
               else float(rng.uniform(*bounds)) for name, bounds in sorted(settings['observation'].items())}
     sensor.update({name: int(rng.integers(bounds[0], bounds[1] + 1)) if name.endswith('_ns')
                    else float(rng.uniform(*bounds)) for name, bounds in sorted(settings.get('camera', {}).items())})
+    # Appending these draws preserves the plant/transport/camera draws of
+    # earlier recipes. This map feeds quantization AND the causal rate observer.
+    sensor.update({name: float(rng.uniform(*bounds))
+                   for name, bounds in sorted(settings.get('encoder', {}).items())})
     return plant, replace(observations, **sensor)

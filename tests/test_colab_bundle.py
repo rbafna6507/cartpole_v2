@@ -155,3 +155,135 @@ def test_remote_commands_reject_session_from_another_bundle(tmp_path,monkeypatch
     with pytest.raises(ValueError,match='different training bundle'):remote.verify_installed_binding()
     (tmp_path/'colab-archives.json').write_text(json.dumps({'source.zip':'a','inputs.zip':'b'}))
     remote.verify_installed_binding()
+
+
+def evidence_profile(tmp_path, *, encoder=False):
+    """A pinned profile with a nondefault recipe whose exact fields must survive."""
+    from hashlib import sha256
+    import shutil
+    from cartpole_sdk.learning.colab_bundle import INPUTS
+    from cartpole_sdk.learning.model_experiment import digest
+    from cartpole_sdk.learning.training_recipe import default_randomization
+    profile = tmp_path/'profile'
+    profile.mkdir()
+    for name in INPUTS:
+        shutil.copyfile(ROOT/'training/profiles/passive-20261017'/name, profile/name)
+    settings = default_randomization()
+    settings['observation']['angle_noise_std'] = [.002, .002]
+    if encoder:
+        settings['encoder'] = dict(encoder_bias_rad=[-.01, .01],
+            encoder_sin_error_rad=[-.04, .04], encoder_cos_error_rad=[-.05, .05])
+    (profile/'randomization.json').write_text(json.dumps(settings))
+    (profile/'provenance.json').write_text(json.dumps({'basis': 'engineering coverage'}))
+    manifest = dict(schema='cartpole-evidence-training-bundle-v1',
+        files_sha256={name: sha256((profile/name).read_bytes()).hexdigest()
+            for name in (*INPUTS, 'randomization.json', 'provenance.json')})
+    manifest['content_sha256'] = digest(manifest)
+    (profile/'bundle.json').write_text(json.dumps(manifest))
+    return profile, settings
+
+
+@pytest.mark.parametrize('encoder', [False, True])
+def test_evidence_profile_randomization_is_frozen_and_packaged(tmp_path, encoder):
+    from hashlib import sha256
+    from cartpole_sdk.learning.colab_bundle import prepare_bundle
+    profile, settings = evidence_profile(tmp_path, encoder=encoder)
+    result = prepare_bundle(ROOT, profile, tmp_path/'bundle', steps=1024)
+    assert result['recipe']['randomization'] == settings
+    assert result['recipe']['randomize'] is False
+    with zipfile.ZipFile(tmp_path/'bundle/inputs.zip') as archive:
+        assert json.loads(archive.read('recipe.json'))['randomization'] == settings
+        assert json.loads(archive.read('randomization.json')) == settings
+        manifest = json.loads(archive.read('bundle.json'))
+        assert 'provenance.json' in archive.namelist()
+        for name, expected in manifest['files_sha256'].items():
+            assert sha256(archive.read(name)).hexdigest() == expected
+
+
+@pytest.mark.parametrize('value', [None, {}, {'schema': 'unsupported'}])
+def test_invalid_optional_randomization_fails_before_creating_output(tmp_path, value):
+    from cartpole_sdk.learning.colab_bundle import prepare_bundle
+    profile, _ = evidence_profile(tmp_path)
+    (profile/'bundle.json').unlink()  # Exercise unmanifested optional input validation.
+    (profile/'randomization.json').write_text(json.dumps(value))
+    with pytest.raises(ValueError):
+        prepare_bundle(ROOT, profile, tmp_path/'bundle', steps=1024)
+    assert not (tmp_path/'bundle').exists()
+
+
+def test_custom_randomization_without_profile_manifest_is_supported(tmp_path):
+    from cartpole_sdk.learning.colab_bundle import prepare_bundle
+    profile, settings = evidence_profile(tmp_path)
+    (profile/'bundle.json').unlink()
+    result = prepare_bundle(ROOT, profile, tmp_path/'bundle', steps=1024)
+    assert result['recipe']['randomization'] == settings
+    with zipfile.ZipFile(tmp_path/'bundle/inputs.zip') as archive:
+        assert json.loads(archive.read('randomization.json')) == settings
+
+
+@pytest.mark.parametrize('name', ['randomization.json', 'provenance.json'])
+def test_evidence_profile_tampering_is_rejected_before_output(tmp_path, name):
+    from cartpole_sdk.learning.colab_bundle import prepare_bundle
+    profile, _ = evidence_profile(tmp_path)
+    with (profile/name).open('a') as stream:
+        stream.write(' ')
+    with pytest.raises(ValueError, match='hash'):
+        prepare_bundle(ROOT, profile, tmp_path/'bundle', steps=1024)
+    assert not (tmp_path/'bundle').exists()
+
+
+def remote_job_fixture(tmp_path, monkeypatch, *, custom):
+    from cartpole_sdk.learning import colab_remote as remote
+    from cartpole_sdk.learning.training_recipe import default_randomization
+    build(tmp_path, steps=1024)
+    recipe = json.loads((tmp_path/'bundle/recipe.json').read_text())
+    if custom:
+        recipe['randomize'] = False
+        recipe['randomization'] = default_randomization()
+        recipe['randomization']['observation']['angle_noise_std'] = [.002, .002]
+    else:
+        recipe.pop('randomization', None)  # Original immutable recipe shape.
+    project = tmp_path/'remote'
+    (project/'inputs').mkdir(parents=True)
+    (project/'inputs/recipe.json').write_text(json.dumps(recipe))
+    if custom:
+        (project/'inputs/randomization.json').write_text(json.dumps(recipe['randomization']))
+    (project/'.venv/bin').mkdir(parents=True)
+    (project/'.venv/bin/python').symlink_to(sys.executable)
+    (project/'examples').mkdir()
+    (project/'examples/train_ppo.py').write_text(
+        'import json, sys\n'
+        'from pathlib import Path\n'
+        'with Path("argv.jsonl").open("a") as stream:\n'
+        '    stream.write(json.dumps(sys.argv[1:])+"\\n")\n')
+    monkeypatch.setattr(remote, 'PROJECT', project)
+    return remote, project, recipe
+
+
+@pytest.mark.parametrize('custom', [False, True])
+def test_remote_job_executes_selected_randomization_arguments(tmp_path, monkeypatch, custom):
+    remote, project, _ = remote_job_fixture(tmp_path, monkeypatch, custom=custom)
+    remote.job()
+    calls = [json.loads(line) for line in (project/'argv.jsonl').read_text().splitlines()]
+    assert calls[0][0] == 'train' and calls[1][0] == 'evaluate'
+    if custom:
+        assert '--randomize' not in calls[0]
+        assert calls[0][calls[0].index('--randomization')+1] == 'inputs/randomization.json'
+    else:
+        assert '--randomize' in calls[0] and '--randomization' not in calls[0]
+    assert json.loads((project/'job-status.json').read_text())['status'] == 'completed'
+
+
+@pytest.mark.parametrize('damage', ['null', 'missing', 'different'])
+def test_remote_rejects_unbound_custom_randomization_before_training(tmp_path, monkeypatch, damage):
+    remote, project, recipe = remote_job_fixture(tmp_path, monkeypatch, custom=True)
+    if damage == 'null':
+        recipe['randomization'] = None
+        (project/'inputs/recipe.json').write_text(json.dumps(recipe))
+    elif damage == 'missing':
+        (project/'inputs/randomization.json').unlink()
+    else:
+        (project/'inputs/randomization.json').write_text('{}')
+    with pytest.raises((ValueError, OSError)):
+        remote.job()
+    assert not (project/'argv.jsonl').exists()
