@@ -1,0 +1,1215 @@
+{
+  "actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "actor_file_sha256": "9e498faf5783e278b44cad6d75e720d38a9ef0800b99d0676256c6445373a850",
+  "actor_receipt_sha256": "1af7414192f4e68643e2ada072942800a146abc7ba92cb25819a293de89c4f42",
+  "actor_training": "Supervised approximation of actual filtered native BAL feedback",
+  "hardware_accepted": false,
+  "ppo_updates": 0,
+  "remote_manifest_sha256": "99bdb17d7dee2a4a2cfb4dacff4a690f7f8fa05f1db92756b307e26e104cc2f6",
+  "schema": "cartpole-filtered-hardware-balance-audit-v1",
+  "script_sha256": "bc421b691d15355052a692fdd94a6da26c9acf2309a1be7668042abedd23c371",
+  "serial_or_motion_activity": false,
+  "trials": [
+    {
+      "action_request_gap_ms": {
+        "max": 12.83553,
+        "mean": 9.997969062248995,
+        "min": 7.561816,
+        "n": 498,
+        "rms": 10.016367165492115
+      },
+      "action_requests": 499,
+      "action_ttl_ms": [
+        20.0
+      ],
+      "active_faults": [
+        0
+      ],
+      "active_samples": 500,
+      "all_observed_faults": [
+        0
+      ],
+      "board_first_enabled_to_first_disabled_s": 4.990984,
+      "camera": {
+        "embedded_encoder_ignored": true,
+        "frames_in_active_receipt_interval": 340,
+        "path": "runs/policy-recovery-20261021/hardware-live/camera-filtered-01/vision.ndjson",
+        "sha256": "9bcf92373435a49bfbf9319794876229a7c942bdb0123800e76deaa7a3089c8f",
+        "valid_angle_frames": 178
+      },
+      "disturbance_basis": "User explicitly confirmed only filtered-console-run25-03 had pokes; timestamps and magnitudes unspecified.",
+      "driver_report_success": true,
+      "executor_parameters": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309074998,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "final_five_seconds": {
+        "commanded_velocity_m_s": {
+          "max": 0.08344953,
+          "mean": 0.017497277303200002,
+          "min": -0.1311677,
+          "n": 500,
+          "rms": 0.048265280433385536
+        },
+        "counted_x_m": {
+          "max": 0.087375,
+          "mean": 0.027002700108,
+          "min": -0.008925,
+          "n": 500,
+          "rms": 0.03755658885789219
+        },
+        "filtered_angle_deg": {
+          "max": 1.28496270685738,
+          "mean": -0.552171671552968,
+          "min": -2.180103264557192,
+          "n": 500,
+          "rms": 1.0750784981520007
+        },
+        "governed_acceleration_m_s2": {
+          "max": 1.891299,
+          "mean": 0.010719298106000003,
+          "min": -2.307117,
+          "n": 500,
+          "rms": 0.7618958653205631
+        },
+        "observer_omega_rad_s": {
+          "max": 0.6148376,
+          "mean": -0.010005827006680009,
+          "min": -0.5150873,
+          "n": 500,
+          "rms": 0.20706963190775585
+        },
+        "raw_angle_deg": {
+          "max": 1.6699221632076726,
+          "mean": -0.5521289271344496,
+          "min": -2.109375062495063,
+          "n": 500,
+          "rms": 1.0541381159881462
+        }
+      },
+      "first_disabled": {
+        "acceleration": 0.0,
+        "angle_hat": -0.03238636,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67343511,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": -0.03909855,
+        "received_ns": 715212931166849,
+        "sid": 2628400746,
+        "theta": -0.03374758,
+        "tick": 522068555,
+        "unwrapped_tick": 522068555,
+        "unwrapped_us": 2382061254,
+        "us": 2382061254,
+        "velocity": 0.0,
+        "x": 0.0874125
+      },
+      "first_enabled": {
+        "acceleration": 0.0,
+        "angle_hat": 0.01710463,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67343511,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 12,
+        "omega": -0.01696079,
+        "received_ns": 715207940627754,
+        "sid": 2628400746,
+        "theta": 0.01687379,
+        "tick": 522063564,
+        "unwrapped_tick": 522063564,
+        "unwrapped_us": 2377070270,
+        "us": 2377070270,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "hardware_accepted": false,
+      "host_arm_to_stop_command_s": 4.989822933,
+      "host_policy_record_span_s": 4.994811781,
+      "i2c_errors_observed": [
+        17
+      ],
+      "inference_max_ms": 2.204423,
+      "inference_mean_ms": 1.059373521042084,
+      "last_enabled": {
+        "acceleration": -0.1270025,
+        "angle_hat": -0.03215319,
+        "brake_direction": 0,
+        "demand": -0.1270025,
+        "dropped": 67343511,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 499,
+        "misses": 2,
+        "mode": 12,
+        "omega": -0.03280416,
+        "received_ns": 715212930323231,
+        "sid": 2628400746,
+        "theta": -0.0322136,
+        "tick": 522068554,
+        "unwrapped_tick": 522068554,
+        "unwrapped_us": 2382060254,
+        "us": 2382060254,
+        "velocity": 0.02518383,
+        "x": 0.087375
+      },
+      "metrics": {
+        "commanded_velocity_m_s": {
+          "max": 0.08344953,
+          "mean": 0.017497277303200002,
+          "min": -0.1311677,
+          "n": 500,
+          "rms": 0.048265280433385536
+        },
+        "counted_x_m": {
+          "max": 0.087375,
+          "mean": 0.027002700108,
+          "min": -0.008925,
+          "n": 500,
+          "rms": 0.03755658885789219
+        },
+        "filtered_angle_deg": {
+          "max": 1.28496270685738,
+          "mean": -0.552171671552968,
+          "min": -2.180103264557192,
+          "n": 500,
+          "rms": 1.0750784981520007
+        },
+        "governed_acceleration_m_s2": {
+          "max": 1.891299,
+          "mean": 0.010719298106000003,
+          "min": -2.307117,
+          "n": 500,
+          "rms": 0.7618958653205631
+        },
+        "observer_omega_rad_s": {
+          "max": 0.6148376,
+          "mean": -0.010005827006680009,
+          "min": -0.5150873,
+          "n": 500,
+          "rms": 0.20706963190775585
+        },
+        "raw_angle_deg": {
+          "max": 1.6699221632076726,
+          "mean": -0.5521289271344496,
+          "min": -2.109375062495063,
+          "n": 500,
+          "rms": 1.0541381159881462
+        }
+      },
+      "operator_pokes_reported": false,
+      "rail_brake_samples": 0,
+      "requested_duration_s": 5.0,
+      "runtime_environment": {
+        "current_thread": {
+          "affinity": [
+            4,
+            5
+          ],
+          "name": "MainThread",
+          "native_id": 306448,
+          "scheduler_policy": 2,
+          "scheduler_priority": 10
+        },
+        "cyclic_gc_enabled": false,
+        "gil_enabled": null,
+        "gil_switch_interval_ms": 1.0,
+        "implementation": "CPython",
+        "pid": 306448,
+        "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+        "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+        "semantics": "Diagnostic settings only; no scheduler, affinity, priority, lease or safety parameter is changed by instrumentation.",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "NUMEXPR_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null
+        },
+        "threads": [
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "MainThread",
+            "native_id": 306448,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-log",
+            "native_id": 306449,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-encoder-mirror",
+            "native_id": 306450,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-io",
+            "native_id": 306451,
+            "scheduler_policy": 2
+          }
+        ]
+      },
+      "sampled_active_span_s": 4.989984,
+      "source": {
+        "path": "runs/policy-recovery-20261021/hardware-live/filtered-bal-run5-01/rig-1792619911388185916-2628400746.jsonl",
+        "sha256": "796002b96fdea216cd56216cfbf09ec75e660445009227906b91a59cf4d92aaf"
+      },
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 715213027657440,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "trial": "filtered-bal-run5-01"
+    },
+    {
+      "action_request_gap_ms": {
+        "max": 11.885159,
+        "mean": 9.999912255404347,
+        "min": 8.091954,
+        "n": 2498,
+        "rms": 10.017302749177933
+      },
+      "action_requests": 2499,
+      "action_ttl_ms": [
+        20.0
+      ],
+      "active_faults": [
+        0
+      ],
+      "active_samples": 2500,
+      "all_observed_faults": [
+        0
+      ],
+      "board_first_enabled_to_first_disabled_s": 24.991,
+      "camera": {
+        "embedded_encoder_ignored": true,
+        "frames_in_active_receipt_interval": 1646,
+        "path": "runs/policy-recovery-20261021/hardware-live/camera-filtered-25-01/vision.ndjson",
+        "sha256": "50ff258d625eed82eaf5e09bb92a785b50ee97681356026f136ebe9e20830500",
+        "valid_angle_frames": 706
+      },
+      "disturbance_basis": "User explicitly confirmed only filtered-console-run25-03 had pokes; timestamps and magnitudes unspecified.",
+      "driver_report_success": true,
+      "executor_parameters": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309074998,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "final_five_seconds": {
+        "commanded_velocity_m_s": {
+          "max": 0.2066886,
+          "mean": 0.017179436213173683,
+          "min": -0.1219836,
+          "n": 501,
+          "rms": 0.07639376578131944
+        },
+        "counted_x_m": {
+          "max": 0.057675,
+          "mean": 0.015912200602794416,
+          "min": -0.0438,
+          "n": 501,
+          "rms": 0.03672578417561391
+        },
+        "filtered_angle_deg": {
+          "max": 1.5386901909375237,
+          "mean": -0.41583655606641673,
+          "min": -3.220132816531892,
+          "n": 501,
+          "rms": 1.3628495729961194
+        },
+        "governed_acceleration_m_s2": {
+          "max": 2.396125,
+          "mean": 0.008012753139720536,
+          "min": -2.701776,
+          "n": 501,
+          "rms": 1.0442700974451924
+        },
+        "observer_omega_rad_s": {
+          "max": 0.7028728,
+          "mean": -0.004062262983832335,
+          "min": -0.7082828,
+          "n": 501,
+          "rms": 0.28316151184984284
+        },
+        "raw_angle_deg": {
+          "max": 1.6699221632076726,
+          "mean": -0.4141911627673551,
+          "min": -3.0761720138851163,
+          "n": 501,
+          "rms": 1.3201592503172546
+        }
+      },
+      "first_disabled": {
+        "acceleration": 0.0,
+        "angle_hat": 0.007726627,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67364205,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": 0.1133108,
+        "received_ns": 715324925017282,
+        "sid": 1399873490,
+        "theta": 0.004601942,
+        "tick": 522180549,
+        "unwrapped_tick": 522180549,
+        "unwrapped_us": 2494055254,
+        "us": 2494055254,
+        "velocity": 0.0,
+        "x": 0.0429375
+      },
+      "first_enabled": {
+        "acceleration": 0.0,
+        "angle_hat": -0.006138632,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67364205,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 12,
+        "omega": -0.0002244241,
+        "received_ns": 715299933731854,
+        "sid": 1399873490,
+        "theta": -0.006135923,
+        "tick": 522155558,
+        "unwrapped_tick": 522155558,
+        "unwrapped_us": 2469064254,
+        "us": 2469064254,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "hardware_accepted": false,
+      "host_arm_to_stop_command_s": 24.991179283,
+      "host_policy_record_span_s": 24.995447211,
+      "i2c_errors_observed": [
+        17
+      ],
+      "inference_max_ms": 2.432238,
+      "inference_mean_ms": 1.084481112444978,
+      "last_enabled": {
+        "acceleration": 1.378316,
+        "angle_hat": 0.008030644,
+        "brake_direction": 0,
+        "demand": 1.378316,
+        "dropped": 67364205,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 2499,
+        "misses": 2,
+        "mode": 12,
+        "omega": 0.1268468,
+        "received_ns": 715324923462456,
+        "sid": 1399873490,
+        "theta": 0.004601942,
+        "tick": 522180548,
+        "unwrapped_tick": 522180548,
+        "unwrapped_us": 2494054254,
+        "us": 2494054254,
+        "velocity": -0.02046669,
+        "x": 0.0429375
+      },
+      "metrics": {
+        "commanded_velocity_m_s": {
+          "max": 0.2200989,
+          "mean": 0.0017129061924479984,
+          "min": -0.1386161,
+          "n": 2500,
+          "rms": 0.06800035576913287
+        },
+        "counted_x_m": {
+          "max": 0.0598875,
+          "mean": 0.008831775000000031,
+          "min": -0.0527625,
+          "n": 2500,
+          "rms": 0.03461736738672759
+        },
+        "filtered_angle_deg": {
+          "max": 1.9869099174482103,
+          "mean": -0.15297780663362603,
+          "min": -3.220132816531892,
+          "n": 2500,
+          "rms": 1.2086041711488016
+        },
+        "governed_acceleration_m_s2": {
+          "max": 2.396125,
+          "mean": 0.005612993547600003,
+          "min": -2.764151,
+          "n": 2500,
+          "rms": 0.8882155974141815
+        },
+        "observer_omega_rad_s": {
+          "max": 0.7028728,
+          "mean": 0.00012802737690999897,
+          "min": -0.8091422,
+          "n": 2500,
+          "rms": 0.24084773692563005
+        },
+        "raw_angle_deg": {
+          "max": 2.0214844826375846,
+          "mean": -0.15437108202485794,
+          "min": -3.164062593742594,
+          "n": 2500,
+          "rms": 1.1769194910500735
+        }
+      },
+      "operator_pokes_reported": false,
+      "rail_brake_samples": 0,
+      "requested_duration_s": 25.0,
+      "runtime_environment": {
+        "current_thread": {
+          "affinity": [
+            4,
+            5
+          ],
+          "name": "MainThread",
+          "native_id": 306505,
+          "scheduler_policy": 2,
+          "scheduler_priority": 10
+        },
+        "cyclic_gc_enabled": false,
+        "gil_enabled": null,
+        "gil_switch_interval_ms": 1.0,
+        "implementation": "CPython",
+        "pid": 306505,
+        "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+        "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+        "semantics": "Diagnostic settings only; no scheduler, affinity, priority, lease or safety parameter is changed by instrumentation.",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "NUMEXPR_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null
+        },
+        "threads": [
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "MainThread",
+            "native_id": 306505,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-log",
+            "native_id": 306506,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-encoder-mirror",
+            "native_id": 306507,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-io",
+            "native_id": 306508,
+            "scheduler_policy": 2
+          }
+        ]
+      },
+      "sampled_active_span_s": 24.99,
+      "source": {
+        "path": "runs/policy-recovery-20261021/hardware-live/filtered-bal-run25-01/rig-1792620003384382571-1399873490.jsonl",
+        "sha256": "e739538dd577429abddb3ab10d987a527e53f875a82ee164ad30f0f225f15027"
+      },
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 715325020763792,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "trial": "filtered-bal-run25-01"
+    },
+    {
+      "action_request_gap_ms": {
+        "max": 13.338739,
+        "mean": 10.000048411529212,
+        "min": 7.581377,
+        "n": 2498,
+        "rms": 10.021718285185974
+      },
+      "action_requests": 2499,
+      "action_ttl_ms": [
+        20.0
+      ],
+      "active_faults": [
+        0
+      ],
+      "active_samples": 2499,
+      "all_observed_faults": [
+        0
+      ],
+      "board_first_enabled_to_first_disabled_s": 24.99,
+      "camera": {
+        "embedded_encoder_ignored": true,
+        "frames_in_active_receipt_interval": 1636,
+        "path": "runs/policy-recovery-20261021/hardware-live/camera-filtered-25-02/vision.ndjson",
+        "sha256": "93364a21c1c96d9485e7f19a3b78408f37bbc2b015818f8546eea745eff9f8eb",
+        "valid_angle_frames": 598
+      },
+      "disturbance_basis": "User explicitly confirmed only filtered-console-run25-03 had pokes; timestamps and magnitudes unspecified.",
+      "driver_report_success": true,
+      "executor_parameters": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309074998,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "final_five_seconds": {
+        "commanded_velocity_m_s": {
+          "max": 0.2013761,
+          "mean": -0.013289953716566886,
+          "min": -0.1137726,
+          "n": 501,
+          "rms": 0.06472573372455137
+        },
+        "counted_x_m": {
+          "max": 0.0594,
+          "mean": 0.016015119760479035,
+          "min": -0.04095,
+          "n": 501,
+          "rms": 0.034480157990469745
+        },
+        "filtered_angle_deg": {
+          "max": 1.4503910921721173,
+          "mean": -0.14276580122469956,
+          "min": -3.020957790041744,
+          "n": 501,
+          "rms": 1.1364734226318545
+        },
+        "governed_acceleration_m_s2": {
+          "max": 2.230106,
+          "mean": -0.0042440291097804355,
+          "min": -2.462548,
+          "n": 501,
+          "rms": 0.925732071863357
+        },
+        "observer_omega_rad_s": {
+          "max": 0.6475948,
+          "mean": 0.005304402701457083,
+          "min": -0.6854407,
+          "n": 501,
+          "rms": 0.2513216307449154
+        },
+        "raw_angle_deg": {
+          "max": 1.5820310103923996,
+          "mean": -0.14192316070399572,
+          "min": -2.8125002743126823,
+          "n": 501,
+          "rms": 1.0977044173565413
+        }
+      },
+      "first_disabled": {
+        "acceleration": 0.0,
+        "angle_hat": 0.01021403,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67389175,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": -0.002751499,
+        "received_ns": 715453450923127,
+        "sid": 3114706321,
+        "theta": 0.01073787,
+        "tick": 522309076,
+        "unwrapped_tick": 522309076,
+        "unwrapped_us": 2622582254,
+        "us": 2622582254,
+        "velocity": 0.0,
+        "x": -0.00855
+      },
+      "first_enabled": {
+        "acceleration": 0.0,
+        "angle_hat": -0.03681855,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67389175,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 12,
+        "omega": -0.0002269318,
+        "received_ns": 715428460834845,
+        "sid": 3114706321,
+        "theta": -0.03681554,
+        "tick": 522284086,
+        "unwrapped_tick": 522284086,
+        "unwrapped_us": 2597592254,
+        "us": 2597592254,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "hardware_accepted": false,
+      "host_arm_to_stop_command_s": 24.990173242,
+      "host_policy_record_span_s": 24.99459552,
+      "i2c_errors_observed": [
+        17
+      ],
+      "inference_max_ms": 3.021849,
+      "inference_mean_ms": 1.116407506202481,
+      "last_enabled": {
+        "acceleration": 0.1220066,
+        "angle_hat": 0.009873653,
+        "brake_direction": 0,
+        "demand": 0.1220066,
+        "dropped": 67389175,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 2498,
+        "misses": 2,
+        "mode": 12,
+        "omega": -0.01559386,
+        "received_ns": 715453440828799,
+        "sid": 3114706321,
+        "theta": 0.009203885,
+        "tick": 522309066,
+        "unwrapped_tick": 522309066,
+        "unwrapped_us": 2622572254,
+        "us": 2622572254,
+        "velocity": -0.01900343,
+        "x": -0.0083625
+      },
+      "metrics": {
+        "commanded_velocity_m_s": {
+          "max": 0.2171674,
+          "mean": -0.0003420274078879547,
+          "min": -0.1953802,
+          "n": 2499,
+          "rms": 0.07462749807861391
+        },
+        "counted_x_m": {
+          "max": 0.1220625,
+          "mean": 0.023852626070028006,
+          "min": -0.0420375,
+          "n": 2499,
+          "rms": 0.04389690489175427
+        },
+        "filtered_angle_deg": {
+          "max": 3.052895603457926,
+          "mean": -0.376901087346285,
+          "min": -3.3556694207168585,
+          "n": 2499,
+          "rms": 1.3446098785412963
+        },
+        "governed_acceleration_m_s2": {
+          "max": 2.369816,
+          "mean": 0.0056747243089235785,
+          "min": -2.632209,
+          "n": 2499,
+          "rms": 0.8631163141707388
+        },
+        "observer_omega_rad_s": {
+          "max": 0.7174743,
+          "mean": 0.001996684117454977,
+          "min": -0.7916174,
+          "n": 2499,
+          "rms": 0.2346331653835567
+        },
+        "raw_angle_deg": {
+          "max": 2.9882814340276385,
+          "mean": -0.3738956459118116,
+          "min": -3.3398437534575502,
+          "n": 2499,
+          "rms": 1.3171325577707425
+        }
+      },
+      "operator_pokes_reported": false,
+      "rail_brake_samples": 0,
+      "requested_duration_s": 25.0,
+      "runtime_environment": {
+        "current_thread": {
+          "affinity": [
+            4,
+            5
+          ],
+          "name": "MainThread",
+          "native_id": 306549,
+          "scheduler_policy": 2,
+          "scheduler_priority": 10
+        },
+        "cyclic_gc_enabled": false,
+        "gil_enabled": null,
+        "gil_switch_interval_ms": 1.0,
+        "implementation": "CPython",
+        "pid": 306549,
+        "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+        "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+        "semantics": "Diagnostic settings only; no scheduler, affinity, priority, lease or safety parameter is changed by instrumentation.",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "NUMEXPR_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null
+        },
+        "threads": [
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "MainThread",
+            "native_id": 306549,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-log",
+            "native_id": 306550,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-encoder-mirror",
+            "native_id": 306551,
+            "scheduler_policy": 2
+          },
+          {
+            "affinity": [
+              4,
+              5
+            ],
+            "name": "cartpole-rig-io",
+            "native_id": 306552,
+            "scheduler_policy": 2
+          }
+        ]
+      },
+      "sampled_active_span_s": 24.98,
+      "source": {
+        "path": "runs/policy-recovery-20261021/hardware-live/filtered-bal-run25-02/rig-1792620131924126905-3114706321.jsonl",
+        "sha256": "013453417a332c5a38a6fd0e66d0de7decf8efecb7515091e5b8a9d139977e59"
+      },
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 715453547386979,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "trial": "filtered-bal-run25-02"
+    },
+    {
+      "action_request_gap_ms": {
+        "max": 13.117329,
+        "mean": 10.000155932746196,
+        "min": 6.914189,
+        "n": 2498,
+        "rms": 10.015950723602284
+      },
+      "action_requests": 2499,
+      "action_ttl_ms": [
+        20.0
+      ],
+      "active_faults": [
+        0
+      ],
+      "active_samples": 2500,
+      "all_observed_faults": [
+        0
+      ],
+      "board_first_enabled_to_first_disabled_s": 24.991,
+      "camera": {
+        "embedded_encoder_ignored": true,
+        "frames_in_active_receipt_interval": 1656,
+        "path": "runs/policy-recovery-20261021/hardware-live/camera-filtered-console-03/vision.ndjson",
+        "sha256": "63d8f43ad1fd151ff418b7e1f2e754043d86f35c1d5be73b263f0ded62c3ba05",
+        "valid_angle_frames": 451
+      },
+      "disturbance_basis": "User explicitly confirmed only filtered-console-run25-03 had pokes; timestamps and magnitudes unspecified.",
+      "driver_report_success": null,
+      "executor_parameters": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309074998,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "final_five_seconds": {
+        "commanded_velocity_m_s": {
+          "max": 0.312691,
+          "mean": 0.006593184121357275,
+          "min": -0.463836,
+          "n": 501,
+          "rms": 0.13984780528494808
+        },
+        "counted_x_m": {
+          "max": 0.0750375,
+          "mean": -0.009714221656686662,
+          "min": -0.1137,
+          "n": 501,
+          "rms": 0.056219218583445585
+        },
+        "filtered_angle_deg": {
+          "max": 10.785947682071601,
+          "mean": -0.1840427643852062,
+          "min": -9.154553492839707,
+          "n": 501,
+          "rms": 2.763486004648164
+        },
+        "governed_acceleration_m_s2": {
+          "max": 8.084978,
+          "mean": -0.00202761367864268,
+          "min": -7.886558,
+          "n": 501,
+          "rms": 2.232716581976248
+        },
+        "observer_omega_rad_s": {
+          "max": 2.657004,
+          "mean": -0.009725100483832325,
+          "min": -2.754453,
+          "n": 501,
+          "rms": 0.778699379532629
+        },
+        "raw_angle_deg": {
+          "max": 10.019530687414855,
+          "mean": -0.18542994864896994,
+          "min": -8.349610816038364,
+          "n": 501,
+          "rms": 2.5848872480290215
+        }
+      },
+      "first_disabled": {
+        "acceleration": 0.0,
+        "angle_hat": -0.02584021,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67422122,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": 0.4444828,
+        "received_ns": 715611998824862,
+        "sid": 1441402287,
+        "theta": -0.02300971,
+        "tick": 522467624,
+        "unwrapped_tick": 522467624,
+        "unwrapped_us": 2781130254,
+        "us": 2781130254,
+        "velocity": 0.0,
+        "x": 0.0162375
+      },
+      "first_enabled": {
+        "acceleration": 0.0,
+        "angle_hat": 0.01816281,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67422122,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 12,
+        "omega": 0.01660673,
+        "received_ns": 715587007644567,
+        "sid": 1441402287,
+        "theta": 0.01840777,
+        "tick": 522442633,
+        "unwrapped_tick": 522442633,
+        "unwrapped_us": 2756139254,
+        "us": 2756139254,
+        "velocity": 0.0,
+        "x": -0.00855
+      },
+      "hardware_accepted": false,
+      "host_arm_to_stop_command_s": 24.989973402,
+      "host_policy_record_span_s": 24.994749262,
+      "i2c_errors_observed": [
+        17
+      ],
+      "inference_max_ms": 2.132023,
+      "inference_mean_ms": 1.0139928459383754,
+      "last_enabled": {
+        "acceleration": 0.251216,
+        "angle_hat": -0.02673856,
+        "brake_direction": 0,
+        "demand": 0.251216,
+        "dropped": 67422122,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 2499,
+        "misses": 2,
+        "mode": 12,
+        "omega": 0.4297619,
+        "received_ns": 715611997524208,
+        "sid": 1441402287,
+        "theta": -0.02454369,
+        "tick": 522467623,
+        "unwrapped_tick": 522467623,
+        "unwrapped_us": 2781129254,
+        "us": 2781129254,
+        "velocity": 0.05745668,
+        "x": 0.0162375
+      },
+      "metrics": {
+        "commanded_velocity_m_s": {
+          "max": 0.312691,
+          "mean": 0.0010091289872079976,
+          "min": -0.5386556,
+          "n": 2500,
+          "rms": 0.11024899042833576
+        },
+        "counted_x_m": {
+          "max": 0.1194375,
+          "mean": 0.010755869971600026,
+          "min": -0.1137,
+          "n": 2500,
+          "rms": 0.048846495275136806
+        },
+        "filtered_angle_deg": {
+          "max": 15.110759170433983,
+          "mean": -0.25223750204862216,
+          "min": -9.154553492839707,
+          "n": 2500,
+          "rms": 2.1198446596691873
+        },
+        "governed_acceleration_m_s2": {
+          "max": 9.589854,
+          "mean": 0.005536047492799996,
+          "min": -7.886558,
+          "n": 2500,
+          "rms": 1.6258888749510572
+        },
+        "observer_omega_rad_s": {
+          "max": 4.623357,
+          "mean": -0.002082346940959999,
+          "min": -2.754453,
+          "n": 2500,
+          "rms": 0.5384735350762266
+        },
+        "raw_angle_deg": {
+          "max": 13.623045607487045,
+          "mean": -0.2506640653046355,
+          "min": -8.349610816038364,
+          "n": 2500,
+          "rms": 2.0138794342187762
+        }
+      },
+      "operator_pokes_reported": true,
+      "rail_brake_samples": 0,
+      "requested_duration_s": 25.0,
+      "runtime_environment": null,
+      "sampled_active_span_s": 24.99,
+      "source": {
+        "path": "runs/policy-recovery-20261021/hardware-live/filtered-console-run25-03/rig-1792620290704718653-1441402287.jsonl",
+        "sha256": "c3a085d3ebc009b1f1ed71f6e45ea17f0decd6308a22209c1303d9de8d629437"
+      },
+      "termination": [
+        {
+          "error": null,
+          "host_monotonic_ns": 715612023837430,
+          "records_dropped": 0,
+          "type": "termination"
+        }
+      ],
+      "trial": "filtered-console-run25-03"
+    }
+  ]
+}

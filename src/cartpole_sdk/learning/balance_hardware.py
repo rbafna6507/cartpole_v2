@@ -12,8 +12,9 @@ import json
 import math
 from pathlib import Path
 
-from cartpole_sdk.contracts import Acceleration, ValidationError, validate_observation
-from cartpole_sdk.policies.neural import NeuralPolicy, load_neural_policy
+from cartpole_sdk.contracts import Acceleration, Channel, ValidationError, select_channels, validate_observation
+from cartpole_sdk.policies.neural import NeuralPolicy, load_neural_policy, MAX_BYTES, validate_actor
+from cartpole_sdk.recording import strict_json_loads
 from cartpole_sdk.policies.rig_observation import rig_channels, select_rig_observation
 from cartpole_sdk.rig.neural_runner import run_neural_policy
 from cartpole_sdk.rig.parameters import float32
@@ -34,15 +35,16 @@ def _profile_duration(guard_profile):
 class BalanceOnlyPolicy(NeuralPolicy):
     """The unchanged numeric actor with start and per-action stop boundaries."""
     def __init__(self, actor, *, channels, reference_guard=None, guard_profile='commissioning',
-                 max_acceleration=None):
+                 max_acceleration=None, inference_backend="python"):
         super().__init__(actor, channels=channels)
         _profile_duration(guard_profile)
         self.guard_profile = guard_profile
         self.reference_guard = reference_guard
         self.max_acceleration = max_acceleration
-        if (self.observation_contract['angle_source'] != 'raw' or
+        if (self.observation_contract['angle_source'] not in ('raw', 'filtered') or
                 self.observation_contract['angle_frame_id'] != 'encoder-zero'):
-            raise ValidationError('balance-only currently requires the raw encoder-zero actor contract')
+            raise ValidationError('balance-only requires a raw or filtered encoder-zero actor contract')
+        self._raw_angle_channel = Channel('pole', 'angle', 'magnetic', 'encoder-zero')
         if self.executor_parameters is None:
             raise ValidationError('balance-only requires a complete trained executor snapshot')
         parameters = self.executor_parameters
@@ -63,6 +65,48 @@ class BalanceOnlyPolicy(NeuralPolicy):
         if self.position_limit <= START_LIMITS['position_m']:
             raise ValidationError('balance-only start region does not fit the saved rail envelope')
         self._balance_started = False
+        self._numeric_backend = None
+        if inference_backend == 'numpy':
+            from cartpole_sdk.policies.numeric_backend import NumpyActorBackend
+            self._numeric_backend = NumpyActorBackend(self.actor)
+            self.inference_provenance = self._numeric_backend.provenance()
+        elif inference_backend == 'python':
+            self.inference_provenance = dict(backend='python-scalar',
+                actor_content_sha256=self.actor['content_sha256'])
+        else:
+            raise ValidationError('inference backend must be numpy or python')
+        # Allocate/import and exercise each numeric path before any possible ARM.
+        encoded = dict(age_s=[0.]*7, state=[0., 0., 0., 1., 0., 0., 0.], valid=[1]*7)
+        for _ in range(64):
+            self.predict_encoded(encoded)
+        self.inference_provenance['warmup_predictions'] = 64
+
+    def predict_encoded(self, encoded):
+        if self._numeric_backend is not None:
+            return self._numeric_backend.predict_encoded(encoded)
+        return super().predict_encoded(encoded)
+
+    def bind_live_executor(self, parameters):
+        """Intersect trained/live rail after validated readback, before ARM.
+
+        The numeric actor and saved executor snapshot stay unchanged. A new
+        run may repeat this binding after HOME; limits are derived afresh from
+        the saved snapshot and that run's actual admitted parameters.
+        """
+        trained = self.executor_parameters
+        hard_limits = [float32(float32(p['rail'])-float32(p['rail_fault_margin']))
+                       for p in (trained, parameters)]
+        limits = hard_limits
+        if self.guard_profile == 'commissioning':
+            limits = [RUN_LIMITS['position_m'], *hard_limits,
+                      *(float32(float32(p['rail'])-float32(p['rail_margin']))
+                        for p in (trained, parameters))]
+        position_limit = min(limits)
+        if position_limit <= START_LIMITS['position_m']:
+            raise ValidationError('balance-only start region does not fit the live rail envelope')
+        self.position_limit = position_limit
+        self.run_limits = dict(self.run_limits, position_m=position_limit)
+        return dict(self.run_limits)
 
     def reset(self, session):
         super().reset(session)
@@ -75,9 +119,21 @@ class BalanceOnlyPolicy(NeuralPolicy):
         return tuple(sample.value for sample in select_rig_observation(
             observation, self.channels, contract=self.observation_contract))
 
+    def _guard_angle(self, observation, theta):
+        """A filtered actor cannot hide a large, missing, or stale raw angle."""
+        if self.observation_contract['angle_source'] == 'raw':
+            return theta
+        samples = select_channels(observation, (self._raw_angle_channel,)+self.channels,
+                                  now_ns=observation.available_ns, max_age_ns=20_000_000)
+        if max(s.effective_ns for s in samples)-min(s.effective_ns for s in samples) > 10_000_000:
+            raise ValidationError('balance-only raw/filtered state timestamp skew exceeds one period')
+        raw = samples[0]
+        return raw.value if abs(raw.value) > abs(theta) else theta
+
     def validate_start(self, observation):
         """Called by run_policy before ARM, and again on the first action."""
         x, velocity, theta, omega, _, brake = self._values(observation)
+        theta = self._guard_angle(observation, theta)
         if (abs(x) > START_LIMITS['position_m'] or abs(velocity) > START_LIMITS['velocity_m_s'] or
                 abs(theta) > START_LIMITS['angle_rad'] or abs(omega) > START_LIMITS['angular_rate_rad_s'] or
                 brake != 0):
@@ -92,6 +148,7 @@ class BalanceOnlyPolicy(NeuralPolicy):
                 self.validate_start(observation)
                 self._balance_started = True
             x, velocity, theta, omega, _, brake = self._values(observation)
+            theta = self._guard_angle(observation, theta)
             rig_profile = self.guard_profile == 'rig'
             outside = ((abs(x) > self.position_limit or abs(velocity) > self.velocity_limit)
                 if rig_profile else
@@ -130,12 +187,22 @@ class BalanceOnlyPolicy(NeuralPolicy):
 
 
 def _load_policy(actor_path, *, reference_guard=None, guard_profile='commissioning',
-                 max_acceleration=None):
+                 max_acceleration=None, inference_backend='python'):
     # Use the ordinary bounded JSON/content/runtime-hash loader before adding
     # constraints. No source hashes or acceptance fields are rewritten.
-    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+    # Read only the bounded, validated declaration to choose explicit channels;
+    # the ordinary loader rereads and verifies content/runtime before use.
+    with Path(actor_path).open('rb') as stream:
+        raw = stream.read(MAX_BYTES+1)
+    if len(raw) > MAX_BYTES:
+        raise ValidationError('numeric actor exceeds size limit')
+    declared = validate_actor(strict_json_loads(raw.decode('utf-8')))
+    if declared['angle_source'] not in ('raw', 'filtered'):
+        raise ValidationError('balance-only requires a raw or filtered encoder-zero actor contract')
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source=declared['angle_source']))
     return BalanceOnlyPolicy(policy.actor, channels=policy.channels, reference_guard=reference_guard,
-                             guard_profile=guard_profile, max_acceleration=max_acceleration)
+                             guard_profile=guard_profile, max_acceleration=max_acceleration,
+                             inference_backend=inference_backend)
 
 
 def _validate_options(*, development_only, execute, expected_upright_raw,
@@ -155,7 +222,7 @@ def _validate_options(*, development_only, execute, expected_upright_raw,
 
 def run_balance_policy(rig, actor_path, *, expected_upright_raw, development_only=False,
                        execute=False, duration_s=1., max_acceleration=.25, preflight_s=2.,
-                       guard_profile='commissioning'):
+                       guard_profile='commissioning', inference_backend='numpy', expected_actor_sha256=None):
     """Use the validated artifact, existing live admission and 20 ms SDK leases.
 
     The expected count binds this invocation to an operator-verified saved
@@ -177,19 +244,22 @@ def run_balance_policy(rig, actor_path, *, expected_upright_raw, development_onl
                     actual.reference_saved is not True or actual.encoder_conf_valid is not True):
                 raise ValidationError('balance-only current saved upright reference differs or is invalid')
         policy = _load_policy(actor_path, reference_guard=reference_guard, guard_profile=guard_profile,
-                              max_acceleration=max_acceleration if execute else None)
+                              max_acceleration=max_acceleration if execute else None, inference_backend=inference_backend)
+        if expected_actor_sha256 is not None and policy.actor['content_sha256'] != expected_actor_sha256:
+            raise ValidationError('selected actor file changed; reload with policy load PATH')
         rig._stopped_healthy()
         info = rig.get_info()
         if info.encoder_upright_raw != expected_upright_raw:
             raise ValidationError('balance-only saved upright reference differs from the expected count')
         rig._record('balance_only_boundary', expected_upright_raw=expected_upright_raw,
             guard_profile=guard_profile, start_limits=START_LIMITS, run_limits=policy.run_limits,
+            limits_basis='trained snapshot; neural_preflight records the validated live intersection',
             run_limit_comparison='abs <=' if guard_profile == 'rig' else 'abs <',
             stop_on_rail_braking=policy.stop_on_rail_braking,
             max_duration_s=_profile_duration(guard_profile), requested_duration_s=duration_s,
             max_acceleration_m_s2=max_acceleration,
             executor_acceleration_limit_m_s2=max(policy.executor_parameters['amax_s'], policy.executor_parameters['amax_b']),
-            actor_sha256=policy.actor['content_sha256'],
+            actor_sha256=policy.actor['content_sha256'], inference_backend=policy.inference_provenance,
             boundary_source_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
             runtime_helper_sha256=sha256(Path(runtime.__file__).read_bytes()).hexdigest(),
             gc_policy=dict(cyclic_gc_enabled=gc.isenabled(),
@@ -199,7 +269,7 @@ def run_balance_policy(rig, actor_path, *, expected_upright_raw, development_onl
             duration_s=duration_s, max_acceleration=max_acceleration, preflight_s=preflight_s)
         return dict(result, task='balance-only', expected_upright_raw=expected_upright_raw,
                     duration_s=duration_s, guard_profile=guard_profile,
-                    run_limits=policy.run_limits, hardware_accepted=False)
+                    run_limits=policy.run_limits, inference_backend=policy.inference_provenance, hardware_accepted=False)
     finally:
         # Also covers reference/actor failures before the shared runner starts.
         rig.stop()
@@ -219,6 +289,8 @@ def main(argv=None, *, rig_factory=None):
                         help='Requested duration, .001..10 seconds for commissioning or .001..60 for rig (default 1).')
     parser.add_argument('--max-acceleration', type=float, default=.25,
                         help='Raw demand ceiling in m/s², at most 25. Excess faults; no clipping (default .25).')
+    parser.add_argument('--inference-backend', choices=('numpy', 'python'), default='numpy',
+                        help='Warmed NumPy contraction by default; python is the scalar parity/debug path.')
     parser.add_argument('--preflight-seconds', type=float, default=2., help='Stopped sensor acquisition deadline.')
     parser.add_argument('--log-dir', type=Path, help='SDK JSONL trace directory.')
     parser.add_argument('--no-vision-telemetry', action='store_true',
@@ -230,7 +302,7 @@ def main(argv=None, *, rig_factory=None):
         guard_profile=args.guard_profile)
     try:
         _validate_options(**options)
-        _load_policy(args.actor, guard_profile=args.guard_profile)  # Reject invalid configuration before opening serial.
+        _load_policy(args.actor, guard_profile=args.guard_profile, inference_backend=args.inference_backend)  # Reject invalid configuration before opening serial.
         from cartpole_sdk.rig import Rig
         from cartpole_sdk.rig.runtime import defer_cyclic_gc
         from cartpole_sdk.sensing.telemetry import EncoderPublisher
@@ -238,7 +310,7 @@ def main(argv=None, *, rig_factory=None):
         publisher = EncoderPublisher(0 if args.no_vision_telemetry else 3096)
         with defer_cyclic_gc(), factory(args.port, rate_hz=100, log_dir=args.log_dir,
                                        vision_publisher=publisher) as rig:
-            result = run_balance_policy(rig, args.actor, **options)
+            result = run_balance_policy(rig, args.actor, inference_backend=args.inference_backend, **options)
         print(json.dumps(result, sort_keys=True))
         return 0
     except (ValueError, OSError, ImportError, RuntimeError) as error:

@@ -1,0 +1,25 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_filtered_guard_checks_combined_raw_and_all_selected_skew _________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-563/test_filtered_guard_checks_com0')
+
+    def test_filtered_guard_checks_combined_raw_and_all_selected_skew(tmp_path):
+        path=saved_actor(tmp_path,mode='filtered')
+        policy=_load_policy(path)
+        with rehearsal() as rig:
+            policy.reset(rig.session)
+            original=rig.control_observation()
+            now=original.available_ns+100_000_000
+            samples=[]
+            for s in original.samples:
+                lag=(20_000_000 if s.source=='magnetic' and s.quantity=='angle' else
+                     10_000_000 if s.source=='magnetic_filtered' else 0)
+                samples.append(replace(s,acquired_ns=now,effective_ns=now-lag,received_ns=now))
+>           with pytest.raises(ValidationError,match='skew'):
+E           Failed: DID NOT RAISE ValidationError
+
+tests/test_balance_filtered.py:103: Failed
+=========================== short test summary info ============================
+FAILED tests/test_balance_filtered.py::test_filtered_guard_checks_combined_raw_and_all_selected_skew
+1 failed, 9 deselected in 0.14s

@@ -1,0 +1,273 @@
+FFFFFFFFFFFF                                                             [100%]
+=================================== FAILURES ===================================
+_____ test_delegates_same_arguments_and_return_under_scoped_interval[None] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108144fd0>
+argv = None
+
+    @pytest.mark.parametrize('argv', [None, ['--port', 'a port', '--actor', 'an actor.json']])
+    def test_delegates_same_arguments_and_return_under_scoped_interval(prior_interval, monkeypatch, argv):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+____ test_delegates_same_arguments_and_return_under_scoped_interval[argv1] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x108146b50>
+argv = ['--port', 'a port', '--actor', 'an actor.json']
+
+    @pytest.mark.parametrize('argv', [None, ['--port', 'a port', '--actor', 'an actor.json']])
+    def test_delegates_same_arguments_and_return_under_scoped_interval(prior_interval, monkeypatch, argv):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure0] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107ee6d50>
+failure = RuntimeError('delegate failed')
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure1] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1080d6050>
+failure = KeyboardInterrupt()
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure2] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1080bf790>
+failure = SystemExit(7)
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+____ test_real_console_help_never_creates_rig_and_restores_interval[argv0] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1080e4350>
+capsys = <_pytest.capture.CaptureFixture object at 0x1080e48d0>
+argv = ['--help']
+
+    @pytest.mark.parametrize('argv', [['--help'], None])
+    def test_real_console_help_never_creates_rig_and_restores_interval(prior_interval, monkeypatch, capsys, argv):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+_____ test_real_console_help_never_creates_rig_and_restores_interval[None] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107ee7310>
+capsys = <_pytest.capture.CaptureFixture object at 0x10811f6d0>, argv = None
+
+    @pytest.mark.parametrize('argv', [['--help'], None])
+    def test_real_console_help_never_creates_rig_and_restores_interval(prior_interval, monkeypatch, capsys, argv):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+__________ test_interval_is_set_before_real_console_calls_rig_factory __________
+
+prior_interval = 0.006999999999999999
+
+    def test_interval_is_set_before_real_console_calls_rig_factory(prior_interval):
+>       launcher = load_launcher()
+                   ^^^^^^^^^^^^^^^
+
+tests/test_policy_console_runtime.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+__________ test_fresh_import_has_no_runtime_or_hardware_side_effects ___________
+
+    def test_fresh_import_has_no_runtime_or_hardware_side_effects():
+>       load_launcher()
+
+tests/test_policy_console_runtime.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_launcher():
+>       assert importlib.util.find_spec(MODULE) is not None, 'policy console launcher is missing'
+E       AssertionError: policy console launcher is missing
+E       assert None is not None
+E        +  where None = <function find_spec at 0x102193880>('cartpole_sdk.rig.policy_console')
+E        +    where <function find_spec at 0x102193880> = <module 'importlib.util' (frozen)>.find_spec
+E        +      where <module 'importlib.util' (frozen)> = importlib.util
+
+tests/test_policy_console_runtime.py:18: AssertionError
+__ test_shell_launcher_preserves_arguments_and_selects_extras[args0-extras0] ___
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-571/test_shell_launcher_preserves_0')
+args = ['--port', 'a port', '--actor', 'an actor.json']
+extras = ['--extra', 'hardware', '--extra', 'inference']
+
+    @pytest.mark.parametrize('args,extras', [
+        (['--port', 'a port', '--actor', 'an actor.json'], ['--extra', 'hardware', '--extra', 'inference']),
+        (['--help'], []),
+        (['--port', 'a port', '-h'], []),
+    ])
+    def test_shell_launcher_preserves_arguments_and_selects_extras(tmp_path, args, extras):
+        script = ROOT / 'scripts/policy-console'
+>       assert script.exists(), 'policy-console shell launcher is missing'
+E       AssertionError: policy-console shell launcher is missing
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/Users/rbafna/projects/cartpole_v2/scripts/policy-console').exists
+
+tests/test_policy_console_runtime.py:132: AssertionError
+__ test_shell_launcher_preserves_arguments_and_selects_extras[args1-extras1] ___
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-571/test_shell_launcher_preserves_1')
+args = ['--help'], extras = []
+
+    @pytest.mark.parametrize('args,extras', [
+        (['--port', 'a port', '--actor', 'an actor.json'], ['--extra', 'hardware', '--extra', 'inference']),
+        (['--help'], []),
+        (['--port', 'a port', '-h'], []),
+    ])
+    def test_shell_launcher_preserves_arguments_and_selects_extras(tmp_path, args, extras):
+        script = ROOT / 'scripts/policy-console'
+>       assert script.exists(), 'policy-console shell launcher is missing'
+E       AssertionError: policy-console shell launcher is missing
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/Users/rbafna/projects/cartpole_v2/scripts/policy-console').exists
+
+tests/test_policy_console_runtime.py:132: AssertionError
+__ test_shell_launcher_preserves_arguments_and_selects_extras[args2-extras2] ___
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-571/test_shell_launcher_preserves_2')
+args = ['--port', 'a port', '-h'], extras = []
+
+    @pytest.mark.parametrize('args,extras', [
+        (['--port', 'a port', '--actor', 'an actor.json'], ['--extra', 'hardware', '--extra', 'inference']),
+        (['--help'], []),
+        (['--port', 'a port', '-h'], []),
+    ])
+    def test_shell_launcher_preserves_arguments_and_selects_extras(tmp_path, args, extras):
+        script = ROOT / 'scripts/policy-console'
+>       assert script.exists(), 'policy-console shell launcher is missing'
+E       AssertionError: policy-console shell launcher is missing
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/Users/rbafna/projects/cartpole_v2/scripts/policy-console').exists
+
+tests/test_policy_console_runtime.py:132: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_policy_console_runtime.py::test_delegates_same_arguments_and_return_under_scoped_interval[None]
+FAILED tests/test_policy_console_runtime.py::test_delegates_same_arguments_and_return_under_scoped_interval[argv1]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure0]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure1]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure2]
+FAILED tests/test_policy_console_runtime.py::test_real_console_help_never_creates_rig_and_restores_interval[argv0]
+FAILED tests/test_policy_console_runtime.py::test_real_console_help_never_creates_rig_and_restores_interval[None]
+FAILED tests/test_policy_console_runtime.py::test_interval_is_set_before_real_console_calls_rig_factory
+FAILED tests/test_policy_console_runtime.py::test_fresh_import_has_no_runtime_or_hardware_side_effects
+FAILED tests/test_policy_console_runtime.py::test_shell_launcher_preserves_arguments_and_selects_extras[args0-extras0]
+FAILED tests/test_policy_console_runtime.py::test_shell_launcher_preserves_arguments_and_selects_extras[args1-extras1]
+FAILED tests/test_policy_console_runtime.py::test_shell_launcher_preserves_arguments_and_selects_extras[args2-extras2]
+12 failed in 0.12s

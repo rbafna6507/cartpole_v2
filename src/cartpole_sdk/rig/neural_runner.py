@@ -18,7 +18,7 @@ from ..sensing.frames import AngularAlignment
 from ..sensing.policy_observation import PolicyObservationAssembler
 from ..sensing.stream import SensingStreamClient, StreamDeadline
 from ..sensing.vision import ClockMapping, VisionProvider, calibration_fingerprint
-from .parameters import float32
+from .parameters import TUNABLE_FIRMWARE, float32
 from .policy import run_policy
 
 
@@ -184,9 +184,49 @@ class CameraObservationProvider:
         return self.assembler.compose(board)
 
 
-def validate_live_executor(rig, policy):
+def _live_rail_compatibility(rig, values, expected, info):
+    """Bound HOME repeatability without modifying either parameter snapshot."""
+    if (type(info.home_epoch) is not int or info.home_epoch <= 0 or
+            type(info.measured_span_steps) is not int or
+            not 10667 <= info.measured_span_steps <= 20000):
+        raise ValidationError('valid physical homing reference metadata required')
+    live, trained = float32(values['rail']), float32(expected['rail'])
+    if not math.isfinite(live) or live <= 0:
+        raise ValidationError('invalid live rail parameter')
+    # INFO uses %.7g whereas PARAM preserves binary32 with %.9g. Account for
+    # decimal serialization only; this is not a second mechanical allowance.
+    binary32_ulp = 2.**(math.frexp(max(live, trained))[1]-24)
+    info_tolerance = .5*10.**(math.floor(math.log10(live))-6)+binary32_ulp
+    if (type(info.rail_half_m) not in (int, float) or not math.isfinite(info.rail_half_m) or
+            abs(info.rail_half_m-live) > info_tolerance):
+        raise ValidationError('live rail PARAM and measured-home INFO metadata disagree')
+    cap = rig._rail_cap(values, info)
+    # Never add the repeatability allowance to the current physical cap.
+    if live > cap:
+        raise ValidationError(f'live rail exceeds current measured homing cap ({cap:.9g} m)')
+    # 200 motor steps * 16 microsteps / 0.120 m = 26666.6666667 steps/m.
+    # cart_homing.h floors the reference rail to whole counted steps. Allow at
+    # most two steps of repeatability, plus two binary32 ULPs for independently
+    # rounded trained decimal geometry and firmware step/division arithmetic.
+    step_m = 1./float32(26666.6666667)
+    max_delta = 2*step_m+2*binary32_ulp
+    delta = live-trained
+    if ((info.firmware != TUNABLE_FIRMWARE and live != trained) or abs(delta) > max_delta):
+        raise ValidationError('live executor differs from actor snapshot: rail '
+            f'(trained {expected["rail"]:.9g} m, live {values["rail"]:.9g} m, '
+            f'delta {delta:.9g} m exceeds allowed {max_delta:.9g} m)')
+    return dict(trained_rail_m=expected['rail'], live_rail_m=values['rail'],
+        delta_m=delta, max_delta_m=max_delta, counted_step_m=step_m,
+        home_epoch=info.home_epoch, measured_span_steps=info.measured_span_steps,
+        info_rail_m=info.rail_half_m, live_rail_cap_m=cap,
+        basis='at most two counted steps plus two binary32 ULPs; live measured cap remains strict')
+
+
+def validate_live_executor(rig, policy, *, require_rate=True):
     """Read and compare; never load settings, home, center or calibrate."""
-    if rig.rate_hz != 100:
+    if type(require_rate) is not bool:
+        raise ValidationError('require_rate must be boolean')
+    if require_rate and rig.rate_hz != 100:
         raise ValidationError('numeric PPO requires 100 Hz board telemetry')
     rig._stopped_healthy()
     if policy.executor_parameters is None:
@@ -195,7 +235,7 @@ def validate_live_executor(rig, policy):
     expected = policy.executor_parameters
     if set(values) != set(expected):
         raise ValidationError('live executor parameter catalog differs from trained actor')
-    mismatches = [name for name in expected if not math.isclose(float32(values[name]), float32(expected[name]),
+    mismatches = [name for name in expected if name != 'rail' and not math.isclose(float32(values[name]), float32(expected[name]),
                                                                rel_tol=1e-6, abs_tol=1e-8)]
     if mismatches:
         raise ValidationError('live executor differs from actor snapshot: '+', '.join(mismatches))
@@ -207,9 +247,14 @@ def validate_live_executor(rig, policy):
             not 0 <= info.encoder_upright_raw < 4096 or
             not info.mag_status & 0x20 or info.mag_status & 0x18):
         raise ValidationError('live neural inference requires saved healthy magnetic reference/configuration')
-    if info.home_epoch <= 0 or info.measured_span_steps <= 0:
-        raise ValidationError('physical homing reference metadata unavailable')
+    rail_compatibility = _live_rail_compatibility(rig, values, expected, info)
+    # A constrained policy binds its host envelope only after the complete
+    # actual readback has passed admission, and before run_policy can ARM.
+    bind = getattr(policy, 'bind_live_executor', None)
+    host_limits = bind(values) if bind is not None else None
     rig._record('neural_preflight', executor_parameters=values,
+        rail_compatibility=rail_compatibility, host_run_limits=host_limits,
+        telemetry_rate_hz=rig.rate_hz, required_telemetry_rate_hz=100,
         encoder_reference=dict(upright_raw=info.encoder_upright_raw, firmware=info.firmware),
         observation_contract=policy.observation_contract, actor_sha256=policy.actor['content_sha256'],
         hardware_accepted=False)

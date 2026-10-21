@@ -1,0 +1,110 @@
+{
+  "approximation": {
+    "expected_local_raw_slopes": {
+      "omega": 3.0214476831965866,
+      "theta": 27.42778348134693,
+      "v": 5.71651375117431,
+      "x": 7.678898958715596
+    },
+    "local_gain_relative_errors": {
+      "omega": 0.005411025905146665,
+      "theta": 0.014904461688838532,
+      "v": 0.0026490295575976016,
+      "x": 0.0030023661556776997
+    },
+    "local_raw_slopes": {
+      "acceleration": -0.011548399925231934,
+      "omega": 3.0050985515117645,
+      "theta": 27.836579829454422,
+      "v": 5.701370537281036,
+      "x": 7.65584409236908
+    },
+    "max_abs_raw_error_m_s2": 0.23305890195983991,
+    "points": 4096,
+    "raw_rmse_m_s2": 0.04257382546711066,
+    "seed": 97201
+  },
+  "checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "critic_std_unchanged": true,
+  "environment_training_steps": 0,
+  "fit": {
+    "batch_seed": 51002,
+    "history": [
+      {
+        "update": 100,
+        "validation_raw_rmse": 0.3563280701637268
+      },
+      {
+        "update": 200,
+        "validation_raw_rmse": 0.2165658324956894
+      },
+      {
+        "update": 300,
+        "validation_raw_rmse": 0.17171728610992432
+      },
+      {
+        "update": 400,
+        "validation_raw_rmse": 0.13914453983306885
+      },
+      {
+        "update": 500,
+        "validation_raw_rmse": 0.11723272502422333
+      },
+      {
+        "update": 600,
+        "validation_raw_rmse": 0.09339916706085205
+      },
+      {
+        "update": 700,
+        "validation_raw_rmse": 0.0803704485297203
+      },
+      {
+        "update": 800,
+        "validation_raw_rmse": 0.0773053988814354
+      },
+      {
+        "update": 900,
+        "validation_raw_rmse": 0.07760513573884964
+      },
+      {
+        "update": 1000,
+        "validation_raw_rmse": 0.056225866079330444
+      },
+      {
+        "update": 1100,
+        "validation_raw_rmse": 0.08545131236314774
+      },
+      {
+        "update": 1200,
+        "validation_raw_rmse": 0.08279135823249817
+      },
+      {
+        "update": 1300,
+        "validation_raw_rmse": 0.0491994209587574
+      },
+      {
+        "update": 1400,
+        "validation_raw_rmse": 0.10338523238897324
+      },
+      {
+        "update": 1500,
+        "validation_raw_rmse": 0.047376349568367004
+      }
+    ],
+    "selection": "minimum synthetic validation RMSE at recorded updates",
+    "train_samples": 8192,
+    "train_seed": 51000,
+    "updates": 1500,
+    "validation_raw_rmse_final": 0.047376349568367004,
+    "validation_raw_rmse_initial": 5.35599946975708,
+    "validation_samples": 4096,
+    "validation_seed": 51001,
+    "wall_seconds": 1.0178437910508364
+  },
+  "label": "Supervised approximation of actual filtered BAL feedback; zero PPO updates; hardware diagnostic research candidate, no qualification.",
+  "model_weights_sha256": "2e3e6e1ab1e00f083201b5355f6cd68addd68034cddad8303a249f4cdb3b8e27",
+  "numerical_imitation_gate_pass": true,
+  "ppo_updates": 0,
+  "projection_normalized": -0.0006060861051082611,
+  "status": "DEVELOPMENT_ONLY"
+}

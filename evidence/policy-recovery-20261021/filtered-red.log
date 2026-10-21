@@ -1,0 +1,238 @@
+FFFFFFFF.                                                                [100%]
+=================================== FAILURES ===================================
+__ test_filtered_actor_loads_its_declared_source_and_executes_with_same_lease __
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_actor_loads_its_0')
+
+    def test_filtered_actor_loads_its_declared_source_and_executes_with_same_lease(tmp_path):
+        path=saved_actor(tmp_path,mode='filtered',demand=.1)
+>       policy=_load_policy(path)
+               ^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_filtered.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:178: in _load_policy
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:142: in load_neural_policy
+    return NeuralPolicy(actor, channels=channels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:82: in __init__
+    channel_age_limits(channels, contract=self.observation_contract)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+channels = (Channel(entity='cart', quantity='position', source='step', frame_id='cart-step-home'), Channel(entity='cart', quantit...ame_id='cart-step-home'), Channel(entity='cart', quantity='brake_direction', source='step', frame_id='cart-step-home'))
+contract = {'schema': 'cartpole-policy-observation-contract-v1', 'angle_source': 'filtered', 'angle_frame_id': 'encoder-zero', 'vision_max_age_ns': 150000000}
+
+    def channel_age_limits(channels, *, contract):
+        contract = validate_observation_contract(contract)
+        hardware = rig_channels(angle_source=contract['angle_source'], angle_frame_id=contract['angle_frame_id'])
+        simulated = simulation_channels(angle_source=contract['angle_source'])
+        if channels not in (hardware, simulated):
+>           raise ValidationError('selected source/frame channels differ from observation contract')
+E           cartpole_sdk.contracts.ValidationError: selected source/frame channels differ from observation contract
+
+src/cartpole_sdk/policies/rig_observation.py:83: ValidationError
+______________ test_filtered_actor_inference_uses_filtered_angle _______________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_actor_inference_0')
+
+    def test_filtered_actor_inference_uses_filtered_angle(tmp_path):
+        path=saved_actor(tmp_path,mode='filtered')
+        actor=json.loads(path.read_text())
+        actor['layers'][0]['weights'][0][9]=1.  # age[7] then state sin-angle index2
+        actor['layers'][1]['weights'][0][0]=1.
+        actor['layers'][2]['weights'][0][0]=1.
+        actor.pop('content_sha256');actor['content_sha256']=neural._digest(actor)
+        path.write_text(json.dumps(actor))
+>       policy=_load_policy(path)
+               ^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_filtered.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:178: in _load_policy
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:142: in load_neural_policy
+    return NeuralPolicy(actor, channels=channels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:82: in __init__
+    channel_age_limits(channels, contract=self.observation_contract)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+channels = (Channel(entity='cart', quantity='position', source='step', frame_id='cart-step-home'), Channel(entity='cart', quantit...ame_id='cart-step-home'), Channel(entity='cart', quantity='brake_direction', source='step', frame_id='cart-step-home'))
+contract = {'schema': 'cartpole-policy-observation-contract-v1', 'angle_source': 'filtered', 'angle_frame_id': 'encoder-zero', 'vision_max_age_ns': 150000000}
+
+    def channel_age_limits(channels, *, contract):
+        contract = validate_observation_contract(contract)
+        hardware = rig_channels(angle_source=contract['angle_source'], angle_frame_id=contract['angle_frame_id'])
+        simulated = simulation_channels(angle_source=contract['angle_source'])
+        if channels not in (hardware, simulated):
+>           raise ValidationError('selected source/frame channels differ from observation contract')
+E           cartpole_sdk.contracts.ValidationError: selected source/frame channels differ from observation contract
+
+src/cartpole_sdk/policies/rig_observation.py:83: ValidationError
+_______ test_filtered_start_does_not_hide_large_raw_angle[commissioning] _______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_start_does_not_h0')
+guard_profile = 'commissioning'
+
+    @pytest.mark.parametrize('guard_profile',['commissioning','rig'])
+    def test_filtered_start_does_not_hide_large_raw_angle(tmp_path,guard_profile):
+        path=saved_actor(tmp_path,mode='filtered')
+        with rehearsal(state=dict(theta=.08,angle_hat=.01)) as rig:
+>           with pytest.raises(ValidationError,match='balance-only'):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'balance-only'
+E             Actual message: 'selected source/frame channels differ from observation contract'
+
+tests/test_balance_filtered.py:45: AssertionError
+____________ test_filtered_start_does_not_hide_large_raw_angle[rig] ____________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_start_does_not_h1')
+guard_profile = 'rig'
+
+    @pytest.mark.parametrize('guard_profile',['commissioning','rig'])
+    def test_filtered_start_does_not_hide_large_raw_angle(tmp_path,guard_profile):
+        path=saved_actor(tmp_path,mode='filtered')
+        with rehearsal(state=dict(theta=.08,angle_hat=.01)) as rig:
+>           with pytest.raises(ValidationError,match='balance-only'):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'balance-only'
+E             Actual message: 'selected source/frame channels differ from observation contract'
+
+tests/test_balance_filtered.py:45: AssertionError
+____________ test_filtered_commissioning_run_still_checks_raw_angle ____________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_commissioning_ru0')
+
+    def test_filtered_commissioning_run_still_checks_raw_angle(tmp_path):
+        class RawDeparts(DeadlineAwareShadowRig):
+            def wait_state(self,**kwargs):
+                super().wait_state(**kwargs)
+                self._state=replace(self._state,theta=.16,angle_hat=.02)
+                self._history[self._state.unwrapped_tick]=self._state
+                return self._state
+        path=saved_actor(tmp_path,mode='filtered')
+        with rehearsal(rig_type=RawDeparts) as rig:
+>           with pytest.raises(ValidationError,match='balance-only'):
+E           AssertionError: Regex pattern did not match.
+E             Expected regex: 'balance-only'
+E             Actual message: 'selected source/frame channels differ from observation contract'
+
+tests/test_balance_filtered.py:59: AssertionError
+______ test_filtered_guard_requires_fresh_synchronous_raw_sample[missing] ______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_guard_requires_f0')
+problem = 'missing'
+
+    @pytest.mark.parametrize('problem',['missing','stale','skew'])
+    def test_filtered_guard_requires_fresh_synchronous_raw_sample(tmp_path,problem):
+        path=saved_actor(tmp_path,mode='filtered')
+>       policy=_load_policy(path)
+               ^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_filtered.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:178: in _load_policy
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:142: in load_neural_policy
+    return NeuralPolicy(actor, channels=channels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:82: in __init__
+    channel_age_limits(channels, contract=self.observation_contract)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+channels = (Channel(entity='cart', quantity='position', source='step', frame_id='cart-step-home'), Channel(entity='cart', quantit...ame_id='cart-step-home'), Channel(entity='cart', quantity='brake_direction', source='step', frame_id='cart-step-home'))
+contract = {'schema': 'cartpole-policy-observation-contract-v1', 'angle_source': 'filtered', 'angle_frame_id': 'encoder-zero', 'vision_max_age_ns': 150000000}
+
+    def channel_age_limits(channels, *, contract):
+        contract = validate_observation_contract(contract)
+        hardware = rig_channels(angle_source=contract['angle_source'], angle_frame_id=contract['angle_frame_id'])
+        simulated = simulation_channels(angle_source=contract['angle_source'])
+        if channels not in (hardware, simulated):
+>           raise ValidationError('selected source/frame channels differ from observation contract')
+E           cartpole_sdk.contracts.ValidationError: selected source/frame channels differ from observation contract
+
+src/cartpole_sdk/policies/rig_observation.py:83: ValidationError
+_______ test_filtered_guard_requires_fresh_synchronous_raw_sample[stale] _______
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_guard_requires_f1')
+problem = 'stale'
+
+    @pytest.mark.parametrize('problem',['missing','stale','skew'])
+    def test_filtered_guard_requires_fresh_synchronous_raw_sample(tmp_path,problem):
+        path=saved_actor(tmp_path,mode='filtered')
+>       policy=_load_policy(path)
+               ^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_filtered.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:178: in _load_policy
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:142: in load_neural_policy
+    return NeuralPolicy(actor, channels=channels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:82: in __init__
+    channel_age_limits(channels, contract=self.observation_contract)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+channels = (Channel(entity='cart', quantity='position', source='step', frame_id='cart-step-home'), Channel(entity='cart', quantit...ame_id='cart-step-home'), Channel(entity='cart', quantity='brake_direction', source='step', frame_id='cart-step-home'))
+contract = {'schema': 'cartpole-policy-observation-contract-v1', 'angle_source': 'filtered', 'angle_frame_id': 'encoder-zero', 'vision_max_age_ns': 150000000}
+
+    def channel_age_limits(channels, *, contract):
+        contract = validate_observation_contract(contract)
+        hardware = rig_channels(angle_source=contract['angle_source'], angle_frame_id=contract['angle_frame_id'])
+        simulated = simulation_channels(angle_source=contract['angle_source'])
+        if channels not in (hardware, simulated):
+>           raise ValidationError('selected source/frame channels differ from observation contract')
+E           cartpole_sdk.contracts.ValidationError: selected source/frame channels differ from observation contract
+
+src/cartpole_sdk/policies/rig_observation.py:83: ValidationError
+_______ test_filtered_guard_requires_fresh_synchronous_raw_sample[skew] ________
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-560/test_filtered_guard_requires_f2')
+problem = 'skew'
+
+    @pytest.mark.parametrize('problem',['missing','stale','skew'])
+    def test_filtered_guard_requires_fresh_synchronous_raw_sample(tmp_path,problem):
+        path=saved_actor(tmp_path,mode='filtered')
+>       policy=_load_policy(path)
+               ^^^^^^^^^^^^^^^^^^
+
+tests/test_balance_filtered.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/learning/balance_hardware.py:178: in _load_policy
+    policy = load_neural_policy(actor_path, channels=rig_channels(angle_source='raw'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:142: in load_neural_policy
+    return NeuralPolicy(actor, channels=channels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/policies/neural.py:82: in __init__
+    channel_age_limits(channels, contract=self.observation_contract)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+channels = (Channel(entity='cart', quantity='position', source='step', frame_id='cart-step-home'), Channel(entity='cart', quantit...ame_id='cart-step-home'), Channel(entity='cart', quantity='brake_direction', source='step', frame_id='cart-step-home'))
+contract = {'schema': 'cartpole-policy-observation-contract-v1', 'angle_source': 'filtered', 'angle_frame_id': 'encoder-zero', 'vision_max_age_ns': 150000000}
+
+    def channel_age_limits(channels, *, contract):
+        contract = validate_observation_contract(contract)
+        hardware = rig_channels(angle_source=contract['angle_source'], angle_frame_id=contract['angle_frame_id'])
+        simulated = simulation_channels(angle_source=contract['angle_source'])
+        if channels not in (hardware, simulated):
+>           raise ValidationError('selected source/frame channels differ from observation contract')
+E           cartpole_sdk.contracts.ValidationError: selected source/frame channels differ from observation contract
+
+src/cartpole_sdk/policies/rig_observation.py:83: ValidationError
+=========================== short test summary info ============================
+FAILED tests/test_balance_filtered.py::test_filtered_actor_loads_its_declared_source_and_executes_with_same_lease
+FAILED tests/test_balance_filtered.py::test_filtered_actor_inference_uses_filtered_angle
+FAILED tests/test_balance_filtered.py::test_filtered_start_does_not_hide_large_raw_angle[commissioning]
+FAILED tests/test_balance_filtered.py::test_filtered_start_does_not_hide_large_raw_angle[rig]
+FAILED tests/test_balance_filtered.py::test_filtered_commissioning_run_still_checks_raw_angle
+FAILED tests/test_balance_filtered.py::test_filtered_guard_requires_fresh_synchronous_raw_sample[missing]
+FAILED tests/test_balance_filtered.py::test_filtered_guard_requires_fresh_synchronous_raw_sample[stale]
+FAILED tests/test_balance_filtered.py::test_filtered_guard_requires_fresh_synchronous_raw_sample[skew]
+8 failed, 1 passed in 0.26s

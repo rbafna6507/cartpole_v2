@@ -14,7 +14,8 @@ from .policy import ZeroAccelerationPolicy, run_policy, run_host_controller
 
 HELP = ('auto [seconds], bal [seconds], python-auto [seconds], python-bal [seconds], manual [seconds], velocity m/s [ttl_ms], '
         'stop, center, home, rehome, upright, hanging MODEL IDENTITY | hanging ideal, switches on|off, status, info, clear, rate hz, '
-        'params, get key, set key value, save path, load path, quit')
+        'params, get key, set key value, save path, load path, '
+        'policy load PATH|status|check|shadow [seconds]|run [seconds]|unload, quit')
 
 def _status(rig, output):
     state=rig.state
@@ -44,7 +45,10 @@ def execute_command(rig, line, *, output=None):
         rig.stop(); return False
     if command in ('help','?'):
         print(HELP,file=output);return True
-    if command in ('auto','bal','balance','manual'):
+    if command=='policy':
+        from .console_policy import execute_policy_command
+        execute_policy_command(rig,args,output)
+    elif command in ('auto','bal','balance','manual'):
         if len(args)>1:raise ValidationError('mode accepts at most one duration')
         mode='bal' if command=='balance' else command
         duration=10. if not args else float(args[0])
@@ -172,8 +176,10 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
     parser.add_argument('--hanging-model',help='approved hanging calibration model JSON')
     parser.add_argument('--calibration-identity',help='separate current installation identity JSON')
     parser.add_argument('--ideal-half-turn',action='store_true',help='explicitly assume hanging is exactly opposite upright')
-    parser.add_argument('--command',choices=('auto','bal','manual','velocity','stop','center','home','rehome','upright','hanging','status','info','clear','params','get','set','save','load','policy-zero','python-auto','python-bal'))
-    parser.add_argument('--duration',type=float,default=None,help='motion duration (default 10s), HOME timeout (75s), or REHOME timeout (15.25s)')
+    parser.add_argument('--command',choices=('auto','bal','manual','velocity','stop','center','home','rehome','upright','hanging','status','info','clear','params','get','set','save','load','policy-zero','policy-run','python-auto','python-bal'))
+    parser.add_argument('--actor',help='validated numeric actor JSON for --command policy-run')
+    parser.add_argument('--development-only',action='store_true',help='acknowledge unqualified learned policy execution')
+    parser.add_argument('--duration',type=float,default=None,help='motion duration (default 10s; learned policy 5s), HOME timeout (75s), or REHOME timeout (15.25s)')
     parser.add_argument('--switches',choices=('on','off'),help='explicit stopped physical switch profile selection')
     parser.add_argument('--center-confirmed',action='store_true',help='operator asserts cart is physically centered now')
     parser.add_argument('--param',help='parameter name for get or set')
@@ -186,6 +192,11 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
     parser.add_argument('--ttl-ms',type=int,default=50)
     parser.add_argument('--source',choices=('magnetic-step',),help='explicit source/frame selection for external Python policies')
     args=parser.parse_args(argv)
+    if args.command=='policy-run':
+        if not args.actor or not args.development_only:
+            parser.error('policy-run requires --actor PATH and --development-only')
+    elif args.actor or args.development_only:
+        parser.error('--actor and --development-only require --command policy-run')
     if args.hanging_model or args.calibration_identity or args.ideal_half_turn:
         if args.command!='hanging':parser.error('hanging calibration options require --command hanging')
         if args.ideal_half_turn and (args.hanging_model or args.calibration_identity):
@@ -195,7 +206,7 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
     if not 0<=args.vision_telemetry_port<=65535:
         parser.error('vision telemetry port must be 0..65535')
     if args.duration is None:
-        args.duration=75. if args.command=='home' else (15.25 if args.command=='rehome' else 10.)
+        args.duration=75. if args.command=='home' else (15.25 if args.command=='rehome' else (5. if args.command=='policy-run' else 10.))
     maximum=75 if args.command=='home' else (15.25 if args.command=='rehome' else 60)
     if not math.isfinite(args.duration) or not .001<=args.duration<=maximum:
         parser.error(f'duration must be finite and within 1ms..{maximum}s')
@@ -211,6 +222,9 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
         parser.error('Python controller supports 100 or 250 Hz')
     factory=Rig if rig_factory is None else rig_factory
     try:
+        if args.command=='policy-run':
+            from .console_policy import ConsolePolicy
+            ConsolePolicy.validate_actor(args.actor)  # Refuse before opening serial.
         publisher=EncoderPublisher(0 if args.no_vision_telemetry else args.vision_telemetry_port)
         with StartupParameters(command=args.command,profile=args.startup_profile,keep_board=args.keep_board_params) as startup, \
                 factory(args.port,rate_hz=args.rate,log_dir=args.log_dir,vision_publisher=publisher) as rig:
@@ -224,6 +238,9 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
                 _wait_run(rig,args.duration,output)
             elif args.command in ('python-auto','python-bal'):
                 execute_command(rig,f'{args.command} {args.duration}',output=output)
+            elif args.command=='policy-run':
+                execute_command(rig,f'policy load {shlex.quote(args.actor)}',output=output)
+                execute_command(rig,f'policy run {args.duration}',output=output)
             elif args.command=='policy-zero':
                 print('external host zero-acceleration policy; no swing-up/balance controller',file=output)
                 channels=(Channel('pole','angle','magnetic','encoder-zero'),Channel('cart','position','step','cart-step-home'))
@@ -262,7 +279,12 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
                         startup.before_command(rig,line,output)
                         if not execute_command(rig,line,output=output):break
                         startup.after_command(rig,line,output)
-                    except (RigError,ValidationError,ValueError,OSError) as exc:
+                    except KeyboardInterrupt:
+                        if shlex.split(line)[:2] not in (['policy','run'],['policy','shadow']):
+                            raise
+                        rig.stop()
+                        print('policy interrupted; stopped and disabled; console remains connected',file=output)
+                    except (RigError,ValidationError,ValueError,TimeoutError,OSError) as exc:
                         print(f'error: {exc}',file=output)
         return 0
     except KeyboardInterrupt:

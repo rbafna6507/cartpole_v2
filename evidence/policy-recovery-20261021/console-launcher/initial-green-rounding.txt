@@ -1,0 +1,224 @@
+FFFFFFFF....                                                             [100%]
+=================================== FAILURES ===================================
+_____ test_delegates_same_arguments_and_return_under_scoped_interval[None] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106bdba50>
+argv = None
+
+    @pytest.mark.parametrize('argv', [None, ['--port', 'a port', '--actor', 'an actor.json']])
+    def test_delegates_same_arguments_and_return_under_scoped_interval(prior_interval, monkeypatch, argv):
+        launcher = load_launcher()
+        from cartpole_sdk.rig import console
+        output = io.StringIO()
+        factory = object()
+        input_fn = object()
+        calls = []
+    
+        def delegate(received, **kwargs):
+            calls.append(received)
+            assert received is argv
+            assert kwargs == dict(rig_factory=factory, input_fn=input_fn, output=output)
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            return 23
+    
+        monkeypatch.setattr(console, 'main', delegate)
+        assert launcher.main(argv, rig_factory=factory, input_fn=input_fn, output=output) == 23
+        assert len(calls) == 1
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:51: AssertionError
+____ test_delegates_same_arguments_and_return_under_scoped_interval[argv1] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106a73390>
+argv = ['--port', 'a port', '--actor', 'an actor.json']
+
+    @pytest.mark.parametrize('argv', [None, ['--port', 'a port', '--actor', 'an actor.json']])
+    def test_delegates_same_arguments_and_return_under_scoped_interval(prior_interval, monkeypatch, argv):
+        launcher = load_launcher()
+        from cartpole_sdk.rig import console
+        output = io.StringIO()
+        factory = object()
+        input_fn = object()
+        calls = []
+    
+        def delegate(received, **kwargs):
+            calls.append(received)
+            assert received is argv
+            assert kwargs == dict(rig_factory=factory, input_fn=input_fn, output=output)
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            return 23
+    
+        monkeypatch.setattr(console, 'main', delegate)
+        assert launcher.main(argv, rig_factory=factory, input_fn=input_fn, output=output) == 23
+        assert len(calls) == 1
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:51: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure0] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106d55a10>
+failure = RuntimeError('delegate failed')
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+        launcher = load_launcher()
+        from cartpole_sdk.rig import console
+    
+        def delegate(*args, **kwargs):
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            raise failure
+    
+        monkeypatch.setattr(console, 'main', delegate)
+        with pytest.raises(type(failure)) as caught:
+            launcher.main([])
+        assert caught.value is failure
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:67: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure1] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106fadb90>
+failure = KeyboardInterrupt()
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+        launcher = load_launcher()
+        from cartpole_sdk.rig import console
+    
+        def delegate(*args, **kwargs):
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            raise failure
+    
+        monkeypatch.setattr(console, 'main', delegate)
+        with pytest.raises(type(failure)) as caught:
+            launcher.main([])
+        assert caught.value is failure
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:67: AssertionError
+______ test_restores_interval_and_propagates_original_exception[failure2] ______
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106fa7250>
+failure = SystemExit(7)
+
+    @pytest.mark.parametrize('failure', [RuntimeError('delegate failed'), KeyboardInterrupt(), SystemExit(7)])
+    def test_restores_interval_and_propagates_original_exception(prior_interval, monkeypatch, failure):
+        launcher = load_launcher()
+        from cartpole_sdk.rig import console
+    
+        def delegate(*args, **kwargs):
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            raise failure
+    
+        monkeypatch.setattr(console, 'main', delegate)
+        with pytest.raises(type(failure)) as caught:
+            launcher.main([])
+        assert caught.value is failure
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:67: AssertionError
+____ test_real_console_help_never_creates_rig_and_restores_interval[argv0] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106d71250>
+capsys = <_pytest.capture.CaptureFixture object at 0x106d72910>
+argv = ['--help']
+
+    @pytest.mark.parametrize('argv', [['--help'], None])
+    def test_real_console_help_never_creates_rig_and_restores_interval(prior_interval, monkeypatch, capsys, argv):
+        launcher = load_launcher()
+        monkeypatch.setattr(sys, 'argv', ['policy-console', '--help'])
+    
+        def forbidden_rig(*args, **kwargs):
+            pytest.fail('help must not create a Rig')
+    
+        with pytest.raises(SystemExit) as caught:
+            launcher.main(argv, rig_factory=forbidden_rig)
+        assert caught.value.code == 0
+        assert '--actor' in capsys.readouterr().out
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:82: AssertionError
+_____ test_real_console_help_never_creates_rig_and_restores_interval[None] _____
+
+prior_interval = 0.006999999999999999
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x106d73950>
+capsys = <_pytest.capture.CaptureFixture object at 0x106d71bd0>, argv = None
+
+    @pytest.mark.parametrize('argv', [['--help'], None])
+    def test_real_console_help_never_creates_rig_and_restores_interval(prior_interval, monkeypatch, capsys, argv):
+        launcher = load_launcher()
+        monkeypatch.setattr(sys, 'argv', ['policy-console', '--help'])
+    
+        def forbidden_rig(*args, **kwargs):
+            pytest.fail('help must not create a Rig')
+    
+        with pytest.raises(SystemExit) as caught:
+            launcher.main(argv, rig_factory=forbidden_rig)
+        assert caught.value.code == 0
+        assert '--actor' in capsys.readouterr().out
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:82: AssertionError
+__________ test_interval_is_set_before_real_console_calls_rig_factory __________
+
+prior_interval = 0.006999999999999999
+
+    def test_interval_is_set_before_real_console_calls_rig_factory(prior_interval):
+        launcher = load_launcher()
+        class ReachedFactory(Exception):
+            pass
+    
+        def factory(port, **kwargs):
+            assert port == 'a port with spaces'
+            assert kwargs['rate_hz'] == 250
+            assert kwargs['log_dir'] == 'a log directory'
+            assert sys.getswitchinterval() == pytest.approx(.001)
+            raise ReachedFactory
+    
+        with pytest.raises(ReachedFactory):
+            launcher.main(['--port', 'a port with spaces', '--rate', '250', '--log-dir',
+                           'a log directory', '--keep-board-params', '--no-vision-telemetry'],
+                          rig_factory=factory)
+>       assert sys.getswitchinterval() == prior_interval
+E       assert 0.006999 == 0.006999999999999999
+E        +  where 0.006999 = <built-in function getswitchinterval>()
+E        +    where <built-in function getswitchinterval> = sys.getswitchinterval
+
+tests/test_policy_console_runtime.py:101: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_policy_console_runtime.py::test_delegates_same_arguments_and_return_under_scoped_interval[None]
+FAILED tests/test_policy_console_runtime.py::test_delegates_same_arguments_and_return_under_scoped_interval[argv1]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure0]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure1]
+FAILED tests/test_policy_console_runtime.py::test_restores_interval_and_propagates_original_exception[failure2]
+FAILED tests/test_policy_console_runtime.py::test_real_console_help_never_creates_rig_and_restores_interval[argv0]
+FAILED tests/test_policy_console_runtime.py::test_real_console_help_never_creates_rig_and_restores_interval[None]
+FAILED tests/test_policy_console_runtime.py::test_interval_is_set_before_real_console_calls_rig_factory
+8 failed, 4 passed in 2.04s

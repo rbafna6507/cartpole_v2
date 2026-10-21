@@ -1,0 +1,392 @@
+{
+  "camera_coverage": {
+    "max_gap_ms": 75.6966850021854,
+    "prearm_frames": 17,
+    "valid_frames": 43
+  },
+  "first_enabled_state": {
+    "acceleration": 0.0,
+    "angle_hat": -0.000253276,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 66905511,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 1,
+    "mode": 12,
+    "omega": -0.00356998,
+    "received_ns": 712543917375451,
+    "sid": 3365154091,
+    "theta": -0.001533981,
+    "tick": 519399565,
+    "unwrapped_tick": 519399565,
+    "unwrapped_us": 4008022531,
+    "us": 4008022531,
+    "velocity": 0.0,
+    "x": 0.0
+  },
+  "initial_40ms_states": [
+    {
+      "a_commanded": 0.0,
+      "board_t_s": 0.0,
+      "demand": 0.0,
+      "enabled": true,
+      "fault": 0,
+      "filtered_deg": -0.014511645851955437,
+      "host_t_s": 0.0,
+      "omega": -0.00356998,
+      "theta_deg": -0.08789063715325754,
+      "v_commanded": 0.0,
+      "x_step_m": 0.0
+    },
+    {
+      "a_commanded": -0.06978747,
+      "board_t_s": 0.01,
+      "demand": -0.06978747,
+      "enabled": true,
+      "fault": 0,
+      "filtered_deg": -1.4070920986362858,
+      "host_t_s": 0.009361420990899205,
+      "omega": -0.6952778,
+      "theta_deg": -1.4941404305349215,
+      "v_commanded": -0.0004885123,
+      "x_step_m": 0.0
+    },
+    {
+      "a_commanded": -1.269787,
+      "board_t_s": 0.02,
+      "demand": -2.531905,
+      "enabled": true,
+      "fault": 0,
+      "filtered_deg": -1.4247260206970271,
+      "host_t_s": 0.019319349084980786,
+      "omega": -0.4781396,
+      "theta_deg": -1.0546875312475315,
+      "v_commanded": -0.006586387,
+      "x_step_m": 0.0
+    },
+    {
+      "a_commanded": -1.845185,
+      "board_t_s": 0.03,
+      "demand": -1.845185,
+      "enabled": true,
+      "fault": 0,
+      "filtered_deg": -2.7913988116758093,
+      "host_t_s": 0.02935952099505812,
+      "omega": -0.9737194,
+      "theta_deg": -3.2519531736000724,
+      "v_commanded": -0.02421205,
+      "x_step_m": -0.00015
+    },
+    {
+      "a_commanded": -3.045186,
+      "board_t_s": 0.04,
+      "demand": -4.520522,
+      "enabled": true,
+      "fault": 0,
+      "filtered_deg": -3.7994653400913405,
+      "host_t_s": 0.03967973799444735,
+      "omega": -1.209676,
+      "theta_deg": -4.3945312847050815,
+      "v_commanded": -0.0480639,
+      "x_step_m": -0.0004875
+    }
+  ],
+  "inputs": {
+    "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/hardware-live/balance47-run25-rr10-ref553-01/rig-1792617247421293680-3365154091.jsonl": "de18eb8686054c6cd2c2e407c4d55556221929f399de9f2edddfdf4956c4d9e0",
+    "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/hardware-live/camera-06/vision.ndjson": "bc2c90d02b71669ef32e984824bdc93e55c7ce5e404dc9bedc451d7d33305c78"
+  },
+  "limits": [
+    "Host camera-read and serial-receipt times share one clock; exposure and serial latency remain unknown.",
+    "Camera geometry is independent of the embedded encoder packet, which was never read.",
+    "Image-plane relative motion needs no metric cart calibration; it cannot prove meter-scale cart tracking.",
+    "Typical camera intervals cannot resolve individual 4ms encoder oscillations. Sparse/no frames are reported, not interpolated into evidence.",
+    "First enabled telemetry is a sampled bound, not the exact driver-enable edge."
+  ],
+  "schema": "cartpole-startup-pixels-v1",
+  "session": 3365154091,
+  "source_sha256": "2c5ebc1d2c4d44b05e00bbedd5f545e61e53274094ef4bb8f02b3a25b864901b",
+  "windows": [
+    {
+      "camera_angle_deg": {
+        "max": -0.07267794087648616,
+        "mean": -0.13312571195910672,
+        "min": -0.21090461130361238,
+        "n": 17,
+        "sd": 0.03932670508282601,
+        "span": 0.13822667042712622
+      },
+      "camera_frames": 17,
+      "commanded_acceleration": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "n": 62,
+        "sd": 0.0,
+        "span": 0.0
+      },
+      "encoder_angle_deg": {
+        "max": 0.0,
+        "mean": -0.005670363687306938,
+        "min": -0.08789063715325754,
+        "n": 62,
+        "sd": 0.021592101635129743,
+        "span": 0.08789063715325754
+      },
+      "encoder_states": 62,
+      "pivot_x_px": {
+        "max": 500.25,
+        "mean": 500.17423273657295,
+        "min": 500.0869565217391,
+        "n": 17,
+        "sd": 0.06399294367368163,
+        "span": 0.1630434782608745
+      },
+      "relative_bob_x_px": {
+        "max": -0.19208444543181713,
+        "mean": -0.3518298634672239,
+        "min": -0.557853092344601,
+        "n": 17,
+        "sd": 0.10404984132272482,
+        "span": 0.3657686469127839
+      },
+      "step_position": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0,
+        "n": 62,
+        "sd": 0.0,
+        "span": 0.0
+      },
+      "window_s": [
+        -0.25,
+        0
+      ]
+    },
+    {
+      "camera_angle_deg": {
+        "max": -0.08485220114227025,
+        "mean": -0.1317156981085879,
+        "min": -0.20853923744477296,
+        "n": 3,
+        "sd": 0.0547590104696773,
+        "span": 0.1236870363025027
+      },
+      "camera_frames": 3,
+      "commanded_acceleration": {
+        "max": 0.0,
+        "mean": -0.7961898675000001,
+        "min": -1.845185,
+        "n": 4,
+        "sd": 0.7883945364036223,
+        "span": 1.845185
+      },
+      "encoder_angle_deg": {
+        "max": -0.08789063715325754,
+        "mean": -1.4721679431339458,
+        "min": -3.2519531736000724,
+        "n": 4,
+        "sd": 1.1465853447247125,
+        "span": 3.164062536446815
+      },
+      "encoder_states": 4,
+      "pivot_x_px": {
+        "max": 500.25,
+        "mean": 500.1666666666667,
+        "min": 500.12500000000006,
+        "n": 3,
+        "sd": 0.05892556509885217,
+        "span": 0.12499999999994316
+      },
+      "relative_bob_x_px": {
+        "max": -0.2244875967628559,
+        "mean": -0.3479875497635779,
+        "min": -0.5510646276658804,
+        "n": 3,
+        "sd": 0.14471242375612875,
+        "span": 0.3265770309030245
+      },
+      "step_position": {
+        "max": 0.0,
+        "mean": -3.75e-05,
+        "min": -0.00015,
+        "n": 4,
+        "sd": 6.495190528383289e-05,
+        "span": 0.00015
+      },
+      "window_s": [
+        0,
+        0.04
+      ]
+    },
+    {
+      "camera_angle_deg": {
+        "max": 2.3468597297201303,
+        "mean": 0.8995717456473635,
+        "min": -0.09383039226612987,
+        "n": 4,
+        "sd": 0.9677028531230596,
+        "span": 2.4406901219862602
+      },
+      "camera_frames": 4,
+      "commanded_acceleration": {
+        "max": -3.045186,
+        "mean": -4.912741,
+        "min": -6.580296,
+        "n": 6,
+        "sd": 1.2227419363531564,
+        "span": 3.5351099999999995
+      },
+      "encoder_angle_deg": {
+        "max": -1.0546875312475315,
+        "mean": -3.955078385417691,
+        "min": -6.064454593828344,
+        "n": 6,
+        "sd": 1.711048184309992,
+        "span": 5.009767062580813
+      },
+      "encoder_states": 6,
+      "pivot_x_px": {
+        "max": 500.12500000000006,
+        "mean": 497.6921790311653,
+        "min": 494.28125,
+        "n": 4,
+        "sd": 2.2888215764802275,
+        "span": 5.843750000000057
+      },
+      "relative_bob_x_px": {
+        "max": 6.164724493987819,
+        "mean": 2.365631511613472,
+        "min": -0.24773327299357106,
+        "n": 4,
+        "sd": 2.542727196811896,
+        "span": 6.41245776698139
+      },
+      "step_position": {
+        "max": -0.0004875,
+        "mean": -0.0038812499999999997,
+        "min": -0.0091875,
+        "n": 6,
+        "sd": 0.003049186623101315,
+        "span": 0.0087
+      },
+      "window_s": [
+        0.04,
+        0.1
+      ]
+    },
+    {
+      "camera_angle_deg": {
+        "max": 15.326185387748735,
+        "mean": 9.830456715447527,
+        "min": 3.790312091985994,
+        "n": 6,
+        "sd": 4.192332977268879,
+        "span": 11.535873295762741
+      },
+      "camera_frames": 6,
+      "commanded_acceleration": {
+        "max": 11.1197,
+        "mean": 4.369707020000001,
+        "min": -2.380293,
+        "n": 10,
+        "sd": 4.308421128442158,
+        "span": 13.499993
+      },
+      "encoder_angle_deg": {
+        "max": 21.88476469775234,
+        "mean": 12.304687471123511,
+        "min": -0.26367185416399314,
+        "n": 10,
+        "sd": 7.829767222573591,
+        "span": 22.14843655191633
+      },
+      "encoder_states": 10,
+      "pivot_x_px": {
+        "max": 491.1808510638298,
+        "mean": 478.44244824127804,
+        "min": 468.84000000000003,
+        "n": 6,
+        "sd": 8.281109885647744,
+        "span": 22.340851063829746
+      },
+      "relative_bob_x_px": {
+        "max": 40.24799901428946,
+        "mean": 25.908217855781498,
+        "min": 10.011457761463419,
+        "n": 6,
+        "sd": 10.988373164634915,
+        "span": 30.236541252826044
+      },
+      "step_position": {
+        "max": -0.01245,
+        "mean": -0.026092499999999998,
+        "min": -0.0345,
+        "n": 10,
+        "sd": 0.00761607920783391,
+        "span": 0.022050000000000004
+      },
+      "window_s": [
+        0.1,
+        0.2
+      ]
+    },
+    {
+      "camera_angle_deg": {
+        "max": 16.20446638775353,
+        "mean": 0.41323939335485677,
+        "min": -13.78673620061337,
+        "n": 13,
+        "sd": 13.118039229693125,
+        "span": 29.991202588366903
+      },
+      "camera_frames": 13,
+      "commanded_acceleration": {
+        "max": 12.6197,
+        "mean": -0.7620494699999998,
+        "min": -10.13157,
+        "n": 30,
+        "sd": 7.884109061696837,
+        "span": 22.751269999999998
+      },
+      "encoder_angle_deg": {
+        "max": 22.060548149298477,
+        "mean": -0.8232419652002724,
+        "min": -15.996093555470132,
+        "n": 30,
+        "sd": 14.401364532843326,
+        "span": 38.05664170476861
+      },
+      "encoder_states": 30,
+      "pivot_x_px": {
+        "max": 634.5090909090909,
+        "mean": 557.2191987704147,
+        "min": 468.84000000000003,
+        "n": 13,
+        "sd": 69.95011796733777,
+        "span": 165.66909090909087
+      },
+      "relative_bob_x_px": {
+        "max": 42.53450340385143,
+        "mean": 1.1625855429862868,
+        "min": -36.128112636547826,
+        "n": 13,
+        "sd": 34.43806246831368,
+        "span": 78.66261604039926
+      },
+      "step_position": {
+        "max": 0.1513875,
+        "mean": 0.07318875033333333,
+        "min": -0.0333375,
+        "n": 30,
+        "sd": 0.06670916260638417,
+        "span": 0.184725
+      },
+      "window_s": [
+        0.2,
+        0.5
+      ]
+    }
+  ]
+}

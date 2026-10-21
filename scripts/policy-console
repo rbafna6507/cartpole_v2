@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+for argument in "$@"; do
+    if [ "$argument" = "--help" ] || [ "$argument" = "-h" ]; then
+        exec uv run --project "$repo_dir" python -m cartpole_sdk.rig.policy_console "$@"
+    fi
+done
+exec uv run --project "$repo_dir" --extra hardware --extra inference python -m cartpole_sdk.rig.policy_console "$@"

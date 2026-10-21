@@ -1,0 +1,3639 @@
+{
+  "calibration_commands": [
+    {
+      "host_monotonic_ns": 714239731436020,
+      "payload": "V2 CALIBRATE 2781284251 upright",
+      "type": "command"
+    },
+    {
+      "host_monotonic_ns": 714359622349733,
+      "payload": "V2 CALIBRATE 2781284251 upright",
+      "type": "command"
+    },
+    {
+      "host_monotonic_ns": 714459210135738,
+      "payload": "V2 CALIBRATE 2781284251 upright",
+      "type": "command"
+    }
+  ],
+  "episodes": [
+    {
+      "active_samples": 3217,
+      "balance_metrics": {
+        "commanded_velocity": {
+          "max": 0.2811065,
+          "mean": 0.020737872168801387,
+          "min": -0.3191459,
+          "n": 2311,
+          "rms": 0.12116563696210711,
+          "span": 0.6002524
+        },
+        "counted_x_m": {
+          "max": 0.1573125,
+          "mean": 0.03401030960926006,
+          "min": -0.1192125,
+          "n": 2311,
+          "rms": 0.0786739553232237,
+          "span": 0.276525
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 0.8368036,
+          "mean": -0.056610742023626134,
+          "min": -5.853628,
+          "n": 2311,
+          "rms": 0.5062536404833582,
+          "span": 6.690431599999999
+        },
+        "omega_observer": {
+          "max": 0.4949664,
+          "mean": -0.013756785030631762,
+          "min": -1.241935,
+          "n": 2311,
+          "rms": 0.1180500800465043,
+          "span": 1.7369014
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 1.1974032966054877,
+          "mean": 0.0018386382277048108,
+          "min": -1.2881918969907376,
+          "n": 2311,
+          "rms": 0.10176894775479353,
+          "span": 2.4855951935962253
+        },
+        "raw_theta_deg": {
+          "max": 1.9335939027801068,
+          "mean": -0.5347598892238582,
+          "min": -7.294921565917447,
+          "n": 2311,
+          "rms": 1.5681554938729085,
+          "span": 9.228515468697553
+        },
+        "requested_demand": {
+          "max": 0.8368036,
+          "mean": -0.05686745813154479,
+          "min": -5.853628,
+          "n": 2311,
+          "rms": 0.5088079607465501,
+          "span": 6.690431599999999
+        }
+      },
+      "balance_segments": [
+        {
+          "duration_s": 9.244,
+          "end_s": 10.0,
+          "start_s": 0.756
+        }
+      ],
+      "board_interval_ms": {
+        "max": 4.0,
+        "mean": 4.0,
+        "min": 4.0,
+        "n": 3216,
+        "rms": 4.0,
+        "span": 0.0
+      },
+      "command": {
+        "host_monotonic_ns": 714463709896105,
+        "payload": "V2 MODE 2781284251 auto 10000",
+        "type": "command"
+      },
+      "enabled_to_first_disabled_s": 12.868,
+      "first_100ms_states": [
+        {
+          "acceleration_governed": -0.15,
+          "brake": 0,
+          "demand": -0.5796289,
+          "fault": 0,
+          "filtered_deg": 0.0,
+          "mode": 2,
+          "omega": 0.0,
+          "t_s": 0.0,
+          "theta_deg": 0.0,
+          "velocity_commanded": -0.00015,
+          "x_step_m": -0.1698375
+        },
+        {
+          "acceleration_governed": -0.5490559,
+          "brake": 0,
+          "demand": -0.5490559,
+          "fault": 0,
+          "filtered_deg": 0.02104838955631012,
+          "mode": 2,
+          "omega": 0.01135082,
+          "t_s": 0.004,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.002012824,
+          "x_step_m": -0.1698375
+        },
+        {
+          "acceleration_governed": -0.6374671,
+          "brake": 0,
+          "demand": -0.6374671,
+          "fault": 0,
+          "filtered_deg": -0.02607874700317455,
+          "mode": 2,
+          "omega": -0.01492235,
+          "t_s": 0.008,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.004404777,
+          "x_step_m": -0.169875
+        },
+        {
+          "acceleration_governed": -0.5856713,
+          "brake": 0,
+          "demand": -0.5856713,
+          "fault": 0,
+          "filtered_deg": 0.008572239296914396,
+          "mode": 2,
+          "omega": 0.00437417,
+          "t_s": 0.012,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.006760878,
+          "x_step_m": -0.169875
+        },
+        {
+          "acceleration_governed": -0.647902,
+          "brake": 0,
+          "demand": -0.647902,
+          "fault": 0,
+          "filtered_deg": -0.02575334135300795,
+          "mode": 2,
+          "omega": -0.01262967,
+          "t_s": 0.016,
+          "theta_deg": 0.17578127430651508,
+          "velocity_commanded": -0.009411446,
+          "x_step_m": -0.1699125
+        },
+        {
+          "acceleration_governed": -0.6969173,
+          "brake": 0,
+          "demand": -0.6969173,
+          "fault": 0,
+          "filtered_deg": -0.049353965678150376,
+          "mode": 2,
+          "omega": -0.02608724,
+          "t_s": 0.02,
+          "theta_deg": -0.3515624913172506,
+          "velocity_commanded": -0.01185664,
+          "x_step_m": -0.16995
+        },
+        {
+          "acceleration_governed": -0.6304694,
+          "brake": 0,
+          "demand": -0.6304694,
+          "fault": 0,
+          "filtered_deg": -0.009033315623390024,
+          "mode": 2,
+          "omega": -0.001036383,
+          "t_s": 0.024,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.01456238,
+          "x_step_m": -0.1699875
+        },
+        {
+          "acceleration_governed": -0.7945191,
+          "brake": 0,
+          "demand": -0.7945191,
+          "fault": 0,
+          "filtered_deg": -0.10359919183924127,
+          "mode": 2,
+          "omega": -0.05067851,
+          "t_s": 0.028,
+          "theta_deg": -0.17578127430651508,
+          "velocity_commanded": -0.01746639,
+          "x_step_m": -0.1700625
+        },
+        {
+          "acceleration_governed": -0.7174602,
+          "brake": 0,
+          "demand": -0.7174602,
+          "fault": 0,
+          "filtered_deg": -0.058993338868495934,
+          "mode": 2,
+          "omega": -0.0214686,
+          "t_s": 0.032,
+          "theta_deg": 0.0,
+          "velocity_commanded": -0.02042966,
+          "x_step_m": -0.1701375
+        },
+        {
+          "acceleration_governed": -0.6880463,
+          "brake": 0,
+          "demand": -0.6880463,
+          "fault": 0,
+          "filtered_deg": -0.0406664300841218,
+          "mode": 2,
+          "omega": -0.008076584,
+          "t_s": 0.036,
+          "theta_deg": 0.17578127430651508,
+          "velocity_commanded": -0.02335151,
+          "x_step_m": -0.1702125
+        },
+        {
+          "acceleration_governed": -0.6555613,
+          "brake": 0,
+          "demand": -0.6555613,
+          "fault": 0,
+          "filtered_deg": -0.016303777621033334,
+          "mode": 2,
+          "omega": 0.005306538,
+          "t_s": 0.04,
+          "theta_deg": 0.0,
+          "velocity_commanded": -0.02598773,
+          "x_step_m": -0.170325
+        },
+        {
+          "acceleration_governed": -0.5212404,
+          "brake": 0,
+          "demand": -0.5212404,
+          "fault": 0,
+          "filtered_deg": 0.07121533077954956,
+          "mode": 2,
+          "omega": 0.05084057,
+          "t_s": 0.044,
+          "theta_deg": 0.26367185416399314,
+          "velocity_commanded": -0.02831104,
+          "x_step_m": -0.1704375
+        },
+        {
+          "acceleration_governed": -0.4447517,
+          "brake": 0,
+          "demand": -0.4447517,
+          "fault": 0,
+          "filtered_deg": 0.13016455189782042,
+          "mode": 2,
+          "omega": 0.07621934,
+          "t_s": 0.048,
+          "theta_deg": 0.26367185416399314,
+          "velocity_commanded": -0.03026852,
+          "x_step_m": -0.17055
+        },
+        {
+          "acceleration_governed": -0.30781,
+          "brake": 0,
+          "demand": -0.30781,
+          "fault": 0,
+          "filtered_deg": 0.2309543024844172,
+          "mode": 2,
+          "omega": 0.1194921,
+          "t_s": 0.052,
+          "theta_deg": 0.3515624913172506,
+          "velocity_commanded": -0.03167034,
+          "x_step_m": -0.1706625
+        },
+        {
+          "acceleration_governed": -0.1738072,
+          "brake": 0,
+          "demand": -0.1738072,
+          "fault": 0,
+          "filtered_deg": 0.33611680966767293,
+          "mode": 2,
+          "omega": 0.1602103,
+          "t_s": 0.056,
+          "theta_deg": 0.43945312847050816,
+          "velocity_commanded": -0.03256745,
+          "x_step_m": -0.1708125
+        },
+        {
+          "acceleration_governed": -0.1305135,
+          "brake": 0,
+          "demand": -0.1305135,
+          "fault": 0,
+          "filtered_deg": 0.39228661252176417,
+          "mode": 2,
+          "omega": 0.1702677,
+          "t_s": 0.06,
+          "theta_deg": 0.43945312847050816,
+          "velocity_commanded": -0.03314144,
+          "x_step_m": -0.170925
+        },
+        {
+          "acceleration_governed": -0.08089443,
+          "brake": 0,
+          "demand": -0.08089443,
+          "fault": 0,
+          "filtered_deg": 0.4539963442969753,
+          "mode": 2,
+          "omega": 0.1818701,
+          "t_s": 0.064,
+          "theta_deg": 0.43945312847050816,
+          "velocity_commanded": -0.03351161,
+          "x_step_m": -0.171075
+        },
+        {
+          "acceleration_governed": 0.007141694,
+          "brake": 0,
+          "demand": 0.007141695,
+          "fault": 0,
+          "filtered_deg": 0.5403408548400723,
+          "mode": 2,
+          "omega": 0.2052154,
+          "t_s": 0.068,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03361185,
+          "x_step_m": -0.1711875
+        },
+        {
+          "acceleration_governed": 0.01453155,
+          "brake": 0,
+          "demand": 0.01453155,
+          "fault": 0,
+          "filtered_deg": 0.5815693507916394,
+          "mode": 2,
+          "omega": 0.2017856,
+          "t_s": 0.072,
+          "theta_deg": 0.5273437656237657,
+          "velocity_commanded": -0.03352455,
+          "x_step_m": -0.1713375
+        },
+        {
+          "acceleration_governed": 0.04242137,
+          "brake": 0,
+          "demand": 0.04242137,
+          "fault": 0,
+          "filtered_deg": 0.6342946459729633,
+          "mode": 2,
+          "omega": 0.205034,
+          "t_s": 0.076,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03338207,
+          "x_step_m": -0.1714875
+        },
+        {
+          "acceleration_governed": -0.01666412,
+          "brake": 0,
+          "demand": -0.01666412,
+          "fault": 0,
+          "filtered_deg": 0.6345736764191919,
+          "mode": 2,
+          "omega": 0.1802942,
+          "t_s": 0.08,
+          "theta_deg": 0.5273437656237657,
+          "velocity_commanded": -0.03333018,
+          "x_step_m": -0.1716
+        },
+        {
+          "acceleration_governed": -0.02744789,
+          "brake": 0,
+          "demand": -0.02744789,
+          "fault": 0,
+          "filtered_deg": 0.6601625445075296,
+          "mode": 2,
+          "omega": 0.1719857,
+          "t_s": 0.084,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03341625,
+          "x_step_m": -0.17175
+        },
+        {
+          "acceleration_governed": -0.05667511,
+          "brake": 0,
+          "demand": -0.05667511,
+          "fault": 0,
+          "filtered_deg": 0.6730409168686852,
+          "mode": 2,
+          "omega": 0.1580529,
+          "t_s": 0.088,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03359468,
+          "x_step_m": -0.1718625
+        },
+        {
+          "acceleration_governed": -0.09588598,
+          "brake": 0,
+          "demand": -0.09588598,
+          "fault": 0,
+          "filtered_deg": 0.6776824479670399,
+          "mode": 2,
+          "omega": 0.1415016,
+          "t_s": 0.092,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03391736,
+          "x_step_m": -0.1720125
+        },
+        {
+          "acceleration_governed": -0.1079543,
+          "brake": 0,
+          "demand": -0.1079543,
+          "fault": 0,
+          "filtered_deg": 0.6962336754577858,
+          "mode": 2,
+          "omega": 0.1341579,
+          "t_s": 0.096,
+          "theta_deg": 0.6152346319601413,
+          "velocity_commanded": -0.03432324,
+          "x_step_m": -0.172125
+        },
+        {
+          "acceleration_governed": -0.1461428,
+          "brake": 0,
+          "demand": -0.1461428,
+          "fault": 0,
+          "filtered_deg": 0.697311982028222,
+          "mode": 2,
+          "omega": 0.1189208,
+          "t_s": 0.1,
+          "theta_deg": 0.7031252118176193,
+          "velocity_commanded": -0.03488045,
+          "x_step_m": -0.172275
+        }
+      ],
+      "first_balance_s": 0.756,
+      "first_disabled_state": {
+        "acceleration": 0.0,
+        "angle_hat": 2.202925,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67209684,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": -11.98989,
+        "received_ns": 714476577748793,
+        "sid": 2781284251,
+        "theta": 2.238078,
+        "tick": 521332182,
+        "unwrapped_tick": 521332182,
+        "unwrapped_us": 1645688254,
+        "us": 1645688254,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "first_enabled_state": {
+        "acceleration": -0.15,
+        "angle_hat": 0.0,
+        "brake_direction": 0,
+        "demand": -0.5796289,
+        "dropped": 67209684,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 2,
+        "omega": 0.0,
+        "received_ns": 714463711187086,
+        "sid": 2781284251,
+        "theta": 0.0,
+        "tick": 521319314,
+        "unwrapped_tick": 521319314,
+        "unwrapped_us": 1632820254,
+        "us": 1632820254,
+        "velocity": -0.00015,
+        "x": -0.1698375
+      },
+      "label": "ref450_auto_upright_10s",
+      "latest_info_before_command": {
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 450,
+        "encoder_raw_age_us": 785,
+        "encoder_recoveries": 0,
+        "encoder_upright_raw": 450,
+        "firmware": "executor-v6-measuredrail",
+        "home_epoch": 36,
+        "i2c_errors": 17,
+        "mag_status": 103,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 714459613348949,
+        "reference_saved": true,
+        "sid": 2781284251
+      },
+      "latest_parameter_readbacks_before_command": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309037507,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "longest_balance_mode_s": 9.244,
+      "prearm_250ms": {
+        "commanded_velocity": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "counted_x_m": {
+          "max": -0.1698375,
+          "mean": -0.1698375,
+          "min": -0.1698375,
+          "n": 62,
+          "rms": 0.1698375,
+          "span": 0.0
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "omega_observer": {
+          "max": 0.007217634,
+          "mean": -2.830445919354829e-05,
+          "min": -0.01655667,
+          "n": 62,
+          "rms": 0.004520563890494715,
+          "span": 0.023774304
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.039440753039199986,
+          "mean": 0.0021114711714775936,
+          "min": -0.07776722921758547,
+          "n": 62,
+          "rms": 0.01526344863102502,
+          "span": 0.11720798225678546
+        },
+        "raw_theta_deg": {
+          "max": 0.0,
+          "mean": -0.002835181843653469,
+          "min": -0.08789063715325754,
+          "n": 62,
+          "rms": 0.015785624431236503,
+          "span": 0.08789063715325754
+        },
+        "requested_demand": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        }
+      },
+      "recorded_control_commands": [
+        {
+          "host_monotonic_ns": 714463709896105,
+          "payload": "V2 MODE 2781284251 auto 10000",
+          "type": "command"
+        }
+      ],
+      "requested_duration_s": 10.0,
+      "sampled_active_span_s": 12.864,
+      "startup_windows": [
+        {
+          "commanded_velocity": {
+            "max": -0.00015,
+            "mean": -0.011040650499999999,
+            "min": -0.02335151,
+            "n": 10,
+            "rms": 0.013334700739042872,
+            "span": 0.023201509999999998
+          },
+          "counted_x_m": {
+            "max": -0.1698375,
+            "mean": -0.16996875,
+            "min": -0.1702125,
+            "n": 10,
+            "rms": 0.16996879488416394,
+            "span": 0.00037499999999998646
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": -0.15,
+            "mean": -0.6097508599999999,
+            "min": -0.7945191,
+            "n": 10,
+            "rms": 0.6321168717352116,
+            "span": 0.6445191
+          },
+          "interval_s": [
+            0,
+            0.04
+          ],
+          "omega_observer": {
+            "max": 0.01135082,
+            "mean": -0.011917434700000002,
+            "min": -0.05067851,
+            "n": 10,
+            "rms": 0.020751436391542023,
+            "span": 0.06202933
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.21644770439063687,
+            "mean": 0.010807648458562184,
+            "min": -0.3022085256391002,
+            "n": 10,
+            "rms": 0.14644937864557872,
+            "span": 0.518656230029737
+          },
+          "raw_theta_deg": {
+            "max": 0.17578127430651508,
+            "mean": -0.017578121701073552,
+            "min": -0.3515624913172506,
+            "n": 10,
+            "rms": 0.1572235385966367,
+            "span": 0.5273437656237656
+          },
+          "requested_demand": {
+            "max": -0.5490559,
+            "mean": -0.65271375,
+            "min": -0.7945191,
+            "n": 10,
+            "rms": 0.6564439851989132,
+            "span": 0.2454632
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": -0.00015,
+            "mean": -0.023798592599999998,
+            "min": -0.03432324,
+            "n": 25,
+            "rms": 0.026464218056826395,
+            "span": 0.03417324
+          },
+          "counted_x_m": {
+            "max": -0.1698375,
+            "mean": -0.17071350000000002,
+            "min": -0.172125,
+            "n": 25,
+            "rms": 0.17071516524242947,
+            "span": 0.002287499999999998
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.04242137,
+            "mean": -0.34610479663999993,
+            "min": -0.7945191,
+            "n": 25,
+            "rms": 0.4503625386756591,
+            "span": 0.83694047
+          },
+          "interval_s": [
+            0,
+            0.1
+          ],
+          "omega_observer": {
+            "max": 0.2052154,
+            "mean": 0.08172238404,
+            "min": -0.05067851,
+            "n": 25,
+            "rms": 0.12078056640941175,
+            "span": 0.25589391
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.21644770439063687,
+            "mean": 0.014204364231947543,
+            "min": -0.3022085256391002,
+            "n": 25,
+            "rms": 0.1154982831452489,
+            "span": 0.518656230029737
+          },
+          "raw_theta_deg": {
+            "max": 0.6152346319601413,
+            "mean": 0.2707031876421762,
+            "min": -0.3515624913172506,
+            "n": 25,
+            "rms": 0.39580077081163295,
+            "span": 0.9667971232773919
+          },
+          "requested_demand": {
+            "max": 0.04242137,
+            "mean": -0.36328995259999997,
+            "min": -0.7945191,
+            "n": 25,
+            "rms": 0.4640745658960037,
+            "span": 0.83694047
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": -0.001463181,
+            "mean": -0.025977726868421057,
+            "min": -0.03827431,
+            "n": 38,
+            "rms": 0.028133265844154775,
+            "span": 0.036811129
+          },
+          "counted_x_m": {
+            "max": -0.172275,
+            "mean": -0.1746404605263158,
+            "min": -0.176175,
+            "n": 38,
+            "rms": 0.17464471151181776,
+            "span": 0.003899999999999987
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.6411785,
+            "mean": 0.22090603736842104,
+            "min": -0.1772039,
+            "n": 38,
+            "rms": 0.3163966300831311,
+            "span": 0.8183824
+          },
+          "interval_s": [
+            0.1,
+            0.25
+          ],
+          "omega_observer": {
+            "max": 0.2286113,
+            "mean": 0.15207213684210527,
+            "min": 0.09222318,
+            "n": 38,
+            "rms": 0.1572725367416592,
+            "span": 0.13638812
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.0873915336179188,
+            "mean": -0.017677677942885293,
+            "min": -0.25845782363674363,
+            "n": 38,
+            "rms": 0.07059722987054269,
+            "span": 0.3458493572546624
+          },
+          "raw_theta_deg": {
+            "max": 2.109375062495063,
+            "mean": 1.3784950815008175,
+            "min": 0.6152346319601413,
+            "n": 38,
+            "rms": 1.4347284803060354,
+            "span": 1.4941404305349217
+          },
+          "requested_demand": {
+            "max": 0.6411785,
+            "mean": 0.22090603736842104,
+            "min": -0.1772039,
+            "n": 38,
+            "rms": 0.3163966300831311,
+            "span": 0.8183824
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.2811065,
+            "mean": 0.11175543466,
+            "min": -0.03827431,
+            "n": 250,
+            "rms": 0.156507229469507,
+            "span": 0.31938080999999996
+          },
+          "counted_x_m": {
+            "max": -0.05865,
+            "mean": -0.14503050012,
+            "min": -0.176175,
+            "n": 250,
+            "rms": 0.14930799546152912,
+            "span": 0.11752499999999999
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.8368036,
+            "mean": 0.23206783453600002,
+            "min": -1.075778,
+            "n": 250,
+            "rms": 0.4764979730903997,
+            "span": 1.9125815999999998
+          },
+          "interval_s": [
+            0,
+            1
+          ],
+          "omega_observer": {
+            "max": 0.2286113,
+            "mean": -0.02048288310360001,
+            "min": -0.4884333,
+            "n": 250,
+            "rms": 0.13956815117542617,
+            "span": 0.7170446
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.3836267565188184,
+            "mean": -7.626858934948189e-05,
+            "min": -0.36389981963246404,
+            "n": 250,
+            "rms": 0.11021068662186986,
+            "span": 0.7475265761512824
+          },
+          "raw_theta_deg": {
+            "max": 2.373046802067497,
+            "mean": 1.2304687904279608,
+            "min": -1.4941404305349215,
+            "n": 250,
+            "rms": 1.551601923701045,
+            "span": 3.8671872326024186
+          },
+          "requested_demand": {
+            "max": 0.8368036,
+            "mean": 0.23119147934,
+            "min": -1.075778,
+            "n": 250,
+            "rms": 0.4790533352571604,
+            "span": 1.9125815999999998
+          },
+          "semantics": "half-open board-time window"
+        }
+      ],
+      "total_balance_mode_s": 9.244,
+      "transitions": [
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 2,
+          "t_s": 0.0,
+          "theta_deg": 0.0,
+          "x_step_m": -0.1698375
+        },
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 3,
+          "t_s": 0.756,
+          "theta_deg": 1.1425781111050095,
+          "x_step_m": -0.1192125
+        },
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 14,
+          "t_s": 10.0,
+          "theta_deg": -3.7792966527449403,
+          "x_step_m": 0.0717375
+        },
+        {
+          "enabled": false,
+          "fault": 0,
+          "mode": 0,
+          "t_s": 12.868,
+          "theta_deg": 128.23242362108024,
+          "x_step_m": 0.0
+        }
+      ]
+    },
+    {
+      "active_samples": 3064,
+      "balance_metrics": {
+        "commanded_velocity": {
+          "max": 0.3063543,
+          "mean": -0.0123618177149705,
+          "min": -0.1919844,
+          "n": 2712,
+          "rms": 0.11734433663408197,
+          "span": 0.4983387
+        },
+        "counted_x_m": {
+          "max": 0.2135625,
+          "mean": 0.09010005547234513,
+          "min": -0.02505,
+          "n": 2712,
+          "rms": 0.11570382758679539,
+          "span": 0.23861249999999998
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 4.838885,
+          "mean": -0.0024762784603908684,
+          "min": -3.707445,
+          "n": 2712,
+          "rms": 0.5035917623965176,
+          "span": 8.546330000000001
+        },
+        "omega_observer": {
+          "max": 2.897601,
+          "mean": 0.023221697735029495,
+          "min": -0.8497181,
+          "n": 2712,
+          "rms": 0.19548721177715547,
+          "span": 3.7473191
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.8630004901819486,
+          "mean": -0.004664370368527116,
+          "min": -1.1046053332327146,
+          "n": 2712,
+          "rms": 0.12037536897087876,
+          "span": 1.9676058234146632
+        },
+        "raw_theta_deg": {
+          "max": 1.9335939027801068,
+          "mean": -0.8537900632308433,
+          "min": -8.437502541811432,
+          "n": 2712,
+          "rms": 1.9664656021268947,
+          "span": 10.371096444591538
+        },
+        "requested_demand": {
+          "max": 4.838885,
+          "mean": -0.002759316205442476,
+          "min": -3.707445,
+          "n": 2712,
+          "rms": 0.501721062504301,
+          "span": 8.546330000000001
+        }
+      },
+      "balance_segments": [
+        {
+          "duration_s": 10.848,
+          "end_s": 12.256,
+          "start_s": 1.408
+        }
+      ],
+      "board_interval_ms": {
+        "max": 4.0,
+        "mean": 4.0,
+        "min": 4.0,
+        "n": 3063,
+        "rms": 4.0,
+        "span": 0.0
+      },
+      "command": {
+        "host_monotonic_ns": 714487190619304,
+        "payload": "V2 MODE 2781284251 auto 55000",
+        "type": "command"
+      },
+      "enabled_to_first_disabled_s": 12.256,
+      "first_100ms_states": [
+        {
+          "acceleration_governed": 0.15,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.1113315168268,
+          "mode": 2,
+          "omega": 0.0,
+          "t_s": 0.0,
+          "theta_deg": 174.1113315168268,
+          "velocity_commanded": 0.00015,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": 0.75,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.1745287616297,
+          "mode": 2,
+          "omega": 0.03608052,
+          "t_s": 0.004,
+          "theta_deg": 174.90235704878438,
+          "velocity_commanded": 0.00225,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 173.80508557532934,
+          "mode": 2,
+          "omega": -0.165386,
+          "t_s": 0.008,
+          "theta_deg": 172.96873908177687,
+          "velocity_commanded": 0.006150001,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 172.08294633050463,
+          "mode": 2,
+          "omega": -1.045732,
+          "t_s": 0.012,
+          "theta_deg": 169.71680252395288,
+          "velocity_commanded": 0.01015,
+          "x_step_m": 3.75e-05
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 171.7587668100196,
+          "mode": 2,
+          "omega": -1.07466,
+          "t_s": 0.016,
+          "theta_deg": 173.93554806528064,
+          "velocity_commanded": 0.01415,
+          "x_step_m": 7.5e-05
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 172.89964037168411,
+          "mode": 2,
+          "omega": -0.3507216,
+          "t_s": 0.02,
+          "theta_deg": 174.90235704878438,
+          "velocity_commanded": 0.01815,
+          "x_step_m": 0.00015
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 173.80743470228938,
+          "mode": 2,
+          "omega": 0.1635441,
+          "t_s": 0.024,
+          "theta_deg": 174.99024877455744,
+          "velocity_commanded": 0.02215,
+          "x_step_m": 0.000225
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.34412426898842,
+          "mode": 2,
+          "omega": 0.4235764,
+          "t_s": 0.028,
+          "theta_deg": 174.90235704878438,
+          "velocity_commanded": 0.02615,
+          "x_step_m": 0.0003
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.2714159247863,
+          "mode": 2,
+          "omega": 0.3361259,
+          "t_s": 0.032,
+          "theta_deg": 174.28711496837292,
+          "velocity_commanded": 0.03015,
+          "x_step_m": 0.0004125
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.23531958369307,
+          "mode": 2,
+          "omega": 0.2768212,
+          "t_s": 0.036,
+          "theta_deg": 174.19922324259986,
+          "velocity_commanded": 0.03415,
+          "x_step_m": 0.0005625
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.4639297439503,
+          "mode": 2,
+          "omega": 0.3627874,
+          "t_s": 0.04,
+          "theta_deg": 174.5507901456921,
+          "velocity_commanded": 0.03814999,
+          "x_step_m": 0.000675
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.7136247510683,
+          "mode": 2,
+          "omega": 0.4512328,
+          "t_s": 0.044,
+          "theta_deg": 175.0781405003305,
+          "velocity_commanded": 0.04214999,
+          "x_step_m": 0.0008625
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 174.87004222913902,
+          "mode": 2,
+          "omega": 0.4783151,
+          "t_s": 0.048,
+          "theta_deg": 174.90235704878438,
+          "velocity_commanded": 0.04614998,
+          "x_step_m": 0.0010125
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 175.040898243647,
+          "mode": 2,
+          "omega": 0.5098202,
+          "t_s": 0.052,
+          "theta_deg": 175.0781405003305,
+          "velocity_commanded": 0.05014997,
+          "x_step_m": 0.0012
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 175.25994000872555,
+          "mode": 2,
+          "omega": 0.5630134,
+          "t_s": 0.056,
+          "theta_deg": 175.34181567764972,
+          "velocity_commanded": 0.05414997,
+          "x_step_m": 0.001425
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 175.4639702795716,
+          "mode": 2,
+          "omega": 0.6027063,
+          "t_s": 0.06,
+          "theta_deg": 175.60549085496893,
+          "velocity_commanded": 0.05814996,
+          "x_step_m": 0.00165
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 175.671381001409,
+          "mode": 2,
+          "omega": 0.6391022,
+          "t_s": 0.064,
+          "theta_deg": 175.7812743065151,
+          "velocity_commanded": 0.06214995,
+          "x_step_m": 0.001875
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 175.8699108774218,
+          "mode": 2,
+          "omega": 0.6660799,
+          "t_s": 0.068,
+          "theta_deg": 175.86916603228815,
+          "velocity_commanded": 0.06614996,
+          "x_step_m": 0.0021375
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.01624429829823,
+          "mode": 2,
+          "omega": 0.6627734,
+          "t_s": 0.072,
+          "theta_deg": 175.9570577580612,
+          "velocity_commanded": 0.07014997,
+          "x_step_m": 0.0024
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.13656543527568,
+          "mode": 2,
+          "omega": 0.6462725,
+          "t_s": 0.076,
+          "theta_deg": 176.04494948383427,
+          "velocity_commanded": 0.07414997,
+          "x_step_m": 0.0027
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.2486359800033,
+          "mode": 2,
+          "omega": 0.6273885,
+          "t_s": 0.08,
+          "theta_deg": 176.13284120960736,
+          "velocity_commanded": 0.07814998,
+          "x_step_m": 0.003
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.30553068905976,
+          "mode": 2,
+          "omega": 0.5814071,
+          "t_s": 0.084,
+          "theta_deg": 176.04494948383427,
+          "velocity_commanded": 0.08214999,
+          "x_step_m": 0.0033375
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.3016918718324,
+          "mode": 2,
+          "omega": 0.5096442,
+          "t_s": 0.088,
+          "theta_deg": 176.04494948383427,
+          "velocity_commanded": 0.08615,
+          "x_step_m": 0.0036375
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.29705091369183,
+          "mode": 2,
+          "omega": 0.4463637,
+          "t_s": 0.092,
+          "theta_deg": 176.13284120960736,
+          "velocity_commanded": 0.09015001,
+          "x_step_m": 0.0040125
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.359044947125,
+          "mode": 2,
+          "omega": 0.425391,
+          "t_s": 0.096,
+          "theta_deg": 176.3086246611535,
+          "velocity_commanded": 0.09415001,
+          "x_step_m": 0.00435
+        },
+        {
+          "acceleration_governed": 1.0,
+          "brake": 0,
+          "demand": 1.0,
+          "fault": 0,
+          "filtered_deg": 176.46847988599498,
+          "mode": 2,
+          "omega": 0.4319995,
+          "t_s": 0.1,
+          "theta_deg": 176.4844081126996,
+          "velocity_commanded": 0.09815002,
+          "x_step_m": 0.0047625
+        }
+      ],
+      "first_balance_s": 1.408,
+      "first_disabled_state": {
+        "acceleration": 0.0,
+        "angle_hat": 0.01478514,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67209684,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": -0.01779227,
+        "received_ns": 714499447127167,
+        "sid": 2781284251,
+        "theta": 0.01533981,
+        "tick": 521355052,
+        "unwrapped_tick": 521355052,
+        "unwrapped_us": 1668558254,
+        "us": 1668558254,
+        "velocity": 0.0,
+        "x": -0.0165
+      },
+      "first_enabled_state": {
+        "acceleration": 0.15,
+        "angle_hat": 3.038816,
+        "brake_direction": 0,
+        "demand": 1.0,
+        "dropped": 67209684,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 2,
+        "omega": 0.0,
+        "received_ns": 714487191725753,
+        "sid": 2781284251,
+        "theta": 3.038816,
+        "tick": 521342796,
+        "unwrapped_tick": 521342796,
+        "unwrapped_us": 1656302254,
+        "us": 1656302254,
+        "velocity": 0.00015,
+        "x": 0.0
+      },
+      "label": "ref450_auto_hanging_55s_requested",
+      "latest_info_before_command": {
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 450,
+        "encoder_raw_age_us": 785,
+        "encoder_recoveries": 0,
+        "encoder_upright_raw": 450,
+        "firmware": "executor-v6-measuredrail",
+        "home_epoch": 36,
+        "i2c_errors": 17,
+        "mag_status": 103,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 714459613348949,
+        "reference_saved": true,
+        "sid": 2781284251
+      },
+      "latest_parameter_readbacks_before_command": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309037507,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "longest_balance_mode_s": 10.848,
+      "prearm_250ms": {
+        "commanded_velocity": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "counted_x_m": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "omega_observer": {
+          "max": 0.007159183,
+          "mean": -0.00031908177596774197,
+          "min": -0.01729326,
+          "n": 62,
+          "rms": 0.004658622400675738,
+          "span": 0.024452443
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.03919031318695569,
+          "mean": -0.002386091979069969,
+          "min": -0.076317978311432,
+          "n": 62,
+          "rms": 0.0330574913310594,
+          "span": 0.11550829149838769
+        },
+        "raw_theta_deg": {
+          "max": 174.1113315168268,
+          "mean": 174.092902606584,
+          "min": 174.0234397910537,
+          "n": 62,
+          "rms": 174.09290628313823,
+          "span": 0.08789172577309046
+        },
+        "requested_demand": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 62,
+          "rms": 0.0,
+          "span": 0.0
+        }
+      },
+      "recorded_control_commands": [
+        {
+          "host_monotonic_ns": 714487190619304,
+          "payload": "V2 MODE 2781284251 auto 55000",
+          "type": "command"
+        },
+        {
+          "host_monotonic_ns": 714499445973102,
+          "payload": "V2 STOP 2781284251",
+          "type": "command"
+        }
+      ],
+      "requested_duration_s": 55.0,
+      "sampled_active_span_s": 12.252,
+      "startup_windows": [
+        {
+          "commanded_velocity": {
+            "max": 0.03415,
+            "mean": 0.0163600001,
+            "min": 0.00015,
+            "n": 10,
+            "rms": 0.019812281575578315,
+            "span": 0.034
+          },
+          "counted_x_m": {
+            "max": 0.0005625,
+            "mean": 0.00017625000000000003,
+            "min": 0.0,
+            "n": 10,
+            "rms": 0.0002562652434490483,
+            "span": 0.0005625
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 1.0,
+            "mean": 0.89,
+            "min": 0.15,
+            "n": 10,
+            "rms": 0.9265527507918802,
+            "span": 0.85
+          },
+          "interval_s": [
+            0,
+            0.04
+          ],
+          "omega_observer": {
+            "max": 0.4235764,
+            "mean": -0.140035148,
+            "min": -1.07466,
+            "n": 10,
+            "rms": 0.5287611693148477,
+            "span": 1.4982364
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 2.1767812552610253,
+            "mean": 0.3425485473969159,
+            "min": -2.3661438065517433,
+            "n": 10,
+            "rms": 1.3148885534500059,
+            "span": 4.542925061812769
+          },
+          "raw_theta_deg": {
+            "max": 174.99024877455744,
+            "mean": 173.89160793197203,
+            "min": 169.71680252395288,
+            "n": 10,
+            "rms": 173.89817908592173,
+            "span": 5.2734462506045645
+          },
+          "requested_demand": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "n": 10,
+            "rms": 1.0,
+            "span": 0.0
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.09415001,
+            "mean": 0.04623398804000001,
+            "min": 0.00015,
+            "n": 25,
+            "rms": 0.05442152768980695,
+            "span": 0.09400001000000001
+          },
+          "counted_x_m": {
+            "max": 0.00435,
+            "mean": 0.0014415,
+            "min": 0.0,
+            "n": 25,
+            "rms": 0.0019859711100617752,
+            "span": 0.00435
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 1.0,
+            "mean": 0.956,
+            "min": 0.15,
+            "n": 25,
+            "rms": 0.9712878049270464,
+            "span": 0.85
+          },
+          "interval_s": [
+            0,
+            0.1
+          ],
+          "omega_observer": {
+            "max": 0.6660799,
+            "mean": 0.2708778488,
+            "min": -1.07466,
+            "n": 25,
+            "rms": 0.5433483970437237,
+            "span": 1.7407399
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 2.1767812552610253,
+            "mean": 0.1312165024096784,
+            "min": -2.3661438065517433,
+            "n": 25,
+            "rms": 0.8404666983095646,
+            "span": 4.542925061812769
+          },
+          "raw_theta_deg": {
+            "max": 176.3086246611535,
+            "mean": 174.9515787070485,
+            "min": 169.71680252395288,
+            "n": 25,
+            "rms": 174.95679426936084,
+            "span": 6.591822137200609
+          },
+          "requested_demand": {
+            "max": 1.0,
+            "mean": 1.0,
+            "min": 1.0,
+            "n": 25,
+            "rms": 1.0,
+            "span": 0.0
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.4255466,
+            "mean": 0.24386255315789476,
+            "min": 0.09815002,
+            "n": 38,
+            "rms": 0.2636620690029699,
+            "span": 0.32739658
+          },
+          "counted_x_m": {
+            "max": 0.040575,
+            "mean": 0.018626644736842102,
+            "min": 0.0047625,
+            "n": 38,
+            "rms": 0.02148041613047005,
+            "span": 0.0358125
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 2.987809,
+            "mean": 2.200074289473684,
+            "min": 1.0,
+            "n": 38,
+            "rms": 2.268944418263648,
+            "span": 1.987809
+          },
+          "interval_s": [
+            0.1,
+            0.25
+          ],
+          "omega_observer": {
+            "max": 1.713216,
+            "mean": 0.9878132105263161,
+            "min": 0.4319995,
+            "n": 38,
+            "rms": 1.035409077802842,
+            "span": 1.2812165000000002
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.3497334381478608,
+            "mean": 0.056921849162575575,
+            "min": -0.5209905231124585,
+            "n": 38,
+            "rms": 0.17335496024560892,
+            "span": 0.8707239612603193
+          },
+          "raw_theta_deg": {
+            "max": 187.2949360955423,
+            "mean": 181.0315571562416,
+            "min": 176.4844081126996,
+            "n": 38,
+            "rms": 181.05659378781715,
+            "span": 10.8105279828427
+          },
+          "requested_demand": {
+            "max": 2.987809,
+            "mean": 2.2584248947368417,
+            "min": 1.0,
+            "n": 38,
+            "rms": 2.3229197977856275,
+            "span": 1.987809
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.9338784,
+            "mean": -0.07964069649600003,
+            "min": -1.215143,
+            "n": 250,
+            "rms": 0.6288558173021638,
+            "span": 2.1490214
+          },
+          "counted_x_m": {
+            "max": 0.1503,
+            "mean": 0.004770149999999997,
+            "min": -0.148425,
+            "n": 250,
+            "rms": 0.09556304785918562,
+            "span": 0.298725
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 9.500347,
+            "mean": 0.93739170532,
+            "min": -13.10024,
+            "n": 250,
+            "rms": 5.697753062738831,
+            "span": 22.600586999999997
+          },
+          "interval_s": [
+            0,
+            1
+          ],
+          "omega_observer": {
+            "max": 16.43908,
+            "mean": -0.10335707068000022,
+            "min": -10.7041,
+            "n": 250,
+            "rms": 5.594129728083288,
+            "span": 27.14318
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 3.1079522639076353,
+            "mean": 0.2194387102389793,
+            "min": -2.3661438065517433,
+            "n": 250,
+            "rms": 0.8284303474498607,
+            "span": 5.474096070459378
+          },
+          "raw_theta_deg": {
+            "max": 200.83008997725628,
+            "mean": 151.61836006850905,
+            "min": 84.37502541811432,
+            "n": 250,
+            "rms": 157.20261051345398,
+            "span": 116.45506455914196
+          },
+          "requested_demand": {
+            "max": 9.500347,
+            "mean": 0.8671292493200001,
+            "min": -13.10024,
+            "n": 250,
+            "rms": 5.843142240062081,
+            "span": 22.600586999999997
+          },
+          "semantics": "half-open board-time window"
+        }
+      ],
+      "total_balance_mode_s": 10.848,
+      "transitions": [
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 2,
+          "t_s": 0.0,
+          "theta_deg": 174.1113315168268,
+          "x_step_m": 0.0
+        },
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 3,
+          "t_s": 1.408,
+          "theta_deg": -8.437502541811432,
+          "x_step_m": 0.117825
+        },
+        {
+          "enabled": false,
+          "fault": 0,
+          "mode": 0,
+          "t_s": 12.256,
+          "theta_deg": 0.8789063715325753,
+          "x_step_m": -0.0165
+        }
+      ]
+    },
+    {
+      "active_samples": 2500,
+      "balance_metrics": {
+        "commanded_velocity": {
+          "max": 0.1473313,
+          "mean": 0.010572532507637202,
+          "min": -0.171913,
+          "n": 2500,
+          "rms": 0.08399545078074822,
+          "span": 0.31924430000000004
+        },
+        "counted_x_m": {
+          "max": 0.13965,
+          "mean": 0.047902815208800006,
+          "min": -0.011325,
+          "n": 2500,
+          "rms": 0.06770653989342693,
+          "span": 0.150975
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 1.22131,
+          "mean": 0.004364981004131996,
+          "min": -1.563188,
+          "n": 2500,
+          "rms": 0.3031931910540051,
+          "span": 2.784498
+        },
+        "omega_observer": {
+          "max": 0.2532219,
+          "mean": -0.0039890962325564005,
+          "min": -0.523963,
+          "n": 2500,
+          "rms": 0.08101526060339215,
+          "span": 0.7771849
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.4935173687232731,
+          "mean": 0.0007029818835397657,
+          "min": -0.48155882280642065,
+          "n": 2500,
+          "rms": 0.08438203270218528,
+          "span": 0.9750761915296937
+        },
+        "raw_theta_deg": {
+          "max": 2.0214844826375846,
+          "mean": -0.8596406399340373,
+          "min": -3.3398437534575502,
+          "n": 2500,
+          "rms": 1.6630857581401526,
+          "span": 5.361328236095135
+        },
+        "requested_demand": {
+          "max": 1.22131,
+          "mean": 0.004350193646787994,
+          "min": -1.563188,
+          "n": 2500,
+          "rms": 0.3032060406079406,
+          "span": 2.784498
+        }
+      },
+      "balance_segments": [
+        {
+          "duration_s": 10.0,
+          "end_s": 10.0,
+          "start_s": 0.0
+        }
+      ],
+      "board_interval_ms": {
+        "max": 4.0,
+        "mean": 4.0,
+        "min": 4.0,
+        "n": 2499,
+        "rms": 4.0,
+        "span": 0.0
+      },
+      "command": {
+        "host_monotonic_ns": 714517263769660,
+        "payload": "V2 MODE 2781284251 bal 10000",
+        "type": "command"
+      },
+      "enabled_to_first_disabled_s": 10.0,
+      "first_100ms_states": [
+        {
+          "acceleration_governed": -0.03898912,
+          "brake": 0,
+          "demand": -0.03898912,
+          "fault": 0,
+          "filtered_deg": -0.08648689055518702,
+          "mode": 3,
+          "omega": 0.0007984895,
+          "t_s": 0.0,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -3.898912e-05,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.125066,
+          "brake": 0,
+          "demand": -0.125066,
+          "fault": 0,
+          "filtered_deg": -0.12704966684459168,
+          "mode": 3,
+          "omega": -0.02078867,
+          "t_s": 0.004,
+          "theta_deg": -0.17578127430651508,
+          "velocity_commanded": -0.0003760508,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.002597319,
+          "brake": 0,
+          "demand": -0.002597319,
+          "fault": 0,
+          "filtered_deg": -0.06946110589819753,
+          "mode": 3,
+          "omega": 0.01101716,
+          "t_s": 0.008,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.0004633166,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": 0.01646859,
+          "brake": 0,
+          "demand": 0.01646858,
+          "fault": 0,
+          "filtered_deg": -0.059668798813175654,
+          "mode": 3,
+          "omega": 0.01603934,
+          "t_s": 0.012,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.0005834913,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.1388498,
+          "brake": 0,
+          "demand": -0.1388498,
+          "fault": 0,
+          "filtered_deg": -0.1309571817116044,
+          "mode": 3,
+          "omega": -0.02393753,
+          "t_s": 0.016,
+          "theta_deg": -0.26367185416399314,
+          "velocity_commanded": -0.0008095326,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.04586403,
+          "brake": 0,
+          "demand": -0.04586403,
+          "fault": 0,
+          "filtered_deg": -0.08861422555272824,
+          "mode": 3,
+          "omega": 0.0008591342,
+          "t_s": 0.02,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.001102413,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.1204797,
+          "brake": 0,
+          "demand": -0.1204797,
+          "fault": 0,
+          "filtered_deg": -0.12441738414220167,
+          "mode": 3,
+          "omega": -0.0174836,
+          "t_s": 0.024,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.001536501,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.09073599,
+          "brake": 0,
+          "demand": -0.09073599,
+          "fault": 0,
+          "filtered_deg": -0.11180864571943472,
+          "mode": 3,
+          "omega": -0.008817036,
+          "t_s": 0.028,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.001940183,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.09505117,
+          "brake": 0,
+          "demand": -0.09505117,
+          "fault": 0,
+          "filtered_deg": -0.11410064878729656,
+          "mode": 3,
+          "omega": -0.009255242,
+          "t_s": 0.032,
+          "theta_deg": -0.17578127430651508,
+          "velocity_commanded": -0.002275819,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.1016429,
+          "brake": 0,
+          "demand": -0.1016429,
+          "fault": 0,
+          "filtered_deg": -0.11879105318557602,
+          "mode": 3,
+          "omega": -0.00962186,
+          "t_s": 0.036,
+          "theta_deg": 0.0,
+          "velocity_commanded": -0.002798581,
+          "x_step_m": -3.75e-05
+        },
+        {
+          "acceleration_governed": -0.02569621,
+          "brake": 0,
+          "demand": -0.02569621,
+          "fault": 0,
+          "filtered_deg": -0.08191377061757084,
+          "mode": 3,
+          "omega": 0.01002963,
+          "t_s": 0.04,
+          "theta_deg": -0.17578127430651508,
+          "velocity_commanded": -0.00291202,
+          "x_step_m": -3.75e-05
+        },
+        {
+          "acceleration_governed": -0.1567766,
+          "brake": 0,
+          "demand": -0.1567766,
+          "fault": 0,
+          "filtered_deg": -0.14430818695796332,
+          "mode": 3,
+          "omega": -0.02260231,
+          "t_s": 0.044,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.00350076,
+          "x_step_m": -3.75e-05
+        },
+        {
+          "acceleration_governed": -0.07553025,
+          "brake": 0,
+          "demand": -0.07553025,
+          "fault": 0,
+          "filtered_deg": -0.10677630010902119,
+          "mode": 3,
+          "omega": -0.0007244031,
+          "t_s": 0.048,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.003863019,
+          "x_step_m": -7.5e-05
+        },
+        {
+          "acceleration_governed": 0.09063723,
+          "brake": 0,
+          "demand": 0.09063723,
+          "fault": 0,
+          "filtered_deg": -0.025174115399598396,
+          "mode": 3,
+          "omega": 0.04124135,
+          "t_s": 0.052,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.003643187,
+          "x_step_m": -7.5e-05
+        },
+        {
+          "acceleration_governed": -0.0410079,
+          "brake": 0,
+          "demand": -0.0410079,
+          "fault": 0,
+          "filtered_deg": -0.08430065549630633,
+          "mode": 3,
+          "omega": 0.007170691,
+          "t_s": 0.056,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.003844496,
+          "x_step_m": -7.5e-05
+        },
+        {
+          "acceleration_governed": 0.1296303,
+          "brake": 0,
+          "demand": 0.1296303,
+          "fault": 0,
+          "filtered_deg": 0.00021529897557760112,
+          "mode": 3,
+          "omega": 0.05005936,
+          "t_s": 0.06,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.003519559,
+          "x_step_m": -0.0001125
+        },
+        {
+          "acceleration_governed": 0.1101019,
+          "brake": 0,
+          "demand": 0.1101019,
+          "fault": 0,
+          "filtered_deg": -0.001479895553832379,
+          "mode": 3,
+          "omega": 0.04286584,
+          "t_s": 0.064,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.003011147,
+          "x_step_m": -0.0001125
+        },
+        {
+          "acceleration_governed": 0.1432573,
+          "brake": 0,
+          "demand": 0.1432573,
+          "fault": 0,
+          "filtered_deg": 0.020122581432625932,
+          "mode": 3,
+          "omega": 0.04963803,
+          "t_s": 0.068,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": -0.002566491,
+          "x_step_m": -0.0001125
+        },
+        {
+          "acceleration_governed": 0.2507616,
+          "brake": 0,
+          "demand": 0.2507616,
+          "fault": 0,
+          "filtered_deg": 0.07909292750480326,
+          "mode": 3,
+          "omega": 0.07459353,
+          "t_s": 0.072,
+          "theta_deg": 0.17578127430651508,
+          "velocity_commanded": -0.001731069,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.08461499,
+          "brake": 0,
+          "demand": 0.08461499,
+          "fault": 0,
+          "filtered_deg": 0.009568429556152456,
+          "mode": 3,
+          "omega": 0.02917151,
+          "t_s": 0.076,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": -0.001131831,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.2209905,
+          "brake": 0,
+          "demand": 0.2209905,
+          "fault": 0,
+          "filtered_deg": 0.0792778782810715,
+          "mode": 3,
+          "omega": 0.06226132,
+          "t_s": 0.08,
+          "theta_deg": 0.17578127430651508,
+          "velocity_commanded": -0.0004660872,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.2072272,
+          "brake": 0,
+          "demand": 0.2072272,
+          "fault": 0,
+          "filtered_deg": 0.08190185309543212,
+          "mode": 3,
+          "omega": 0.05549226,
+          "t_s": 0.084,
+          "theta_deg": 0.0,
+          "velocity_commanded": 0.000470556,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.109768,
+          "brake": 0,
+          "demand": 0.109768,
+          "fault": 0,
+          "filtered_deg": 0.04147098314962245,
+          "mode": 3,
+          "omega": 0.02856806,
+          "t_s": 0.088,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": 0.0009408013,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.2500642,
+          "brake": 0,
+          "demand": 0.2500642,
+          "fault": 0,
+          "filtered_deg": 0.11335918410461777,
+          "mode": 3,
+          "omega": 0.06226038,
+          "t_s": 0.092,
+          "theta_deg": 0.08789063715325754,
+          "velocity_commanded": 0.001795394,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.07117024,
+          "brake": 0,
+          "demand": 0.07117024,
+          "fault": 0,
+          "filtered_deg": 0.03563574605131414,
+          "mode": 3,
+          "omega": 0.01393872,
+          "t_s": 0.096,
+          "theta_deg": -0.08789063715325754,
+          "velocity_commanded": 0.002371164,
+          "x_step_m": -0.00015
+        },
+        {
+          "acceleration_governed": 0.1140028,
+          "brake": 0,
+          "demand": 0.1140028,
+          "fault": 0,
+          "filtered_deg": 0.05666648850753424,
+          "mode": 3,
+          "omega": 0.02427098,
+          "t_s": 0.1,
+          "theta_deg": 0.17578127430651508,
+          "velocity_commanded": 0.00263418,
+          "x_step_m": -0.0001125
+        }
+      ],
+      "first_balance_s": 0.0,
+      "first_disabled_state": {
+        "acceleration": 0.0,
+        "angle_hat": -0.03999266,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67209684,
+        "fault": 3,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 4,
+        "omega": 0.04757699,
+        "received_ns": 714527264563252,
+        "sid": 2781284251,
+        "theta": -0.0398835,
+        "tick": 521382871,
+        "unwrapped_tick": 521382871,
+        "unwrapped_us": 1696377254,
+        "us": 1696377254,
+        "velocity": 0.0,
+        "x": 0.1057125
+      },
+      "first_enabled_state": {
+        "acceleration": -0.03898912,
+        "angle_hat": -0.001509481,
+        "brake_direction": 0,
+        "demand": -0.03898912,
+        "dropped": 67209684,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 3,
+        "omega": 0.0007984895,
+        "received_ns": 714517264728086,
+        "sid": 2781284251,
+        "theta": -0.001533981,
+        "tick": 521372871,
+        "unwrapped_tick": 521372871,
+        "unwrapped_us": 1686377254,
+        "us": 1686377254,
+        "velocity": -3.898912e-05,
+        "x": 0.0
+      },
+      "label": "ref450_bal_10s",
+      "latest_info_before_command": {
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 450,
+        "encoder_raw_age_us": 785,
+        "encoder_recoveries": 0,
+        "encoder_upright_raw": 450,
+        "firmware": "executor-v6-measuredrail",
+        "home_epoch": 36,
+        "i2c_errors": 17,
+        "mag_status": 103,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 714459613348949,
+        "reference_saved": true,
+        "sid": 2781284251
+      },
+      "latest_parameter_readbacks_before_command": {
+        "amax_b": 25.0,
+        "amax_m": 0.5,
+        "amax_s": 25.0,
+        "approach_angle": 0.800000012,
+        "approach_v": 0.200000003,
+        "bal_pw": 4.5,
+        "bw": 10.0,
+        "catch_a": 0.25,
+        "catch_da": 4.0,
+        "catch_r": 3.0,
+        "catch_v": 0.300000012,
+        "giveup": 0.800000012,
+        "jmax": 150.0,
+        "jmax_m": 10.0,
+        "kdx": 2.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "leff": 0.123999998,
+        "manual_speed_max": 0.150000006,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "phase_soft": 2.0,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "rail": 0.309037507,
+        "rail_fault_margin": 0.00999999978,
+        "rail_fraction": 0.949999988,
+        "rail_hysteresis": 0.00499999989,
+        "rail_margin": 0.0149999997,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rail_recover_v": 0.150000006,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0,
+        "rehome_v": 0.0799999982,
+        "spin_resume_rad_s": 10.0,
+        "spin_trip_rad_s": 150.0,
+        "vman": 0.0500000007,
+        "vmax": 1.5,
+        "vmax_b": 1.5,
+        "vmax_s": 1.5
+      },
+      "longest_balance_mode_s": 10.0,
+      "prearm_250ms": {
+        "commanded_velocity": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 63,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "counted_x_m": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 63,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 63,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "omega_observer": {
+          "max": 0.007884527,
+          "mean": -0.0001382009107142857,
+          "min": -0.009299939,
+          "n": 63,
+          "rms": 0.0035497759604150706,
+          "span": 0.017184466000000002
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.021621994793749436,
+          "mean": -0.0014527672299996396,
+          "min": -0.07695808676014582,
+          "n": 63,
+          "rms": 0.017428977504465135,
+          "span": 0.09858008155389525
+        },
+        "raw_theta_deg": {
+          "max": -0.08789063715325754,
+          "mean": -0.09207590558912698,
+          "min": -0.17578127430651508,
+          "n": 63,
+          "rms": 0.09395904335221547,
+          "span": 0.08789063715325754
+        },
+        "requested_demand": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 63,
+          "rms": 0.0,
+          "span": 0.0
+        }
+      },
+      "recorded_control_commands": [
+        {
+          "host_monotonic_ns": 714517263769660,
+          "payload": "V2 MODE 2781284251 bal 10000",
+          "type": "command"
+        },
+        {
+          "host_monotonic_ns": 714527264310621,
+          "payload": "V2 STOP 2781284251",
+          "type": "command"
+        },
+        {
+          "host_monotonic_ns": 714527265014338,
+          "payload": "V2 STOP 2781284251",
+          "type": "command"
+        }
+      ],
+      "requested_duration_s": 10.0,
+      "sampled_active_span_s": 9.996,
+      "startup_windows": [
+        {
+          "commanded_velocity": {
+            "max": -3.898912e-05,
+            "mean": -0.001192487742,
+            "min": -0.002798581,
+            "n": 10,
+            "rms": 0.0014732708273944076,
+            "span": 0.00275959188
+          },
+          "counted_x_m": {
+            "max": 0.0,
+            "mean": -3.7499999999999997e-06,
+            "min": -3.75e-05,
+            "n": 10,
+            "rms": 1.185854122563142e-05,
+            "span": 3.75e-05
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.01646859,
+            "mean": -0.0742807439,
+            "min": -0.1388498,
+            "n": 10,
+            "rms": 0.08996486791908281,
+            "span": 0.15531839
+          },
+          "interval_s": [
+            0,
+            0.04
+          ],
+          "omega_observer": {
+            "max": 0.01603934,
+            "mean": -0.006118981429999999,
+            "min": -0.02393753,
+            "n": 10,
+            "rms": 0.01395293578122425,
+            "span": 0.03997687
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.14755943596643317,
+            "mean": 0.006455864981994008,
+            "min": -0.13271467245238872,
+            "n": 10,
+            "rms": 0.07869305621235642,
+            "span": 0.2802741084188219
+          },
+          "raw_theta_deg": {
+            "max": 0.08789063715325754,
+            "mean": -0.09667969513900536,
+            "min": -0.26367185416399314,
+            "n": 10,
+            "rms": 0.13329273951238158,
+            "span": 0.3515624913172507
+          },
+          "requested_demand": {
+            "max": 0.01646858,
+            "mean": -0.0742807449,
+            "min": -0.1388498,
+            "n": 10,
+            "rms": 0.08996486773602708,
+            "span": 0.15531838
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.002371164,
+            "mean": -0.0014614651327999996,
+            "min": -0.003863019,
+            "n": 25,
+            "rms": 0.002261899838398743,
+            "span": 0.006234183
+          },
+          "counted_x_m": {
+            "max": 0.0,
+            "mean": -6.9e-05,
+            "min": -0.00015,
+            "n": 25,
+            "rms": 9.307255234493142e-05,
+            "span": 0.00015
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.2507616,
+            "mean": 0.02505620244,
+            "min": -0.1567766,
+            "n": 25,
+            "rms": 0.12848252087378847,
+            "span": 0.40753819999999996
+          },
+          "interval_s": [
+            0,
+            0.1
+          ],
+          "omega_observer": {
+            "max": 0.07459353,
+            "mean": 0.017710966144,
+            "min": -0.02393753,
+            "n": 25,
+            "rms": 0.03427900806910693,
+            "span": 0.09853106
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.17219129264956387,
+            "mean": 0.005430293158250915,
+            "min": -0.13271467245238872,
+            "n": 25,
+            "rms": 0.08497908093534617,
+            "span": 0.30490596510195256
+          },
+          "raw_theta_deg": {
+            "max": 0.17578127430651508,
+            "mean": -0.03515625256947184,
+            "min": -0.26367185416399314,
+            "n": 25,
+            "rms": 0.11922065565142383,
+            "span": 0.4394531284705082
+          },
+          "requested_demand": {
+            "max": 0.2507616,
+            "mean": 0.025056202040000003,
+            "min": -0.1567766,
+            "n": 25,
+            "rms": 0.12848252082251743,
+            "span": 0.40753819999999996
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.003151083,
+            "mean": 0.0003416908084210525,
+            "min": -0.001549087,
+            "n": 38,
+            "rms": 0.0015359187079321014,
+            "span": 0.00470017
+          },
+          "counted_x_m": {
+            "max": 0.0,
+            "mean": -3.2565789473684205e-05,
+            "min": -0.0001125,
+            "n": 38,
+            "rms": 4.7512117567937063e-05,
+            "span": 0.0001125
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.1218362,
+            "mean": -0.019017902315789478,
+            "min": -0.1487106,
+            "n": 38,
+            "rms": 0.06434547422885437,
+            "span": 0.2705468
+          },
+          "interval_s": [
+            0.1,
+            0.25
+          ],
+          "omega_observer": {
+            "max": 0.02477056,
+            "mean": -0.002893714057894736,
+            "min": -0.0411216,
+            "n": 38,
+            "rms": 0.016725303266817777,
+            "span": 0.06589216
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.1308901112721064,
+            "mean": -0.00019344853949536655,
+            "min": -0.14291466192695795,
+            "n": 38,
+            "rms": 0.07336444667697187,
+            "span": 0.2738047731990644
+          },
+          "raw_theta_deg": {
+            "max": 0.17578127430651508,
+            "mean": -0.025442026544364026,
+            "min": -0.17578127430651508,
+            "n": 38,
+            "rms": 0.08903958313567141,
+            "span": 0.35156254861303016
+          },
+          "requested_demand": {
+            "max": 0.1218362,
+            "mean": -0.019017902368421057,
+            "min": -0.1487106,
+            "n": 38,
+            "rms": 0.06434547423467163,
+            "span": 0.2705468
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.003151083,
+            "mean": 0.00022464222972000002,
+            "min": -0.003863019,
+            "n": 250,
+            "rms": 0.0012815262167167264,
+            "span": 0.0070141019999999995
+          },
+          "counted_x_m": {
+            "max": 0.0001875,
+            "mean": 2.1300000000000003e-05,
+            "min": -0.00015,
+            "n": 250,
+            "rms": 7.993747556684536e-05,
+            "span": 0.0003375
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.2507616,
+            "mean": -0.0010619691182799996,
+            "min": -0.1609871,
+            "n": 250,
+            "rms": 0.07128146769870689,
+            "span": 0.41174869999999997
+          },
+          "interval_s": [
+            0,
+            1
+          ],
+          "omega_observer": {
+            "max": 0.07459353,
+            "mean": 0.0011195831520800002,
+            "min": -0.0411216,
+            "n": 250,
+            "rms": 0.01862346504248994,
+            "span": 0.11571513
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 0.20716259673459864,
+            "mean": 0.0010718509385563642,
+            "min": -0.2526833888196546,
+            "n": 250,
+            "rms": 0.08019528431484144,
+            "span": 0.4598459855542532
+          },
+          "raw_theta_deg": {
+            "max": 0.17578127430651508,
+            "mean": -0.011250000868067612,
+            "min": -0.26367185416399314,
+            "n": 250,
+            "rms": 0.09268191471771466,
+            "span": 0.4394531284705082
+          },
+          "requested_demand": {
+            "max": 0.2507616,
+            "mean": -0.001061969139719999,
+            "min": -0.1609871,
+            "n": 250,
+            "rms": 0.07128146767338987,
+            "span": 0.41174869999999997
+          },
+          "semantics": "half-open board-time window"
+        }
+      ],
+      "total_balance_mode_s": 10.0,
+      "transitions": [
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 3,
+          "t_s": 0.0,
+          "theta_deg": -0.08789063715325754,
+          "x_step_m": 0.0
+        },
+        {
+          "enabled": false,
+          "fault": 3,
+          "mode": 4,
+          "t_s": 10.0,
+          "theta_deg": -2.285156222210019,
+          "x_step_m": 0.1057125
+        }
+      ]
+    },
+    {
+      "active_samples": 672,
+      "balance_metrics": {
+        "commanded_velocity": {
+          "max": 1.031016,
+          "mean": -0.1973361576992073,
+          "min": -1.46517,
+          "n": 164,
+          "rms": 0.8342814520219881,
+          "span": 2.496186
+        },
+        "counted_x_m": {
+          "max": 0.136425,
+          "mean": 0.022912042689024387,
+          "min": -0.128025,
+          "n": 164,
+          "rms": 0.07364924265277675,
+          "span": 0.26444999999999996
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 16.49762,
+          "mean": -0.8004459185256094,
+          "min": -19.1991,
+          "n": 164,
+          "rms": 9.272922714931052,
+          "span": 35.69672
+        },
+        "omega_observer": {
+          "max": 8.564733,
+          "mean": 0.9907818845731706,
+          "min": -5.862257,
+          "n": 164,
+          "rms": 4.276952986918683,
+          "span": 14.42699
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 1.656615791373553,
+          "mean": 0.09046138090442428,
+          "min": -2.217675544930691,
+          "n": 164,
+          "rms": 0.830739765894426,
+          "span": 3.8742913363042444
+        },
+        "raw_theta_deg": {
+          "max": 49.65820626736484,
+          "mean": -1.1720538242585363,
+          "min": -30.937503590397295,
+          "n": 164,
+          "rms": 19.673907862186898,
+          "span": 80.59570985776213
+        },
+        "requested_demand": {
+          "max": 25.0,
+          "mean": 0.5852565237804878,
+          "min": -22.96223,
+          "n": 164,
+          "rms": 15.303195240266028,
+          "span": 47.962230000000005
+        }
+      },
+      "balance_segments": [
+        {
+          "duration_s": 0.656,
+          "end_s": 0.656,
+          "start_s": 0.0
+        }
+      ],
+      "board_interval_ms": {
+        "max": 4.0,
+        "mean": 4.0,
+        "min": 4.0,
+        "n": 671,
+        "rms": 4.0,
+        "span": 0.0
+      },
+      "command": {
+        "host_monotonic_ns": 713630232281181,
+        "payload": "V2 MODE 1166258662 bal 10000",
+        "type": "command"
+      },
+      "enabled_to_first_disabled_s": 2.688,
+      "first_100ms_states": [
+        {
+          "acceleration_governed": -0.1216613,
+          "brake": 0,
+          "demand": -0.1532088,
+          "fault": 0,
+          "filtered_deg": -0.10913207337948108,
+          "mode": 3,
+          "omega": -0.03358517,
+          "t_s": 0.0,
+          "theta_deg": -0.7031252118176193,
+          "velocity_commanded": -3.259567e-05,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -0.5991254,
+          "brake": 0,
+          "demand": -1.826571,
+          "fault": 0,
+          "filtered_deg": -0.9147666540142234,
+          "mode": 3,
+          "omega": -0.4578441,
+          "t_s": 0.004,
+          "theta_deg": -2.636718541639931,
+          "velocity_commanded": -0.001529098,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -1.199125,
+          "brake": 0,
+          "demand": -1.600957,
+          "fault": 0,
+          "filtered_deg": -0.8926688177716178,
+          "mode": 3,
+          "omega": -0.3804371,
+          "t_s": 0.008,
+          "theta_deg": 0.0,
+          "velocity_commanded": -0.005425599,
+          "x_step_m": 0.0
+        },
+        {
+          "acceleration_governed": -1.799125,
+          "brake": 0,
+          "demand": -3.835492,
+          "fault": 0,
+          "filtered_deg": -2.0342637333001825,
+          "mode": 3,
+          "omega": -0.9282526,
+          "t_s": 0.012,
+          "theta_deg": -2.4609373819249747,
+          "velocity_commanded": -0.0117221,
+          "x_step_m": -3.75e-05
+        },
+        {
+          "acceleration_governed": -1.799125,
+          "brake": 0,
+          "demand": -0.9009706,
+          "fault": 0,
+          "filtered_deg": -0.7494007210991555,
+          "mode": 3,
+          "omega": -0.1457444,
+          "t_s": 0.016,
+          "theta_deg": 0.7910157916750973,
+          "velocity_commanded": -0.0195186,
+          "x_step_m": -7.5e-05
+        },
+        {
+          "acceleration_governed": -1.499125,
+          "brake": 0,
+          "demand": -1.52239,
+          "fault": 0,
+          "filtered_deg": -1.034277628669381,
+          "mode": 3,
+          "omega": -0.2940804,
+          "t_s": 0.02,
+          "theta_deg": -3.2519531736000724,
+          "velocity_commanded": -0.02551511,
+          "x_step_m": -0.0001875
+        },
+        {
+          "acceleration_governed": -2.099125,
+          "brake": 0,
+          "demand": -2.896677,
+          "fault": 0,
+          "filtered_deg": -1.7413258825102613,
+          "mode": 3,
+          "omega": -0.6235687,
+          "t_s": 0.024,
+          "theta_deg": -2.109375062495063,
+          "velocity_commanded": -0.03301161,
+          "x_step_m": -0.0003
+        },
+        {
+          "acceleration_governed": -2.699126,
+          "brake": 0,
+          "demand": -3.116172,
+          "fault": 0,
+          "filtered_deg": -1.9301550100937315,
+          "mode": 3,
+          "omega": -0.6484225,
+          "t_s": 0.028,
+          "theta_deg": -2.0214844826375846,
+          "velocity_commanded": -0.04290811,
+          "x_step_m": -0.0004125
+        },
+        {
+          "acceleration_governed": -3.299126,
+          "brake": 0,
+          "demand": -3.82881,
+          "fault": 0,
+          "filtered_deg": -2.3567770925169618,
+          "mode": 3,
+          "omega": -0.7940841,
+          "t_s": 0.032,
+          "theta_deg": -2.8125002743126823,
+          "velocity_commanded": -0.05520461,
+          "x_step_m": -0.0006
+        },
+        {
+          "acceleration_governed": -3.899127,
+          "brake": 0,
+          "demand": -4.967154,
+          "fault": 0,
+          "filtered_deg": -3.009129076361268,
+          "mode": 3,
+          "omega": -1.040145,
+          "t_s": 0.036,
+          "theta_deg": -3.8671878055602136,
+          "velocity_commanded": -0.06990112,
+          "x_step_m": -0.0008625
+        },
+        {
+          "acceleration_governed": -4.499127,
+          "brake": 0,
+          "demand": -6.491658,
+          "fault": 0,
+          "filtered_deg": -3.8833618311589615,
+          "mode": 3,
+          "omega": -1.374223,
+          "t_s": 0.04,
+          "theta_deg": -5.0097659166652235,
+          "velocity_commanded": -0.08699763,
+          "x_step_m": -0.0011625
+        },
+        {
+          "acceleration_governed": -5.099127,
+          "brake": 0,
+          "demand": -7.232339,
+          "fault": 0,
+          "filtered_deg": -4.434975229547776,
+          "mode": 3,
+          "omega": -1.495264,
+          "t_s": 0.044,
+          "theta_deg": -4.306640704847604,
+          "velocity_commanded": -0.1064941,
+          "x_step_m": -0.0015375
+        },
+        {
+          "acceleration_governed": -5.699128,
+          "brake": 0,
+          "demand": -6.959986,
+          "fault": 0,
+          "filtered_deg": -4.506060384316272,
+          "mode": 3,
+          "omega": -1.352425,
+          "t_s": 0.048,
+          "theta_deg": -3.8671878055602136,
+          "velocity_commanded": -0.1283907,
+          "x_step_m": -0.0019875
+        },
+        {
+          "acceleration_governed": -6.299128,
+          "brake": 0,
+          "demand": -6.601397,
+          "fault": 0,
+          "filtered_deg": -4.504377034314178,
+          "mode": 3,
+          "omega": -1.187748,
+          "t_s": 0.052,
+          "theta_deg": -3.6914066458452575,
+          "velocity_commanded": -0.1526872,
+          "x_step_m": -0.00255
+        },
+        {
+          "acceleration_governed": -5.999128,
+          "brake": 0,
+          "demand": -5.750091,
+          "fault": 0,
+          "filtered_deg": -4.2300081727066505,
+          "mode": 3,
+          "omega": -0.9001719,
+          "t_s": 0.056,
+          "theta_deg": -3.164062593742594,
+          "velocity_commanded": -0.1775837,
+          "x_step_m": -0.0031875
+        },
+        {
+          "acceleration_governed": -5.399127,
+          "brake": 0,
+          "demand": -4.510743,
+          "fault": 0,
+          "filtered_deg": -3.721809505328284,
+          "mode": 3,
+          "omega": -0.5248058,
+          "t_s": 0.06,
+          "theta_deg": -2.373046802067497,
+          "velocity_commanded": -0.2000802,
+          "x_step_m": -0.003975
+        },
+        {
+          "acceleration_governed": -4.799127,
+          "brake": 0,
+          "demand": -2.760434,
+          "fault": 0,
+          "filtered_deg": -2.904981964982543,
+          "mode": 3,
+          "omega": -0.03376694,
+          "t_s": 0.064,
+          "theta_deg": -1.4062498506774435,
+          "velocity_commanded": -0.2201767,
+          "x_step_m": -0.0047625
+        },
+        {
+          "acceleration_governed": -4.199127,
+          "brake": 0,
+          "demand": -1.603976,
+          "fault": 0,
+          "filtered_deg": -2.2940840505737476,
+          "mode": 3,
+          "omega": 0.2890987,
+          "t_s": 0.068,
+          "theta_deg": -1.4062498506774435,
+          "velocity_commanded": -0.2378732,
+          "x_step_m": -0.0056625
+        },
+        {
+          "acceleration_governed": -3.599126,
+          "brake": 0,
+          "demand": -0.5115611,
+          "fault": 0,
+          "filtered_deg": -1.6625762713163004,
+          "mode": 3,
+          "omega": 0.5831526,
+          "t_s": 0.072,
+          "theta_deg": -1.0546875312475315,
+          "velocity_commanded": -0.2531697,
+          "x_step_m": -0.0066375
+        },
+        {
+          "acceleration_governed": -2.999126,
+          "brake": 0,
+          "demand": -0.1904089,
+          "fault": 0,
+          "filtered_deg": -1.360038512668962,
+          "mode": 3,
+          "omega": 0.6697143,
+          "t_s": 0.076,
+          "theta_deg": -1.3183592708199654,
+          "velocity_commanded": -0.2660662,
+          "x_step_m": -0.0076875
+        },
+        {
+          "acceleration_governed": -2.399126,
+          "brake": 0,
+          "demand": 0.4764477,
+          "fault": 0,
+          "filtered_deg": -0.8858821326882931,
+          "mode": 3,
+          "omega": 0.8391522,
+          "t_s": 0.08,
+          "theta_deg": -0.17578127430651508,
+          "velocity_commanded": -0.2765627,
+          "x_step_m": -0.0088125
+        },
+        {
+          "acceleration_governed": -1.799125,
+          "brake": 0,
+          "demand": 0.6927212,
+          "fault": 0,
+          "filtered_deg": -0.6009313135624954,
+          "mode": 3,
+          "omega": 0.8848026,
+          "t_s": 0.084,
+          "theta_deg": -0.7910157916750973,
+          "velocity_commanded": -0.2846592,
+          "x_step_m": -0.0099
+        },
+        {
+          "acceleration_governed": -1.199126,
+          "brake": 0,
+          "demand": 0.6822566,
+          "fault": 0,
+          "filtered_deg": -0.4307795787762587,
+          "mode": 3,
+          "omega": 0.869153,
+          "t_s": 0.088,
+          "theta_deg": -0.43945312847050816,
+          "velocity_commanded": -0.2903557,
+          "x_step_m": -0.011025
+        },
+        {
+          "acceleration_governed": -0.5991256,
+          "brake": 0,
+          "demand": 1.169162,
+          "fault": 0,
+          "filtered_deg": -0.028523248517788403,
+          "mode": 3,
+          "omega": 0.9768974,
+          "t_s": 0.092,
+          "theta_deg": 0.43945312847050816,
+          "velocity_commanded": -0.2936522,
+          "x_step_m": -0.0121875
+        },
+        {
+          "acceleration_governed": 0.0008744001,
+          "brake": 0,
+          "demand": 2.111804,
+          "fault": 0,
+          "filtered_deg": 0.6111276704846436,
+          "mode": 3,
+          "omega": 1.193419,
+          "t_s": 0.096,
+          "theta_deg": 1.0546875312475315,
+          "velocity_commanded": -0.2945487,
+          "x_step_m": -0.0133875
+        },
+        {
+          "acceleration_governed": 0.6008744,
+          "brake": 0,
+          "demand": 3.041121,
+          "fault": 0,
+          "filtered_deg": 1.2726160393301058,
+          "mode": 3,
+          "omega": 1.397529,
+          "t_s": 0.1,
+          "theta_deg": 2.0214844826375846,
+          "velocity_commanded": -0.2930452,
+          "x_step_m": -0.0145875
+        }
+      ],
+      "first_balance_s": 0.0,
+      "first_disabled_state": {
+        "acceleration": 0.0,
+        "angle_hat": 1.712339,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 67153045,
+        "fault": 0,
+        "flags": 205,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 0,
+        "omega": -8.29463,
+        "received_ns": 713632925109503,
+        "sid": 1166258662,
+        "theta": 1.719592,
+        "tick": 520488528,
+        "unwrapped_tick": 520488528,
+        "unwrapped_us": 802034254,
+        "us": 802034254,
+        "velocity": 0.0,
+        "x": -0.00165
+      },
+      "first_enabled_state": {
+        "acceleration": -0.1216613,
+        "angle_hat": -0.001904714,
+        "brake_direction": 0,
+        "demand": -0.1532088,
+        "dropped": 67153045,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 0,
+        "misses": 2,
+        "mode": 3,
+        "omega": -0.03358517,
+        "received_ns": 713630237318509,
+        "sid": 1166258662,
+        "theta": -0.01227185,
+        "tick": 520485840,
+        "unwrapped_tick": 520485840,
+        "unwrapped_us": 799346254,
+        "us": 799346254,
+        "velocity": -3.259567e-05,
+        "x": 0.0
+      },
+      "label": "ref553_failed_agent_bal",
+      "latest_info_before_command": {
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 553,
+        "encoder_raw_age_us": 3703,
+        "encoder_recoveries": 0,
+        "encoder_upright_raw": 553,
+        "firmware": "executor-v6-measuredrail",
+        "home_epoch": 34,
+        "i2c_errors": 15,
+        "mag_status": 103,
+        "measured_span_steps": 16510,
+        "rail_half_m": 0.309075,
+        "received_ns": 713630230369883,
+        "reference_saved": true,
+        "sid": 1166258662
+      },
+      "latest_parameter_readbacks_before_command": {},
+      "longest_balance_mode_s": 0.656,
+      "prearm_250ms": {
+        "commanded_velocity": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 5,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "counted_x_m": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 5,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "faults": [
+          0
+        ],
+        "governed_acceleration": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 5,
+          "rms": 0.0,
+          "span": 0.0
+        },
+        "omega_observer": {
+          "max": 0.007670908,
+          "mean": 4.676979999999539e-06,
+          "min": -0.007682747,
+          "n": 5,
+          "rms": 0.00672503198180761,
+          "span": 0.015353655
+        },
+        "rail_brake_samples": 0,
+        "raw_minus_filtered_deg": {
+          "max": 0.03877745125893294,
+          "mean": -0.0012123534843538398,
+          "min": -0.037348821103819894,
+          "n": 5,
+          "rms": 0.03261964974674858,
+          "span": 0.07612627236275284
+        },
+        "raw_theta_deg": {
+          "max": 0.0,
+          "mean": -0.052734382291954526,
+          "min": -0.08789063715325754,
+          "n": 5,
+          "rms": 0.06807979479642505,
+          "span": 0.08789063715325754
+        },
+        "requested_demand": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 5,
+          "rms": 0.0,
+          "span": 0.0
+        }
+      },
+      "recorded_control_commands": [
+        {
+          "host_monotonic_ns": 713630232281181,
+          "payload": "V2 MODE 1166258662 bal 10000",
+          "type": "command"
+        }
+      ],
+      "requested_duration_s": 10.0,
+      "sampled_active_span_s": 2.684,
+      "startup_windows": [
+        {
+          "commanded_velocity": {
+            "max": -3.259567e-05,
+            "mean": -0.026476855267,
+            "min": -0.06990112,
+            "n": 10,
+            "rms": 0.03473581491980994,
+            "span": 0.06986852433
+          },
+          "counted_x_m": {
+            "max": 0.0,
+            "mean": -0.0002475,
+            "min": -0.0008625,
+            "n": 10,
+            "rms": 0.00037499999999999995,
+            "span": 0.0008625
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": -0.1216613,
+            "mean": -1.9013790700000002,
+            "min": -3.899127,
+            "n": 10,
+            "rms": 2.1979936632039876,
+            "span": 3.7774657
+          },
+          "interval_s": [
+            0,
+            0.04
+          ],
+          "omega_observer": {
+            "max": -0.03358517,
+            "mean": -0.5346164069999999,
+            "min": -1.040145,
+            "n": 10,
+            "rms": 0.6202112553663613,
+            "span": 1.00655983
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 1.5404165127742528,
+            "mean": -0.4300369452596778,
+            "min": -2.217675544930691,
+            "n": 10,
+            "rms": 1.1258584147438908,
+            "span": 3.758092057704944
+          },
+          "raw_theta_deg": {
+            "max": 0.7910157916750973,
+            "mean": -1.9072266142313044,
+            "min": -3.8671878055602136,
+            "n": 10,
+            "rms": 2.3686483474620545,
+            "span": 4.65820359723531
+          },
+          "requested_demand": {
+            "max": -0.1532088,
+            "mean": -2.46484024,
+            "min": -4.967154,
+            "n": 10,
+            "rms": 2.849508493376442,
+            "span": 4.8139452
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": -3.259567e-05,
+            "mean": -0.1413626553068,
+            "min": -0.2945487,
+            "n": 25,
+            "rms": 0.17856128229675433,
+            "span": 0.29451610433
+          },
+          "counted_x_m": {
+            "max": 0.0,
+            "mean": -0.0038775,
+            "min": -0.0133875,
+            "n": 25,
+            "rms": 0.005742527209339108,
+            "span": 0.0133875
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 0.0008744001,
+            "mean": -2.9440275959960003,
+            "min": -6.299128,
+            "n": 25,
+            "rms": 3.4943179477370157,
+            "span": 6.3000024000999995
+          },
+          "interval_s": [
+            0,
+            0.1
+          ],
+          "omega_observer": {
+            "max": 1.193419,
+            "mean": -0.23636715639999997,
+            "min": -1.495264,
+            "n": 25,
+            "rms": 0.8435831070277946,
+            "span": 2.688683
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 1.5404165127742528,
+            "mean": 0.12108502401968943,
+            "min": -2.217675544930691,
+            "n": 25,
+            "rms": 0.9454568980196038,
+            "span": 3.758092057704944
+          },
+          "raw_theta_deg": {
+            "max": 1.0546875312475315,
+            "mean": -1.8632813059679163,
+            "min": -5.0097659166652235,
+            "n": 25,
+            "rms": 2.473336609381286,
+            "span": 6.064453447912755
+          },
+          "requested_demand": {
+            "max": 2.111804,
+            "mean": -2.4851441960000002,
+            "min": -7.232339,
+            "n": 25,
+            "rms": 3.680028337782727,
+            "span": 9.344142999999999
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 0.936484,
+            "mean": 0.23921943368421053,
+            "min": -0.2930452,
+            "n": 38,
+            "rms": 0.4839166256064591,
+            "span": 1.2295292
+          },
+          "counted_x_m": {
+            "max": 0.019875,
+            "mean": -0.01429934207894737,
+            "min": -0.0256875,
+            "n": 38,
+            "rms": 0.019168198130198696,
+            "span": 0.0455625
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 13.80086,
+            "mean": 8.148240984210526,
+            "min": 0.6008744,
+            "n": 38,
+            "rms": 8.944829946624125,
+            "span": 13.1999856
+          },
+          "interval_s": [
+            0.1,
+            0.25
+          ],
+          "omega_observer": {
+            "max": 4.934526,
+            "mean": 1.4312332123684213,
+            "min": -3.494744,
+            "n": 38,
+            "rms": 2.9409639842778317,
+            "span": 8.429269999999999
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 1.5923070084480715,
+            "mean": -0.46332919652608157,
+            "min": -1.791278061963152,
+            "n": 38,
+            "rms": 1.04295116900053,
+            "span": 3.3835850704112236
+          },
+          "raw_theta_deg": {
+            "max": 17.57812743065151,
+            "mean": 12.253803869766774,
+            "min": 2.0214844826375846,
+            "n": 38,
+            "rms": 13.134499945934357,
+            "span": 15.556642948013925
+          },
+          "requested_demand": {
+            "max": 21.87975,
+            "mean": 11.623271057894739,
+            "min": -2.595523,
+            "n": 38,
+            "rms": 13.660762234368883,
+            "span": 24.475273
+          },
+          "semantics": "half-open board-time window"
+        },
+        {
+          "commanded_velocity": {
+            "max": 1.031016,
+            "mean": -0.10140756320207998,
+            "min": -1.46517,
+            "n": 250,
+            "rms": 0.6847419516195321,
+            "span": 2.496186
+          },
+          "counted_x_m": {
+            "max": 0.136425,
+            "mean": -0.024717749995999995,
+            "min": -0.13875,
+            "n": 250,
+            "rms": 0.0906165985316592,
+            "span": 0.275175
+          },
+          "faults": [
+            0
+          ],
+          "governed_acceleration": {
+            "max": 16.49762,
+            "mean": 0.06842456856719992,
+            "min": -19.1991,
+            "n": 250,
+            "rms": 8.218921363888354,
+            "span": 35.69672
+          },
+          "interval_s": [
+            0,
+            1
+          ],
+          "omega_observer": {
+            "max": 16.53051,
+            "mean": 3.2110853002800006,
+            "min": -5.862257,
+            "n": 250,
+            "rms": 6.296280974767788,
+            "span": 22.392767
+          },
+          "rail_brake_samples": 0,
+          "raw_minus_filtered_deg": {
+            "max": 1.8224068589726174,
+            "mean": 0.015353029011220393,
+            "min": -2.2619457019292706,
+            "n": 250,
+            "rms": 0.9102579530832231,
+            "span": 4.084352560901888
+          },
+          "raw_theta_deg": {
+            "max": 209.88282314032332,
+            "mean": 33.52816369414557,
+            "min": -30.937503590397295,
+            "n": 250,
+            "rms": 66.65367511792586,
+            "span": 240.8203267307206
+          },
+          "requested_demand": {
+            "max": 25.0,
+            "mean": -0.38214117167999984,
+            "min": -22.96223,
+            "n": 250,
+            "rms": 12.885235374051428,
+            "span": 47.962230000000005
+          },
+          "semantics": "half-open board-time window"
+        }
+      ],
+      "total_balance_mode_s": 0.656,
+      "transitions": [
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 3,
+          "t_s": 0.0,
+          "theta_deg": -0.7031252118176193,
+          "x_step_m": 0.0
+        },
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 10,
+          "t_s": 0.656,
+          "theta_deg": 51.064456691000075,
+          "x_step_m": -0.130125
+        },
+        {
+          "enabled": true,
+          "fault": 0,
+          "mode": 11,
+          "t_s": 0.864,
+          "theta_deg": 99.58006479373708,
+          "x_step_m": -0.1060125
+        },
+        {
+          "enabled": false,
+          "fault": 0,
+          "mode": 0,
+          "t_s": 2.688,
+          "theta_deg": 98.52536408446026,
+          "x_step_m": -0.00165
+        }
+      ]
+    }
+  ],
+  "failed_source": {
+    "path": "runs/policy-recovery-20261021/hardware-live/native-bal-01/rig-1792618334408320436-1166258662.jsonl",
+    "sha256": "3c697798eab2bef55ac2d9fc72b4d30bdd8ca7a907a021d9658fed75721a57e1"
+  },
+  "hardware_activity": false,
+  "limitations": [
+    "Mode3 durations are firmware balance-mode occupancy; angle/omega and cart-position metrics are reported separately.",
+    "Counted x and governed velocity/acceleration are not independent physical cart measurements.",
+    "Camera is not included in this final snapshot comparison.",
+    "Native AUTO55s requested duration was stopped early; report observed intervals only.",
+    "The initial calibration/pose and run conditions differ; this is a descriptive comparison and does not independently isolate a single causal mechanism.",
+    "Latest parameter readbacks may precede a HOME; latest INFO carries measured home geometry independently."
+  ],
+  "outputs_sha256": {
+    "startup-comparison.png": "f41de124d7220fbcc99068f31e388365c05d3506f422f55a4826024cee2ee8c7",
+    "traces.json": "f0e4c48f36ac4f29b25bbaf3ce772c85f1705f2b0c5fc52f56d88788923a40a5"
+  },
+  "schema": "cartpole-reference450-native-comparison-v1",
+  "script_sha256": "5a2e0fa0a2b5242d640dd88dab66f86f040d0c4bfc236aca81d32a3e8e9054b5",
+  "source": {
+    "compressed_sha256": "07523dac1391130656f41d53e994ffce4893851f24b127628272a5252f17692b",
+    "original_path": "/tmp/policy-user-manual-20261021-prefix.jsonl.gz",
+    "preserved_file": "source-prefix.jsonl.gz",
+    "records": 175486,
+    "session_id": "2781284251",
+    "uncompressed_bytes": 69954645,
+    "uncompressed_sha256": "39442b6753c8dd9360cf7272fed2deff7ef51defd4f201b3e82a0abe58868eb7"
+  },
+  "user_confirmation": "Parent relayed user confirmation that upright calibration was the issue and that native AUTO/BAL now work."
+}

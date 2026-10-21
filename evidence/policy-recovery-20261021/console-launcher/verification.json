@@ -1,0 +1,28 @@
+{
+  "evidence_sha256": {
+    "README.md": "1f4502a35c64f4f0575009fe6ce647b7630152c4d6b8bad83da2ca0d2593d893",
+    "full-suite.txt": "a51fd7861a3006c03e89ef95e07291b862b70d6560833328bcd5fbe829f94491",
+    "green.txt": "00fb0480d3fe1bbd3fbd105550a65b9bb3a4be908a201f40de90675d12283c08",
+    "initial-green-rounding.txt": "3f5700a1965f2a2479abdb0973b5b3df26c447ab0396088039806371989b3685",
+    "module-help.txt": "66e31fcb07cee0fe27e3a8453ea033c6e0eeb65d3f531fb72622453a8370b305",
+    "red.txt": "f54c5f133ae5b6c902567f0da5ad4b4ca2a840bebb82b35ad86011b42cdfdad4",
+    "review.txt": "c9946200f87df7ed416b91e04bda484d5a724466a28902df0e00fd6972610f6a"
+  },
+  "existing_production_files_edited_by_this_task": [],
+  "focused_green": "70 passed, 3 subtests passed",
+  "full_suite": "2030 passed, 8 skipped, 460 subtests passed",
+  "full_suite_command": ".venv/bin/python -m pytest -q",
+  "full_suite_exit_code": 0,
+  "hardware_activity": false,
+  "review": "No Important/Critical findings; independent 12 focused tests passed",
+  "smoke": [
+    "sh -n scripts/policy-console",
+    "python -m cartpole_sdk.rig.policy_console --help"
+  ],
+  "source_sha256": {
+    "scripts/policy-console": "cc098acc2ef9466d5ad87cfc247ba509d11714eb85e4475d57b6c032d840af0f",
+    "src/cartpole_sdk/rig/policy_console.py": "26d4d7b3b7b862b02037870d8088cf2700ebe23ca15ff5493b2bc5ff45e547c6",
+    "tests/test_policy_console_runtime.py": "f4e2ff61993cd02184a3f7c654cc3c8aca2f95eaf31543976d1227b2347784de"
+  },
+  "test_first_red": "12 expected failures for missing module/script"
+}

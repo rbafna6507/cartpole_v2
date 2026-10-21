@@ -1,0 +1,53 @@
+usage: policy_console.py [-h] --port PORT [--rate {0,100,250,500,1000}]
+                         [--log-dir LOG_DIR]
+                         [--vision-telemetry-port VISION_TELEMETRY_PORT]
+                         [--no-vision-telemetry]
+                         [--hanging-model HANGING_MODEL]
+                         [--calibration-identity CALIBRATION_IDENTITY]
+                         [--ideal-half-turn]
+                         [--command {auto,bal,manual,velocity,stop,center,home,rehome,upright,hanging,status,info,clear,params,get,set,save,load,policy-zero,policy-run,python-auto,python-bal}]
+                         [--actor ACTOR] [--development-only]
+                         [--duration DURATION] [--switches {on,off}]
+                         [--center-confirmed] [--param PARAM] [--value VALUE]
+                         [--profile PROFILE]
+                         [--startup-profile STARTUP_PROFILE | --keep-board-params]
+                         [--velocity VELOCITY] [--ttl-ms TTL_MS]
+                         [--source {magnetic-step}]
+
+Operator console for board reference modes and explicit external policies.
+
+options:
+  -h, --help            show this help message and exit
+  --port PORT
+  --rate {0,100,250,500,1000}
+  --log-dir LOG_DIR
+  --vision-telemetry-port VISION_TELEMETRY_PORT
+                        read-only loopback encoder mirror port (default 3096;
+                        0 disables)
+  --no-vision-telemetry
+                        disable loopback encoder mirror
+  --hanging-model HANGING_MODEL
+                        approved hanging calibration model JSON
+  --calibration-identity CALIBRATION_IDENTITY
+                        separate current installation identity JSON
+  --ideal-half-turn     explicitly assume hanging is exactly opposite upright
+  --command {auto,bal,manual,velocity,stop,center,home,rehome,upright,hanging,status,info,clear,params,get,set,save,load,policy-zero,policy-run,python-auto,python-bal}
+  --actor ACTOR         validated numeric actor JSON for --command policy-run
+  --development-only    acknowledge unqualified learned policy execution
+  --duration DURATION   motion duration (default 10s; learned policy 5s), HOME
+                        timeout (75s), or REHOME timeout (15.25s)
+  --switches {on,off}   explicit stopped physical switch profile selection
+  --center-confirmed    operator asserts cart is physically centered now
+  --param PARAM         parameter name for get or set
+  --value VALUE         parameter value for set
+  --profile PROFILE     profile path for save or load
+  --startup-profile STARTUP_PROFILE
+                        apply this profile instead of the preserved tuned
+                        default
+  --keep-board-params   keep live board parameters; disable automatic startup
+                        profile
+  --velocity VELOCITY
+  --ttl-ms TTL_MS
+  --source {magnetic-step}
+                        explicit source/frame selection for external Python
+                        policies

@@ -37,6 +37,10 @@ id = [
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
+inference = [
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
 plots = [
     { name = "matplotlib" },
 ]
@@ -75,6 +79,7 @@ requires-dist = [
     { name = "mujoco", marker = "extra == 'rl'", specifier = ">=3.15,<4" },
     { name = "mujoco", marker = "extra == 'sim'", specifier = ">=3.15,<4" },
     { name = "numpy", marker = "extra == 'id'", specifier = ">=1.26,<3" },
+    { name = "numpy", marker = "extra == 'inference'", specifier = ">=1.26,<3" },
     { name = "numpy", marker = "extra == 'rl'", specifier = ">=1.26,<3" },
     { name = "numpy", marker = "extra == 'sim'", specifier = ">=1.26,<3" },
     { name = "numpy", marker = "extra == 'vision'", specifier = ">=1.26,<3" },
@@ -83,7 +88,7 @@ requires-dist = [
     { name = "stable-baselines3", marker = "extra == 'rl'", specifier = ">=2.7,<3" },
     { name = "torch", marker = "extra == 'rl'", specifier = ">=2.8,<3" },
 ]
-provides-extras = ["vision", "hardware", "id", "sim", "rl", "plots"]
+provides-extras = ["vision", "hardware", "id", "inference", "sim", "rl", "plots"]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=8,<10" }]

@@ -6,4 +6,4 @@ for argument in "$@"; do
         exec uv run --project "$repo_dir" python -m cartpole_sdk.learning.balance_hardware "$@"
     fi
 done
-exec uv run --project "$repo_dir" --extra hardware python -m cartpole_sdk.learning.balance_hardware "$@"
+exec uv run --project "$repo_dir" --extra hardware --extra inference python -m cartpole_sdk.learning.balance_hardware "$@"

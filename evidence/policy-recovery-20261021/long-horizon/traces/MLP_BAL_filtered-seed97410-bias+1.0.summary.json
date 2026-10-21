@@ -1,0 +1,132 @@
+{
+  "arm": "MLP_BAL_filtered",
+  "bias_degrees": 1.0,
+  "fault": null,
+  "horizons": [
+    {
+      "balanced_fraction": 0.8632,
+      "command_delta_p95_m_s2": 0.09775206971957118,
+      "command_total_variation_per_s": 3.8870436015405523,
+      "elapsed_s": 25.0,
+      "fault": null,
+      "final_balance_dwell_s": 0.0,
+      "final_x_m": -0.1257772111357973,
+      "first_angle_over5deg_s": null,
+      "first_hold_exit_s": 1.48,
+      "first_rail_braking_s": null,
+      "full_horizon_complete": true,
+      "hold_success": false,
+      "horizon_s": 25.0,
+      "max_abs_command_m_s2": 0.9242351638285646,
+      "max_abs_omega_rad_s": 0.2486121824856476,
+      "max_abs_theta_deg": 2.9965126979411307,
+      "max_abs_x_m": 0.12770027859692462,
+      "max_balance_dwell_s": 1.69,
+      "max_x_m": 0.017609296782007212,
+      "min_x_m": -0.12770027859692462,
+      "rail_braking_steps": 0,
+      "steps": 2500,
+      "tail_command_rms_m_s2": 0.48890368663827777,
+      "tail_command_spectrum": {
+        "dominant_bin_power_fraction": 0.47530122475763364,
+        "dominant_hz": 0.6000000000000001
+      },
+      "tail_theta_rms_deg": 2.248711076737655,
+      "tail_theta_spectrum": {
+        "dominant_bin_power_fraction": 0.5071803362247591,
+        "dominant_hz": 0.6000000000000001
+      },
+      "tail_theta_std_deg": 2.2478860552348183,
+      "tail_x_mean_m": -0.05982605968815709,
+      "tail_x_rms_m": 0.07528686055826432,
+      "tail_x_std_m": 0.045705075811211596,
+      "total_balanced_s": 21.58
+    },
+    {
+      "balanced_fraction": 0.86,
+      "command_delta_p95_m_s2": 0.09644151980823613,
+      "command_total_variation_per_s": 3.9438463393736924,
+      "elapsed_s": 60.0,
+      "fault": null,
+      "final_balance_dwell_s": 1.62,
+      "final_x_m": -0.11511392519226527,
+      "first_angle_over5deg_s": null,
+      "first_hold_exit_s": 1.48,
+      "first_rail_braking_s": null,
+      "full_horizon_complete": true,
+      "hold_success": false,
+      "horizon_s": 60.0,
+      "max_abs_command_m_s2": 0.9459567388112586,
+      "max_abs_omega_rad_s": 0.25257419926320573,
+      "max_abs_theta_deg": 3.0088868535418616,
+      "max_abs_x_m": 0.12827023706672855,
+      "max_balance_dwell_s": 1.69,
+      "max_x_m": 0.017609296782007212,
+      "min_x_m": -0.12827023706672855,
+      "rail_braking_steps": 0,
+      "steps": 6000,
+      "tail_command_rms_m_s2": 0.48625796815142597,
+      "tail_command_spectrum": {
+        "dominant_bin_power_fraction": 0.4885064647297395,
+        "dominant_hz": 0.6000000000000001
+      },
+      "tail_theta_rms_deg": 2.2575706269324702,
+      "tail_theta_spectrum": {
+        "dominant_bin_power_fraction": 0.5149741824460682,
+        "dominant_hz": 0.6000000000000001
+      },
+      "tail_theta_std_deg": 2.2548438942539395,
+      "tail_x_mean_m": -0.056943553052047756,
+      "tail_x_rms_m": 0.07255748529065219,
+      "tail_x_std_m": 0.0449668815631219,
+      "total_balanced_s": 51.6
+    }
+  ],
+  "initial_encoded_observation": {
+    "age_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "state": [
+      0.0016499999999999998,
+      -0.004112909673071645,
+      0.02300768146883937,
+      0.9997352882605617,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "valid": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "literal_initial_state": [
+    0.001643729477084509,
+    -0.004112909673071645,
+    0.005924022435657101,
+    -0.0017368149161698999
+  ],
+  "reset_truth": {
+    "omega": -0.000520382690875528,
+    "theta": 0.005921271800706346,
+    "time_ns": 3000000,
+    "v": -0.004112909673071645,
+    "x": 0.0016313907480652943
+  },
+  "reset_warmup_ns": 3000000,
+  "seed": 97410,
+  "steps": 6000,
+  "trace_path": "traces/MLP_BAL_filtered-seed97410-bias+1.0.jsonl",
+  "trace_sha256": "b7f813b16634df9078cd5b4993d94164cf1f4c0c36669324f6f2a4781cac87ab"
+}

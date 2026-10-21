@@ -1,0 +1,91 @@
+{
+  "actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "actor_file_sha256": "9e498faf5783e278b44cad6d75e720d38a9ef0800b99d0676256c6445373a850",
+  "candidate_path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-recovery-20261021/actor.json",
+  "checkpoint_path": "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/teacher-transfer/bal-filtered-supervised-seed47.zip",
+  "checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "deployable": false,
+  "emission_max_raw_difference_m_s2": 3.703921400699528e-06,
+  "emission_parity_report_sha256": "90c7bddde33e2a966b55a0b604c4548f741dbb09c8c3ba3f2546780f63351da9",
+  "environment_training_steps": 0,
+  "evidence_report_sha256": "9884230e4e9e34f8633400a3aeb3697e859f636dd82f265d5b50932d34893e79",
+  "exported": true,
+  "fit_report_sha256": "f88e341a8d0975b8b404885d9933b4dc8ab4e7d756b1080a9f1775ce3625b482",
+  "hardware_accepted": false,
+  "label": "Supervised approximation of actual filtered BAL feedback; zero PPO updates; hardware diagnostic research candidate, no qualification.",
+  "limitations": [
+    "BAL feedback transfer does not reproduce native1kHz timing; first test uses existing100Hz runtime contract.",
+    "No physical fit changes. Existing passive friction model predicts local instability for actual BAL feedback; simulation mismatch is retained.",
+    "Development poses are previously inspected; no fresh held-out qualification or PPO improvement claim.",
+    "Raw safety guard and filtered hardware wrapper integration belong to parent; no dirty console/runtime files edited here."
+  ],
+  "linearization_sha256": "46e169c8563626c11a856cdd0009289b57154cfcf6f3bd324a54b1f09096e3d0",
+  "model_weights_sha256": "2e3e6e1ab1e00f083201b5355f6cd68addd68034cddad8303a249f4cdb3b8e27",
+  "numerical_imitation_gate_pass": true,
+  "numpy_parity": {
+    "max_abs_raw_difference_m_s2": 1.4210854715202004e-14,
+    "observations": 2000,
+    "passed": true
+  },
+  "observation_contract": {
+    "angle_frame_id": "encoder-zero",
+    "angle_source": "filtered",
+    "schema": "cartpole-policy-observation-contract-v1",
+    "vision_max_age_ns": 150000000
+  },
+  "ppo_updates": 0,
+  "protocol_sha256": "ca54f404e547893b67b6c630129b9d99552991ca1954769a723176980f7b2ae2",
+  "research_candidate_only": true,
+  "simulation_failures_retained": true,
+  "simulation_only": true,
+  "simulation_report_sha256": "61a33320a44d2f48aae5ba46e67c49af51a03ce65b68664a2850362e6c219ae1",
+  "simulation_summary": [
+    {
+      "arm": "analytic_BAL_filtered",
+      "bias_degrees": 0.0,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    },
+    {
+      "arm": "MLP_BAL_filtered",
+      "bias_degrees": 0.0,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    },
+    {
+      "arm": "analytic_BAL_filtered",
+      "bias_degrees": -0.25,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    },
+    {
+      "arm": "MLP_BAL_filtered",
+      "bias_degrees": -0.25,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    },
+    {
+      "arm": "analytic_BAL_filtered",
+      "bias_degrees": 0.25,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    },
+    {
+      "arm": "MLP_BAL_filtered",
+      "bias_degrees": 0.25,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2
+    }
+  ],
+  "simulator_task_qualified": false,
+  "source_identity_unchanged": true,
+  "source_zip_sha256": "5a723305059b4ef0eccc3202a5958c1d97f71b1cd74a5137501fb6c79bb6c828",
+  "status": "DEVELOPMENT_ONLY",
+  "teacher_law_audit_sha256": "eed36d9489c562f24023c3c9a72673992527aa04b09bcb322914764269660395"
+}

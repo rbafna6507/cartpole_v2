@@ -1,0 +1,68 @@
+{
+  "candidate_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "candidate_is_unchanged": true,
+  "created_date": "2026-10-21",
+  "deployed": false,
+  "hardware_accepted": false,
+  "hardware_executed": false,
+  "hashes_sha256": {
+    "evidence/policy-recovery-20261021/startup-settling/settling_balance.py": "873ec26a421b22387f9a1de26b27b67d05b87f7f0b0e46c52362e66fbf532b53",
+    "evidence/policy-recovery-20261021/startup-settling/test_settling_balance.py": "8131184df070e42267bb3b57dda88aa292aede8bb395fa7fc2b3d8264ae134b3",
+    "src/cartpole_sdk/learning/balance_hardware.py": "ddb8ce775e40653ff6fc0994f68be91dd15b8595d9ffb17876cb0193441851f7",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "src/cartpole_sdk/rig/neural_runner.py": "db3a34a82a66c271b6a312b94543c234c77bda63d0051cbd41487000d02ce1fe",
+    "src/cartpole_sdk/rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+    "training/candidates/balance-recovery-20261021/actor.json": "9e498faf5783e278b44cad6d75e720d38a9ef0800b99d0676256c6445373a850"
+  },
+  "hypothesis_status": "Unconfirmed. Fake-Rig tests verify command and guard semantics; they do not show that startup settling fixes native or learned hardware failures.",
+  "limitations": [
+    "No hardware or deployment occurred; no hardware qualification or stability claim.",
+    "Zero phase is measured in board time from the first post-ARM callback, not from the host ARM call. The unchanged host duration still bounds the whole run.",
+    "A run whose total duration expires before board-time handoff reports its phase/counts; the wrapper does not extend the duration.",
+    "The historical successful native baseline reportedly used bandwidth 8 while current bandwidth is 10; root is investigating this independently. This harness does not change either value.",
+    "The candidate is a supervised approximation of actual filtered BAL feedback, not a PPO improvement.",
+    "Only focused and adjacent tests were run for this task. Parent reports the full production suite separately."
+  ],
+  "production_source_modified_by_this_task": false,
+  "purpose": "Local-only harness for a future matched comparison of immediate feedback and explicit 200ms zero-command settling using the same frozen filtered learned actor.",
+  "schema": "startup-settling-research-v1",
+  "semantics": {
+    "command_lease_ms": 20,
+    "default_behavior": "Exact delegation to existing run_balance_policy with unchanged arguments.",
+    "default_settle_ms": 0,
+    "during_zero": "Require fresh healthy homed switch-profile telemetry, fresh selected and raw channels, <=10ms raw/selected skew, unchanged saved upright reference, START_LIMITS cart position/speed/brake, raw angle <=10 degrees and angular rate <=3 rad/s. Enforce normal 100Hz cadence.",
+    "finally": "STOP in finally, including refusal and exception paths.",
+    "handoff": "At first observation at or after 200ms, require the standard full start guard immediately. No extending or retrying the handoff. Reset only actor cadence history, then invoke unchanged actor and guards.",
+    "no_writes": "No calibration, parameter, reference, home, physical model or actor weight writes.",
+    "other_allowed_settle_ms": 200,
+    "phase_time_origin": "First post-ARM policy observation board timestamp; the normal full start guard runs before ARM. In stopped shadow, the first shadow observation is the origin.",
+    "recording": "Boundary, zero-phase start, transfer or refusal, all phase commands, and ordinary SDK action requests/transitions.",
+    "total_duration": "Includes settling; >=0.25 seconds for the 200ms intervention, with existing duration/profile bounds and stop reserve unchanged. No extension."
+  },
+  "status": "DEVELOPMENT_ONLY",
+  "verification": {
+    "adjacent_test_cases": 99,
+    "cli_help": "Executed --help successfully without connecting to hardware.",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q evidence/policy-recovery-20261021/startup-settling/test_settling_balance.py tests/test_balance_hardware.py tests/test_neural_runner.py --disable-warnings --maxfail=1",
+    "coverage": [
+      "20 zero requests and no early armed actor inference",
+      "exact 20ms leases",
+      "standard start guard before ARM and at handoff",
+      "immediate default matches production runner",
+      "bounded enable transient accepted only during zero phase",
+      "raw/selected freshness, missing values, timestamp skew and unhealthy/fault telemetry fail closed",
+      "position, speed, brake, angle, rate, cadence and reference refusal",
+      "same acceleration guard after transfer",
+      "no session reset at transfer",
+      "duration bounds and no waiting extension",
+      "all phase commands recorded",
+      "actor file unchanged",
+      "STOP finally"
+    ],
+    "cwd": "/Users/rbafna/projects/cartpole_v2",
+    "exit_code": 0,
+    "new_test_cases": 34,
+    "red_phase": "First test failed at the deliberate NotImplementedError placeholder before implementation; 1 failed in 0.17s.",
+    "result": "133 passed in 3.66s"
+  }
+}

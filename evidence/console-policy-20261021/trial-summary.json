@@ -1,0 +1,178 @@
+{
+  "semantics": "success means requested operation completed, not balance; zero-output tests measure scheduling only; receipt to request record includes host computation and logging timestamps, not verified wire latency",
+  "trials": [
+    {
+      "trial": "actor-zero-affinity-01",
+      "success": true,
+      "error": null,
+      "actions": 999,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/actor-zero-affinity-01/rig-1792596874833898986-3686962684.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.07452,
+        "p99": 5.095852459999996,
+        "max": 6.396342
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.995383408610073
+    },
+    {
+      "trial": "actor-zero-affinity5-01",
+      "success": true,
+      "error": null,
+      "actions": 999,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/actor-zero-affinity5-01/rig-1792596946336179251-3581740240.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.191931,
+        "p99": 5.4404242,
+        "max": 6.292021
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.995367572563742
+    },
+    {
+      "trial": "actor-zero-affinity5-30s-01",
+      "success": true,
+      "error": null,
+      "actions": 2999,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/actor-zero-affinity5-30s-01/rig-1792597007049402193-172700707.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.267934,
+        "p99": 5.35874484,
+        "max": 8.810821
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.9953961906981026
+    },
+    {
+      "trial": "actor-zero-gil1-01",
+      "success": false,
+      "error": "latched rig error: executor fault 1",
+      "actions": 22,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/actor-zero-gil1-01/rig-1792596739205037577-3199535862.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.6726895,
+        "p99": 9.130054709999998,
+        "max": 9.761262
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.995516432616267
+    },
+    {
+      "trial": "actor-zero-gil5-01",
+      "success": false,
+      "error": "latched rig error: executor fault 1",
+      "actions": 278,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/actor-zero-gil5-01/rig-1792596707536868474-2944980772.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.670865,
+        "p99": 8.422775790000001,
+        "max": 11.673551
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.995324327067415
+    },
+    {
+      "trial": "learned-01",
+      "success": false,
+      "error": "latched rig error: executor fault 1",
+      "actions": 10,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/learned-01/rig-1792596459376904020-1790567371.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 2.8521425,
+        "p99": 11.897907120000001,
+        "max": 12.581037
+      },
+      "observed_position_max_m": 0.005625,
+      "observed_angle_rms_rad": 0.06604138402970941
+    },
+    {
+      "trial": "shadow-01",
+      "success": true,
+      "error": null,
+      "actions": 0,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/shadow-01/rig-1792596410263041250-3597026553.jsonl"
+    },
+    {
+      "trial": "zero-gil5-01",
+      "success": false,
+      "error": "",
+      "actions": 0,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/zero-gil5-01/rig-1792596610552490738-980368633.jsonl"
+    },
+    {
+      "trial": "zero-gil5-02",
+      "success": true,
+      "error": null,
+      "actions": 499,
+      "source": "id-20261021-policy-console/runs/console-policy-20261021/zero-gil5-02/rig-1792596636829400882-1700666326.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 1.881441,
+        "p99": 6.037285939999992,
+        "max": 9.318145
+      },
+      "observed_position_max_m": 0.007575,
+      "observed_angle_rms_rad": 2.995344809034492
+    },
+    {
+      "trial": "learned-affinity-01",
+      "success": false,
+      "error": "balance-only requires a centered, nearly stationary upright start (|x|<=.015 m, |commanded v|<=.025 m/s, |angle|<=.07 rad, |rate|<=.15 rad/s, no rail braking)",
+      "actions": 0,
+      "source": "runs/console-policy-20261021/learned-affinity-01/rig-1792597143261256370-3061471609.jsonl"
+    },
+    {
+      "trial": "learned-affinity-02",
+      "success": true,
+      "error": null,
+      "actions": 299,
+      "source": "runs/console-policy-20261021/learned-affinity-02/rig-1792597205936393154-318521962.jsonl",
+      "receipt_to_request_record_ms": {
+        "p50": 3.336032,
+        "p99": 5.344998019999999,
+        "max": 5.795055
+      },
+      "observed_position_max_m": 0.2940375,
+      "observed_angle_rms_rad": 1.8917928001350393
+    },
+    {
+      "trial": "native-baseline-01",
+      "success": true,
+      "error": null,
+      "actions": 0,
+      "source": "runs/console-policy-20261021/native-baseline-01/rig-1792597367160385837-4180688972.jsonl",
+      "native_balance_mode_seconds": 3.52,
+      "longest_balance_mode_seconds": 2.528,
+      "native_auto_seconds": 10.0,
+      "native_max_abs_x_m": 0.2935875
+    },
+    {
+      "trial": "native-baseline-bw6-01",
+      "success": true,
+      "error": null,
+      "actions": 0,
+      "source": "runs/console-policy-20261021/native-baseline-bw6-01/rig-1792597574539824647-2687131290.jsonl",
+      "native_balance_mode_seconds": 1.748,
+      "longest_balance_mode_seconds": 1.6320000000000001,
+      "native_auto_seconds": 10.0,
+      "native_max_abs_x_m": 0.2929125
+    },
+    {
+      "trial": "native-baseline-bw8-25s-01",
+      "success": true,
+      "error": null,
+      "actions": 0,
+      "source": "runs/console-policy-20261021/native-baseline-bw8-25s-01/rig-1792598133215934445-3309950163.jsonl",
+      "native_balance_mode_seconds": 2.912,
+      "longest_balance_mode_seconds": 2.024,
+      "native_auto_seconds": 25.0,
+      "native_max_abs_x_m": 0.293775
+    },
+    {
+      "trial": "upright-02",
+      "success": null,
+      "error": null,
+      "actions": 0,
+      "source": "runs/console-policy-20261021/upright-02/rig-1792597182943227105-3726828425.jsonl"
+    }
+  ]
+}

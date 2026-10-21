@@ -1,0 +1,140 @@
+{
+  "config": {
+    "cart_damping": 0.05,
+    "cart_mass_kg": 0.35,
+    "control_steps": 1,
+    "effective_length_m": 0.16030387335574306,
+    "hinge_coulomb_friction_nm": 0.0007133292581428023,
+    "hinge_damping": 3.0218604984532184e-06,
+    "hinge_friction_velocity_scale_rad_s": 0.05,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 50000000,
+    "max_force_n": 20.0,
+    "max_steps": 200,
+    "physics_dt_ns": 1000000,
+    "pole_mass_kg": 0.02275,
+    "rail_half_m": 0.309074998
+  },
+  "initial_semantics": "Prearm encoder median, final step/commanded velocity, prearm MCU omega median; no fitted initial state.",
+  "initial_state": [
+    0.0,
+    0.0,
+    -0.001533981,
+    0.0003445149
+  ],
+  "limits": [
+    "Open-loop acceleration-servo prediction driven by recorded governor acceleration, not a validated physical replay.",
+    "Acceleration between recorded frames is unknown; both interpolation assumptions are shown without tuning.",
+    "No startup motor-enable impulse, structural compliance, magnetic disturbance, physical cart tracking error, or camera exposure latency is modeled.",
+    "No policy was rerun and no governor was applied a second time."
+  ],
+  "milestones": {
+    "left_hold": [
+      {
+        "a": -0.1216613,
+        "force_saturated": false,
+        "t_s": 0.004,
+        "theta_deg": -0.08744899306646461,
+        "x": -1.2166129999999999e-06
+      },
+      {
+        "a": -1.199125,
+        "force_saturated": false,
+        "t_s": 0.01,
+        "theta_deg": -0.0817797831941894,
+        "x": -1.85181164e-05
+      },
+      {
+        "a": -1.799125,
+        "force_saturated": false,
+        "t_s": 0.02,
+        "theta_deg": -0.03740497623139776,
+        "x": -0.0001588839594
+      },
+      {
+        "a": -3.899127,
+        "force_saturated": false,
+        "t_s": 0.04,
+        "theta_deg": 0.24993928945798402,
+        "x": -0.0010711532334
+      },
+      {
+        "a": -5.999128,
+        "force_saturated": false,
+        "t_s": 0.06,
+        "theta_deg": 1.1150648466627757,
+        "x": -0.0036840732373999998
+      },
+      {
+        "a": 0.0008744001,
+        "force_saturated": false,
+        "t_s": 0.1,
+        "theta_deg": 4.72907575455485,
+        "x": -0.014146865490999
+      },
+      {
+        "a": 13.20086,
+        "force_saturated": false,
+        "t_s": 0.2,
+        "theta_deg": 7.565664749781373,
+        "x": -0.016706326187359004
+      }
+    ],
+    "linear_interpolation": [
+      {
+        "a": -0.47975937500000004,
+        "force_saturated": false,
+        "t_s": 0.004,
+        "theta_deg": -0.08702921396992579,
+        "x": -2.4102732499999998e-06
+      },
+      {
+        "a": -1.3491250000000001,
+        "force_saturated": false,
+        "t_s": 0.01,
+        "theta_deg": -0.07882057651911686,
+        "x": -2.7458951350000002e-05
+      },
+      {
+        "a": -1.574125,
+        "force_saturated": false,
+        "t_s": 0.02,
+        "theta_deg": -0.026983702209086056,
+        "x": -0.00019178674985000001
+      },
+      {
+        "a": -4.349126999999999,
+        "force_saturated": false,
+        "t_s": 0.04,
+        "theta_deg": 0.288397672760846,
+        "x": -0.00118887996385
+      },
+      {
+        "a": -5.549127249999999,
+        "force_saturated": false,
+        "t_s": 0.06,
+        "theta_deg": 1.2109132383962569,
+        "x": -0.0039659739568500005
+      },
+      {
+        "a": 0.45087440002500007,
+        "force_saturated": false,
+        "t_s": 0.1,
+        "theta_deg": 4.880122170687172,
+        "x": -0.014568414096148402
+      },
+      {
+        "a": 12.7508675,
+        "force_saturated": false,
+        "t_s": 0.2,
+        "theta_deg": 7.3584619717139566,
+        "x": -0.0159238948241084
+      }
+    ]
+  },
+  "model_content_sha256": "37a9b9f00245ffb4784e11b4355206b0e49db784740f0e660c517cefe188484f",
+  "model_sha256": "240541df813b52bb16f9db3b0904e9cf0a3fd17a594eaf45abe7e33283d1ada0",
+  "schema": "cartpole-initial-command-replay-v1",
+  "script_sha256": "dbd9f32889c9c39f5ca451c7dded00ba13ebec846c82f8b9043d83326fe35cc6",
+  "source_csv_sha256": "7483f5efaa27dbf82090122a56086764515024b7643d20565059bcf8d3724c16"
+}

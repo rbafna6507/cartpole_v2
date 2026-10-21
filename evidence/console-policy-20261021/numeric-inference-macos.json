@@ -1,0 +1,174 @@
+{
+  "schema": "cartpole-numeric-inference-benchmark-v1",
+  "measured_at_utc": "2026-10-21T15:20:43.175573+00:00",
+  "scope": "offline warmed host observations; no hardware, scheduling or lease guarantee",
+  "actor": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261020/actor.json",
+  "actor_file_sha256": "b6d1179873eadbfebe0798e7cc39c17f05cc1bf7d9983733550e26e5681e6f08",
+  "backend": {
+    "backend": "numpy-einsum",
+    "dtype": "float64",
+    "contraction": "einsum-optimize-false",
+    "numpy_version": "2.4.6",
+    "actor_content_sha256": "ada6784ce953ecb90ae598f1c884b6f6a435e91c7c0b9b1396e140e24996f223",
+    "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a"
+  },
+  "benchmark_source_sha256": "fe0de22dd3dbe8713b7c198c20df9a612c9e97feaf70eeee56bf84abde7dd96e",
+  "scalar_source_sha256": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+  "environment": {
+    "platform": "macOS-26.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.7 (main, Feb  7 2025, 13:36:14) [Clang 15.0.0 (clang-1500.3.9.4)]",
+    "numpy": "2.4.6",
+    "numpy_config": {
+      "Compilers": {
+        "c": {
+          "name": "clang",
+          "linker": "ld64",
+          "version": "15.0.0",
+          "commands": "cc"
+        },
+        "cython": {
+          "name": "cython",
+          "linker": "cython",
+          "version": "3.2.4",
+          "commands": "cython"
+        },
+        "c++": {
+          "name": "clang",
+          "linker": "ld64",
+          "version": "15.0.0",
+          "commands": "c++"
+        }
+      },
+      "Machine Information": {
+        "host": {
+          "cpu": "aarch64",
+          "family": "aarch64",
+          "endian": "little",
+          "system": "darwin"
+        },
+        "build": {
+          "cpu": "aarch64",
+          "family": "aarch64",
+          "endian": "little",
+          "system": "darwin"
+        }
+      },
+      "Build Dependencies": {
+        "blas": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        },
+        "lapack": {
+          "name": "accelerate",
+          "found": true,
+          "version": "unknown",
+          "detection method": "system",
+          "include directory": "unknown",
+          "lib directory": "unknown",
+          "openblas configuration": "unknown",
+          "pc file directory": "unknown"
+        }
+      },
+      "Python Information": {
+        "path": "/private/var/folders/k4/_09nqs851t35bpkk8lr_p43c0000gn/T/build-env-rubp05cr/bin/python",
+        "version": "3.11"
+      },
+      "SIMD Extensions": {
+        "baseline": [
+          "NEON",
+          "NEON_FP16",
+          "NEON_VFPV4",
+          "ASIMD"
+        ],
+        "found": [
+          "ASIMDHP",
+          "ASIMDDP"
+        ],
+        "not found": [
+          "ASIMDFHM"
+        ]
+      }
+    },
+    "original_thread_environment": {
+      "OPENBLAS_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "VECLIB_MAXIMUM_THREADS": null,
+      "BLIS_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null
+    },
+    "benchmark_thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "gc_enabled": true
+  },
+  "parameters": {
+    "samples_per_engine": 10000,
+    "warmup_per_engine": 500,
+    "random_cases": 2000,
+    "seed": 20261021,
+    "timed_inputs": "real actions"
+  },
+  "parity": {
+    "synthetic_cases": 2171,
+    "real_action_cases": 103,
+    "max_abs_error_m_s2": 1.4210854715202004e-14,
+    "alternative_max_abs_error_m_s2": {
+      "numpy-einsum": 1.4210854715202004e-14,
+      "numpy-matmul-comparison": 1.7763568394002505e-14
+    },
+    "max_recorded_scalar_error_m_s2": 4.440892098500626e-15,
+    "absolute_tolerance_m_s2": 5.0000000000000005e-12,
+    "relative_tolerance": 2e-13,
+    "sources": [
+      {
+        "path": "/tmp/cartpole-full-range-operator-20261021/runs/my-balance-full-range-01/rig-1792594816617189466-2070916419.jsonl",
+        "sha256": "ee9b82d062f432df49dacece6d0d00eb24c8300152f403f40ee8ab0c3309a4bc"
+      }
+    ]
+  },
+  "timings_us": {
+    "scalar": {
+      "count": 10000,
+      "min": 227.958,
+      "mean": 237.9120287,
+      "p50": 235.125,
+      "p95": 252.0,
+      "p99": 293.3484200000004,
+      "p999": 445.2555000000011,
+      "max": 540.459
+    },
+    "numpy-einsum": {
+      "count": 10000,
+      "min": 15.583,
+      "mean": 17.5403045,
+      "p50": 16.958,
+      "p95": 20.208,
+      "p99": 31.12583000000002,
+      "p999": 76.91704200000021,
+      "max": 122.291
+    },
+    "numpy-matmul-comparison": {
+      "count": 10000,
+      "min": 12.583,
+      "mean": 14.0185431,
+      "p50": 13.583,
+      "p95": 15.96104999999997,
+      "p99": 22.335240000000027,
+      "p999": 64.42216600000106,
+      "max": 116.416
+    }
+  }
+}

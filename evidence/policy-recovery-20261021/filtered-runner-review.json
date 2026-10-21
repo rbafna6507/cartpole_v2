@@ -1,0 +1,10 @@
+{
+  "change": "Accept explicit filtered encoder actor with independent raw admission and commissioning checks",
+  "initial_missing_support_tests": "8 failed, 1 passed",
+  "review_discovered_issue": "pairwise skew allowed a 20 ms raw/cart span",
+  "regression": "combined timestamp-skew reproduced acceptance before fix",
+  "fix": "one 10 ms span across raw and all six selected state channels",
+  "affected_tests": "188 passed",
+  "review": "No remaining blocker after combined-skew fix; raw path and rig-profile thresholds preserved",
+  "hardware_changes": "No firmware change, reset, lease change or parameter write"
+}
