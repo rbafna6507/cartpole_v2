@@ -1,0 +1,250 @@
+{
+  "status": "PASSED_OFFLINE_ONLY",
+  "cloud_allocated": false,
+  "temporary_root": "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x",
+  "bundle_manifest_sha256": "ae87aa807b4b91ac88865165bc57738d44198412048e62fe93473fca5d0c4877",
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "bound_files_verified": 145,
+  "extracted_source_pythonpath": "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/src",
+  "actual_smoke_command": [
+    "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+    "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/evidence/policy-recovery-20261021/combined-next/run.py",
+    "train",
+    "--protocol",
+    "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/evidence/policy-recovery-20261021/combined-next/protocol.json",
+    "--arm",
+    "retained",
+    "--seed",
+    "11",
+    "--smoke",
+    "--output",
+    "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/extracted-smoke-retained"
+  ],
+  "actual_smoke": {
+    "actor_changed_by_training": true,
+    "actual_steps": 128,
+    "arm": "retained",
+    "budget": "pilot",
+    "checkpoint_roundtrip": true,
+    "checkpoints": [
+      {
+        "actor_weights_sha256": "0c5bb4d8ef4e75bc1a1b00051f2f8a052da22e4e63fa444463071cb8be9dc384",
+        "path": "checkpoints/step-000000000.zip",
+        "sha256": "55ee9c1ca6cdff260c69631af2fe16c97e875eaea91c326a58c5a4f26c05d589",
+        "step": 0,
+        "weights_sha256": "d27a672e6ed58491689b19103a48524991203190bf12346ffb894ee254077f21"
+      },
+      {
+        "actor_weights_sha256": "c2868a84191d23182254821bee1f65c42e716e4ba4242cf6f7ab4156e77a9244",
+        "path": "checkpoints/step-000000064.zip",
+        "sha256": "31ada432739122c5eb2eb35d733316fb2f0e7c798fdfa71a917cf31499aa24a7",
+        "step": 64,
+        "weights_sha256": "f9a1f1ba318e318fd1fde3af88277deb0539fd59a20901e31b50a7cf602df3d4"
+      },
+      {
+        "actor_weights_sha256": "64b33475e695b594dba1a608d030569a594283dfd460904e65efa516624f0c03",
+        "path": "checkpoints/step-000000128.zip",
+        "sha256": "caa5bd9f9f096c9876cdf37f2ccc7a203a89f91db7e1fb2028056986691616b0",
+        "step": 128,
+        "weights_sha256": "b49939668f73aefb19546739d18ef82ed2ee68f1c9eb23feb0f21d84bbcab822"
+      }
+    ],
+    "completed": true,
+    "evaluations": [
+      {
+        "path": "eval-000000000/report.json",
+        "sha256": "141f344c4830fe5b9f2bd2e2969a65e4e5a7021637b379fc9d0a62e0c468ca6d",
+        "step": 0,
+        "summary": [
+          {
+            "captures": 0,
+            "episodes": 2,
+            "episodes_with_rail_braking": 0,
+            "faults": 0,
+            "holds": 0,
+            "mean_capture_s": null,
+            "min_final_dwell_s": 0.0,
+            "scenario": "nominal",
+            "start": "hanging",
+            "worst_max_x_m": 0.014084612502970247
+          },
+          {
+            "captures": 0,
+            "episodes": 2,
+            "episodes_with_rail_braking": 0,
+            "faults": 0,
+            "holds": 0,
+            "mean_capture_s": null,
+            "min_final_dwell_s": 0.05,
+            "scenario": "nominal",
+            "start": "upright",
+            "worst_max_x_m": 0.015183718522500634
+          }
+        ]
+      },
+      {
+        "path": "eval-000000128/report.json",
+        "sha256": "2264bda25eb8c0bcbf906e0df2f69d98bda710bd4e222d915966d9699ef03745",
+        "step": 128,
+        "summary": [
+          {
+            "captures": 0,
+            "episodes": 2,
+            "episodes_with_rail_braking": 0,
+            "faults": 0,
+            "holds": 0,
+            "mean_capture_s": null,
+            "min_final_dwell_s": 0.0,
+            "scenario": "nominal",
+            "start": "hanging",
+            "worst_max_x_m": 0.014084612502970247
+          },
+          {
+            "captures": 0,
+            "episodes": 2,
+            "episodes_with_rail_braking": 0,
+            "faults": 0,
+            "holds": 0,
+            "mean_capture_s": null,
+            "min_final_dwell_s": 0.05,
+            "scenario": "nominal",
+            "start": "upright",
+            "worst_max_x_m": 0.015191429732989908
+          }
+        ]
+      }
+    ],
+    "final_emission_parity": {
+      "max_abs_raw_error_m_s2": 9.623904047018073e-07,
+      "passed": true
+    },
+    "foundation_actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+    "foundation_checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+    "hardware_accepted": false,
+    "migration_max_abs_raw_error_m_s2": 3.5871876047366413e-07,
+    "optimizer_resume": false,
+    "optimizer_seed": 11,
+    "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+    "retention": {
+      "anchor_sha256": "1a4f00e09b06c66828c74ee75cd14711d878ef16a9e0117d467311b80a5b6e8c",
+      "batch_size": 256,
+      "learning_rate": 0.0001,
+      "samples": 8192,
+      "seed": 98702,
+      "updates": 4,
+      "weight": 1.0
+    },
+    "retention_diagnostics": {
+      "equilibrium_projection_normalized": -0.00018481630831956863,
+      "mse_before_projection": 1.9333922640640822e-07,
+      "mse_final": 1.6631909094400044e-07,
+      "mse_initial": 1.4882676291350094e-07,
+      "rmse_final": 0.0004078223767082925,
+      "rmse_initial": 0.00038578071869068434,
+      "update_loss_normalized": 9.757625782924606e-07
+    },
+    "smoke": true,
+    "status": "DEVELOPMENT_ONLY",
+    "transfer": "Only exact filtered actor weights copied; critic, optimizer and exploration freshly seeded.",
+    "wall_seconds": 1.8393449999857694
+  },
+  "job_dispatch_rehearsal": "subprocess execution replaced by local report-writing stub; all6 real commands/paths and success handling verified. No Colab/network action.",
+  "dispatched_commands": [
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "ppo",
+      "--seed",
+      "11",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/ppo-seed11"
+    ],
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "retained",
+      "--seed",
+      "11",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/retained-seed11"
+    ],
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "ppo",
+      "--seed",
+      "23",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/ppo-seed23"
+    ],
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "retained",
+      "--seed",
+      "23",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/retained-seed23"
+    ],
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "ppo",
+      "--seed",
+      "47",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/ppo-seed47"
+    ],
+    [
+      "/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/cartpole-filtered-bundle-n93fpl6x/.venv/bin/python",
+      "-u",
+      "evidence/policy-recovery-20261021/combined-next/run.py",
+      "train",
+      "--protocol",
+      "evidence/policy-recovery-20261021/combined-next/protocol.json",
+      "--arm",
+      "retained",
+      "--seed",
+      "47",
+      "--budget",
+      "pilot",
+      "--output",
+      "runs/combined-pilot/retained-seed47"
+    ]
+  ]
+}

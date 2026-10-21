@@ -1,0 +1,157 @@
+{
+  "actor_changed_by_training": true,
+  "actual_steps": 102400,
+  "arm": "ppo",
+  "budget": "pilot",
+  "checkpoint_roundtrip": true,
+  "checkpoints": [
+    {
+      "actor_weights_sha256": "0c5bb4d8ef4e75bc1a1b00051f2f8a052da22e4e63fa444463071cb8be9dc384",
+      "path": "checkpoints/step-000000000.zip",
+      "sha256": "b4453683a24f5cbbdd159558b42c84827d614eddb22abf5e7b2b4c32d58deadc",
+      "step": 0,
+      "weights_sha256": "d27a672e6ed58491689b19103a48524991203190bf12346ffb894ee254077f21"
+    },
+    {
+      "actor_weights_sha256": "64bd1dc158185395da482715084ed7ea39d81dd91cdd8ee0e85961e3295663e9",
+      "path": "checkpoints/step-000025600.zip",
+      "sha256": "2822eb0b478fc8b50324789a4e8b197c52cdba9248f410028321fc486adb1a7b",
+      "step": 25600,
+      "weights_sha256": "9c6f8ca98bfcca62e5a69191814fe82f6b793709f95a4be3d858d46f0f194612"
+    },
+    {
+      "actor_weights_sha256": "465122edb923b6663d526b9c9d3b852708e5b8c8fbca295e36d94f3a71f48253",
+      "path": "checkpoints/step-000051200.zip",
+      "sha256": "68511f825590330820271411ef6576b80a97768214f5a5e271ce4c6e53a81815",
+      "step": 51200,
+      "weights_sha256": "34c1bba58b42f3fed739fb1140714091018f9eb8d8e581821c7179886abdbbeb"
+    },
+    {
+      "actor_weights_sha256": "31c8647229084c882b9b9f366b89d79f1b3f5248f1db259a7aff13d840eaf0de",
+      "path": "checkpoints/step-000076800.zip",
+      "sha256": "2a44ee435dd2e9ff48cfa90b4a54126f9a5ef4223b83a7f1c1f81c0791a29022",
+      "step": 76800,
+      "weights_sha256": "aa7d59e8720ad68dca5d79531196a488c2ec08355b8af6299dc8c4b36172d839"
+    },
+    {
+      "actor_weights_sha256": "c0d7d398d0491cbd5dd4ee001dd5029fb910601322d4cc9fd04d501ed684d507",
+      "path": "checkpoints/step-000102400.zip",
+      "sha256": "77119319619c4427f6329a4ed179bf0a7840257e355befd58649a58fc3e5aa32",
+      "step": 102400,
+      "weights_sha256": "19c40f04ce16347cc30fbcc46b3e704fd4243ce288d274cd9f4bf12a662087bb"
+    }
+  ],
+  "completed": true,
+  "evaluations": [
+    {
+      "path": "eval-000000000/report.json",
+      "sha256": "0111fc2aad9bdb2278300841d7f9a6eca4eaff7f843b4c1366cffebe13ad7b53",
+      "step": 0,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 7.08,
+          "min_final_dwell_s": 16.809999999999828,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.29407809439818816
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.07290574754228553
+        }
+      ]
+    },
+    {
+      "path": "eval-000051200/report.json",
+      "sha256": "b411d26a5b124814570e34d00b1f912fd7e3fd4f37af665e7c7b831735d2212a",
+      "step": 51200,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 5.35,
+          "min_final_dwell_s": 19.840000000000302,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.29407585843480943
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.0881633642448286
+        }
+      ]
+    },
+    {
+      "path": "eval-000102400/report.json",
+      "sha256": "42784243ffbc84354d51080a68972c20c99555daebd7052fe553119e56448807",
+      "step": 102400,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 7.584999999999999,
+          "min_final_dwell_s": 15.439999999999715,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.29407837926818925
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.09725156396611935
+        }
+      ]
+    }
+  ],
+  "final_emission_parity": {
+    "max_abs_raw_error_m_s2": 3.2099491562576077e-06,
+    "passed": true
+  },
+  "foundation_actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "foundation_checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "hardware_accepted": false,
+  "migration_max_abs_raw_error_m_s2": 3.5871876047366413e-07,
+  "optimizer_resume": false,
+  "optimizer_seed": 11,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "retention": null,
+  "retention_diagnostics": null,
+  "smoke": false,
+  "status": "DEVELOPMENT_ONLY",
+  "transfer": "Only exact filtered actor weights copied; critic, optimizer and exploration freshly seeded.",
+  "wall_seconds": 603.2538118748926
+}

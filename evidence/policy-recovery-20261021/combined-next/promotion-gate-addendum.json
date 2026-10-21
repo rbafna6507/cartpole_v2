@@ -1,0 +1,21 @@
+{
+  "status": "PREDECLARED_AFTER_INITIAL_BASELINE_BEFORE_PPO_RESULTS",
+  "supersedes_sha256": "30c3a30d734c560ab6f0ed2ca4dab9265bf73b65e6b5b01e9c993200c95a4357",
+  "reason": "Both matched initial actors already achieve4of4 hanging and4of4 upright nominal development holds; a1of4 hanging threshold is insufficient.",
+  "initial_evidence_sha256": {
+    "ppo": "0111fc2aad9bdb2278300841d7f9a6eca4eaff7f843b4c1366cffebe13ad7b53",
+    "retained": "51c394a75e5358cacb567a0b4da3ec66e63a480d40de8e0146677157e6fc3a93"
+  },
+  "nominal_baseline": {
+    "upright_holds": 4,
+    "hanging_holds": 4,
+    "episodes_per_start": 4,
+    "hanging_mean_capture_s": 7.08,
+    "hanging_min_final_dwell_s": 16.81,
+    "hanging_all_four_episodes_use_rail_braking": true,
+    "hanging_worst_abs_x_m": 0.29407809439818816
+  },
+  "long_budget_rule": "Do not justify long training solely by any swing-up success. Preserve initial upright and hanging hold performance with no new faults, and demonstrate a concrete capture/dwell/centering/braking or matched stress improvement. An earlier checkpoint remains eligible under the frozen protocol; any exception or evidence-based exploratory longer run requires an explicit root rationale.",
+  "rail_dependence": "Current nominal hanging successes rely on the unchanged ideal acceleration/governor model near the rail; no learned hardware swing-up or robustness qualification follows.",
+  "no_automatic_cloud_launch": true
+}

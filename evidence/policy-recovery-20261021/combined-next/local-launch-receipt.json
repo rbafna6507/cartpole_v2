@@ -1,0 +1,59 @@
+{
+  "status": "LAUNCHED_LOCAL",
+  "hardware_accepted": false,
+  "cloud_allocated": false,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "driver_sha256": "1cbd891031691d513beac17b4a02e673b41cd0731db948067fb30fd002a90be3",
+  "per_arm_steps": 102400,
+  "worker_threads_per_arm": 1,
+  "jobs": [
+    {
+      "arm": "ppo",
+      "pid": 28097,
+      "command": [
+        "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py",
+        "train",
+        "--protocol",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/protocol.json",
+        "--arm",
+        "ppo",
+        "--seed",
+        "11",
+        "--budget",
+        "pilot",
+        "--output",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-ppo"
+      ],
+      "cwd": "/Users/rbafna/projects/cartpole_v2",
+      "output": "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-ppo",
+      "log": "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-ppo.log",
+      "started_unix": 1792621319.365264
+    },
+    {
+      "arm": "retained",
+      "pid": 28098,
+      "command": [
+        "/Users/rbafna/projects/cartpole_v2/.venv/bin/python",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py",
+        "train",
+        "--protocol",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/protocol.json",
+        "--arm",
+        "retained",
+        "--seed",
+        "11",
+        "--budget",
+        "pilot",
+        "--output",
+        "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-retained"
+      ],
+      "cwd": "/Users/rbafna/projects/cartpole_v2",
+      "output": "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-retained",
+      "log": "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/pilot-seed11-retained.log",
+      "started_unix": 1792621319.366899
+    }
+  ],
+  "review": "confidence_review final-byte GO; no Important/Critical issues",
+  "promotion_gate_sha256": "30c3a30d734c560ab6f0ed2ca4dab9265bf73b65e6b5b01e9c993200c95a4357"
+}

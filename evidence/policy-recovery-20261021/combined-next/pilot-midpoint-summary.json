@@ -1,0 +1,459 @@
+{
+  "status": "MIDPOINT_COMPLETE_TRAINING_CONTINUES",
+  "step": 51200,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "adapter_sha256": "1cbd891031691d513beac17b4a02e673b41cd0731db948067fb30fd002a90be3",
+  "claims": [
+    "Simulation only, four development seeds and one optimizer seed.",
+    "All hanging cases still rely on rail braking; initial supervised foundation already holds 4/4.",
+    "No reserved confirmation or new hardware trial."
+  ],
+  "comparisons": [
+    {
+      "arm": "ppo",
+      "start": "hanging",
+      "by_step": {
+        "0": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 7.08,
+          "min_final_dwell_s": 16.809999999999828,
+          "max_abs_x_m": 0.29407809439818816,
+          "total_rail_braking_control_steps": 1604,
+          "mean_final_window_x_rms_m": 0.04531955034218135,
+          "mean_raw_action_change_rms_m_s2": 0.5032853657473846,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 5.89,
+              "final_balance_dwell_s": 20.110000000000344,
+              "max_abs_x_m": 0.2940749995141623,
+              "rail_braking_control_steps": 318,
+              "final_window_x_rms_m": 0.04585752768538694,
+              "raw_action_change_rms_m_s2": 0.4751886815139929
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 6.98,
+              "final_balance_dwell_s": 19.020000000000174,
+              "max_abs_x_m": 0.29407494638575193,
+              "rail_braking_control_steps": 412,
+              "final_window_x_rms_m": 0.04563701721852287,
+              "raw_action_change_rms_m_s2": 0.5124306110108607
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 6.26,
+              "final_balance_dwell_s": 19.740000000000286,
+              "max_abs_x_m": 0.2940753656199175,
+              "rail_braking_control_steps": 295,
+              "final_window_x_rms_m": 0.04498679110871194,
+              "raw_action_change_rms_m_s2": 0.46163351587032475
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 9.19,
+              "final_balance_dwell_s": 16.809999999999828,
+              "max_abs_x_m": 0.29407809439818816,
+              "rail_braking_control_steps": 579,
+              "final_window_x_rms_m": 0.04479686535610366,
+              "raw_action_change_rms_m_s2": 0.5638886545943599
+            }
+          ]
+        },
+        "51200": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 5.35,
+          "min_final_dwell_s": 19.840000000000302,
+          "max_abs_x_m": 0.29407585843480943,
+          "total_rail_braking_control_steps": 945,
+          "mean_final_window_x_rms_m": 0.053407102739228274,
+          "mean_raw_action_change_rms_m_s2": 0.447838924862054,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 4.86,
+              "final_balance_dwell_s": 21.140000000000505,
+              "max_abs_x_m": 0.29407486724198995,
+              "rail_braking_control_steps": 206,
+              "final_window_x_rms_m": 0.05342565337014209,
+              "raw_action_change_rms_m_s2": 0.42789303362016273
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 6.16,
+              "final_balance_dwell_s": 19.840000000000302,
+              "max_abs_x_m": 0.29407585843480943,
+              "rail_braking_control_steps": 327,
+              "final_window_x_rms_m": 0.053137913233330655,
+              "raw_action_change_rms_m_s2": 0.4734133820271259
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 5.49,
+              "final_balance_dwell_s": 20.510000000000407,
+              "max_abs_x_m": 0.2940747430574173,
+              "rail_braking_control_steps": 208,
+              "final_window_x_rms_m": 0.05353251477278946,
+              "raw_action_change_rms_m_s2": 0.4446176216688407
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 4.89,
+              "final_balance_dwell_s": 21.1100000000005,
+              "max_abs_x_m": 0.2940748747784555,
+              "rail_braking_control_steps": 204,
+              "final_window_x_rms_m": 0.05353232958065089,
+              "raw_action_change_rms_m_s2": 0.44543166213208657
+            }
+          ]
+        }
+      }
+    },
+    {
+      "arm": "ppo",
+      "start": "upright",
+      "by_step": {
+        "0": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "max_abs_x_m": 0.07290574754228553,
+          "total_rail_braking_control_steps": 0,
+          "mean_final_window_x_rms_m": 0.04522412648152499,
+          "mean_raw_action_change_rms_m_s2": 0.04955399202849282,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.0688876804996648,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.0450662573946094,
+              "raw_action_change_rms_m_s2": 0.0485519732490345
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07290574754228553,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.04528861610993034,
+              "raw_action_change_rms_m_s2": 0.05123524137999549
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.06947098834006343,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.0450210167732413,
+              "raw_action_change_rms_m_s2": 0.04840809039661626
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07041779984804587,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.045520615648318934,
+              "raw_action_change_rms_m_s2": 0.050020663088325014
+            }
+          ]
+        },
+        "51200": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "max_abs_x_m": 0.0881633642448286,
+          "total_rail_braking_control_steps": 0,
+          "mean_final_window_x_rms_m": 0.053240237600618544,
+          "mean_raw_action_change_rms_m_s2": 0.0532382681807079,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07879519322214386,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.053579867865671926,
+              "raw_action_change_rms_m_s2": 0.0531307072487422
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.0881633642448286,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.05305058111402517,
+              "raw_action_change_rms_m_s2": 0.05447308283869046
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07820714798128837,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.053310725139493434,
+              "raw_action_change_rms_m_s2": 0.05215518125864938
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.08154649589611289,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.05301977628328364,
+              "raw_action_change_rms_m_s2": 0.05319410137674954
+            }
+          ]
+        }
+      }
+    },
+    {
+      "arm": "retained",
+      "start": "hanging",
+      "by_step": {
+        "0": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 7.08,
+          "min_final_dwell_s": 16.809999999999828,
+          "max_abs_x_m": 0.29407809439818816,
+          "total_rail_braking_control_steps": 1604,
+          "mean_final_window_x_rms_m": 0.04531955034218135,
+          "mean_raw_action_change_rms_m_s2": 0.5032853657473846,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 5.89,
+              "final_balance_dwell_s": 20.110000000000344,
+              "max_abs_x_m": 0.2940749995141623,
+              "rail_braking_control_steps": 318,
+              "final_window_x_rms_m": 0.04585752768538694,
+              "raw_action_change_rms_m_s2": 0.4751886815139929
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 6.98,
+              "final_balance_dwell_s": 19.020000000000174,
+              "max_abs_x_m": 0.29407494638575193,
+              "rail_braking_control_steps": 412,
+              "final_window_x_rms_m": 0.04563701721852287,
+              "raw_action_change_rms_m_s2": 0.5124306110108607
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 6.26,
+              "final_balance_dwell_s": 19.740000000000286,
+              "max_abs_x_m": 0.2940753656199175,
+              "rail_braking_control_steps": 295,
+              "final_window_x_rms_m": 0.04498679110871194,
+              "raw_action_change_rms_m_s2": 0.46163351587032475
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 9.19,
+              "final_balance_dwell_s": 16.809999999999828,
+              "max_abs_x_m": 0.29407809439818816,
+              "rail_braking_control_steps": 579,
+              "final_window_x_rms_m": 0.04479686535610366,
+              "raw_action_change_rms_m_s2": 0.5638886545943599
+            }
+          ]
+        },
+        "51200": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 6.93,
+          "min_final_dwell_s": 16.739999999999817,
+          "max_abs_x_m": 0.2940757830570371,
+          "total_rail_braking_control_steps": 1559,
+          "mean_final_window_x_rms_m": 0.04550855495688089,
+          "mean_raw_action_change_rms_m_s2": 0.4961955928170959,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 5.7,
+              "final_balance_dwell_s": 20.300000000000374,
+              "max_abs_x_m": 0.29407575495503196,
+              "rail_braking_control_steps": 278,
+              "final_window_x_rms_m": 0.045803717466465194,
+              "raw_action_change_rms_m_s2": 0.4534717521034359
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 7.32,
+              "final_balance_dwell_s": 18.68000000000012,
+              "max_abs_x_m": 0.2940757830570371,
+              "rail_braking_control_steps": 434,
+              "final_window_x_rms_m": 0.04546478112997558,
+              "raw_action_change_rms_m_s2": 0.5085283846819909
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 5.44,
+              "final_balance_dwell_s": 20.560000000000414,
+              "max_abs_x_m": 0.29407492677445496,
+              "rail_braking_control_steps": 263,
+              "final_window_x_rms_m": 0.04529828905772649,
+              "raw_action_change_rms_m_s2": 0.4579203624713204
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 9.26,
+              "final_balance_dwell_s": 16.739999999999817,
+              "max_abs_x_m": 0.2940755722939106,
+              "rail_braking_control_steps": 584,
+              "final_window_x_rms_m": 0.045467432173356276,
+              "raw_action_change_rms_m_s2": 0.5648618720116364
+            }
+          ]
+        }
+      }
+    },
+    {
+      "arm": "retained",
+      "start": "upright",
+      "by_step": {
+        "0": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "max_abs_x_m": 0.07290574754228553,
+          "total_rail_braking_control_steps": 0,
+          "mean_final_window_x_rms_m": 0.04522412648152499,
+          "mean_raw_action_change_rms_m_s2": 0.04955399202849282,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.0688876804996648,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.0450662573946094,
+              "raw_action_change_rms_m_s2": 0.0485519732490345
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07290574754228553,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.04528861610993034,
+              "raw_action_change_rms_m_s2": 0.05123524137999549
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.06947098834006343,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.0450210167732413,
+              "raw_action_change_rms_m_s2": 0.04840809039661626
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07041779984804587,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.045520615648318934,
+              "raw_action_change_rms_m_s2": 0.050020663088325014
+            }
+          ]
+        },
+        "51200": {
+          "holds": 4,
+          "faults": 0,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "max_abs_x_m": 0.07317725001471638,
+          "total_rail_braking_control_steps": 0,
+          "mean_final_window_x_rms_m": 0.04528506672983923,
+          "mean_raw_action_change_rms_m_s2": 0.04903488907091104,
+          "per_seed": [
+            {
+              "seed": 98400,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.06917766538885865,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.04557880103978211,
+              "raw_action_change_rms_m_s2": 0.04837833669121945
+            },
+            {
+              "seed": 98401,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07317725001471638,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.04517148852604144,
+              "raw_action_change_rms_m_s2": 0.05124339423954023
+            },
+            {
+              "seed": 98402,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.06975768562199823,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.045224940659122824,
+              "raw_action_change_rms_m_s2": 0.04738437567091839
+            },
+            {
+              "seed": 98403,
+              "hold_success": true,
+              "first_one_second_capture_s": 1.0,
+              "final_balance_dwell_s": 25.00000000000111,
+              "max_abs_x_m": 0.07131319602511192,
+              "rail_braking_control_steps": 0,
+              "final_window_x_rms_m": 0.04516503669441055,
+              "raw_action_change_rms_m_s2": 0.049133449681966083
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "report_bindings": {
+    "pilot-seed11-ppo/eval-000000000/report.json": "0111fc2aad9bdb2278300841d7f9a6eca4eaff7f843b4c1366cffebe13ad7b53",
+    "pilot-seed11-ppo/eval-000051200/report.json": "b411d26a5b124814570e34d00b1f912fd7e3fd4f37af665e7c7b831735d2212a",
+    "pilot-seed11-retained/eval-000000000/report.json": "51c394a75e5358cacb567a0b4da3ec66e63a480d40de8e0146677157e6fc3a93",
+    "pilot-seed11-retained/eval-000051200/report.json": "726e5fe113f659ec3c1eb206f47f608a95c490ab5b96347829de4e1459d740c1"
+  }
+}

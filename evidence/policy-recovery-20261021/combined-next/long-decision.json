@@ -1,0 +1,47 @@
+{
+  "status": "LONG_EXPERIMENT_AUTHORIZED_BASED_ON_MIDPOINT",
+  "recorded_at_utc": "2026-10-21T22:30:12.310579+00:00",
+  "decision_owner": "parent/root acting within user authorization",
+  "launch_owner": "parent/root",
+  "launch_status": "Root intends launch; actual cloud state not yet confirmed in this receipt.",
+  "evidence_available_at_decision": "Both matched seed 11 arms completed 51,200-step development evaluations; 102,400-step evaluations still pending.",
+  "scope": {
+    "arms": [
+      "equilibrium_projected_ppo",
+      "equilibrium_projected_ppo_plus_retention"
+    ],
+    "seeds": [
+      11,
+      23,
+      47
+    ],
+    "steps_per_trial": 1024000,
+    "total_steps": 6144000,
+    "execution": "Six serial matched fresh trials initialized from the same filtered supervised BAL foundation."
+  },
+  "rationale": [
+    "Projected PPO preserves 4/4 hanging and 4/4 upright final 5 s holds with no faults.",
+    "Mean hanging capture improves 7.08 to 5.35 s; minimum final dwell improves 16.81 to 19.84 s.",
+    "This concrete development improvement satisfies the postbaseline addendum; the long experiment tests replication across seeds and whether improvement lasts.",
+    "The initial checkpoint remains eligible; no automatic new checkpoint promotion or hardware qualification."
+  ],
+  "tradeoffs": [
+    "All 4 hanging cases still use rail braking and reach approximately 0.29408 m.",
+    "PPO braking control steps decrease 1,604 to 945 across four 25 s cases, but rail dependence persists.",
+    "PPO upright worst cart excursion worsens 72.9 to 88.2 mm and final-window cart RMS worsens 45.2 to 53.2 mm.",
+    "Retained midpoint improves mean capture only 7.08 to 6.93 s and largely preserves centering.",
+    "One optimizer seed and four development poses; nominal model only; hardware swing-up remains untested.",
+    "The separate \u00b11 degree long-horizon bias diagnostic showed strict centering hold failure even with bounded pole motion; this robustness limitation is not resolved."
+  ],
+  "bindings": {
+    "protocol.json": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+    "run.py": "1cbd891031691d513beac17b4a02e673b41cd0731db948067fb30fd002a90be3",
+    "promotion-gate-addendum.json": "bbdecd11dcdd23ec05f5552b885fd27dda8d55a10aa9dbff035c0503dfa6d37d",
+    "pilot-midpoint-summary.json": "007dff00559131480448d374996ae6d44aecec3fa120e063cb86b8b3b3aeb1fc",
+    "colab-long-final/bundle.json": "bc91fc0528e327353e76101e89ace878897be9f6531410c69310bfb8418cd989",
+    "pilot-seed11-ppo/eval-000000000/report.json": "0111fc2aad9bdb2278300841d7f9a6eca4eaff7f843b4c1366cffebe13ad7b53",
+    "pilot-seed11-ppo/eval-000051200/report.json": "b411d26a5b124814570e34d00b1f912fd7e3fd4f37af665e7c7b831735d2212a",
+    "pilot-seed11-retained/eval-000000000/report.json": "51c394a75e5358cacb567a0b4da3ec66e63a480d40de8e0146677157e6fc3a93",
+    "pilot-seed11-retained/eval-000051200/report.json": "726e5fe113f659ec3c1eb206f47f608a95c490ab5b96347829de4e1459d740c1"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "status": "READY_FOR_GATED_TRAINING_EXPERIMENT",
+  "cloud_launched": true,
+  "local_pilots_launched": true,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "foundation": "Supervised filtered BAL; new joint PPO learning is under evaluation.",
+  "tests": "34 passed in 3.34 s",
+  "smokes": {
+    "ppo": {
+      "max_abs_raw_error_m_s2": 9.805566157927714e-07,
+      "passed": true
+    },
+    "retained": {
+      "max_abs_raw_error_m_s2": 9.623904047018073e-07,
+      "passed": true
+    }
+  },
+  "bundles": {
+    "colab-pilot-final": "ae87aa807b4b91ac88865165bc57738d44198412048e62fe93473fca5d0c4877",
+    "colab-long-final": "bc91fc0528e327353e76101e89ace878897be9f6531410c69310bfb8418cd989"
+  },
+  "extracted_actual_smoke_receipt_sha256": "20f708a2ac8bea496009010d8a645033c3fb59cac571b177b92305dce7b854e6",
+  "long_source_identical_to_rehearsed_pilot": true,
+  "all145_bound_files_present_in_long_bundle": true,
+  "review": "Independent final-byte GO; no Important/Critical issue.",
+  "local_launcher": "/Users/rbafna/projects/cartpole_v2/examples/colab_training.py",
+  "colab_cli_present": true,
+  "readiness_gaps": [
+    "Both local pilots completed. The 51,200-step projected PPO development checkpoint is selected; its capture gain did not persist at 102,400. Multi-seed long training is confirmed running to test replication and duration effects.",
+    "All initial hanging successes use near-rail braking in the ideal model; benefit and robustness must be distinguished from exploitation of model assumptions.",
+    "Reserved60s confirmation and stress have not been consumed.",
+    "Cloud training is confirmed, but full matrix completion, runtime performance, session lifetime and recovery across backup snapshots remain unproven.",
+    "No new checkpoint hardware acceptance; hardware balance evidence does not establish hardware swing-up."
+  ],
+  "promotion_gate_addendum_sha256": "bbdecd11dcdd23ec05f5552b885fd27dda8d55a10aa9dbff035c0503dfa6d37d",
+  "readme_sha256": "31e52b7758488f1113e7e2b61c82342266b68c3aaefebe7fbd1c1cb85529f27d",
+  "midpoint_summary_sha256": "007dff00559131480448d374996ae6d44aecec3fa120e063cb86b8b3b3aeb1fc",
+  "cloud_training_confirmed": true,
+  "local_pilots_completed": true,
+  "final_pilot_summary_sha256": "e2f7907c51698ff6df42db2df99dd1c38d13c9362599c8fd67954734a6ec8df0",
+  "cloud_launch_update_sha256": "5cf2011bd868527715e923422ed9fdac838824fd9fe5ace0600aa43635c03db4",
+  "cloud_training_update_sha256": "81df1e3b8098b42142c91835d59a6b58ccc7de6bf58956da2d11345efe4699e6",
+  "local_selection_sha256": "5c3a21fa4453a9174091e66b6ebe0db6ffe6f95e8cd612fe7e399a63fa8a681e",
+  "first_cloud_snapshot_verified": true
+}

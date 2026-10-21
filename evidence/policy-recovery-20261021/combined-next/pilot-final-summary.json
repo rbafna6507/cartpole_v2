@@ -1,0 +1,207 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "completed": true,
+  "hardware_accepted": false,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "source_binding_count_verified": 145,
+  "trace_hashes_verified": 48,
+  "checkpoint_hashes_verified": 10,
+  "runs": {
+    "ppo": {
+      "actual_steps": 102400,
+      "wall_seconds": 603.2538118748926,
+      "checkpoint_roundtrip": true,
+      "final_emission_parity": {
+        "max_abs_raw_error_m_s2": 3.2099491562576077e-06,
+        "passed": true
+      },
+      "actor_changed_by_training": true
+    },
+    "retained": {
+      "actual_steps": 102400,
+      "wall_seconds": 606.1901492089964,
+      "checkpoint_roundtrip": true,
+      "final_emission_parity": {
+        "max_abs_raw_error_m_s2": 3.775233953007273e-06,
+        "passed": true
+      },
+      "actor_changed_by_training": true
+    }
+  },
+  "comparisons": [
+    {
+      "arm": "ppo",
+      "step": 0,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 7.08,
+      "min_final_dwell_s": 16.809999999999828,
+      "max_abs_x_m": 0.29407809439818816,
+      "total_rail_braking_control_steps": 1604,
+      "mean_final_window_x_rms_m": 0.04531955034218135,
+      "mean_raw_action_change_rms_m_s2": 0.5032853657473846
+    },
+    {
+      "arm": "ppo",
+      "step": 0,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.07290574754228553,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.04522412648152499,
+      "mean_raw_action_change_rms_m_s2": 0.04955399202849282
+    },
+    {
+      "arm": "ppo",
+      "step": 51200,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 5.35,
+      "min_final_dwell_s": 19.840000000000302,
+      "max_abs_x_m": 0.29407585843480943,
+      "total_rail_braking_control_steps": 945,
+      "mean_final_window_x_rms_m": 0.053407102739228274,
+      "mean_raw_action_change_rms_m_s2": 0.447838924862054
+    },
+    {
+      "arm": "ppo",
+      "step": 51200,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.0881633642448286,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.053240237600618544,
+      "mean_raw_action_change_rms_m_s2": 0.0532382681807079
+    },
+    {
+      "arm": "ppo",
+      "step": 102400,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 7.585,
+      "min_final_dwell_s": 15.439999999999715,
+      "max_abs_x_m": 0.29407837926818925,
+      "total_rail_braking_control_steps": 1444,
+      "mean_final_window_x_rms_m": 0.05983753656670453,
+      "mean_raw_action_change_rms_m_s2": 0.5363768544207332
+    },
+    {
+      "arm": "ppo",
+      "step": 102400,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.09725156396611935,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.06055828429767973,
+      "mean_raw_action_change_rms_m_s2": 0.06121078997461173
+    },
+    {
+      "arm": "retained",
+      "step": 0,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 7.08,
+      "min_final_dwell_s": 16.809999999999828,
+      "max_abs_x_m": 0.29407809439818816,
+      "total_rail_braking_control_steps": 1604,
+      "mean_final_window_x_rms_m": 0.04531955034218135,
+      "mean_raw_action_change_rms_m_s2": 0.5032853657473846
+    },
+    {
+      "arm": "retained",
+      "step": 0,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.07290574754228553,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.04522412648152499,
+      "mean_raw_action_change_rms_m_s2": 0.04955399202849282
+    },
+    {
+      "arm": "retained",
+      "step": 51200,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 6.93,
+      "min_final_dwell_s": 16.739999999999817,
+      "max_abs_x_m": 0.2940757830570371,
+      "total_rail_braking_control_steps": 1559,
+      "mean_final_window_x_rms_m": 0.04550855495688089,
+      "mean_raw_action_change_rms_m_s2": 0.4961955928170959
+    },
+    {
+      "arm": "retained",
+      "step": 51200,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.07317725001471638,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.04528506672983923,
+      "mean_raw_action_change_rms_m_s2": 0.04903488907091104
+    },
+    {
+      "arm": "retained",
+      "step": 102400,
+      "start": "hanging",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 6.9425,
+      "min_final_dwell_s": 16.68999999999981,
+      "max_abs_x_m": 0.2940774395717031,
+      "total_rail_braking_control_steps": 1588,
+      "mean_final_window_x_rms_m": 0.04487043781389949,
+      "mean_raw_action_change_rms_m_s2": 0.4980518883900249
+    },
+    {
+      "arm": "retained",
+      "step": 102400,
+      "start": "upright",
+      "holds": 4,
+      "faults": 0,
+      "mean_capture_s": 1.0,
+      "min_final_dwell_s": 25.00000000000111,
+      "max_abs_x_m": 0.0736924377159114,
+      "total_rail_braking_control_steps": 0,
+      "mean_final_window_x_rms_m": 0.04466550133084349,
+      "mean_raw_action_change_rms_m_s2": 0.048941335507493564
+    }
+  ],
+  "report_bindings": {
+    "pilot-seed11-ppo/report.json": "04ce5c19b81f998ed63f999b70877ed583804aa4a27a9f04d087395d703c66e8",
+    "pilot-seed11-ppo/eval-000000000/report.json": "0111fc2aad9bdb2278300841d7f9a6eca4eaff7f843b4c1366cffebe13ad7b53",
+    "pilot-seed11-ppo/eval-000051200/report.json": "b411d26a5b124814570e34d00b1f912fd7e3fd4f37af665e7c7b831735d2212a",
+    "pilot-seed11-ppo/eval-000102400/report.json": "42784243ffbc84354d51080a68972c20c99555daebd7052fe553119e56448807",
+    "pilot-seed11-retained/report.json": "317da8eb7261c46d38b1fdf9ce3681c19d45add638610386b0841818572fa96a",
+    "pilot-seed11-retained/eval-000000000/report.json": "51c394a75e5358cacb567a0b4da3ec66e63a480d40de8e0146677157e6fc3a93",
+    "pilot-seed11-retained/eval-000051200/report.json": "726e5fe113f659ec3c1eb206f47f608a95c490ab5b96347829de4e1459d740c1",
+    "pilot-seed11-retained/eval-000102400/report.json": "28bf9e409b33ddce19fd69049395159544ef0ff10ed8cfef211a4c67423aa1f3"
+  },
+  "interpretation": [
+    "Both seed 11 arms preserve all nominal development holds and have no faults.",
+    "Projected PPO midpoint capture improvement is not sustained at the final checkpoint; upright cart excursion increases with training.",
+    "Retention keeps final nominal behavior close to the supervised foundation, with a small mean capture improvement and slightly reduced minimum final dwell.",
+    "All hanging successes still use rail braking near 0.29408 m.",
+    "One optimizer seed and four development poses do not establish reproducibility or hardware swing-up.",
+    "Initial and intermediate checkpoints remain eligible; a final checkpoint is not automatically preferred."
+  ]
+}

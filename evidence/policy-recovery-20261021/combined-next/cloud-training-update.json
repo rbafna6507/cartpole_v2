@@ -1,0 +1,37 @@
+{
+  "status": "TRAINING_CONFIRMED",
+  "reported_by": "parent/root",
+  "recorded_at_utc": "2026-10-21T22:34:16.716248+00:00",
+  "session": "filtered-bal-joint-long-20261021",
+  "remote_status": "training",
+  "remote_supervisor_alive": true,
+  "remote_supervisor_pid": 3829,
+  "active_remote_run": "runs/combined-long/ppo-seed11",
+  "observed_remote_checkpoint": "step 0 ZIP",
+  "local_backup_watcher_pid": 31451,
+  "backup_directory": "colab-long-backups-01",
+  "watch_log": "colab-watch.log",
+  "watch_poll_seconds": 60,
+  "watch_max_seconds": 43200,
+  "operational_requirement": "The local Mac must stay awake with network access for watcher backups.",
+  "launch_update_sha256": "5cf2011bd868527715e923422ed9fdac838824fd9fe5ace0600aa43635c03db4",
+  "long_decision_sha256": "a4e517d77a567bde7d8b043b33d16cfed967fdd4aa914b284c3c89956615c8cd",
+  "bundle_sha256": "bc91fc0528e327353e76101e89ace878897be9f6531410c69310bfb8418cd989",
+  "pilot_final_summary_sha256": "e2f7907c51698ff6df42db2df99dd1c38d13c9362599c8fd67954734a6ec8df0",
+  "interpretation": "The long run is a replication and duration experiment. The local PPO midpoint gain was not sustained at the last checkpoint.",
+  "cloud_actions_owned_by": "parent/root; this agent made no network or deployment calls.",
+  "first_local_backup": {
+    "path": "colab-long-backups-01/snapshot-1792622004031267000.zip",
+    "sha256": "625feef1c6d0aacc967c96442e85a663bd9b8d26d6ea2a909100c7a7e024b244",
+    "size_bytes": 2919833,
+    "outer_crc_passed": true,
+    "initial_checkpoints": [
+      {
+        "path": "runs/combined-long/ppo-seed11/checkpoints/step-000000000.zip",
+        "sha256": "824326aee313873128d921c30df33fe5ffd15e3520588a06cf1e115447bf641e",
+        "inner_crc_passed": true
+      }
+    ],
+    "parent_verified_protocol_binding": true
+  }
+}

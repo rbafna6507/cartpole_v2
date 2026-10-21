@@ -1,0 +1,112 @@
+{
+  "actor_changed_by_training": true,
+  "actual_steps": 128,
+  "arm": "ppo",
+  "budget": "pilot",
+  "checkpoint_roundtrip": true,
+  "checkpoints": [
+    {
+      "actor_weights_sha256": "0c5bb4d8ef4e75bc1a1b00051f2f8a052da22e4e63fa444463071cb8be9dc384",
+      "path": "checkpoints/step-000000000.zip",
+      "sha256": "cd8d08c7e565795a1ee99543a4b533e8f95d944680145c039766a4b53e02f3c7",
+      "step": 0,
+      "weights_sha256": "d27a672e6ed58491689b19103a48524991203190bf12346ffb894ee254077f21"
+    },
+    {
+      "actor_weights_sha256": "27966ce7e324228e0db7874199cabe0d1a4a4afb923ddbebe660a589ee40162a",
+      "path": "checkpoints/step-000000064.zip",
+      "sha256": "dc39442b7d25c7de0883d32806d7382d47748d55ff4e66bccd99e3b6ee288e7f",
+      "step": 64,
+      "weights_sha256": "b6980b4528c2d93e6642b1d632057c37a9033d3d4be95b0a3c4e4f67a2f87ae9"
+    },
+    {
+      "actor_weights_sha256": "3099cd02d375a36286a1824000bacfad1dfcea6d6b77da085e1306b08ed7970f",
+      "path": "checkpoints/step-000000128.zip",
+      "sha256": "6d6670fff7ad8741423bf672c09e0be5bcf2ebcef1dbfd0f0a2d387542bd1cce",
+      "step": 128,
+      "weights_sha256": "398ef80f8ec669068b0cd035c1134c9544f47f5fff02917047494cc0d6294cac"
+    }
+  ],
+  "completed": true,
+  "evaluations": [
+    {
+      "path": "eval-000000000/report.json",
+      "sha256": "d5ddd739046f5b814d2e8e04fdc1832f8f8327dcd3300ec9195dbad2248c6714",
+      "step": 0,
+      "summary": [
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.0,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.014084612502970247
+        },
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.05,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.015183718522500634
+        }
+      ]
+    },
+    {
+      "path": "eval-000000128/report.json",
+      "sha256": "19cfd8e324982a82fa219c1548c5108dc8eb15161df1ef4b8d4fc5eefb42945c",
+      "step": 128,
+      "summary": [
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.0,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.014084612502970247
+        },
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.05,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.01518605675096476
+        }
+      ]
+    }
+  ],
+  "final_emission_parity": {
+    "max_abs_raw_error_m_s2": 9.805566157927714e-07,
+    "passed": true
+  },
+  "foundation_actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "foundation_checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "hardware_accepted": false,
+  "migration_max_abs_raw_error_m_s2": 3.5871876047366413e-07,
+  "optimizer_resume": false,
+  "optimizer_seed": 11,
+  "protocol_sha256": "ec8f3d3b88bff5c40368c8757ef0547b0887f46f2cc9f4ebcf0b4ea53d602ab5",
+  "retention": null,
+  "retention_diagnostics": null,
+  "smoke": true,
+  "status": "DEVELOPMENT_ONLY",
+  "transfer": "Only exact filtered actor weights copied; critic, optimizer and exploration freshly seeded.",
+  "wall_seconds": 1.7851701669860631
+}

@@ -1,0 +1,24 @@
+{
+  "status": "LOCAL_DEVELOPMENT_SELECTION_ONLY",
+  "selected_by": "parent/root after comparing all completed local development checkpoints",
+  "selected_arm": "equilibrium_projected_ppo",
+  "optimizer_seed": 11,
+  "step": 51200,
+  "checkpoint_path": "pilot-seed11-ppo/checkpoints/step-000051200.zip",
+  "checkpoint_sha256": "68511f825590330820271411ef6576b80a97768214f5a5e271ce4c6e53a81815",
+  "weights_sha256": "34c1bba58b42f3fed739fb1140714091018f9eb8d8e581821c7179886abdbbeb",
+  "actor_weights_sha256": "465122edb923b6663d526b9c9d3b852708e5b8c8fbca295e36d94f3a71f48253",
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "final_summary_sha256": "e2f7907c51698ff6df42db2df99dd1c38d13c9362599c8fd67954734a6ec8df0",
+  "selected_evaluation_sha256": "b411d26a5b124814570e34d00b1f912fd7e3fd4f37af665e7c7b831735d2212a",
+  "rule": "Among completed nominal development evaluations, require no loss of all 4 hanging and all 4 upright holds or new faults. Prefer shorter mean hanging capture, retaining reported centering and rail-braking tradeoffs. Never select automatically by last checkpoint.",
+  "rationale": "The 51,200-step projected PPO checkpoint has the fastest mean hanging capture (5.35 s) and longest minimum final dwell (19.84 s), retaining all holds. The final 102,400-step checkpoint regresses in capture and centering.",
+  "limitations": [
+    "All hanging cases still use near-rail braking.",
+    "Upright worst excursion at selection is 88.2 mm versus foundation 72.9 mm.",
+    "One optimizer seed and four development poses.",
+    "No reserved confirmation, stress, or new hardware qualification has been run for this selected checkpoint."
+  ],
+  "reserved_confirmation_consumed": false,
+  "hardware_accepted": false
+}

@@ -1,0 +1,173 @@
+{
+  "actor_changed_by_training": true,
+  "actual_steps": 102400,
+  "arm": "retained",
+  "budget": "pilot",
+  "checkpoint_roundtrip": true,
+  "checkpoints": [
+    {
+      "actor_weights_sha256": "0c5bb4d8ef4e75bc1a1b00051f2f8a052da22e4e63fa444463071cb8be9dc384",
+      "path": "checkpoints/step-000000000.zip",
+      "sha256": "3379442f7e78a95b6371e295b5e7c879b59897e57cba70c87f18da202c77a40d",
+      "step": 0,
+      "weights_sha256": "d27a672e6ed58491689b19103a48524991203190bf12346ffb894ee254077f21"
+    },
+    {
+      "actor_weights_sha256": "edee76d025e65d96e93d8e6bfb179235220e13052e3779e74d5f5edb66a67239",
+      "path": "checkpoints/step-000025600.zip",
+      "sha256": "692fa17d2b9b57b96c5a88298e1581c71370630ccbdad4e2dd69051f16d8a138",
+      "step": 25600,
+      "weights_sha256": "094538c405ab05d8c10afaa34ac99d7bbc72682d56bba6e22ca43de23790026a"
+    },
+    {
+      "actor_weights_sha256": "9742f78a3be5d9d377a30fba1d0c4de3f535242e5bf468b1b7c838d61811d9da",
+      "path": "checkpoints/step-000051200.zip",
+      "sha256": "1b9ff58475803d904ed1414baa0e7725af30b4647abc8d3c20831fff1a1c284b",
+      "step": 51200,
+      "weights_sha256": "e41a63fab57821e55830993a3cc5d53d3d1c1e2e7d125edc84ba6c17049ffbc6"
+    },
+    {
+      "actor_weights_sha256": "94b952511ff304448191be119b718288b0bd965670c68ba46bad7de3febed7d5",
+      "path": "checkpoints/step-000076800.zip",
+      "sha256": "477e94c7cc4e20a5889ea33a660b5a852a632c3262b73b5eb9e5bf2522ebb097",
+      "step": 76800,
+      "weights_sha256": "81cb1fc2cf389b23d560ccb3929b3544ce799f7753190dbeb63b088d015e7814"
+    },
+    {
+      "actor_weights_sha256": "75b07df38921ee89a06c2beb11ca2fa299451ac0e0a7f9ad877fe5c4ba4c3304",
+      "path": "checkpoints/step-000102400.zip",
+      "sha256": "8626c24248d364470d2f075a3eeba65a070be4e7b605a81d45c1eb73cff1b8a3",
+      "step": 102400,
+      "weights_sha256": "595f7770b0f1fb36f145d5ae366fcaba93e25efcf260c35347c546c0a2ab6bf9"
+    }
+  ],
+  "completed": true,
+  "evaluations": [
+    {
+      "path": "eval-000000000/report.json",
+      "sha256": "51c394a75e5358cacb567a0b4da3ec66e63a480d40de8e0146677157e6fc3a93",
+      "step": 0,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 7.08,
+          "min_final_dwell_s": 16.809999999999828,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.29407809439818816
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.07290574754228553
+        }
+      ]
+    },
+    {
+      "path": "eval-000051200/report.json",
+      "sha256": "726e5fe113f659ec3c1eb206f47f608a95c490ab5b96347829de4e1459d740c1",
+      "step": 51200,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 6.93,
+          "min_final_dwell_s": 16.739999999999817,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.2940757830570371
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.07317725001471638
+        }
+      ]
+    },
+    {
+      "path": "eval-000102400/report.json",
+      "sha256": "28bf9e409b33ddce19fd69049395159544ef0ff10ed8cfef211a4c67423aa1f3",
+      "step": 102400,
+      "summary": [
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 4,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 6.942500000000001,
+          "min_final_dwell_s": 16.68999999999981,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.2940774395717031
+        },
+        {
+          "captures": 4,
+          "episodes": 4,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 4,
+          "mean_capture_s": 1.0,
+          "min_final_dwell_s": 25.00000000000111,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.0736924377159114
+        }
+      ]
+    }
+  ],
+  "final_emission_parity": {
+    "max_abs_raw_error_m_s2": 3.775233953007273e-06,
+    "passed": true
+  },
+  "foundation_actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "foundation_checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "hardware_accepted": false,
+  "migration_max_abs_raw_error_m_s2": 3.5871876047366413e-07,
+  "optimizer_resume": false,
+  "optimizer_seed": 11,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "retention": {
+    "anchor_sha256": "1a4f00e09b06c66828c74ee75cd14711d878ef16a9e0117d467311b80a5b6e8c",
+    "batch_size": 256,
+    "learning_rate": 0.0001,
+    "samples": 8192,
+    "seed": 98702,
+    "updates": 4,
+    "weight": 1.0
+  },
+  "retention_diagnostics": {
+    "equilibrium_projection_normalized": 4.3754465878009796e-05,
+    "mse_before_projection": 1.5311749335111813e-07,
+    "mse_final": 1.4795712832693653e-07,
+    "mse_initial": 3.7003502484367345e-07,
+    "rmse_final": 0.0003846519573938712,
+    "rmse_initial": 0.0006083050425926728,
+    "update_loss_normalized": 3.4696048345495e-07
+  },
+  "smoke": false,
+  "status": "DEVELOPMENT_ONLY",
+  "transfer": "Only exact filtered actor weights copied; critic, optimizer and exploration freshly seeded.",
+  "wall_seconds": 606.1901492089964
+}

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py", line 199, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py", line 191, in main
+    if args.command=='train':train_one(args.protocol,args.output,arm=args.arm,seed=args.seed,budget=args.budget,smoke=args.smoke);return
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py", line 166, in train_one
+    result=evaluate(model,p,out/f'eval-{step:09d}',seconds=seconds,seeds=p['smoke_seeds'] if smoke else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/combined-next/run.py", line 106, in evaluate
+    result=_episode(predictor,env,seed=seed,start=start,scenario=dict(name=scenario['name'],angle_offset_rad=0.),root=out)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rbafna/projects/cartpole_v2/src/cartpole_sdk/learning/transfer_checks.py", line 129, in _episode
+    result.update(scenario=scenario['name'], expected=scenario['expected'],
+                                                      ~~~~~~~~^^^^^^^^^^^^
+KeyError: 'expected'

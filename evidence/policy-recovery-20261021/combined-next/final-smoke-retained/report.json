@@ -1,0 +1,128 @@
+{
+  "actor_changed_by_training": true,
+  "actual_steps": 128,
+  "arm": "retained",
+  "budget": "pilot",
+  "checkpoint_roundtrip": true,
+  "checkpoints": [
+    {
+      "actor_weights_sha256": "0c5bb4d8ef4e75bc1a1b00051f2f8a052da22e4e63fa444463071cb8be9dc384",
+      "path": "checkpoints/step-000000000.zip",
+      "sha256": "2174ac336fdeec7e4b5436ac39b07cd11b4dd08ab5723c9dfa4f82ff7f0931f5",
+      "step": 0,
+      "weights_sha256": "d27a672e6ed58491689b19103a48524991203190bf12346ffb894ee254077f21"
+    },
+    {
+      "actor_weights_sha256": "c2868a84191d23182254821bee1f65c42e716e4ba4242cf6f7ab4156e77a9244",
+      "path": "checkpoints/step-000000064.zip",
+      "sha256": "8f420fcd5b5fa65ce90a9938040a4cca483b0660b8f8a3a22d588efe4fd0330a",
+      "step": 64,
+      "weights_sha256": "f9a1f1ba318e318fd1fde3af88277deb0539fd59a20901e31b50a7cf602df3d4"
+    },
+    {
+      "actor_weights_sha256": "64b33475e695b594dba1a608d030569a594283dfd460904e65efa516624f0c03",
+      "path": "checkpoints/step-000000128.zip",
+      "sha256": "cbb6664601a0b80d25f6ee6312fc0641d856e75375374e7da5d812451af745a3",
+      "step": 128,
+      "weights_sha256": "b49939668f73aefb19546739d18ef82ed2ee68f1c9eb23feb0f21d84bbcab822"
+    }
+  ],
+  "completed": true,
+  "evaluations": [
+    {
+      "path": "eval-000000000/report.json",
+      "sha256": "fa42d1c2def973e2f32a9182bca12af713c4c3982b084af1a8ab07d2b03039ee",
+      "step": 0,
+      "summary": [
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.0,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.014084612502970247
+        },
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.05,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.015183718522500634
+        }
+      ]
+    },
+    {
+      "path": "eval-000000128/report.json",
+      "sha256": "ce16633c4bd28309ead73c2da37a7411848134f6b9d10040184b621e0e5869dc",
+      "step": 128,
+      "summary": [
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.0,
+          "scenario": "nominal",
+          "start": "hanging",
+          "worst_max_x_m": 0.014084612502970247
+        },
+        {
+          "captures": 0,
+          "episodes": 2,
+          "episodes_with_rail_braking": 0,
+          "faults": 0,
+          "holds": 0,
+          "mean_capture_s": null,
+          "min_final_dwell_s": 0.05,
+          "scenario": "nominal",
+          "start": "upright",
+          "worst_max_x_m": 0.015191429732989908
+        }
+      ]
+    }
+  ],
+  "final_emission_parity": {
+    "max_abs_raw_error_m_s2": 9.623904047018073e-07,
+    "passed": true
+  },
+  "foundation_actor_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "foundation_checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "hardware_accepted": false,
+  "migration_max_abs_raw_error_m_s2": 3.5871876047366413e-07,
+  "optimizer_resume": false,
+  "optimizer_seed": 11,
+  "protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "retention": {
+    "anchor_sha256": "1a4f00e09b06c66828c74ee75cd14711d878ef16a9e0117d467311b80a5b6e8c",
+    "batch_size": 256,
+    "learning_rate": 0.0001,
+    "samples": 8192,
+    "seed": 98702,
+    "updates": 4,
+    "weight": 1.0
+  },
+  "retention_diagnostics": {
+    "equilibrium_projection_normalized": -0.00018481630831956863,
+    "mse_before_projection": 1.9333922640640822e-07,
+    "mse_final": 1.6631909094400044e-07,
+    "mse_initial": 1.4882676291350094e-07,
+    "rmse_final": 0.0004078223767082925,
+    "rmse_initial": 0.00038578071869068434,
+    "update_loss_normalized": 9.757625782924606e-07
+  },
+  "smoke": true,
+  "status": "DEVELOPMENT_ONLY",
+  "transfer": "Only exact filtered actor weights copied; critic, optimizer and exploration freshly seeded.",
+  "wall_seconds": 1.9808127919677645
+}
