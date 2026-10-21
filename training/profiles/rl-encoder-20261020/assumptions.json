@@ -1,0 +1,27 @@
+{
+  "executor_snapshot": {
+    "firmware": "executor-v6-measuredrail",
+    "home_epoch": 16,
+    "path": "evidence/system-id-20261020/live/homed-snapshot.json",
+    "sha256": "ec1af202748cb0662247786f016c563c1c45a6ebee1114db80d295029b65b792",
+    "source_status": "Live stopped readback after full physical HOME, 2026-10-20; working bw10 profile restored before HOME."
+  },
+  "observation_assumptions": "Raw 4096-count encoder with verified bw=10 Hz observer; Gaussian angle noise sigma .001 rad and telemetry/command delays 3/1 ms remain engineering assumptions. Encoder-only characterization cannot identify true cart tracking or global angular mapping.",
+  "rationale": "Development training: use measured rail and recorded executor snapshot; .35 kg cart, .02275 kg equivalent pole mass, .05 N s/m cart damping and 20 N force ceiling remain explicit assumptions. Replace passive length/damping/friction using the frozen batch-6 candidate. No claim of measured force authority, actuator tracking, global encoder mapping or hardware transfer. This revision updates the measured home rail and all 41 executor settings from the current rig; it does not refit the passive law or claim physical actuator identification.",
+  "simulation_config": {
+    "cart_damping": 0.05,
+    "cart_mass_kg": 0.35,
+    "control_steps": 10,
+    "effective_length_m": 0.124,
+    "hinge_coulomb_friction_nm": 0.0,
+    "hinge_damping": 0.0001,
+    "hinge_friction_velocity_scale_rad_s": 0.05,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 50000000,
+    "max_force_n": 20.0,
+    "max_steps": 2500,
+    "physics_dt_ns": 1000000,
+    "pole_mass_kg": 0.02275,
+    "rail_half_m": 0.309000015
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "actor_sha256": "b6d1179873eadbfebe0798e7cc39c17f05cc1bf7d9983733550e26e5681e6f08",
+  "completed": true,
+  "emission_parity_pass": true,
+  "hardware_accepted": false,
+  "heldout": {
+    "checkpoint": 20480,
+    "directory": "heldout-teacher-seed17-step20480",
+    "evaluation_sha256": "7ed2a6778d7dcffd1208baa15356781989738f5f07d80a708dc5e5d5c2d59736",
+    "metrics": {
+      "balanced_samples": 48000,
+      "complete_episodes": 8,
+      "episodes": 8,
+      "faults": 0,
+      "holds": 8,
+      "max_abs_raw_m_s2": 2.941710129380226,
+      "mean_tail_theta_rms_rad": 0.000323420138678139,
+      "mean_tail_x_rms_m": 0.003710573052488399,
+      "minimum_balanced_fraction": 1.0,
+      "samples": 48000,
+      "worst_max_abs_x_m": 0.10359015968241725
+    },
+    "run": "teacher-seed17"
+  },
+  "numeric_actor": "/Users/rbafna/projects/cartpole_v2/runs/local-balance-20261020/selected-sdk-parity/actor.json",
+  "numeric_upright": [
+    {
+      "balanced_samples": 6000,
+      "complete": true,
+      "hold": true,
+      "samples": 6000,
+      "seed": 63000
+    },
+    {
+      "balanced_samples": 6000,
+      "complete": true,
+      "hold": true,
+      "samples": 6000,
+      "seed": 63001
+    }
+  ],
+  "numeric_upright_full_balance_pass": true,
+  "parity_report_sha256": "033ff695e769d7139259a7e832538d61b12a777078b8eb0b65efefae08e2b94a",
+  "protocol_sha256": "5ba10edd00559f56b2c21bf93aa5269f982e68c7cf1b015722def92034ba6983",
+  "qualification": "Nominal simulation only; bounded hardware development still requires separate live admission.",
+  "schema": "cartpole-id-balance-result-20261020-v1",
+  "selected": {
+    "final": {
+      "balanced_samples": 2000,
+      "complete_episodes": 2,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2,
+      "max_abs_raw_m_s2": 2.6519540697336197,
+      "mean_tail_theta_rms_rad": 0.0005431628670575499,
+      "mean_tail_x_rms_m": 0.008735723686028807,
+      "minimum_balanced_fraction": 1.0,
+      "samples": 2000,
+      "worst_max_abs_x_m": 0.061382279355339735
+    },
+    "final_checkpoint_sha256": "c5afe39e8db489d8a4d27fd0ddaa5f66e01c6da75d5229fb8db56fb8f73b21b4",
+    "initial": {
+      "balanced_samples": 2000,
+      "complete_episodes": 2,
+      "episodes": 2,
+      "faults": 0,
+      "holds": 2,
+      "max_abs_raw_m_s2": 2.560850791633129,
+      "mean_tail_theta_rms_rad": 0.0005373520289267656,
+      "mean_tail_x_rms_m": 0.008745740232978225,
+      "minimum_balanced_fraction": 1.0,
+      "samples": 2000,
+      "worst_max_abs_x_m": 0.06029405461371916
+    },
+    "initialization": "teacher",
+    "recipe_sha256": "2c6226c095a2e65e42ab93b5317b1704dae63946a057ade208f175005f5e2d58",
+    "run": "teacher-seed17",
+    "seed": 17
+  },
+  "simulation_only": true,
+  "status": "DEVELOPMENT_ONLY",
+  "wall_seconds": 952.1321989998687
+}

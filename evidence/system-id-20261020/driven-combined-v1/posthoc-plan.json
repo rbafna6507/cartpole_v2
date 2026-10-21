@@ -1,0 +1,14 @@
+{
+  "status": "post-hoc diagnostics declared after original validation failures were seen",
+  "primary_analysis_unchanged": true,
+  "model_coefficients_unchanged": true,
+  "input_hypotheses": {"sign": [1, -1], "causal_delay_s": [0.0, 0.01, 0.02]},
+  "phase_baselines": ["firmware_reference", "local_hanging_anchor"],
+  "training_sources": ["gentle-train-02", "standard-train-01"],
+  "selection": "For each existing phase baseline independently, minimize equal-trial mean squared causal 0.5s forecast error over all completed, originally admitted non-timing training trials. No parameter optimization. Tie break by listed hypothesis order.",
+  "freeze_before_diagnostic_validation": "Write training-choice.json before computing diagnostic validation forecasts.",
+  "validation_source": "coupled-validation-01",
+  "validation_scope": "Previously scored validation is reused only for post-hoc diagnostics, not a new unseen confirmation; no refitting to validation.",
+  "short_horizon": "Also calculate fixed 0.1s forecasts for every originally admitted trial under original sign +1, delay 0, both phase baselines; no selection or new pass gate.",
+  "limitations": "Commanded acceleration proxy, 100Hz left-held reconstruction, unknown physical input tracking, uncertain global encoder phase. These hypotheses cannot prove a physical fault or validate transfer."
+}

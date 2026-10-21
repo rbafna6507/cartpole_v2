@@ -1,5 +1,6 @@
 """Repeatable collection campaigns; immutable evidence, never automatic model activation."""
 from copy import deepcopy
+from contextlib import nullcontext
 import csv
 import hashlib
 import json
@@ -32,9 +33,13 @@ def _read_json(path):
     return value
 
 
-def plan_suite(suite='autonomous', *, level='gentle', repetitions=2, seconds=15.):
+def plan_suite(suite='autonomous', *, level='gentle', repetitions=2, seconds=15., encoder_only=False):
     if suite not in SUITES or level not in ('gentle', 'standard'):
         raise ValueError('unknown suite or excitation level')
+    if type(encoder_only) is not bool:
+        raise ValueError('encoder_only must be an explicit boolean')
+    if encoder_only and suite in MANUAL:
+        raise ValueError('encoder-only mode does not support manual calibration suites')
     if type(repetitions) is not int or not 1 <= repetitions <= 5:
         raise ValueError('repetitions must be an integer 1..5')
     if type(seconds) not in (int, float) or not math.isfinite(seconds) or not 5 <= seconds <= 25:
@@ -53,11 +58,14 @@ def plan_suite(suite='autonomous', *, level='gentle', repetitions=2, seconds=15.
     for i, trial in enumerate(trials):
         trial['id'] = f'{i+1:03d}-{trial["kind"]}'
     return dict(schema=SCHEMA, suite=suite, level=level, rate_hz=100,
+        sensor_mode='encoder_only' if encoder_only else 'encoder_camera',
+        independent_cart_motion_measured=False,
         requires_execute=suite not in MANUAL, requires_physical_home_after=suite == 'cart-map',
         trials=trials, powered_return='REHOME to saved counted home after successful driven trials; no full HOME',
         stop_on_failure=True, change_parameters=False, calibration_commands=False,
         manual_angle_convention='requested poses are labels; angle-map zero is hanging',
-        physical_measurements='camera raw image geometry; cart steps/velocity/acceleration are executor estimates',
+        physical_measurements=('encoder angle only; camera omitted by explicit request; cart steps/velocity/acceleration are executor estimates'
+                               if encoder_only else 'camera raw image geometry; cart steps/velocity/acceleration are executor estimates'),
         limitations=['Camera host-read timestamps do not measure exposure or millisecond motor delay.',
                      'Motor-disabled manual cart movement requires full HOME before future powered use.'])
 
@@ -111,13 +119,14 @@ def _identity(rig, expected_reference, expected_home):
     return info
 
 
-def _settle(rig, camera, pins, *, timeout_s=60.):
+def _settle(rig, camera, pins, *, timeout_s=60., encoder_only=False):
     from .experiments import validate_camera_finish, validate_preflight
     deadline = time.monotonic() + timeout_s
     quiet_since = None
     info = _identity(rig, **pins)
     while time.monotonic() < deadline:
-        camera.check(); validate_camera_finish(camera.latest())
+        if not encoder_only:
+            camera.check(); validate_camera_finish(camera.latest())
         state = rig.state; rig._fresh(state); rig._require()
         if not state.healthy or not state.homed or not state.switch_profile or state.flags & 48 or state.enabled:
             raise ValueError('settling requires healthy disabled rig with released switches')
@@ -139,16 +148,16 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
                      camera_url='http://127.0.0.1:3090/api/sensing-stream?max_hz=100',
                      cart_restraint='', manual_timeout_s=1800., expected_reference=None,
                      expected_home=None, rig_factory=None, camera_factory=None,
-                     prompt=input, emit=print):
+                     prompt=input, emit=print, encoder_only=False):
     """One exclusive serial session. Errors abort; all evidence and STOP results survive."""
-    plan = plan_suite(suite, level=level, repetitions=repetitions, seconds=seconds)
+    plan = plan_suite(suite, level=level, repetitions=repetitions, seconds=seconds, encoder_only=encoder_only)
     if plan['requires_execute'] and execute is not True:
         raise ValueError('powered collection requires --execute')
     if suite in MANUAL and not cart_restraint.strip():
         raise ValueError('manual collection requires --cart-restraint description')
     if dataset_role not in ('training', 'validation', 'development'):
         raise ValueError('unknown dataset role')
-    if not camera_url or not str(port).strip():
+    if (not encoder_only and not camera_url) or not str(port).strip():
         raise ValueError('explicit serial port and camera URL required')
     if type(manual_timeout_s) not in (int,float) or not math.isfinite(manual_timeout_s) or not 30 <= manual_timeout_s <= 3600:
         raise ValueError('manual timeout must be 30..3600 seconds')
@@ -158,12 +167,17 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
     write_json(output/'plan.json', plan)
     report = dict(schema=SCHEMA, synthetic=False, completed=False, hardware_accepted=False,
+        sensor_mode=plan['sensor_mode'], independent_cart_motion_measured=False,
         dataset_role=dataset_role, run_label=run_label, cart_restraint=cart_restraint,
         started_ns=time.monotonic_ns(), plan=plan, provenance=provenance(), trials=[],
         stop_confirmed=False, records_dropped=0,
-        semantics=dict(camera='raw image geometry with host-read proxy and HTTP clock bounds; no exposure timestamp',
+        semantics=dict(camera=('not recorded: explicit encoder-only mode; no independent cart or angle reference'
+                               if encoder_only else 'raw image geometry with host-read proxy and HTTP clock bounds; no exposure timestamp'),
                        cart='step position and commanded velocity/acceleration are not physical cart ground truth',
                        encoder='raw theta; firmware reference and observer remain unchanged'))
+    if encoder_only:
+        report['camera'] = dict(recorded=False, reason='explicit encoder-only collection',
+                              independent_cart_motion_measured=False)
     rig = camera = None
     timing_wrappers = []
     failure = None
@@ -177,8 +191,9 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
             rig_factory = Rig
         # Camera starts first: no rig connection if independent recording is unavailable.
         budget = manual_timeout_s+30 if suite in MANUAL else len(plan['trials'])*110+30
-        camera = (camera_factory or CameraRecorder)(camera_url, output, budget)
-        camera.start()
+        if not encoder_only:
+            camera = (camera_factory or CameraRecorder)(camera_url, output, budget)
+            camera.start()
         def timed_transport(device):
             wrapper = TimingTransport(SerialTransport(device), rig._record)
             timing_wrappers.append(wrapper)
@@ -190,7 +205,13 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
         rig = rig_factory(port, rate_hz=100, log_dir=output, record_capacity=32768,
             max_host_age_s=.02, vision_publisher=EncoderPublisher(),
             transport_factory=timed_transport)
-        with rig:
+        from cartpole_sdk.rig import runtime
+        report['runtime'] = dict(cyclic_gc_deferred=plan['requires_execute'],
+            restore_after='serial STOP and disconnection',
+            helper_sha256=_hash(Path(runtime.__file__)))
+        # Cyclic GC paused the real Jetson for 54 ms during a 20 ms lease.
+        # Keep reference counting; restore automatic GC only after Rig closes.
+        with (runtime.defer_cyclic_gc() if plan['requires_execute'] else nullcontext()), rig:
             rig.stop(); rig._stopped_healthy()
             info = _identity(rig, expected_reference, expected_home)
             pins = dict(expected_reference=info.encoder_upright_raw, expected_home=info.home_epoch)
@@ -198,7 +219,9 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
             report['initial_info'] = plain(info)
             report['parameters'] = parameters
             rig._record('campaign_start', plan=plan, dataset_role=dataset_role, run_label=run_label,
-                        parameters=parameters, info=plain(info), cart_restraint=cart_restraint)
+                        sensor_mode=plan['sensor_mode'], independent_cart_motion_measured=False,
+                        parameters=parameters, info=plain(info), cart_restraint=cart_restraint,
+                        runtime=report['runtime'])
             for trial in plan['trials']:
                 _identity(rig, **pins)
                 if rig.get_parameters() != parameters:
@@ -217,8 +240,8 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
                             raise ValueError('manual collection ended before its planned measurements were complete')
                     else:
                         from .driven_capture import run_actuator, run_timing_hold, run_coupled, return_saved_home
-                        _settle(rig, camera, pins)
-                        common = dict(camera=camera, **pins)
+                        _settle(rig, camera, pins, encoder_only=encoder_only)
+                        common = dict(camera=camera, encoder_only=encoder_only, **pins)
                         if trial['kind'] == 'actuator':
                             result = run_actuator(rig, trial=trial['trial'], policy_wrapper=timed_policy, **common)
                         elif trial['kind'] == 'timing':
@@ -305,6 +328,7 @@ def collect_campaign(*, output, port, suite='autonomous', level='gentle', repeti
 
 def analysis_request(report):
     return dict(schema='cartpole-id-analysis-request-v1', dataset_role=report.get('dataset_role'),
+        sensor_mode=report.get('sensor_mode','encoder_camera'), independent_cart_motion_measured=False,
         synthetic=report.get('synthetic', False), hardware_accepted=False,
         questions=[
             'Compare measured camera cart displacement against step count by direction and speed; qualify metric anchors first.',
@@ -451,7 +475,10 @@ def review_campaign(directory, output):
             if quality['valid_fraction'] < .8 or not windows or any(not t['qualified'] for t in quality['measurement_phases']):
                 blockers.append('Camera coverage lacks valid frames, span, rate or gap continuity in a measurement phase; inspect before fitting.')
         else:
-            blockers.append('Raw camera evidence missing.')
+            if report.get('sensor_mode') == 'encoder_only':
+                blockers.append('Independent camera evidence intentionally omitted: encoder-only recording cannot identify physical cart motion or actuator gain/latency.')
+            else:
+                blockers.append('Raw camera evidence missing.')
         states=[r['state'] for r in records if r.get('type')=='state']
         windows=_measurement_windows(records,report.get('trials',[]))
         for window in windows:
@@ -479,6 +506,7 @@ def review_campaign(directory, output):
         if report.get('camera_failure') or report.get('camera', {}).get('failure'):
             blockers.append('Camera recorder/clock evidence failed.')
     result = dict(schema='cartpole-id-campaign-review-v1', integrity_ok=integrity,
+        sensor_mode=report.get('sensor_mode','encoder_camera'), independent_cart_motion_measured=False,
         recording_complete=report.get('completed',False), synthetic=report.get('synthetic',False),
         analysis_usable=not blockers, ready_for_fit=False, hardware_accepted=False,
         blockers=blockers, timing=timing, camera_quality=quality, telemetry_quality=telemetry_quality,

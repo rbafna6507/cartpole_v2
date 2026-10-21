@@ -238,7 +238,8 @@ def test_json_and_line_limits_apply_before_parse(tmp_path,monkeypatch):
     with pytest.raises(ValueError,match='line'):list(c._read_lines(path))
 
 
-def test_complete_campaign_through_real_sdk_guards_and_scripted_device(tmp_path,monkeypatch):
+@pytest.mark.parametrize('encoder_only', [False, True])
+def test_complete_campaign_through_real_sdk_guards_and_scripted_device(tmp_path,monkeypatch,encoder_only):
     """Only device scheduling is scripted; run the actual policies, leases and returns."""
     from dataclasses import replace
     from types import SimpleNamespace
@@ -264,12 +265,48 @@ def test_complete_campaign_through_real_sdk_guards_and_scripted_device(tmp_path,
         def close(self):return {}
     with clocks(clock),__import__('unittest.mock',fromlist=['patch']).patch.object(c,'time',clock):
         report=c.collect_campaign(output=tmp_path/'sdk-campaign',port='scripted-device',suite='autonomous',
-            execute=True,repetitions=1,seconds=5,rig_factory=Device,camera_factory=Camera,emit=lambda x:None)
+            execute=True,repetitions=1,seconds=5,encoder_only=encoder_only,
+            rig_factory=Device,camera_factory=Camera,emit=lambda x:None)
     assert report['completed'] and report['stop_confirmed'] and len(report['trials'])==8
     commands=[item[1] for item in instances[0].commands]
     assert commands.count('ARM')==7 and commands.count('MODE')==1 and commands.count('REHOME')==8
     assert not {'HOME','CLEAR','SET','CALIBRATE'} & set(commands)
     assert c.verify(tmp_path/'sdk-campaign')==(True,None)
+    assert report['sensor_mode'] == ('encoder_only' if encoder_only else 'encoder_camera')
+    assert (tmp_path/'sdk-campaign'/'vision.ndjson').exists() is not encoder_only
+
+
+def test_encoder_only_cli_preserves_explicit_measurement_limitations(tmp_path,monkeypatch,capsys):
+    from cartpole_sdk.identification.campaign_cli import main
+    import cartpole_sdk.rig
+    import cartpole_sdk.identification.experiments as experiments
+    Rig,Camera,instances,calls=fake_resources(tmp_path,monkeypatch)
+    monkeypatch.setattr(cartpole_sdk.rig,'Rig',Rig)
+    def no_camera(*a,**kw):raise AssertionError('encoder-only must not open camera')
+    monkeypatch.setattr(experiments,'CameraRecorder',no_camera)
+    folder=tmp_path/'encoder-only'
+    assert main(['collect','--suite','timing','--port','fixture','--execute','--encoder-only',
+                 '--output',str(folder)])==0
+    report=json.loads((folder/'report.json').read_text())
+    assert report['sensor_mode']=='encoder_only'
+    assert report['camera']['recorded'] is False
+    assert report['independent_cart_motion_measured'] is False
+    assert not (folder/'vision.ndjson').exists()
+    assert not (folder/'vision-report.json').exists()
+    review=c.review_campaign(folder,tmp_path/'review')
+    assert review['integrity_ok'] and review['recording_complete']
+    assert review['sensor_mode']=='encoder_only'
+    assert not review['ready_for_fit'] and not review['hardware_accepted']
+    assert any('independent camera' in b.lower() for b in review['blockers'])
+    assert 'timing' in review
+
+
+def test_encoder_only_manual_suites_are_rejected_before_resources(tmp_path):
+    for suite in c.MANUAL:
+        with pytest.raises(ValueError,match='manual'):
+            c.collect_campaign(output=tmp_path/suite,port='fixture',suite=suite,
+                               cart_restraint='held',encoder_only=True)
+        assert not (tmp_path/suite).exists()
 
 
 def test_second_trial_without_measurement_events_cannot_hide_behind_first(tmp_path):
@@ -289,3 +326,34 @@ def test_second_trial_without_measurement_events_cannot_hide_behind_first(tmp_pa
     review=c.review_campaign(folder,tmp_path/'second-review')
     assert not review['analysis_usable']
     assert any('second' in b for b in review['blockers'])
+
+@pytest.mark.parametrize('fail_at', [None, 1])
+def test_collection_defers_cyclic_gc_until_serial_context_has_stopped(tmp_path, monkeypatch, fail_at):
+    import gc
+    Rig, Camera, instances, calls = fake_resources(tmp_path, monkeypatch, fail_at=fail_at)
+    observed = []
+    class CheckedRig(Rig):
+        def __enter__(self):
+            observed.append(('connect', gc.isenabled()))
+            return super().__enter__()
+        def __exit__(self, *args):
+            observed.append(('disconnect', gc.isenabled()))
+            return super().__exit__(*args)
+    before = gc.isenabled()
+    try:
+        gc.enable()
+        def collect():
+            return c.collect_campaign(output=tmp_path/'gc-run', port='fixture', suite='timing',
+                execute=True, repetitions=1, encoder_only=True, rig_factory=CheckedRig,
+                camera_factory=Camera, emit=lambda _: None)
+        if fail_at:
+            with pytest.raises(RuntimeError, match='fault during trial'):
+                collect()
+        else:
+            collect()
+        assert observed == [('connect', False), ('disconnect', False)]
+        assert gc.isenabled()
+        assert calls[-1] == 'stop'
+    finally:
+        if not before:
+            gc.disable()

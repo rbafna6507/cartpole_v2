@@ -18,6 +18,7 @@ def parser():
         if name!='plan':s.add_argument('--output',type=Path,required=True,help='New directory; never overwrite evidence.')
         if name=='collect':
             s.add_argument('--port',required=True)
+            s.add_argument('--encoder-only',action='store_true',help='Powered suites only: explicitly omit camera; no independent physical cart measurement or actuator calibration.')
             s.add_argument('--execute',action='store_true',help='Authorize guarded motion AND return to the saved home. Required for powered suites.')
             s.add_argument('--camera-url',default='http://127.0.0.1:3090/api/sensing-stream?max_hz=100')
             s.add_argument('--dataset-role',choices=('training','validation','development'),default='development')
@@ -42,6 +43,7 @@ def main(argv=None):
             else:
                 result=campaign.collect_campaign(output=a.output,port=a.port,execute=a.execute,
                     dataset_role=a.dataset_role,run_label=a.run_label,camera_url=a.camera_url,
+                    encoder_only=a.encoder_only,
                     cart_restraint=a.cart_restraint,manual_timeout_s=a.manual_timeout_s,
                     expected_reference=a.expected_reference,expected_home=a.expected_home,**options)
         elif a.command=='review':result=campaign.review_campaign(a.input,a.output)

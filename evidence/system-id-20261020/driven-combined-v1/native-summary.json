@@ -1,0 +1,303 @@
+[
+  {
+    "campaign": "gentle-train-02",
+    "declared_role": "training",
+    "source_raw_path": "runs/id-live-20261020/gentle-train-02/rig-1792542554363258349-770265025.jsonl",
+    "source_raw_sha256": "9f9f9f714dcd6b8e42a742154e8adecd3dd39e9d13cfd91da3a6e44e866a4991",
+    "trials": [
+      {
+        "id": "008-coupled",
+        "requested_s": 15.0,
+        "observed_through_stop_s": 18.494,
+        "mode_intervals": [
+          {
+            "mode": 2,
+            "start_s": 0.0,
+            "last_s": 2.5,
+            "samples": 251,
+            "end_s": 2.51,
+            "duration_s": 2.51
+          },
+          {
+            "mode": 3,
+            "start_s": 2.51,
+            "last_s": 3.5,
+            "samples": 100,
+            "end_s": 3.51,
+            "duration_s": 1.0
+          },
+          {
+            "mode": 5,
+            "start_s": 3.51,
+            "last_s": 3.62,
+            "samples": 12,
+            "end_s": 3.63,
+            "duration_s": 0.1200000000000001
+          },
+          {
+            "mode": 6,
+            "start_s": 3.63,
+            "last_s": 3.7,
+            "samples": 8,
+            "end_s": 3.71,
+            "duration_s": 0.08000000000000007
+          },
+          {
+            "mode": 2,
+            "start_s": 3.71,
+            "last_s": 14.99,
+            "samples": 1129,
+            "end_s": 15.0,
+            "duration_s": 11.29
+          },
+          {
+            "mode": 14,
+            "start_s": 15.0,
+            "last_s": 18.48,
+            "samples": 349,
+            "end_s": 18.49,
+            "duration_s": 3.4899999999999984
+          },
+          {
+            "mode": 0,
+            "start_s": 18.49,
+            "last_s": 18.494,
+            "samples": 2,
+            "end_s": 18.494,
+            "duration_s": 0.004000000000001336
+          }
+        ],
+        "balance_intervals": [
+          {
+            "mode": 3,
+            "start_s": 2.51,
+            "last_s": 3.5,
+            "samples": 100,
+            "end_s": 3.51,
+            "duration_s": 1.0
+          }
+        ],
+        "total_observed_balance_s": 1.0,
+        "balanced_samples": 100,
+        "raw_balance_angle_rms_deg": 4.976231882122251,
+        "raw_balance_angle_p95_abs_deg": 8.094724811296464,
+        "max_abs_counted_x_m": 0.2932875,
+        "faults": [
+          0
+        ]
+      }
+    ],
+    "semantics": "Mode intervals end at first next-mode sample and are telemetry-quantized. Angle metrics use only enabled mode3; counted cart x is not independently measured physical displacement. Return-home motion is included only in mode timeline, not forecast scores."
+  },
+  {
+    "campaign": "coupled-validation-01",
+    "declared_role": "validation",
+    "source_raw_path": "runs/id-live-20261020/coupled-validation-01/rig-1792543239332101914-2363832026.jsonl",
+    "source_raw_sha256": "280fe54df4d14bb23b558c67d947f76826c43a8a8255559b183f6ef4987b36ed",
+    "trials": [
+      {
+        "id": "001-coupled",
+        "requested_s": 25.0,
+        "observed_through_stop_s": 27.014,
+        "mode_intervals": [
+          {
+            "mode": 2,
+            "start_s": 0.0,
+            "last_s": 1.89,
+            "samples": 190,
+            "end_s": 1.9,
+            "duration_s": 1.9
+          },
+          {
+            "mode": 3,
+            "start_s": 1.9,
+            "last_s": 2.01,
+            "samples": 12,
+            "end_s": 2.02,
+            "duration_s": 0.1200000000000001
+          },
+          {
+            "mode": 5,
+            "start_s": 2.02,
+            "last_s": 2.27,
+            "samples": 26,
+            "end_s": 2.28,
+            "duration_s": 0.2599999999999998
+          },
+          {
+            "mode": 6,
+            "start_s": 2.28,
+            "last_s": 2.33,
+            "samples": 6,
+            "end_s": 2.34,
+            "duration_s": 0.06000000000000005
+          },
+          {
+            "mode": 2,
+            "start_s": 2.34,
+            "last_s": 5.99,
+            "samples": 366,
+            "end_s": 6.0,
+            "duration_s": 3.66
+          },
+          {
+            "mode": 3,
+            "start_s": 6.0,
+            "last_s": 7.38,
+            "samples": 139,
+            "end_s": 7.39,
+            "duration_s": 1.3899999999999997
+          },
+          {
+            "mode": 5,
+            "start_s": 7.39,
+            "last_s": 7.43,
+            "samples": 5,
+            "end_s": 7.44,
+            "duration_s": 0.05000000000000071
+          },
+          {
+            "mode": 6,
+            "start_s": 7.44,
+            "last_s": 7.51,
+            "samples": 8,
+            "end_s": 7.52,
+            "duration_s": 0.07999999999999918
+          },
+          {
+            "mode": 2,
+            "start_s": 7.52,
+            "last_s": 24.99,
+            "samples": 1748,
+            "end_s": 25.0,
+            "duration_s": 17.48
+          },
+          {
+            "mode": 14,
+            "start_s": 25.0,
+            "last_s": 27.0,
+            "samples": 201,
+            "end_s": 27.01,
+            "duration_s": 2.0100000000000016
+          },
+          {
+            "mode": 0,
+            "start_s": 27.01,
+            "last_s": 27.014,
+            "samples": 2,
+            "end_s": 27.014,
+            "duration_s": 0.003999999999997783
+          }
+        ],
+        "balance_intervals": [
+          {
+            "mode": 3,
+            "start_s": 1.9,
+            "last_s": 2.01,
+            "samples": 12,
+            "end_s": 2.02,
+            "duration_s": 0.1200000000000001
+          },
+          {
+            "mode": 3,
+            "start_s": 6.0,
+            "last_s": 7.38,
+            "samples": 139,
+            "end_s": 7.39,
+            "duration_s": 1.3899999999999997
+          }
+        ],
+        "total_observed_balance_s": 1.5099999999999998,
+        "balanced_samples": 151,
+        "raw_balance_angle_rms_deg": 12.12247678458211,
+        "raw_balance_angle_p95_abs_deg": 27.026367630119374,
+        "max_abs_counted_x_m": 0.2938875,
+        "faults": [
+          0
+        ]
+      },
+      {
+        "id": "002-coupled",
+        "requested_s": 25.0,
+        "observed_through_stop_s": 27.654,
+        "mode_intervals": [
+          {
+            "mode": 2,
+            "start_s": 0.0,
+            "last_s": 2.46,
+            "samples": 247,
+            "end_s": 2.47,
+            "duration_s": 2.47
+          },
+          {
+            "mode": 3,
+            "start_s": 2.47,
+            "last_s": 5.07,
+            "samples": 261,
+            "end_s": 5.08,
+            "duration_s": 2.61
+          },
+          {
+            "mode": 5,
+            "start_s": 5.08,
+            "last_s": 5.2,
+            "samples": 13,
+            "end_s": 5.21,
+            "duration_s": 0.1299999999999999
+          },
+          {
+            "mode": 6,
+            "start_s": 5.21,
+            "last_s": 5.28,
+            "samples": 8,
+            "end_s": 5.29,
+            "duration_s": 0.08000000000000007
+          },
+          {
+            "mode": 2,
+            "start_s": 5.29,
+            "last_s": 24.99,
+            "samples": 1971,
+            "end_s": 25.0,
+            "duration_s": 19.71
+          },
+          {
+            "mode": 14,
+            "start_s": 25.0,
+            "last_s": 27.64,
+            "samples": 265,
+            "end_s": 27.65,
+            "duration_s": 2.6499999999999986
+          },
+          {
+            "mode": 0,
+            "start_s": 27.65,
+            "last_s": 27.654,
+            "samples": 2,
+            "end_s": 27.654,
+            "duration_s": 0.004000000000001336
+          }
+        ],
+        "balance_intervals": [
+          {
+            "mode": 3,
+            "start_s": 2.47,
+            "last_s": 5.07,
+            "samples": 261,
+            "end_s": 5.08,
+            "duration_s": 2.61
+          }
+        ],
+        "total_observed_balance_s": 2.61,
+        "balanced_samples": 261,
+        "raw_balance_angle_rms_deg": 5.064413427405797,
+        "raw_balance_angle_p95_abs_deg": 8.96484716687189,
+        "max_abs_counted_x_m": 0.2932125,
+        "faults": [
+          0
+        ]
+      }
+    ],
+    "semantics": "Mode intervals end at first next-mode sample and are telemetry-quantized. Angle metrics use only enabled mode3; counted cart x is not independently measured physical displacement. Return-home motion is included only in mode timeline, not forecast scores."
+  }
+]

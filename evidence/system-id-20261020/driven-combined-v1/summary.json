@@ -1,0 +1,2461 @@
+{
+  "schema": "cartpole-driven-frozen-prediction-v1",
+  "parameters_fitted": false,
+  "frozen_model": {
+    "effective_length_m": 0.160303873,
+    "angular_damping_per_s": 0.006891975,
+    "coulomb_rad_s2": 1.6268943,
+    "friction_width_rad_s": 0.05,
+    "gravity_m_s2": 9.81,
+    "commanded_input_gain": 1.0
+  },
+  "frozen_model_sha256": "ad41557a386da4c927d56ebb4a0fa3e64c349e7e234c65c2c0d5e0f70123a43d",
+  "model_law": "qdd=(g*sin(q)-commanded_input_gain*a_mcu*cos(q))/L-gamma*omega-c*tanh(omega/friction_width), q=encoder-phase",
+  "fixed_phase_offset_rad": null,
+  "phase_selected_from_scores": false,
+  "hardware_accepted": false,
+  "recommended_model": null,
+  "physical_acceleration_measured": false,
+  "global_encoder_phase_calibrated": false,
+  "analysis_source_sha256": "46f79474ae00415a6ead5f3360439a13c1bb574d89db22b62bc783506efd3439",
+  "limitations": [
+    "MCU acceleration is a command-state proxy; unit input gain and zero delay are assumptions, not measured actuator properties.",
+    "Left-held 100Hz input omits intersample 1kHz governor ramps. Input history over each forecast is conditioned on recorded commands.",
+    "Every 0.5s forecast reinitializes from past raw encoder data; full-episode open-loop accuracy is not established.",
+    "Firmware-reference and pertrial local-hanging sensitivities are both retained; resting equilibrium may be shifted by friction. Neither establishes global angle calibration.",
+    "Recorded firmware omega is a comparator only; the primary estimate uses seven past/current encoder samples.",
+    "Pertrial forecast checks do not replace original full-model residual/calibration/physical-validity gates. Partial campaigns remain partial diagnostics.",
+    "No vision is loaded; physical cart tracking, masses, force authority, input delay and metric actuator gain remain unmeasured."
+  ],
+  "training": [
+    {
+      "name": "gentle-train-02",
+      "declared_dataset_role": "training",
+      "source_manifest_sha256": "0abb8b3b061b156a5efb587f228d48b9077c4dfcf78a824d7aad1c7f837ee1fa",
+      "source_raw_sha256": "9f9f9f714dcd6b8e42a742154e8adecd3dd39e9d13cfd91da3a6e44e866a4991",
+      "source_report_sha256": "1e5ba3d2426912663ecdb382beca1a5dc7cdfeef7e927fb487f12ebb68444d2b",
+      "sensor_mode": "encoder_only",
+      "campaign_completed": true,
+      "partial_diagnostics": false,
+      "failure": null,
+      "stop_confirmed": true,
+      "trials": [
+        {
+          "id": "001-timing",
+          "kind": "timing",
+          "reference": null,
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.051088,
+          "source_ticks": [
+            444708447,
+            444723467
+          ],
+          "active_duration_s": 15.019999999999982,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.012077502,
+          "phase_anchor_source_host_ns": 637852413234674,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0,
+            "hold_max_abs_v_m_s": 0.0,
+            "elapsed_board_s": 15.02,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.09159583188610401,
+                  "prediction_p95_rad": 0.12926142976847618
+                },
+                "recorded_omega": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.09176999834931224,
+                  "prediction_p95_rad": 0.12918534104525786
+                },
+                "angle_span_rad": 0.0015339999999999243,
+                "commanded_acceleration_rms_m_s2": 0.0,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "commanded acceleration RMS below 0.05 m/s2",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1450,
+                      "prediction_rmse_rad": 0.09159583188610401,
+                      "prediction_p95_rad": 0.12926142976847618
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1450,
+                      "prediction_rmse_rad": 0.09176999834931224,
+                      "prediction_p95_rad": 0.12918534104525786
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.09050465358979308,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.001507957049838089,
+                  "prediction_p95_rad": 0.0029315677463525257
+                },
+                "recorded_omega": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.0009167765340932295,
+                  "prediction_p95_rad": 0.0016463430945179657
+                },
+                "angle_span_rad": 0.0015339999999999243,
+                "commanded_acceleration_rms_m_s2": 0.0,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "commanded acceleration RMS below 0.05 m/s2"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1450,
+                      "prediction_rmse_rad": 0.001507957049838089,
+                      "prediction_p95_rad": 0.0029315677463525257
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1450,
+                      "prediction_rmse_rad": 0.0009167765340932295,
+                      "prediction_p95_rad": 0.0016463430945179657
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "002-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-10mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.051088,
+          "source_ticks": [
+            444725805,
+            444729625
+          ],
+          "active_duration_s": 3.8200000000001637,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.010867491,
+          "phase_anchor_source_host_ns": 637869771046929,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0001125,
+            "hold_max_abs_v_m_s": 0.002459228,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.09589311455612932,
+                  "prediction_p95_rad": 0.16078517509851106
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.0965523522480437,
+                  "prediction_p95_rad": 0.15805519052472983
+                },
+                "angle_span_rad": 0.12271799999999988,
+                "commanded_acceleration_rms_m_s2": 0.15413026566799062,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.09342303981467981,
+                      "prediction_p95_rad": 0.16510818274770106
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.09638974140749075,
+                      "prediction_p95_rad": 0.1650498837155571
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.09658979127995512,
+                      "prediction_p95_rad": 0.1430935859235227
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.09659893279441814,
+                      "prediction_p95_rad": 0.14499468666915044
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.09050465358979308,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.007742794754605034,
+                  "prediction_p95_rad": 0.022079436157083743
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.00719831820541784,
+                  "prediction_p95_rad": 0.016505447256713927
+                },
+                "angle_span_rad": 0.12271799999999988,
+                "commanded_acceleration_rms_m_s2": 0.15413026566799062,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.013542804222480406,
+                      "prediction_p95_rad": 0.024923423275815954
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.011656479163988145,
+                      "prediction_p95_rad": 0.02329243243662417
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.004954579028060567,
+                      "prediction_p95_rad": 0.011506721675290604
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.005264123592710904,
+                      "prediction_p95_rad": 0.014309902720735087
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "003-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-10mm-negative",
+            "kind": "pulse",
+            "amplitude_m": -0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.052622,
+          "source_ticks": [
+            444731971,
+            444735791
+          ],
+          "active_duration_s": 3.819999999999709,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.010913089,
+          "phase_anchor_source_host_ns": 637875939504843,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.00015,
+            "hold_max_abs_v_m_s": 0.002426104,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10125934860252869,
+                  "prediction_p95_rad": 0.17637817552098395
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.09730130104962635,
+                  "prediction_p95_rad": 0.16974940666871763
+                },
+                "angle_span_rad": 0.13038799999999995,
+                "commanded_acceleration_rms_m_s2": 0.15401643457907385,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.08538327061660411,
+                      "prediction_p95_rad": 0.1287258437940405
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.08280491663155641,
+                      "prediction_p95_rad": 0.11640949740913646
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.10543838477404913,
+                      "prediction_p95_rad": 0.17919286661961142
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.1011367937002702,
+                      "prediction_p95_rad": 0.1726811921667526
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08897065358979317,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.019638061318130343,
+                  "prediction_p95_rad": 0.04817659576952076
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.013950474880197803,
+                  "prediction_p95_rad": 0.03456485498126938
+                },
+                "angle_span_rad": 0.13038799999999995,
+                "commanded_acceleration_rms_m_s2": 0.15401643457907385,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.019848721042703972,
+                      "prediction_p95_rad": 0.03520712897584923
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.01763138712499669,
+                      "prediction_p95_rad": 0.0340704502007457
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.019576224555032194,
+                      "prediction_p95_rad": 0.05022890514135381
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.01267782926055361,
+                      "prediction_p95_rad": 0.03516700040488163
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "004-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-20mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.057224,
+          "source_ticks": [
+            444738145,
+            444741965
+          ],
+          "active_duration_s": 3.819999999999709,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.012520042,
+          "phase_anchor_source_host_ns": 637882105612197,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0003,
+            "hold_max_abs_v_m_s": 0.004986238,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10926155981650827,
+                  "prediction_p95_rad": 0.18596183730717694
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.11380970182015222,
+                  "prediction_p95_rad": 0.18530689466044092
+                },
+                "angle_span_rad": 0.3282713071795862,
+                "commanded_acceleration_rms_m_s2": 0.3084224752633716,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.09743666775886108,
+                      "prediction_p95_rad": 0.18124424766814803
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.10081260214961844,
+                      "prediction_p95_rad": 0.18129630622953988
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.11247488485620091,
+                      "prediction_p95_rad": 0.187684743960842
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.11732780584346264,
+                      "prediction_p95_rad": 0.18875479078795765
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08436865358979295,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.0198750157313998,
+                  "prediction_p95_rad": 0.04472890301348196
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.020219930291281947,
+                  "prediction_p95_rad": 0.050322791791013656
+                },
+                "angle_span_rad": 0.3282713071795862,
+                "commanded_acceleration_rms_m_s2": 0.3084224752633716,
+                "forecast_checks_pass": true,
+                "forecast_check_reasons": [],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.029565945485310767,
+                      "prediction_p95_rad": 0.05622730658027683
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.01785120994856612,
+                      "prediction_p95_rad": 0.04101914776023329
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.015979486636775838,
+                      "prediction_p95_rad": 0.03844331676980994
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.02085987013284308,
+                      "prediction_p95_rad": 0.05379272428080917
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "005-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-20mm-negative",
+            "kind": "pulse",
+            "amplitude_m": -0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.054156,
+          "source_ticks": [
+            444744317,
+            444748137
+          ],
+          "active_duration_s": 3.819999999999709,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.011209646,
+          "phase_anchor_source_host_ns": 637888285827728,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0002625,
+            "hold_max_abs_v_m_s": 0.004587768,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.11722085166613214,
+                  "prediction_p95_rad": 0.21717590162382044
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10752432782448483,
+                  "prediction_p95_rad": 0.1940111404880746
+                },
+                "angle_span_rad": 0.319068307179585,
+                "commanded_acceleration_rms_m_s2": 0.3073631584291457,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.09258508061856294,
+                      "prediction_p95_rad": 0.1366351218677019
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.08979285339936188,
+                      "prediction_p95_rad": 0.12857061041766069
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.12348068626738071,
+                      "prediction_p95_rad": 0.22805982019625826
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.1121668599348436,
+                      "prediction_p95_rad": 0.19540991979740818
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08743665358979325,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.035859777563411015,
+                  "prediction_p95_rad": 0.09873537830168257
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.018774813480956682,
+                  "prediction_p95_rad": 0.04312023644719856
+                },
+                "angle_span_rad": 0.319068307179585,
+                "commanded_acceleration_rms_m_s2": 0.3073631584291457,
+                "forecast_checks_pass": true,
+                "forecast_check_reasons": [],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.02319842577069185,
+                      "prediction_p95_rad": 0.04977528708780995
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 79,
+                      "prediction_rmse_rad": 0.020434849833412285,
+                      "prediction_p95_rad": 0.043880246089276556
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.03878020602079916,
+                      "prediction_p95_rad": 0.10898105247659817
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 271,
+                      "prediction_rmse_rad": 0.0182625080733731,
+                      "prediction_p95_rad": 0.04224300281269411
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "006-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "reversal-20mm-positive",
+            "kind": "reversal",
+            "amplitude_m": 0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.057224,
+          "source_ticks": [
+            444750478,
+            444754698
+          ],
+          "active_duration_s": 4.220000000000255,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.01290057,
+          "phase_anchor_source_host_ns": 637894446679720,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0002625,
+            "hold_max_abs_v_m_s": 0.004884713,
+            "elapsed_board_s": 4.22,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.13188152002658934,
+                  "prediction_p95_rad": 0.21349787996617722
+                },
+                "recorded_omega": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.1311744745014342,
+                  "prediction_p95_rad": 0.2002276258486598
+                },
+                "angle_span_rad": 0.7025623071795866,
+                "commanded_acceleration_rms_m_s2": 0.5069985561253258,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.11197669126204143,
+                      "prediction_p95_rad": 0.19007967423363878
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.11861943927593055,
+                      "prediction_p95_rad": 0.18328563027486966
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.13928206809728316,
+                      "prediction_p95_rad": 0.2192086820933348
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.13602691811031453,
+                      "prediction_p95_rad": 0.2124586018974623
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08436865358979295,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.03406685537685533,
+                  "prediction_p95_rad": 0.07705396865266396
+                },
+                "recorded_omega": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.035874596302525874,
+                  "prediction_p95_rad": 0.0798063288398925
+                },
+                "angle_span_rad": 0.7025623071795866,
+                "commanded_acceleration_rms_m_s2": 0.5069985561253258,
+                "forecast_checks_pass": true,
+                "forecast_check_reasons": [],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.024546913097483494,
+                      "prediction_p95_rad": 0.04589989701720655
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.027836818771953032,
+                      "prediction_p95_rad": 0.06084694731946681
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.037299371143583816,
+                      "prediction_p95_rad": 0.0887328328357545
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.038713074820604626,
+                      "prediction_p95_rad": 0.08872846311405894
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "007-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "reversal-20mm-negative",
+            "kind": "reversal",
+            "amplitude_m": -0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.052622,
+          "source_ticks": [
+            444757043,
+            444761263
+          ],
+          "active_duration_s": 4.220000000000255,
+          "max_board_gap_s": 0.01000099999964732,
+          "max_host_receipt_gap_s": 0.01188904,
+          "phase_anchor_source_host_ns": 637901012293003,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0002625,
+            "hold_max_abs_v_m_s": 0.004816923,
+            "elapsed_board_s": 4.22,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.1261223604648897,
+                  "prediction_p95_rad": 0.2083692626918651
+                },
+                "recorded_omega": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.1305962641584066,
+                  "prediction_p95_rad": 0.21708852084660546
+                },
+                "angle_span_rad": 0.6902913071795864,
+                "commanded_acceleration_rms_m_s2": 0.5080138258981505,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.11292917731124939,
+                      "prediction_p95_rad": 0.21199388605615244
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.11301806117305228,
+                      "prediction_p95_rad": 0.21643702784150295
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.1311897047150973,
+                      "prediction_p95_rad": 0.20649786700187642
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.13720716421596657,
+                      "prediction_p95_rad": 0.21914131955502286
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08897065358979317,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.023670297745511958,
+                  "prediction_p95_rad": 0.04406055412956178
+                },
+                "recorded_omega": {
+                  "prediction_windows": 8,
+                  "prediction_samples": 400,
+                  "prediction_rmse_rad": 0.036319602781421274,
+                  "prediction_p95_rad": 0.07463845881816866
+                },
+                "angle_span_rad": 0.6902913071795864,
+                "commanded_acceleration_rms_m_s2": 0.5080138258981505,
+                "forecast_checks_pass": true,
+                "forecast_check_reasons": [],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.030045159270306085,
+                      "prediction_p95_rad": 0.05461815314174333
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 117,
+                      "prediction_rmse_rad": 0.039021724963687957,
+                      "prediction_p95_rad": 0.08657617556644509
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.02046249188320216,
+                      "prediction_p95_rad": 0.03922914075845866
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 283,
+                      "prediction_rmse_rad": 0.03514181774192605,
+                      "prediction_p95_rad": 0.069200787271595
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "008-coupled",
+          "kind": "coupled",
+          "reference": null,
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.038816,
+          "source_ticks": [
+            444763598,
+            444778588
+          ],
+          "active_duration_s": 14.989999999999782,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.011856906,
+          "phase_anchor_source_host_ns": 637907573235537,
+          "protocol": {},
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.7979638032592756,
+                  "prediction_p95_rad": 1.9419634701741952
+                },
+                "recorded_omega": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.7779217310039772,
+                  "prediction_p95_rad": 1.887837886469419
+                },
+                "angle_span_rad": 17.711342221538757,
+                "commanded_acceleration_rms_m_s2": 5.3623457825193634,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1333,
+                      "prediction_rmse_rad": 0.7501592676176135,
+                      "prediction_p95_rad": 1.7702846415603868
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1333,
+                      "prediction_rmse_rad": 0.6832131488464477,
+                      "prediction_p95_rad": 1.4737369253642418
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 98,
+                      "prediction_rmse_rad": 1.2823027343655133,
+                      "prediction_p95_rad": 2.8164668042307253
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 98,
+                      "prediction_rmse_rad": 1.5364444170954117,
+                      "prediction_p95_rad": 2.8916291029238814
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 11,
+                      "prediction_rmse_rad": 1.0436334186085743,
+                      "prediction_p95_rad": 1.5709758066730004
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 11,
+                      "prediction_rmse_rad": 1.4693462394679202,
+                      "prediction_p95_rad": 2.228295912072928
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.059935903342728934,
+                      "prediction_p95_rad": 0.09407271104903717
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.14731721417170504,
+                      "prediction_p95_rad": 0.18152043139045934
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.10277665358979293,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.8484073550460716,
+                  "prediction_p95_rad": 2.1727716068580634
+                },
+                "recorded_omega": {
+                  "prediction_windows": 29,
+                  "prediction_samples": 1450,
+                  "prediction_rmse_rad": 0.7877232993347429,
+                  "prediction_p95_rad": 1.8746541407176915
+                },
+                "angle_span_rad": 17.711342221538757,
+                "commanded_acceleration_rms_m_s2": 5.3623457825193634,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1333,
+                      "prediction_rmse_rad": 0.7813056456289543,
+                      "prediction_p95_rad": 1.931344994112023
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 1333,
+                      "prediction_rmse_rad": 0.7164293104715099,
+                      "prediction_p95_rad": 1.538199764681776
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 98,
+                      "prediction_rmse_rad": 1.4940838232559515,
+                      "prediction_p95_rad": 2.8275667991546047
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 98,
+                      "prediction_rmse_rad": 1.4138407488444433,
+                      "prediction_p95_rad": 2.8170501164400457
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 11,
+                      "prediction_rmse_rad": 1.009931464373137,
+                      "prediction_p95_rad": 1.4958251585524984
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 11,
+                      "prediction_rmse_rad": 1.327365472815186,
+                      "prediction_p95_rad": 1.9936653151895873
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.024032395496146407,
+                      "prediction_p95_rad": 0.038195670075683
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.1833180431128545,
+                      "prediction_p95_rad": 0.2387533324129901
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "standard-train-01",
+      "declared_dataset_role": "training",
+      "source_manifest_sha256": "877eda64039d08d743a3b5edfc1dd8ab944b9c12e58a178c9ea6bd3cbce450e0",
+      "source_raw_sha256": "a37595cc740c2312211c0e09b6dad9c383362c6390b3763b588414a16a55ddc5",
+      "source_report_sha256": "54aec9551780f055e8e199f34ee8e1a6e65fe45c905a55f89928b0b12447f906",
+      "sensor_mode": "encoder_only",
+      "campaign_completed": false,
+      "partial_diagnostics": true,
+      "failure": "RigError('latched rig error: executor fault 1')",
+      "stop_confirmed": false,
+      "trials": [
+        {
+          "id": "001-timing",
+          "kind": "timing",
+          "reference": null,
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.041884,
+          "source_ticks": [
+            444944325,
+            444969345
+          ],
+          "active_duration_s": 25.019999999999982,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.012127944,
+          "phase_anchor_source_host_ns": 638088303286539,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0,
+            "hold_max_abs_v_m_s": 0.0,
+            "elapsed_board_s": 25.02,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.08693535303578723,
+                  "prediction_p95_rad": 0.1216014466463198
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.08685562922996637,
+                  "prediction_p95_rad": 0.12160562276623617
+                },
+                "angle_span_rad": 0.016874000000000056,
+                "commanded_acceleration_rms_m_s2": 0.0,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "commanded acceleration RMS below 0.05 m/s2",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2450,
+                      "prediction_rmse_rad": 0.08693535303578723,
+                      "prediction_p95_rad": 0.1216014466463198
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2450,
+                      "prediction_rmse_rad": 0.08685562922996637,
+                      "prediction_p95_rad": 0.12160562276623617
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.09970865358979308,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.00511235255416064,
+                  "prediction_p95_rad": 0.0075180637066256896
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.005129673810149844,
+                  "prediction_p95_rad": 0.0075208084815148405
+                },
+                "angle_span_rad": 0.016874000000000056,
+                "commanded_acceleration_rms_m_s2": 0.0,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "commanded acceleration RMS below 0.05 m/s2"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2450,
+                      "prediction_rmse_rad": 0.00511235255416064,
+                      "prediction_p95_rad": 0.0075180637066256896
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2450,
+                      "prediction_rmse_rad": 0.005129673810149844,
+                      "prediction_p95_rad": 0.0075208084815148405
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "002-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-10mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.052622,
+          "source_ticks": [
+            444971697,
+            444975517
+          ],
+          "active_duration_s": 3.8200000000001637,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.011674722,
+          "phase_anchor_source_host_ns": 638115676593515,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.00015,
+            "hold_max_abs_v_m_s": 0.002382017,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10010189897421251,
+                  "prediction_p95_rad": 0.1712163415079305
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10095870470223099,
+                  "prediction_p95_rad": 0.16581432912019634
+                },
+                "angle_span_rad": 0.11811600000000011,
+                "commanded_acceleration_rms_m_s2": 0.15377161307157808,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.09843390924206455,
+                      "prediction_p95_rad": 0.18026919375463743
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.10316207661957318,
+                      "prediction_p95_rad": 0.18027588544822762
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.10057511591921638,
+                      "prediction_p95_rad": 0.14661469989222578
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.10031792702400777,
+                      "prediction_p95_rad": 0.15162465335780612
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08897065358979317,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.012023324930340777,
+                  "prediction_p95_rad": 0.03441036351042334
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.009132089436455477,
+                  "prediction_p95_rad": 0.022710416835548468
+                },
+                "angle_span_rad": 0.11811600000000011,
+                "commanded_acceleration_rms_m_s2": 0.15377161307157808,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.022477337535654358,
+                      "prediction_p95_rad": 0.039859491095055155
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.017488688027343192,
+                      "prediction_p95_rad": 0.036590120469920856
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.006413486772843274,
+                      "prediction_p95_rad": 0.012818234862999323
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.00442737217107714,
+                      "prediction_p95_rad": 0.011218882034070331
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "003-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-10mm-negative",
+            "kind": "pulse",
+            "amplitude_m": -0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.049554,
+          "source_ticks": [
+            444977863,
+            444981683
+          ],
+          "active_duration_s": 3.8200000000001637,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.010933239,
+          "phase_anchor_source_host_ns": 638121842381786,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0001125,
+            "hold_max_abs_v_m_s": 0.00243109,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10539408768563999,
+                  "prediction_p95_rad": 0.1784124065124351
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.10241959241471697,
+                  "prediction_p95_rad": 0.17343998249810508
+                },
+                "angle_span_rad": 0.12271799999999988,
+                "commanded_acceleration_rms_m_s2": 0.15393145576675896,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad",
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.08777415632341212,
+                      "prediction_p95_rad": 0.12539088911979462
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.08687705086589799,
+                      "prediction_p95_rad": 0.11850761659067495
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.10992701798931924,
+                      "prediction_p95_rad": 0.1821133999764449
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.10645880874919052,
+                      "prediction_p95_rad": 0.17533941460328123
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.092038653589793,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.02061468209270005,
+                  "prediction_p95_rad": 0.04852882588512944
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.016786458667523117,
+                  "prediction_p95_rad": 0.03901412568676199
+                },
+                "angle_span_rad": 0.12271799999999988,
+                "commanded_acceleration_rms_m_s2": 0.15393145576675896,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "encoder angle span below 0.15 rad"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.021411934922116554,
+                      "prediction_p95_rad": 0.039245630530886096
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.020596544087763752,
+                      "prediction_p95_rad": 0.038946176866159865
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.020380304846185807,
+                      "prediction_p95_rad": 0.05333387180805387
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.015522261420952295,
+                      "prediction_p95_rad": 0.038734875706049755
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "004-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-20mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.052622,
+          "source_ticks": [
+            444984035,
+            444987855
+          ],
+          "active_duration_s": 3.8200000000001637,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.01254561,
+          "phase_anchor_source_host_ns": 638128015612897,
+          "protocol": {
+            "clamped_commands": 0,
+            "fit_protocol_deviation_clamped": false,
+            "hold_max_abs_x_m": 0.0002625,
+            "hold_max_abs_v_m_s": 0.00503797,
+            "elapsed_board_s": 3.82,
+            "hold_type": "feedback_cart_hold",
+            "physical_cart_fixed": false,
+            "jerk_limited_commands": 0,
+            "limits": {
+              "position_m": 0.1,
+              "velocity_m_s": 0.6,
+              "acceleration_m_s2": 8.0,
+              "jerk_m_s3": 150.0,
+              "native_position_m": 0.29900000022,
+              "native_velocity_m_s": 1.5,
+              "native_acceleration_m_s2": 25.0,
+              "native_omega_rad_s": 150.0
+            },
+            "physical_trajectory_guaranteed": false
+          },
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.11840575213001928,
+                  "prediction_p95_rad": 0.19162087907592487
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.12148045174152225,
+                  "prediction_p95_rad": 0.20007097918661093
+                },
+                "angle_span_rad": 0.31139730717958614,
+                "commanded_acceleration_rms_m_s2": 0.30848769105132345,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.10627498452748152,
+                      "prediction_p95_rad": 0.1982345523605137
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.10849605220022332,
+                      "prediction_p95_rad": 0.19822695572338453
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.12166147140558783,
+                      "prediction_p95_rad": 0.18598706250328945
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.1249552327719178,
+                      "prediction_p95_rad": 0.20006549198103782
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08897065358979317,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.02958354298485313,
+                  "prediction_p95_rad": 0.07610019437900167
+                },
+                "recorded_omega": {
+                  "prediction_windows": 7,
+                  "prediction_samples": 350,
+                  "prediction_rmse_rad": 0.02065013486921435,
+                  "prediction_p95_rad": 0.04720897842379382
+                },
+                "angle_span_rad": 0.31139730717958614,
+                "commanded_acceleration_rms_m_s2": 0.30848769105132345,
+                "forecast_checks_pass": true,
+                "forecast_check_reasons": [],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "driven_excitation": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.05005870736945467,
+                      "prediction_p95_rad": 0.10201284609459987
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 78,
+                      "prediction_rmse_rad": 0.021290695670808553,
+                      "prediction_p95_rad": 0.04312392230682378
+                    }
+                  },
+                  "feedback_cart_hold": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.02018816986912413,
+                      "prediction_p95_rad": 0.038885720623209274
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 272,
+                      "prediction_rmse_rad": 0.020462745400213336,
+                      "prediction_p95_rad": 0.049555607306291036
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "005-actuator",
+          "kind": "actuator",
+          "reference": {
+            "id": "pulse-20mm-negative",
+            "kind": "pulse",
+            "amplitude_m": -0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "completed": false,
+          "status": "excluded_incomplete",
+          "failure": "RigError('latched rig error: executor fault 1')",
+          "reason": "failed/incomplete trial is never model validation"
+        }
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "name": "coupled-validation-01",
+      "declared_dataset_role": "validation",
+      "source_manifest_sha256": "8bdb54e7fdae0ea91fe2701ec1650df395d03f3dec9016192f1e227a12fcf782",
+      "source_raw_sha256": "280fe54df4d14bb23b558c67d947f76826c43a8a8255559b183f6ef4987b36ed",
+      "source_report_sha256": "8c6bc01960c1047bcc9569b5883ed2e5e58dbc7554ffbaa0932829334223ad10",
+      "sensor_mode": "encoder_only",
+      "campaign_completed": true,
+      "partial_diagnostics": false,
+      "failure": null,
+      "stop_confirmed": true,
+      "trials": [
+        {
+          "id": "001-coupled",
+          "kind": "coupled",
+          "reference": null,
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.052622,
+          "source_ticks": [
+            445393401,
+            445418391
+          ],
+          "active_duration_s": 24.98999999999978,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.01548809,
+          "phase_anchor_source_host_ns": 638537401211523,
+          "protocol": {},
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.8268112557489544,
+                  "prediction_p95_rad": 2.02224245026302
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.7065828099310401,
+                  "prediction_p95_rad": 1.5842479757171934
+                },
+                "angle_span_rad": 22.457478828718344,
+                "commanded_acceleration_rms_m_s2": 5.5822546937861555,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2258,
+                      "prediction_rmse_rad": 0.7234648932196864,
+                      "prediction_p95_rad": 1.734688630234389
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2258,
+                      "prediction_rmse_rad": 0.6872598576555596,
+                      "prediction_p95_rad": 1.4947879837694902
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 148,
+                      "prediction_rmse_rad": 1.6263608200415112,
+                      "prediction_p95_rad": 2.8725864745633007
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 148,
+                      "prediction_rmse_rad": 0.9424924091625619,
+                      "prediction_p95_rad": 2.4664557583527658
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 30,
+                      "prediction_rmse_rad": 1.3620076780086263,
+                      "prediction_p95_rad": 2.3984363025409303
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 30,
+                      "prediction_rmse_rad": 0.5867106612502573,
+                      "prediction_p95_rad": 1.0475326464359767
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 14,
+                      "prediction_rmse_rad": 1.810712862871856,
+                      "prediction_p95_rad": 3.024298483135406
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 14,
+                      "prediction_rmse_rad": 1.0309064933329684,
+                      "prediction_p95_rad": 1.5186069507392521
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.08897065358979317,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.8186282182632207,
+                  "prediction_p95_rad": 1.9598676740868621
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.8022617639240162,
+                  "prediction_p95_rad": 1.9561161785162533
+                },
+                "angle_span_rad": 22.457478828718344,
+                "commanded_acceleration_rms_m_s2": 5.5822546937861555,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2258,
+                      "prediction_rmse_rad": 0.7144103448876558,
+                      "prediction_p95_rad": 1.5915183001556543
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2258,
+                      "prediction_rmse_rad": 0.7741052880178524,
+                      "prediction_p95_rad": 1.8124444206443058
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 148,
+                      "prediction_rmse_rad": 1.6161770545248297,
+                      "prediction_p95_rad": 2.898699681072521
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 148,
+                      "prediction_rmse_rad": 1.1085566304298746,
+                      "prediction_p95_rad": 2.591087109558629
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 30,
+                      "prediction_rmse_rad": 1.4192560346397696,
+                      "prediction_p95_rad": 2.5839648707022445
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 30,
+                      "prediction_rmse_rad": 0.6916932442857825,
+                      "prediction_p95_rad": 1.2168627966316528
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 14,
+                      "prediction_rmse_rad": 1.7407121345245524,
+                      "prediction_p95_rad": 3.005924017056977
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 14,
+                      "prediction_rmse_rad": 1.4032343127008742,
+                      "prediction_p95_rad": 1.8591652886949184
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        },
+        {
+          "id": "002-coupled",
+          "kind": "coupled",
+          "reference": null,
+          "completed": true,
+          "status": "scored",
+          "initial_hanging_rad": 3.04035,
+          "source_ticks": [
+            445427189,
+            445452179
+          ],
+          "active_duration_s": 24.98999999999978,
+          "max_board_gap_s": 0.010000000000218279,
+          "max_host_receipt_gap_s": 0.015701819,
+          "phase_anchor_source_host_ns": 638571190054234,
+          "protocol": {},
+          "return_home_scored": false,
+          "phase_baselines": {
+            "firmware_reference": {
+              "phase_offset_rad": 0.0,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.7134222578388969,
+                  "prediction_p95_rad": 1.6756698855050167
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.8017047733793354,
+                  "prediction_p95_rad": 2.0081011623652305
+                },
+                "angle_span_rad": 11.727283114359173,
+                "commanded_acceleration_rms_m_s2": 5.9310673439195725,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2174,
+                      "prediction_rmse_rad": 0.626388719839683,
+                      "prediction_p95_rad": 1.2705696789188228
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2174,
+                      "prediction_rmse_rad": 0.7724512800871552,
+                      "prediction_p95_rad": 1.8787964012260145
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 256,
+                      "prediction_rmse_rad": 1.2104340472191564,
+                      "prediction_p95_rad": 2.7059178939427055
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 256,
+                      "prediction_rmse_rad": 1.039411269422419,
+                      "prediction_p95_rad": 2.690466554679869
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 12,
+                      "prediction_rmse_rad": 1.2527796970671128,
+                      "prediction_p95_rad": 3.0585631428561535
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 12,
+                      "prediction_rmse_rad": 0.24015038895716675,
+                      "prediction_p95_rad": 0.5426273919003836
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.09414579057362917,
+                      "prediction_p95_rad": 0.10670563424877821
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.17216025429354015,
+                      "prediction_p95_rad": 0.20818716232092624
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            },
+            "local_hanging_anchor": {
+              "phase_offset_rad": -0.10124265358979301,
+              "scores": {
+                "causal_encoder": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.6984718969447966,
+                  "prediction_p95_rad": 1.6511393175288387
+                },
+                "recorded_omega": {
+                  "prediction_windows": 49,
+                  "prediction_samples": 2450,
+                  "prediction_rmse_rad": 0.8251250089150561,
+                  "prediction_p95_rad": 2.0674217759515185
+                },
+                "angle_span_rad": 11.727283114359173,
+                "commanded_acceleration_rms_m_s2": 5.9310673439195725,
+                "forecast_checks_pass": false,
+                "forecast_check_reasons": [
+                  "causal forecast errors exceed 0.08 rad RMS or 0.15 rad p95"
+                ],
+                "hardware_accepted": false,
+                "by_phase": {
+                  "native_mode_2": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2174,
+                      "prediction_rmse_rad": 0.6028599111681228,
+                      "prediction_p95_rad": 1.323243536239416
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 2174,
+                      "prediction_rmse_rad": 0.8032726588302423,
+                      "prediction_p95_rad": 1.989931984624959
+                    }
+                  },
+                  "native_mode_3": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 256,
+                      "prediction_rmse_rad": 1.2398746216090577,
+                      "prediction_p95_rad": 2.7777301352821127
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 256,
+                      "prediction_rmse_rad": 0.9958118873443802,
+                      "prediction_p95_rad": 2.374082043969749
+                    }
+                  },
+                  "native_mode_5": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 12,
+                      "prediction_rmse_rad": 0.9725657059604772,
+                      "prediction_p95_rad": 2.366649325299807
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 12,
+                      "prediction_rmse_rad": 0.9526705823477987,
+                      "prediction_p95_rad": 2.3109545780655374
+                    }
+                  },
+                  "native_mode_6": {
+                    "causal_encoder": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.1764218989983994,
+                      "prediction_p95_rad": 0.2261262435483215
+                    },
+                    "recorded_omega": {
+                      "prediction_windows": null,
+                      "prediction_samples": 8,
+                      "prediction_rmse_rad": 0.2546037784471029,
+                      "prediction_p95_rad": 0.3268881550067315
+                    }
+                  }
+                },
+                "initialization": "primary: seven past/current encoder samples, quadratic endpoint derivative; comparator: current recorded firmware omega",
+                "horizon_s": 0.5,
+                "max_gap_s": 0.02,
+                "input_reconstruction": "left-held MCU commanded acceleration; zero modeled delay",
+                "causal_initialization": true,
+                "physical_acceleration_measured": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "standard-validation-01",
+      "declared_dataset_role": "validation",
+      "source_manifest_sha256": "de3451d63dd88c3f71c47144937917b52ed2b2c1602785aebb666125e5ce2cae",
+      "source_raw_sha256": "95783fd67127c99e72a43966989e36cb654c85987058639a366e5d4f7ded07bf",
+      "source_report_sha256": "bdaf449e76adf81ecf47570949c8c5b98f8fe85efb3b22d9d363a76ad290f8f5",
+      "sensor_mode": "encoder_only",
+      "campaign_completed": false,
+      "partial_diagnostics": true,
+      "failure": "ValidationError('driven policy cadence exceeded 20 ms lease guard')",
+      "stop_confirmed": false,
+      "trials": [
+        {
+          "id": "001-timing",
+          "kind": "timing",
+          "reference": null,
+          "completed": false,
+          "status": "excluded_incomplete",
+          "failure": "ValidationError('driven policy cadence exceeded 20 ms lease guard')",
+          "reason": "failed/incomplete trial is never model validation"
+        }
+      ]
+    }
+  ],
+  "development": []
+}

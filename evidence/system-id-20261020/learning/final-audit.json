@@ -1,0 +1,157 @@
+{
+  "actor_sha256": "b6d1179873eadbfebe0798e7cc39c17f05cc1bf7d9983733550e26e5681e6f08",
+  "all_trial_checkpoint_recipe_source_and_evaluation_trace_bindings_valid": true,
+  "artifact_hashes": {
+    "deployment-envelope-check.json": "00ecc649021c4cfb89669bb0d87563ac7343dd87ffcfb3337998edf8ac8a9449",
+    "protocol.json": "5ba10edd00559f56b2c21bf93aa5269f982e68c7cf1b015722def92034ba6983",
+    "result.json": "5a05bd1a80fe6b74928b4f664bcdc66d8d22b1d9fa0afc91c69697d3dda89351",
+    "selected-sdk-parity/report.json": "033ff695e769d7139259a7e832538d61b12a777078b8eb0b65efefae08e2b94a",
+    "selected-stress/report.json": "bbba0dac5d51b07a177bf9a90fee42ff181b87cd6cdd1d8de6be64b4746b3b3b",
+    "selection.json": "41527143c92e50f99f532f6d48e8a448125235a109ce471ae237ff4f1b7830a4"
+  },
+  "completed": true,
+  "counted_decisions": {
+    "development": 72000,
+    "numeric_parity": 24000,
+    "paired_heldout": 288000,
+    "stress_advanced": 36012,
+    "stress_proposed": 36016,
+    "training": 122880
+  },
+  "hardware_accepted": false,
+  "learning_interpretation": "Teacher prior explains initial balance success. Scratch final0/6 versus teacher final6/6 on equal online-budget development poses, with extra teacher supervision. Heldout RMS improved12/24 paired poses and regressed12/24. Selected seed mean improves0.220mm, with4/8 paired wins and essentially unchanged worst excursion. This is not evidence of a reliable PPO improvement.",
+  "limitations": [
+    "One-degree angle bias in either direction breaks all four upright stress trials; candidate is not robust.",
+    "stress-summary.actual_decisions counts36012 physical-advanced decisions; trace audit counts36016 proposed decisions including four invalid-input decisions with no time advance.",
+    "Stress uses trained predictor through TrainingEnv; actual numeric SDK parity is a separate fresh-seed report.",
+    "Balance wrapper is narrower than generic evaluation; default raw cap .25m/s\u00b2 can reject nominal demands.",
+    "Physical host command lease expiry remains unresolved; cyclic GC deferral is not a demonstrated complete fix.",
+    "No hardware was accessed by this agent."
+  ],
+  "paired_teacher_heldout": [
+    {
+      "episodes": 8,
+      "final": {
+        "balanced_samples": 47999,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 3.49787101149559,
+        "mean_tail_theta_rms_rad": 0.00035938031426091413,
+        "mean_tail_x_rms_m": 0.0036911705843842464,
+        "minimum_balanced_fraction": 0.9998333333333334,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.10610023688663196
+      },
+      "final_continuously_balanced_episodes": 7,
+      "initial": {
+        "balanced_samples": 48000,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 2.9379043728113174,
+        "mean_tail_theta_rms_rad": 0.00034946793502525227,
+        "mean_tail_x_rms_m": 0.003948109709668368,
+        "minimum_balanced_fraction": 1.0,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.09949081598716304
+      },
+      "initial_continuously_balanced_episodes": 8,
+      "mean_paired_rms_delta_m": -0.00025693912528412257,
+      "optimizer_seed": 3,
+      "paired_rms_improvements": 5,
+      "paired_rms_regressions": 3
+    },
+    {
+      "episodes": 8,
+      "final": {
+        "balanced_samples": 48000,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 2.941710129380226,
+        "mean_tail_theta_rms_rad": 0.000323420138678139,
+        "mean_tail_x_rms_m": 0.003710573052488399,
+        "minimum_balanced_fraction": 1.0,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.10359015968241725
+      },
+      "final_continuously_balanced_episodes": 8,
+      "initial": {
+        "balanced_samples": 48000,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 2.8588226065039635,
+        "mean_tail_theta_rms_rad": 0.000352404288309,
+        "mean_tail_x_rms_m": 0.003930279956602998,
+        "minimum_balanced_fraction": 1.0,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.10352344283607627
+      },
+      "initial_continuously_balanced_episodes": 8,
+      "mean_paired_rms_delta_m": -0.00021970690411459885,
+      "optimizer_seed": 17,
+      "paired_rms_improvements": 4,
+      "paired_rms_regressions": 4
+    },
+    {
+      "episodes": 8,
+      "final": {
+        "balanced_samples": 48000,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 3.406177833676338,
+        "mean_tail_theta_rms_rad": 0.0003562845788346399,
+        "mean_tail_x_rms_m": 0.0036466055441654677,
+        "minimum_balanced_fraction": 1.0,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.08668602889647979
+      },
+      "final_continuously_balanced_episodes": 8,
+      "initial": {
+        "balanced_samples": 48000,
+        "complete_episodes": 8,
+        "episodes": 8,
+        "faults": 0,
+        "holds": 8,
+        "max_abs_raw_m_s2": 2.8837956488132477,
+        "mean_tail_theta_rms_rad": 0.00034236703310550423,
+        "mean_tail_x_rms_m": 0.003523544419802977,
+        "minimum_balanced_fraction": 1.0,
+        "samples": 48000,
+        "worst_max_abs_x_m": 0.10086563502152711
+      },
+      "initial_continuously_balanced_episodes": 8,
+      "mean_paired_rms_delta_m": 0.00012306112436249106,
+      "optimizer_seed": 29,
+      "paired_rms_improvements": 3,
+      "paired_rms_regressions": 5
+    }
+  ],
+  "pinned_training_source_and_profiles_unchanged": true,
+  "profile_interpretation": "Updated executor bw10 and rail .309000015; original passive dynamics coefficients retained. No new accepted physical fit.",
+  "robust": false,
+  "schema": "cartpole-balance-final-audit-20261020-v1",
+  "selected_run": "teacher-seed17",
+  "status": "DEVELOPMENT_ONLY",
+  "stress": {
+    "angle_bias_upright_episodes": 4,
+    "angle_bias_upright_holds": 0,
+    "episodes": 44,
+    "expected_fault_episodes": 8,
+    "expected_fault_passes": 8,
+    "hanging_task_episodes": 18,
+    "hanging_task_holds": 5,
+    "scenario_gate_pass": false,
+    "upright_task_episodes": 18,
+    "upright_task_holds": 14
+  },
+  "teacher_extra_supervised_updates": 4500
+}

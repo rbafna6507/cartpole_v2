@@ -1,5 +1,7 @@
 # Cartpole v2
 
+Latest live measurements, model limitations, training results and bounded balance commands: [2026-10-20 checkpoint](docs/checkpoint-20261020.md).
+
 The SDK now connects to a new Teensy safety executor, runs the preserved controller
 on hardware, and supports Python policies, MuJoCo simulation, policy training,
 recordings, source-specific sensing, and an isolated submission queue. The working

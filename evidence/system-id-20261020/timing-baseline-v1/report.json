@@ -1,0 +1,3207 @@
+{
+  "schema": "cartpole-host-timing-diagnostic-v1",
+  "hardware_accepted": false,
+  "physical_one_way_latency_identified": false,
+  "script_sha256": "482100ceeb325b0fcf6c35eb3485f30682647cd226cecf5f22e65241f9a3caf5",
+  "runs": [
+    {
+      "name": "timing-probe-01",
+      "source_path": "/Users/rbafna/projects/cartpole_v2/runs/id-live-20261020/timing-probe-01/timing-probe-01",
+      "source_sha256": {
+        "manifest": "d531c31e78a98d44342cab28cb42ea006ca392ff3e297161a70e2faa69379882",
+        "report": "9c0aaa73cc05fbe070862884ec6c56933ccb55e26ccc365a306859b86639d881",
+        "raw": "821a2c051c20eb741e0631706417cceeabe64fc3da1804ffda45419711b9a2d9"
+      },
+      "collection": {
+        "dataset_role": "development",
+        "sensor_mode": "encoder_only",
+        "completed": true,
+        "stop_confirmed": true,
+        "last_disabled_snapshot": null,
+        "failure": null,
+        "records_dropped": 0,
+        "pending_log_records": 0,
+        "timing_record_errors": 0
+      },
+      "timing": {
+        "schema_version": 1,
+        "clock_basis": "host monotonic receipt and board counters reported separately",
+        "instrumentation_overhead_included": true,
+        "counts": {
+          "state_records": 891,
+          "write_starts": 1015,
+          "write_ends": 1015,
+          "write_errors": 0,
+          "partial_writes": 0,
+          "incomplete_write_events": 0,
+          "read_chunks": 2089,
+          "read_bytes": 103193,
+          "read_errors": 0,
+          "policy_calls": 503,
+          "policy_errors": 0,
+          "invalid_timing_records": 0,
+          "session_boundaries": 1,
+          "lease_boundaries": 2,
+          "sequence_boundaries": 1,
+          "board_counter_boundaries": 0,
+          "action_requests": 503,
+          "recorded_drops": 0
+        },
+        "state_receipt_interval_ns": {
+          "count": 890,
+          "p50": 9859922.0,
+          "p95": 11031187.5,
+          "p99": 13226253.75,
+          "max": 22631444.0
+        },
+        "board_tick_gap": {
+          "count": 890,
+          "p50": 10.0,
+          "p95": 10.0,
+          "p99": 10.0,
+          "max": 10.0
+        },
+        "board_us_gap": {
+          "count": 890,
+          "p50": 10000.0,
+          "p95": 10000.0,
+          "p99": 10000.0,
+          "max": 10000.0
+        },
+        "command_write_duration_ns": {
+          "count": 1015,
+          "p50": 297358.0,
+          "p95": 1369928.0999999994,
+          "p99": 3059948.5000000005,
+          "max": 8517643.0
+        },
+        "policy_duration_ns": {
+          "count": 503,
+          "p50": 194558.0,
+          "p95": 328735.79999999993,
+          "p99": 568046.3800000001,
+          "max": 775001.0
+        },
+        "read_call_duration_ns": {
+          "count": 2089,
+          "p50": 413408.0,
+          "p95": 3076689.1999999997,
+          "p99": 7230200.279999981,
+          "max": 12525807.0
+        },
+        "acknowledgements": {
+          "basis": "first exact last_seq receipt relative to the host write interval",
+          "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+          "written_actions": 503,
+          "observed_sequences": 502,
+          "unobserved_sequences": 1,
+          "telemetry_skipped_sequences": 0,
+          "right_censored_sequences": 1,
+          "ambiguous_sequences": 0,
+          "missed_commands": null,
+          "receipt_elapsed_lower_ms": {
+            "count": 502,
+            "p50": 7.763749499999999,
+            "p95": 9.081183,
+            "p99": 10.612234240000005,
+            "max": 12.160061
+          },
+          "receipt_elapsed_upper_ms": {
+            "count": 502,
+            "p50": 8.2723055,
+            "p95": 9.48078555,
+            "p99": 10.87534737,
+            "max": 12.59424
+          },
+          "per_action_samples_omitted": 503
+        }
+      },
+      "state_intervals": {
+        "active_external": {
+          "receipt_gap_ms": {
+            "count": 502,
+            "p50": 10.008385,
+            "p95": 11.0402704,
+            "p99": 12.50633422,
+            "max": 14.387158
+          },
+          "board_gap_ms": {
+            "count": 502,
+            "p50": 10.0,
+            "p95": 10.0,
+            "p99": 10.0,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 502,
+            "p50": 0.008384999999999643,
+            "p95": 1.0402704,
+            "p99": 2.50633422,
+            "max": 4.3871579999999994
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444081228,
+              "tick": 444081238,
+              "received_ns": 637225160661482,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.387158,
+              "receipt_gap_minus_board_gap_ms": 4.3871579999999994
+            },
+            {
+              "previous_tick": 444081918,
+              "tick": 444081928,
+              "received_ns": 637225851750420,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.251908,
+              "receipt_gap_minus_board_gap_ms": 3.2519080000000002
+            },
+            {
+              "previous_tick": 444078858,
+              "tick": 444078868,
+              "received_ns": 637222789537088,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.223083,
+              "receipt_gap_minus_board_gap_ms": 3.223083000000001
+            },
+            {
+              "previous_tick": 444077988,
+              "tick": 444077998,
+              "received_ns": 637221919071584,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 12.87298,
+              "receipt_gap_minus_board_gap_ms": 2.87298
+            },
+            {
+              "previous_tick": 444081578,
+              "tick": 444081588,
+              "received_ns": 637225509062624,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 12.797248,
+              "receipt_gap_minus_board_gap_ms": 2.7972479999999997
+            }
+          ]
+        },
+        "active_native": {
+          "receipt_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": []
+        },
+        "stopped": {
+          "receipt_gap_ms": {
+            "count": 384,
+            "p50": 8.734034000000001,
+            "p95": 10.878639199999999,
+            "p99": 13.648501710000003,
+            "max": 22.631444
+          },
+          "board_gap_ms": {
+            "count": 384,
+            "p50": 10.0,
+            "p95": 10.0,
+            "p99": 10.0,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 384,
+            "p50": 0.033710499999999755,
+            "p95": 1.2262354499999952,
+            "p99": 3.818547500000001,
+            "max": 12.631443999999998
+          },
+          "duplicate_board_snapshots": 2,
+          "intervals_over_15ms": 1,
+          "intervals_at_least_20ms": 1,
+          "worst_intervals": [
+            {
+              "previous_tick": 444075741,
+              "tick": 444075751,
+              "received_ns": 637219680772436,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 22.631444,
+              "receipt_gap_minus_board_gap_ms": 12.631443999999998
+            },
+            {
+              "previous_tick": 444075841,
+              "tick": 444075851,
+              "received_ns": 637219773010290,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.335939,
+              "receipt_gap_minus_board_gap_ms": 4.335939
+            },
+            {
+              "previous_tick": 444083067,
+              "tick": 444083077,
+              "received_ns": 637226999592347,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.870464,
+              "receipt_gap_minus_board_gap_ms": 3.870464
+            },
+            {
+              "previous_tick": 444077486,
+              "tick": 444077496,
+              "received_ns": 637221417782295,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.807914,
+              "receipt_gap_minus_board_gap_ms": 3.8079140000000002
+            },
+            {
+              "previous_tick": 444077286,
+              "tick": 444077296,
+              "received_ns": 637221218177852,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.615851,
+              "receipt_gap_minus_board_gap_ms": 3.6158509999999993
+            }
+          ]
+        },
+        "faulted": {
+          "receipt_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": []
+        },
+        "transitions": {
+          "receipt_gap_ms": {
+            "count": 2,
+            "p50": 6.280956,
+            "p95": 9.8393274,
+            "p99": 10.15562708,
+            "max": 10.234702
+          },
+          "board_gap_ms": {
+            "count": 2,
+            "p50": 6.5,
+            "p95": 9.649999999999999,
+            "p99": 9.93,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 2,
+            "p50": -0.2190439999999998,
+            "p95": 0.18932740000000037,
+            "p99": 0.22562708000000042,
+            "max": 0.2347020000000004
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444082938,
+              "tick": 444082948,
+              "received_ns": 637226866669534,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 10.234702,
+              "receipt_gap_minus_board_gap_ms": 0.2347020000000004
+            },
+            {
+              "previous_tick": 444077915,
+              "tick": 444077918,
+              "received_ns": 637221835581719,
+              "board_gap_ms": 3.0,
+              "receipt_gap_ms": 2.32721,
+              "receipt_gap_minus_board_gap_ms": -0.67279
+            }
+          ]
+        }
+      },
+      "action_pipeline": {
+        "receipt_to_policy_start_ms": {
+          "count": 503,
+          "p50": 1.003707,
+          "p95": 2.1267243,
+          "p99": 4.001754180000003,
+          "max": 6.202916
+        },
+        "policy_duration_ms": {
+          "count": 503,
+          "p50": 0.194558,
+          "p95": 0.32873579999999997,
+          "p99": 0.5680463800000002,
+          "max": 0.775001
+        },
+        "receipt_to_write_start_ms": {
+          "count": 503,
+          "p50": 1.620731,
+          "p95": 3.0720066999999984,
+          "p99": 4.69701238,
+          "max": 6.88379
+        },
+        "receipt_to_write_end_ms": {
+          "count": 503,
+          "p50": 2.189236,
+          "p95": 4.453835600000001,
+          "p99": 5.926099180000002,
+          "max": 10.460211
+        },
+        "write_duration_ms": {
+          "count": 503,
+          "p50": 0.402559,
+          "p95": 1.4540903999999997,
+          "p99": 3.2558128400000017,
+          "max": 8.517643
+        },
+        "inter_action_write_start_ms": {
+          "count": 502,
+          "p50": 10.0559585,
+          "p95": 11.8341367,
+          "p99": 13.934723650000002,
+          "max": 15.370486
+        },
+        "ttl_values_ms": [
+          20.0
+        ],
+        "worst_receipt_to_write": [
+          {
+            "trial_id": "001-timing",
+            "sequence": 401,
+            "observation_tick": 444081918,
+            "source_received_ns": 637225838498512,
+            "issued_at_board_ns": 1704804186000,
+            "expires_at_board_ns": 1704824186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637225840887906,
+            "write_end_ns": 637225848958723,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 2.389394,
+            "receipt_to_write_end_ms": 10.460211,
+            "write_duration_ms": 8.070817,
+            "receipt_to_policy_start_ms": 1.546736,
+            "policy_duration_ms": 0.28238
+          },
+          {
+            "trial_id": "001-timing",
+            "sequence": 258,
+            "observation_tick": 444080488,
+            "source_received_ns": 637224406268931,
+            "issued_at_board_ns": 1703374186000,
+            "expires_at_board_ns": 1703394186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637224407747720,
+            "write_end_ns": 637224416265363,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 1.478789,
+            "receipt_to_write_end_ms": 9.996432,
+            "write_duration_ms": 8.517643,
+            "receipt_to_policy_start_ms": 0.893867,
+            "policy_duration_ms": 0.262536
+          },
+          {
+            "trial_id": "001-timing",
+            "sequence": 161,
+            "observation_tick": 444079518,
+            "source_received_ns": 637223436608324,
+            "issued_at_board_ns": 1702404186000,
+            "expires_at_board_ns": 1702424186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637223443492114,
+            "write_end_ns": 637223444496814,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 6.88379,
+            "receipt_to_write_end_ms": 7.88849,
+            "write_duration_ms": 1.0047,
+            "receipt_to_policy_start_ms": 6.202916,
+            "policy_duration_ms": 0.229028
+          },
+          {
+            "trial_id": "001-timing",
+            "sequence": 393,
+            "observation_tick": 444081838,
+            "source_received_ns": 637225756829222,
+            "issued_at_board_ns": 1704724186000,
+            "expires_at_board_ns": 1704744186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637225763144793,
+            "write_end_ns": 637225763457450,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 6.315571,
+            "receipt_to_write_end_ms": 6.628228,
+            "write_duration_ms": 0.312657,
+            "receipt_to_policy_start_ms": 5.222826,
+            "policy_duration_ms": 0.206432
+          },
+          {
+            "trial_id": "001-timing",
+            "sequence": 253,
+            "observation_tick": 444080438,
+            "source_received_ns": 637224356425065,
+            "issued_at_board_ns": 1703324186000,
+            "expires_at_board_ns": 1703344186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637224360348650,
+            "write_end_ns": 637224362511834,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 3.923585,
+            "receipt_to_write_end_ms": 6.086769,
+            "write_duration_ms": 2.163184,
+            "receipt_to_policy_start_ms": 1.214012,
+            "policy_duration_ms": 0.264009
+          }
+        ]
+      },
+      "trials": [
+        {
+          "id": "001-timing",
+          "kind": "timing",
+          "completed": true,
+          "reference": null,
+          "failure": null,
+          "state_intervals": {
+            "active_external": {
+              "receipt_gap_ms": {
+                "count": 502,
+                "p50": 10.008385,
+                "p95": 11.0402704,
+                "p99": 12.50633422,
+                "max": 14.387158
+              },
+              "board_gap_ms": {
+                "count": 502,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 502,
+                "p50": 0.008384999999999643,
+                "p95": 1.0402704,
+                "p99": 2.50633422,
+                "max": 4.3871579999999994
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444081228,
+                  "tick": 444081238,
+                  "received_ns": 637225160661482,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.387158,
+                  "receipt_gap_minus_board_gap_ms": 4.3871579999999994
+                },
+                {
+                  "previous_tick": 444081918,
+                  "tick": 444081928,
+                  "received_ns": 637225851750420,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.251908,
+                  "receipt_gap_minus_board_gap_ms": 3.2519080000000002
+                },
+                {
+                  "previous_tick": 444078858,
+                  "tick": 444078868,
+                  "received_ns": 637222789537088,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.223083,
+                  "receipt_gap_minus_board_gap_ms": 3.223083000000001
+                },
+                {
+                  "previous_tick": 444077988,
+                  "tick": 444077998,
+                  "received_ns": 637221919071584,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.87298,
+                  "receipt_gap_minus_board_gap_ms": 2.87298
+                },
+                {
+                  "previous_tick": 444081578,
+                  "tick": 444081588,
+                  "received_ns": 637225509062624,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.797248,
+                  "receipt_gap_minus_board_gap_ms": 2.7972479999999997
+                }
+              ]
+            },
+            "active_native": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "stopped": {
+              "receipt_gap_ms": {
+                "count": 295,
+                "p50": 9.672294,
+                "p95": 11.0898616,
+                "p99": 13.62737478,
+                "max": 14.335939
+              },
+              "board_gap_ms": {
+                "count": 295,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 295,
+                "p50": 0.03151899999999941,
+                "p95": 1.1541871000000017,
+                "p99": 3.62737478,
+                "max": 4.335939
+              },
+              "duplicate_board_snapshots": 2,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444075841,
+                  "tick": 444075851,
+                  "received_ns": 637219773010290,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.335939,
+                  "receipt_gap_minus_board_gap_ms": 4.335939
+                },
+                {
+                  "previous_tick": 444083067,
+                  "tick": 444083077,
+                  "received_ns": 637226999592347,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.870464,
+                  "receipt_gap_minus_board_gap_ms": 3.870464
+                },
+                {
+                  "previous_tick": 444077486,
+                  "tick": 444077496,
+                  "received_ns": 637221417782295,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.807914,
+                  "receipt_gap_minus_board_gap_ms": 3.8079140000000002
+                },
+                {
+                  "previous_tick": 444077286,
+                  "tick": 444077296,
+                  "received_ns": 637221218177852,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.615851,
+                  "receipt_gap_minus_board_gap_ms": 3.6158509999999993
+                },
+                {
+                  "previous_tick": 444076111,
+                  "tick": 444076121,
+                  "received_ns": 637220041837215,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.441139,
+                  "receipt_gap_minus_board_gap_ms": 3.4411389999999997
+                }
+              ]
+            },
+            "faulted": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "transitions": {
+              "receipt_gap_ms": {
+                "count": 2,
+                "p50": 6.280956,
+                "p95": 9.8393274,
+                "p99": 10.15562708,
+                "max": 10.234702
+              },
+              "board_gap_ms": {
+                "count": 2,
+                "p50": 6.5,
+                "p95": 9.649999999999999,
+                "p99": 9.93,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 2,
+                "p50": -0.2190439999999998,
+                "p95": 0.18932740000000037,
+                "p99": 0.22562708000000042,
+                "max": 0.2347020000000004
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444082938,
+                  "tick": 444082948,
+                  "received_ns": 637226866669534,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 10.234702,
+                  "receipt_gap_minus_board_gap_ms": 0.2347020000000004
+                },
+                {
+                  "previous_tick": 444077915,
+                  "tick": 444077918,
+                  "received_ns": 637221835581719,
+                  "board_gap_ms": 3.0,
+                  "receipt_gap_ms": 2.32721,
+                  "receipt_gap_minus_board_gap_ms": -0.67279
+                }
+              ]
+            }
+          },
+          "action_pipeline": {
+            "receipt_to_policy_start_ms": {
+              "count": 503,
+              "p50": 1.003707,
+              "p95": 2.1267243,
+              "p99": 4.001754180000003,
+              "max": 6.202916
+            },
+            "policy_duration_ms": {
+              "count": 503,
+              "p50": 0.194558,
+              "p95": 0.32873579999999997,
+              "p99": 0.5680463800000002,
+              "max": 0.775001
+            },
+            "receipt_to_write_start_ms": {
+              "count": 503,
+              "p50": 1.620731,
+              "p95": 3.0720066999999984,
+              "p99": 4.69701238,
+              "max": 6.88379
+            },
+            "receipt_to_write_end_ms": {
+              "count": 503,
+              "p50": 2.189236,
+              "p95": 4.453835600000001,
+              "p99": 5.926099180000002,
+              "max": 10.460211
+            },
+            "write_duration_ms": {
+              "count": 503,
+              "p50": 0.402559,
+              "p95": 1.4540903999999997,
+              "p99": 3.2558128400000017,
+              "max": 8.517643
+            },
+            "inter_action_write_start_ms": {
+              "count": 502,
+              "p50": 10.0559585,
+              "p95": 11.8341367,
+              "p99": 13.934723650000002,
+              "max": 15.370486
+            },
+            "ttl_values_ms": [
+              20.0
+            ],
+            "worst_receipt_to_write": [
+              {
+                "trial_id": "001-timing",
+                "sequence": 401,
+                "observation_tick": 444081918,
+                "source_received_ns": 637225838498512,
+                "issued_at_board_ns": 1704804186000,
+                "expires_at_board_ns": 1704824186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637225840887906,
+                "write_end_ns": 637225848958723,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 2.389394,
+                "receipt_to_write_end_ms": 10.460211,
+                "write_duration_ms": 8.070817,
+                "receipt_to_policy_start_ms": 1.546736,
+                "policy_duration_ms": 0.28238
+              },
+              {
+                "trial_id": "001-timing",
+                "sequence": 258,
+                "observation_tick": 444080488,
+                "source_received_ns": 637224406268931,
+                "issued_at_board_ns": 1703374186000,
+                "expires_at_board_ns": 1703394186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637224407747720,
+                "write_end_ns": 637224416265363,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 1.478789,
+                "receipt_to_write_end_ms": 9.996432,
+                "write_duration_ms": 8.517643,
+                "receipt_to_policy_start_ms": 0.893867,
+                "policy_duration_ms": 0.262536
+              },
+              {
+                "trial_id": "001-timing",
+                "sequence": 161,
+                "observation_tick": 444079518,
+                "source_received_ns": 637223436608324,
+                "issued_at_board_ns": 1702404186000,
+                "expires_at_board_ns": 1702424186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637223443492114,
+                "write_end_ns": 637223444496814,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 6.88379,
+                "receipt_to_write_end_ms": 7.88849,
+                "write_duration_ms": 1.0047,
+                "receipt_to_policy_start_ms": 6.202916,
+                "policy_duration_ms": 0.229028
+              },
+              {
+                "trial_id": "001-timing",
+                "sequence": 393,
+                "observation_tick": 444081838,
+                "source_received_ns": 637225756829222,
+                "issued_at_board_ns": 1704724186000,
+                "expires_at_board_ns": 1704744186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637225763144793,
+                "write_end_ns": 637225763457450,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 6.315571,
+                "receipt_to_write_end_ms": 6.628228,
+                "write_duration_ms": 0.312657,
+                "receipt_to_policy_start_ms": 5.222826,
+                "policy_duration_ms": 0.206432
+              },
+              {
+                "trial_id": "001-timing",
+                "sequence": 253,
+                "observation_tick": 444080438,
+                "source_received_ns": 637224356425065,
+                "issued_at_board_ns": 1703324186000,
+                "expires_at_board_ns": 1703344186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637224360348650,
+                "write_end_ns": 637224362511834,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 3.923585,
+                "receipt_to_write_end_ms": 6.086769,
+                "write_duration_ms": 2.163184,
+                "receipt_to_policy_start_ms": 1.214012,
+                "policy_duration_ms": 0.264009
+              }
+            ]
+          },
+          "timing": {
+            "schema_version": 1,
+            "clock_basis": "host monotonic receipt and board counters reported separately",
+            "instrumentation_overhead_included": true,
+            "counts": {
+              "state_records": 802,
+              "write_starts": 834,
+              "write_ends": 834,
+              "write_errors": 0,
+              "partial_writes": 0,
+              "incomplete_write_events": 0,
+              "read_chunks": 1740,
+              "read_bytes": 90086,
+              "read_errors": 0,
+              "policy_calls": 503,
+              "policy_errors": 0,
+              "invalid_timing_records": 0,
+              "session_boundaries": 0,
+              "lease_boundaries": 1,
+              "sequence_boundaries": 1,
+              "board_counter_boundaries": 0,
+              "action_requests": 503,
+              "recorded_drops": 0
+            },
+            "state_receipt_interval_ns": {
+              "count": 801,
+              "p50": 9931236.0,
+              "p95": 11057277.0,
+              "p99": 13223083.0,
+              "max": 14387158.0
+            },
+            "board_tick_gap": {
+              "count": 801,
+              "p50": 10.0,
+              "p95": 10.0,
+              "p99": 10.0,
+              "max": 10.0
+            },
+            "board_us_gap": {
+              "count": 801,
+              "p50": 10000.0,
+              "p95": 10000.0,
+              "p99": 10000.0,
+              "max": 10000.0
+            },
+            "command_write_duration_ns": {
+              "count": 834,
+              "p50": 341269.5,
+              "p95": 1448852.199999999,
+              "p99": 3151854.53,
+              "max": 8517643.0
+            },
+            "policy_duration_ns": {
+              "count": 503,
+              "p50": 194558.0,
+              "p95": 328735.79999999993,
+              "p99": 568046.3800000001,
+              "max": 775001.0
+            },
+            "read_call_duration_ns": {
+              "count": 1740,
+              "p50": 486219.5,
+              "p95": 3115517.1999999997,
+              "p99": 7763919.039999998,
+              "max": 12525807.0
+            },
+            "acknowledgements": {
+              "basis": "first exact last_seq receipt relative to the host write interval",
+              "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+              "written_actions": 503,
+              "observed_sequences": 502,
+              "unobserved_sequences": 1,
+              "telemetry_skipped_sequences": 0,
+              "right_censored_sequences": 1,
+              "ambiguous_sequences": 0,
+              "missed_commands": null,
+              "receipt_elapsed_lower_ms": {
+                "count": 502,
+                "p50": 7.763749499999999,
+                "p95": 9.081183,
+                "p99": 10.612234240000005,
+                "max": 12.160061
+              },
+              "receipt_elapsed_upper_ms": {
+                "count": 502,
+                "p50": 8.2723055,
+                "p95": 9.48078555,
+                "p99": 10.87534737,
+                "max": 12.59424
+              },
+              "per_action_samples_omitted": 503
+            }
+          }
+        }
+      ],
+      "fault": null
+    },
+    {
+      "name": "gentle-train-01",
+      "source_path": "/Users/rbafna/projects/cartpole_v2/runs/id-live-20261020/gentle-train-01/gentle-train-01",
+      "source_sha256": {
+        "manifest": "523571ac8761c2a9b748f56fd45f9816ba3ef03d0f6704568a349a3f2b8944b0",
+        "report": "7fe141c8c4e15e8f99f29b6e9646637291ba2d42048d852dc563b5f4934363e1",
+        "raw": "720b886bc51e72f599f6fffa0d15a62c722981d1d14355a1ee3fd5b387d992d1"
+      },
+      "collection": {
+        "dataset_role": "training",
+        "sensor_mode": "encoder_only",
+        "completed": false,
+        "stop_confirmed": false,
+        "last_disabled_snapshot": true,
+        "failure": "RigError('latched rig error: executor fault 1')",
+        "records_dropped": 0,
+        "pending_log_records": 0,
+        "timing_record_errors": 0
+      },
+      "timing": {
+        "schema_version": 1,
+        "clock_basis": "host monotonic receipt and board counters reported separately",
+        "instrumentation_overhead_included": true,
+        "counts": {
+          "state_records": 2019,
+          "write_starts": 2160,
+          "write_ends": 2160,
+          "write_errors": 0,
+          "partial_writes": 0,
+          "incomplete_write_events": 0,
+          "read_chunks": 4738,
+          "read_bytes": 255048,
+          "read_errors": 0,
+          "policy_calls": 1008,
+          "policy_errors": 0,
+          "invalid_timing_records": 0,
+          "session_boundaries": 1,
+          "lease_boundaries": 4,
+          "sequence_boundaries": 3,
+          "board_counter_boundaries": 0,
+          "action_requests": 1008,
+          "recorded_drops": 0
+        },
+        "state_receipt_interval_ns": {
+          "count": 2018,
+          "p50": 9872417.0,
+          "p95": 11022023.749999998,
+          "p99": 12509066.259999998,
+          "max": 14516561.0
+        },
+        "board_tick_gap": {
+          "count": 2018,
+          "p50": 10.0,
+          "p95": 10.0,
+          "p99": 10.0,
+          "max": 10.0
+        },
+        "board_us_gap": {
+          "count": 2018,
+          "p50": 10000.0,
+          "p95": 10000.0,
+          "p99": 10000.0,
+          "max": 10000.0
+        },
+        "command_write_duration_ns": {
+          "count": 2160,
+          "p50": 325246.0,
+          "p95": 1464825.3499999999,
+          "p99": 2711247.1299999934,
+          "max": 6533685.0
+        },
+        "policy_duration_ns": {
+          "count": 1008,
+          "p50": 207869.0,
+          "p95": 325780.1,
+          "p99": 574903.7699999952,
+          "max": 5075723.0
+        },
+        "read_call_duration_ns": {
+          "count": 4738,
+          "p50": 426347.5,
+          "p95": 3056064.35,
+          "p99": 5463122.030000013,
+          "max": 10974792.0
+        },
+        "acknowledgements": {
+          "basis": "first exact last_seq receipt relative to the host write interval",
+          "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+          "written_actions": 1008,
+          "observed_sequences": 1005,
+          "unobserved_sequences": 3,
+          "telemetry_skipped_sequences": 0,
+          "right_censored_sequences": 3,
+          "ambiguous_sequences": 0,
+          "missed_commands": null,
+          "receipt_elapsed_lower_ms": {
+            "count": 1005,
+            "p50": 7.745929,
+            "p95": 9.158210599999999,
+            "p99": 10.07743512,
+            "max": 12.663348
+          },
+          "receipt_elapsed_upper_ms": {
+            "count": 1005,
+            "p50": 8.293206,
+            "p95": 9.553073199999998,
+            "p99": 10.555397040000003,
+            "max": 12.806696
+          },
+          "per_action_samples_omitted": 1008
+        }
+      },
+      "state_intervals": {
+        "active_external": {
+          "receipt_gap_ms": {
+            "count": 1005,
+            "p50": 10.001734,
+            "p95": 11.1189778,
+            "p99": 12.390652800000007,
+            "max": 14.107839
+          },
+          "board_gap_ms": {
+            "count": 1005,
+            "p50": 10.0,
+            "p95": 10.0,
+            "p99": 10.0,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 1005,
+            "p50": 0.0017340000000007905,
+            "p95": 1.1189778,
+            "p99": 2.390652800000007,
+            "max": 4.107839
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444146051,
+              "tick": 444146061,
+              "received_ns": 637289991991149,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.107839,
+              "receipt_gap_minus_board_gap_ms": 4.107839
+            },
+            {
+              "previous_tick": 444139598,
+              "tick": 444139608,
+              "received_ns": 637283537725068,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.569575,
+              "receipt_gap_minus_board_gap_ms": 3.5695750000000004
+            },
+            {
+              "previous_tick": 444153771,
+              "tick": 444153781,
+              "received_ns": 637297713117531,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.219535,
+              "receipt_gap_minus_board_gap_ms": 3.2195350000000005
+            },
+            {
+              "previous_tick": 444153401,
+              "tick": 444153411,
+              "received_ns": 637297342579273,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 12.958506,
+              "receipt_gap_minus_board_gap_ms": 2.958506
+            },
+            {
+              "previous_tick": 444151821,
+              "tick": 444151831,
+              "received_ns": 637295761667485,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 12.949263,
+              "receipt_gap_minus_board_gap_ms": 2.949263
+            }
+          ]
+        },
+        "active_native": {
+          "receipt_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": []
+        },
+        "stopped": {
+          "receipt_gap_ms": {
+            "count": 1000,
+            "p50": 9.5441785,
+            "p95": 10.9147796,
+            "p99": 12.663040499999997,
+            "max": 14.516561
+          },
+          "board_gap_ms": {
+            "count": 1000,
+            "p50": 10.0,
+            "p95": 10.0,
+            "p99": 10.0,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 1000,
+            "p50": 0.0018804999999995076,
+            "p95": 1.3855392999999985,
+            "p99": 3.4892549899999996,
+            "max": 6.154831
+          },
+          "duplicate_board_snapshots": 4,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444138556,
+              "tick": 444138566,
+              "received_ns": 637282497651158,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.516561,
+              "receipt_gap_minus_board_gap_ms": 4.516560999999999
+            },
+            {
+              "previous_tick": 444137192,
+              "tick": 444137202,
+              "received_ns": 637281132408623,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.494673,
+              "receipt_gap_minus_board_gap_ms": 4.494673000000001
+            },
+            {
+              "previous_tick": 444150830,
+              "tick": 444150840,
+              "received_ns": 637294772148639,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 14.440673,
+              "receipt_gap_minus_board_gap_ms": 4.440673
+            },
+            {
+              "previous_tick": 444150520,
+              "tick": 444150530,
+              "received_ns": 637294461773405,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.965567,
+              "receipt_gap_minus_board_gap_ms": 3.965567
+            },
+            {
+              "previous_tick": 444144524,
+              "tick": 444144534,
+              "received_ns": 637288464995843,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 13.686954,
+              "receipt_gap_minus_board_gap_ms": 3.686954
+            }
+          ]
+        },
+        "faulted": {
+          "receipt_gap_ms": {
+            "count": 3,
+            "p50": 3.810866,
+            "p95": 3.9571907,
+            "p99": 3.97019734,
+            "max": 3.973449
+          },
+          "board_gap_ms": {
+            "count": 3,
+            "p50": 3.0,
+            "p95": 3.9,
+            "p99": 3.98,
+            "max": 4.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 3,
+            "p50": 0.8108659999999999,
+            "p95": 0.9571907,
+            "p99": 0.97019734,
+            "max": 0.973449
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444153798,
+              "tick": 444153801,
+              "received_ns": 637297730464360,
+              "board_gap_ms": 3.0,
+              "receipt_gap_ms": 3.973449,
+              "receipt_gap_minus_board_gap_ms": 0.973449
+            },
+            {
+              "previous_tick": 444153791,
+              "tick": 444153794,
+              "received_ns": 637297723391376,
+              "board_gap_ms": 3.0,
+              "receipt_gap_ms": 3.810866,
+              "receipt_gap_minus_board_gap_ms": 0.8108659999999999
+            },
+            {
+              "previous_tick": 444153794,
+              "tick": 444153798,
+              "received_ns": 637297726490911,
+              "board_gap_ms": 4.0,
+              "receipt_gap_ms": 3.099535,
+              "receipt_gap_minus_board_gap_ms": -0.9004650000000001
+            }
+          ]
+        },
+        "transitions": {
+          "receipt_gap_ms": {
+            "count": 6,
+            "p50": 6.5934185,
+            "p95": 9.84396525,
+            "p99": 9.85129145,
+            "max": 9.853123
+          },
+          "board_gap_ms": {
+            "count": 6,
+            "p50": 8.0,
+            "p95": 10.0,
+            "p99": 10.0,
+            "max": 10.0
+          },
+          "receipt_gap_minus_board_gap_ms": {
+            "count": 6,
+            "p50": -0.27652699999999997,
+            "p95": 1.25617425,
+            "p99": 1.6303212500000002,
+            "max": 1.723858
+          },
+          "duplicate_board_snapshots": 0,
+          "intervals_over_15ms": 0,
+          "intervals_at_least_20ms": 0,
+          "worst_intervals": [
+            {
+              "previous_tick": 444149021,
+              "tick": 444149031,
+              "received_ns": 637292958221572,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 9.853123,
+              "receipt_gap_minus_board_gap_ms": -0.14687699999999992
+            },
+            {
+              "previous_tick": 444142788,
+              "tick": 444142798,
+              "received_ns": 637286724507288,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 9.816492,
+              "receipt_gap_minus_board_gap_ms": -0.18350799999999978
+            },
+            {
+              "previous_tick": 444145196,
+              "tick": 444145201,
+              "received_ns": 637289129965955,
+              "board_gap_ms": 5.0,
+              "receipt_gap_ms": 6.723858,
+              "receipt_gap_minus_board_gap_ms": 1.723858
+            },
+            {
+              "previous_tick": 444153781,
+              "tick": 444153791,
+              "received_ns": 637297719580510,
+              "board_gap_ms": 10.0,
+              "receipt_gap_ms": 6.462979,
+              "receipt_gap_minus_board_gap_ms": -3.537021
+            },
+            {
+              "previous_tick": 444151365,
+              "tick": 444151371,
+              "received_ns": 637295299703328,
+              "board_gap_ms": 6.0,
+              "receipt_gap_ms": 4.487346,
+              "receipt_gap_minus_board_gap_ms": -1.5126540000000004
+            }
+          ]
+        }
+      },
+      "action_pipeline": {
+        "receipt_to_policy_start_ms": {
+          "count": 1008,
+          "p50": 1.0267849999999998,
+          "p95": 2.211971049999999,
+          "p99": 4.09485445999999,
+          "max": 5.413525
+        },
+        "policy_duration_ms": {
+          "count": 1008,
+          "p50": 0.207869,
+          "p95": 0.3257801,
+          "p99": 0.5749037699999953,
+          "max": 5.075723
+        },
+        "receipt_to_write_start_ms": {
+          "count": 1008,
+          "p50": 1.6578650000000001,
+          "p95": 3.2248862999999997,
+          "p99": 4.889177819999998,
+          "max": 8.062799
+        },
+        "receipt_to_write_end_ms": {
+          "count": 1008,
+          "p50": 2.2033300000000002,
+          "p95": 4.4388673999999995,
+          "p99": 6.047649409999994,
+          "max": 8.551444
+        },
+        "write_duration_ms": {
+          "count": 1008,
+          "p50": 0.42622000000000004,
+          "p95": 1.5505021999999995,
+          "p99": 3.0506228199999934,
+          "max": 6.533685
+        },
+        "inter_action_write_start_ms": {
+          "count": 1005,
+          "p50": 10.05899,
+          "p95": 12.0275844,
+          "p99": 13.307701960000001,
+          "max": 15.898078
+        },
+        "ttl_values_ms": [
+          20.0
+        ],
+        "worst_receipt_to_write": [
+          {
+            "trial_id": "002-actuator",
+            "sequence": 51,
+            "observation_tick": 444145701,
+            "source_received_ns": 637289628675764,
+            "issued_at_board_ns": 1768587186000,
+            "expires_at_board_ns": 1768607186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637289636738563,
+            "write_end_ns": 637289637227208,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 8.062799,
+            "receipt_to_write_end_ms": 8.551444,
+            "write_duration_ms": 0.488645,
+            "receipt_to_policy_start_ms": 1.580318,
+            "policy_duration_ms": 5.075723
+          },
+          {
+            "trial_id": "002-actuator",
+            "sequence": 261,
+            "observation_tick": 444147801,
+            "source_received_ns": 637291728345351,
+            "issued_at_board_ns": 1770687186000,
+            "expires_at_board_ns": 1770707186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637291732437861,
+            "write_end_ns": 637291736470331,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 4.09251,
+            "receipt_to_write_end_ms": 8.12498,
+            "write_duration_ms": 4.03247,
+            "receipt_to_policy_start_ms": 2.623312,
+            "policy_duration_ms": 0.241154
+          },
+          {
+            "trial_id": "002-actuator",
+            "sequence": 236,
+            "observation_tick": 444147551,
+            "source_received_ns": 637291480880448,
+            "issued_at_board_ns": 1770437186000,
+            "expires_at_board_ns": 1770457186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637291482335820,
+            "write_end_ns": 637291488869505,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 1.455372,
+            "receipt_to_write_end_ms": 7.989057,
+            "write_duration_ms": 6.533685,
+            "receipt_to_policy_start_ms": 0.857592,
+            "policy_duration_ms": 0.200348
+          },
+          {
+            "trial_id": "002-actuator",
+            "sequence": 371,
+            "observation_tick": 444148901,
+            "source_received_ns": 637292828681720,
+            "issued_at_board_ns": 1771787186000,
+            "expires_at_board_ns": 1771807186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637292834730470,
+            "write_end_ns": 637292836055135,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 6.04875,
+            "receipt_to_write_end_ms": 7.373415,
+            "write_duration_ms": 1.324665,
+            "receipt_to_policy_start_ms": 5.413525,
+            "policy_duration_ms": 0.205437
+          },
+          {
+            "trial_id": "001-actuator",
+            "sequence": 157,
+            "observation_tick": 444140528,
+            "source_received_ns": 637284454125788,
+            "issued_at_board_ns": 1763414186000,
+            "expires_at_board_ns": 1763434186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637284456480554,
+            "write_end_ns": 637284461419271,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 2.354766,
+            "receipt_to_write_end_ms": 7.293483,
+            "write_duration_ms": 4.938717,
+            "receipt_to_policy_start_ms": 1.727765,
+            "policy_duration_ms": 0.208542
+          }
+        ]
+      },
+      "trials": [
+        {
+          "id": "001-actuator",
+          "kind": "actuator",
+          "completed": true,
+          "reference": {
+            "id": "pulse-10mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "failure": null,
+          "state_intervals": {
+            "active_external": {
+              "receipt_gap_ms": {
+                "count": 382,
+                "p50": 10.0201545,
+                "p95": 10.865069,
+                "p99": 11.87382751,
+                "max": 13.569575
+              },
+              "board_gap_ms": {
+                "count": 382,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 382,
+                "p50": 0.020154500000000297,
+                "p95": 0.8650690000000008,
+                "p99": 1.8738275100000006,
+                "max": 3.5695750000000004
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444139598,
+                  "tick": 444139608,
+                  "received_ns": 637283537725068,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.569575,
+                  "receipt_gap_minus_board_gap_ms": 3.5695750000000004
+                },
+                {
+                  "previous_tick": 444141978,
+                  "tick": 444141988,
+                  "received_ns": 637285917306191,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.620184,
+                  "receipt_gap_minus_board_gap_ms": 2.620184
+                },
+                {
+                  "previous_tick": 444141068,
+                  "tick": 444141078,
+                  "received_ns": 637285006358803,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.080654,
+                  "receipt_gap_minus_board_gap_ms": 2.080653999999999
+                },
+                {
+                  "previous_tick": 444139888,
+                  "tick": 444139898,
+                  "received_ns": 637283826418988,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 11.87458,
+                  "receipt_gap_minus_board_gap_ms": 1.87458
+                },
+                {
+                  "previous_tick": 444140718,
+                  "tick": 444140728,
+                  "received_ns": 637284655974634,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 11.873651,
+                  "receipt_gap_minus_board_gap_ms": 1.8736510000000006
+                }
+              ]
+            },
+            "active_native": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "stopped": {
+              "receipt_gap_ms": {
+                "count": 292,
+                "p50": 9.737435000000001,
+                "p95": 11.07729795,
+                "p99": 13.162138549999998,
+                "max": 14.516561
+              },
+              "board_gap_ms": {
+                "count": 292,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 292,
+                "p50": 0.013564500000000201,
+                "p95": 1.4892580499999992,
+                "p99": 4.49664292,
+                "max": 6.154831
+              },
+              "duplicate_board_snapshots": 2,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444138556,
+                  "tick": 444138566,
+                  "received_ns": 637282497651158,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.516561,
+                  "receipt_gap_minus_board_gap_ms": 4.516560999999999
+                },
+                {
+                  "previous_tick": 444137192,
+                  "tick": 444137202,
+                  "received_ns": 637281132408623,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.494673,
+                  "receipt_gap_minus_board_gap_ms": 4.494673000000001
+                },
+                {
+                  "previous_tick": 444137996,
+                  "tick": 444138006,
+                  "received_ns": 637281934974428,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.236026,
+                  "receipt_gap_minus_board_gap_ms": 3.2360260000000007
+                },
+                {
+                  "previous_tick": 444137906,
+                  "tick": 444137913,
+                  "received_ns": 637281845306827,
+                  "board_gap_ms": 7.0,
+                  "receipt_gap_ms": 13.154831,
+                  "receipt_gap_minus_board_gap_ms": 6.154831
+                },
+                {
+                  "previous_tick": 444138446,
+                  "tick": 444138456,
+                  "received_ns": 637282384841929,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.276017,
+                  "receipt_gap_minus_board_gap_ms": 2.2760169999999995
+                }
+              ]
+            },
+            "faulted": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "transitions": {
+              "receipt_gap_ms": {
+                "count": 2,
+                "p50": 6.223473,
+                "p95": 9.4571901,
+                "p99": 9.74463162,
+                "max": 9.816492
+              },
+              "board_gap_ms": {
+                "count": 2,
+                "p50": 6.5,
+                "p95": 9.649999999999999,
+                "p99": 9.93,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 2,
+                "p50": -0.27652699999999997,
+                "p95": -0.1928098999999998,
+                "p99": -0.18536837999999978,
+                "max": -0.18350799999999978
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444142788,
+                  "tick": 444142798,
+                  "received_ns": 637286724507288,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 9.816492,
+                  "receipt_gap_minus_board_gap_ms": -0.18350799999999978
+                },
+                {
+                  "previous_tick": 444138965,
+                  "tick": 444138968,
+                  "received_ns": 637282894268666,
+                  "board_gap_ms": 3.0,
+                  "receipt_gap_ms": 2.630454,
+                  "receipt_gap_minus_board_gap_ms": -0.36954600000000015
+                }
+              ]
+            }
+          },
+          "action_pipeline": {
+            "receipt_to_policy_start_ms": {
+              "count": 383,
+              "p50": 0.997165,
+              "p95": 1.8993697999999986,
+              "p99": 3.705592660000001,
+              "max": 4.645204
+            },
+            "policy_duration_ms": {
+              "count": 383,
+              "p50": 0.203453,
+              "p95": 0.32195549999999995,
+              "p99": 0.5940461400000002,
+              "max": 0.910337
+            },
+            "receipt_to_write_start_ms": {
+              "count": 383,
+              "p50": 1.629991,
+              "p95": 2.739258799999999,
+              "p99": 4.382479200000002,
+              "max": 5.387741
+            },
+            "receipt_to_write_end_ms": {
+              "count": 383,
+              "p50": 2.180884,
+              "p95": 4.047734899999999,
+              "p99": 5.555369220000003,
+              "max": 7.293483
+            },
+            "write_duration_ms": {
+              "count": 383,
+              "p50": 0.429405,
+              "p95": 1.5369801999999992,
+              "p99": 2.7954316200000022,
+              "max": 4.938717
+            },
+            "inter_action_write_start_ms": {
+              "count": 382,
+              "p50": 10.055982499999999,
+              "p95": 11.6740892,
+              "p99": 12.20502407,
+              "max": 14.018951
+            },
+            "ttl_values_ms": [
+              20.0
+            ],
+            "worst_receipt_to_write": [
+              {
+                "trial_id": "001-actuator",
+                "sequence": 157,
+                "observation_tick": 444140528,
+                "source_received_ns": 637284454125788,
+                "issued_at_board_ns": 1763414186000,
+                "expires_at_board_ns": 1763434186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637284456480554,
+                "write_end_ns": 637284461419271,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 2.354766,
+                "receipt_to_write_end_ms": 7.293483,
+                "write_duration_ms": 4.938717,
+                "receipt_to_policy_start_ms": 1.727765,
+                "policy_duration_ms": 0.208542
+              },
+              {
+                "trial_id": "001-actuator",
+                "sequence": 10,
+                "observation_tick": 444139058,
+                "source_received_ns": 637282984419868,
+                "issued_at_board_ns": 1761944186000,
+                "expires_at_board_ns": 1761964186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637282989807609,
+                "write_end_ns": 637282991320048,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 5.387741,
+                "receipt_to_write_end_ms": 6.90018,
+                "write_duration_ms": 1.512439,
+                "receipt_to_policy_start_ms": 4.645204,
+                "policy_duration_ms": 0.264965
+              },
+              {
+                "trial_id": "001-actuator",
+                "sequence": 107,
+                "observation_tick": 444140028,
+                "source_received_ns": 637283954564007,
+                "issued_at_board_ns": 1762914186000,
+                "expires_at_board_ns": 1762934186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637283959230300,
+                "write_end_ns": 637283960770007,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 4.666293,
+                "receipt_to_write_end_ms": 6.206,
+                "write_duration_ms": 1.539707,
+                "receipt_to_policy_start_ms": 4.107974,
+                "policy_duration_ms": 0.19606
+              },
+              {
+                "trial_id": "001-actuator",
+                "sequence": 169,
+                "observation_tick": 444140648,
+                "source_received_ns": 637284574901410,
+                "issued_at_board_ns": 1763534186000,
+                "expires_at_board_ns": 1763554186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637284576824659,
+                "write_end_ns": 637284580718875,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 1.923249,
+                "receipt_to_write_end_ms": 5.817465,
+                "write_duration_ms": 3.894216,
+                "receipt_to_policy_start_ms": 1.088507,
+                "policy_duration_ms": 0.322189
+              },
+              {
+                "trial_id": "001-actuator",
+                "sequence": 18,
+                "observation_tick": 444139138,
+                "source_received_ns": 637283063881233,
+                "issued_at_board_ns": 1762024186000,
+                "expires_at_board_ns": 1762044186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637283069022539,
+                "write_end_ns": 637283069379069,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 5.141306,
+                "receipt_to_write_end_ms": 5.497836,
+                "write_duration_ms": 0.35653,
+                "receipt_to_policy_start_ms": 3.83424,
+                "policy_duration_ms": 0.278504
+              }
+            ]
+          },
+          "timing": {
+            "schema_version": 1,
+            "clock_basis": "host monotonic receipt and board counters reported separately",
+            "instrumentation_overhead_included": true,
+            "counts": {
+              "state_records": 679,
+              "write_starts": 691,
+              "write_ends": 691,
+              "write_errors": 0,
+              "partial_writes": 0,
+              "incomplete_write_events": 0,
+              "read_chunks": 1509,
+              "read_bytes": 84568,
+              "read_errors": 0,
+              "policy_calls": 383,
+              "policy_errors": 0,
+              "invalid_timing_records": 0,
+              "session_boundaries": 0,
+              "lease_boundaries": 1,
+              "sequence_boundaries": 1,
+              "board_counter_boundaries": 0,
+              "action_requests": 383,
+              "recorded_drops": 0
+            },
+            "state_receipt_interval_ns": {
+              "count": 678,
+              "p50": 9937764.5,
+              "p95": 10940981.85,
+              "p99": 12189520.590000002,
+              "max": 14516561.0
+            },
+            "board_tick_gap": {
+              "count": 678,
+              "p50": 10.0,
+              "p95": 10.0,
+              "p99": 10.0,
+              "max": 10.0
+            },
+            "board_us_gap": {
+              "count": 678,
+              "p50": 10000.0,
+              "p95": 10000.0,
+              "p99": 10000.0,
+              "max": 10000.0
+            },
+            "command_write_duration_ns": {
+              "count": 691,
+              "p50": 356530.0,
+              "p95": 1453534.5,
+              "p99": 2555172.8000000035,
+              "max": 4938717.0
+            },
+            "policy_duration_ns": {
+              "count": 383,
+              "p50": 203453.0,
+              "p95": 321955.49999999994,
+              "p99": 594046.1400000002,
+              "max": 910337.0
+            },
+            "read_call_duration_ns": {
+              "count": 1509,
+              "p50": 471395.0,
+              "p95": 3075022.4,
+              "p99": 5354347.640000022,
+              "max": 9731210.0
+            },
+            "acknowledgements": {
+              "basis": "first exact last_seq receipt relative to the host write interval",
+              "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+              "written_actions": 383,
+              "observed_sequences": 382,
+              "unobserved_sequences": 1,
+              "telemetry_skipped_sequences": 0,
+              "right_censored_sequences": 1,
+              "ambiguous_sequences": 0,
+              "missed_commands": null,
+              "receipt_elapsed_lower_ms": {
+                "count": 382,
+                "p50": 7.7997119999999995,
+                "p95": 8.9793637,
+                "p99": 9.61190817,
+                "max": 9.954246
+              },
+              "receipt_elapsed_upper_ms": {
+                "count": 382,
+                "p50": 8.3506385,
+                "p95": 9.44110665,
+                "p99": 10.03121548,
+                "max": 10.835518
+              },
+              "per_action_samples_omitted": 383
+            }
+          }
+        },
+        {
+          "id": "002-actuator",
+          "kind": "actuator",
+          "completed": true,
+          "reference": {
+            "id": "pulse-10mm-negative",
+            "kind": "pulse",
+            "amplitude_m": -0.01,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "failure": null,
+          "state_intervals": {
+            "active_external": {
+              "receipt_gap_ms": {
+                "count": 382,
+                "p50": 9.9857845,
+                "p95": 11.274409299999999,
+                "p99": 12.42009831,
+                "max": 14.107839
+              },
+              "board_gap_ms": {
+                "count": 382,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 382,
+                "p50": -0.014215500000000603,
+                "p95": 1.2744092999999983,
+                "p99": 2.42009831,
+                "max": 4.107839
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444146051,
+                  "tick": 444146061,
+                  "received_ns": 637289991991149,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.107839,
+                  "receipt_gap_minus_board_gap_ms": 4.107839
+                },
+                {
+                  "previous_tick": 444146501,
+                  "tick": 444146511,
+                  "received_ns": 637290441008654,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.798151,
+                  "receipt_gap_minus_board_gap_ms": 2.7981510000000007
+                },
+                {
+                  "previous_tick": 444145721,
+                  "tick": 444145731,
+                  "received_ns": 637289660849380,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.640115,
+                  "receipt_gap_minus_board_gap_ms": 2.6401149999999998
+                },
+                {
+                  "previous_tick": 444145851,
+                  "tick": 444145861,
+                  "received_ns": 637289791014101,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.515394,
+                  "receipt_gap_minus_board_gap_ms": 2.5153940000000006
+                },
+                {
+                  "previous_tick": 444145701,
+                  "tick": 444145711,
+                  "received_ns": 637289641073509,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.397745,
+                  "receipt_gap_minus_board_gap_ms": 2.3977450000000005
+                }
+              ]
+            },
+            "active_native": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "stopped": {
+              "receipt_gap_ms": {
+                "count": 290,
+                "p50": 9.717115,
+                "p95": 10.819858100000001,
+                "p99": 12.203617680000004,
+                "max": 13.686954
+              },
+              "board_gap_ms": {
+                "count": 290,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 290,
+                "p50": 0.005808499999999661,
+                "p95": 1.2777011500000002,
+                "p99": 2.7140152200000065,
+                "max": 5.928286
+              },
+              "duplicate_board_snapshots": 2,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444144524,
+                  "tick": 444144534,
+                  "received_ns": 637288464995843,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.686954,
+                  "receipt_gap_minus_board_gap_ms": 3.686954
+                },
+                {
+                  "previous_tick": 444145094,
+                  "tick": 444145104,
+                  "received_ns": 637289033588486,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.660214,
+                  "receipt_gap_minus_board_gap_ms": 2.660214
+                },
+                {
+                  "previous_tick": 444145054,
+                  "tick": 444145064,
+                  "received_ns": 637288994047017,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.478172,
+                  "receipt_gap_minus_board_gap_ms": 2.4781720000000007
+                },
+                {
+                  "previous_tick": 444144594,
+                  "tick": 444144604,
+                  "received_ns": 637288532796248,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.169684,
+                  "receipt_gap_minus_board_gap_ms": 2.169684
+                },
+                {
+                  "previous_tick": 444143849,
+                  "tick": 444143859,
+                  "received_ns": 637287788168915,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 11.987292,
+                  "receipt_gap_minus_board_gap_ms": 1.987292
+                }
+              ]
+            },
+            "faulted": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "transitions": {
+              "receipt_gap_ms": {
+                "count": 2,
+                "p50": 8.2884905,
+                "p95": 9.69665975,
+                "p99": 9.821830349999999,
+                "max": 9.853123
+              },
+              "board_gap_ms": {
+                "count": 2,
+                "p50": 7.5,
+                "p95": 9.75,
+                "p99": 9.95,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 2,
+                "p50": 0.7884905,
+                "p95": 1.6303212499999997,
+                "p99": 1.7051506499999998,
+                "max": 1.723858
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444149021,
+                  "tick": 444149031,
+                  "received_ns": 637292958221572,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 9.853123,
+                  "receipt_gap_minus_board_gap_ms": -0.14687699999999992
+                },
+                {
+                  "previous_tick": 444145196,
+                  "tick": 444145201,
+                  "received_ns": 637289129965955,
+                  "board_gap_ms": 5.0,
+                  "receipt_gap_ms": 6.723858,
+                  "receipt_gap_minus_board_gap_ms": 1.723858
+                }
+              ]
+            }
+          },
+          "action_pipeline": {
+            "receipt_to_policy_start_ms": {
+              "count": 383,
+              "p50": 1.029712,
+              "p95": 2.3791719999999996,
+              "p99": 4.362648540000003,
+              "max": 5.413525
+            },
+            "policy_duration_ms": {
+              "count": 383,
+              "p50": 0.207677,
+              "p95": 0.3190849999999999,
+              "p99": 0.6033576600000008,
+              "max": 5.075723
+            },
+            "receipt_to_write_start_ms": {
+              "count": 383,
+              "p50": 1.667082,
+              "p95": 3.5141918999999993,
+              "p99": 5.417386360000003,
+              "max": 8.062799
+            },
+            "receipt_to_write_end_ms": {
+              "count": 383,
+              "p50": 2.165647,
+              "p95": 4.7203812,
+              "p99": 6.849858120000004,
+              "max": 8.551444
+            },
+            "write_duration_ms": {
+              "count": 383,
+              "p50": 0.38559,
+              "p95": 1.6734954999999996,
+              "p99": 3.5903007400000004,
+              "max": 6.533685
+            },
+            "inter_action_write_start_ms": {
+              "count": 382,
+              "p50": 9.999048,
+              "p95": 12.524358999999999,
+              "p99": 14.022103829999999,
+              "max": 15.898078
+            },
+            "ttl_values_ms": [
+              20.0
+            ],
+            "worst_receipt_to_write": [
+              {
+                "trial_id": "002-actuator",
+                "sequence": 51,
+                "observation_tick": 444145701,
+                "source_received_ns": 637289628675764,
+                "issued_at_board_ns": 1768587186000,
+                "expires_at_board_ns": 1768607186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637289636738563,
+                "write_end_ns": 637289637227208,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 8.062799,
+                "receipt_to_write_end_ms": 8.551444,
+                "write_duration_ms": 0.488645,
+                "receipt_to_policy_start_ms": 1.580318,
+                "policy_duration_ms": 5.075723
+              },
+              {
+                "trial_id": "002-actuator",
+                "sequence": 261,
+                "observation_tick": 444147801,
+                "source_received_ns": 637291728345351,
+                "issued_at_board_ns": 1770687186000,
+                "expires_at_board_ns": 1770707186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637291732437861,
+                "write_end_ns": 637291736470331,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 4.09251,
+                "receipt_to_write_end_ms": 8.12498,
+                "write_duration_ms": 4.03247,
+                "receipt_to_policy_start_ms": 2.623312,
+                "policy_duration_ms": 0.241154
+              },
+              {
+                "trial_id": "002-actuator",
+                "sequence": 236,
+                "observation_tick": 444147551,
+                "source_received_ns": 637291480880448,
+                "issued_at_board_ns": 1770437186000,
+                "expires_at_board_ns": 1770457186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637291482335820,
+                "write_end_ns": 637291488869505,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 1.455372,
+                "receipt_to_write_end_ms": 7.989057,
+                "write_duration_ms": 6.533685,
+                "receipt_to_policy_start_ms": 0.857592,
+                "policy_duration_ms": 0.200348
+              },
+              {
+                "trial_id": "002-actuator",
+                "sequence": 371,
+                "observation_tick": 444148901,
+                "source_received_ns": 637292828681720,
+                "issued_at_board_ns": 1771787186000,
+                "expires_at_board_ns": 1771807186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637292834730470,
+                "write_end_ns": 637292836055135,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 6.04875,
+                "receipt_to_write_end_ms": 7.373415,
+                "write_duration_ms": 1.324665,
+                "receipt_to_policy_start_ms": 5.413525,
+                "policy_duration_ms": 0.205437
+              },
+              {
+                "trial_id": "002-actuator",
+                "sequence": 19,
+                "observation_tick": 444145381,
+                "source_received_ns": 637289308513614,
+                "issued_at_board_ns": 1768267186000,
+                "expires_at_board_ns": 1768287186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637289312176529,
+                "write_end_ns": 637289315248545,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 3.662915,
+                "receipt_to_write_end_ms": 6.734931,
+                "write_duration_ms": 3.072016,
+                "receipt_to_policy_start_ms": 1.645319,
+                "policy_duration_ms": 0.35189
+              }
+            ]
+          },
+          "timing": {
+            "schema_version": 1,
+            "clock_basis": "host monotonic receipt and board counters reported separately",
+            "instrumentation_overhead_included": true,
+            "counts": {
+              "state_records": 677,
+              "write_starts": 691,
+              "write_ends": 691,
+              "write_errors": 0,
+              "partial_writes": 0,
+              "incomplete_write_events": 0,
+              "read_chunks": 1488,
+              "read_bytes": 84525,
+              "read_errors": 0,
+              "policy_calls": 383,
+              "policy_errors": 0,
+              "invalid_timing_records": 0,
+              "session_boundaries": 0,
+              "lease_boundaries": 1,
+              "sequence_boundaries": 1,
+              "board_counter_boundaries": 0,
+              "action_requests": 383,
+              "recorded_drops": 0
+            },
+            "state_receipt_interval_ns": {
+              "count": 676,
+              "p50": 9925218.0,
+              "p95": 11123588.0,
+              "p99": 12417851.75,
+              "max": 14107839.0
+            },
+            "board_tick_gap": {
+              "count": 676,
+              "p50": 10.0,
+              "p95": 10.0,
+              "p99": 10.0,
+              "max": 10.0
+            },
+            "board_us_gap": {
+              "count": 676,
+              "p50": 10000.0,
+              "p95": 10000.0,
+              "p99": 10000.0,
+              "max": 10000.0
+            },
+            "command_write_duration_ns": {
+              "count": 691,
+              "p50": 342896.0,
+              "p95": 1765895.5,
+              "p99": 3122317.3000000115,
+              "max": 6533685.0
+            },
+            "policy_duration_ns": {
+              "count": 383,
+              "p50": 207677.0,
+              "p95": 319084.9999999999,
+              "p99": 603357.6600000008,
+              "max": 5075723.0
+            },
+            "read_call_duration_ns": {
+              "count": 1488,
+              "p50": 437789.0,
+              "p95": 3107587.6499999985,
+              "p99": 6662216.069999972,
+              "max": 10974792.0
+            },
+            "acknowledgements": {
+              "basis": "first exact last_seq receipt relative to the host write interval",
+              "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+              "written_actions": 383,
+              "observed_sequences": 382,
+              "unobserved_sequences": 1,
+              "telemetry_skipped_sequences": 0,
+              "right_censored_sequences": 1,
+              "ambiguous_sequences": 0,
+              "missed_commands": null,
+              "receipt_elapsed_lower_ms": {
+                "count": 382,
+                "p50": 7.6768675,
+                "p95": 9.32137345,
+                "p99": 10.424505649999999,
+                "max": 12.663348
+              },
+              "receipt_elapsed_upper_ms": {
+                "count": 382,
+                "p50": 8.2379235,
+                "p95": 9.58837205,
+                "p99": 10.61280481,
+                "max": 12.806696
+              },
+              "per_action_samples_omitted": 383
+            }
+          }
+        },
+        {
+          "id": "003-actuator",
+          "kind": "actuator",
+          "completed": false,
+          "reference": {
+            "id": "pulse-20mm-positive",
+            "kind": "pulse",
+            "amplitude_m": 0.02,
+            "segment_s": 0.4,
+            "hold_s": 3.0
+          },
+          "failure": "RigError('latched rig error: executor fault 1')",
+          "state_intervals": {
+            "active_external": {
+              "receipt_gap_ms": {
+                "count": 241,
+                "p50": 9.991373,
+                "p95": 11.052068,
+                "p99": 12.800248999999997,
+                "max": 13.219535
+              },
+              "board_gap_ms": {
+                "count": 241,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 241,
+                "p50": -0.008627000000000606,
+                "p95": 1.0520680000000002,
+                "p99": 2.8002489999999978,
+                "max": 3.2195350000000005
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444153771,
+                  "tick": 444153781,
+                  "received_ns": 637297713117531,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.219535,
+                  "receipt_gap_minus_board_gap_ms": 3.2195350000000005
+                },
+                {
+                  "previous_tick": 444153401,
+                  "tick": 444153411,
+                  "received_ns": 637297342579273,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.958506,
+                  "receipt_gap_minus_board_gap_ms": 2.958506
+                },
+                {
+                  "previous_tick": 444151821,
+                  "tick": 444151831,
+                  "received_ns": 637295761667485,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.949263,
+                  "receipt_gap_minus_board_gap_ms": 2.949263
+                },
+                {
+                  "previous_tick": 444152271,
+                  "tick": 444152281,
+                  "received_ns": 637296211271305,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.576728,
+                  "receipt_gap_minus_board_gap_ms": 2.5767279999999992
+                },
+                {
+                  "previous_tick": 444153171,
+                  "tick": 444153181,
+                  "received_ns": 637297110603040,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 11.685305,
+                  "receipt_gap_minus_board_gap_ms": 1.6853049999999996
+                }
+              ]
+            },
+            "active_native": {
+              "receipt_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 0,
+                "p50": null,
+                "p95": null,
+                "p99": null,
+                "max": null
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": []
+            },
+            "stopped": {
+              "receipt_gap_ms": {
+                "count": 244,
+                "p50": 9.8827885,
+                "p95": 11.2470483,
+                "p99": 13.270181579999997,
+                "max": 14.440673
+              },
+              "board_gap_ms": {
+                "count": 244,
+                "p50": 10.0,
+                "p95": 10.0,
+                "p99": 10.0,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 244,
+                "p50": -0.007310000000000372,
+                "p95": 1.3947695999999985,
+                "p99": 3.270181579999997,
+                "max": 4.440673
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444150830,
+                  "tick": 444150840,
+                  "received_ns": 637294772148639,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 14.440673,
+                  "receipt_gap_minus_board_gap_ms": 4.440673
+                },
+                {
+                  "previous_tick": 444150520,
+                  "tick": 444150530,
+                  "received_ns": 637294461773405,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.965567,
+                  "receipt_gap_minus_board_gap_ms": 3.965567
+                },
+                {
+                  "previous_tick": 444150213,
+                  "tick": 444150223,
+                  "received_ns": 637294154630015,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 13.48806,
+                  "receipt_gap_minus_board_gap_ms": 3.488060000000001
+                },
+                {
+                  "previous_tick": 444150153,
+                  "tick": 444150163,
+                  "received_ns": 637294093523302,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.981366,
+                  "receipt_gap_minus_board_gap_ms": 2.9813659999999995
+                },
+                {
+                  "previous_tick": 444150540,
+                  "tick": 444150550,
+                  "received_ns": 637294481206232,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 12.942864,
+                  "receipt_gap_minus_board_gap_ms": 2.942864
+                }
+              ]
+            },
+            "faulted": {
+              "receipt_gap_ms": {
+                "count": 2,
+                "p50": 3.4552005,
+                "p95": 3.77529945,
+                "p99": 3.8037526899999996,
+                "max": 3.810866
+              },
+              "board_gap_ms": {
+                "count": 2,
+                "p50": 3.5,
+                "p95": 3.95,
+                "p99": 3.99,
+                "max": 4.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 2,
+                "p50": -0.0447995000000001,
+                "p95": 0.7252994499999998,
+                "p99": 0.7937526899999998,
+                "max": 0.8108659999999999
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444153791,
+                  "tick": 444153794,
+                  "received_ns": 637297723391376,
+                  "board_gap_ms": 3.0,
+                  "receipt_gap_ms": 3.810866,
+                  "receipt_gap_minus_board_gap_ms": 0.8108659999999999
+                },
+                {
+                  "previous_tick": 444153794,
+                  "tick": 444153798,
+                  "received_ns": 637297726490911,
+                  "board_gap_ms": 4.0,
+                  "receipt_gap_ms": 3.099535,
+                  "receipt_gap_minus_board_gap_ms": -0.9004650000000001
+                }
+              ]
+            },
+            "transitions": {
+              "receipt_gap_ms": {
+                "count": 2,
+                "p50": 5.4751625,
+                "p95": 6.3641973499999995,
+                "p99": 6.44322267,
+                "max": 6.462979
+              },
+              "board_gap_ms": {
+                "count": 2,
+                "p50": 8.0,
+                "p95": 9.8,
+                "p99": 9.96,
+                "max": 10.0
+              },
+              "receipt_gap_minus_board_gap_ms": {
+                "count": 2,
+                "p50": -2.5248375000000003,
+                "p95": -1.6138723500000005,
+                "p99": -1.5328976700000005,
+                "max": -1.5126540000000004
+              },
+              "duplicate_board_snapshots": 0,
+              "intervals_over_15ms": 0,
+              "intervals_at_least_20ms": 0,
+              "worst_intervals": [
+                {
+                  "previous_tick": 444153781,
+                  "tick": 444153791,
+                  "received_ns": 637297719580510,
+                  "board_gap_ms": 10.0,
+                  "receipt_gap_ms": 6.462979,
+                  "receipt_gap_minus_board_gap_ms": -3.537021
+                },
+                {
+                  "previous_tick": 444151365,
+                  "tick": 444151371,
+                  "received_ns": 637295299703328,
+                  "board_gap_ms": 6.0,
+                  "receipt_gap_ms": 4.487346,
+                  "receipt_gap_minus_board_gap_ms": -1.5126540000000004
+                }
+              ]
+            }
+          },
+          "action_pipeline": {
+            "receipt_to_policy_start_ms": {
+              "count": 242,
+              "p50": 1.069237,
+              "p95": 2.3962398999999994,
+              "p99": 3.931939680000003,
+              "max": 4.645446
+            },
+            "policy_duration_ms": {
+              "count": 242,
+              "p50": 0.2195825,
+              "p95": 0.34114874999999995,
+              "p99": 0.44721683,
+              "max": 0.598483
+            },
+            "receipt_to_write_start_ms": {
+              "count": 242,
+              "p50": 1.6993245,
+              "p95": 3.3504634999999996,
+              "p99": 4.737616070000001,
+              "max": 5.29376
+            },
+            "receipt_to_write_end_ms": {
+              "count": 242,
+              "p50": 2.268204,
+              "p95": 4.03386325,
+              "p99": 5.579963310000001,
+              "max": 5.932667
+            },
+            "write_duration_ms": {
+              "count": 242,
+              "p50": 0.49490100000000004,
+              "p95": 1.3287641,
+              "p99": 2.0050144700000008,
+              "max": 3.229985
+            },
+            "inter_action_write_start_ms": {
+              "count": 241,
+              "p50": 10.078302,
+              "p95": 12.114965,
+              "p99": 13.291213599999999,
+              "max": 15.262731
+            },
+            "ttl_values_ms": [
+              20.0
+            ],
+            "worst_receipt_to_write": [
+              {
+                "trial_id": "003-actuator",
+                "sequence": 12,
+                "observation_tick": 444151481,
+                "source_received_ns": 637295408996783,
+                "issued_at_board_ns": 1774367186000,
+                "expires_at_board_ns": 1774387186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637295414210694,
+                "write_end_ns": 637295414929450,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 5.213911,
+                "receipt_to_write_end_ms": 5.932667,
+                "write_duration_ms": 0.718756,
+                "receipt_to_policy_start_ms": 4.594177,
+                "policy_duration_ms": 0.252355
+              },
+              {
+                "trial_id": "003-actuator",
+                "sequence": 210,
+                "observation_tick": 444153461,
+                "source_received_ns": 637297388983520,
+                "issued_at_board_ns": 1776347186000,
+                "expires_at_board_ns": 1776367186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637297394277280,
+                "write_end_ns": 637297394907192,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 5.29376,
+                "receipt_to_write_end_ms": 5.923672,
+                "write_duration_ms": 0.629912,
+                "receipt_to_policy_start_ms": 4.645446,
+                "policy_duration_ms": 0.250403
+              },
+              {
+                "trial_id": "003-actuator",
+                "sequence": 242,
+                "observation_tick": 444153781,
+                "source_received_ns": 637297713117531,
+                "issued_at_board_ns": 1776667186000,
+                "expires_at_board_ns": 1776687186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637297716898409,
+                "write_end_ns": 637297718785935,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 3.780878,
+                "receipt_to_write_end_ms": 5.668404,
+                "write_duration_ms": 1.887526,
+                "receipt_to_policy_start_ms": 3.111825,
+                "policy_duration_ms": 0.216286
+              },
+              {
+                "trial_id": "003-actuator",
+                "sequence": 215,
+                "observation_tick": 444153511,
+                "source_received_ns": 637297438791023,
+                "issued_at_board_ns": 1776397186000,
+                "expires_at_board_ns": 1776417186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637297443683608,
+                "write_end_ns": 637297444243718,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 4.892585,
+                "receipt_to_write_end_ms": 5.452695,
+                "write_duration_ms": 0.56011,
+                "receipt_to_policy_start_ms": 4.23819,
+                "policy_duration_ms": 0.258116
+              },
+              {
+                "trial_id": "003-actuator",
+                "sequence": 222,
+                "observation_tick": 444153581,
+                "source_received_ns": 637297509243318,
+                "issued_at_board_ns": 1776467186000,
+                "expires_at_board_ns": 1776487186000,
+                "ttl_ms": 20.0,
+                "write_start_ns": 637297513256933,
+                "write_end_ns": 637297514559578,
+                "write_complete": true,
+                "receipt_to_write_start_ms": 4.013615,
+                "receipt_to_write_end_ms": 5.31626,
+                "write_duration_ms": 1.302645,
+                "receipt_to_policy_start_ms": 3.297035,
+                "policy_duration_ms": 0.227552
+              }
+            ]
+          },
+          "timing": {
+            "schema_version": 1,
+            "clock_basis": "host monotonic receipt and board counters reported separately",
+            "instrumentation_overhead_included": true,
+            "counts": {
+              "state_records": 490,
+              "write_starts": 428,
+              "write_ends": 428,
+              "write_errors": 0,
+              "partial_writes": 0,
+              "incomplete_write_events": 0,
+              "read_chunks": 1051,
+              "read_bytes": 60589,
+              "read_errors": 0,
+              "policy_calls": 242,
+              "policy_errors": 0,
+              "invalid_timing_records": 0,
+              "session_boundaries": 0,
+              "lease_boundaries": 1,
+              "sequence_boundaries": 1,
+              "board_counter_boundaries": 0,
+              "action_requests": 242,
+              "recorded_drops": 0
+            },
+            "state_receipt_interval_ns": {
+              "count": 489,
+              "p50": 9949584.0,
+              "p95": 11095836.999999998,
+              "p99": 12961249.2,
+              "max": 14440673.0
+            },
+            "board_tick_gap": {
+              "count": 489,
+              "p50": 10.0,
+              "p95": 10.0,
+              "p99": 10.0,
+              "max": 10.0
+            },
+            "board_us_gap": {
+              "count": 489,
+              "p50": 10000.0,
+              "p95": 10000.0,
+              "p99": 10000.0,
+              "max": 10000.0
+            },
+            "command_write_duration_ns": {
+              "count": 428,
+              "p50": 381381.0,
+              "p95": 1317692.15,
+              "p99": 2170298.750000002,
+              "max": 3229985.0
+            },
+            "policy_duration_ns": {
+              "count": 242,
+              "p50": 219582.5,
+              "p95": 341148.74999999994,
+              "p99": 447216.83,
+              "max": 598483.0
+            },
+            "read_call_duration_ns": {
+              "count": 1051,
+              "p50": 491269.0,
+              "p95": 3109890.5,
+              "p99": 5720687.0,
+              "max": 9012358.0
+            },
+            "acknowledgements": {
+              "basis": "first exact last_seq receipt relative to the host write interval",
+              "limitations": "Receipt-domain bounds only; not physical actuation, board acceptance time, one-way latency, or sensor age. Unobserved sequences may reflect telemetry or log loss; later sequences do not prove a skipped command was accepted.",
+              "written_actions": 242,
+              "observed_sequences": 241,
+              "unobserved_sequences": 1,
+              "telemetry_skipped_sequences": 0,
+              "right_censored_sequences": 1,
+              "ambiguous_sequences": 0,
+              "missed_commands": null,
+              "receipt_elapsed_lower_ms": {
+                "count": 241,
+                "p50": 7.73522,
+                "p95": 9.033164,
+                "p99": 10.328669399999997,
+                "max": 11.246108
+              },
+              "receipt_elapsed_upper_ms": {
+                "count": 241,
+                "p50": 8.268448,
+                "p95": 9.658466,
+                "p99": 11.1522214,
+                "max": 11.481853
+              },
+              "per_action_samples_omitted": 242
+            }
+          }
+        }
+      ],
+      "fault": {
+        "first_fault_code": 1,
+        "first_fault_tick": 444153791,
+        "first_fault_received_ns": 637297719580510,
+        "last_healthy_tick": 444153781,
+        "last_observed_action_before_fault": {
+          "trial_id": "003-actuator",
+          "sequence": 241,
+          "observation_tick": 444153771,
+          "source_received_ns": 637297699897996,
+          "issued_at_board_ns": 1776657186000,
+          "expires_at_board_ns": 1776677186000,
+          "ttl_ms": 20.0,
+          "write_start_ns": 637297701635678,
+          "write_end_ns": 637297701871423,
+          "write_complete": true,
+          "receipt_to_write_start_ms": 1.737682,
+          "receipt_to_write_end_ms": 1.973427,
+          "write_duration_ms": 0.235745,
+          "receipt_to_policy_start_ms": 1.158049,
+          "policy_duration_ms": 0.241474
+        },
+        "fault_minus_last_observed_action_anchor_ticks": 20,
+        "recent_actions": [
+          {
+            "trial_id": "003-actuator",
+            "sequence": 238,
+            "observation_tick": 444153741,
+            "source_received_ns": 637297669780847,
+            "issued_at_board_ns": 1776627186000,
+            "expires_at_board_ns": 1776647186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637297671180018,
+            "write_end_ns": 637297672289004,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 1.399171,
+            "receipt_to_write_end_ms": 2.508157,
+            "write_duration_ms": 1.108986,
+            "receipt_to_policy_start_ms": 0.929314,
+            "policy_duration_ms": 0.169239
+          },
+          {
+            "trial_id": "003-actuator",
+            "sequence": 239,
+            "observation_tick": 444153751,
+            "source_received_ns": 637297680515844,
+            "issued_at_board_ns": 1776637186000,
+            "expires_at_board_ns": 1776657186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637297682585604,
+            "write_end_ns": 637297683570125,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 2.06976,
+            "receipt_to_write_end_ms": 3.054281,
+            "write_duration_ms": 0.984521,
+            "receipt_to_policy_start_ms": 1.447498,
+            "policy_duration_ms": 0.232896
+          },
+          {
+            "trial_id": "003-actuator",
+            "sequence": 240,
+            "observation_tick": 444153761,
+            "source_received_ns": 637297689138804,
+            "issued_at_board_ns": 1776647186000,
+            "expires_at_board_ns": 1776667186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637297691478201,
+            "write_end_ns": 637297691719227,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 2.339397,
+            "receipt_to_write_end_ms": 2.580423,
+            "write_duration_ms": 0.241026,
+            "receipt_to_policy_start_ms": 1.729456,
+            "policy_duration_ms": 0.228224
+          },
+          {
+            "trial_id": "003-actuator",
+            "sequence": 241,
+            "observation_tick": 444153771,
+            "source_received_ns": 637297699897996,
+            "issued_at_board_ns": 1776657186000,
+            "expires_at_board_ns": 1776677186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637297701635678,
+            "write_end_ns": 637297701871423,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 1.737682,
+            "receipt_to_write_end_ms": 1.973427,
+            "write_duration_ms": 0.235745,
+            "receipt_to_policy_start_ms": 1.158049,
+            "policy_duration_ms": 0.241474
+          },
+          {
+            "trial_id": "003-actuator",
+            "sequence": 242,
+            "observation_tick": 444153781,
+            "source_received_ns": 637297713117531,
+            "issued_at_board_ns": 1776667186000,
+            "expires_at_board_ns": 1776687186000,
+            "ttl_ms": 20.0,
+            "write_start_ns": 637297716898409,
+            "write_end_ns": 637297718785935,
+            "write_complete": true,
+            "receipt_to_write_start_ms": 3.780878,
+            "receipt_to_write_end_ms": 5.668404,
+            "write_duration_ms": 1.887526,
+            "receipt_to_policy_start_ms": 3.111825,
+            "policy_duration_ms": 0.216286
+          }
+        ],
+        "timeline": [
+          {
+            "event": "state receipt",
+            "host_ns": 637297669780847,
+            "tick": 444153741,
+            "last_seq": 237,
+            "fault": 0,
+            "mode": 12,
+            "host_relative_ms": 0.0
+          },
+          {
+            "event": "action write start",
+            "host_ns": 637297671180018,
+            "sequence": 238,
+            "observation_tick": 444153741,
+            "host_relative_ms": 1.399171
+          },
+          {
+            "event": "action write end",
+            "host_ns": 637297672289004,
+            "sequence": 238,
+            "observation_tick": 444153741,
+            "host_relative_ms": 2.508157
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297680515844,
+            "tick": 444153751,
+            "last_seq": 238,
+            "fault": 0,
+            "mode": 12,
+            "host_relative_ms": 10.734997
+          },
+          {
+            "event": "action write start",
+            "host_ns": 637297682585604,
+            "sequence": 239,
+            "observation_tick": 444153751,
+            "host_relative_ms": 12.804757
+          },
+          {
+            "event": "action write end",
+            "host_ns": 637297683570125,
+            "sequence": 239,
+            "observation_tick": 444153751,
+            "host_relative_ms": 13.789278
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297689138804,
+            "tick": 444153761,
+            "last_seq": 239,
+            "fault": 0,
+            "mode": 12,
+            "host_relative_ms": 19.357957
+          },
+          {
+            "event": "action write start",
+            "host_ns": 637297691478201,
+            "sequence": 240,
+            "observation_tick": 444153761,
+            "host_relative_ms": 21.697354
+          },
+          {
+            "event": "action write end",
+            "host_ns": 637297691719227,
+            "sequence": 240,
+            "observation_tick": 444153761,
+            "host_relative_ms": 21.93838
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297699897996,
+            "tick": 444153771,
+            "last_seq": 240,
+            "fault": 0,
+            "mode": 12,
+            "host_relative_ms": 30.117149
+          },
+          {
+            "event": "action write start",
+            "host_ns": 637297701635678,
+            "sequence": 241,
+            "observation_tick": 444153771,
+            "host_relative_ms": 31.854831
+          },
+          {
+            "event": "action write end",
+            "host_ns": 637297701871423,
+            "sequence": 241,
+            "observation_tick": 444153771,
+            "host_relative_ms": 32.090576
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297713117531,
+            "tick": 444153781,
+            "last_seq": 241,
+            "fault": 0,
+            "mode": 12,
+            "host_relative_ms": 43.336684
+          },
+          {
+            "event": "action write start",
+            "host_ns": 637297716898409,
+            "sequence": 242,
+            "observation_tick": 444153781,
+            "host_relative_ms": 47.117562
+          },
+          {
+            "event": "action write end",
+            "host_ns": 637297718785935,
+            "sequence": 242,
+            "observation_tick": 444153781,
+            "host_relative_ms": 49.005088
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297719580510,
+            "tick": 444153791,
+            "last_seq": 0,
+            "fault": 1,
+            "mode": 4,
+            "host_relative_ms": 49.799663
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297723391376,
+            "tick": 444153794,
+            "last_seq": 0,
+            "fault": 1,
+            "mode": 4,
+            "host_relative_ms": 53.610529
+          },
+          {
+            "event": "state receipt",
+            "host_ns": 637297726490911,
+            "tick": 444153798,
+            "last_seq": 0,
+            "fault": 1,
+            "mode": 4,
+            "host_relative_ms": 56.710064
+          }
+        ],
+        "interpretation": "Fault 1 is ACTION_EXPIRED in executor_core.h. A complete host write does not establish board receipt/acceptance time. Tick-anchored expiry and late receipt/dispatch are observable; physical one-way or actuator latency is not."
+      }
+    }
+  ],
+  "interpretation": [
+    "Receipt gaps are classified on adjacent source snapshots before any state filtering. Stopped periods and transition intervals are separate.",
+    "Same-source repeated board snapshots are counted separately and excluded from periodic interval percentiles.",
+    "Receipt-to-write intervals include host decoding/scheduling/policy/transport overhead after State.received_ns; they omit preceding board-to-host age.",
+    "Acknowledgement bounds are host-write to first exact last_seq receipt, not board acceptance or physical latency. Raw source logs retain every action.",
+    "Failed collection and STOP status are preserved. CPU-affinity effects require new labeled repeats; these data alone do not establish causation.",
+    "A quiet feedback policy does not measure the deployed neural actor inference cost. Keep the 20 ms lease and existing SDK cadence rejection unchanged."
+  ]
+}

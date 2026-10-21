@@ -2,8 +2,11 @@
 
 Use `./scripts/system-id-campaign` from this checkout. It installs its required
 Python dependencies with `uv`; no editable Python scripts or notebook are needed.
-These workflows were tested offline. They have not yet been exercised on the
-physical rig. The current simulation and training profiles are unchanged.
+Offline tests cover collection orchestration, guards and artifact generation.
+Check each live recording's report for its actual completion and STOP outcome;
+collection does not automatically update or qualify a simulator or policy.
+See [the October 20 live results](checkpoint-20261020.md), including the remaining
+host command-deadline failures; a completed trial is not a reliability guarantee.
 
 ## What each suite measures
 
@@ -26,10 +29,47 @@ limits; jerk uses the live setting. The external-motion guards are at most
 No collector changes gains, jerk, firmware, encoder zero, switch profile or
 watchdogs. In particular, it does not silently replace your working gains.
 
-Camera frames are required for every suite. Raw detector geometry is retained
+Camera frames are required by default for every suite. Raw detector geometry is retained
 along with encoder data and any published fusion fields. Analysis uses independent
 raw camera geometry, not fused values as an independent angle reference. These
 files contain tracking records, **not an encoded video recording**.
+
+## Powered collection without the camera
+
+If the camera is unsuitable for a session, explicitly add `--encoder-only` to
+`collect` for `timing`, `actuator`, `coupled` or `autonomous`. This mode does not start a camera recorder or read camera measurements and
+produces no `vision.ndjson` or `vision-report.json`. The SDK still publishes
+encoder telemetry to the loopback vision display. Manual calibration suites
+still require the camera.
+
+```sh
+./scripts/system-id-campaign collect --suite timing --seconds 5 --repetitions 1 \
+  --port "$PORT" --execute --encoder-only --dataset-role training \
+  --run-label encoder-timing-001 --output runs/id-encoder-timing-001
+
+./scripts/system-id-campaign collect --suite autonomous --level gentle \
+  --port "$PORT" --execute --encoder-only --dataset-role training \
+  --run-label encoder-dynamics-001 --output runs/id-encoder-dynamics-001
+```
+
+Complete the same healthy, homed, centered and quiet-pole preflight described
+below. Encoder-only mode retains the live motion limits, released-switch checks,
+reference/home pins, freshness and action-lease guards, STOP behavior and saved
+counted-home returns. It changes only the camera prerequisites and recording.
+
+The report and trial events state `sensor_mode: encoder_only`; camera evidence
+is explicitly absent. These data support host/transport timing diagnostics,
+executor count/command consistency and pole-model replay conditional on recorded
+governor input. Counted cart position and governor velocity/acceleration remain
+internal executor quantities. They cannot establish physical actuator gain,
+latency, slip, independent cart scale or global encoder-angle accuracy.
+
+Run `review` and `bundle` normally. Review retains timing and encoder diagnostics
+and adds an explicit missing-independent-camera blocker; `ready_for_fit` and
+`hardware_accepted` remain false. A completed encoder-only campaign therefore
+does not qualify a physical actuator fit. Reserve a separately labeled validation
+recording before comparing predictions. Conditional replay must preserve this
+measurement limitation and must not relabel the validation recording as training.
 
 ## Rehearse now, without the rig
 
@@ -52,7 +92,7 @@ sealed recording directory.
 
 ## Prepare the Jetson later
 
-Keep the camera fixed, showing the entire rail and both pole markers. Start the
+For the default camera mode, keep the camera fixed, showing the entire rail and both pole markers. Start the
 maintained vision service as usual; its default raw stream is
 `http://127.0.0.1:3090/api/sensing-stream?max_hz=100`.
 Override `--camera-url` if your service is elsewhere. The recorder retains camera
@@ -208,7 +248,8 @@ Each recording contains:
 - `rig-*.jsonl`: raw encoder/executor telemetry, action demands, command timing,
   policy timing, trial boundaries, and manual labels/windows.
 - `vision.ndjson`, `vision-report.json`: raw source-frame geometry/confidence,
-  source and collector clocks, and camera clock anchors.
+  source and collector clocks, and camera clock anchors; omitted in explicitly
+  selected encoder-only collection.
 - `analysis-request.json`: explicit remaining questions and model-update boundaries.
 - `manifest.json`: relative filenames, byte counts and SHA-256 hashes.
 

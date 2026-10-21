@@ -123,14 +123,21 @@ def _limits(parameters, info):
 
 
 class _CameraEvidence:
-    def __init__(self, camera):
-        if camera is None or not callable(getattr(camera, 'check', None)) or not callable(getattr(camera, 'latest', None)):
+    def __init__(self, camera, *, encoder_only=False):
+        if type(encoder_only) is not bool:
+            raise ValidationError('encoder_only must be an explicit boolean')
+        if encoder_only and camera is not None:
+            raise ValidationError('encoder-only collection must omit the camera recorder')
+        if not encoder_only and (camera is None or not callable(getattr(camera, 'check', None)) or not callable(getattr(camera, 'latest', None))):
             raise ValidationError('driven collection requires a live camera recorder')
         self.camera = camera
+        self.encoder_only = encoder_only
         self.previous = None
         self.valid = self.missing = 0
 
     def check(self):
+        if self.encoder_only:
+            return
         self.camera.check()
         sample = self.camera.latest()
         validate_camera_finish(sample)
@@ -146,7 +153,9 @@ class _CameraEvidence:
 
     def summary(self):
         return dict(valid_geometry_frames=self.valid, missing_geometry_frames=self.missing,
-                    raw_geometry_only=True, physical_tracking_proven=False)
+                    recorded=not self.encoder_only, raw_geometry_only=True,
+                    sensor_mode='encoder_only' if self.encoder_only else 'encoder_camera',
+                    physical_tracking_proven=False)
 
 
 def _preflight(rig, camera, expected_reference, expected_home, *, quiet=True):
@@ -263,16 +272,17 @@ def _stop(rig, failure):
 def _result(parameters, info, camera, **extra):
     return dict(completed=True, parameters=parameters, info=plain(info),
                 reference=info.encoder_upright_raw, home_epoch=info.home_epoch,
-                camera_quality=camera.summary(), hardware_validated=False,
+                camera_quality=camera.summary(), sensor_mode=camera.summary()['sensor_mode'],
+                hardware_validated=False,
                 physical_trajectory_guaranteed=False, **extra)
 
 
-def _run_driven(rig, *, trial, seconds, camera, expected_reference, expected_home, ready, policy_wrapper):
+def _run_driven(rig, *, trial, seconds, camera, expected_reference, expected_home, ready, policy_wrapper, encoder_only=False):
     failure = policy = result = None
     try:
         trial = None if trial is None else _trial(trial)
         duration = _seconds(seconds, 'timing hold') if trial is None else trial['segment_s']*(len(_waypoints(trial))-1)+trial['hold_s']
-        evidence = _CameraEvidence(camera)
+        evidence = _CameraEvidence(camera, encoder_only=encoder_only)
         values, info, limits, hanging = _preflight(rig, evidence, expected_reference, expected_home)
         if trial is not None:
             bounds = _reference_bounds(trial)
@@ -284,6 +294,7 @@ def _run_driven(rig, *, trial, seconds, camera, expected_reference, expected_hom
         rig._record('driven_start', procedure='timing_hold' if trial is None else 'actuator',
             trial=trial, parameters=values, info=plain(info), limits=limits, initial_hanging=hanging,
             seconds=duration, rate_hz=100, ttl_ms=20, feedback_kp=80., feedback_kd=14.,
+            sensor_mode=evidence.summary()['sensor_mode'],
             hardware_validated=False, physical_trajectory_guaranteed=False)
         if ready is not None:
             ready(dict(status='timing_hold_starting' if trial is None else 'actuator_starting',
@@ -327,18 +338,18 @@ def _run_driven(rig, *, trial, seconds, camera, expected_reference, expected_hom
     return result
 
 
-def run_actuator(rig, *, trial, camera, expected_reference=None, expected_home=None, ready=None, policy_wrapper=None):
+def run_actuator(rig, *, trial, camera, expected_reference=None, expected_home=None, ready=None, policy_wrapper=None, encoder_only=False):
     """One exact preset only; the outer campaign chooses progression and returns."""
     return _run_driven(rig, trial=trial, seconds=None, camera=camera,
                        expected_reference=expected_reference, expected_home=expected_home,
-                       ready=ready, policy_wrapper=policy_wrapper)
+                       ready=ready, policy_wrapper=policy_wrapper, encoder_only=encoder_only)
 
 
-def run_timing_hold(rig, *, seconds=10., camera, expected_reference=None, expected_home=None, ready=None, policy_wrapper=None):
+def run_timing_hold(rig, *, seconds=10., camera, expected_reference=None, expected_home=None, ready=None, policy_wrapper=None, encoder_only=False):
     """Bounded zero-reference cart feedback; no artificial delay injection."""
     return _run_driven(rig, trial=None, seconds=seconds, camera=camera,
                        expected_reference=expected_reference, expected_home=expected_home,
-                       ready=ready, policy_wrapper=policy_wrapper)
+                       ready=ready, policy_wrapper=policy_wrapper, encoder_only=encoder_only)
 
 
 def _native_guard(rig, limits, modes):
@@ -378,15 +389,16 @@ def _wait_native(rig, evidence, limits, *, minimum_s, deadline_s, modes):
         rig.wait_state(after_tick=state.unwrapped_tick, timeout=min(.1, deadline-time.monotonic()))
 
 
-def run_coupled(rig, *, seconds=15., camera, expected_reference=None, expected_home=None, ready=None):
+def run_coupled(rig, *, seconds=15., camera, expected_reference=None, expected_home=None, ready=None, encoder_only=False):
     """Preserved native AUTO with current readback and its normal counted return."""
     failure = result = None
     try:
         seconds = _seconds(seconds, 'coupled')
-        evidence = _CameraEvidence(camera)
+        evidence = _CameraEvidence(camera, encoder_only=encoder_only)
         values, info, limits, hanging = _preflight(rig, evidence, expected_reference, expected_home)
         rig._record('driven_coupled_start', parameters=values, info=plain(info), seconds=seconds,
                     limits=limits, initial_hanging=hanging, controller='preserved_board_auto',
+                    sensor_mode=evidence.summary()['sensor_mode'],
                     hardware_validated=False, physical_trajectory_guaranteed=False)
         if ready is not None:
             ready(dict(status='coupled_starting', seconds=seconds, drivers_enabled=False,
@@ -409,14 +421,15 @@ def run_coupled(rig, *, seconds=15., camera, expected_reference=None, expected_h
     return result
 
 
-def return_saved_home(rig, *, camera, expected_reference=None, expected_home=None, ready=None):
+def return_saved_home(rig, *, camera, expected_reference=None, expected_home=None, ready=None, encoder_only=False):
     """Explicit outer-campaign opt-in after success; never a fault recovery path."""
     failure = result = None
     try:
-        evidence = _CameraEvidence(camera)
+        evidence = _CameraEvidence(camera, encoder_only=encoder_only)
         values, info, limits, _ = _preflight(rig, evidence, expected_reference, expected_home, quiet=False)
         _native_guard(rig, limits, (0,))
         rig._record('driven_return_start', parameters=values, info=plain(info), limits=limits,
+                    sensor_mode=evidence.summary()['sensor_mode'],
                     deadline_s=_RETURN_DEADLINE_S, operation='existing_counted_home')
         if ready is not None:
             ready(dict(status='returning_to_saved_home', drivers_enabled=False,

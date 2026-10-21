@@ -1,0 +1,75 @@
+{
+  "actor_file_sha256": "b6d1179873eadbfebe0798e7cc39c17f05cc1bf7d9983733550e26e5681e6f08",
+  "all_sampled_starts_and_observed_envelopes_pass": true,
+  "boundary_sha256": "d606ca496155acbbc8629543e03ab725a8981e87729da08f9e188dbeb173b793",
+  "episodes": [
+    {
+      "first_observation": {
+        "angle_rad": -0.04295146206079795,
+        "angular_rate_rad_s": 0.0,
+        "brake_direction": 0.0,
+        "position_m": 0.0017249999999999998,
+        "velocity_m_s": 0.02241464235077055
+      },
+      "max_abs_raw_action_m_s2": 1.9069814899743223,
+      "maxima": {
+        "angle_rad": 0.04295146206079795,
+        "angular_rate_rad_s": 0.43046939872960077,
+        "brake_direction": 0.0,
+        "position_m": 0.035399999999999994,
+        "velocity_m_s": 0.13227370381355286
+      },
+      "runtime_boundary_violations": [],
+      "samples": 6000,
+      "seed": 63000,
+      "start_pass": true,
+      "trace_path": "traces/upright-63000.jsonl",
+      "trace_sha256": "654e0423968578299f5b17da59bb63040766577b2652e0a969e0974f2b0937ab"
+    },
+    {
+      "first_observation": {
+        "angle_rad": 0.039883500485026674,
+        "angular_rate_rad_s": 0.0,
+        "brake_direction": 0.0,
+        "position_m": -0.0098625,
+        "velocity_m_s": -0.007827804857013926
+      },
+      "max_abs_raw_action_m_s2": 1.7223047831629117,
+      "maxima": {
+        "angle_rad": 0.041417481272912324,
+        "angular_rate_rad_s": 0.406110851750836,
+        "brake_direction": 0.0,
+        "position_m": 0.0315,
+        "velocity_m_s": 0.12915633618831635
+      },
+      "runtime_boundary_violations": [],
+      "samples": 6000,
+      "seed": 63001,
+      "start_pass": true,
+      "trace_path": "traces/upright-63001.jsonl",
+      "trace_sha256": "023888340d59ecd197c94c706b3b85865e05cf6c38de11bfdb9be12662596ce0"
+    }
+  ],
+  "hardware_accepted": false,
+  "heldout_truth_peak_speed_m_s": 0.23061560854250784,
+  "limitations": [
+    "Replay inspection of two nominal simulation observation traces, not a balance-wrapper end-to-end run or hardware qualification.",
+    "Eight heldout reports preserve truth speed only, so no commanded-speed claim is made for them.",
+    "Default .25 m/s\u00b2 demand cap intentionally rejects many nominal actor demands; no ceiling or guard was changed.",
+    "Hardware command lease expiry remains unresolved. Cyclic GC deferral is a mitigation, not a demonstrated fix."
+  ],
+  "parity_report_sha256": "033ff695e769d7139259a7e832538d61b12a777078b8eb0b65efefae08e2b94a",
+  "run_limits": {
+    "angle_rad": 0.15,
+    "angular_rate_rad_s": 1.0,
+    "position_m": 0.12,
+    "velocity_m_s": 0.25
+  },
+  "schema": "cartpole-balance-observed-envelope-check-v1",
+  "start_limits": {
+    "angle_rad": 0.07,
+    "angular_rate_rad_s": 0.15,
+    "position_m": 0.015,
+    "velocity_m_s": 0.025
+  }
+}
