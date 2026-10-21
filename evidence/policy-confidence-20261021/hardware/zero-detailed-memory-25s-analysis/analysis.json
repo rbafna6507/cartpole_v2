@@ -1,0 +1,820 @@
+{
+  "conclusion": "A completed healthy-state notification precedes the main control-thread wait return by10.40ms, crossing the lease deadline. That wait consumes only0.068ms of thread CPU. Both diagnostic workers were disabled and cyclicGC was deferred. Prioritize kernel wake/switch evidence; the current data do not uniquely distinguish OS runnable delay from GIL/futex reacquisition.",
+  "dropped_events": 0,
+  "eliminated_for_this_run": [
+    "Missing healthy telemetry",
+    "Missing Condition.notify_all",
+    "Slow final inference",
+    "Long final transport write",
+    "Encoder fault or new counted I2C error",
+    "Logger/mirror thread workload, because neither worker existed"
+  ],
+  "enabled_span_s": 10.85,
+  "failure": {
+    "act_finished_host_ns": 711552177283232,
+    "act_started_host_ns": 711552176140439,
+    "failed_observation_board_ns": 3016340531000,
+    "failed_observation_sequence": 518407883,
+    "fetch_finished_host_ns": 711552175832914,
+    "fetch_started_host_ns": 711552175567282,
+    "host_monotonic_ns": 711552196089972,
+    "previous_sent_observation_board_ns": 3016340531000,
+    "previous_sent_observation_sequence": 518407883,
+    "reason": "latched rig error: executor fault 1",
+    "stage": "wait",
+    "timing": null,
+    "type": "policy_failure"
+  },
+  "fault_elapsed_s": 10.86,
+  "final_io_events": [
+    [
+      "transport.read",
+      711552161852450,
+      711552164956151,
+      110208,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552164983098,
+      711552165043041,
+      59872,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552165332356,
+      711552165352678,
+      18592,
+      518407873,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552165473013,
+      711552170593628,
+      76352,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552171706050,
+      711552174956937,
+      100416,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552174981067,
+      711552175043155,
+      62432,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552175323829,
+      711552175344023,
+      18560,
+      518407883,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552175465094,
+      711552180600271,
+      90592,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552180664630,
+      711552180669655,
+      4352,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552180682681,
+      711552180845676,
+      79040,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552180624338,
+      711552180876656,
+      166688,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552181983861,
+      711552184983806,
+      112608,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552185009313,
+      711552185095755,
+      67264,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552185488378,
+      711552185516093,
+      25472,
+      518407893,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552185697491,
+      711552190832732,
+      89024,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552191972517,
+      711552194981071,
+      118272,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552195008114,
+      711552195058584,
+      50592,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552195405538,
+      711552195418979,
+      69088,
+      518407903,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552195638686,
+      711552195645087,
+      5824,
+      518407903,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552195736874,
+      711552195741994,
+      4768,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552195758988,
+      711552196258312,
+      156512,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552195683203,
+      711552196303886,
+      277184,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552196322864,
+      711552196389144,
+      67264,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552196473218,
+      711552196480355,
+      6560,
+      518407903,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552196498405,
+      711552197085196,
+      70688,
+      null,
+      null,
+      null,
+      true
+    ]
+  ],
+  "final_main_events": [
+    [
+      "act",
+      711552156283333,
+      711552157410284,
+      1127808,
+      518407863,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552157684397,
+      711552157690510,
+      4736,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552157704751,
+      711552157883685,
+      103808,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552157632903,
+      711552157915145,
+      203904,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "step",
+      711552157463922,
+      711552158104063,
+      563488,
+      518407863,
+      518407863,
+      1083,
+      true
+    ],
+    [
+      "condition.wait",
+      711552158143428,
+      711552165536221,
+      63488,
+      518407863,
+      null,
+      null,
+      true
+    ],
+    [
+      "wait_state",
+      711552158124706,
+      711552165553695,
+      98272,
+      518407863,
+      518407873,
+      null,
+      true
+    ],
+    [
+      "fetch.control_observation",
+      711552165573505,
+      711552165824223,
+      251616,
+      null,
+      518407873,
+      null,
+      true
+    ],
+    [
+      "act",
+      711552166104225,
+      711552167289455,
+      1187424,
+      518407873,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552167626136,
+      711552167632024,
+      4736,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552167647706,
+      711552167824880,
+      101632,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552167573521,
+      711552167858804,
+      206272,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "step",
+      711552167348278,
+      711552168071213,
+      624000,
+      518407873,
+      518407873,
+      1084,
+      true
+    ],
+    [
+      "condition.wait",
+      711552168113586,
+      711552175537582,
+      69856,
+      518407873,
+      null,
+      null,
+      true
+    ],
+    [
+      "wait_state",
+      711552168093744,
+      711552175555601,
+      106240,
+      518407873,
+      518407883,
+      null,
+      true
+    ],
+    [
+      "fetch.control_observation",
+      711552175573139,
+      711552175825809,
+      253600,
+      null,
+      518407883,
+      null,
+      true
+    ],
+    [
+      "act",
+      711552176146231,
+      711552177267230,
+      1122208,
+      518407883,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552177534142,
+      711552177539871,
+      4800,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552177554561,
+      711552177711124,
+      100288,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552177486617,
+      711552177790653,
+      245504,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "step",
+      711552177321285,
+      711552177980244,
+      601440,
+      518407883,
+      518407883,
+      1085,
+      true
+    ],
+    [
+      "condition.wait",
+      711552178021401,
+      711552195917343,
+      68064,
+      518407883,
+      null,
+      null,
+      true
+    ],
+    [
+      "wait_state",
+      711552178002071,
+      711552196024140,
+      150304,
+      518407883,
+      null,
+      null,
+      false
+    ],
+    [
+      "write_lock.acquire",
+      711552196213155,
+      711552196544971,
+      30080,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552196561869,
+      711552196671354,
+      70560,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552196174238,
+      711552196699645,
+      182464,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "write_lock.acquire",
+      711552196801194,
+      711552196805994,
+      3968,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.write",
+      711552196817932,
+      711552196910775,
+      63968,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "send",
+      711552196732801,
+      711552196933690,
+      170112,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.wait",
+      711552196957628,
+      711552197701398,
+      42304,
+      518407903,
+      null,
+      null,
+      true
+    ]
+  ],
+  "first_expiry_fault": {
+    "host_monotonic_ns": 711552195601977,
+    "state": {
+      "acceleration": 0.0,
+      "angle_hat": 3.000467,
+      "brake_direction": 0,
+      "demand": 0.0,
+      "dropped": 66808659,
+      "fault": 1,
+      "flags": 205,
+      "last_seq": 0,
+      "misses": 1,
+      "mode": 4,
+      "omega": 9.099404e-05,
+      "received_ns": 711552195163653,
+      "sid": 3551321903,
+      "theta": 3.000467,
+      "tick": 518407903,
+      "unwrapped_tick": 518407903,
+      "unwrapped_us": 3016360531,
+      "us": 3016360531,
+      "velocity": 0.0,
+      "x": 0.0
+    },
+    "type": "state"
+  },
+  "input_sha256": {
+    "report.json": "702c15f34cc71aa01cdf66309815b58c441b6eaf5632061de506f047c38b9a2a",
+    "rig-memory-3551321903.jsonl": "717376b7b228d31db9a30948ab7b6334ffc2cce5c86fc266530195d0f7f8308f",
+    "timings.json": "6bd9749b7b9ed4246c4f11e97ae7cac45a5c3e0b7b05c8ed116a7577d4fb5c4f"
+  },
+  "io_leaf_events_during_delayed_wake": [
+    [
+      "transport.read",
+      711552185697491,
+      711552190832732,
+      89024,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552191972517,
+      711552194981071,
+      118272,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "transport.read",
+      711552195008114,
+      711552195058584,
+      50592,
+      null,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552195405538,
+      711552195418979,
+      69088,
+      518407903,
+      null,
+      null,
+      true
+    ],
+    [
+      "condition.notify_all",
+      711552195638686,
+      711552195645087,
+      5824,
+      518407903,
+      null,
+      null,
+      true
+    ]
+  ],
+  "io_leaf_thread_cpu_during_delayed_wake_ms": 0.3328,
+  "limitations": [
+    "Wall-minus-thread-CPU includes blocking and descheduling and is not by itself runnable scheduler delay.",
+    "IO reads can include blocking and thread scheduling; no kernel scheduling trace is available.",
+    "A normal condition predicate/wait and matching notify lock are visible; no code-level lost-notification race is identified.",
+    "CPU frequency changes cannot be justified as the cause from a mostly non-CPU interval.",
+    "No hardware, scheduler changes or privileged commands were executed by this analyzer."
+  ],
+  "next_experiment": {
+    "analysis_command": "sudo perf sched timehist -i /tmp/cartpole-zero-sched.data --tid MAIN_TID,IO_TID -w -M",
+    "bounded_capture_command": "sudo perf sched record -a -C 4,5 --clockid mono -o /tmp/cartpole-zero-sched.data -- sleep 30",
+    "interpretation": [
+      "A prompt sched_wakeup followed by delayed main sched-in identifies runnable scheduler delay.",
+      "Prompt main sched-in followed by blocking again points toward futex/GIL/lock waiting.",
+      "Inspect IO sched-outs and CPU migrations to detect a scheduling-mediated GIL delay."
+    ],
+    "prerequisite": "Root/operator verifies installed perf supports sched events and the monotonic clock. Recording requires existing tracing privileges or explicit operator sudo.",
+    "purpose": "Observe scheduler wakeups and sched-in during the same separately authorized zero-emission probe.",
+    "settings": "Keep20ms leases,100Hz cadence,zero emission,actor,CPU affinity and currentGIL setting unchanged; do not set realtime policy or governor during this observation.",
+    "sources": [
+      "https://man7.org/linux/man-pages/man1/perf-sched.1.html",
+      "https://man7.org/linux/man-pages/man1/perf-record.1.html",
+      "https://www.kernel.org/doc/html/latest/trace/events.html"
+    ],
+    "tid_source": "Use runtime_environment native IDs from the new experiment, not prior process IDs."
+  },
+  "notify_to_wait_return_ms": {
+    "max": 10.40125,
+    "median": 0.181782,
+    "n": 1085
+  },
+  "observed_action_requests": 1085,
+  "runtime_environment": {
+    "current_thread": {
+      "affinity": [
+        4,
+        5
+      ],
+      "name": "MainThread",
+      "native_id": 305366,
+      "scheduler_policy": 0,
+      "scheduler_priority": 0
+    },
+    "cyclic_gc_enabled": false,
+    "gil_enabled": null,
+    "gil_switch_interval_ms": 1.0,
+    "implementation": "CPython",
+    "pid": 305366,
+    "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+    "python": "3.11.17 (main, Oct  3 2026, 01:03:29) [Clang 22.1.3 ]",
+    "semantics": "Diagnostic settings only; no scheduler, affinity, priority, lease or safety parameter is changed by instrumentation.",
+    "thread_environment": {
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "threads": [
+      {
+        "affinity": [
+          4,
+          5
+        ],
+        "name": "MainThread",
+        "native_id": 305366,
+        "scheduler_policy": 0
+      },
+      {
+        "affinity": [
+          4,
+          5
+        ],
+        "name": "cartpole-rig-io",
+        "native_id": 305368,
+        "scheduler_policy": 0
+      }
+    ]
+  },
+  "schema": "cartpole-detailed-wake-diagnosis-v1",
+  "source_sha256": "5fafeecc06deaa275cd6cf290d157ef6dbfecc6bdd9c98e6bad03419bd274d1d",
+  "thread_metadata": [
+    {
+      "affinity": [
+        4,
+        5
+      ],
+      "name": "MainThread",
+      "native_id": 305366,
+      "scheduler_policy": 0,
+      "scheduler_priority": 0
+    },
+    {
+      "affinity": [
+        4,
+        5
+      ],
+      "name": "cartpole-rig-io",
+      "native_id": 305368,
+      "scheduler_policy": 0,
+      "scheduler_priority": 0
+    }
+  ],
+  "worst_wake": {
+    "healthy_state": {
+      "host_monotonic_ns": 711552185677649,
+      "state": {
+        "acceleration": 0.0,
+        "angle_hat": 3.000467,
+        "brake_direction": 0,
+        "demand": 0.0,
+        "dropped": 66808659,
+        "fault": 0,
+        "flags": 207,
+        "last_seq": 1085,
+        "misses": 1,
+        "mode": 12,
+        "omega": 9.099404e-05,
+        "received_ns": 711552185213273,
+        "sid": 3551321903,
+        "theta": 3.000467,
+        "tick": 518407893,
+        "unwrapped_tick": 518407893,
+        "unwrapped_us": 3016350531,
+        "us": 3016350531,
+        "velocity": 0.0,
+        "x": 0.0
+      },
+      "type": "state"
+    },
+    "notify": [
+      "condition.notify_all",
+      711552185488378,
+      711552185516093,
+      25472,
+      518407893,
+      null,
+      null,
+      true
+    ],
+    "notify_finish_to_wait_return_ms": 10.40125,
+    "receipt_to_wait_return_ms": 10.70407,
+    "wait": [
+      "condition.wait",
+      711552178021401,
+      711552195917343,
+      68064,
+      518407883,
+      null,
+      null,
+      true
+    ],
+    "wait_thread_cpu_ms": 0.068064,
+    "wait_wall_ms": 17.895942
+  }
+}

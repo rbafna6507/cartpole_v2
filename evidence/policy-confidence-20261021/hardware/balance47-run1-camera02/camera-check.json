@@ -1,0 +1,61 @@
+{
+  "active_valid_frames": 34,
+  "analysis_sha256": "6984b553a35698ead74398c7c6462f1cd983693c9b0d4201a1504d7b9b63c9cc",
+  "camera_angle_peak": {
+    "arm_length_px": 151.50791338062487,
+    "cart_valid": false,
+    "frame_seq": 1710145,
+    "pivot_x_px": 473.6666666666667,
+    "pivot_y_px": 242.40740740740736,
+    "recorded_age_ms": 18.126068986020982,
+    "relative_t_s": 0.21925758803263307,
+    "theta_camera_deg": 11.48767046461774
+  },
+  "camera_angle_trough": {
+    "arm_length_px": 153.3906636079448,
+    "cart_valid": false,
+    "frame_seq": 1710161,
+    "pivot_x_px": 590.2156862745098,
+    "pivot_y_px": 242.68627450980392,
+    "recorded_age_ms": 16.33875898551196,
+    "relative_t_s": 0.4199844300746918,
+    "theta_camera_deg": -16.37974379347052
+  },
+  "camera_pivot_leftmost": {
+    "arm_length_px": 153.24629593215334,
+    "cart_valid": false,
+    "frame_seq": 1710143,
+    "pivot_x_px": 471.60377358490564,
+    "pivot_y_px": 242.81132075471695,
+    "recorded_age_ms": 17.859058920294046,
+    "relative_t_s": 0.19447296706493944,
+    "theta_camera_deg": 10.91406226267345
+  },
+  "camera_pivot_rightmost": {
+    "arm_length_px": 152.77043804237198,
+    "cart_valid": false,
+    "frame_seq": 1710163,
+    "pivot_x_px": 592.2719298245614,
+    "pivot_y_px": 242.42105263157893,
+    "recorded_age_ms": 14.613016974180937,
+    "relative_t_s": 0.44593878905288875,
+    "theta_camera_deg": -15.8235581373724
+  },
+  "conclusions": [
+    "Independent camera angle shows a large positive then negative excursion before the lease fault. Observed camera extrema differ from encoder extrema; they corroborate oscillation, not equal amplitude or zero calibration.",
+    "The camera angle stays near its pre-arm value during the first60ms, so the initial encoder negative wiggle is not independently corroborated in amplitude.",
+    "Arm-pivot image coordinates move left then right, in the same order as negative then positive step-count estimate. Pixels are uncalibrated; correlation supports shape/order, not physical meter-scale tracking or velocity.",
+    "No embedded encoder packet was used. Camera host-read timestamp and serial-receipt timestamp share a clock but exposure/processing/serial timing remains unknown.",
+    "No correction, camera calibration, model fitting, production edit or hardware action was performed."
+  ],
+  "max_valid_camera_frame_gap_ms": 75.89320291299373,
+  "metric_cart_calibration": false,
+  "prearm_200ms_valid_frames": 14,
+  "prearm_camera_mean_deg": -2.076525721553572,
+  "prearm_pivot_x_mean_px": 500.2802949709865,
+  "schema": "cartpole-independent-camera-check-v1",
+  "session": 1814684874,
+  "source_sha256": "c9a810dd02a79b31bc505cb815d9848f3ac57390423d0520c36777e396a21209",
+  "vision_sha256": "452c4c6294c44683c6689ed83b7135f831eff420eaa81fca879ff8b4263bf36c",
+  "zero_shift_pivot_x_vs_step_estimate_correlation": 0.9907440999393743
+}

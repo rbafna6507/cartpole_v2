@@ -1,0 +1,76 @@
+{
+  "accepted_requests": 722,
+  "actor_replay_max_abs_error_m_s2": 0.0,
+  "analysis_sha256": "fa2afbce19984c8f1cc8c36767310fc610c033b779a2d9ca8e1abab71a5b61e0",
+  "conclusion": "Useful learned upright hold through7.22s with loose centering. All enabled encoder observations stay within1degree; expiry occurs before the subsequent pole departure. This is not a completed10s trial or evidence of reliable deployment.",
+  "enabled_samples": 723,
+  "enabled_span_s": 7.2199999999998,
+  "fault_first_seen_s": 7.230000000000018,
+  "final_healthy_angle_deg": 0.26367185416399314,
+  "final_inference_wall_ms": 14.863355,
+  "last_fault_context": {
+    "act_finished_host_ns": 711145379565021,
+    "act_started_host_ns": 711145364701666,
+    "failed_observation_board_ns": 2609573531000,
+    "failed_observation_sequence": 518001116,
+    "fetch_finished_host_ns": 711145364419520,
+    "fetch_started_host_ns": 711145364103965,
+    "host_monotonic_ns": 711145379676254,
+    "previous_sent_observation_board_ns": 2609563531000,
+    "previous_sent_observation_sequence": 518001106,
+    "reason": "latched rig error: executor fault 1",
+    "stage": "step",
+    "timing": null,
+    "type": "policy_failure"
+  },
+  "last_second_metrics": {
+    "commanded_velocity_m_s": {
+      "max": 0.03650384,
+      "min": -0.1666893,
+      "n": 101,
+      "rms": 0.10464817140848215
+    },
+    "theta_encoder_deg": {
+      "max": 0.5273437656237657,
+      "min": -0.7031252118176193,
+      "n": 101,
+      "rms": 0.3606899597030451
+    },
+    "x_step_estimate_m": {
+      "max": 0.1181625,
+      "min": 0.03345,
+      "n": 101,
+      "rms": 0.09642307043890656
+    }
+  },
+  "limits": [
+    "No camera recording bound to this trial; independent physical cart displacement remains unmeasured.",
+    "Step-count RMS76.94mm and extrema approximately -114/+118mm show limited centering in the recorded cart estimate.",
+    "GIL1ms did not prevent expiry; its causal effect is not identified by these unmatched trials.",
+    "Final inference lacks per-thread CPU instrumentation, so wall14.86ms is not equivalent to14.86ms of computation."
+  ],
+  "metrics": {
+    "commanded_velocity_m_s": {
+      "max": 0.1688681,
+      "min": -0.1666893,
+      "n": 723,
+      "rms": 0.0768081639900063
+    },
+    "theta_encoder_deg": {
+      "max": 0.8789063715325753,
+      "min": -0.9667969513900534,
+      "n": 723,
+      "rms": 0.3315745063317159
+    },
+    "x_step_estimate_m": {
+      "max": 0.1181625,
+      "min": -0.114,
+      "n": 723,
+      "rms": 0.07694423998895031
+    }
+  },
+  "receipt_to_final_inference_start_ms": 8.323748,
+  "requests": 722,
+  "schema": "cartpole-run10-hold-conclusion-v1",
+  "timings_sha256": "a20f7a28d19f1254282f4981f287e8a02b5781d36fe3b3e9f52dcf1473b9035d"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "cartpole-short-balance-hardware-protocol-v1",
+  "status": "development-only",
+  "hardware_accepted": false,
+  "actor": "training/candidates/balance-20261021-confidence/actor.json",
+  "actor_sha256": "9685d1fbbce230ac8ce838a92818b09c139535b6733a4628310c368c256b8898",
+  "initial_duration_s": 1,
+  "followup_duration_s": [
+    3,
+    5,
+    10
+  ],
+  "frequency_hz": 100,
+  "anchored_lease_ms": 20,
+  "jerk_limit_m_s3": 150,
+  "action_scale_m_s2": 25,
+  "guard_profile": "rig",
+  "camera_cpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "control_cpus": [
+    4,
+    5
+  ],
+  "safety": "No flashing/reset; explicit switch homing and verified disabled upright calibration. One serial owner. Existing executor protections stay enabled. Assess each short run before extending duration. No automatic fault clear/restart.",
+  "measurements": [
+    "encoder raw/filtered angle and observer rate",
+    "counted cart position and commanded velocity",
+    "actor demand and governed acceleration",
+    "host action timing and fault history",
+    "camera geometry when valid"
+  ],
+  "physical_measurement_limit": "Commanded/count-state cart telemetry is not measured physical cart motion; camera geometry is auxiliary and may be unavailable.",
+  "reference": "Capture user-confirmed upright before first powered test. Preserve original533 and resulting new reference in trace. Never silently calibrate from hanging.",
+  "local_confirmation": "Selected balance actor completed8/8 uninterrupted60s nominal simulated starts; this does not establish real transfer."
+}

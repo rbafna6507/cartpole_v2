@@ -1,0 +1,12 @@
+# Local policy development cycle, 2026-10-21
+
+User authorizes autonomous local training, evaluation, iteration and selective headless Colab jobs. Target is one learned SDK actor capable of hanging-start swing-up and sustained centered balance. Hardware testing is outside this offline campaign. Use the new rl-encoder-20261021 model and keep all physical/executor limits and source contracts intact.
+
+First reproduce reliable balance with matched teacher versus scratch runs, three independent optimizer seeds, equal online budgets and separate development poses. Preserve initial checkpoints so learning can be compared with initialization alone. Extend promising actors to longer unseen poses before adding swing-up. Use historical full-task actors as explicit weight-transfer candidates, never relabel old performance under a new profile. Train nominal acquisition first and introduce the new upstream sensor/dynamics recipe as a separate treatment; keep a balance regression throughout. Diagnose failures rather than indefinitely increasing the budget.
+
+Success metrics use true simulation state after causal decisions: capture time, continuous hold, cart/angle RMS, centering margin, command variation, faults and braking. Development seeds become inspected after use. A final heldout set is used once after selection; repeated tuning thereafter requires a new set. The aspiration is capture within5s and at least30s continuous balance for>=90% of unseen hanging trials, with sustained upright-start regression and engineering stress corners. This is a proposed simulator gate, not a hardware guarantee or posterior success probability.
+
+Archive exact source, profiles, recipes, checkpoints, outcomes and failed trials. Test any new execution code and independent SDK export parity before hardware claims. Cloud is authorized when extra interaction budget has an evidence-backed reason; launch bounded jobs with unique sessions and checkpoint backup, and do not send credentials/raw recordings. Avoid spending a long cloud budget on a recipe with no positive control. Keep existing unrelated console changes untouched; work in the current codex branch.
+
+
+The user later extended the task to supervised physical balance iterations and confirmed power, a clear rig, a closed console, and upright poses. These measurements are a separate follow-up to the offline selection campaign. They do not retroactively qualify the simulator or change reserved-pose selection. The user requested 10–25 second balance comparisons when timing and state permit.

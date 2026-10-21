@@ -1,0 +1,97 @@
+{"event": "predeclared", "seeds": [95000, 95001, 95002, 95003], "protocol_sha256": "0afa9e5f7cde36a58267674decc6def76037a223b657231d6395ef90e65fbc74"}
+{"event": "episode", "arm": "original", "seed": 95000, "start": "hanging", "hold": true, "fault": null, "capture_s": 8.63, "longest_dwell_s": 17.369999999999916}
+{"event": "episode", "arm": "original", "seed": 95000, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "original", "seed": 95001, "start": "hanging", "hold": false, "fault": null, "capture_s": null, "longest_dwell_s": 0.05}
+{"event": "episode", "arm": "original", "seed": 95001, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "original", "seed": 95002, "start": "hanging", "hold": true, "fault": null, "capture_s": 14.31, "longest_dwell_s": 11.689999999999795}
+{"event": "episode", "arm": "original", "seed": 95002, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "original", "seed": 95003, "start": "hanging", "hold": true, "fault": null, "capture_s": 4.33, "longest_dwell_s": 21.670000000000588}
+{"event": "episode", "arm": "original", "seed": 95003, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95000, "start": "hanging", "hold": true, "fault": null, "capture_s": 9.92, "longest_dwell_s": 16.079999999999714}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95000, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95001, "start": "hanging", "hold": false, "fault": null, "capture_s": 22.83, "longest_dwell_s": 3.1699999999999764}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95001, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95002, "start": "hanging", "hold": false, "fault": null, "capture_s": null, "longest_dwell_s": 0.10999999999999999}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95002, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95003, "start": "hanging", "hold": true, "fault": null, "capture_s": 16.13, "longest_dwell_s": 9.869999999999834}
+{"event": "episode", "arm": "odd-raw-mean", "seed": 95003, "start": "upright", "hold": true, "fault": null, "capture_s": 1.0, "longest_dwell_s": 25.00000000000111}
+{
+  "event": "complete",
+  "summary": [
+    {
+      "arm": "original",
+      "start": "hanging",
+      "episodes": 4,
+      "holds": 3,
+      "faults": 0,
+      "captures": 3,
+      "mean_capture_s": 9.090000000000002,
+      "mean_longest_dwell_s": 12.695000000000075,
+      "worst_max_abs_x_m": 0.2940772991961241,
+      "mean_tail_x_rms_m": 0.046466591719596655,
+      "mean_tail_theta_rms_deg": 31.088024998576344
+    },
+    {
+      "arm": "original",
+      "start": "upright",
+      "episodes": 4,
+      "holds": 4,
+      "faults": 0,
+      "captures": 4,
+      "mean_capture_s": 1.0,
+      "mean_longest_dwell_s": 25.00000000000111,
+      "worst_max_abs_x_m": 0.09206107519214675,
+      "mean_tail_x_rms_m": 0.003282289711909469,
+      "mean_tail_theta_rms_deg": 0.019749170030922827
+    },
+    {
+      "arm": "odd-raw-mean",
+      "start": "hanging",
+      "episodes": 4,
+      "holds": 2,
+      "faults": 0,
+      "captures": 3,
+      "mean_capture_s": 16.293333333333333,
+      "mean_longest_dwell_s": 7.307499999999881,
+      "worst_max_abs_x_m": 0.294075374064518,
+      "mean_tail_x_rms_m": 0.08088198466917614,
+      "mean_tail_theta_rms_deg": 42.129557587130584
+    },
+    {
+      "arm": "odd-raw-mean",
+      "start": "upright",
+      "episodes": 4,
+      "holds": 4,
+      "faults": 0,
+      "captures": 4,
+      "mean_capture_s": 1.0,
+      "mean_longest_dwell_s": 25.00000000000111,
+      "worst_max_abs_x_m": 0.09168117789598594,
+      "mean_tail_x_rms_m": 0.0034934250927754207,
+      "mean_tail_theta_rms_deg": 0.020353626268607643
+    }
+  ],
+  "folded_architecture": {
+    "compared_observations": 40000,
+    "float64_fold_max_abs_mean_error": 3.885780586188048e-16,
+    "float64_fold_max_abs_oddness_error": 4.440892098500626e-16,
+    "original_even_component_rms_normalized": 0.022646998817597887,
+    "exact_real_arithmetic": true,
+    "architecture": [
+      21,
+      128,
+      128,
+      1
+    ],
+    "construction": {
+      "input": "x=[age_s,state,valid], D diagonal with -1 at state indices0,1,2,4,5,6; +1 elsewhere",
+      "first": "W1_new=[W1;W1 D], b1_new=[b1;b1]",
+      "second": "W2_new=blockdiag(W2,W2), b2_new=[b2;b2]",
+      "output": "W3_new=0.5*[W3,-W3], b3_new=0; clip once after final mean, then multiply physical action scale"
+    },
+    "interface": "Same21 observation features and one normalized action; two64 branches represented as128-wide layers.",
+    "current_numeric_contract": "Current validate_actor and export_actor require21-64-64-1; a128-wide artifact would be rejected. Supporting it needs deliberate schema/shape-validation/export/backend work and fresh parity. No production interface or runtime was changed.",
+    "numeric_exported": false,
+    "hardware_accepted": false
+  }
+}

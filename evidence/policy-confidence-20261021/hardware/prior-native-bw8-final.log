@@ -1,0 +1,53 @@
+{
+  "role": "native-auto",
+  "active_span_s": 24.996000000000095,
+  "requests": 0,
+  "first_rail_braking_s": 1.8959999999997308,
+  "first_abs_encoder_over_5deg_s": 0.0,
+  "mlp_replay_minus_requested_m_s2": null,
+  "camera": {
+    "status": "aligned",
+    "frames": 1429,
+    "unique_frames": 1208,
+    "aligned_frames": 934,
+    "rejected": {
+      "outside_active_interval": 274,
+      "invalid_or_uncalibrated_angle": 221
+    },
+    "stale_other_session_embedded_encoder_packets_ignored": 2,
+    "alignment_delta_ms": {
+      "n": 934,
+      "mean": 0.12028180272168852,
+      "median": 0.14105852460488677,
+      "p01": -2.3996424430515617,
+      "p99": 2.865633157780387,
+      "min": -4.847466014325619,
+      "max": 3.6882800050079823,
+      "rms": 1.3076192845968815
+    },
+    "camera_minus_encoder_deg": {
+      "n": 934,
+      "mean": 0.654982567632895,
+      "median": -0.8572271740686244,
+      "p01": -16.716395756671602,
+      "p99": 20.215895903285965,
+      "min": -20.55084382757382,
+      "max": 27.13667546346816,
+      "rms": 8.64950875608263
+    },
+    "quiet_camera_minus_encoder_deg": null,
+    "valid_cart_frames": 0,
+    "camera_minus_step_x_m": null,
+    "recorded_calibrations": [
+      {
+        "home_angle_rad": -0.018565937574014667,
+        "home_length_px": 155.96037524530877,
+        "cart_a_px": null,
+        "cart_b_px": null,
+        "cart_span_mm": null
+      }
+    ],
+    "physical_cart_tracking": "unmeasured: no valid calibrated camera cart-position samples",
+    "semantics": "Camera frame host timestamp aligned to this trial state host receipt within the declared tolerance; no embedded encoder packets used. Shared host clock does not remove exposure/processing/serial delay. Angle residual does not by itself identify encoder-zero error or true vertical."
+  }
+}

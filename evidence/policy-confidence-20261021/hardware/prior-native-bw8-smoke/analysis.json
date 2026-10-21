@@ -1,0 +1,526 @@
+{
+  "accepted_minus_requested_m_s2": null,
+  "action_rows_matched": 0,
+  "active_span_s": 24.996000000000095,
+  "active_states": 6250,
+  "actor": {
+    "status": "not supplied"
+  },
+  "analysis_source_sha256": {
+    "firmware/teensy_executor/executor_core.h": "55ea99a855a10457b0b1ff55676fb61e21f21ec76c5db6259ca5a7f04cf13d7b",
+    "src/cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "src/cartpole_sdk/policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+    "src/cartpole_sdk/policies/numeric_backend.py": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "src/cartpole_sdk/rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a"
+  },
+  "analyzer_sha256": "c25f6c98c4da68d110504a47383b1b310c0288ebdc01ae819a149f50c12cffb9",
+  "artifacts": {
+    "camera-alignment.csv": "32548208656384389ab91fef4ad6f8fff4f9d7fee542e3e0772790aabc754e33",
+    "signals.png": "9ad8ab9ae0f0bbbda902d68c1037027f6932e1462e03bcc4a02e57e054a0192f",
+    "telemetry.csv": "d61b8c9c3283566419691d1353ac38fececc8245c73b378485f9b9a655f9ce27"
+  },
+  "calibration": {
+    "quiet_stopped_encoder_angle_deg": {
+      "max": 176.48440811269958,
+      "mean": 175.8648974450966,
+      "median": 176.48440811269958,
+      "min": -144.0527050771145,
+      "n": 555,
+      "p01": 176.39651638692658,
+      "p99": 176.48440811269958,
+      "rms": 176.38936043399207
+    },
+    "reference_changed": false,
+    "saved_reference_counts": [
+      294
+    ],
+    "semantics": "Quiet stopped angle does not establish true vertical: the pole can hang or be held at an unknown angle. Saved reference consistency is distinct from physical zero calibration."
+  },
+  "camera": {
+    "aligned_frames": 934,
+    "alignment_delta_ms": {
+      "max": 3.6882800050079823,
+      "mean": 0.12028180272168852,
+      "median": 0.14105852460488677,
+      "min": -4.847466014325619,
+      "n": 934,
+      "p01": -2.3996424430515617,
+      "p99": 2.865633157780387,
+      "rms": 1.3076192845968815
+    },
+    "camera_minus_encoder_deg": {
+      "max": 27.13667546346816,
+      "mean": 0.654982567632895,
+      "median": -0.8572271740686244,
+      "min": -20.55084382757382,
+      "n": 934,
+      "p01": -16.716395756671602,
+      "p99": 20.215895903285965,
+      "rms": 8.64950875608263
+    },
+    "camera_minus_step_x_m": null,
+    "frames": 1429,
+    "physical_cart_tracking": "unmeasured: no valid calibrated camera cart-position samples",
+    "quiet_camera_minus_encoder_deg": null,
+    "recorded_calibrations": [
+      {
+        "cart_a_px": null,
+        "cart_b_px": null,
+        "cart_span_mm": null,
+        "home_angle_rad": -0.018565937574014667,
+        "home_length_px": 155.96037524530877
+      }
+    ],
+    "rejected": {
+      "invalid_or_uncalibrated_angle": 221,
+      "outside_active_interval": 274
+    },
+    "semantics": "Camera frame host timestamp aligned to this trial state host receipt within the declared tolerance; no embedded encoder packets used. Shared host clock does not remove exposure/processing/serial delay. Angle residual does not by itself identify encoder-zero error or true vertical.",
+    "stale_other_session_embedded_encoder_packets_ignored": 2,
+    "status": "aligned",
+    "unique_frames": 1208,
+    "valid_cart_frames": 0
+  },
+  "counterfactual_linear_gains": {
+    "auto": {
+      "k1": -22.02559265311508,
+      "k2": -2.391379796199559,
+      "k3": -3.4128439816513763,
+      "k4": -3.1853211041467877
+    },
+    "upright": {
+      "k1": -27.42778348134693,
+      "k2": -3.0214476831965866,
+      "k3": -7.678898958715596,
+      "k4": -5.71651375117431
+    }
+  },
+  "demand_minus_governed_acceleration_m_s2": {
+    "max": 27.08083,
+    "mean": 0.10227354163297597,
+    "median": 0.0,
+    "min": -14.3930916,
+    "n": 6250,
+    "p01": -9.14993997,
+    "p99": 15.296505407000007,
+    "rms": 3.0881218491885143
+  },
+  "encoder_angle_deg": {
+    "max": 179.91212812206976,
+    "mean": 1.0385014673196404,
+    "median": 1.5820310103923996,
+    "min": -179.91212812206976,
+    "n": 6250,
+    "p01": -176.7498411245343,
+    "p99": 177.09959289733158,
+    "rms": 98.23799054787729
+  },
+  "evidence_limits": [
+    "No hardware/network/transport opened.",
+    "No physical cart tracking claim without independently valid camera cart data.",
+    "No calibration correction is fitted or applied.",
+    "No training, policy selection, or reserved-pose evaluation performed."
+  ],
+  "first_abs_encoder_over_15deg_s": 0.0,
+  "first_abs_encoder_over_5deg_s": 0.0,
+  "first_active_state": {
+    "acceleration": 0.3,
+    "angle_hat": 3.078854,
+    "brake_direction": 0,
+    "demand": 1.0,
+    "dropped": 63491998,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 0,
+    "mode": 2,
+    "omega": 0.003875796,
+    "received_ns": 693431121957716,
+    "sid": 3309950163,
+    "theta": 3.080234,
+    "tick": 500286891,
+    "unwrapped_tick": 500286891,
+    "unwrapped_us": 2075202338,
+    "us": 2075202338,
+    "velocity": 0.00045,
+    "x": 0.0
+  },
+  "first_rail_braking_s": 1.8959999999997308,
+  "input": {
+    "archive_sha256": "2b36ab88d8cd4c8d0bd13f5912597166ad5525114117dee356b48fd073698097",
+    "members": {
+      "report.json": {
+        "bytes": 4010,
+        "sha256": "5e1d96e5a5dad64553c081f37ac3fbbd88155b920c1b28fa1ccd26b27303eda4"
+      },
+      "rig-1792598133215934445-3309950163.jsonl": {
+        "bytes": 3425015,
+        "sha256": "2546ad9d8f86f373b3ef7752dc5196ff091232ac99c0ed3685fb34d3c0347918"
+      },
+      "vision-report.json": {
+        "bytes": 868,
+        "sha256": "0974f4e3d409b6d27572c83e33287c8cea98fa99e138a65dc3d80a37e8b2498b"
+      },
+      "vision.ndjson": {
+        "bytes": 10868924,
+        "sha256": "c9474d112a811b210048a2299c01669dd3a99fe18372e93cbcd0ca47d62af9da"
+      }
+    },
+    "path": "/Users/rbafna/projects/cartpole_v2/evidence/console-policy-20261021/live-traces-04.tar.gz"
+  },
+  "last_active_state": {
+    "acceleration": -1.201049,
+    "angle_hat": -2.992303,
+    "brake_direction": 0,
+    "demand": -1.201049,
+    "dropped": 63491998,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 0,
+    "mode": 2,
+    "omega": 12.63822,
+    "received_ns": 693456117852699,
+    "sid": 3309950163,
+    "theta": -2.994331,
+    "tick": 500311887,
+    "unwrapped_tick": 500311887,
+    "unwrapped_us": 2100198338,
+    "us": 2100198338,
+    "velocity": 1.322116,
+    "x": 0.0618
+  },
+  "linear_parameter_error": null,
+  "linear_semantics": "Unclipped offline native state-feedback comparison from recorded parameters, using raw or filtered angle; AUTO and upright-only gains differ. This is not the executed controller in host mode.",
+  "max_abs_step_position_m": 0.293775,
+  "max_camera_alignment_ms": 20.0,
+  "mlp_replay_minus_requested_m_s2": null,
+  "observer": {
+    "best_lag_rms_deg": 1.4465522056324507,
+    "best_raw_to_filtered_angle_lag_ms": 0,
+    "curve": [
+      {
+        "lag_ms": 0,
+        "rms_deg": 1.4465522056324507
+      },
+      {
+        "lag_ms": 2,
+        "rms_deg": 1.758205505405686
+      },
+      {
+        "lag_ms": 4,
+        "rms_deg": 2.472511414831249
+      },
+      {
+        "lag_ms": 6,
+        "rms_deg": 3.3218689912193744
+      },
+      {
+        "lag_ms": 8,
+        "rms_deg": 4.240148065059055
+      },
+      {
+        "lag_ms": 10,
+        "rms_deg": 5.175580795050935
+      },
+      {
+        "lag_ms": 12,
+        "rms_deg": 6.133204795330624
+      },
+      {
+        "lag_ms": 14,
+        "rms_deg": 7.088919113096503
+      },
+      {
+        "lag_ms": 16,
+        "rms_deg": 8.056691718884483
+      },
+      {
+        "lag_ms": 18,
+        "rms_deg": 9.018525966304969
+      },
+      {
+        "lag_ms": 20,
+        "rms_deg": 9.988867323021447
+      },
+      {
+        "lag_ms": 22,
+        "rms_deg": 10.9526446365671
+      },
+      {
+        "lag_ms": 24,
+        "rms_deg": 11.923200316764031
+      },
+      {
+        "lag_ms": 26,
+        "rms_deg": 12.886991083901982
+      },
+      {
+        "lag_ms": 28,
+        "rms_deg": 13.856584726512297
+      },
+      {
+        "lag_ms": 30,
+        "rms_deg": 14.8192225728781
+      },
+      {
+        "lag_ms": 32,
+        "rms_deg": 15.787071485821919
+      },
+      {
+        "lag_ms": 34,
+        "rms_deg": 16.747847181474206
+      },
+      {
+        "lag_ms": 36,
+        "rms_deg": 17.71345024796754
+      },
+      {
+        "lag_ms": 38,
+        "rms_deg": 18.671863709136677
+      },
+      {
+        "lag_ms": 40,
+        "rms_deg": 19.634843692778595
+      },
+      {
+        "lag_ms": 42,
+        "rms_deg": 20.59047396659374
+      },
+      {
+        "lag_ms": 44,
+        "rms_deg": 21.55049725496053
+      },
+      {
+        "lag_ms": 46,
+        "rms_deg": 22.503012215176
+      },
+      {
+        "lag_ms": 48,
+        "rms_deg": 23.459803331557495
+      },
+      {
+        "lag_ms": 50,
+        "rms_deg": 24.40916302028968
+      },
+      {
+        "lag_ms": 52,
+        "rms_deg": 25.36270211140493
+      },
+      {
+        "lag_ms": 54,
+        "rms_deg": 26.309022580540066
+      },
+      {
+        "lag_ms": 56,
+        "rms_deg": 27.259433426766446
+      },
+      {
+        "lag_ms": 58,
+        "rms_deg": 28.202710576364858
+      },
+      {
+        "lag_ms": 60,
+        "rms_deg": 29.150002366871416
+      },
+      {
+        "lag_ms": 62,
+        "rms_deg": 30.090103155802556
+      },
+      {
+        "lag_ms": 64,
+        "rms_deg": 31.03415923709199
+      },
+      {
+        "lag_ms": 66,
+        "rms_deg": 31.9709539240846
+      },
+      {
+        "lag_ms": 68,
+        "rms_deg": 32.911657754459355
+      },
+      {
+        "lag_ms": 70,
+        "rms_deg": 33.84505923852958
+      },
+      {
+        "lag_ms": 72,
+        "rms_deg": 34.78233179162761
+      },
+      {
+        "lag_ms": 74,
+        "rms_deg": 35.71236928583573
+      },
+      {
+        "lag_ms": 76,
+        "rms_deg": 36.646243883707164
+      },
+      {
+        "lag_ms": 78,
+        "rms_deg": 37.57288989562254
+      },
+      {
+        "lag_ms": 80,
+        "rms_deg": 38.503343735442186
+      },
+      {
+        "lag_ms": 82,
+        "rms_deg": 39.426551030439924
+      },
+      {
+        "lag_ms": 84,
+        "rms_deg": 40.3535413255006
+      },
+      {
+        "lag_ms": 86,
+        "rms_deg": 41.27324632116367
+      },
+      {
+        "lag_ms": 88,
+        "rms_deg": 42.196714210091486
+      },
+      {
+        "lag_ms": 90,
+        "rms_deg": 43.11293289620128
+      },
+      {
+        "lag_ms": 92,
+        "rms_deg": 44.03289816420409
+      },
+      {
+        "lag_ms": 94,
+        "rms_deg": 44.94546995619311
+      },
+      {
+        "lag_ms": 96,
+        "rms_deg": 45.861777149131385
+      },
+      {
+        "lag_ms": 98,
+        "rms_deg": 46.7705787550005
+      },
+      {
+        "lag_ms": 100,
+        "rms_deg": 47.68310821250489
+      }
+    ],
+    "raw_finite_difference_rate_minus_observer_rad_s": {
+      "max": 17.60325999883838,
+      "mean": 0.019781279624509474,
+      "median": -0.2998332499257503,
+      "min": -13.632080000535264,
+      "n": 6250,
+      "p01": -6.793832679757519,
+      "p99": 9.375810902677783,
+      "rms": 3.104697537077454
+    },
+    "semantics": "Fits a delayed raw angle to filtered angle on the same board timestamps. Not a causal identification or camera/exposure delay estimate. Raw-angle derivative is quantization-sensitive.",
+    "status": "descriptive fit only",
+    "timing_gap_max_ms": 4.00000000036016,
+    "zero_lag_rms_deg": 1.4465522056324507
+  },
+  "operation_completed": true,
+  "operation_error": null,
+  "rail_braking_fraction": 0.03264,
+  "raw_minus_filtered_angle_deg": {
+    "max": 6.2474172065474685,
+    "mean": -0.0034118421637881055,
+    "median": -0.11780012267888784,
+    "min": -5.881165395165994,
+    "n": 6250,
+    "p01": -2.7884661272014326,
+    "p99": 3.535771828122693,
+    "rms": 1.4436849298371608
+  },
+  "recorded_parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.800000012,
+    "approach_v": 0.200000003,
+    "bal_pw": 4.5,
+    "bw": 10.0,
+    "catch_a": 0.25,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.300000012,
+    "giveup": 0.800000012,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.123999998,
+    "manual_speed_max": 0.150000006,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "phase_soft": 2.0,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "rail": 0.309037507,
+    "rail_fault_margin": 0.00999999978,
+    "rail_fraction": 0.949999988,
+    "rail_hysteresis": 0.00499999989,
+    "rail_margin": 0.0149999997,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rail_recover_v": 0.150000006,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0,
+    "rehome_v": 0.0799999982,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.0500000007,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "requests": 0,
+  "role": "native-auto",
+  "schema": "cartpole-offline-live-trace-analysis-v1",
+  "semantics": "Operation success is not balance success. x is step-count estimate; velocity/acceleration are commanded governor state, not independently measured cart motion.",
+  "sim_replay": {
+    "performed": false,
+    "reason": "Trace cart velocity/acceleration are command states. A matched command-state simulation can be a hypothesis check, but cannot establish actuator tracking or physical initial cart velocity."
+  },
+  "timing": {
+    "accepted_sequences_seen": 0,
+    "action_expiry_fault_observed": false,
+    "board_dropped_serial_frames_delta": 0,
+    "board_telemetry_interval_ms": {
+      "max": 4.0,
+      "mean": 4.0,
+      "median": 4.0,
+      "min": 4.0,
+      "n": 6249,
+      "p01": 4.0,
+      "p99": 4.0,
+      "rms": 4.0
+    },
+    "control_deadline_misses_delta": 0,
+    "failure_context": [],
+    "faults": [],
+    "first_accept_board_age_upper_bound_ms": null,
+    "host_receipt_interval_ms": {
+      "max": 12.344636917114258,
+      "mean": 3.999983194599649,
+      "median": 3.9999650716781616,
+      "min": 0.15974605083465576,
+      "n": 6249,
+      "p01": 0.551939377784729,
+      "p99": 8.030462541580176,
+      "rms": 4.1835551059678355
+    },
+    "logger_dropped_records": [
+      0
+    ],
+    "policy_compute": [],
+    "receipt_to_command_record_ms": null,
+    "receipt_to_request_record_ms": null,
+    "request_board_interval_ms": null,
+    "request_host_interval_ms": null,
+    "semantics": "Host command record follows transport.write; these intervals are host proxies, not wire/executor latency. First telemetry last_seq observation is an upper bound on acceptance time. Unseen sequence does not prove rejection. dropped_serial_frames can count overwritten telemetry, not lost policy commands.",
+    "ttl_ms": []
+  }
+}

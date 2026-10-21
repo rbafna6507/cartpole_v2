@@ -1,0 +1,1020 @@
+{
+  "accepted_minus_requested_m_s2": {
+    "max": 7.57091819236777e-08,
+    "mean": -4.2813352089548434e-10,
+    "median": 2.0681563818285287e-10,
+    "min": -7.232037335658248e-08,
+    "n": 722,
+    "p01": -5.3570363023891506e-08,
+    "p99": 5.3084674475067915e-08,
+    "rms": 2.41986785409752e-08
+  },
+  "action_rows_matched": 722,
+  "active_span_s": 7.2199999999998,
+  "active_states": 723,
+  "actor": {
+    "backend": {
+      "actor_content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a"
+    },
+    "content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+    "file_sha256": "9685d1fbbce230ac8ce838a92818b09c139535b6733a4628310c368c256b8898",
+    "path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261021-confidence/actor.json",
+    "semantics": "Offline encoded reconstruction; current deployment loader is not invoked and this grants no runtime/hardware admission.",
+    "status": "trace-bound",
+    "trace_expected_content_sha256": [
+      "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79"
+    ]
+  },
+  "analysis_source_sha256": {
+    "firmware/teensy_executor/executor_core.h": "55ea99a855a10457b0b1ff55676fb61e21f21ec76c5db6259ca5a7f04cf13d7b",
+    "src/cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "src/cartpole_sdk/policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+    "src/cartpole_sdk/policies/numeric_backend.py": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "src/cartpole_sdk/rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a"
+  },
+  "analyzer_sha256": "6f60422639a133a9b3c89c44096d843b870188c5aab0d62f904ed0674aff9bfe",
+  "artifacts": {
+    "actions.csv": "0d8e7accbe6f330e3dbf456c1125b5c1f5f41a43e1d5fe1bcee6f9196689ec14",
+    "analyzer.py": "6f60422639a133a9b3c89c44096d843b870188c5aab0d62f904ed0674aff9bfe",
+    "camera-alignment.csv": "ba7eb7613de3aa074bb457957195098b3ce2bfb97d752ba6301c6779d8f76d72",
+    "signals.png": "eeaac19d7486cb3010bc626e4850ed6894ec0a4011b4610bb006eaec97ae1629",
+    "telemetry.csv": "40609f4f256371c07476b3e77eb078355c7682c67bfb4452999ed110c62cf39f"
+  },
+  "calibration": {
+    "quiet_stopped_encoder_angle_deg": {
+      "max": 0.2636718541639931,
+      "mean": 0.18227753455685045,
+      "median": 0.17578127430651508,
+      "min": 0.17578127430651508,
+      "n": 230,
+      "p01": 0.17578127430651508,
+      "p99": 0.2636718541639931,
+      "rms": 0.18372223133630497
+    },
+    "reference_changed": false,
+    "saved_reference_counts": [
+      537
+    ],
+    "semantics": "Quiet stopped angle does not establish true vertical: the pole can hang or be held at an unknown angle. Saved reference consistency is distinct from physical zero calibration."
+  },
+  "camera": {
+    "aligned_frames": 408,
+    "alignment_delta_ms": {
+      "max": 5.002088961191475,
+      "mean": -0.02754172886603092,
+      "median": -0.1485130051150918,
+      "min": -5.092778010293841,
+      "n": 408,
+      "p01": -4.8708303773310035,
+      "p99": 4.972439935663715,
+      "rms": 2.8291216618798085
+    },
+    "camera_minus_encoder_deg": {
+      "max": 0.5097940666593125,
+      "mean": -1.6676162253219673,
+      "median": -1.4869354257133192,
+      "min": -3.7749935931801026,
+      "n": 408,
+      "p01": -3.5301427910858547,
+      "p99": 0.03505386135933276,
+      "rms": 1.9322766960190654
+    },
+    "camera_minus_step_x_m": null,
+    "frames": 8498,
+    "physical_cart_tracking": "unmeasured: no valid calibrated camera cart-position samples",
+    "quiet_camera_minus_encoder_deg": {
+      "max": 0.5097940666593125,
+      "mean": -1.2934351708977039,
+      "median": -1.2323857642251697,
+      "min": -3.4835449542023253,
+      "n": 92,
+      "p01": -2.515232085148009,
+      "p99": 0.07828719519167932,
+      "rms": 1.4678036573288737
+    },
+    "recorded_calibrations": [
+      {
+        "cart_a_px": null,
+        "cart_b_px": null,
+        "cart_span_mm": null,
+        "home_angle_rad": -0.018565937574014667,
+        "home_length_px": 155.96037524530877
+      }
+    ],
+    "rejected": {
+      "invalid_or_uncalibrated_angle": 13,
+      "outside_active_interval": 8077
+    },
+    "semantics": "Camera frame host timestamp aligned to this trial state host receipt within the declared tolerance; no embedded encoder packets used. Shared host clock does not remove exposure/processing/serial delay. Angle residual does not by itself identify encoder-zero error or true vertical.",
+    "stale_other_session_embedded_encoder_packets_ignored": 212,
+    "status": "aligned",
+    "unique_frames": 8485,
+    "valid_cart_frames": 0
+  },
+  "counterfactual_linear_gains": {
+    "auto": {
+      "k1": -22.02559265311508,
+      "k2": -2.391379796199559,
+      "k3": -3.4128439816513763,
+      "k4": -3.1853211041467877
+    },
+    "upright": {
+      "k1": -27.42778348134693,
+      "k2": -3.0214476831965866,
+      "k3": -7.678898958715596,
+      "k4": -5.71651375117431
+    }
+  },
+  "demand_minus_governed_acceleration_m_s2": {
+    "max": 0.0,
+    "mean": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 723,
+    "p01": 0.0,
+    "p99": 0.0,
+    "rms": 0.0
+  },
+  "encoder_angle_deg": {
+    "max": 0.8789063715325753,
+    "mean": -0.017262064843963105,
+    "median": 0.08789063715325754,
+    "min": -0.9667969513900534,
+    "n": 723,
+    "p01": -0.7910157916750973,
+    "p99": 0.6152346319601413,
+    "rms": 0.3315745063317159
+  },
+  "evidence_limits": [
+    "No hardware/network/transport opened.",
+    "No physical cart tracking claim without independently valid camera cart data.",
+    "No calibration correction is fitted or applied.",
+    "No training, policy selection, or reserved-pose evaluation performed."
+  ],
+  "first_abs_encoder_over_15deg_s": null,
+  "first_abs_encoder_over_5deg_s": null,
+  "first_active_state": {
+    "acceleration": 0.0,
+    "angle_hat": 0.003063574,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 66768815,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 1,
+    "mode": 12,
+    "omega": -0.001689136,
+    "received_ns": 711138135893318,
+    "sid": 2410309463,
+    "theta": 0.003067962,
+    "tick": 517993896,
+    "unwrapped_tick": 517993896,
+    "unwrapped_us": 2602353531,
+    "us": 2602353531,
+    "velocity": 0.0,
+    "x": 0.0
+  },
+  "first_rail_braking_s": null,
+  "initial_response": {
+    "accepted_demand_m_s2": {
+      "max": 0.3276894,
+      "mean": -0.04724881849019608,
+      "median": -0.02178191,
+      "min": -0.3536758,
+      "n": 51,
+      "p01": -0.3513865,
+      "p99": 0.3067819,
+      "rms": 0.1830048973650955
+    },
+    "encoder_angle_change_deg": -0.26367191145977265,
+    "end_s": 0.5,
+    "governed_acceleration_m_s2": {
+      "max": 0.3276894,
+      "mean": -0.04724881849019608,
+      "median": -0.02178191,
+      "min": -0.3536758,
+      "n": 51,
+      "p01": -0.3513865,
+      "p99": 0.3067819,
+      "rms": 0.1830048973650955
+    },
+    "linear_auto_raw_m_s2": {
+      "max": 0.23397063591351322,
+      "mean": -0.04786364754813228,
+      "median": -0.04947643740808809,
+      "min": -0.2723587041328413,
+      "n": 51,
+      "p01": -0.26204898414335437,
+      "p99": 0.21346925167600678,
+      "rms": 0.1332908605862696
+    },
+    "linear_upright_raw_m_s2": {
+      "max": 0.28331183903518786,
+      "mean": -0.07076244913200996,
+      "median": -0.07742352430711552,
+      "min": -0.35070573154867885,
+      "n": 51,
+      "p01": -0.3480683034830212,
+      "p99": 0.25564917529486314,
+      "rms": 0.171493700563968
+    },
+    "replayed_mlp_m_s2": {
+      "max": 0.3276894427522513,
+      "mean": -0.0483542376661834,
+      "median": -0.04712827399533624,
+      "min": -0.3536758013665469,
+      "n": 51,
+      "p01": -0.3513864795280597,
+      "p99": 0.3067819088478873,
+      "rms": 0.18317508414134856
+    },
+    "semantics": "First0.5s, stopped earlier at first rail brake or abs(encoder angle)>15deg.",
+    "step_position_change_m": -0.0024375
+  },
+  "input": {
+    "external_vision": "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/hardware-live/camera-04/vision.ndjson",
+    "members": {
+      "report.json": {
+        "bytes": 4569,
+        "sha256": "923d069b3d97dd3b8aadb3baf323f2f82c7be8326a231b1a1fe654a2c2cbf4ca"
+      },
+      "rig-1792615841654866948-2410309463.jsonl": {
+        "bytes": 761461,
+        "sha256": "16c5850c9b756e6634882787a9bb6ddba681a074698e4fcc4a2c31fd8bec86b6"
+      },
+      "vision.ndjson": {
+        "bytes": 26348771,
+        "sha256": "e5744b70622e9719d7439eb93da4fb8b6b2c8b0287fecf30956cc00542eab20d"
+      }
+    },
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/hardware-live/balance47-run10-gil1-01"
+  },
+  "last_active_state": {
+    "acceleration": 0.007047998,
+    "angle_hat": 0.005040565,
+    "brake_direction": 0,
+    "demand": 0.007047998,
+    "dropped": 66768815,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 722,
+    "misses": 1,
+    "mode": 12,
+    "omega": -0.05523042,
+    "received_ns": 711145356377918,
+    "sid": 2410309463,
+    "theta": 0.004601942,
+    "tick": 518001116,
+    "unwrapped_tick": 518001116,
+    "unwrapped_us": 2609573531,
+    "us": 2609573531,
+    "velocity": -0.1537523,
+    "x": 0.03345
+  },
+  "linear_parameter_error": null,
+  "linear_semantics": "Unclipped offline native state-feedback comparison from recorded parameters, using raw or filtered angle; AUTO and upright-only gains differ. This is not the executed controller in host mode.",
+  "max_abs_step_position_m": 0.1181625,
+  "max_camera_alignment_ms": 20.0,
+  "mlp_replay_minus_requested_m_s2": {
+    "max": 0.0,
+    "mean": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 722,
+    "p01": 0.0,
+    "p99": 0.0,
+    "rms": 0.0
+  },
+  "observer": {
+    "best_lag_rms_deg": 0.06255095612972598,
+    "best_raw_to_filtered_angle_lag_ms": 4,
+    "curve": [
+      {
+        "lag_ms": 0,
+        "rms_deg": 0.08687427786703227
+      },
+      {
+        "lag_ms": 2,
+        "rms_deg": 0.07093466789859773
+      },
+      {
+        "lag_ms": 4,
+        "rms_deg": 0.06255095612972598
+      },
+      {
+        "lag_ms": 6,
+        "rms_deg": 0.0647288588150138
+      },
+      {
+        "lag_ms": 8,
+        "rms_deg": 0.07657242494617503
+      },
+      {
+        "lag_ms": 10,
+        "rms_deg": 0.09451537128393984
+      },
+      {
+        "lag_ms": 12,
+        "rms_deg": 0.08707324229142607
+      },
+      {
+        "lag_ms": 14,
+        "rms_deg": 0.08735551127629748
+      },
+      {
+        "lag_ms": 16,
+        "rms_deg": 0.0952935616426779
+      },
+      {
+        "lag_ms": 18,
+        "rms_deg": 0.10923086625927644
+      },
+      {
+        "lag_ms": 20,
+        "rms_deg": 0.12721062498847566
+      },
+      {
+        "lag_ms": 22,
+        "rms_deg": 0.1271823293866193
+      },
+      {
+        "lag_ms": 24,
+        "rms_deg": 0.13263555412898265
+      },
+      {
+        "lag_ms": 26,
+        "rms_deg": 0.14294432147770042
+      },
+      {
+        "lag_ms": 28,
+        "rms_deg": 0.1571560096816542
+      },
+      {
+        "lag_ms": 30,
+        "rms_deg": 0.1743186370673167
+      },
+      {
+        "lag_ms": 32,
+        "rms_deg": 0.174761011395979
+      },
+      {
+        "lag_ms": 34,
+        "rms_deg": 0.17920810479617866
+      },
+      {
+        "lag_ms": 36,
+        "rms_deg": 0.18737499403731764
+      },
+      {
+        "lag_ms": 38,
+        "rms_deg": 0.1988037771313351
+      },
+      {
+        "lag_ms": 40,
+        "rms_deg": 0.21296996280752906
+      },
+      {
+        "lag_ms": 42,
+        "rms_deg": 0.21234001355266366
+      },
+      {
+        "lag_ms": 44,
+        "rms_deg": 0.21506728071151276
+      },
+      {
+        "lag_ms": 46,
+        "rms_deg": 0.22102752473339785
+      },
+      {
+        "lag_ms": 48,
+        "rms_deg": 0.22996951042894767
+      },
+      {
+        "lag_ms": 50,
+        "rms_deg": 0.24156233635420843
+      },
+      {
+        "lag_ms": 52,
+        "rms_deg": 0.23894756457029037
+      },
+      {
+        "lag_ms": 54,
+        "rms_deg": 0.2393451346157841
+      },
+      {
+        "lag_ms": 56,
+        "rms_deg": 0.2427402457266367
+      },
+      {
+        "lag_ms": 58,
+        "rms_deg": 0.24901031887777958
+      },
+      {
+        "lag_ms": 60,
+        "rms_deg": 0.25794578791056927
+      },
+      {
+        "lag_ms": 62,
+        "rms_deg": 0.2537913379026812
+      },
+      {
+        "lag_ms": 64,
+        "rms_deg": 0.2524578561539203
+      },
+      {
+        "lag_ms": 66,
+        "rms_deg": 0.2539897779820036
+      },
+      {
+        "lag_ms": 68,
+        "rms_deg": 0.2583361332675824
+      },
+      {
+        "lag_ms": 70,
+        "rms_deg": 0.2653586637538788
+      },
+      {
+        "lag_ms": 72,
+        "rms_deg": 0.26056157506667355
+      },
+      {
+        "lag_ms": 74,
+        "rms_deg": 0.25852149160233706
+      },
+      {
+        "lag_ms": 76,
+        "rms_deg": 0.25930349416554066
+      },
+      {
+        "lag_ms": 78,
+        "rms_deg": 0.26288239918204825
+      },
+      {
+        "lag_ms": 80,
+        "rms_deg": 0.26914665660202963
+      },
+      {
+        "lag_ms": 82,
+        "rms_deg": 0.2637898510550946
+      },
+      {
+        "lag_ms": 84,
+        "rms_deg": 0.261179943964155
+      },
+      {
+        "lag_ms": 86,
+        "rms_deg": 0.2613992264502736
+      },
+      {
+        "lag_ms": 88,
+        "rms_deg": 0.26444066045003045
+      },
+      {
+        "lag_ms": 90,
+        "rms_deg": 0.2702089655421484
+      },
+      {
+        "lag_ms": 92,
+        "rms_deg": 0.2644428700595095
+      },
+      {
+        "lag_ms": 94,
+        "rms_deg": 0.261411986157109
+      },
+      {
+        "lag_ms": 96,
+        "rms_deg": 0.26121154263018237
+      },
+      {
+        "lag_ms": 98,
+        "rms_deg": 0.2638479903565988
+      },
+      {
+        "lag_ms": 100,
+        "rms_deg": 0.2692380035257528
+      }
+    ],
+    "rate_lag_fit": {
+      "best": null,
+      "curve": [],
+      "derivative_window_ms": 40.0,
+      "semantics": "Centered local linear raw-angle derivative, then delayed-reference RMS scan0..100ms. Descriptive observer phase-delay proxy; not causal identification and not a time-shift correction."
+    },
+    "raw_finite_difference_rate_minus_observer_rad_s": {
+      "max": 0.48925223997251566,
+      "mean": -0.00039744476049827823,
+      "median": -0.0043747589930242465,
+      "min": -0.5233072700039763,
+      "n": 723,
+      "p01": -0.34782764381813686,
+      "p99": 0.3763243819948643,
+      "rms": 0.14009099607628314
+    },
+    "semantics": "Fits a delayed raw angle to filtered angle on the same board timestamps. Not a causal identification or camera/exposure delay estimate. Raw-angle derivative is quantization-sensitive.",
+    "status": "descriptive fit only",
+    "timing_gap_max_ms": 10.000000000218279,
+    "zero_lag_rms_deg": 0.08687427786703227
+  },
+  "operation_completed": false,
+  "operation_error": "latched rig error: executor fault 1",
+  "rail_braking_fraction": 0.0,
+  "raw_minus_filtered_angle_deg": {
+    "max": 0.32966897182438876,
+    "mean": -0.0031859189675019516,
+    "median": -0.0035622504996668924,
+    "min": -0.3834679326180081,
+    "n": 723,
+    "p01": -0.23149520099907933,
+    "p99": 0.22672877999828864,
+    "rms": 0.08973572991267272
+  },
+  "recorded_parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.800000012,
+    "approach_v": 0.200000003,
+    "bal_pw": 4.5,
+    "bw": 10.0,
+    "catch_a": 0.25,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.300000012,
+    "giveup": 0.800000012,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.123999998,
+    "manual_speed_max": 0.150000006,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "phase_soft": 2.0,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "rail": 0.309037507,
+    "rail_fault_margin": 0.00999999978,
+    "rail_fraction": 0.949999988,
+    "rail_hysteresis": 0.00499999989,
+    "rail_margin": 0.0149999997,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rail_recover_v": 0.150000006,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0,
+    "rehome_v": 0.0799999982,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.0500000007,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "requests": 722,
+  "response_snapshots": [
+    {
+      "accepted_demand_m_s2": 0.0,
+      "board_t_s": 0.0,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.0,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 0.06343766728324103,
+      "counterfactual_auto_linear_raw_angle_m_s2": 0.0635343155838029,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 0.07892340829727998,
+      "counterfactual_upright_linear_raw_angle_m_s2": 0.07904376141119615,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.0,
+      "host_receipt_t_s": 0.0,
+      "last_seq": 0,
+      "mode": 12,
+      "observation_sequence": 517993896,
+      "observer_rate_rad_s": -0.001689136,
+      "replayed_mlp_m_s2": 0.12094031234255627,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.0,
+      "theta_encoder_deg": 0.17578127430651508,
+      "theta_filtered_deg": 0.17552986042601165,
+      "x_step_estimate_m": 0.0
+    },
+    {
+      "accepted_demand_m_s2": 0.06187532,
+      "board_t_s": 0.04999999999972715,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.007037595,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.014310427598219294,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.1617228295439495,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.006507047762215237,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.19007511363493734,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.06187532,
+      "host_receipt_t_s": 0.0491978470236063,
+      "last_seq": 5,
+      "mode": 12,
+      "observation_sequence": 517993946,
+      "observer_rate_rad_s": -0.03482979,
+      "replayed_mlp_m_s2": -0.24254578665101334,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.05,
+      "theta_encoder_deg": -0.2636718541639931,
+      "theta_filtered_deg": 0.11979607845401499,
+      "x_step_estimate_m": 0.00015
+    },
+    {
+      "accepted_demand_m_s2": -0.1986088,
+      "board_t_s": 0.09999999999990905,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.001111969,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.13552283289381642,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.17808464762484294,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.16750408364842376,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.22050498389210893,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -0.1986088,
+      "host_receipt_t_s": 0.0994379100156948,
+      "last_seq": 10,
+      "mode": 12,
+      "observation_sequence": 517993996,
+      "observer_rate_rad_s": -0.04828206,
+      "replayed_mlp_m_s2": -0.23670310058064614,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.1,
+      "theta_encoder_deg": -0.17578127430651508,
+      "theta_filtered_deg": -0.06506405589102504,
+      "x_step_estimate_m": 0.0004125
+    },
+    {
+      "accepted_demand_m_s2": 0.144302,
+      "board_t_s": 0.1999999999998181,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.0115587,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 0.15492061522893455,
+      "counterfactual_auto_linear_raw_angle_m_s2": 0.1484115019601227,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 0.17418543081969212,
+      "counterfactual_upright_linear_raw_angle_m_s2": 0.16607983510636704,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.144302,
+      "host_receipt_t_s": 0.19920935796108097,
+      "last_seq": 20,
+      "mode": 12,
+      "observation_sequence": 517994096,
+      "observer_rate_rad_s": 0.06386382,
+      "replayed_mlp_m_s2": 0.1844524420127551,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.2,
+      "theta_encoder_deg": 0.08789063715325754,
+      "theta_filtered_deg": 0.1048229723938612,
+      "x_step_estimate_m": -0.000375
+    },
+    {
+      "accepted_demand_m_s2": -0.02178191,
+      "board_t_s": 0.29999999999972715,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.002688525,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 0.009856851045932466,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.012038918358966626,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 0.00485502409281181,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.02241109454713936,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -0.02178191,
+      "host_receipt_t_s": 0.29915655206423253,
+      "last_seq": 30,
+      "mode": 12,
+      "observation_sequence": 517994196,
+      "observer_rate_rad_s": -0.0003293029,
+      "replayed_mlp_m_s2": -0.008022248421024267,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.3,
+      "theta_encoder_deg": 0.0,
+      "theta_filtered_deg": 0.05695806672947631,
+      "x_step_estimate_m": -0.0007875
+    },
+    {
+      "accepted_demand_m_s2": -0.09003773,
+      "board_t_s": 0.5,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.02321121,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.05006839723623321,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.04947643740808809,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.11011297614963284,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.10937582704078816,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -0.09003773,
+      "host_receipt_t_s": 0.4992103340337053,
+      "last_seq": 50,
+      "mode": 12,
+      "observation_sequence": 517994396,
+      "observer_rate_rad_s": 0.02783513,
+      "replayed_mlp_m_s2": -0.05637641243356438,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.5,
+      "theta_encoder_deg": -0.08789063715325754,
+      "theta_filtered_deg": -0.08943051852345114,
+      "x_step_estimate_m": -0.0024375
+    },
+    {
+      "accepted_demand_m_s2": -0.4310773,
+      "board_t_s": 1.0,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.08216676,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.6054465947050938,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.5853914996730969,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.9741226222512334,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.9491486379912617,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -0.4310773,
+      "host_receipt_t_s": 0.9991663050604984,
+      "last_seq": 100,
+      "mode": 12,
+      "observation_sequence": 517994896,
+      "observer_rate_rad_s": -0.06229458,
+      "replayed_mlp_m_s2": -0.5253032811336645,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 1.0,
+      "theta_encoder_deg": -0.2636718541639931,
+      "theta_filtered_deg": -0.315841724058717,
+      "x_step_estimate_m": -0.0214875
+    },
+    {
+      "accepted_demand_m_s2": 0.1592568,
+      "board_t_s": 2.0,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.01942824,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.13093376097331155,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.15135862165476882,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.41630975890465427,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.4417442007937109,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.1592568,
+      "host_receipt_t_s": 1.9991684580454603,
+      "last_seq": 200,
+      "mode": 12,
+      "observation_sequence": 517995896,
+      "observer_rate_rad_s": 0.02605752,
+      "replayed_mlp_m_s2": 0.0934704010266265,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 2.0,
+      "theta_encoder_deg": 0.17578127430651508,
+      "theta_filtered_deg": 0.2289130257477046,
+      "x_step_estimate_m": -0.064275
+    },
+    {
+      "accepted_demand_m_s2": -0.192707,
+      "board_t_s": 5.0,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.1336762,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 0.18038955774241347,
+      "counterfactual_auto_linear_raw_angle_m_s2": 0.1609294400447553,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 0.4569051401173634,
+      "counterfactual_upright_linear_raw_angle_m_s2": 0.4326720625725733,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -0.192707,
+      "host_receipt_t_s": 4.999152770033106,
+      "last_seq": 500,
+      "mode": 12,
+      "observation_sequence": 517998896,
+      "observer_rate_rad_s": -0.01137937,
+      "replayed_mlp_m_s2": -0.21811959657440821,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 5.0,
+      "theta_encoder_deg": -0.6152346319601413,
+      "theta_filtered_deg": -0.5646124929574042,
+      "x_step_estimate_m": -0.0003375
+    }
+  ],
+  "role": "host-policy",
+  "schema": "cartpole-offline-live-trace-analysis-v1",
+  "semantics": "Operation success is not balance success. x is step-count estimate; velocity/acceleration are commanded governor state, not independently measured cart motion.",
+  "sim_replay": {
+    "performed": false,
+    "reason": "Trace cart velocity/acceleration are command states. A matched command-state simulation can be a hypothesis check, but cannot establish actuator tracking or physical initial cart velocity."
+  },
+  "timing": {
+    "accepted_sequences_seen": 722,
+    "action_expiry_fault_observed": true,
+    "board_dropped_serial_frames_delta": 0,
+    "board_telemetry_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 722,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "control_deadline_misses_delta": 0,
+    "failure_context": [
+      {
+        "host_monotonic_ns": 711145366591410,
+        "reason": "executor fault 1",
+        "type": "error"
+      },
+      {
+        "act_finished_host_ns": 711145379565021,
+        "act_started_host_ns": 711145364701666,
+        "failed_observation_board_ns": 2609573531000,
+        "failed_observation_sequence": 518001116,
+        "fetch_finished_host_ns": 711145364419520,
+        "fetch_started_host_ns": 711145364103965,
+        "host_monotonic_ns": 711145379676254,
+        "previous_sent_observation_board_ns": 2609563531000,
+        "previous_sent_observation_sequence": 518001106,
+        "reason": "latched rig error: executor fault 1",
+        "stage": "step",
+        "timing": null,
+        "type": "policy_failure"
+      }
+    ],
+    "faults": [
+      {
+        "board_t_s": 7.230000000000018,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.239999999999782,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.24599999999964,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.2479999999995925,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.251999999999953,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.253999999999905,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.257999999999811,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.267999999999574,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.277999999999793,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.288000000000011,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.2979999999997744,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.307999999999993,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.317999999999756,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.3279999999999745,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.337999999999738,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 7.3419999999996435,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      }
+    ],
+    "first_accept_board_age_upper_bound_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 722,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "host_receipt_interval_ms": {
+      "max": 11.327165961265564,
+      "mean": 10.000671191063613,
+      "median": 10.000147044658661,
+      "min": 9.089770913124084,
+      "n": 722,
+      "p01": 9.611014715433122,
+      "p99": 10.386331104040146,
+      "rms": 10.00200430585248
+    },
+    "logger_dropped_records": [
+      0
+    ],
+    "policy_compute": [
+      {
+        "calls": 723,
+        "host_monotonic_ns": 711145382064338,
+        "max_compute_ns": 14866299,
+        "mean_compute_ns": 1342953.7026279392,
+        "timing": null,
+        "type": "policy_end"
+      }
+    ],
+    "receipt_to_command_record_ms": {
+      "max": 6.865144,
+      "mean": 2.849545265927978,
+      "median": 2.7398784999999997,
+      "min": 1.878864,
+      "n": 722,
+      "p01": 2.0647222800000002,
+      "p99": 3.9778270299999967,
+      "rms": 2.8821982634104106
+    },
+    "receipt_to_request_record_ms": {
+      "max": 7.009562,
+      "mean": 2.943220268698061,
+      "median": 2.8316555,
+      "min": 1.96664,
+      "n": 722,
+      "p01": 2.12911748,
+      "p99": 4.161572559999997,
+      "rms": 2.9760622285200777
+    },
+    "request_board_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 721,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "request_host_interval_ms": {
+      "max": 14.403478980064392,
+      "mean": 9.999999957011907,
+      "median": 10.000275015830994,
+      "min": 6.617526054382324,
+      "n": 721,
+      "p01": 8.648717617988586,
+      "p99": 11.463115763664245,
+      "rms": 10.014979004067191
+    },
+    "semantics": "Host command record follows transport.write; these intervals are host proxies, not wire/executor latency. First telemetry last_seq observation is an upper bound on acceptance time. Unseen sequence does not prove rejection. dropped_serial_frames can count overwritten telemetry, not lost policy commands.",
+    "ttl_ms": [
+      20.0
+    ]
+  }
+}

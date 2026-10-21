@@ -1,0 +1,109 @@
+...................................................................... [  3%]
+.................................................................F...... [  7%]
+...................................................................... [ 10%]
+........................................................................ [ 14%]
+.................................... [ 15%]
+.........F...................................... [ 18%]
+....s................................................................... [ 21%]
+........................................................................ [ 25%]
+........................................................................ [ 28%]
+........................................................................ [ 32%]
+........................................................................ [ 36%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+........................................................................ [ 53%]
+.....................ssss........ss..................... [ 56%]
+................................................... [ 59%]
+........................................................... [ 62%]
+........................................................ [ 64%]
+........................................................... [ 67%]
+.......................................................... [ 70%]
+............................................... [ 73%]
+............................................................................................................... [ 78%]
+........................................................................ [ 82%]
+.............................................................................. [ 86%]
+........................................................................ [ 89%]
+..................................................................... [ 93%]
+..........................................................s..................................................... [ 98%]
+............................                                             [100%]
+=================================== FAILURES ===================================
+___ test_spawned_camera_capture_preserves_clock_anchors_raw_frames_and_queue ___
+
+tmp_path = PosixPath('/private/var/folders/nn/t89hrlds76g_9dx54gq2ljj00000gn/T/pytest-of-rbafna/pytest-556/test_spawned_camera_capture_pr0')
+
+    def test_spawned_camera_capture_preserves_clock_anchors_raw_frames_and_queue(tmp_path):
+        stopped=threading.Event()
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self,*args):pass
+            def do_GET(self):
+                if self.path=='/api/clock':
+                    body=json.dumps({'monotonic_s':time.monotonic()}).encode()
+                    self.send_response(200);self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body);return
+                self.send_response(200);self.send_header('Content-Type','application/x-ndjson');self.end_headers()
+                seq=0
+                while not stopped.is_set():
+                    t=time.monotonic()
+                    row=dict(schema='cartpole-sensing-stream-v1',stream_seq=seq,host_t=t+.000001,
+                        encoder={'packets':[]},vision=dict(seq=seq,t=t,stale=False,worker_error=None,
+                        age_since_host_read_s=.000001,detected=True,confidence=.9,image_angle_rad=0.,
+                        pivot_px=[100.,100.],bob_px=[100.,200.],length_px=100.,frame_width=640,frame_height=480))
+                    try:self.wfile.write((json.dumps(row)+'\n').encode());self.wfile.flush()
+                    except (BrokenPipeError,ConnectionResetError):break
+                    seq+=1;stopped.wait(.02)
+        server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+        recorder=CameraRecorder(f'http://127.0.0.1:{server.server_port}/api/sensing-stream',tmp_path,5.)
+        samples=[]
+        try:
+>           recorder.start();deadline=time.monotonic()+.4
+            ^^^^^^^^^^^^^^^^
+
+tests/test_camera_recorder_integration.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <cartpole_sdk.identification.experiments.CameraRecorder object at 0x120dcbbd0>
+
+    def start(self):
+        self.process.start()
+>       if not self.ready.wait(3.):raise RuntimeError('camera unavailable before collection')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       RuntimeError: camera unavailable before collection
+
+src/cartpole_sdk/identification/experiments.py:435: RuntimeError
+_______________ test_rig_filtered_angle_preserves_encoder_health _______________
+
+rig = (<test_control_observation.CountingRig object at 0x13af82ed0>, <test_control_observation.FeedbackFirmware object at 0x115da4650>)
+
+    def test_rig_filtered_angle_preserves_encoder_health(rig):
+        connected, firmware = rig
+        previous = connected.state.tick
+        firmware.flags &= ~1
+        firmware.send(firmware.state(tick=(previous+1)&0xffffffff))
+>       connected.wait_state(after_tick=previous)
+
+tests/test_control_observation.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/cartpole_sdk/rig/client.py:377: in wait_state
+    return self._wait_state(after_tick, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/cartpole_sdk/rig/client.py:387: in _wait_state
+    self._require(allow_error=allow_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_control_observation.CountingRig object at 0x13af82ed0>
+allow_error = False
+
+    def _require(self, *, allow_error=False):
+        if not self._connected or self._closed:
+            raise RigError('rig is not connected')
+        if self.error is not None and not allow_error:
+>           raise RigError(f'latched rig error: {self.error}')
+E           cartpole_sdk.rig.client.RigError: latched rig error: out-of-order board counter
+
+src/cartpole_sdk/rig/client.py:161: RigError
+=========================== short test summary info ============================
+FAILED tests/test_camera_recorder_integration.py::test_spawned_camera_capture_preserves_clock_anchors_raw_frames_and_queue
+FAILED tests/test_control_observation.py::test_rig_filtered_angle_preserves_encoder_health
+2 failed, 2006 passed, 8 skipped, 460 subtests passed in 164.97s (0:02:44)

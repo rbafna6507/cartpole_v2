@@ -1,0 +1,1565 @@
+{
+  "bias_intervention": "Upstream encoder_bias_rad before unchanged sensor noise, quantization and observer.",
+  "branch": "New analytic teacher / possible future supervised initialization; distinct from PPO improvement and original joint-candidate selection.",
+  "candidates": [
+    {
+      "control": true,
+      "gains": {
+        "omega_gain": 2.0,
+        "position_gain": 1.0,
+        "theta_gain": 40.0,
+        "velocity_gain": 2.0
+      },
+      "name": "original-control"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 40.0,
+        "velocity_gain": 4.0
+      },
+      "name": "center04-v04-t40-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 4.0
+      },
+      "name": "center04-v04-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 5.0
+      },
+      "name": "center04-v05-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 6.0
+      },
+      "name": "center04-v06-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 5.0
+      },
+      "name": "center06-v05-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 6.0
+      },
+      "name": "center06-v06-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 7.0
+      },
+      "name": "center06-v07-t60-o3"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 4.0,
+        "position_gain": 8.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 7.0
+      },
+      "name": "center08-v07-t60-o4"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 4.0,
+        "position_gain": 12.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 9.0
+      },
+      "name": "center12-v09-t60-o4"
+    },
+    {
+      "control": false,
+      "gains": {
+        "omega_gain": 5.0,
+        "position_gain": 20.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 12.0
+      },
+      "name": "center20-v12-t60-o5"
+    }
+  ],
+  "confirmation": {
+    "encoder_bias_degrees": [
+      0.0,
+      -0.25,
+      0.25,
+      -0.5,
+      0.5
+    ],
+    "rule": "Run only a single frozen winning alternative after development; do not tune or select a runner-up using confirmation.",
+    "seconds": 30.0,
+    "seeds": [
+      97000,
+      97001,
+      97002,
+      97003
+    ],
+    "starts": [
+      "upright"
+    ]
+  },
+  "control": "original-control",
+  "deployable": false,
+  "development": {
+    "encoder_bias_degrees": [
+      0.0,
+      -0.25,
+      0.25,
+      -0.5,
+      0.5
+    ],
+    "seconds": 10.0,
+    "seeds": [
+      94000,
+      94007
+    ],
+    "starts": [
+      "upright"
+    ]
+  },
+  "eligibility": "Alternative must pass local gate and all10 development final holds with full10s and no simulator/policy fault. Original law is a comparator, not a replacement candidate.",
+  "experiment": {
+    "admission": {
+      "development_only": true,
+      "hardware_accepted": false,
+      "model": {
+        "acceptance_scope": "DEVELOPMENT_ONLY",
+        "accepted_fit": false,
+        "content_sha256": "37a9b9f00245ffb4784e11b4355206b0e49db784740f0e660c517cefe188484f",
+        "limitations": [
+          "Frozen batch-6 passive coefficients are retained from the source profile; no physical refit or fit acceptance is claimed.",
+          "Passive decays identify angular ratios. Cart/pole masses, cart damping and 20 N force authority remain assumptions.",
+          "Ideal acceleration-servo gain and tracking, physical delay, backlash, slip and missed steps remain unidentified.",
+          "The full-angle encoder curve failed held-out upright and freefall checks; no nominal global correction is applied.",
+          "Encoder, friction, length, noise and transport ranges are engineering stress coverage, not a statistical posterior.",
+          "The camera alone moved between native trial groups; their image-vertical angles are different view epochs, not evidence of encoder drift.",
+          "The readback was motor-disabled with fault 4 and invalid homing. Recorded settings do not establish a presently healthy or homed rig.",
+          "One-way transport delays are assumed. Host dispatch stalls and the 20 ms lease require separate fault evaluation.",
+          "Post-tightening friction, full-speed physical cart tracking, global swing-up/balance prediction and hardware transfer remain unqualified.",
+          "Smooth dry friction requires MujocoBackend; generated MJCF alone omits its applied torque."
+        ],
+        "rationale": "Retain the preserved passive plant; refresh only the recorded rail and executor settings. Nominal encoder correction remains zero. Source bytes and evidence limits are pinned in provenance.json with canonical digest e18db1e363f9e35f82c2b968e8890134a5ed8b084de13618694d48a71879b034.",
+        "raw_sha256": "240541df813b52bb16f9db3b0904e9cf0a3fd17a594eaf45abe7e33283d1ada0",
+        "schema": "cartpole-development-model-v1",
+        "source_path": "/Users/rbafna/projects/cartpole_v2/training/profiles/rl-encoder-20261021/model.json",
+        "status": "DEVELOPMENT_ONLY"
+      },
+      "simulation_config": {
+        "cart_damping": 0.05,
+        "cart_mass_kg": 0.35,
+        "control_steps": 10,
+        "effective_length_m": 0.16030387335574306,
+        "hinge_coulomb_friction_nm": 0.0007133292581428023,
+        "hinge_damping": 3.0218604984532184e-06,
+        "hinge_friction_velocity_scale_rad_s": 0.05,
+        "max_acceleration_m_s2": 25.0,
+        "max_action_ttl_ns": 50000000,
+        "max_force_n": 20.0,
+        "max_steps": 2500,
+        "physics_dt_ns": 1000000,
+        "pole_mass_kg": 0.02275,
+        "rail_half_m": 0.309074998
+      },
+      "task": "swingup-and-balance",
+      "task_qualified": false,
+      "task_validation": "Global swing-up and balance qualification is not established by this model scope."
+    },
+    "environment": "RigCartpoleEnv",
+    "executor_parameters": {
+      "amax_b": 25.0,
+      "amax_m": 0.5,
+      "amax_s": 25.0,
+      "approach_angle": 0.800000012,
+      "approach_v": 0.200000003,
+      "bal_pw": 4.5,
+      "bw": 10.0,
+      "catch_a": 0.25,
+      "catch_da": 4.0,
+      "catch_r": 3.0,
+      "catch_v": 0.300000012,
+      "giveup": 0.800000012,
+      "jmax": 150.0,
+      "jmax_m": 10.0,
+      "kdx": 2.0,
+      "ke": 4.0,
+      "kpx": 40.0,
+      "leff": 0.123999998,
+      "manual_speed_max": 0.150000006,
+      "pc1": -5.0,
+      "pc2": -6.0,
+      "phase_soft": 2.0,
+      "pw": 3.0,
+      "pz": 0.850000024,
+      "rail": 0.309074998,
+      "rail_fault_margin": 0.00999999978,
+      "rail_fraction": 0.949999988,
+      "rail_hysteresis": 0.00499999989,
+      "rail_margin": 0.0149999997,
+      "rail_recover_a": 1.5,
+      "rail_recover_s": 8.0,
+      "rail_recover_v": 0.150000006,
+      "rehome_a": 0.5,
+      "rehome_j": 10.0,
+      "rehome_v": 0.0799999982,
+      "spin_resume_rad_s": 10.0,
+      "spin_trip_rad_s": 150.0,
+      "vman": 0.0500000007,
+      "vmax": 1.5,
+      "vmax_b": 1.5,
+      "vmax_s": 1.5
+    },
+    "hardware_accepted": false,
+    "observation_config": {
+      "angle_frame_id": "encoder-zero",
+      "angle_noise_std": 0.001,
+      "angle_source": "raw",
+      "command_delay_steps": 1,
+      "dropout_probability": 0.0,
+      "encoder_bias_rad": 0.0,
+      "encoder_cos_error_rad": 0.0,
+      "encoder_counts": 4096,
+      "encoder_sin_error_rad": 0.0,
+      "telemetry_delay_steps": 3,
+      "vision_angle_noise_std": 0.003,
+      "vision_angle_quantum_rad": 0.001,
+      "vision_dropout_probability": 0.0,
+      "vision_frame_period_ns": 12500000,
+      "vision_latency_ns": 20000000,
+      "vision_max_age_ns": 150000000,
+      "vision_warmup_steps": 500
+    },
+    "prior_length_matches_model": false,
+    "prior_parameters": {
+      "approach_angle_rad": 0.800000012,
+      "capture_angle_rad": 0.25,
+      "capture_rate_rad_s": 3.0,
+      "effective_length_m": 0.123999998,
+      "energy_gain": 4.0,
+      "kick_acceleration_m_s2": 1.0,
+      "kick_duration_s": 0.12,
+      "max_acceleration_m_s2": 25.0,
+      "omega_gain": 2.391379796199559,
+      "phase_softness": 2.0,
+      "position_gain": 3.4128439816513763,
+      "release_angle_rad": 0.800000012,
+      "swing_position_gain": 40.0,
+      "swing_velocity_gain": 2.0,
+      "theta_gain": 22.02559265311508,
+      "velocity_gain": 3.1853211041467877
+    },
+    "rate_hz": 100,
+    "schema": "cartpole-model-experiment-v1",
+    "simulation_config": {
+      "cart_damping": 0.05,
+      "cart_mass_kg": 0.35,
+      "control_steps": 10,
+      "effective_length_m": 0.16030387335574306,
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "max_acceleration_m_s2": 25.0,
+      "max_action_ttl_ns": 50000000,
+      "max_force_n": 20.0,
+      "max_steps": 500,
+      "physics_dt_ns": 1000000,
+      "pole_mass_kg": 0.02275,
+      "rail_half_m": 0.309074998
+    },
+    "simulation_only": true,
+    "startup_policy": "Encoder telemetry warms causally under the initial 20 ms ARM lease; observer rate starts at zero. Plant evolves during acquisition; unusable policy channels fault without ground-truth substitution.",
+    "ttl_ms": 20
+  },
+  "hardware_accepted": false,
+  "hold_definition": "Whole final5s true abs(theta)<.15rad, abs(omega)<1rad/s, abs(x)<.12m; complete episode without fault.",
+  "if_no_winner": "Stop after development; do not access confirmation poses, fit, or export.",
+  "if_winner": "Write frozen-winner receipt with development/protocol hashes before any confirmation. Require all20 confirmation holds/no faults before reporting analytic teacher as passed.",
+  "limitations": [
+    "Small reused development sample; selection only within the declared finite set.",
+    "Fresh confirmation tests this analytic teacher, not an untrained neural approximation or hardware.",
+    "No hardware qualification, runtime source edits, neural fitting or actor export in this branch."
+  ],
+  "linear_gate": {
+    "actual_observer_tick": "angle_hat_next=wrap(angle_hat+(rate_hat+2*w*error)*.001), rate_hat_next=rate_hat+w*w*error*.001",
+    "controller_equation": "a=kx*x+kv*v+ktheta*theta+komega*rate_hat",
+    "criterion": "All real parts of continuous local closed-loop eigenvalues < -1e-6 per second.",
+    "friction_scope": "Exact current fitted tanh Coulomb and viscous terms; fit validated on free swings, not tiny upright corrections. No physical coefficients changed.",
+    "limitations": "Continuous unquantized local necessary screen with compensated acceleration and actual friction slope; omits sample/transport delay, quantization, clipping, jerk limits and rail guards. Nonlinear simulator retains them all.",
+    "observer_equations": [
+      "w=2*pi*bw",
+      "angle_hat_dot=rate_hat+2*w*(theta-angle_hat)",
+      "rate_hat_dot=w^2*(theta-angle_hat)"
+    ],
+    "plant_equations": [
+      "xdot=v",
+      "vdot=a",
+      "thetadot=omega",
+      "omegadot=(9.81*theta-a)/L_eff - ((hinge_damping+coulomb/tanh_width)/I_pivot)*omega",
+      "I_pivot=mass*(1.5*L_eff)^2/3=0.75*mass*L_eff^2"
+    ],
+    "state_order": [
+      "x",
+      "v",
+      "theta",
+      "omega",
+      "angle_hat",
+      "rate_hat"
+    ]
+  },
+  "local_linearization": {
+    "center04-v04-t40-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.83257762312928
+        },
+        {
+          "imag": 33.28953896037083,
+          "real": -28.620033399731966
+        },
+        {
+          "imag": -33.28953896037083,
+          "real": -28.620033399731966
+        },
+        {
+          "imag": 0.0,
+          "real": -1.6295687548870037
+        },
+        {
+          "imag": 1.774776316247199,
+          "real": 0.24686440609518667
+        },
+        {
+          "imag": -1.774776316247199,
+          "real": 0.24686440609518667
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 40.0,
+        "velocity_gain": 4.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": false,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          4.0,
+          40.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -24.952609792049643,
+          -24.952609792049643,
+          -188.32982240549467,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": 0.24686440609518667,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center04-v04-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.57929286068597
+        },
+        {
+          "imag": 33.850162304106064,
+          "real": -27.37512680141453
+        },
+        {
+          "imag": -33.850162304106064,
+          "real": -27.37512680141453
+        },
+        {
+          "imag": 0.0,
+          "real": -3.6076161888673837
+        },
+        {
+          "imag": 1.2084529717315724,
+          "real": -0.135660856453777
+        },
+        {
+          "imag": -1.2084529717315724,
+          "real": -0.135660856453777
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 4.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          4.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -24.952609792049643,
+          -24.952609792049643,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.135660856453777,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center04-v05-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.4541440996083
+        },
+        {
+          "imag": 33.463866928973864,
+          "real": -27.269039233235453
+        },
+        {
+          "imag": -33.463866928973864,
+          "real": -27.269039233235453
+        },
+        {
+          "imag": 0.0,
+          "real": -2.5391706401790266
+        },
+        {
+          "imag": 1.4230413970355882,
+          "real": -0.33854557951583364
+        },
+        {
+          "imag": -1.4230413970355882,
+          "real": -0.33854557951583364
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 5.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          5.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -24.952609792049643,
+          -31.190762240062053,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.33854557951583364,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center04-v06-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.33032808158028
+        },
+        {
+          "imag": 33.07599226308088,
+          "real": -27.175994143194455
+        },
+        {
+          "imag": -33.07599226308088,
+          "real": -27.175994143194455
+        },
+        {
+          "imag": 1.8655118762459033,
+          "real": -0.5270896689975537
+        },
+        {
+          "imag": -1.8655118762459033,
+          "real": -0.5270896689975537
+        },
+        {
+          "imag": 0.0,
+          "real": -1.4719886593255356
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 4.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 6.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          6.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -24.952609792049643,
+          -37.428914688074464,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.5270896689975537,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center06-v05-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.45675245884185
+        },
+        {
+          "imag": 33.47160909065095,
+          "real": -27.285849752977224
+        },
+        {
+          "imag": -33.47160909065095,
+          "real": -27.285849752977224
+        },
+        {
+          "imag": 0.0,
+          "real": -3.2222915944584627
+        },
+        {
+          "imag": 1.5895347806752025,
+          "real": 0.021129596982476438
+        },
+        {
+          "imag": -1.5895347806752025,
+          "real": 0.021129596982476438
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 5.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": false,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.0,
+          5.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -37.428914688074464,
+          -31.190762240062053,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": 0.021129596982476438,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center06-v06-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.33291209097293
+        },
+        {
+          "imag": 33.08437670387772,
+          "real": -27.192566380723633
+        },
+        {
+          "imag": -33.08437670387772,
+          "real": -27.192566380723633
+        },
+        {
+          "imag": 0.0,
+          "real": -2.3621875415219797
+        },
+        {
+          "imag": 1.8723358864000674,
+          "real": -0.06412598567386288
+        },
+        {
+          "imag": -1.8723358864000674,
+          "real": -0.06412598567386288
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 6.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.0,
+          6.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -37.428914688074464,
+          -37.428914688074464,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.06412598567386288,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center06-v07-t60-o3": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -95.21038341959971
+        },
+        {
+          "imag": 32.69639660271899,
+          "real": -27.112503140985943
+        },
+        {
+          "imag": -32.69639660271899,
+          "real": -27.112503140985943
+        },
+        {
+          "imag": 2.2557770386964435,
+          "real": -0.05789454933934309
+        },
+        {
+          "imag": -2.2557770386964435,
+          "real": -0.05789454933934309
+        },
+        {
+          "imag": 0.0,
+          "real": -1.6573055650395863
+        }
+      ],
+      "gains": {
+        "omega_gain": 3.0,
+        "position_gain": 6.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 7.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.0,
+          7.0,
+          60.0,
+          0.0,
+          0.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -37.428914688074464,
+          -43.66706713608687,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -18.714457344037232
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.05789454933934309,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center08-v07-t60-o4": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -99.21204086371381
+        },
+        {
+          "imag": 36.86970737840449,
+          "real": -25.235747407080737
+        },
+        {
+          "imag": -36.86970737840449,
+          "real": -25.235747407080737
+        },
+        {
+          "imag": 0.0,
+          "real": -2.1255378561288416
+        },
+        {
+          "imag": 2.1215795537715856,
+          "real": 0.3002945843571736
+        },
+        {
+          "imag": -2.1215795537715856,
+          "real": 0.3002945843571736
+        }
+      ],
+      "gains": {
+        "omega_gain": 4.0,
+        "position_gain": 8.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 7.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": false,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          8.0,
+          7.0,
+          60.0,
+          0.0,
+          0.0,
+          4.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -49.905219584099285,
+          -43.66706713608687,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -24.952609792049643
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": 0.3002945843571736,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center12-v09-t60-o4": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -98.95794478087562
+        },
+        {
+          "imag": 36.10817403673525,
+          "real": -25.050501338125677
+        },
+        {
+          "imag": -36.10817403673525,
+          "real": -25.050501338125677
+        },
+        {
+          "imag": 2.5183998145531348,
+          "real": 0.9673386987412753
+        },
+        {
+          "imag": -2.5183998145531348,
+          "real": 0.9673386987412753
+        },
+        {
+          "imag": 0.0,
+          "real": -2.084214305645396
+        }
+      ],
+      "gains": {
+        "omega_gain": 4.0,
+        "position_gain": 12.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 9.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": false,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          12.0,
+          9.0,
+          60.0,
+          0.0,
+          0.0,
+          4.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -74.85782937614893,
+          -56.14337203211169,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -24.952609792049643
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": 0.9673386987412753,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "center20-v12-t60-o5": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -101.95518572905316
+        },
+        {
+          "imag": 38.388413581641124,
+          "real": -23.073077008467298
+        },
+        {
+          "imag": -38.388413581641124,
+          "real": -23.073077008467298
+        },
+        {
+          "imag": 2.5416664187638847,
+          "real": 2.0529888194490384
+        },
+        {
+          "imag": -2.5416664187638847,
+          "real": 2.0529888194490384
+        },
+        {
+          "imag": 0.0,
+          "real": -2.2131222582003924
+        }
+      ],
+      "gains": {
+        "omega_gain": 5.0,
+        "position_gain": 20.0,
+        "theta_gain": 60.0,
+        "velocity_gain": 12.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": false,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          20.0,
+          12.0,
+          60.0,
+          0.0,
+          0.0,
+          5.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -124.76304896024821,
+          -74.85782937614893,
+          -313.0928713657429,
+          -32.54477822169814,
+          0.0,
+          -31.190762240062053
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": 2.0529888194490384,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    },
+    "original-control": {
+      "combined_angular_damping_per_s": 32.54477822169814,
+      "coulomb_tanh_slope_nm_per_rad_s": 0.014266585162856046,
+      "effective_length_m": 0.16030387335574306,
+      "eigenvalues": [
+        {
+          "imag": 0.0,
+          "real": -91.05371707865551
+        },
+        {
+          "imag": 28.696131104767662,
+          "real": -31.113315079762017
+        },
+        {
+          "imag": -28.696131104767662,
+          "real": -31.113315079762017
+        },
+        {
+          "imag": 0.0,
+          "real": -2.2660556554576234
+        },
+        {
+          "imag": 0.737557520492831,
+          "real": -0.33104073582636506
+        },
+        {
+          "imag": -0.737557520492831,
+          "real": -0.33104073582636506
+        }
+      ],
+      "gains": {
+        "omega_gain": 2.0,
+        "position_gain": 1.0,
+        "theta_gain": 40.0,
+        "velocity_gain": 2.0
+      },
+      "hinge_coulomb_friction_nm": 0.0007133292581428023,
+      "hinge_damping_nm_per_rad_s": 3.0218604984532184e-06,
+      "hinge_friction_velocity_scale_rad_s": 0.05,
+      "locally_stable": true,
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          2.0,
+          40.0,
+          0.0,
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -6.238152448012411,
+          -12.476304896024821,
+          -188.32982240549467,
+          -32.54477822169814,
+          0.0,
+          -12.476304896024821
+        ],
+        [
+          0.0,
+          0.0,
+          125.66370614359172,
+          0.0,
+          -125.66370614359172,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          3947.8417604357433,
+          0.0,
+          -3947.8417604357433,
+          0.0
+        ]
+      ],
+      "maximum_real_eigenvalue_per_s": -0.33104073582636506,
+      "observer_bandwidth_hz": 10.0,
+      "observer_w_per_s": 62.83185307179586,
+      "pivot_inertia_kg_m2": 0.0004384607240568233,
+      "pole_mass_kg": 0.02275,
+      "state_order": [
+        "x",
+        "v",
+        "theta",
+        "omega",
+        "angle_hat",
+        "rate_hat"
+      ],
+      "uniform_rod_length_m": 0.2404558100336146
+    }
+  },
+  "matching": "Same seeds/initial-state function and random draw sequence for each candidate/bias; unchanged plant/governor/parameters/TTL20ms.",
+  "nonlinear_law": "At100Hz: clip(kx*observed_x+kv*observed_v+ktheta*atan2(observed_sin,observed_cos)+komega*observed_rate,-25,25). No truth in controller.",
+  "ranking": [
+    "minimum worst max_abs_x_m across all10 episodes",
+    "minimum worst raw-command adjacent-difference RMS across all10 episodes",
+    "candidate name ascending tie-break"
+  ],
+  "schema": "cartpole-analytic-centering-teacher-screen-v1",
+  "script_sha256": "c157b6bd2fbe80060a1d4e896331fe7c8a4a467a979e42d0f691015f52c286ff",
+  "simulation_only": true,
+  "simulation_source": {
+    "balance_experiment_sha256": "e2ecfe29df7f905851902e8308292237e5b1e01f52dbddbd70fae070adb0bb55",
+    "code_sha256": {
+      "../cartpole_vision/state.py": "085faa9e7f5995b3b6c75c15f0aeb8c2addf60dfee9f8aae920d0940b85a040f",
+      "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+      "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+      "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+      "control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+      "control/tuned_parameters.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+      "learning/model_experiment.py": "dd22ff077e19d60f1f7aa26f4eb665782d29526643de524b5627b62aade55661",
+      "learning/model_search.py": "82a818031084794dcf85d98bcb79fd8d3350521ae8ca63585cb4b35bd22ed9fd",
+      "learning/ppo.py": "e7f417a330219e6a34e79ae234d803b046ddea18edc6f83aa047693af6a3328f",
+      "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+      "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+      "learning/training_recipe.py": "344e44922ce08a10411918fa3e29affc7b394b2709bccaa7fa97227b9405a794",
+      "policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+      "policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+      "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
+      "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+      "rig/__init__.py": "8f197f0d954e5457dfd10bd3d798dd8d3b759014e3e118a847105fe3a8290638",
+      "rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+      "rig/neural_runner.py": "db3a34a82a66c271b6a312b94543c234c77bda63d0051cbd41487000d02ce1fe",
+      "rig/parameters.py": "5ed4c1d1030ac06178459e039e6af06077a3ff70840f4cf9328798fc7c6be1a0",
+      "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+      "rig/protocol.py": "bea00edbd75eeb5325709e1befcca5f1e4dbfcc3947ea9a167ca62c24c060b80",
+      "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+      "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+      "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+      "sensing/policy_observation.py": "6fdb448c03e6b524cc2ffaa0a6dd1bf1a59200c90b9b2a695dd144149befacb1",
+      "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+      "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2",
+      "sim/backend.py": "4ecb77076bd2d7f0f1a29ce66ca8d39abe02fd78bfd8796e5dff466d313abfd2",
+      "sim/config.py": "972893d8328e639e24a0d643cb81e836260475fd9e964f2f64559521ff945717",
+      "sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+      "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+      "sim/rig_gym_env.py": "90cba9c47505eb9b5a200a007f21294b66b95fda094745abbfd0cf4746961514"
+    },
+    "dependencies": {
+      "gymnasium": "1.4.0",
+      "mujoco": "3.15.0",
+      "numpy": "2.4.6",
+      "stable-baselines3": "2.9.0",
+      "torch": "2.14.1"
+    },
+    "diagnostics_sha256": "2e1a1e6ed03c1c7b5e72aaf036832c1a39efb5271accd907e9187a4f7b59e5ef",
+    "projected_ppo_sha256": "62bf8825fee497a5d04988926969ac3a1759103e0048c8dfabd3ed6fd9a5cf5e",
+    "python": "3.11.7"
+  },
+  "source_archive_path": "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/balance/teacher-seed47/source.zip",
+  "source_archive_sha256": "e1df298b213b7aea4f7319dbfdf0e07730c9fe0a70b5ad2b2f464e5cd7994234",
+  "status": "DEVELOPMENT_ONLY",
+  "torch_threads": 1,
+  "training_recipe_path": "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/balance/teacher-seed47/recipe.json",
+  "training_recipe_sha256": "3659b7f828b0d342f6db0913dab62c523d680b12fe2a4d21fc4c1a0281d4341d",
+  "workers": 1
+}

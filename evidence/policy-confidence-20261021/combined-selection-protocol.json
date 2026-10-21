@@ -1,0 +1,142 @@
+{
+  "analyzer_sha256": "89903493c7a29f32b9ca9d1c2baeea0edfd86c7184ff20c3229dfc3e4de8f8e2",
+  "checkpoints_evaluated": [
+    0,
+    51200,
+    102400
+  ],
+  "confirmation": {
+    "candidate_count": 1,
+    "maximum_workers": 2,
+    "nominal_seconds": 60,
+    "nominal_seeds": [
+      96000,
+      96001,
+      96002,
+      96003,
+      96004,
+      96005,
+      96006,
+      96007
+    ],
+    "sdk_seconds": 60,
+    "sdk_seeds": [
+      96000,
+      96001,
+      96002,
+      96003,
+      96004,
+      96005,
+      96006,
+      96007
+    ],
+    "starts": [
+      "hanging",
+      "upright"
+    ],
+    "stress_scenarios": [
+      "nominal",
+      "encoder-bias-minus",
+      "combined-minus",
+      "encoder-bias-plus",
+      "combined-plus"
+    ],
+    "stress_seconds": 60,
+    "stress_seeds": [
+      96008,
+      96009
+    ]
+  },
+  "declared_utc": "2026-10-21T20:23:04.770593+00:00",
+  "development_seeds": [
+    95000,
+    95001
+  ],
+  "holdout_rule": "Freeze one selected checkpoint before any reserved pose execution. Do not choose another candidate based on confirmation outcomes.",
+  "limitations": [
+    "Adaptive development experiment; selecting among30 evaluated checkpoints on2 common poses can overfit.",
+    "Original arms have3 optimizer seeds each; ablations have2 each. Compare ablations with matched original PPO seeds11/23 separately.",
+    "Repeated optimizer outcomes reuse the same poses, not independent physical starts."
+  ],
+  "runs": [
+    {
+      "arm": "ppo",
+      "group": "ppo",
+      "path": "runs/policy-confidence-20261021/joint/ppo-seed11",
+      "protocol": "joint-protocol.json",
+      "seed": 11
+    },
+    {
+      "arm": "retained",
+      "group": "retained",
+      "path": "runs/policy-confidence-20261021/joint/retained-seed11",
+      "protocol": "joint-protocol.json",
+      "seed": 11
+    },
+    {
+      "arm": "ppo",
+      "group": "ppo",
+      "path": "runs/policy-confidence-20261021/joint/ppo-seed23",
+      "protocol": "joint-protocol.json",
+      "seed": 23
+    },
+    {
+      "arm": "retained",
+      "group": "retained",
+      "path": "runs/policy-confidence-20261021/joint/retained-seed23",
+      "protocol": "joint-protocol.json",
+      "seed": 23
+    },
+    {
+      "arm": "ppo",
+      "group": "ppo",
+      "path": "runs/policy-confidence-20261021/joint/ppo-seed47",
+      "protocol": "joint-protocol.json",
+      "seed": 47
+    },
+    {
+      "arm": "retained",
+      "group": "retained",
+      "path": "runs/policy-confidence-20261021/joint/retained-seed47",
+      "protocol": "joint-protocol.json",
+      "seed": 47
+    },
+    {
+      "arm": "ppo",
+      "group": "continuing",
+      "path": "runs/policy-confidence-20261021/ablations/continuing-seed11",
+      "protocol": "continuing-protocol.json",
+      "seed": 11
+    },
+    {
+      "arm": "ppo",
+      "group": "low-std",
+      "path": "runs/policy-confidence-20261021/ablations/low-std-seed11",
+      "protocol": "low-std-protocol.json",
+      "seed": 11
+    },
+    {
+      "arm": "ppo",
+      "group": "continuing",
+      "path": "runs/policy-confidence-20261021/ablations/continuing-seed23",
+      "protocol": "continuing-protocol.json",
+      "seed": 23
+    },
+    {
+      "arm": "ppo",
+      "group": "low-std",
+      "path": "runs/policy-confidence-20261021/ablations/low-std-seed23",
+      "protocol": "low-std-protocol.json",
+      "seed": 23
+    }
+  ],
+  "schema": "cartpole-combined-development-selection-protocol-v1",
+  "selection": "Unchanged frozen rule: no faults and both upright development poses balanced throughout; rank hanging final-five-second holds, earlier mean first1s capture among held episodes, then mean longest hanging dwell. Initial checkpoint remains eligible.",
+  "source_constraints": "Do not change training code or active pinned drivers; run-confirmation.py validates source bindings. No hardware or cloud.",
+  "tie_break": "Stable listed run order, then listed checkpoint evaluation order. Original six runs first in prior order; four ablations appended. Duplicate initial actor weights remain one baseline control, not independent initialization evidence.",
+  "training_protocol_sha256": {
+    "continuing-protocol.json": "428b365201ddab393d4fcc5024b9ce6dbc2bc6e7dfc7d5dab179689394a63acd",
+    "joint-protocol.json": "0890810840197d3476b094b5edde5419edf65dc25b13cc3ec9f4c6a5597a691d",
+    "low-std-protocol.json": "8da0b80f037791441306d930bf90a8d34803fbab88fc9618dffaffd68a97438e"
+  }
+}

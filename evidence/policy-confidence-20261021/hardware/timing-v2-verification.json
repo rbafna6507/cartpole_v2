@@ -1,0 +1,22 @@
+{
+  "hardware_invoked": false,
+  "production_modified": false,
+  "schema": "cartpole-research-driver-verification-v1",
+  "source_sha256": {
+    "test_timing_v2.py": "a47ed49e9e63b3de396283ec3212a4b2abcb49dc02dc8054f5c06362cf2433e3",
+    "timing_instrumentation.py": "faad00c9fe97c1bb7a0289ebac3e8605f23c4dcb2c6100e9096c7f96abd53ec9",
+    "trial-timed-v2.py": "7c1ac86b6d3ded501ce0d261da56b81bfda78a3fe132e5d052440530bdbe5289",
+    "trial-timed.py": "998a9f92b9b50db1a4f6f063bb4d9bdba89002689c9ed7b4d9f30af61f5ede1a",
+    "zero-timing-v2.py": "92717c8d8a16e06b5e1d0e1243468e21fe46e338665ab971b6859f564d4640f8"
+  },
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python evidence/policy-confidence-20261021/hardware/test_timing_v2.py",
+  "test_coverage": [
+    "Bounded event retention and CPU/wall spans",
+    "Actor return/exception propagation and method restoration",
+    "Wait/fetch/step delegation without connect",
+    "Condition notification/predicate behavior",
+    "Duration limits and zero20ms lease invariant",
+    "Post-close in-memory record snapshot, disabled worker constructor arguments and GIL restoration"
+  ],
+  "tests_passed": 7
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "cartpole-joint-confidence-protocol-v1",
+  "profile": "training/profiles/rl-encoder-20261021",
+  "warm_run": "runs/local-swing-20261018/anchored-seed17",
+  "warm_parity": "runs/local-swing-20261018/stress-anchored-seed17/parity",
+  "arms": ["ppo", "retained"],
+  "optimizer_seeds": [11, 23, 47],
+  "steps": 102400,
+  "checkpoint_every": 25600,
+  "evaluate_at": [0, 51200, 102400],
+  "training_seconds": 25,
+  "evaluation_seconds": 25,
+  "training_seeds": [24000, 24127],
+  "development_seeds": [95000, 95001],
+  "future_confirmation_seeds": [96000, 96001, 96002, 96003, 96004, 96005, 96006, 96007],
+  "learning_rate": 0.000003,
+  "policy_std": 0.05,
+  "randomization": null,
+  "retention": {"updates": 4, "batch_size": 256, "learning_rate": 0.0001, "weight": 1, "seed": 95102},
+  "anchors": {"trajectory_rows": 8192, "synthetic_balance_rows": 4096, "seed": 95101},
+  "selection": "Use development only: final five-second hanging holds, then capture speed and uninterrupted dwell, subject to no upright regression or faults. Initial checkpoint is eligible. Confirm frozen choices on fresh 60s poses and the numeric SDK path before any large cloud run.",
+  "limitations": ["Retention is an explicit post-PPO proximal actor update, not vanilla PPO.", "Nominal acquisition comparison first; upstream encoder and plant randomization follow only if task acquisition improves.", "Counts across optimizer seeds on the same poses are repeated policy trials, not independent physical starts."]
+}

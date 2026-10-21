@@ -136,3 +136,137 @@ def test_warm_actor_rejects_rehashed_incompatible_contract(warm,change):
     bad.pop('content_sha256');bad['content_sha256']=_digest(bad)
     with pytest.raises(ValueError,match='scale|contract|shape'):
         m.copy_actor_weights(None,bad,action_scale=25.)
+
+
+def fixed_randomization():
+    return dict(schema='cartpole-training-randomization-v1', rationale='Fixed software test perturbations.',
+        plant=dict(effective_length_scale=[1.02,1.02], angular_damping_scale=[1.,1.],
+            coulomb_friction_scale=[1.,1.]),
+        observation=dict(angle_noise_std=[0.,0.], telemetry_delay_steps=[0,0], command_delay_steps=[0,0]),
+        encoder=dict(encoder_bias_rad=[.01,.01], encoder_sin_error_rad=[.02,.02], encoder_cos_error_rad=[.03,.03]))
+
+
+def test_explicit_trial_randomization_is_recorded_and_used_for_episode_draws(warm,tmp_path):
+    m=api();exp,run,parity=warm;settings=fixed_randomization();before=deepcopy(settings)
+    output=tmp_path/'custom-randomization'
+    report=m.run_trial(exp,output,warm_run=run,warm_parity=parity,seed=3,randomized=True,
+        randomization=settings,bias_degrees=0.,steps=8,every=8,training_seeds=(51,),
+        evaluation_seeds=(501,),heldout_seeds=(601,),evaluation_seconds=.02,n_steps=8,batch_size=4,epochs=1)
+    recipe=json.loads((output/'recipe.json').read_text())
+    assert settings==before and report['randomization']==recipe['randomization']==before
+    episodes=[json.loads(line) for line in (output/'training-episodes.jsonl').read_text().splitlines()]
+    assert episodes
+    for episode in episodes:
+        parameters=episode['episode_parameters']
+        assert parameters['simulation_config']['effective_length_m']==pytest.approx(exp['simulation_config']['effective_length_m']*1.02)
+        assert parameters['observation_config']['encoder_bias_rad']==.01
+        assert parameters['observation_config']['encoder_sin_error_rad']==.02
+        assert parameters['observation_config']['encoder_cos_error_rad']==.03
+    assert all(episode['episode_parameters']['observation_config']['encoder_bias_rad']==0.
+        for episode in json.loads((output/'final/report.json').read_text())['episodes'])
+
+
+@pytest.mark.parametrize('randomized,settings',[(True,{}),(False,fixed_randomization())])
+def test_trial_rejects_invalid_or_disabled_explicit_randomization_before_io(tmp_path,randomized,settings):
+    m=api();exp=make_experiment(tmp_path);output=tmp_path/'invalid'
+    with pytest.raises(ValueError,match='randomization|randomized'):
+        m.run_trial(exp,output,warm_run=tmp_path/'missing-run',warm_parity=tmp_path/'missing-parity',
+            seed=3,randomized=randomized,randomization=settings,bias_degrees=0.)
+    assert not output.exists()
+
+
+@pytest.mark.parametrize('has_recipe,randomized,override,expected_bw',[
+    (True,True,None,6.),(True,True,10,10.),(True,False,None,6.),(False,True,None,6.)])
+def test_cli_uses_profile_bandwidth_and_pins_selected_randomization(tmp_path,monkeypatch,has_recipe,randomized,override,expected_bw):
+    m=api();exp=make_experiment(tmp_path)
+    for filename,key in [('executor-parameters','executor_parameters'),('observation-config','observation_config'),('prior-parameters','prior_parameters')]:
+        (tmp_path/f'{filename}.json').write_text(json.dumps(exp[key]))
+    settings=fixed_randomization();path=tmp_path/'randomization.json'
+    if has_recipe:path.write_text(json.dumps(settings))
+    before={p.name:p.read_bytes() for p in tmp_path.glob('*.json')}
+    calls=[]
+    # Keep real profile admission and hashing; stop before the long default PPO budget.
+    def capture(experiment,output,**kwargs):calls.append((experiment,kwargs))
+    monkeypatch.setattr(m,'run_trial',capture)
+    arguments=['--profile',str(tmp_path),'--output',str(tmp_path/'output'),
+        '--warm-run',str(tmp_path/'prior'),'--warm-parity',str(tmp_path/'parity'),'--seed','3']
+    if randomized:arguments.append('--randomized')
+    if override is not None:arguments+=['--observer-bw',str(override)]
+    assert m.main(arguments)==0
+    assert len(calls)==1
+    experiment,kwargs=calls[0]
+    assert experiment['executor_parameters']['bw']==expected_bw
+    assert kwargs['randomization']==(settings if has_recipe and randomized else None)
+    assert kwargs['randomized'] is randomized
+    if has_recipe:assert kwargs['input_files'][str(path)]==sha256(before[path.name]).hexdigest()
+    assert before=={p.name:p.read_bytes() for p in tmp_path.glob('*.json')}
+
+
+def rebind_actor_fixture(parity,actor):
+    from cartpole_sdk.policies.neural import _digest
+    actor.pop('content_sha256',None);actor['content_sha256']=_digest(actor)
+    (parity/'actor.json').write_text(json.dumps(actor))
+    for name in ('recipe.json','report.json'):
+        path=parity/name;data=json.loads(path.read_text())
+        data.update(actor_content_sha256=actor['content_sha256'],actor_runtime_sha256=actor['runtime_sha256'],
+            actor_file_sha256=sha256((parity/'actor.json').read_bytes()).hexdigest())
+        if name=='report.json':data['recipe_sha256']=sha256((parity/'recipe.json').read_bytes()).hexdigest()
+        path.write_text(json.dumps(data))
+
+
+def replace_archived_runtime_fixture(run,parity,*,rebind_actor):
+    import zipfile
+    name='rig/neural_runner.py';member='src/cartpole_sdk/'+name
+    with zipfile.ZipFile(run/'source.zip') as archive:files={name:archive.read(name) for name in archive.namelist()}
+    files[member]+=b'\n# Synthetic archived runner revision.\n'
+    with zipfile.ZipFile(run/'source.zip','w') as archive:
+        for path,data in files.items():archive.writestr(path,data)
+    recipe=json.loads((run/'recipe.json').read_text())
+    recipe['provenance']['code_sha256'][name]=sha256(files[member]).hexdigest()
+    (run/'recipe.json').write_text(json.dumps(recipe))
+    report=json.loads((run/'report.json').read_text());report.update(recipe)
+    report['recipe_sha256']=sha256((run/'recipe.json').read_bytes()).hexdigest()
+    report['source_zip_sha256']=sha256((run/'source.zip').read_bytes()).hexdigest()
+    (run/'report.json').write_text(json.dumps(report))
+    if rebind_actor:
+        actor=json.loads((parity/'actor.json').read_text())
+        actor['runtime_sha256'][name]=sha256(files[member]).hexdigest()
+        rebind_actor_fixture(parity,actor)
+
+
+def test_offline_migration_uses_verified_archived_runtime_and_records_current_difference(warm):
+    m=api();_,run,parity=warm
+    replace_archived_runtime_fixture(run,parity,rebind_actor=True)
+    originals={path:path.read_bytes() for folder in (run,parity) for path in folder.rglob('*') if path.is_file()}
+    result=m.load_warm_start(run,parity);binding=result['binding']
+    assert binding['changed_runtime_files']==['rig/neural_runner.py']
+    assert binding['original_actor_runtime_sha256']==result['actor']['runtime_sha256']
+    root=Path(m.__file__).resolve().parents[1]
+    assert binding['migration_runtime_sha256']['rig/neural_runner.py']==sha256((root/'rig/neural_runner.py').read_bytes()).hexdigest()
+    assert all(path.read_bytes()==data for path,data in originals.items())
+    from cartpole_sdk.policies.neural import load_neural_policy
+    from cartpole_sdk.policies.rig_observation import rig_channels
+    with pytest.raises(ValueError,match='source.*provenance'):
+        load_neural_policy(parity/'actor.json',channels=rig_channels(angle_source='raw'))
+
+
+def test_offline_migration_rejects_archived_runtime_hash_mismatch(warm):
+    m=api();_,run,parity=warm
+    replace_archived_runtime_fixture(run,parity,rebind_actor=True)
+    replace_archived_runtime_fixture(run,parity,rebind_actor=False)
+    with pytest.raises(ValueError,match='archived actor runtime hash mismatch'):m.load_warm_start(run,parity)
+
+
+def test_offline_migration_rejects_rehashed_actor_that_differs_from_checkpoint(warm):
+    m=api();_,run,parity=warm
+    replace_archived_runtime_fixture(run,parity,rebind_actor=True)
+    actor=json.loads((parity/'actor.json').read_text());actor['layers'][0]['weights'][0][0]+=.001
+    rebind_actor_fixture(parity,actor)
+    with pytest.raises(ValueError,match='differs from actual checkpoint weights'):m.load_warm_start(run,parity)
+
+
+def test_offline_migration_requires_complete_runtime_pin_catalog(warm):
+    m=api();_,run,parity=warm
+    actor=json.loads((parity/'actor.json').read_text());actor['runtime_sha256'].pop('rig/neural_runner.py')
+    rebind_actor_fixture(parity,actor)
+    with pytest.raises(ValueError,match='inference provenance'):m.load_warm_start(run,parity)

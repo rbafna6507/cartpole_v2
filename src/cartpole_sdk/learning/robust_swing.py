@@ -21,7 +21,8 @@ import torch
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.logger import configure
 
-from cartpole_sdk.policies.neural import NeuralPolicy, load_neural_policy, validate_actor
+from cartpole_sdk.policies.neural import NeuralPolicy, validate_actor, MAX_BYTES, RUNTIME_FILES
+from cartpole_sdk.recording import strict_json_loads
 from cartpole_sdk.policies.rig_observation import rig_channels
 from . import transfer_checks
 from .diagnostics import preserved_rng, _source_snapshot
@@ -121,8 +122,16 @@ def load_warm_start(run,parity):
         _file_hash(run/'recipe.json')!=report['recipe_sha256'] or any(report.get(k)!=v for k,v in recipe.items()) or
         _file_hash(run/'source.zip')!=report['source_zip_sha256'] or experiment_identity(recipe['experiment'])!=recipe['experiment_sha256']):
         raise ValueError('warm-start recipe/source hash mismatch or incomplete run')
-    policy=load_neural_policy(parity/'actor.json',channels=rig_channels(angle_source='raw'))
-    actor=policy.actor
+    # Offline weight migration verifies the actor against its archived runtime,
+    # while the deployment loader continues to require the current runtime.
+    with (parity/'actor.json').open('rb') as stream:raw=stream.read(MAX_BYTES+1)
+    if len(raw)>MAX_BYTES:raise ValueError('numeric actor exceeds size limit')
+    actor=validate_actor(strict_json_loads(raw.decode('utf-8')))
+    runtime=actor.get('runtime_sha256')
+    if not isinstance(runtime,dict) or set(runtime)!=set(RUNTIME_FILES):
+        raise ValueError('numeric actor lacks inference provenance')
+    # Preserve channel/observation validation previously supplied by the loader.
+    NeuralPolicy(actor,channels=rig_channels(angle_source='raw'))
     selected=next((e for e in report['evaluations'] if e['checkpoint_sha256']==actor['checkpoint_sha256']),None)
     if selected is None:raise ValueError('numeric actor checkpoint is absent from warm-start report')
     checkpoint=run/selected['checkpoint']
@@ -162,7 +171,11 @@ def load_warm_start(run,parity):
         for key,target in [('weights','weight'),('bias','bias')]:
             if not np.array_equal(np.asarray(source[key]),weights[prefix+'.'+target].cpu().numpy()):
                 raise ValueError('numeric actor differs from actual checkpoint weights')
+    root=Path(__file__).resolve().parents[1]
+    current_runtime={name:_file_hash(root/name) for name in RUNTIME_FILES}
     binding=dict(run=str(run),parity=str(parity),checkpoint_sha256=selected['checkpoint_sha256'],
+        original_actor_runtime_sha256=dict(runtime),migration_runtime_sha256=current_runtime,
+        changed_runtime_files=sorted(name for name in runtime if runtime[name]!=current_runtime[name]),
         actor_file_sha256=_file_hash(parity/'actor.json'),actor_content_sha256=actor['content_sha256'],
         original_experiment_sha256=recipe['experiment_sha256'],original_executor=recipe['experiment']['executor_parameters'],
         optimizer_resume=False,transfer='Only actor Linear weights/bias; fresh critic, optimizer and exploration. Profile changes require new evaluation.',
@@ -248,9 +261,12 @@ def evaluate_fulltask(model,experiment,output,*,seeds,seconds,checkpoint_sha256)
 
 def run_trial(experiment,output,*,warm_run,warm_parity,seed,randomized,bias_degrees,steps=20480,every=5120,
               training_seeds=tuple(range(22000,22128)),evaluation_seeds=(68000,),heldout_seeds=(69000,),
-              evaluation_seconds=25.,learning_rate=3e-6,policy_std=.05,n_steps=1024,batch_size=64,epochs=10,input_files=None):
+              evaluation_seconds=25.,learning_rate=3e-6,policy_std=.05,n_steps=1024,batch_size=64,epochs=10,input_files=None,randomization=None):
     validate_task(experiment);_bias_degrees(bias_degrees);_seconds(evaluation_seconds)
     if type(randomized) is not bool or type(seed) is not int or seed<0:raise ValueError('boolean randomization and nonnegative seed required')
+    if randomization is not None and not randomized:raise ValueError('explicit randomization requires randomized=True')
+    settings=validate_randomization(default_randomization(angle_source=experiment['observation_config']['angle_source'])
+        if randomized and randomization is None else randomization)
     if any(type(v) is not int or v<1 for v in (steps,every,n_steps,batch_size,epochs)) or min(n_steps,batch_size)<2 or n_steps%batch_size or every%n_steps or steps%every:
         raise ValueError('invalid or indivisible budgets')
     if any(type(v) not in (int,float) or not math.isfinite(v) or v<=0 for v in (learning_rate,policy_std)):raise ValueError('positive finite optimizer settings required')
@@ -265,7 +281,6 @@ def run_trial(experiment,output,*,warm_run,warm_parity,seed,randomized,bias_degr
         if any(_file_hash(p)!=pin for p,pin in inputs.items()):raise ValueError('profile input hash changed')
         if any(_file_hash(path)!=warm['binding']['files'][name] for name,path in warm['files'].items()):raise ValueError('warm-start source file hash changed')
     verify_inputs();out=Path(output);out.mkdir(parents=True,exist_ok=False);pins=source_identity()
-    settings=default_randomization(angle_source=experiment['observation_config']['angle_source']) if randomized else None
     recipe=dict(schema='cartpole-robust-swing-v1',status='DEVELOPMENT_ONLY',hardware_accepted=False,deployable=False,
         warm_start=warm['binding'],experiment=experiment,experiment_sha256=experiment_identity(experiment),input_files=inputs,source=pins,
         optimizer_seed=seed,steps=steps,every=every,training_seeds=list(train),evaluation_seeds=list(dev),heldout_seeds=list(heldout),
@@ -293,7 +308,7 @@ def run_trial(experiment,output,*,warm_run,warm_parity,seed,randomized,bias_degr
     def save():
         temp=out/'report.tmp';temp.write_text(json.dumps(report,indent=2,sort_keys=True,allow_nan=False)+'\n');temp.replace(out/'report.json')
     torch.set_num_threads(1);began=time.monotonic()
-    env=RobustSwingEnv(experiment,train,randomized=randomized,bias_degrees=bias_degrees,randomization_seed=seed)
+    env=RobustSwingEnv(experiment,train,randomized=randomized,bias_degrees=bias_degrees,randomization_seed=seed,randomization=settings)
     class Episodes(BaseCallback):
         def _on_step(self):
             for info in self.locals.get('infos',[]):
@@ -338,7 +353,7 @@ def main(argv=None):
     p.add_argument('--profile',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--warm-run',type=Path,required=True);p.add_argument('--warm-parity',type=Path,required=True)
     p.add_argument('--seed',type=int,required=True);p.add_argument('--randomized',action='store_true')
-    p.add_argument('--bias-degrees',type=float,default=0.);p.add_argument('--observer-bw',type=int,choices=(6,8,10),default=8)
+    p.add_argument('--bias-degrees',type=float,default=0.);p.add_argument('--observer-bw',type=int,choices=(6,8,10),help='Override the profile observer bandwidth (Hz).')
     p.add_argument('--steps',type=int,default=20480);p.add_argument('--every',type=int,default=5120)
     p.add_argument('--seconds',type=float,default=25.);p.add_argument('--evaluation-seconds',type=float,default=25.)
     p.add_argument('--training-seeds',type=int,nargs='+',default=list(range(22000,22128)))
@@ -347,9 +362,12 @@ def main(argv=None):
     a=p.parse_args(argv)
     try:
         exp,inputs=load_profile(a.profile,observer_bw=a.observer_bw,seconds=a.seconds)
+        randomization_path=a.profile/'randomization.json'
+        randomization=(validate_randomization(json.loads(randomization_path.read_text()))
+            if a.randomized and randomization_path.exists() else None)
         run_trial(exp,a.output,warm_run=a.warm_run,warm_parity=a.warm_parity,seed=a.seed,randomized=a.randomized,bias_degrees=a.bias_degrees,
             steps=a.steps,every=a.every,training_seeds=a.training_seeds,evaluation_seeds=a.evaluation_seeds,heldout_seeds=a.heldout_seeds,
-            evaluation_seconds=a.evaluation_seconds,learning_rate=a.learning_rate,policy_std=a.policy_std,input_files=inputs)
+            evaluation_seconds=a.evaluation_seconds,learning_rate=a.learning_rate,policy_std=a.policy_std,input_files=inputs,randomization=randomization)
     except (ValueError,OSError,KeyError) as exc:p.exit(2,f'robust swing learning: {exc}\n')
     return 0
 

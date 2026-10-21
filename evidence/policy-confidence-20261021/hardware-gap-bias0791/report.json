@@ -1,0 +1,4376 @@
+{
+  "actors_unchanged": true,
+  "completed": true,
+  "deployable": false,
+  "episodes": [
+    {
+      "actor": "centered",
+      "case": "true_upright_zero_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.012146044777179375,
+        "theta": 0.0015717009940034343,
+        "time_ns": 5003000000,
+        "v": -0.008919252786035883,
+        "x": -0.0021971849569102676
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0015339801862847655,
+            0.9999988234517019,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.17392274737358093,
+          "fault": null,
+          "observed_omega_rad_s": -0.000453097524955265,
+          "observed_theta_rad": 0.0015339807878856412,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.009360491455981997,
+          "true_omega_rad_s": -0.016098590075458302,
+          "true_theta_rad": 0.0017146986215828385,
+          "x_m": -0.0021075566446913776
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.17578125,
+        "first1s_peak_abs_observed_omega_rad_s": 0.0385609574536519,
+        "first1s_peak_abs_raw_command_m_s2": 0.27515802218397584,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.12389110810175978,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.087890625,
+            "raw_command_rms_m_s2": 0.0821885960787501,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.17578125
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.10379622642648041,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.08597762793935845,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.263671875,
+        "peak_abs_x_m": 0.00460104195151664,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.14860478043556213,
+            "fault": null,
+            "observed_omega_rad_s": 0.02425031359452129,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.14949557111279668,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.00593251899740078,
+            "true_theta_rad": 0.0004778554806158112,
+            "x_m": -0.00020386586029082516
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.25595611333847046,
+            "fault": null,
+            "observed_omega_rad_s": 0.023666090527413666,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.15874845487559355,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.011031096198153378,
+            "true_theta_rad": 0.0001648391722119773,
+            "x_m": -0.00020945117967110052
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.13718204200267792,
+            "fault": null,
+            "observed_omega_rad_s": -0.009469177825496906,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.12168216345948826,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.007894711000020512,
+            "true_theta_rad": 1.3387225854106809e-05,
+            "x_m": -0.00020393470082897552
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.06470654904842377,
+            "fault": null,
+            "observed_omega_rad_s": -0.01000083831966121,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.032051062818588286,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.0008383177154016548,
+            "true_theta_rad": 0.000130683378076883,
+            "x_m": -0.0002573252305900656
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": 0.00694088451564312,
+            "fault": null,
+            "observed_omega_rad_s": 0.005890450986776073,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.10207850610576819,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.0018519667005019577,
+            "true_theta_rad": 0.0003455583919019147,
+            "x_m": -0.00033748107712995004
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.1435023844242096,
+            "fault": null,
+            "observed_omega_rad_s": -0.013311689391951619,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.011275891475837681,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.0011074064248277394,
+            "true_theta_rad": -0.00039793346023580454,
+            "x_m": -8.689156584581021e-05
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": 0.026908820495009422,
+            "fault": null,
+            "observed_omega_rad_s": -0.0001845423777910196,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0026150798715458314,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.009136905390791409,
+            "true_theta_rad": -8.359696752278952e-05,
+            "x_m": 3.821095196903142e-05
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.07433953881263733,
+            "fault": null,
+            "observed_omega_rad_s": 0.011016574358289384,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.12401448470041813,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.007031730372823627,
+            "true_theta_rad": 0.00010471050144276197,
+            "x_m": 2.8525517060658343e-05
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": 0.017444318160414696,
+            "fault": null,
+            "observed_omega_rad_s": -0.014732946729120113,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.026219988497313173,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.0010484868902755258,
+            "true_theta_rad": -0.0003745422834604189,
+            "x_m": 0.000260913222423061
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": 0.02122887596487999,
+            "fault": null,
+            "observed_omega_rad_s": 0.014255325965978616,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.15325173720435475,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.003159469515032444,
+            "true_theta_rad": -0.00047885339447490153,
+            "x_m": 0.0005610930092961125
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": 0.0334877111017704,
+            "fault": null,
+            "observed_omega_rad_s": 0.010935575846954256,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.03406822392261312,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.0032720140170613824,
+            "true_theta_rad": -0.000853898100171083,
+            "x_m": 0.0010172986674632488
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.0346389003098011,
+            "fault": null,
+            "observed_omega_rad_s": -0.0035985175372348684,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09622847656133747,
+            "requested_s": 1.36,
+            "true_omega_rad_s": -0.001902696088298185,
+            "true_theta_rad": -0.0004665545669829443,
+            "x_m": 0.0013218941204992732
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.11886213719844818,
+            "fault": null,
+            "observed_omega_rad_s": -0.008908352847390473,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.05628735311332478,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.009725374237137105,
+            "true_theta_rad": 0.00016352453304767578,
+            "x_m": -0.000654075774434876
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 0.036710597574710846,
+            "fault": null,
+            "observed_omega_rad_s": -0.011930082356257955,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09047938741704167,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -0.004443597511027212,
+            "true_theta_rad": -0.0003416612898465596,
+            "x_m": -0.002180832778946689
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.050913143903017044,
+            "fault": null,
+            "observed_omega_rad_s": 0.005987679069960637,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.048398641384100966,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.01276508131250424,
+            "true_theta_rad": -0.0011768908067611055,
+            "x_m": 0.004600389268349897
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.17392274737358093,
+            "fault": null,
+            "observed_omega_rad_s": -0.000453097524955265,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.009360491455981997,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.016098590075458302,
+            "true_theta_rad": 0.0017146986215828385,
+            "x_m": -0.0021075566446913776
+          }
+        ]
+      },
+      "trace_path": "traces/centered-true_upright_zero_bias-94000.jsonl",
+      "trace_sha256": "b863ea1a7c978ff000dbbf993d7fb801dc157216923912eecc8c555685368d98"
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_zero_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.007893479622663832,
+        "theta": 7.888508746348116e-05,
+        "time_ns": 5003000000,
+        "v": 0.0004423168263674569,
+        "x": -0.0005936291398192324
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0015339801862847655,
+            0.9999988234517019,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.11446531116962433,
+          "fault": null,
+          "observed_omega_rad_s": -0.0005499945482409401,
+          "observed_theta_rad": 0.0,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.00583773848386376,
+          "true_omega_rad_s": -0.009900681010761933,
+          "true_theta_rad": 0.00016924109473344173,
+          "x_m": -0.0005977896098497794
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.17578125,
+        "first1s_peak_abs_observed_omega_rad_s": 0.0385609574536519,
+        "first1s_peak_abs_raw_command_m_s2": 0.19387780891718004,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.08654307766246819,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.061240124021547125,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.06639916085661966,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.05784750301897039,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.17578125,
+        "peak_abs_x_m": 0.003442059863633599,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.11371085047721863,
+            "fault": null,
+            "observed_omega_rad_s": 0.024990679660097194,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.12081107621480479,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.005661643567811679,
+            "true_theta_rad": 0.0003170598869187588,
+            "x_m": -0.00014435789913311607
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.17262667417526245,
+            "fault": null,
+            "observed_omega_rad_s": 0.023818564966491984,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.09858969783664169,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.007820763122964288,
+            "true_theta_rad": 0.0001704774234796495,
+            "x_m": -0.0001617807696433738
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.08949976414442062,
+            "fault": null,
+            "observed_omega_rad_s": -0.004135859172274705,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.07756370979280398,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.005099084481005103,
+            "true_theta_rad": 3.211392209868004e-05,
+            "x_m": -0.000169028891646536
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.037407658994197845,
+            "fault": null,
+            "observed_omega_rad_s": -0.008876808078204172,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.016282437232246302,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.00016697554347081315,
+            "true_theta_rad": 6.332353406613483e-05,
+            "x_m": -0.00019094802139606334
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.0241764634847641,
+            "fault": null,
+            "observed_omega_rad_s": -0.0006051297651738503,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.005958843871536846,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.005719531514419718,
+            "true_theta_rad": 0.0002536469850769827,
+            "x_m": -0.00023598384970589564
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.10116485506296158,
+            "fault": null,
+            "observed_omega_rad_s": -0.01403360497014294,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.032897210670968305,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.0006253654153939422,
+            "true_theta_rad": -0.00012966182090589872,
+            "x_m": -0.00015738122217054558
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": 0.006172534544020891,
+            "fault": null,
+            "observed_omega_rad_s": 0.0006991028674781024,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.06313080301806602,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.004762652598772158,
+            "true_theta_rad": 8.287540782827288e-05,
+            "x_m": -0.00011297155181889062
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.05434895679354668,
+            "fault": null,
+            "observed_omega_rad_s": 0.006857472557550187,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07270557007509511,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.0028602489771420063,
+            "true_theta_rad": 0.0001225994578738452,
+            "x_m": -0.00011111421243706832
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.0022133488673716784,
+            "fault": null,
+            "observed_omega_rad_s": -0.01240488522978009,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.02417681144575917,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.002815368495506103,
+            "true_theta_rad": -0.00016516142747478093,
+            "x_m": 5.403304070164293e-05
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.0002581367443781346,
+            "fault": null,
+            "observed_omega_rad_s": 0.0074350608755184185,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.08089439001843324,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.0010576841616334392,
+            "true_theta_rad": -0.0002104144582178802,
+            "x_m": 0.00022043463852081718
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": 0.015831002965569496,
+            "fault": null,
+            "observed_omega_rad_s": 0.015221228885277497,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.03631025712971477,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.0013418943024742778,
+            "true_theta_rad": -0.00029011042146793005,
+            "x_m": 0.0004570367570817448
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.008542660623788834,
+            "fault": null,
+            "observed_omega_rad_s": -0.005670960533422092,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.06999649365751655,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.0018765466934270616,
+            "true_theta_rad": -0.0004778352452435352,
+            "x_m": 0.0009038576447977088
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.03750048577785492,
+            "fault": null,
+            "observed_omega_rad_s": -0.00014025045220353565,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0031812852462894097,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.005758221142474503,
+            "true_theta_rad": -0.0005213731632916443,
+            "x_m": 0.001007310389971773
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 0.0766974613070488,
+            "fault": null,
+            "observed_omega_rad_s": -0.016083602196702997,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09749431828548266,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -0.0014621202007149667,
+            "true_theta_rad": 0.00024173530555130686,
+            "x_m": -0.001967678430539307
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.022058991715312004,
+            "fault": null,
+            "observed_omega_rad_s": 0.006865117338433532,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.013186179000598515,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.0068251440043956705,
+            "true_theta_rad": -0.0001203409186396207,
+            "x_m": -0.0022686587292529755
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.11446531116962433,
+            "fault": null,
+            "observed_omega_rad_s": -0.0005499945482409401,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.00583773848386376,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.009900681010761933,
+            "true_theta_rad": 0.00016924109473344173,
+            "x_m": -0.0005977896098497794
+          }
+        ]
+      },
+      "trace_path": "traces/original47-true_upright_zero_bias-94000.jsonl",
+      "trace_sha256": "400fa1e6b5bbfb2db1f7cb986cf9b3abc9ad57d22d9c61ea9cc293b3eac548f3"
+    },
+    {
+      "actor": "centered",
+      "case": "true_upright_zero_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.003623430845709747,
+        "theta": 0.0006011335407806536,
+        "time_ns": 5003000000,
+        "v": -0.0030001668213446215,
+        "x": -0.0007197370067411884
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": -0.026910627260804176,
+          "fault": null,
+          "observed_omega_rad_s": -0.00861016890536167,
+          "observed_theta_rad": 0.0015339807878856412,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.042556589740525244,
+          "true_omega_rad_s": -0.0027477844311223306,
+          "true_theta_rad": 0.0006317558784885302,
+          "x_m": -0.0006878202919178037
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.17578125,
+        "first1s_peak_abs_observed_omega_rad_s": 0.028934752036361176,
+        "first1s_peak_abs_raw_command_m_s2": 0.2714033911444645,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.11707163929132508,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.087890625,
+            "raw_command_rms_m_s2": 0.08677039868102446,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.17578125
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.087890625,
+            "raw_command_rms_m_s2": 0.0863551289039359,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.17578125
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.09615415175764827,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.17578125,
+        "peak_abs_x_m": 0.0035109542352736085,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": -0.1372775286436081,
+            "fault": null,
+            "observed_omega_rad_s": -0.004412944639791934,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.007081272441286559,
+            "requested_s": 0.1,
+            "true_omega_rad_s": 0.0021429707540183943,
+            "true_theta_rad": -0.0004777725672642422,
+            "x_m": 0.0001800784724757945
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": 0.01127646304666996,
+            "fault": null,
+            "observed_omega_rad_s": 0.006759402691041549,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.0965562743359454,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.009730272055861694,
+            "true_theta_rad": 0.0001057586980801228,
+            "x_m": 0.00021371814893109288
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.14726877212524414,
+            "fault": null,
+            "observed_omega_rad_s": -0.008884042414375834,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07132983245380242,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.004471827675442687,
+            "true_theta_rad": -0.00013431448352771585,
+            "x_m": 0.00019901043874403227
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.08063049614429474,
+            "fault": null,
+            "observed_omega_rad_s": 0.0064995830020226865,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.11892184321511702,
+            "requested_s": 0.4,
+            "true_omega_rad_s": 0.002202838607977339,
+            "true_theta_rad": -0.00021459463135238162,
+            "x_m": 0.00022987428539799493
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.01143604051321745,
+            "fault": null,
+            "observed_omega_rad_s": 0.028934752036361176,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.151872751264225,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.008348572100294688,
+            "true_theta_rad": 0.00042841650178987315,
+            "x_m": 6.961835176294834e-05
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": 0.10927136242389679,
+            "fault": null,
+            "observed_omega_rad_s": 0.0011624948815445158,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.010441983021510295,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.005787139377773989,
+            "true_theta_rad": 0.00036994633299340164,
+            "x_m": -0.00018364600082258374
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": 0.001273508882150054,
+            "fault": null,
+            "observed_omega_rad_s": -0.000245641676702121,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0020212081398730776,
+            "requested_s": 0.67,
+            "true_omega_rad_s": -0.0019324650187731468,
+            "true_theta_rad": 4.9540203477868605e-05,
+            "x_m": -0.0002041483986969844
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.11900650709867477,
+            "fault": null,
+            "observed_omega_rad_s": -0.0005848182891514371,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.09209777167379248,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.0029150717619208346,
+            "true_theta_rad": 5.635664144364993e-06,
+            "x_m": -0.00020239865398724997
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": 0.08759129047393799,
+            "fault": null,
+            "observed_omega_rad_s": -0.010524659100464151,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.04633824375815761,
+            "requested_s": 0.8,
+            "true_omega_rad_s": -0.0033939804392818713,
+            "true_theta_rad": 0.0003886782151842592,
+            "x_m": -0.00037848750697731305
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": 0.00707620196044445,
+            "fault": null,
+            "observed_omega_rad_s": -0.017729593476817584,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.14598918547552944,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.0031964194532051126,
+            "true_theta_rad": -0.00010640639633032243,
+            "x_m": -0.0003372367554322357
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.14025181531906128,
+            "fault": null,
+            "observed_omega_rad_s": -0.024846159123610885,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.148454029878299,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.0008095592123391842,
+            "true_theta_rad": -0.0003708244810865704,
+            "x_m": -0.00022596185047204416
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.025309640914201736,
+            "fault": null,
+            "observed_omega_rad_s": -0.0013405188432610913,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.002237475499096658,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.0022896902317677483,
+            "true_theta_rad": -0.00041538491769169383,
+            "x_m": 0.0004505985288244748
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.04332096874713898,
+            "fault": null,
+            "observed_omega_rad_s": 0.014884441047898551,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.11279224074773615,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.0066800700611442726,
+            "true_theta_rad": 0.0004138392573059163,
+            "x_m": -0.000855300435162444
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": -0.05437333509325981,
+            "fault": null,
+            "observed_omega_rad_s": -0.013240622898258463,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.04593490948678536,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.0069217647687771,
+            "true_theta_rad": 0.00010445446584284446,
+            "x_m": -0.0032463982571066335
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.07916486263275146,
+            "fault": null,
+            "observed_omega_rad_s": -0.013832035201986715,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0959208819637018,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.0019541884840249056,
+            "true_theta_rad": -0.0008053551328566135,
+            "x_m": 0.00039758873725521206
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": -0.026910627260804176,
+            "fault": null,
+            "observed_omega_rad_s": -0.00861016890536167,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.042556589740525244,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.0027477844311223306,
+            "true_theta_rad": 0.0006317558784885302,
+            "x_m": -0.0006878202919178037
+          }
+        ]
+      },
+      "trace_path": "traces/centered-true_upright_zero_bias-94007.jsonl",
+      "trace_sha256": "cd168063ab073a651f956361ea94412838bbde765e649ce03b144467cd56c207"
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_zero_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": 0.00011880638525328599,
+        "theta": 0.00016973823363640884,
+        "time_ns": 5003000000,
+        "v": -0.0010392563576681903,
+        "x": -0.006020358012146807
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": -0.021532047539949417,
+          "fault": null,
+          "observed_omega_rad_s": -0.013035999968158215,
+          "observed_theta_rad": 0.0,
+          "rail_braking": false,
+          "raw_command_m_s2": -0.035621720553794936,
+          "true_omega_rad_s": -0.0025487529815596288,
+          "true_theta_rad": 0.00018020617775567433,
+          "x_m": -0.006011568426028513
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.17578125,
+        "first1s_peak_abs_observed_omega_rad_s": 0.030842255881899355,
+        "first1s_peak_abs_raw_command_m_s2": 0.1767423199297648,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.07988277923173084,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.087890625,
+            "raw_command_rms_m_s2": 0.05953514554716875,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.17578125
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.06459405001716088,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.06736929701864326,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.17578125,
+        "peak_abs_x_m": 0.006011568426028513,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": -0.10123542696237564,
+            "fault": null,
+            "observed_omega_rad_s": 0.002959706596630421,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.0022907684488811947,
+            "requested_s": 0.1,
+            "true_omega_rad_s": 0.002417331359044897,
+            "true_theta_rad": -0.0002992114727431147,
+            "x_m": 0.00011650940757040224
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.0013931888388469815,
+            "fault": null,
+            "observed_omega_rad_s": 0.00958583520657024,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07699515062162049,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.008495718394573186,
+            "true_theta_rad": 0.00024832344551098693,
+            "x_m": 7.272050491422765e-05
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.11036366969347,
+            "fault": null,
+            "observed_omega_rad_s": -0.013223121552784468,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.026806161247963645,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.0030948568157383822,
+            "true_theta_rad": -1.8508639903436496e-05,
+            "x_m": 2.6702368887890387e-05
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.028843998908996582,
+            "fault": null,
+            "observed_omega_rad_s": 0.005587524429670424,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07632919183980709,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.0016880623805707441,
+            "true_theta_rad": -2.3233860103546764e-05,
+            "x_m": 1.097854080684933e-05
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.002217093715444207,
+            "fault": null,
+            "observed_omega_rad_s": 0.030842255881899355,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.12134438534844348,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.008983840299176751,
+            "true_theta_rad": 0.00029598525169411365,
+            "x_m": -4.052990468050775e-05
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": 0.09494122117757797,
+            "fault": null,
+            "observed_omega_rad_s": 0.004611661444785532,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.012677953195811388,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.002222023277812721,
+            "true_theta_rad": 0.0003736753419033162,
+            "x_m": -0.00021702114755119557
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": 0.006749653723090887,
+            "fault": null,
+            "observed_omega_rad_s": 0.005193288796896605,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.010913278155275314,
+            "requested_s": 0.67,
+            "true_omega_rad_s": -0.0015562000603112842,
+            "true_theta_rad": 0.0001405531836649728,
+            "x_m": -0.0002444084700385978
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.07728472352027893,
+            "fault": null,
+            "observed_omega_rad_s": -0.002169158317415351,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.052343247808116874,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.0011779356181086794,
+            "true_theta_rad": 8.795579998303455e-05,
+            "x_m": -0.00024123841733037768
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": 0.06331360340118408,
+            "fault": null,
+            "observed_omega_rad_s": -0.011064648680347833,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.02064660933208595,
+            "requested_s": 0.8,
+            "true_omega_rad_s": -0.003420169493863584,
+            "true_theta_rad": 0.00030197010389904376,
+            "x_m": -0.00033907958808629033
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.0015462167793884873,
+            "fault": null,
+            "observed_omega_rad_s": -0.016555211804126856,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0955601635365619,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.0022240732399212548,
+            "true_theta_rad": -0.00013363325768794848,
+            "x_m": -0.00023114219979400853
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.10351411998271942,
+            "fault": null,
+            "observed_omega_rad_s": -0.02483956696765241,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.11641336391166852,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.0007378133852566804,
+            "true_theta_rad": -0.00037108291494715743,
+            "x_m": -5.367887632682957e-05
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.0474747009575367,
+            "fault": null,
+            "observed_omega_rad_s": 0.001074211101816047,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.005990361258938204,
+            "requested_s": 1.36,
+            "true_omega_rad_s": -0.00022641293138138437,
+            "true_theta_rad": -0.0001668439611667873,
+            "x_m": 0.0005572918608247532
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.00872291810810566,
+            "fault": null,
+            "observed_omega_rad_s": 0.018254589120862513,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.09661776756952337,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.0022574379463398573,
+            "true_theta_rad": 8.947768229006482e-05,
+            "x_m": 0.0001230051880041229
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": -0.05912986770272255,
+            "fault": null,
+            "observed_omega_rad_s": -0.017753894082517922,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.10413487800893934,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.006153770931204281,
+            "true_theta_rad": -0.000506582350451921,
+            "x_m": -0.0014514460343019815
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.003631018567830324,
+            "fault": null,
+            "observed_omega_rad_s": -0.009598662510103682,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.025175838181149338,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.0015925083951902168,
+            "true_theta_rad": -0.00028360094042246517,
+            "x_m": -0.00309090028740544
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": -0.021532047539949417,
+            "fault": null,
+            "observed_omega_rad_s": -0.013035999968158215,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.035621720553794936,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.0025487529815596288,
+            "true_theta_rad": 0.00018020617775567433,
+            "x_m": -0.006011568426028513
+          }
+        ]
+      },
+      "trace_path": "traces/original47-true_upright_zero_bias-94007.jsonl",
+      "trace_sha256": "508ee54f79f04b6ff8c33b340dc99e6e2c5b9427a8b482ce74b30b0648b52aa4"
+    },
+    {
+      "actor": "centered",
+      "case": "true_upright_plus9counts_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.791015625,
+      "encoder_bias_rad": 0.01380582709097077,
+      "final_ground_truth": {
+        "omega": -0.02159733859852583,
+        "theta": 0.0026074610955649953,
+        "time_ns": 5003000000,
+        "v": 0.014558710198384176,
+        "x": -0.16322493583657458
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0153392062849881,
+            0.9998823474542126,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.15557773411273956,
+          "fault": null,
+          "observed_omega_rad_s": -0.01114347371400559,
+          "observed_theta_rad": 0.01687378866674205,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.12382634033546724,
+          "true_omega_rad_s": -0.02205116079190922,
+          "true_theta_rad": 0.0028261324585580282,
+          "x_m": -0.1633649507532656
+        },
+        "first1s_peak_abs_observed_angle_deg": 1.40625,
+        "first1s_peak_abs_observed_omega_rad_s": 0.23311851146865026,
+        "first1s_peak_abs_raw_command_m_s2": 0.9361040536563358,
+        "first_abs_x_over012m_s": 1.24,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.5758044131532464,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.494140625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.3445890843396643,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.615234375
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.9667968749999999,
+            "raw_command_rms_m_s2": 0.22390221826235487,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.6152343749999999
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 1.40625,
+            "raw_command_rms_m_s2": 0.1077455685435778,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.4394531250000001
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 1.9335937499999998,
+        "peak_abs_x_m": 0.1832356627219406,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.11879755556583405,
+            "fault": null,
+            "observed_omega_rad_s": -0.16991461624524734,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.026401163662897714,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.2213202664662257,
+            "true_theta_rad": -0.01444337088665717,
+            "x_m": 0.003220354108273984
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.7193682789802551,
+            "fault": null,
+            "observed_omega_rad_s": 0.013847354738214322,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.2907446236629201,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.06606459268960434,
+            "true_theta_rad": -0.02162368307102522,
+            "x_m": 0.006183871561173347
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.32213154435157776,
+            "fault": null,
+            "observed_omega_rad_s": 0.03530144277256189,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.37115630420433315,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.027707941764646228,
+            "true_theta_rad": -0.017265669025937274,
+            "x_m": 0.004220074035312978
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.23480293154716492,
+            "fault": null,
+            "observed_omega_rad_s": 0.03377729781093946,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.35707513924395334,
+            "requested_s": 0.4,
+            "true_omega_rad_s": 0.041324734650401526,
+            "true_theta_rad": -0.01382118530397607,
+            "x_m": -0.0007837228647135268
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.2735874056816101,
+            "fault": null,
+            "observed_omega_rad_s": 0.07011176265624325,
+            "observed_theta_rad": 0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.17263274949006605,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.06480044505525377,
+            "true_theta_rad": -0.008145737159276632,
+            "x_m": -0.009306466237608361
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.40791627764701843,
+            "fault": null,
+            "observed_omega_rad_s": 0.019139657647090563,
+            "observed_theta_rad": 0.009203884727313847,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.31889133285173765,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.035354180156374565,
+            "true_theta_rad": -0.004335009297785398,
+            "x_m": -0.02034066924768316
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.1890423446893692,
+            "fault": null,
+            "observed_omega_rad_s": 0.05184604091796825,
+            "observed_theta_rad": 0.01380582709097077,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.14509420402137244,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.06367331774786447,
+            "true_theta_rad": -0.0007071240122987572,
+            "x_m": -0.02945829671382162
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.271579384803772,
+            "fault": null,
+            "observed_omega_rad_s": 0.05923304940261633,
+            "observed_theta_rad": 0.015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09927728005869495,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.06500936528569697,
+            "true_theta_rad": 0.00113865959972691,
+            "x_m": -0.03375343365212159
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.12423241883516312,
+            "fault": null,
+            "observed_omega_rad_s": 0.026849426368217685,
+            "observed_theta_rad": 0.018407769454627694,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.16641134487475873,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.03661376980811476,
+            "true_theta_rad": 0.005123501449169063,
+            "x_m": -0.04882175866896288
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": 0.014873077161610126,
+            "fault": null,
+            "observed_omega_rad_s": 0.04402504357350451,
+            "observed_theta_rad": 0.023009711818284616,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.00534798956710492,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.03384840092998054,
+            "true_theta_rad": 0.008629062064034765,
+            "x_m": -0.0648732762414094
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.042796988040208817,
+            "fault": null,
+            "observed_omega_rad_s": 0.0433541738940252,
+            "observed_theta_rad": 0.02454369260617026,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.023893145598439344,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.033151341784542494,
+            "true_theta_rad": 0.011487654586199455,
+            "x_m": -0.08141875029558626
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.20995287597179413,
+            "fault": null,
+            "observed_omega_rad_s": 0.0053429962615404065,
+            "observed_theta_rad": 0.03067961575771283,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.10313726303721268,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.0026665800477219006,
+            "true_theta_rad": 0.01752293360175809,
+            "x_m": -0.13866224827779203
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": 0.1890839785337448,
+            "fault": null,
+            "observed_omega_rad_s": -0.040655148085825196,
+            "observed_theta_rad": 0.021475731030398983,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.1417629224678737,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.022589226206718476,
+            "true_theta_rad": 0.007910075979833599,
+            "x_m": -0.1831661964633586
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 0.04503580927848816,
+            "fault": null,
+            "observed_omega_rad_s": -0.008417139624775555,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.2078353230168712,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -0.007616658349042737,
+            "true_theta_rad": -0.009495585876870013,
+            "x_m": -0.12574750741543458
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.10389842092990875,
+            "fault": null,
+            "observed_omega_rad_s": 0.016293228991337692,
+            "observed_theta_rad": 0.01687378866674205,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.08208680007772569,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.02088829756975499,
+            "true_theta_rad": 0.004048757472993565,
+            "x_m": -0.13518178072668058
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.15557773411273956,
+            "fault": null,
+            "observed_omega_rad_s": -0.01114347371400559,
+            "observed_theta_rad": 0.01687378866674205,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.12382634033546724,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.02205116079190922,
+            "true_theta_rad": 0.0028261324585580282,
+            "x_m": -0.1633649507532656
+          }
+        ]
+      },
+      "trace_path": "traces/centered-true_upright_plus9counts_bias-94000.jsonl",
+      "trace_sha256": "1d6f13f080d54afe27447a3f695388d00e01a86bfdc9ba2e001b38bdaeb61b11"
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_plus9counts_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.791015625,
+      "encoder_bias_rad": 0.01380582709097077,
+      "final_ground_truth": {
+        "omega": 0.2483295487201424,
+        "theta": -0.24964524270621452,
+        "time_ns": 5003000000,
+        "v": -1.2697656184132204,
+        "x": -0.2172701906397848
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0153392062849881,
+            0.9998823474542126,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 5.551809310913086,
+          "fault": null,
+          "observed_omega_rad_s": 1.8487684577437389,
+          "observed_theta_rad": -0.2439029452738169,
+          "rail_braking": true,
+          "raw_command_m_s2": -6.8206245852423,
+          "true_omega_rad_s": 0.8024464324142837,
+          "true_theta_rad": -0.25469461432540463,
+          "x_m": -0.2042732030051903
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.87890625,
+        "first1s_peak_abs_observed_omega_rad_s": 0.15200344116163889,
+        "first1s_peak_abs_raw_command_m_s2": 0.6225469384461082,
+        "first_abs_x_over012m_s": 1.54,
+        "first_observed_abs_angle_over5deg_s": 2.34,
+        "first_rail_braking_s": 2.23,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.305163845407406,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.142578125
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.1798578105495587,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.21720315199339038,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.22074721238434178,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": 2.33,
+        "peak_abs_observed_angle_deg": 178.06640625,
+        "peak_abs_x_m": 0.2940748566742958,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.21239690482616425,
+            "fault": null,
+            "observed_omega_rad_s": -0.09872582466372051,
+            "observed_theta_rad": 0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.1323143963903786,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.13477286983213585,
+            "true_theta_rad": -0.009047266815120726,
+            "x_m": 0.0023159265389144416
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.2944377660751343,
+            "fault": null,
+            "observed_omega_rad_s": -0.024432131173491946,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.07524557512477133,
+            "requested_s": 0.2,
+            "true_omega_rad_s": -0.008246195704488448,
+            "true_theta_rad": -0.016274884017899924,
+            "x_m": 0.005884120660839603
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.19670501351356506,
+            "fault": null,
+            "observed_omega_rad_s": -0.014596416001716855,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.19346447673177866,
+            "requested_s": 0.3,
+            "true_omega_rad_s": -0.00539810889048086,
+            "true_theta_rad": -0.017342080774972842,
+            "x_m": 0.007991216192077853
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.07802849262952805,
+            "fault": null,
+            "observed_omega_rad_s": -0.01702100909334074,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.21579501859450306,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.008986434563004665,
+            "true_theta_rad": -0.01807736644453227,
+            "x_m": 0.008809652749048562
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.21474900841712952,
+            "fault": null,
+            "observed_omega_rad_s": 0.01623081869380418,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.13459150464558794,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.007983132772502484,
+            "true_theta_rad": -0.01774478913769698,
+            "x_m": 0.007871894968464997
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.28700366616249084,
+            "fault": null,
+            "observed_omega_rad_s": -0.00890620139576808,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.22748856299327222,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.005530524750841831,
+            "true_theta_rad": -0.017710586707949134,
+            "x_m": 0.005083391498787369
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.21217115223407745,
+            "fault": null,
+            "observed_omega_rad_s": 0.0066307369196042226,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.22846992475848193,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.01734624823162735,
+            "true_theta_rad": -0.016849773933053248,
+            "x_m": 0.0018447184417499716
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.2841477394104004,
+            "fault": null,
+            "observed_omega_rad_s": 0.016423558639511424,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.1658493683680949,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.017769476386313404,
+            "true_theta_rad": -0.016360201816336892,
+            "x_m": 7.085903256764359e-05
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.2273998260498047,
+            "fault": null,
+            "observed_omega_rad_s": -0.0028944999313405806,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.24893514112416873,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.014130705294846802,
+            "true_theta_rad": -0.015382761799413568,
+            "x_m": -0.007146037110587522
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.17904537916183472,
+            "fault": null,
+            "observed_omega_rad_s": 0.02356141360005002,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.11638332447424429,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.012456333889754251,
+            "true_theta_rad": -0.013945069288335183,
+            "x_m": -0.016552247525475825
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.17604988813400269,
+            "fault": null,
+            "observed_omega_rad_s": 0.031171615364787082,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.21436346368798104,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.019589225490092895,
+            "true_theta_rad": -0.01260164307425032,
+            "x_m": -0.027938668341183925
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.0933990553021431,
+            "fault": null,
+            "observed_omega_rad_s": 0.017522621321841993,
+            "observed_theta_rad": 0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.16806574945944724,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.015315950873109488,
+            "true_theta_rad": -0.006880925494626749,
+            "x_m": -0.08500358104333819
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.13511617481708527,
+            "fault": null,
+            "observed_omega_rad_s": -0.0021677492389730233,
+            "observed_theta_rad": 0.015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.11178351928933786,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.01985054937770803,
+            "true_theta_rad": 0.0019847216209184794,
+            "x_m": -0.22726796824255194
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 6.7805256843566895,
+            "fault": null,
+            "observed_omega_rad_s": -7.104902148248453,
+            "observed_theta_rad": 0.6580777580029401,
+            "rail_braking": false,
+            "raw_command_m_s2": 7.009073775177183,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -6.688197211329161,
+            "true_theta_rad": 0.6257435287940452,
+            "x_m": -0.2495227775412884
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -13.550676345825195,
+            "fault": null,
+            "observed_omega_rad_s": -6.010988872845552,
+            "observed_theta_rad": -0.47860200582032003,
+            "rail_braking": true,
+            "raw_command_m_s2": -13.577036909699055,
+            "requested_s": 4.0,
+            "true_omega_rad_s": -4.500609151269269,
+            "true_theta_rad": -0.5060253137546371,
+            "x_m": -0.19872617892115885
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 5.551809310913086,
+            "fault": null,
+            "observed_omega_rad_s": 1.8487684577437389,
+            "observed_theta_rad": -0.2439029452738169,
+            "rail_braking": true,
+            "raw_command_m_s2": -6.8206245852423,
+            "requested_s": 5.0,
+            "true_omega_rad_s": 0.8024464324142837,
+            "true_theta_rad": -0.25469461432540463,
+            "x_m": -0.2042732030051903
+          }
+        ]
+      },
+      "trace_path": "traces/original47-true_upright_plus9counts_bias-94000.jsonl",
+      "trace_sha256": "6670bdaec013e1db8b0730ae69b38f9e8526ff04f0eb3ba0b667667fc33bdbb5"
+    },
+    {
+      "actor": "centered",
+      "case": "true_upright_plus9counts_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.791015625,
+      "encoder_bias_rad": 0.01380582709097077,
+      "final_ground_truth": {
+        "omega": -0.015802173317731823,
+        "theta": 0.0016434760020106079,
+        "time_ns": 5003000000,
+        "v": 0.02416963930075915,
+        "x": -0.1646432885054996
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.01380538852806039,
+            0.9999047010828529,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.07998766005039215,
+          "fault": null,
+          "observed_omega_rad_s": -0.02784396150162047,
+          "observed_theta_rad": 0.015339807878856412,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.04681018791469942,
+          "true_omega_rad_s": -0.019268761949455194,
+          "true_theta_rad": 0.0018170815174392513,
+          "x_m": -0.16488287844007424
+        },
+        "first1s_peak_abs_observed_angle_deg": 1.494140625,
+        "first1s_peak_abs_observed_omega_rad_s": 0.22434863870861207,
+        "first1s_peak_abs_raw_command_m_s2": 1.0524752630622394,
+        "first_abs_x_over012m_s": 1.24,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.6321537527769573,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.58203125
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.263671875,
+            "raw_command_rms_m_s2": 0.32724715105305185,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.52734375
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.20635633710652113,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.615234375
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 1.494140625,
+            "raw_command_rms_m_s2": 0.12075914116310658,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.5273437500000002
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 1.9335937499999998,
+        "peak_abs_x_m": 0.1830377953500707,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": -0.2223571240901947,
+            "fault": null,
+            "observed_omega_rad_s": -0.2082313477484697,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.30759819396571475,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.22687761607376308,
+            "true_theta_rad": -0.01649396321298175,
+            "x_m": 0.0035422638302296423
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.4795931577682495,
+            "fault": null,
+            "observed_omega_rad_s": 0.031622755136742835,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.3323766600839293,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.09203060578871781,
+            "true_theta_rad": -0.02033873313766224,
+            "x_m": 0.005631280483648184
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.4749267101287842,
+            "fault": null,
+            "observed_omega_rad_s": 0.009121437498726409,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.28645453063356763,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.025821100189594073,
+            "true_theta_rad": -0.016194507964592843,
+            "x_m": 0.0030743052087351735
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.3199564516544342,
+            "fault": null,
+            "observed_omega_rad_s": 0.03560584687316162,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.26580784876509217,
+            "requested_s": 0.4,
+            "true_omega_rad_s": 0.03544648176165422,
+            "true_theta_rad": -0.013215024532302588,
+            "x_m": -0.0021244611214175707
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.3205893039703369,
+            "fault": null,
+            "observed_omega_rad_s": 0.07009740334490529,
+            "observed_theta_rad": 0.007669903939428206,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09382878723772042,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.07162769892027596,
+            "true_theta_rad": -0.007919201861748893,
+            "x_m": -0.01062601057855038
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.11799875646829605,
+            "fault": null,
+            "observed_omega_rad_s": 0.04503961616551348,
+            "observed_theta_rad": 0.010737865515199488,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.18404979318568707,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.03188129729025031,
+            "true_theta_rad": -0.0028480659212284875,
+            "x_m": -0.02199223962564763
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.22400738298892975,
+            "fault": null,
+            "observed_omega_rad_s": 0.04274715693031263,
+            "observed_theta_rad": 0.01380582709097077,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.14779846640132888,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.04146452469700697,
+            "true_theta_rad": -0.0004241879758212461,
+            "x_m": -0.03097537663432208
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.3152194619178772,
+            "fault": null,
+            "observed_omega_rad_s": 0.03569353120500277,
+            "observed_theta_rad": 0.015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.13592290600214918,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.04468682919241628,
+            "true_theta_rad": 0.000774886202291817,
+            "x_m": -0.035113464866176204
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": 0.0052674319595098495,
+            "fault": null,
+            "observed_omega_rad_s": 0.03658056099330814,
+            "observed_theta_rad": 0.019941750242513337,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0558558414772225,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.03686234797249431,
+            "true_theta_rad": 0.005471740929628021,
+            "x_m": -0.05012505787717702
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.09261463582515717,
+            "fault": null,
+            "observed_omega_rad_s": 0.008674821804532152,
+            "observed_theta_rad": 0.019941750242513337,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.2776179519484792,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.042235601158483536,
+            "true_theta_rad": 0.00823287409590413,
+            "x_m": -0.06587266754750631
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.05741804465651512,
+            "fault": null,
+            "observed_omega_rad_s": 0.013977283705047982,
+            "observed_theta_rad": 0.02454369260617026,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09528974672535595,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.026620955631068303,
+            "true_theta_rad": 0.01149376994793568,
+            "x_m": -0.08235963954832491
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.1724620759487152,
+            "fault": null,
+            "observed_omega_rad_s": -0.0024807201026636545,
+            "observed_theta_rad": 0.03067961575771283,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07243416039804985,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.005063892766055013,
+            "true_theta_rad": 0.017820529206123176,
+            "x_m": -0.13876547644440498
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": 0.2695232033729553,
+            "fault": null,
+            "observed_omega_rad_s": -0.010296674130083415,
+            "observed_theta_rad": 0.023009711818284616,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.349626759290787,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.03836381507553852,
+            "true_theta_rad": 0.008071322056634394,
+            "x_m": -0.18290268121371778
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": -0.11268085986375809,
+            "fault": null,
+            "observed_omega_rad_s": -0.014100259404392308,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.22450626677473157,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.008339369244651583,
+            "true_theta_rad": -0.010273414574479296,
+            "x_m": -0.1251473372512554
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.014491032809019089,
+            "fault": null,
+            "observed_omega_rad_s": 0.0013718670747529691,
+            "observed_theta_rad": 0.018407769454627694,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0504230913412871,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.012730652974182554,
+            "true_theta_rad": 0.00449478388534274,
+            "x_m": -0.1391387381618039
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.07998766005039215,
+            "fault": null,
+            "observed_omega_rad_s": -0.02784396150162047,
+            "observed_theta_rad": 0.015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.04681018791469942,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.019268761949455194,
+            "true_theta_rad": 0.0018170815174392513,
+            "x_m": -0.16488287844007424
+          }
+        ]
+      },
+      "trace_path": "traces/centered-true_upright_plus9counts_bias-94007.jsonl",
+      "trace_sha256": "08ef7981e780d5c2fd53a4576c89d84d2d1c19a6212fff04283ff47439b2cfc5"
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_plus9counts_bias",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.791015625,
+      "encoder_bias_rad": 0.01380582709097077,
+      "final_ground_truth": {
+        "omega": 3.12449806933173,
+        "theta": -0.105475226556954,
+        "time_ns": 5003000000,
+        "v": -1.4932571443220373,
+        "x": -0.15691128431968157
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.01380538852806039,
+            0.9999047010828529,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.0,
+          "theta": 0.0,
+          "time_ns": 3000000,
+          "v": 0.0,
+          "x": 0.0
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.0,
+            "theta": 0.0,
+            "time_ns": 3000000,
+            "v": 0.0,
+            "x": 0.0
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": -0.17586520314216614,
+          "fault": null,
+          "observed_omega_rad_s": 3.2250215694383533,
+          "observed_theta_rad": -0.13345632854605077,
+          "rail_braking": false,
+          "raw_command_m_s2": -0.640969450612465,
+          "true_omega_rad_s": 3.2562274254009163,
+          "true_theta_rad": -0.13737369932174132,
+          "x_m": -0.1419371268120629
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+        "first1s_peak_abs_observed_omega_rad_s": 0.1460748530936724,
+        "first1s_peak_abs_raw_command_m_s2": 0.7500063332764647,
+        "first_abs_x_over012m_s": 1.52,
+        "first_observed_abs_angle_over5deg_s": 2.33,
+        "first_rail_braking_s": 2.21,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.9667968749999999,
+            "raw_command_rms_m_s2": 0.33638318827870894,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.2304687499999998
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.263671875,
+            "raw_command_rms_m_s2": 0.17685998762844057,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.17578125
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.2124842804470741,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.21145947679010466,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.3515625
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": 2.32,
+        "peak_abs_observed_angle_deg": 177.626953125,
+        "peak_abs_x_m": 0.29407479869892383,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": -0.008004180155694485,
+            "fault": null,
+            "observed_omega_rad_s": -0.12986359702356204,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.06890235636019017,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.1415255327662158,
+            "true_theta_rad": -0.01040049713345927,
+            "x_m": 0.002546764319743961
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.20126067101955414,
+            "fault": null,
+            "observed_omega_rad_s": -0.031495590875773104,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0982839394534603,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.0032593722135712427,
+            "true_theta_rad": -0.015976688583017203,
+            "x_m": 0.005683472905274477
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.23415420949459076,
+            "fault": null,
+            "observed_omega_rad_s": -0.02049773534490852,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09267245557599973,
+            "requested_s": 0.3,
+            "true_omega_rad_s": -0.007061435086246282,
+            "true_theta_rad": -0.01707243845159062,
+            "x_m": 0.007257761455647641
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.18836060166358948,
+            "fault": null,
+            "observed_omega_rad_s": -0.0013426716078162749,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.14042408331069378,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.001140420000733434,
+            "true_theta_rad": -0.017647076606535313,
+            "x_m": 0.007603954385764888
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.2631138563156128,
+            "fault": null,
+            "observed_omega_rad_s": 0.017459044978020803,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.08389532561117073,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.009616245267171778,
+            "true_theta_rad": -0.01731472145449601,
+            "x_m": 0.006155143202267573
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.18297810852527618,
+            "fault": null,
+            "observed_omega_rad_s": 0.003862314651591507,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.20987054253496498,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.007271319643836161,
+            "true_theta_rad": -0.01683072654701615,
+            "x_m": 0.002750652362294472
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.21079683303833008,
+            "fault": null,
+            "observed_omega_rad_s": 0.015250662717204717,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.217468648436303,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.008389740689681712,
+            "true_theta_rad": -0.01640600626833648,
+            "x_m": -0.0008066949478611642
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.22205063700675964,
+            "fault": null,
+            "observed_omega_rad_s": 0.002069580298310489,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.19604019895093577,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.00592966288960391,
+            "true_theta_rad": -0.0162031455163139,
+            "x_m": -0.002630593805469606
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.1469220668077469,
+            "fault": null,
+            "observed_omega_rad_s": 0.00033399516564951875,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.24604399679908465,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.008958002516351423,
+            "true_theta_rad": -0.014864569862851515,
+            "x_m": -0.010190052338399046
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.20183953642845154,
+            "fault": null,
+            "observed_omega_rad_s": -0.004205416150882353,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.31088626859475155,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.01919817542417674,
+            "true_theta_rad": -0.013629723090114544,
+            "x_m": -0.019836563661478547
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.29683762788772583,
+            "fault": null,
+            "observed_omega_rad_s": -0.0068407040387780775,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.30798294573701046,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.01617770771733768,
+            "true_theta_rad": -0.012328540967020801,
+            "x_m": -0.03155607932497572
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.13138246536254883,
+            "fault": null,
+            "observed_omega_rad_s": 0.00713695147220419,
+            "observed_theta_rad": 0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.19775085576945078,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.013555651056186276,
+            "true_theta_rad": -0.006741098580624963,
+            "x_m": -0.08880589067392806
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.009714290499687195,
+            "fault": null,
+            "observed_omega_rad_s": 0.026132908059257567,
+            "observed_theta_rad": 0.01687378866674205,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.01580000060211486,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.005833527719149598,
+            "true_theta_rad": 0.0025559593537496476,
+            "x_m": -0.23176437250675638
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 6.005521774291992,
+            "fault": null,
+            "observed_omega_rad_s": -6.9227499431328985,
+            "observed_theta_rad": 0.5599029875782591,
+            "rail_braking": false,
+            "raw_command_m_s2": 5.866662207062501,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -6.71709347857161,
+            "true_theta_rad": 0.5271040973888976,
+            "x_m": -0.23526601366540573
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -12.059734344482422,
+            "fault": null,
+            "observed_omega_rad_s": -5.334106456427929,
+            "observed_theta_rad": -0.5506991028509451,
+            "rail_braking": true,
+            "raw_command_m_s2": -15.705502695105885,
+            "requested_s": 4.0,
+            "true_omega_rad_s": -3.8641528718740026,
+            "true_theta_rad": -0.5758831169526171,
+            "x_m": -0.19111336216704322
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": -0.17586520314216614,
+            "fault": null,
+            "observed_omega_rad_s": 3.2250215694383533,
+            "observed_theta_rad": -0.13345632854605077,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.640969450612465,
+            "requested_s": 5.0,
+            "true_omega_rad_s": 3.2562274254009163,
+            "true_theta_rad": -0.13737369932174132,
+            "x_m": -0.1419371268120629
+          }
+        ]
+      },
+      "trace_path": "traces/original47-true_upright_plus9counts_bias-94007.jsonl",
+      "trace_sha256": "6ca8231d682be2617331fdca2bf9df43c94cb3ed98bd094f97cfa37bf3a51bbc"
+    },
+    {
+      "actor": "centered",
+      "case": "observed_angle_is_true_tilt",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.015140571518945293,
+        "theta": 0.0022161047083158704,
+        "time_ns": 5003000000,
+        "v": -0.0016559257646622941,
+        "x": -0.009440976967194026
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0153392062849881,
+            0.9998823474542126,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.002452830756574039,
+          "theta": 0.013810789232449291,
+          "time_ns": 3000000,
+          "v": -3.505824667004072e-21,
+          "x": -6.981828256966173e-24
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.01380583,
+          -3.536394e-07
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.002452830756574039,
+            "theta": 0.013810789232449291,
+            "time_ns": 3000000,
+            "v": -3.505824667004072e-21,
+            "x": -6.981828256966173e-24
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.14820460975170135,
+          "fault": null,
+          "observed_omega_rad_s": -0.0006453001925940836,
+          "observed_theta_rad": 0.0030679615757712823,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.10480175319414409,
+          "true_omega_rad_s": -0.014445375863534404,
+          "true_theta_rad": 0.0023656653057389653,
+          "x_m": -0.009419701630722109
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.87890625,
+        "first1s_peak_abs_observed_omega_rad_s": 0.2165849258261147,
+        "first1s_peak_abs_raw_command_m_s2": 0.9361040536563358,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.5062403080674374,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.494140625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.439453125,
+            "raw_command_rms_m_s2": 0.1331979122816059,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.11901047765335984,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.17578125,
+            "raw_command_rms_m_s2": 0.10875663906907833,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.17578125
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.87890625,
+        "peak_abs_x_m": 0.017687996769949758,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.3291471600532532,
+            "fault": null,
+            "observed_omega_rad_s": -0.14114169627151038,
+            "observed_theta_rad": 0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.31294235386012254,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.2011771616147756,
+            "true_theta_rad": 0.0015984588905434821,
+            "x_m": 0.0035357935315668545
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.5353899002075195,
+            "fault": null,
+            "observed_omega_rad_s": -0.009401628827829415,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.07769201831678996,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.03865821585898519,
+            "true_theta_rad": -0.007122487633171972,
+            "x_m": 0.009074177705109116
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.07429329305887222,
+            "fault": null,
+            "observed_omega_rad_s": 0.0012735593119557638,
+            "observed_theta_rad": -0.007669903939428206,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.18218325760909873,
+            "requested_s": 0.3,
+            "true_omega_rad_s": 0.00014019765445053207,
+            "true_theta_rad": -0.0058306548158593725,
+            "x_m": 0.012247828712921585
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.07349500805139542,
+            "fault": null,
+            "observed_omega_rad_s": -0.007794846340788462,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.14741473012139183,
+            "requested_s": 0.4,
+            "true_omega_rad_s": 0.0015121803046093416,
+            "true_theta_rad": -0.005827566378423719,
+            "x_m": 0.014964258787701827
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.054420679807662964,
+            "fault": null,
+            "observed_omega_rad_s": 0.01937889922336028,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.04999012903224077,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.012828694165781668,
+            "true_theta_rad": -0.004579779564533191,
+            "x_m": 0.016628557702212575
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.1310022473335266,
+            "fault": null,
+            "observed_omega_rad_s": -0.011738106088576393,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.16045118195462654,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.002478134090223025,
+            "true_theta_rad": -0.004353502131219374,
+            "x_m": 0.01754481323885448
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.028622902929782867,
+            "fault": null,
+            "observed_omega_rad_s": 0.01059353876135851,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.07708679610996778,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.01845390245495693,
+            "true_theta_rad": -0.0033020193446055106,
+            "x_m": 0.01763250983916476
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.16087421774864197,
+            "fault": null,
+            "observed_omega_rad_s": 0.019682833560521616,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.027845825296943627,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.016485677350319916,
+            "true_theta_rad": -0.002841511270318384,
+            "x_m": 0.017486699366650045
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.167617067694664,
+            "fault": null,
+            "observed_omega_rad_s": -0.007273381643920775,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.18146591272375653,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.013823037912802707,
+            "true_theta_rad": -0.002364347925083992,
+            "x_m": 0.016751354363652833
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.09560797363519669,
+            "fault": null,
+            "observed_omega_rad_s": 0.02282514644291797,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.036815140823864945,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.01135637694849489,
+            "true_theta_rad": -0.001321460384637489,
+            "x_m": 0.01529562440723501
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.040623702108860016,
+            "fault": null,
+            "observed_omega_rad_s": 0.029694287253319646,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.005481234549346197,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.015735530739304608,
+            "true_theta_rad": -0.000251526177390278,
+            "x_m": 0.013284649829242323
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.023691264912486076,
+            "fault": null,
+            "observed_omega_rad_s": 0.003550685405560041,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.04457991041413312,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.011164990115667664,
+            "true_theta_rad": 0.0035282388987118354,
+            "x_m": 0.0014005717207127325
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.04986848682165146,
+            "fault": null,
+            "observed_omega_rad_s": -0.0166102771293299,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.016231183183282448,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.003984223744447271,
+            "true_theta_rad": 0.0031191552584868007,
+            "x_m": -0.014360208870146137
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 0.04259567707777023,
+            "fault": null,
+            "observed_omega_rad_s": -0.02465847026118237,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.22789443626347874,
+            "requested_s": 3.0,
+            "true_omega_rad_s": -0.010598535080808977,
+            "true_theta_rad": -0.0039143584223172885,
+            "x_m": 0.00428240191532735
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.06639069318771362,
+            "fault": null,
+            "observed_omega_rad_s": 0.011918053820243354,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.05320347980500334,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.01582838865044788,
+            "true_theta_rad": 0.00032626568467544043,
+            "x_m": 0.007365015214041225
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.14820460975170135,
+            "fault": null,
+            "observed_omega_rad_s": -0.0006453001925940836,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.10480175319414409,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.014445375863534404,
+            "true_theta_rad": 0.0023656653057389653,
+            "x_m": -0.009419701630722109
+          }
+        ]
+      },
+      "trace_path": "traces/centered-observed_angle_is_true_tilt-94000.jsonl",
+      "trace_sha256": "f297836b256fa6b25809dc63f2ade7cd088b7cb550d8f71c60aadbba582c9eeb"
+    },
+    {
+      "actor": "original47",
+      "case": "observed_angle_is_true_tilt",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.010246562177770391,
+        "theta": 0.0016145732095550925,
+        "time_ns": 5003000000,
+        "v": -0.028219113076723677,
+        "x": 0.008312765359554096
+      },
+      "policy_fault": null,
+      "seed": 94000,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.0153392062849881,
+            0.9998823474542126,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.002452830756574039,
+          "theta": 0.013810789232449291,
+          "time_ns": 3000000,
+          "v": -3.505824667004072e-21,
+          "x": -6.981828256966173e-24
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.01380583,
+          -3.536394e-07
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.002452830756574039,
+            "theta": 0.013810789232449291,
+            "time_ns": 3000000,
+            "v": -3.505824667004072e-21,
+            "x": -6.981828256966173e-24
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.13432349264621735,
+          "fault": null,
+          "observed_omega_rad_s": -0.0021864678262542266,
+          "observed_theta_rad": 0.0015339807878856412,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.018963519457109237,
+          "true_omega_rad_s": -0.013238835185682715,
+          "true_theta_rad": 0.0017328240390267267,
+          "x_m": 0.008595809848694376
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.87890625,
+        "first1s_peak_abs_observed_omega_rad_s": 0.1279806072275798,
+        "first1s_peak_abs_raw_command_m_s2": 0.6249502110171794,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.87890625,
+            "raw_command_rms_m_s2": 0.3355273123145361,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.9667968749999999
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.08165453526776609,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.439453125
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.439453125,
+            "raw_command_rms_m_s2": 0.06746662828407601,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.439453125,
+            "raw_command_rms_m_s2": 0.08860992528352242,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.263671875
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.87890625,
+        "peak_abs_x_m": 0.09339102355069143,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.36428987979888916,
+            "fault": null,
+            "observed_omega_rad_s": -0.06321112431787611,
+            "observed_theta_rad": 0.009203884727313847,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.35539851654331345,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.10076694387221406,
+            "true_theta_rad": 0.0072737803252749325,
+            "x_m": 0.0025185331076681625
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.09507805854082108,
+            "fault": null,
+            "observed_omega_rad_s": -0.02658683123758724,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.17962152539753284,
+            "requested_s": 0.2,
+            "true_omega_rad_s": -0.016098071779859224,
+            "true_theta_rad": 0.0010450316780328318,
+            "x_m": 0.00801698671549373
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": 0.03566204756498337,
+            "fault": null,
+            "observed_omega_rad_s": -0.02066935716960732,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.03687557777833261,
+            "requested_s": 0.3,
+            "true_omega_rad_s": -0.01628287009207534,
+            "true_theta_rad": -0.0008628724304268822,
+            "x_m": 0.014289792644785729
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.10962855815887451,
+            "fault": null,
+            "observed_omega_rad_s": -0.03159650567138764,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.023230396360739928,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.01688091769751523,
+            "true_theta_rad": -0.0027425630635055003,
+            "x_m": 0.02143070629773106
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": 0.024389009922742844,
+            "fault": null,
+            "observed_omega_rad_s": 0.008016328886931929,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.05771901165092384,
+            "requested_s": 0.5,
+            "true_omega_rad_s": -0.0032305641178495695,
+            "true_theta_rad": -0.0033348133626390675,
+            "x_m": 0.028777960555899946
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.041943300515413284,
+            "fault": null,
+            "observed_omega_rad_s": -0.02259021659866939,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.05928201528455322,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.011817663881299923,
+            "true_theta_rad": -0.004557806461291347,
+            "x_m": 0.036277937751131445
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.0281369611620903,
+            "fault": null,
+            "observed_omega_rad_s": -0.00546215889327032,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.027022650414543648,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.0041894515977205105,
+            "true_theta_rad": -0.004724890098909418,
+            "x_m": 0.04146997909676072
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.06989388912916183,
+            "fault": null,
+            "observed_omega_rad_s": 0.0012944414408385474,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.046755326121432655,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.001110844866936953,
+            "true_theta_rad": -0.0046814489824409085,
+            "x_m": 0.04359978434357291
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.12475496530532837,
+            "fault": null,
+            "observed_omega_rad_s": -0.017188752724073726,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.11624800930649165,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.0030408043708685015,
+            "true_theta_rad": -0.005442968583971851,
+            "x_m": 0.050737432752736726
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.007120306603610516,
+            "fault": null,
+            "observed_omega_rad_s": 0.008262144533936644,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.006287226341685111,
+            "requested_s": 0.9,
+            "true_omega_rad_s": -0.0029269298297736816,
+            "true_theta_rad": -0.005692921531732163,
+            "x_m": 0.057484495385196455
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.07541201263666153,
+            "fault": null,
+            "observed_omega_rad_s": 0.020717261507336195,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.042502578740448264,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.007428970457697736,
+            "true_theta_rad": -0.005650420467895854,
+            "x_m": 0.0638011092479694
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.02010265737771988,
+            "fault": null,
+            "observed_omega_rad_s": -0.004176360973669506,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.11526547272250288,
+            "requested_s": 1.36,
+            "true_omega_rad_s": -0.0011807873795979887,
+            "true_theta_rad": -0.005045475658221343,
+            "x_m": 0.0809032619621708
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.06773445755243301,
+            "fault": null,
+            "observed_omega_rad_s": -0.0019956446736867977,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.045784962592777464,
+            "requested_s": 2.0,
+            "true_omega_rad_s": 0.005807477849630061,
+            "true_theta_rad": -0.003682834287933709,
+            "x_m": 0.09332287946074588
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": 0.04482853412628174,
+            "fault": null,
+            "observed_omega_rad_s": -0.010279497131931993,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.13378997262534176,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.0013040150664247203,
+            "true_theta_rad": -0.000683934323032588,
+            "x_m": 0.07540944571314331
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.043119337409734726,
+            "fault": null,
+            "observed_omega_rad_s": 0.002697295392058643,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.02658372148589827,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.008055591140086305,
+            "true_theta_rad": 0.00037027466179260544,
+            "x_m": 0.04123153250827439
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.13432349264621735,
+            "fault": null,
+            "observed_omega_rad_s": -0.0021864678262542266,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.018963519457109237,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.013238835185682715,
+            "true_theta_rad": 0.0017328240390267267,
+            "x_m": 0.008595809848694376
+          }
+        ]
+      },
+      "trace_path": "traces/original47-observed_angle_is_true_tilt-94000.jsonl",
+      "trace_sha256": "c0eeb392560dad6582e9c14651b1c36c1ff67e5ac79c720d4054fe2fe5c852e6"
+    },
+    {
+      "actor": "centered",
+      "case": "observed_angle_is_true_tilt",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.012905067765285341,
+        "theta": 0.002165812286955788,
+        "time_ns": 5003000000,
+        "v": 0.004064204761139494,
+        "x": -0.012100935141171684
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.01380538852806039,
+            0.9999047010828529,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.002452830756574039,
+          "theta": 0.013810789232449291,
+          "time_ns": 3000000,
+          "v": -3.505824667004072e-21,
+          "x": -6.981828256966173e-24
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.01380583,
+          -3.536394e-07
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.002452830756574039,
+            "theta": 0.013810789232449291,
+            "time_ns": 3000000,
+            "v": -3.505824667004072e-21,
+            "x": -6.981828256966173e-24
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.10973402857780457,
+          "fault": null,
+          "observed_omega_rad_s": -0.01688153642135445,
+          "observed_theta_rad": 0.0030679615757712823,
+          "rail_braking": false,
+          "raw_command_m_s2": 0.08383348575510689,
+          "true_omega_rad_s": -0.01303177885404501,
+          "true_theta_rad": 0.002296041667651842,
+          "x_m": -0.012137804681920201
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+        "first1s_peak_abs_observed_omega_rad_s": 0.19150585061307715,
+        "first1s_peak_abs_raw_command_m_s2": 1.165558320025212,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.9667968749999999,
+            "raw_command_rms_m_s2": 0.503059734823529,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 1.494140625
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.439453125,
+            "raw_command_rms_m_s2": 0.10949912340151458,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.439453125,
+            "raw_command_rms_m_s2": 0.12704497915613377,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.263671875,
+            "raw_command_rms_m_s2": 0.11922692635148609,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.3515625
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.9667968749999999,
+        "peak_abs_x_m": 0.018756525498221113,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.0077348253689706326,
+            "fault": null,
+            "observed_omega_rad_s": -0.17240327945262035,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.035502622178771044,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.19091011226621232,
+            "true_theta_rad": 0.0002567134817466571,
+            "x_m": 0.0037598793946746725
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": -0.17620348930358887,
+            "fault": null,
+            "observed_omega_rad_s": -0.011276095083079052,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.029423105416378874,
+            "requested_s": 0.2,
+            "true_omega_rad_s": 0.03040122272659916,
+            "true_theta_rad": -0.005849759341376594,
+            "x_m": 0.008697029246782884
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.13210515677928925,
+            "fault": null,
+            "observed_omega_rad_s": -0.016351353688129917,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.03025622114586799,
+            "requested_s": 0.3,
+            "true_omega_rad_s": -0.006213984753050284,
+            "true_theta_rad": -0.0056770548728266165,
+            "x_m": 0.011936374822501093
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": -0.08703477680683136,
+            "fault": null,
+            "observed_omega_rad_s": 0.0018082906153942917,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0022806341483200872,
+            "requested_s": 0.4,
+            "true_omega_rad_s": 0.002312336293805126,
+            "true_theta_rad": -0.005886306144549984,
+            "x_m": 0.014892789653796177
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.15593664348125458,
+            "fault": null,
+            "observed_omega_rad_s": 0.022509177559165552,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.088589534925774,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.01498557470469976,
+            "true_theta_rad": -0.005117027481061623,
+            "x_m": 0.017015287475610208
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": -0.0716678649187088,
+            "fault": null,
+            "observed_omega_rad_s": 0.004257656063683763,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.10366384688498746,
+            "requested_s": 0.6,
+            "true_omega_rad_s": 0.008668121354579273,
+            "true_theta_rad": -0.004498920925625244,
+            "x_m": 0.018251215560367278
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.10495157539844513,
+            "fault": null,
+            "observed_omega_rad_s": 0.018185985273877985,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0006176782149531221,
+            "requested_s": 0.67,
+            "true_omega_rad_s": 0.008241277317659595,
+            "true_theta_rad": -0.0040639207523157535,
+            "x_m": 0.01864814905713371
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.118667833507061,
+            "fault": null,
+            "observed_omega_rad_s": -0.00013800585203153568,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.057742189426439244,
+            "requested_s": 0.7,
+            "true_omega_rad_s": 0.0018975179411820364,
+            "true_theta_rad": -0.003995852454712475,
+            "x_m": 0.018732692040823
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": 0.00794241577386856,
+            "fault": null,
+            "observed_omega_rad_s": 0.003934083620157749,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.13636745803007325,
+            "requested_s": 0.8,
+            "true_omega_rad_s": 0.008107533961363279,
+            "true_theta_rad": -0.0024484421926906194,
+            "x_m": 0.01821476206414211
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.06880056858062744,
+            "fault": null,
+            "observed_omega_rad_s": -0.0013322204235941622,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.21336328803668445,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.019269038055020418,
+            "true_theta_rad": -0.001575246363166073,
+            "x_m": 0.016964663751675123
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.17680777609348297,
+            "fault": null,
+            "observed_omega_rad_s": -0.012227293273831808,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.1949294494231492,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.01734339399950503,
+            "true_theta_rad": -0.0006823803944146622,
+            "x_m": 0.015000667039102607
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": 0.06388121843338013,
+            "fault": null,
+            "observed_omega_rad_s": 0.003450770965969871,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.024925491303970457,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.005801778992169126,
+            "true_theta_rad": 0.002950645187149003,
+            "x_m": 0.003998164893196798
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": 0.0856025293469429,
+            "fault": null,
+            "observed_omega_rad_s": 0.0069036138144462685,
+            "observed_theta_rad": 0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.1306031584131961,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.0114888663077031,
+            "true_theta_rad": 0.0043535857815577145,
+            "x_m": -0.0144429045833339
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": -0.10329996049404144,
+            "fault": null,
+            "observed_omega_rad_s": -0.01754742928558615,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09081060946755982,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.003778770338447712,
+            "true_theta_rad": -0.004554751951181887,
+            "x_m": 0.0026839713183741064
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.06695985794067383,
+            "fault": null,
+            "observed_omega_rad_s": -0.006663595431765442,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09924022545262468,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.007382127140598158,
+            "true_theta_rad": 5.857680411892634e-05,
+            "x_m": 0.007448214372179351
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.10973402857780457,
+            "fault": null,
+            "observed_omega_rad_s": -0.01688153642135445,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.08383348575510689,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.01303177885404501,
+            "true_theta_rad": 0.002296041667651842,
+            "x_m": -0.012137804681920201
+          }
+        ]
+      },
+      "trace_path": "traces/centered-observed_angle_is_true_tilt-94007.jsonl",
+      "trace_sha256": "5a70af30bf5adb9c5a3350ec687cb4cba5126c3044eae07384d3a443b1c3f7da"
+    },
+    {
+      "actor": "original47",
+      "case": "observed_angle_is_true_tilt",
+      "elapsed_physical_s": 5.0,
+      "encoder_bias_degrees": 0.0,
+      "encoder_bias_rad": 0.0,
+      "final_ground_truth": {
+        "omega": -0.0027159565641296066,
+        "theta": 0.0017342325416099974,
+        "time_ns": 5003000000,
+        "v": -0.0287281045866257,
+        "x": 0.0029401408990290963
+      },
+      "policy_fault": null,
+      "seed": 94007,
+      "simulator_fault": null,
+      "startup": {
+        "first_decision_time_ns": 3000000,
+        "first_encoded_observation": {
+          "age_s": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "state": [
+            0.0,
+            0.0,
+            0.01380538852806039,
+            0.9999047010828529,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "first_ground_truth": {
+          "omega": 0.002452830756574039,
+          "theta": 0.013810789232449291,
+          "time_ns": 3000000,
+          "v": -3.505824667004072e-21,
+          "x": -6.981828256966173e-24
+        },
+        "literal_initial_state": [
+          0.0,
+          0.0,
+          0.01380583,
+          -3.536394e-07
+        ],
+        "literal_initial_time_ns": 0,
+        "reset_info": {
+          "action_ignored_reason": null,
+          "action_semantics": "raw acceleration; binary32 cart_motion governor at 1000 Hz",
+          "available_ns": 0,
+          "diagnostics": {
+            "active_request_sequence": 1,
+            "enabled": true,
+            "executed_acceleration_m_s2": 0.0,
+            "expires_at_ns": 20000000,
+            "fault_reason": null,
+            "force_saturated": false,
+            "rail_braking": false,
+            "raw_acceleration_m_s2": 0.0
+          },
+          "fault_reason": null,
+          "ground_truth": {
+            "omega": 0.002452830756574039,
+            "theta": 0.013810789232449291,
+            "time_ns": 3000000,
+            "v": -3.505824667004072e-21,
+            "x": -6.981828256966173e-24
+          },
+          "observation_contract": {
+            "angle_frame_id": "encoder-zero",
+            "angle_source": "raw",
+            "schema": "cartpole-policy-observation-contract-v1",
+            "vision_max_age_ns": 150000000
+          },
+          "observation_sequence": 0,
+          "physical_time_ns": 3000000,
+          "reset_warmup_ns": 3000000,
+          "sensor_diagnostics": null,
+          "telemetry_transport_age_ns": 3000000
+        }
+      },
+      "steps": 500,
+      "summary": {
+        "final_record": {
+          "elapsed_s": 4.99,
+          "executed_acceleration_m_s2": 0.018638968467712402,
+          "fault": null,
+          "observed_omega_rad_s": -0.014884113094813462,
+          "observed_theta_rad": 0.0015339807878856412,
+          "rail_braking": false,
+          "raw_command_m_s2": -0.0200284416077068,
+          "true_omega_rad_s": -0.006324621560964716,
+          "true_theta_rad": 0.001777688189326311,
+          "x_m": 0.0032265206649988555
+        },
+        "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+        "first1s_peak_abs_observed_omega_rad_s": 0.10014946237097722,
+        "first1s_peak_abs_raw_command_m_s2": 0.7709452187229616,
+        "first_abs_x_over012m_s": null,
+        "first_observed_abs_angle_over5deg_s": null,
+        "first_rail_braking_s": null,
+        "first_second_quarter_windows": [
+          {
+            "end_s": 0.25,
+            "peak_abs_observed_theta_deg": 0.9667968749999999,
+            "raw_command_rms_m_s2": 0.3394723549758942,
+            "start_s": 0.0,
+            "theta_peak_to_peak_deg": 0.9667968749999999
+          },
+          {
+            "end_s": 0.5,
+            "peak_abs_observed_theta_deg": 0.263671875,
+            "raw_command_rms_m_s2": 0.07377360510272563,
+            "start_s": 0.25,
+            "theta_peak_to_peak_deg": 0.3515625
+          },
+          {
+            "end_s": 0.75,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.06404657669988055,
+            "start_s": 0.5,
+            "theta_peak_to_peak_deg": 0.263671875
+          },
+          {
+            "end_s": 1.0,
+            "peak_abs_observed_theta_deg": 0.3515625,
+            "raw_command_rms_m_s2": 0.06839095878699697,
+            "start_s": 0.75,
+            "theta_peak_to_peak_deg": 0.17578125
+          }
+        ],
+        "first_true_abs_angle_over5deg_s": null,
+        "peak_abs_observed_angle_deg": 0.9667968749999999,
+        "peak_abs_x_m": 0.09529671757674892,
+        "samples": [
+          {
+            "elapsed_s": 0.1,
+            "executed_acceleration_m_s2": 0.2178378403186798,
+            "fault": null,
+            "observed_omega_rad_s": -0.08950599385859641,
+            "observed_theta_rad": 0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.1664183507284697,
+            "requested_s": 0.1,
+            "true_omega_rad_s": -0.09822211604575554,
+            "true_theta_rad": 0.00654882594272337,
+            "x_m": 0.002676430014073849
+          },
+          {
+            "elapsed_s": 0.2,
+            "executed_acceleration_m_s2": 0.07553502917289734,
+            "fault": null,
+            "observed_omega_rad_s": -0.0323661859562991,
+            "observed_theta_rad": 0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.17130604500668478,
+            "requested_s": 0.2,
+            "true_omega_rad_s": -0.0123408640629211,
+            "true_theta_rad": 0.0016765553621934635,
+            "x_m": 0.007897802402669914
+          },
+          {
+            "elapsed_s": 0.3,
+            "executed_acceleration_m_s2": -0.0162715632468462,
+            "fault": null,
+            "observed_omega_rad_s": -0.03273183321832434,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07143554597074174,
+            "requested_s": 0.3,
+            "true_omega_rad_s": -0.01846338134303256,
+            "true_theta_rad": -0.0008080649433068619,
+            "x_m": 0.01412813785090822
+          },
+          {
+            "elapsed_s": 0.4,
+            "executed_acceleration_m_s2": 0.015309709124267101,
+            "fault": null,
+            "observed_omega_rad_s": -0.011645696674207404,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.07225391054412741,
+            "requested_s": 0.4,
+            "true_omega_rad_s": -0.010690068996788782,
+            "true_theta_rad": -0.002485725040229687,
+            "x_m": 0.021242762135630373
+          },
+          {
+            "elapsed_s": 0.5,
+            "executed_acceleration_m_s2": -0.06345271319150925,
+            "fault": null,
+            "observed_omega_rad_s": 0.014972303219569437,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.12879780471956875,
+            "requested_s": 0.5,
+            "true_omega_rad_s": 0.0010654196982875167,
+            "true_theta_rad": -0.003255112050240101,
+            "x_m": 0.028616762571602238
+          },
+          {
+            "elapsed_s": 0.6,
+            "executed_acceleration_m_s2": 0.0668996274471283,
+            "fault": null,
+            "observed_omega_rad_s": -0.003214156429546159,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.01552544498042768,
+            "requested_s": 0.6,
+            "true_omega_rad_s": -0.010348027759971604,
+            "true_theta_rad": -0.004052526751431762,
+            "x_m": 0.036013881882032674
+          },
+          {
+            "elapsed_s": 0.67,
+            "executed_acceleration_m_s2": -0.00955080334097147,
+            "fault": null,
+            "observed_omega_rad_s": -0.006384004834527923,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.023411356568329208,
+            "requested_s": 0.67,
+            "true_omega_rad_s": -0.006196658821425891,
+            "true_theta_rad": -0.004633546111596726,
+            "x_m": 0.04122805365634725
+          },
+          {
+            "elapsed_s": 0.7,
+            "executed_acceleration_m_s2": -0.08588217943906784,
+            "fault": null,
+            "observed_omega_rad_s": -0.004814039648943693,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": 0.03806513790515242,
+            "requested_s": 0.7,
+            "true_omega_rad_s": -0.0037604296797040353,
+            "true_theta_rad": -0.004815426682839028,
+            "x_m": 0.04343884811542698
+          },
+          {
+            "elapsed_s": 0.8,
+            "executed_acceleration_m_s2": -0.030983254313468933,
+            "fault": null,
+            "observed_omega_rad_s": -0.012748612945386761,
+            "observed_theta_rad": -0.0046019423636569235,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.038708388598605606,
+            "requested_s": 0.8,
+            "true_omega_rad_s": -0.0027252180832262928,
+            "true_theta_rad": -0.005047862186600002,
+            "x_m": 0.050554472808626225
+          },
+          {
+            "elapsed_s": 0.9,
+            "executed_acceleration_m_s2": -0.0043743145652115345,
+            "fault": null,
+            "observed_omega_rad_s": -0.010017430989876064,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.09548453348973167,
+            "requested_s": 0.9,
+            "true_omega_rad_s": 0.0007745659393922479,
+            "true_theta_rad": -0.005355154728335565,
+            "x_m": 0.057348292935737816
+          },
+          {
+            "elapsed_s": 1.0,
+            "executed_acceleration_m_s2": -0.1076756939291954,
+            "fault": null,
+            "observed_omega_rad_s": -0.016003331614797733,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.1162719326520862,
+            "requested_s": 1.0,
+            "true_omega_rad_s": 0.0024004402874965958,
+            "true_theta_rad": -0.0056543328369362674,
+            "x_m": 0.06371882511068197
+          },
+          {
+            "elapsed_s": 1.36,
+            "executed_acceleration_m_s2": -0.05865404009819031,
+            "fault": null,
+            "observed_omega_rad_s": -0.006287088659533684,
+            "observed_theta_rad": -0.006135923151542565,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.1159552632395036,
+            "requested_s": 1.36,
+            "true_omega_rad_s": 0.0019079030420534923,
+            "true_theta_rad": -0.005426292770129889,
+            "x_m": 0.08201159522980035
+          },
+          {
+            "elapsed_s": 2.0,
+            "executed_acceleration_m_s2": -0.024305762723088264,
+            "fault": null,
+            "observed_omega_rad_s": 0.014771519446284572,
+            "observed_theta_rad": -0.0030679615757712823,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.003826889442200016,
+            "requested_s": 2.0,
+            "true_omega_rad_s": -0.004188087537185777,
+            "true_theta_rad": -0.003564597664102782,
+            "x_m": 0.09515754803875297
+          },
+          {
+            "elapsed_s": 3.0,
+            "executed_acceleration_m_s2": -0.020433155819773674,
+            "fault": null,
+            "observed_omega_rad_s": -0.013130031909363907,
+            "observed_theta_rad": -0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0822532768779559,
+            "requested_s": 3.0,
+            "true_omega_rad_s": 0.005195286873899509,
+            "true_theta_rad": -0.0010380629265552418,
+            "x_m": 0.07725690714322174
+          },
+          {
+            "elapsed_s": 4.0,
+            "executed_acceleration_m_s2": -0.04481308162212372,
+            "fault": null,
+            "observed_omega_rad_s": -0.015365928811739362,
+            "observed_theta_rad": 0.0,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.07329120629325668,
+            "requested_s": 4.0,
+            "true_omega_rad_s": 0.0023430378753481907,
+            "true_theta_rad": 0.0006435493646945013,
+            "x_m": 0.039448169161008545
+          },
+          {
+            "elapsed_s": 4.99,
+            "executed_acceleration_m_s2": 0.018638968467712402,
+            "fault": null,
+            "observed_omega_rad_s": -0.014884113094813462,
+            "observed_theta_rad": 0.0015339807878856412,
+            "rail_braking": false,
+            "raw_command_m_s2": -0.0200284416077068,
+            "requested_s": 5.0,
+            "true_omega_rad_s": -0.006324621560964716,
+            "true_theta_rad": 0.001777688189326311,
+            "x_m": 0.0032265206649988555
+          }
+        ]
+      },
+      "trace_path": "traces/original47-observed_angle_is_true_tilt-94007.jsonl",
+      "trace_sha256": "77baaea7129c46cf7524077c216ca65248ac433321d9c7dfa64c514dca0f598b"
+    }
+  ],
+  "hardware_accepted": false,
+  "hardware_comparison_sha256": "1a881ac5fd6421e8c35cd6aa6a23e43097bbc8566017f061462c5c9b27e4524f",
+  "limitations": [
+    "Encoder difference does not establish true tilt versus reference bias. These are diagnostic hypotheses.",
+    "Current model assumes ideal acceleration tracking and its free-swing-fitted friction near upright; neither is reidentified here.",
+    "No hardware enable motion, physical backlash/slip, host scheduling stalls, or later I2C fault is injected.",
+    "Original frozen profile rail is0.309074998m; recorded hardware rail is0.309037507m (37.491micrometre difference); profile is intentionally unchanged.",
+    "Two reused noise seeds and5s are a bounded diagnosis, not qualification or candidate selection."
+  ],
+  "protocol_sha256": "047598addccc8457c3dfabb6be32c26da3422111e1c46c1dc1ef39eb5bb384e8",
+  "simulation_only": true,
+  "source_identity_unchanged": true,
+  "status": "DEVELOPMENT_ONLY"
+}

@@ -1,0 +1,331 @@
+{
+  "completed": true,
+  "deployable": false,
+  "hardware_accepted": false,
+  "hardware_comparison_sha256": "1a881ac5fd6421e8c35cd6aa6a23e43097bbc8566017f061462c5c9b27e4524f",
+  "hardware_first_fault_s": 15.915,
+  "hardware_summary": {
+    "first1s_peak_abs_observed_angle_deg": 19.335939027801068,
+    "first1s_peak_abs_observed_omega_rad_s": 5.513326,
+    "first1s_peak_abs_raw_command_m_s2": 17.96404,
+    "first_abs_x_over012m_s": 1.34,
+    "first_observed_abs_angle_over5deg_s": 0.67,
+    "first_rail_braking_s": 1.36,
+    "first_second_quarter_windows": [
+      {
+        "end_s": 0.25,
+        "peak_abs_observed_theta_deg": 1.0546875312475315,
+        "raw_command_rms_m_s2": 1.1741915200407869,
+        "start_s": 0.0,
+        "theta_peak_to_peak_deg": 2.021484482637585
+      },
+      {
+        "end_s": 0.5,
+        "peak_abs_observed_theta_deg": 2.1972656423525407,
+        "raw_command_rms_m_s2": 2.521114186779558,
+        "start_s": 0.25,
+        "theta_peak_to_peak_deg": 3.691406072887462
+      },
+      {
+        "end_s": 0.75,
+        "peak_abs_observed_theta_deg": 9.31640834038621,
+        "raw_command_rms_m_s2": 6.44496392300026,
+        "start_s": 0.5,
+        "theta_peak_to_peak_deg": 13.447267885518858
+      },
+      {
+        "end_s": 1.0,
+        "peak_abs_observed_theta_deg": 19.335939027801068,
+        "raw_command_rms_m_s2": 11.113129763064768,
+        "start_s": 0.75,
+        "theta_peak_to_peak_deg": 27.15820521877897
+      }
+    ]
+  },
+  "interpretation": "The unchanged model does not reproduce centered hardware subsecond angular instability under either reference-bias or real-tilt hypothesis. +9-count bias predicts centering loss, not the recorded rapidly growing first-second oscillation. This exposes a dynamics/startup/sensing gap, without identifying which physical or timing mechanism causes it.",
+  "limitations": [
+    "Encoder difference does not establish true tilt versus reference bias. These are diagnostic hypotheses.",
+    "Current model assumes ideal acceleration tracking and its free-swing-fitted friction near upright; neither is reidentified here.",
+    "No hardware enable motion, physical backlash/slip, host scheduling stalls, or later I2C fault is injected.",
+    "Original frozen profile rail is0.309074998m; recorded hardware rail is0.309037507m (37.491micrometre difference); profile is intentionally unchanged.",
+    "Two reused noise seeds and5s are a bounded diagnosis, not qualification or candidate selection."
+  ],
+  "plot_sha256": "f9477a019122a56b427a8c706912a2bbc9abcc8f32435ce35a162632f57775e7",
+  "protocol_sha256": "047598addccc8457c3dfabb6be32c26da3422111e1c46c1dc1ef39eb5bb384e8",
+  "report_sha256": "63d0fc31997d59e89ce5431fab67da3b35738fe1e008941b9e0398871e42885e",
+  "simulation_only": true,
+  "simulation_summary": [
+    {
+      "actor": "centered",
+      "case": "true_upright_zero_bias",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        -0.0021971849569102676,
+        -0.0007197370067411884
+      ],
+      "first1s_peak_abs_observed_angle_deg": 0.17578125,
+      "first1s_peak_abs_raw_command_m_s2": 0.27515802218397584,
+      "first_over12cm_s": [
+        null,
+        null
+      ],
+      "first_over5deg_s": [
+        null,
+        null
+      ],
+      "first_rail_braking_s": [
+        null,
+        null
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.17578125,
+          0.087890625,
+          0.17578125,
+          0.17578125
+        ],
+        [
+          0.17578125,
+          0.087890625,
+          0.087890625,
+          0.17578125
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.00460104195151664
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_zero_bias",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        -0.0005936291398192324,
+        -0.006020358012146807
+      ],
+      "first1s_peak_abs_observed_angle_deg": 0.17578125,
+      "first1s_peak_abs_raw_command_m_s2": 0.19387780891718004,
+      "first_over12cm_s": [
+        null,
+        null
+      ],
+      "first_over5deg_s": [
+        null,
+        null
+      ],
+      "first_rail_braking_s": [
+        null,
+        null
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.17578125,
+          0.17578125,
+          0.17578125,
+          0.17578125
+        ],
+        [
+          0.17578125,
+          0.087890625,
+          0.17578125,
+          0.17578125
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.006011568426028513
+    },
+    {
+      "actor": "centered",
+      "case": "true_upright_plus9counts_bias",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        -0.16322493583657458,
+        -0.1646432885054996
+      ],
+      "first1s_peak_abs_observed_angle_deg": 1.494140625,
+      "first1s_peak_abs_raw_command_m_s2": 1.0524752630622394,
+      "first_over12cm_s": [
+        1.24,
+        1.24
+      ],
+      "first_over5deg_s": [
+        null,
+        null
+      ],
+      "first_rail_braking_s": [
+        null,
+        null
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.87890625,
+          0.3515625,
+          0.9667968749999999,
+          1.40625
+        ],
+        [
+          0.87890625,
+          0.263671875,
+          0.87890625,
+          1.494140625
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.1832356627219406
+    },
+    {
+      "actor": "original47",
+      "case": "true_upright_plus9counts_bias",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        -0.2172701906397848,
+        -0.15691128431968157
+      ],
+      "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+      "first1s_peak_abs_raw_command_m_s2": 0.7500063332764647,
+      "first_over12cm_s": [
+        1.54,
+        1.52
+      ],
+      "first_over5deg_s": [
+        2.34,
+        2.33
+      ],
+      "first_rail_braking_s": [
+        2.23,
+        2.21
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.87890625,
+          0.3515625,
+          0.3515625,
+          0.17578125
+        ],
+        [
+          0.9667968749999999,
+          0.263671875,
+          0.3515625,
+          0.17578125
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.2940748566742958
+    },
+    {
+      "actor": "centered",
+      "case": "observed_angle_is_true_tilt",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        -0.009440976967194026,
+        -0.012100935141171684
+      ],
+      "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+      "first1s_peak_abs_raw_command_m_s2": 1.165558320025212,
+      "first_over12cm_s": [
+        null,
+        null
+      ],
+      "first_over5deg_s": [
+        null,
+        null
+      ],
+      "first_rail_braking_s": [
+        null,
+        null
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.87890625,
+          0.439453125,
+          0.3515625,
+          0.17578125
+        ],
+        [
+          0.9667968749999999,
+          0.439453125,
+          0.439453125,
+          0.263671875
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.018756525498221113
+    },
+    {
+      "actor": "original47",
+      "case": "observed_angle_is_true_tilt",
+      "episodes": 2,
+      "final_cart_positions_m": [
+        0.008312765359554096,
+        0.0029401408990290963
+      ],
+      "first1s_peak_abs_observed_angle_deg": 0.9667968749999999,
+      "first1s_peak_abs_raw_command_m_s2": 0.7709452187229616,
+      "first_over12cm_s": [
+        null,
+        null
+      ],
+      "first_over5deg_s": [
+        null,
+        null
+      ],
+      "first_rail_braking_s": [
+        null,
+        null
+      ],
+      "first_second_quarter_peaks_deg": [
+        [
+          0.87890625,
+          0.3515625,
+          0.439453125,
+          0.439453125
+        ],
+        [
+          0.9667968749999999,
+          0.263671875,
+          0.3515625,
+          0.3515625
+        ]
+      ],
+      "maximum_cart_excursion_m": 0.09529671757674892
+    }
+  ],
+  "status": "DEVELOPMENT_ONLY",
+  "unchanged_model_parameters": {
+    "cart_damping": 0.05,
+    "cart_mass_kg": 0.35,
+    "control_steps": 10,
+    "effective_length_m": 0.16030387335574306,
+    "hinge_coulomb_friction_nm": 0.0007133292581428023,
+    "hinge_damping": 3.0218604984532184e-06,
+    "hinge_friction_velocity_scale_rad_s": 0.05,
+    "max_acceleration_m_s2": 25.0,
+    "max_action_ttl_ns": 50000000,
+    "max_force_n": 20.0,
+    "max_steps": 500,
+    "physics_dt_ns": 1000000,
+    "pole_mass_kg": 0.02275,
+    "rail_half_m": 0.309074998
+  },
+  "unchanged_observation_config": {
+    "angle_frame_id": "encoder-zero",
+    "angle_noise_std": 0.001,
+    "angle_source": "raw",
+    "command_delay_steps": 1,
+    "dropout_probability": 0.0,
+    "encoder_bias_rad": 0.0,
+    "encoder_cos_error_rad": 0.0,
+    "encoder_counts": 4096,
+    "encoder_sin_error_rad": 0.0,
+    "telemetry_delay_steps": 3,
+    "vision_angle_noise_std": 0.003,
+    "vision_angle_quantum_rad": 0.001,
+    "vision_dropout_probability": 0.0,
+    "vision_frame_period_ns": 12500000,
+    "vision_latency_ns": 20000000,
+    "vision_max_age_ns": 150000000,
+    "vision_warmup_steps": 500
+  },
+  "verification": {
+    "commands_replayed": 6000,
+    "max_numpy_vs_recorded_raw_difference_m_s2": 1.7763568394002505e-14,
+    "physical_timeline_and_startup_verified": true,
+    "source_and_actors_unchanged": true,
+    "trace_count": 12
+  },
+  "verification_script_sha256": "688a4c5dbebc2bf17578c845fd00688602be8e2eb0509ed7876fb0729a6598d8"
+}

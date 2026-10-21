@@ -1,0 +1,1094 @@
+{
+  "accepted_minus_requested_m_s2": {
+    "max": 4.1407494268952405e-06,
+    "mean": -2.411382104526246e-07,
+    "median": -5.4014428929605174e-08,
+    "min": -4.523837642267381e-06,
+    "n": 50,
+    "p01": -4.506611827714835e-06,
+    "p99": 3.830151111863244e-06,
+    "rms": 1.6205519931628044e-06
+  },
+  "action_rows_matched": 51,
+  "active_span_s": 0.5,
+  "active_states": 51,
+  "actor": {
+    "backend": {
+      "actor_content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a"
+    },
+    "content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+    "file_sha256": "9685d1fbbce230ac8ce838a92818b09c139535b6733a4628310c368c256b8898",
+    "path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261021-confidence/actor.json",
+    "semantics": "Offline encoded reconstruction; current deployment loader is not invoked and this grants no runtime/hardware admission.",
+    "status": "trace-bound",
+    "trace_expected_content_sha256": [
+      "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79"
+    ]
+  },
+  "analysis_source_sha256": {
+    "firmware/teensy_executor/executor_core.h": "55ea99a855a10457b0b1ff55676fb61e21f21ec76c5db6259ca5a7f04cf13d7b",
+    "src/cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "src/cartpole_sdk/policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+    "src/cartpole_sdk/policies/numeric_backend.py": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "src/cartpole_sdk/rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a"
+  },
+  "analyzer_sha256": "6f60422639a133a9b3c89c44096d843b870188c5aab0d62f904ed0674aff9bfe",
+  "artifacts": {
+    "actions.csv": "189dfb34d3d26eedeb2eb723f12e49240bf4755ce48c852b76a88439dab97909",
+    "analyzer.py": "6f60422639a133a9b3c89c44096d843b870188c5aab0d62f904ed0674aff9bfe",
+    "signals.png": "4b8b6532dc8b16245832bd9e61f8489fd5685d977b76c03975efc29b2ad2df82",
+    "telemetry.csv": "0f5dd0b151c36e7c4179e4ae49801693ee592221d7d4e3136fedeb525ac4d99e"
+  },
+  "calibration": {
+    "quiet_stopped_encoder_angle_deg": {
+      "max": 0.0,
+      "mean": -0.023570669049871543,
+      "median": 0.0,
+      "min": -5.0097659166652235,
+      "n": 220,
+      "p01": -0.07119141609413861,
+      "p99": 0.0,
+      "rms": 0.3378622908549022
+    },
+    "reference_changed": false,
+    "saved_reference_counts": [
+      537
+    ],
+    "semantics": "Quiet stopped angle does not establish true vertical: the pole can hang or be held at an unknown angle. Saved reference consistency is distinct from physical zero calibration."
+  },
+  "camera": {
+    "physical_cart_tracking": "unmeasured",
+    "status": "no camera recording supplied"
+  },
+  "counterfactual_linear_gains": {
+    "auto": {
+      "k1": -22.02559265311508,
+      "k2": -2.391379796199559,
+      "k3": -3.4128439816513763,
+      "k4": -3.1853211041467877
+    },
+    "upright": {
+      "k1": -27.42778348134693,
+      "k2": -3.0214476831965866,
+      "k3": -7.678898958715596,
+      "k4": -5.71651375117431
+    }
+  },
+  "demand_minus_governed_acceleration_m_s2": {
+    "max": 9.322241,
+    "mean": -0.025216880392156894,
+    "median": 0.0,
+    "min": -9.991672000000001,
+    "n": 51,
+    "p01": -9.337298500000001,
+    "p99": 9.138955500000002,
+    "rms": 3.811733486536646
+  },
+  "encoder_angle_deg": {
+    "max": 18.105466326134014,
+    "mean": -1.2821690545240547,
+    "median": -2.636718541639931,
+    "min": -18.105466326134014,
+    "n": 51,
+    "p01": -17.97363160226339,
+    "p99": 17.622070428749065,
+    "rms": 11.842829453032298
+  },
+  "evidence_limits": [
+    "No hardware/network/transport opened.",
+    "No physical cart tracking claim without independently valid camera cart data.",
+    "No calibration correction is fitted or applied.",
+    "No training, policy selection, or reserved-pose evaluation performed."
+  ],
+  "first_abs_encoder_over_15deg_s": 0.15000000000009095,
+  "first_abs_encoder_over_5deg_s": 0.05999999999994543,
+  "first_active_state": {
+    "acceleration": 0.0,
+    "angle_hat": -4.345465e-06,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 66683755,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 1,
+    "mode": 12,
+    "omega": -0.0004229256,
+    "received_ns": 710362167129015,
+    "sid": 1814684874,
+    "theta": 0.0,
+    "tick": 517217925,
+    "unwrapped_tick": 517217925,
+    "unwrapped_us": 1826382531,
+    "us": 1826382531,
+    "velocity": 0.0,
+    "x": 0.0
+  },
+  "first_rail_braking_s": null,
+  "initial_response": {
+    "accepted_demand_m_s2": {
+      "max": 14.5945,
+      "mean": 0.625067961,
+      "median": -0.8494103120000001,
+      "min": -6.277745,
+      "n": 16,
+      "p01": -6.23259995,
+      "p99": 14.306925999999999,
+      "rms": 6.287172308496312
+    },
+    "encoder_angle_change_deg": 15.380862934214555,
+    "end_s": 0.15000000000009095,
+    "governed_acceleration_m_s2": {
+      "max": 5.272259,
+      "mean": -1.3589495139999999,
+      "median": -1.4494105,
+      "min": -6.277745,
+      "n": 16,
+      "p01": -6.1982729,
+      "p99": 5.0472588499999995,
+      "rms": 3.5077943607535036
+    },
+    "linear_auto_raw_m_s2": {
+      "max": 16.445129121018752,
+      "mean": 1.730367027415097,
+      "median": -0.7772577710346036,
+      "min": -5.891966630689048,
+      "n": 16,
+      "p01": -5.771969002543953,
+      "p99": 16.152820664197197,
+      "rms": 7.138221552178204
+    },
+    "linear_upright_raw_m_s2": {
+      "max": 20.16754568327837,
+      "mean": 1.8483449844197004,
+      "median": -0.984166833829835,
+      "min": -7.631424272155985,
+      "n": 16,
+      "p01": -7.467623803709314,
+      "p99": 19.791773800150526,
+      "rms": 8.741891463199494
+    },
+    "replayed_mlp_m_s2": {
+      "max": 15.727933955630025,
+      "mean": 1.6080643862911201,
+      "median": -0.8494105543208919,
+      "min": -6.277745084965614,
+      "n": 16,
+      "p01": -6.232599953516259,
+      "p99": 15.557919540861167,
+      "rms": 7.415459843569888
+    },
+    "semantics": "First0.5s, stopped earlier at first rail brake or abs(encoder angle)>15deg.",
+    "step_position_change_m": -0.0273
+  },
+  "input": {
+    "members": {
+      "report.json": {
+        "bytes": 4539,
+        "sha256": "cc70c8f50c2b4a08d0ec904418aaf3f4076159707811c3bfffb011fc1b665bca"
+      },
+      "rig-1792615065736997209-1814684874.jsonl": {
+        "bytes": 187479,
+        "sha256": "151782f2242f95502bf09b8e787652744bae0f091e76c0efd181ddac7745abef"
+      }
+    },
+    "path": "/Users/rbafna/projects/cartpole_v2/runs/policy-confidence-20261021/hardware-live/balance47-run1-01"
+  },
+  "last_active_state": {
+    "acceleration": -4.052503,
+    "angle_hat": -0.1560585,
+    "brake_direction": 0,
+    "demand": -3.841173,
+    "dropped": 66683755,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 50,
+    "misses": 1,
+    "mode": 12,
+    "omega": 2.039645,
+    "received_ns": 710362666929849,
+    "sid": 1814684874,
+    "theta": -0.1549321,
+    "tick": 517218425,
+    "unwrapped_tick": 517218425,
+    "unwrapped_us": 1826882531,
+    "us": 1826882531,
+    "velocity": -0.4627242,
+    "x": 0.0846
+  },
+  "linear_parameter_error": null,
+  "linear_semantics": "Unclipped offline native state-feedback comparison from recorded parameters, using raw or filtered angle; AUTO and upright-only gains differ. This is not the executed controller in host mode.",
+  "max_abs_step_position_m": 0.1028625,
+  "max_camera_alignment_ms": 20.0,
+  "mlp_replay_minus_requested_m_s2": {
+    "max": 2.6645352591003757e-15,
+    "mean": 5.224578939412501e-17,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 51,
+    "p01": 0.0,
+    "p99": 1.3322676295501878e-15,
+    "rms": 3.731095656508669e-16
+  },
+  "observer": {
+    "best_lag_rms_deg": 0.7814220397022227,
+    "best_raw_to_filtered_angle_lag_ms": 2,
+    "curve": [
+      {
+        "lag_ms": 0,
+        "rms_deg": 0.7891156211946162
+      },
+      {
+        "lag_ms": 2,
+        "rms_deg": 0.7814220397022227
+      },
+      {
+        "lag_ms": 4,
+        "rms_deg": 0.9473034825612523
+      },
+      {
+        "lag_ms": 6,
+        "rms_deg": 1.2177823760909887
+      },
+      {
+        "lag_ms": 8,
+        "rms_deg": 1.5386521654794634
+      },
+      {
+        "lag_ms": 10,
+        "rms_deg": 1.8843443423569768
+      },
+      {
+        "lag_ms": 12,
+        "rms_deg": 2.231990622915368
+      },
+      {
+        "lag_ms": 14,
+        "rms_deg": 2.5917918245577343
+      },
+      {
+        "lag_ms": 16,
+        "rms_deg": 2.9593177869249963
+      },
+      {
+        "lag_ms": 18,
+        "rms_deg": 3.332013332328863
+      },
+      {
+        "lag_ms": 20,
+        "rms_deg": 3.708320119741398
+      },
+      {
+        "lag_ms": 22,
+        "rms_deg": 4.063233231322435
+      },
+      {
+        "lag_ms": 24,
+        "rms_deg": 4.423964153882643
+      },
+      {
+        "lag_ms": 26,
+        "rms_deg": 4.789198444314685
+      },
+      {
+        "lag_ms": 28,
+        "rms_deg": 5.157979546675301
+      },
+      {
+        "lag_ms": 30,
+        "rms_deg": 5.529597872349081
+      },
+      {
+        "lag_ms": 32,
+        "rms_deg": 5.872865614576469
+      },
+      {
+        "lag_ms": 34,
+        "rms_deg": 6.221493131387794
+      },
+      {
+        "lag_ms": 36,
+        "rms_deg": 6.574627852588426
+      },
+      {
+        "lag_ms": 38,
+        "rms_deg": 6.931580943458338
+      },
+      {
+        "lag_ms": 40,
+        "rms_deg": 7.291791666727414
+      },
+      {
+        "lag_ms": 42,
+        "rms_deg": 7.614417416029939
+      },
+      {
+        "lag_ms": 44,
+        "rms_deg": 7.94301777098733
+      },
+      {
+        "lag_ms": 46,
+        "rms_deg": 8.276881168884698
+      },
+      {
+        "lag_ms": 48,
+        "rms_deg": 8.615395771928108
+      },
+      {
+        "lag_ms": 50,
+        "rms_deg": 8.958034303326617
+      },
+      {
+        "lag_ms": 52,
+        "rms_deg": 9.261680963975303
+      },
+      {
+        "lag_ms": 54,
+        "rms_deg": 9.571468611227745
+      },
+      {
+        "lag_ms": 56,
+        "rms_deg": 9.88682000797119
+      },
+      {
+        "lag_ms": 58,
+        "rms_deg": 10.20721949220321
+      },
+      {
+        "lag_ms": 60,
+        "rms_deg": 10.532206371492112
+      },
+      {
+        "lag_ms": 62,
+        "rms_deg": 10.815164917296123
+      },
+      {
+        "lag_ms": 64,
+        "rms_deg": 11.104618922909188
+      },
+      {
+        "lag_ms": 66,
+        "rms_deg": 11.400073629342046
+      },
+      {
+        "lag_ms": 68,
+        "rms_deg": 11.701074488403973
+      },
+      {
+        "lag_ms": 70,
+        "rms_deg": 12.007204408575204
+      },
+      {
+        "lag_ms": 72,
+        "rms_deg": 12.268174760516557
+      },
+      {
+        "lag_ms": 74,
+        "rms_deg": 12.53612248126976
+      },
+      {
+        "lag_ms": 76,
+        "rms_deg": 12.810609760674502
+      },
+      {
+        "lag_ms": 78,
+        "rms_deg": 13.091225255108428
+      },
+      {
+        "lag_ms": 80,
+        "rms_deg": 13.37758332377327
+      },
+      {
+        "lag_ms": 82,
+        "rms_deg": 13.617881721730152
+      },
+      {
+        "lag_ms": 84,
+        "rms_deg": 13.865392572508267
+      },
+      {
+        "lag_ms": 86,
+        "rms_deg": 14.11973659079502
+      },
+      {
+        "lag_ms": 88,
+        "rms_deg": 14.38055121328934
+      },
+      {
+        "lag_ms": 90,
+        "rms_deg": 14.64749079547663
+      },
+      {
+        "lag_ms": 92,
+        "rms_deg": 14.865636455882422
+      },
+      {
+        "lag_ms": 94,
+        "rms_deg": 15.091406886219552
+      },
+      {
+        "lag_ms": 96,
+        "rms_deg": 15.32446509034696
+      },
+      {
+        "lag_ms": 98,
+        "rms_deg": 15.564483696478458
+      },
+      {
+        "lag_ms": 100,
+        "rms_deg": 15.811145723934045
+      }
+    ],
+    "rate_lag_fit": {
+      "best": {
+        "lag_ms": 26,
+        "rms_rad_s": 0.4036319589950108
+      },
+      "curve": [
+        {
+          "lag_ms": 0,
+          "rms_rad_s": 1.6969934877749704
+        },
+        {
+          "lag_ms": 2,
+          "rms_rad_s": 1.5747242127102448
+        },
+        {
+          "lag_ms": 4,
+          "rms_rad_s": 1.4573296984995974
+        },
+        {
+          "lag_ms": 6,
+          "rms_rad_s": 1.3460859592228092
+        },
+        {
+          "lag_ms": 8,
+          "rms_rad_s": 1.242645977191573
+        },
+        {
+          "lag_ms": 10,
+          "rms_rad_s": 1.1491190952776797
+        },
+        {
+          "lag_ms": 12,
+          "rms_rad_s": 1.019313921400789
+        },
+        {
+          "lag_ms": 14,
+          "rms_rad_s": 0.8966666091362118
+        },
+        {
+          "lag_ms": 16,
+          "rms_rad_s": 0.7845413359715763
+        },
+        {
+          "lag_ms": 18,
+          "rms_rad_s": 0.6881011336489844
+        },
+        {
+          "lag_ms": 20,
+          "rms_rad_s": 0.6147724739760336
+        },
+        {
+          "lag_ms": 22,
+          "rms_rad_s": 0.5100136394358774
+        },
+        {
+          "lag_ms": 24,
+          "rms_rad_s": 0.43409495919490143
+        },
+        {
+          "lag_ms": 26,
+          "rms_rad_s": 0.4036319589950108
+        },
+        {
+          "lag_ms": 28,
+          "rms_rad_s": 0.428433059634306
+        },
+        {
+          "lag_ms": 30,
+          "rms_rad_s": 0.5003466981896514
+        },
+        {
+          "lag_ms": 32,
+          "rms_rad_s": 0.5284157825913623
+        },
+        {
+          "lag_ms": 34,
+          "rms_rad_s": 0.5951662824813335
+        },
+        {
+          "lag_ms": 36,
+          "rms_rad_s": 0.6894532702846468
+        },
+        {
+          "lag_ms": 38,
+          "rms_rad_s": 0.8016183403641524
+        },
+        {
+          "lag_ms": 40,
+          "rms_rad_s": 0.925181797761176
+        },
+        {
+          "lag_ms": 42,
+          "rms_rad_s": 0.9988439972097466
+        },
+        {
+          "lag_ms": 44,
+          "rms_rad_s": 1.0896203129834456
+        },
+        {
+          "lag_ms": 46,
+          "rms_rad_s": 1.1936124354156699
+        },
+        {
+          "lag_ms": 48,
+          "rms_rad_s": 1.307671208415606
+        },
+        {
+          "lag_ms": 50,
+          "rms_rad_s": 1.4293888401994594
+        },
+        {
+          "lag_ms": 52,
+          "rms_rad_s": 1.5122452854787063
+        },
+        {
+          "lag_ms": 54,
+          "rms_rad_s": 1.6070227471016683
+        },
+        {
+          "lag_ms": 56,
+          "rms_rad_s": 1.7117422046464117
+        },
+        {
+          "lag_ms": 58,
+          "rms_rad_s": 1.8246927412251985
+        },
+        {
+          "lag_ms": 60,
+          "rms_rad_s": 1.9444404809195637
+        },
+        {
+          "lag_ms": 62,
+          "rms_rad_s": 2.0306646919229605
+        },
+        {
+          "lag_ms": 64,
+          "rms_rad_s": 2.126439420659725
+        },
+        {
+          "lag_ms": 66,
+          "rms_rad_s": 2.230534765451473
+        },
+        {
+          "lag_ms": 68,
+          "rms_rad_s": 2.341841429627688
+        },
+        {
+          "lag_ms": 70,
+          "rms_rad_s": 2.4593804981406717
+        },
+        {
+          "lag_ms": 72,
+          "rms_rad_s": 2.5454261537096134
+        },
+        {
+          "lag_ms": 74,
+          "rms_rad_s": 2.6395760336100804
+        },
+        {
+          "lag_ms": 76,
+          "rms_rad_s": 2.7409951539878525
+        },
+        {
+          "lag_ms": 78,
+          "rms_rad_s": 2.8489072808657077
+        },
+        {
+          "lag_ms": 80,
+          "rms_rad_s": 2.9626029804148533
+        },
+        {
+          "lag_ms": 82,
+          "rms_rad_s": 3.034727107906339
+        },
+        {
+          "lag_ms": 84,
+          "rms_rad_s": 3.1143700524327844
+        },
+        {
+          "lag_ms": 86,
+          "rms_rad_s": 3.2009706389950052
+        },
+        {
+          "lag_ms": 88,
+          "rms_rad_s": 3.2939801523560055
+        },
+        {
+          "lag_ms": 90,
+          "rms_rad_s": 3.3928715656080755
+        },
+        {
+          "lag_ms": 92,
+          "rms_rad_s": 3.457924646765094
+        },
+        {
+          "lag_ms": 94,
+          "rms_rad_s": 3.529567336313548
+        },
+        {
+          "lag_ms": 96,
+          "rms_rad_s": 3.6074070490269734
+        },
+        {
+          "lag_ms": 98,
+          "rms_rad_s": 3.6910517430807515
+        },
+        {
+          "lag_ms": 100,
+          "rms_rad_s": 3.7801160881329263
+        }
+      ],
+      "derivative_window_ms": 40.0,
+      "semantics": "Centered local linear raw-angle derivative, then delayed-reference RMS scan0..100ms. Descriptive observer phase-delay proxy; not causal identification and not a time-shift correction."
+    },
+    "raw_finite_difference_rate_minus_observer_rad_s": {
+      "max": 3.517821200002999,
+      "mean": 0.08939378383689926,
+      "median": 0.5080209999978362,
+      "min": -3.9879270744036277,
+      "n": 51,
+      "p01": -3.572596037201257,
+      "p99": 3.4004271000042205,
+      "rms": 1.8900767394044984
+    },
+    "semantics": "Fits a delayed raw angle to filtered angle on the same board timestamps. Not a causal identification or camera/exposure delay estimate. Raw-angle derivative is quantization-sensitive.",
+    "status": "descriptive fit only",
+    "timing_gap_max_ms": 10.000000000218279,
+    "zero_lag_rms_deg": 0.7891156211946162
+  },
+  "operation_completed": false,
+  "operation_error": "latched rig error: executor fault 1",
+  "rail_braking_fraction": 0.0,
+  "raw_minus_filtered_angle_deg": {
+    "max": 1.506430375240478,
+    "mean": 0.06342166165921863,
+    "median": 0.1800462575419093,
+    "min": -1.6079544858330925,
+    "n": 51,
+    "p01": -1.5471579341917612,
+    "p99": 1.472537916306207,
+    "rms": 0.7945768903067817
+  },
+  "recorded_parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.800000012,
+    "approach_v": 0.200000003,
+    "bal_pw": 4.5,
+    "bw": 10.0,
+    "catch_a": 0.25,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.300000012,
+    "giveup": 0.800000012,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.123999998,
+    "manual_speed_max": 0.150000006,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "phase_soft": 2.0,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "rail": 0.309037507,
+    "rail_fault_margin": 0.00999999978,
+    "rail_fraction": 0.949999988,
+    "rail_hysteresis": 0.00499999989,
+    "rail_margin": 0.0149999997,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rail_recover_v": 0.150000006,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0,
+    "rehome_v": 0.0799999982,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.0500000007,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "requests": 51,
+  "response_snapshots": [
+    {
+      "accepted_demand_m_s2": 0.0,
+      "board_t_s": 0.0,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.0,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -0.0011070871771139447,
+      "counterfactual_auto_linear_raw_angle_m_s2": -0.001011375735135576,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.0013970340474302977,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.0012778475742845263,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.0,
+      "host_receipt_t_s": 0.0,
+      "last_seq": 0,
+      "mode": 12,
+      "observation_sequence": 517217925,
+      "observer_rate_rad_s": -0.0004229256,
+      "replayed_mlp_m_s2": -0.000892623962930883,
+      "requested_minus_governed_m_s2": 0.0,
+      "requested_time_s": 0.0,
+      "theta_encoder_deg": 0.0,
+      "theta_filtered_deg": -0.0002489768045218163,
+      "x_step_estimate_m": 0.0
+    },
+    {
+      "accepted_demand_m_s2": -5.346024,
+      "board_t_s": 0.049999999999954525,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.07871281,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -5.168325790261901,
+      "counterfactual_auto_linear_raw_angle_m_s2": -5.091982443055086,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -6.634489138058547,
+      "counterfactual_upright_linear_raw_angle_m_s2": -6.539421149178181,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -4.24793,
+      "host_receipt_t_s": 0.049729307065717876,
+      "last_seq": 5,
+      "mode": 12,
+      "observation_sequence": 517217975,
+      "observer_rate_rad_s": -1.316587,
+      "replayed_mlp_m_s2": -5.976777541969919,
+      "requested_minus_governed_m_s2": -1.0980939999999997,
+      "requested_time_s": 0.05,
+      "theta_encoder_deg": -4.3945312847050815,
+      "theta_filtered_deg": -4.593125331990966,
+      "x_step_estimate_m": -0.0010125
+    },
+    {
+      "accepted_demand_m_s2": 0.578184,
+      "board_t_s": 0.10000000000013642,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.3227182,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 2.5923625469182063,
+      "counterfactual_auto_linear_raw_angle_m_s2": 2.7126016227983065,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 2.692539605839971,
+      "counterfactual_upright_linear_raw_angle_m_s2": 2.8422695763872197,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -2.227743,
+      "host_receipt_t_s": 0.09977317601442337,
+      "last_seq": 10,
+      "mode": 12,
+      "observation_sequence": 517218025,
+      "observer_rate_rad_s": 1.580723,
+      "replayed_mlp_m_s2": 2.6547849964085373,
+      "requested_minus_governed_m_s2": 2.8059269999999996,
+      "requested_time_s": 0.1,
+      "theta_encoder_deg": 0.0,
+      "theta_filtered_deg": -0.31278121270024617,
+      "x_step_estimate_m": -0.0115875
+    },
+    {
+      "accepted_demand_m_s2": 10.20235,
+      "board_t_s": 0.20000000000004547,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.2057075,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 10.186697220604577,
+      "counterfactual_auto_linear_raw_angle_m_s2": 9.910965433858026,
+      "counterfactual_upright_linear_filtered_angle_m_s2": 12.9945665334407,
+      "counterfactual_upright_linear_raw_angle_m_s2": 12.651206340372763,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 10.97225,
+      "host_receipt_t_s": 0.19978577899746597,
+      "last_seq": 20,
+      "mode": 12,
+      "observation_sequence": 517218125,
+      "observer_rate_rad_s": 1.18618,
+      "replayed_mlp_m_s2": 9.646839824931785,
+      "requested_minus_governed_m_s2": -0.7699000000000016,
+      "requested_time_s": 0.2,
+      "theta_encoder_deg": 16.962891079817982,
+      "theta_filtered_deg": 17.680159754808404,
+      "x_step_estimate_m": -0.0298125
+    },
+    {
+      "accepted_demand_m_s2": -6.359805,
+      "board_t_s": 0.2999999999999545,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": 0.8872237,
+      "counterfactual_auto_linear_filtered_angle_m_s2": -10.00850236097124,
+      "counterfactual_auto_linear_raw_angle_m_s2": -9.987005162285875,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -11.013348516149083,
+      "counterfactual_upright_linear_raw_angle_m_s2": -10.986578725193453,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": 0.239242,
+      "host_receipt_t_s": 0.29975393298082054,
+      "last_seq": 30,
+      "mode": 12,
+      "observation_sequence": 517218225,
+      "observer_rate_rad_s": -5.02489,
+      "replayed_mlp_m_s2": -9.943682933592463,
+      "requested_minus_governed_m_s2": -6.599047,
+      "requested_time_s": 0.3,
+      "theta_encoder_deg": -2.373046802067497,
+      "theta_filtered_deg": -2.4289680558300604,
+      "x_step_estimate_m": 0.0338625
+    },
+    {
+      "accepted_demand_m_s2": -3.841173,
+      "board_t_s": 0.5,
+      "brake_direction": 0,
+      "commanded_velocity_m_s": -0.4627242,
+      "counterfactual_auto_linear_filtered_angle_m_s2": 0.2550863345515575,
+      "counterfactual_auto_linear_raw_angle_m_s2": 0.2798959621160262,
+      "counterfactual_upright_linear_filtered_angle_m_s2": -0.11319248902406942,
+      "counterfactual_upright_linear_raw_angle_m_s2": -0.08229783371068011,
+      "fault": 0,
+      "flags": 207,
+      "governed_acceleration_m_s2": -4.052503,
+      "host_receipt_t_s": 0.4998008339898661,
+      "last_seq": 50,
+      "mode": 12,
+      "observation_sequence": 517218425,
+      "observer_rate_rad_s": 2.039645,
+      "replayed_mlp_m_s2": -2.706946418460123,
+      "requested_minus_governed_m_s2": 0.2113299999999998,
+      "requested_time_s": 0.5,
+      "theta_encoder_deg": -8.87695544109882,
+      "theta_filtered_deg": -8.941493407142357,
+      "x_step_estimate_m": 0.0846
+    }
+  ],
+  "role": "host-policy",
+  "schema": "cartpole-offline-live-trace-analysis-v1",
+  "semantics": "Operation success is not balance success. x is step-count estimate; velocity/acceleration are commanded governor state, not independently measured cart motion.",
+  "sim_replay": {
+    "performed": false,
+    "reason": "Trace cart velocity/acceleration are command states. A matched command-state simulation can be a hypothesis check, but cannot establish actuator tracking or physical initial cart velocity."
+  },
+  "timing": {
+    "accepted_sequences_seen": 50,
+    "action_expiry_fault_observed": true,
+    "board_dropped_serial_frames_delta": 0,
+    "board_telemetry_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 50,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "control_deadline_misses_delta": 0,
+    "failure_context": [
+      {
+        "host_monotonic_ns": 710362677652882,
+        "reason": "executor fault 1",
+        "type": "error"
+      },
+      {
+        "act_finished_host_ns": 710362670242580,
+        "act_started_host_ns": 710362668112995,
+        "failed_observation_board_ns": 1826882531000,
+        "failed_observation_sequence": 517218425,
+        "fetch_finished_host_ns": 710362667698239,
+        "fetch_started_host_ns": 710362667376253,
+        "host_monotonic_ns": 710362678474200,
+        "previous_sent_observation_board_ns": 1826872531000,
+        "previous_sent_observation_sequence": 517218415,
+        "reason": "latched rig error: executor fault 1",
+        "stage": "step",
+        "timing": null,
+        "type": "policy_failure"
+      }
+    ],
+    "faults": [
+      {
+        "board_t_s": 0.5099999999999909,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5140000000001237,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5170000000000528,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5180000000000291,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5199999999999818,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5230000000001382,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5330000000001291,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.54300000000012,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.553000000000111,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5630000000001019,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5730000000000928,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5830000000000837,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.5930000000000746,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.6030000000000655,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      },
+      {
+        "board_t_s": 0.6059999999999945,
+        "code": 1,
+        "mode": 4,
+        "name": "action_expired"
+      }
+    ],
+    "first_accept_board_age_upper_bound_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 50,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "host_receipt_interval_ms": {
+      "max": 10.455446004867554,
+      "mean": 9.996016681194305,
+      "median": 9.999746024608612,
+      "min": 9.5640150308609,
+      "n": 50,
+      "p01": 9.614693293571472,
+      "p99": 10.398966616392135,
+      "rms": 9.997071491378149
+    },
+    "logger_dropped_records": [
+      0
+    ],
+    "policy_compute": [
+      {
+        "calls": 51,
+        "host_monotonic_ns": 710362681857716,
+        "max_compute_ns": 2131729,
+        "mean_compute_ns": 1209326.9607843137,
+        "timing": null,
+        "type": "policy_end"
+      }
+    ],
+    "receipt_to_command_record_ms": {
+      "max": 11.350462,
+      "mean": 2.7951559215686275,
+      "median": 2.543413,
+      "min": 1.65259,
+      "n": 51,
+      "p01": 1.691694,
+      "p99": 7.544366500000001,
+      "rms": 3.0678930624224763
+    },
+    "receipt_to_request_record_ms": {
+      "max": 11.475135,
+      "mean": 2.8762133529411766,
+      "median": 2.626102,
+      "min": 1.706223,
+      "n": 51,
+      "p01": 1.7445425,
+      "p99": 7.6497115,
+      "rms": 3.1449799699401466
+    },
+    "request_board_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 50,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "request_host_interval_ms": {
+      "max": 17.64148998260498,
+      "mean": 10.183615040779113,
+      "median": 9.99941098690033,
+      "min": 9.279821038246155,
+      "n": 50,
+      "p01": 9.299828680753707,
+      "p99": 14.555734602212894,
+      "rms": 10.247077904611498
+    },
+    "semantics": "Host command record follows transport.write; these intervals are host proxies, not wire/executor latency. First telemetry last_seq observation is an upper bound on acceptance time. Unseen sequence does not prove rejection. dropped_serial_frames can count overwritten telemetry, not lost policy commands.",
+    "ttl_ms": [
+      20.0
+    ]
+  }
+}

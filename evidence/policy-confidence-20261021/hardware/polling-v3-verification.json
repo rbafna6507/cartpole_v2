@@ -1,0 +1,33 @@
+{
+  "current_priority": "Do not deploy yet: latest RR trace showed47.72ms transport-read delay and prompt notifications. Parent is first isolating RR10 to only the control child because its launcher inherited realtime policy.",
+  "frozen_v2_sources_unchanged": true,
+  "hardware_invoked": false,
+  "hypothesis": "Periodic timer wakeups may distinguish the earlier delayed healthy-notification handoff from normal notification wakeups. Success would not identify a unique kernel/GIL cause or establish real-time reliability.",
+  "invariant_checks": [
+    "False and spurious wakes do not return an unchanged state",
+    "Original overall deadline is retained across repeated1ms waits",
+    "An available newer state is returned after a timeout wake",
+    "Remaining deadlines shorter than1ms are honored",
+    "Faults propagate and polling scope restores",
+    "Non-control Condition.wait calls remain uncapped",
+    "Driver retains20ms lease and60s duration ceiling"
+  ],
+  "limitations": [
+    "Polling cannot create missing serial samples or renew any action lease.",
+    "Extra timed sleeps and predicate checks change wakeup frequency and CPU load; they are an experimental factor.",
+    "Parent retains hardware ownership and deployment/review decision."
+  ],
+  "production_modified": false,
+  "schema": "cartpole-polling-research-verification-v1",
+  "source_sha256": {
+    "polling_timing_instrumentation.py": "ea1d3f44861a21456044963ddc44853df0fcdb04968702f52882c4e5ceca4a45",
+    "test_polling_timing.py": "4d673f39c14cce4a2d5b85979b3a2d1f2636a7f165fec17dfdbe515e1f301602",
+    "zero-timing-poll-v3.py": "13d156c96023129b4a634ea5203d75897256a5ab7f3c9b1c74dac7c943393ff2"
+  },
+  "status": "PREPARED_UNDEPLOYED",
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python evidence/policy-confidence-20261021/hardware/test_polling_timing.py",
+  "tests": {
+    "existing_timing": 7,
+    "polling": 6
+  }
+}

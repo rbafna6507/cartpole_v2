@@ -1,0 +1,52 @@
+{
+  "schema": "cartpole-policy-confidence-protocol-v1",
+  "profile": "training/profiles/rl-encoder-20261021",
+  "hardware_accepted": false,
+  "initial_stage": {
+    "optimizer_seeds": [
+      11,
+      23,
+      47
+    ],
+    "initializations": [
+      "scratch",
+      "teacher"
+    ],
+    "steps": 20480,
+    "seconds": 5,
+    "evaluation_seconds": 10,
+    "development_seeds": [
+      93000,
+      93001
+    ],
+    "future_balance_confirmation_seeds": [
+      94000,
+      94001,
+      94002,
+      94003,
+      94004,
+      94005,
+      94006,
+      94007
+    ],
+    "learning_rate": 3e-06,
+    "policy_std": 0.02,
+    "constraint": "equilibrium",
+    "randomization": null,
+    "teacher_gains": {
+      "position_gain": 1,
+      "velocity_gain": 2,
+      "theta_gain": 40,
+      "omega_gain": 2
+    }
+  },
+  "future_joint_holdout_seed_range": [
+    96000,
+    96999
+  ],
+  "limitations": [
+    "Protocol will be extended before subsequent stage execution; every inspected pose becomes development data.",
+    "Equal online budgets; teacher initialization adds supervised compute.",
+    "No hardware transfer probability is inferred."
+  ]
+}

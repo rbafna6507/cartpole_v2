@@ -1,0 +1,37 @@
+Frozen selection: low-std optimizer seed 11, step 102,400.
+Checkpoint: runs/policy-confidence-20261021/ablations/low-std-seed11/checkpoints/step-000102400.zip
+SHA-256: 13b32ac4c20e8a1c523141ebc80902d8ffe6525d79699ea24bbb5d41c56fb1dd
+
+Development, matched optimizer seeds 11 and 23 (same two poses; descriptive repeated outcomes):
+  ppo: final hanging holds 2/4; upright holds 4/4, uninterrupted 0/4; worst upright displacement 137.74 mm.
+  retained: final hanging holds 1/4; upright holds 4/4, uninterrupted 4/4; worst upright displacement 94.98 mm.
+  continuing: final hanging holds 2/4; upright holds 4/4, uninterrupted 0/4; worst upright displacement 189.45 mm.
+  low-std: final hanging holds 3/4; upright holds 4/4, uninterrupted 4/4; worst upright displacement 104.91 mm.
+
+Reserved-pose confirmation, 60 seconds, frozen candidate only:
+  nominal/nominal/hanging: holds 6/8; uninterrupted 0/8; faults 0; balanced fraction 0.547083; tail cart RMS 37.585 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 1/8.
+  nominal/nominal/upright: holds 8/8; uninterrupted 5/8; faults 0; balanced fraction 0.991354; tail cart RMS 3.192 mm; worst displacement 153.67 mm; capture <=5 s plus >=30 s dwell 8/8.
+  sdk/nominal/hanging: holds 8/8; uninterrupted 0/8; faults 0; balanced fraction 0.733229; tail cart RMS 3.402 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 2/8.
+  sdk/nominal/upright: holds 8/8; uninterrupted 5/8; faults 0; balanced fraction 0.991354; tail cart RMS 3.660 mm; worst displacement 153.66 mm; capture <=5 s plus >=30 s dwell 8/8.
+  stress/nominal/hanging: holds 2/2; uninterrupted 0/2; faults 0; balanced fraction 0.840333; tail cart RMS 3.735 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 1/2.
+  stress/nominal/upright: holds 2/2; uninterrupted 2/2; faults 0; balanced fraction 1.000000; tail cart RMS 4.231 mm; worst displacement 64.15 mm; capture <=5 s plus >=30 s dwell 2/2.
+  stress/encoder-bias-minus/hanging: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.046083; tail cart RMS 162.084 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/encoder-bias-minus/upright: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.061500; tail cart RMS 173.244 mm; worst displacement 294.09 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/combined-minus/hanging: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.061167; tail cart RMS 202.242 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/combined-minus/upright: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.032917; tail cart RMS 187.622 mm; worst displacement 294.13 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/encoder-bias-plus/hanging: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.020083; tail cart RMS 196.956 mm; worst displacement 294.09 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/encoder-bias-plus/upright: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.055667; tail cart RMS 212.692 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/combined-plus/hanging: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.240750; tail cart RMS 147.759 mm; worst displacement 294.09 mm; capture <=5 s plus >=30 s dwell 0/2.
+  stress/combined-plus/upright: holds 0/2; uninterrupted 0/2; faults 0; balanced fraction 0.390583; tail cart RMS 144.928 mm; worst displacement 294.08 mm; capture <=5 s plus >=30 s dwell 0/2.
+
+SDK same-observation emission parity: True; 96000 comparisons; maximum discrepancy 5.60286401e-06 m/s^2 against 1e-05 tolerance.
+Audited 52 episodes, 312000 physically advanced decisions.
+
+Nominal and SDK share eight paired poses; stress scenarios share two other poses. Development selection considered thirty checkpoint records on two poses and can overfit. No reserved outcome changed candidate selection. All evidence is local simulation; hardware performance is separate.
+
+Paired initializer control, same eight nominal poses (declared before outcome inspection):
+  initial/hanging: final holds 8/8, uninterrupted 0/8, balanced fraction 0.713083, longest dwell mean 42.100 s, tail cart RMS 2.732 mm, worst displacement 294.08 mm, raw-action-change RMS 0.522708 m/s^2 per sample.
+  initial/upright: final holds 8/8, uninterrupted 6/8, balanced fraction 0.998396, longest dwell mean 59.486 s, tail cart RMS 3.255 mm, worst displacement 125.08 mm, raw-action-change RMS 0.078459 m/s^2 per sample.
+  selected/hanging: final holds 6/8, uninterrupted 0/8, balanced fraction 0.547083, longest dwell mean 32.602 s, tail cart RMS 37.585 mm, worst displacement 294.08 mm, raw-action-change RMS 0.674040 m/s^2 per sample.
+  selected/upright: final holds 8/8, uninterrupted 5/8, balanced fraction 0.991354, longest dwell mean 58.998 s, tail cart RMS 3.192 mm, worst displacement 153.67 mm, raw-action-change RMS 0.083754 m/s^2 per sample.
+  Hanging transitions: zero gained holds, two lost holds. Training did not improve this reserved nominal set. The selected candidate stays frozen; no alternate candidate was selected after confirmation.

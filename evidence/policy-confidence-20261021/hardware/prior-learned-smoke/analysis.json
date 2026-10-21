@@ -1,0 +1,566 @@
+{
+  "accepted_minus_requested_m_s2": {
+    "max": 5.52426845601417e-06,
+    "mean": 6.67845544861969e-08,
+    "median": 0.0,
+    "min": -4.621781325653274e-06,
+    "n": 299,
+    "p01": -4.1489066432376375e-06,
+    "p99": 4.947368219418989e-06,
+    "rms": 1.4869469778833825e-06
+  },
+  "action_rows_matched": 299,
+  "active_span_s": 2.990000000000009,
+  "active_states": 300,
+  "actor": {
+    "backend": {
+      "actor_content_sha256": "44034abc275db1edf052847b3ad0718d3a0e94a0b42f2a7ca7b4a82779ba3bba",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a"
+    },
+    "content_sha256": "44034abc275db1edf052847b3ad0718d3a0e94a0b42f2a7ca7b4a82779ba3bba",
+    "file_sha256": "20743fc04cf565390a6eb08069b53ccf401bd03c56b7bd6810678a2190200db1",
+    "path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261021-console/actor.json",
+    "semantics": "Offline encoded reconstruction; current deployment loader is not invoked and this grants no runtime/hardware admission.",
+    "status": "trace-bound",
+    "trace_expected_content_sha256": [
+      "44034abc275db1edf052847b3ad0718d3a0e94a0b42f2a7ca7b4a82779ba3bba"
+    ]
+  },
+  "analysis_source_sha256": {
+    "firmware/teensy_executor/executor_core.h": "55ea99a855a10457b0b1ff55676fb61e21f21ec76c5db6259ca5a7f04cf13d7b",
+    "src/cartpole_sdk/control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+    "src/cartpole_sdk/policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+    "src/cartpole_sdk/policies/numeric_backend.py": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+    "src/cartpole_sdk/rig/client.py": "5a427ad08eda72c909048f0eae054cde05e0de3acb8f063aa4d684cee92ff93f",
+    "src/cartpole_sdk/rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a"
+  },
+  "analyzer_sha256": "c25f6c98c4da68d110504a47383b1b310c0288ebdc01ae819a149f50c12cffb9",
+  "artifacts": {
+    "actions.csv": "fd24b9926aede7b3d2c3c00c177655cae8a85ff8fad7c185b49dcd98b5ffc9b6",
+    "signals.png": "24cfde6d193717c24da910b212e17f6189612940403a974927593a0bea4f3cb6",
+    "telemetry.csv": "c21eaf4630859a45ad21e6ed760742c1b047444f391f75739364d2a0de24429b"
+  },
+  "calibration": {
+    "quiet_stopped_encoder_angle_deg": {
+      "max": 0.0,
+      "mean": -0.01602425981247237,
+      "median": 0.0,
+      "min": -0.08789063715325754,
+      "n": 181,
+      "p01": -0.08789063715325754,
+      "p99": 0.0,
+      "rms": 0.037528421294101034
+    },
+    "reference_changed": false,
+    "saved_reference_counts": [
+      294
+    ],
+    "semantics": "Quiet stopped angle does not establish true vertical: the pole can hang or be held at an unknown angle. Saved reference consistency is distinct from physical zero calibration."
+  },
+  "camera": {
+    "physical_cart_tracking": "unmeasured",
+    "status": "no camera recording supplied"
+  },
+  "counterfactual_linear_gains": {
+    "auto": {
+      "k1": -22.02559265311508,
+      "k2": -2.391379796199559,
+      "k3": -3.4128439816513763,
+      "k4": -3.1853211041467877
+    },
+    "upright": {
+      "k1": -27.42778348134693,
+      "k2": -3.0214476831965866,
+      "k3": -7.678898958715596,
+      "k4": -5.71651375117431
+    }
+  },
+  "demand_minus_governed_acceleration_m_s2": {
+    "max": 37.44999,
+    "mean": 3.0631786861000005,
+    "median": 0.25065550000000103,
+    "min": -25.0,
+    "n": 300,
+    "p01": -25.0,
+    "p99": 35.9520809,
+    "rms": 13.336610898117815
+  },
+  "encoder_angle_deg": {
+    "max": 179.56056121897748,
+    "mean": 4.167185918467395,
+    "median": 0.43945312847050816,
+    "min": -179.8242363962967,
+    "n": 300,
+    "p01": -175.72150736003158,
+    "p99": 175.36818262242386,
+    "rms": 108.39174316097382
+  },
+  "evidence_limits": [
+    "No hardware/network/transport opened.",
+    "No physical cart tracking claim without independently valid camera cart data.",
+    "No calibration correction is fitted or applied.",
+    "No training, policy selection, or reserved-pose evaluation performed."
+  ],
+  "first_abs_encoder_over_15deg_s": 1.0499999999999545,
+  "first_abs_encoder_over_5deg_s": 0.22000000000002728,
+  "first_active_state": {
+    "acceleration": 0.0,
+    "angle_hat": -0.0001975544,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 63269530,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 0,
+    "misses": 0,
+    "mode": 12,
+    "omega": 0.00122259,
+    "received_ns": 692502342067056,
+    "sid": 318521962,
+    "theta": 0.0,
+    "tick": 499358112,
+    "unwrapped_tick": 499358112,
+    "unwrapped_us": 1146423338,
+    "us": 1146423338,
+    "velocity": 0.0,
+    "x": 0.0
+  },
+  "first_rail_braking_s": 0.9299999999998363,
+  "input": {
+    "archive_sha256": "3a20c9adfbedc84030e3e7ec452f3d9b411f9c1a44b3a6ce91aa190796b30f7a",
+    "members": {
+      "report.json": {
+        "bytes": 3854,
+        "sha256": "0ee4a15d20c99a24a581fcc9c95c4751baccdc4c55e3aca57c9b49e69ba762aa"
+      },
+      "rig-1792597205936393154-318521962.jsonl": {
+        "bytes": 366166,
+        "sha256": "cfc1cc1ce3ea927bdc6f71d4b72bd1e433cdece3c29d9546710dc97d571c0beb"
+      }
+    },
+    "path": "/Users/rbafna/projects/cartpole_v2/evidence/console-policy-20261021/live-traces-02.tar.gz"
+  },
+  "last_active_state": {
+    "acceleration": -1.07441,
+    "angle_hat": 2.713826,
+    "brake_direction": 1,
+    "demand": 25.0,
+    "dropped": 63269530,
+    "fault": 0,
+    "flags": 207,
+    "last_seq": 299,
+    "misses": 0,
+    "mode": 12,
+    "omega": 6.268343,
+    "received_ns": 692505332264674,
+    "sid": 318521962,
+    "theta": 2.687534,
+    "tick": 499361102,
+    "unwrapped_tick": 499361102,
+    "unwrapped_us": 1149413338,
+    "us": 1149413338,
+    "velocity": 0.7376345,
+    "x": 0.2433375
+  },
+  "linear_parameter_error": null,
+  "linear_semantics": "Unclipped offline native state-feedback comparison from recorded parameters, using raw or filtered angle; AUTO and upright-only gains differ. This is not the executed controller in host mode.",
+  "max_abs_step_position_m": 0.2940375,
+  "max_camera_alignment_ms": 20.0,
+  "mlp_replay_minus_requested_m_s2": {
+    "max": 3.552713678800501e-15,
+    "mean": 1.2624609644566997e-17,
+    "median": 0.0,
+    "min": -3.552713678800501e-15,
+    "n": 299,
+    "p01": 0.0,
+    "p99": 1.776356839398635e-17,
+    "rms": 3.616106602624423e-16
+  },
+  "observer": {
+    "best_lag_rms_deg": 1.0270638781812764,
+    "best_raw_to_filtered_angle_lag_ms": 0,
+    "curve": [
+      {
+        "lag_ms": 0,
+        "rms_deg": 1.0270638781812764
+      },
+      {
+        "lag_ms": 2,
+        "rms_deg": 1.2366647823676549
+      },
+      {
+        "lag_ms": 4,
+        "rms_deg": 1.7573864839644848
+      },
+      {
+        "lag_ms": 6,
+        "rms_deg": 2.3941726379784747
+      },
+      {
+        "lag_ms": 8,
+        "rms_deg": 3.0757610249527834
+      },
+      {
+        "lag_ms": 10,
+        "rms_deg": 3.777980550609191
+      },
+      {
+        "lag_ms": 12,
+        "rms_deg": 4.474176253732987
+      },
+      {
+        "lag_ms": 14,
+        "rms_deg": 5.181523029230173
+      },
+      {
+        "lag_ms": 16,
+        "rms_deg": 5.89600884502969
+      },
+      {
+        "lag_ms": 18,
+        "rms_deg": 6.615320955353996
+      },
+      {
+        "lag_ms": 20,
+        "rms_deg": 7.338040203508891
+      },
+      {
+        "lag_ms": 22,
+        "rms_deg": 8.033296300664393
+      },
+      {
+        "lag_ms": 24,
+        "rms_deg": 8.734731313053578
+      },
+      {
+        "lag_ms": 26,
+        "rms_deg": 9.440968117770538
+      },
+      {
+        "lag_ms": 28,
+        "rms_deg": 10.151004537478688
+      },
+      {
+        "lag_ms": 30,
+        "rms_deg": 10.864095612157334
+      },
+      {
+        "lag_ms": 32,
+        "rms_deg": 11.5512441718364
+      },
+      {
+        "lag_ms": 34,
+        "rms_deg": 12.243325231672
+      },
+      {
+        "lag_ms": 36,
+        "rms_deg": 12.939547360696936
+      },
+      {
+        "lag_ms": 38,
+        "rms_deg": 13.639276426294199
+      },
+      {
+        "lag_ms": 40,
+        "rms_deg": 14.341999139866553
+      },
+      {
+        "lag_ms": 42,
+        "rms_deg": 15.01886674864908
+      },
+      {
+        "lag_ms": 44,
+        "rms_deg": 15.700425013264088
+      },
+      {
+        "lag_ms": 46,
+        "rms_deg": 16.386088638645592
+      },
+      {
+        "lag_ms": 48,
+        "rms_deg": 17.075363077992257
+      },
+      {
+        "lag_ms": 50,
+        "rms_deg": 17.767828109036348
+      },
+      {
+        "lag_ms": 52,
+        "rms_deg": 18.437447799817217
+      },
+      {
+        "lag_ms": 54,
+        "rms_deg": 19.11143688215148
+      },
+      {
+        "lag_ms": 56,
+        "rms_deg": 19.789348920441576
+      },
+      {
+        "lag_ms": 58,
+        "rms_deg": 20.470794179937624
+      },
+      {
+        "lag_ms": 60,
+        "rms_deg": 21.155431233790015
+      },
+      {
+        "lag_ms": 62,
+        "rms_deg": 21.814799213348874
+      },
+      {
+        "lag_ms": 64,
+        "rms_deg": 22.47848667566609
+      },
+      {
+        "lag_ms": 66,
+        "rms_deg": 23.146122055521925
+      },
+      {
+        "lag_ms": 68,
+        "rms_deg": 23.81737335780481
+      },
+      {
+        "lag_ms": 70,
+        "rms_deg": 24.4919432792899
+      },
+      {
+        "lag_ms": 72,
+        "rms_deg": 25.138742790829696
+      },
+      {
+        "lag_ms": 74,
+        "rms_deg": 25.789942521834828
+      },
+      {
+        "lag_ms": 76,
+        "rms_deg": 26.44521741481192
+      },
+      {
+        "lag_ms": 78,
+        "rms_deg": 27.104271907184387
+      },
+      {
+        "lag_ms": 80,
+        "rms_deg": 27.766836870361786
+      },
+      {
+        "lag_ms": 82,
+        "rms_deg": 28.400600816229538
+      },
+      {
+        "lag_ms": 84,
+        "rms_deg": 29.038822110912264
+      },
+      {
+        "lag_ms": 86,
+        "rms_deg": 29.681213222988976
+      },
+      {
+        "lag_ms": 88,
+        "rms_deg": 30.327509180953257
+      },
+      {
+        "lag_ms": 90,
+        "rms_deg": 30.977465580418496
+      },
+      {
+        "lag_ms": 92,
+        "rms_deg": 31.59965780825554
+      },
+      {
+        "lag_ms": 94,
+        "rms_deg": 32.22631220565114
+      },
+      {
+        "lag_ms": 96,
+        "rms_deg": 32.85717346520025
+      },
+      {
+        "lag_ms": 98,
+        "rms_deg": 33.4920038641662
+      },
+      {
+        "lag_ms": 100,
+        "rms_deg": 34.130581924738614
+      }
+    ],
+    "raw_finite_difference_rate_minus_observer_rad_s": {
+      "max": 8.24689899984883,
+      "mean": 0.04861390689561496,
+      "median": -0.4196280999991975,
+      "min": -5.0411429999988995,
+      "n": 300,
+      "p01": -3.676023830103421,
+      "p99": 6.837899490007659,
+      "rms": 2.2942657755560227
+    },
+    "semantics": "Fits a delayed raw angle to filtered angle on the same board timestamps. Not a causal identification or camera/exposure delay estimate. Raw-angle derivative is quantization-sensitive.",
+    "status": "descriptive fit only",
+    "timing_gap_max_ms": 10.000000000218279,
+    "zero_lag_rms_deg": 1.0270638781812764
+  },
+  "operation_completed": true,
+  "operation_error": null,
+  "rail_braking_fraction": 0.3566666666666667,
+  "raw_minus_filtered_angle_deg": {
+    "max": 3.6466471828896556,
+    "mean": 0.10271228470415637,
+    "median": -0.11194707232273943,
+    "min": -2.0050658040603095,
+    "n": 300,
+    "p01": -1.6876878884795916,
+    "p99": 2.692374515943342,
+    "rms": 1.020091664704673
+  },
+  "recorded_parameters": {
+    "amax_b": 25.0,
+    "amax_m": 0.5,
+    "amax_s": 25.0,
+    "approach_angle": 0.800000012,
+    "approach_v": 0.200000003,
+    "bal_pw": 4.5,
+    "bw": 10.0,
+    "catch_a": 0.25,
+    "catch_da": 4.0,
+    "catch_r": 3.0,
+    "catch_v": 0.300000012,
+    "giveup": 0.800000012,
+    "jmax": 150.0,
+    "jmax_m": 10.0,
+    "kdx": 2.0,
+    "ke": 4.0,
+    "kpx": 40.0,
+    "leff": 0.123999998,
+    "manual_speed_max": 0.150000006,
+    "pc1": -5.0,
+    "pc2": -6.0,
+    "phase_soft": 2.0,
+    "pw": 3.0,
+    "pz": 0.850000024,
+    "rail": 0.309037507,
+    "rail_fault_margin": 0.00999999978,
+    "rail_fraction": 0.949999988,
+    "rail_hysteresis": 0.00499999989,
+    "rail_margin": 0.0149999997,
+    "rail_recover_a": 1.5,
+    "rail_recover_s": 8.0,
+    "rail_recover_v": 0.150000006,
+    "rehome_a": 0.5,
+    "rehome_j": 10.0,
+    "rehome_v": 0.0799999982,
+    "spin_resume_rad_s": 10.0,
+    "spin_trip_rad_s": 150.0,
+    "vman": 0.0500000007,
+    "vmax": 1.5,
+    "vmax_b": 1.5,
+    "vmax_s": 1.5
+  },
+  "requests": 299,
+  "role": "host-policy",
+  "schema": "cartpole-offline-live-trace-analysis-v1",
+  "semantics": "Operation success is not balance success. x is step-count estimate; velocity/acceleration are commanded governor state, not independently measured cart motion.",
+  "sim_replay": {
+    "performed": false,
+    "reason": "Trace cart velocity/acceleration are command states. A matched command-state simulation can be a hypothesis check, but cannot establish actuator tracking or physical initial cart velocity."
+  },
+  "timing": {
+    "accepted_sequences_seen": 299,
+    "action_expiry_fault_observed": false,
+    "board_dropped_serial_frames_delta": 0,
+    "board_telemetry_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 299,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "control_deadline_misses_delta": 0,
+    "failure_context": [],
+    "faults": [],
+    "first_accept_board_age_upper_bound_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 299,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "host_receipt_interval_ms": {
+      "max": 11.846658945083618,
+      "mean": 10.000660929791504,
+      "median": 9.998911023139954,
+      "min": 8.122619986534119,
+      "n": 299,
+      "p01": 8.648088567256927,
+      "p99": 11.043685009479518,
+      "rms": 10.008577796235654
+    },
+    "logger_dropped_records": [
+      0
+    ],
+    "policy_compute": [
+      {
+        "calls": 299,
+        "host_monotonic_ns": 692505333859585,
+        "max_compute_ns": 3805129,
+        "mean_compute_ns": 1510089.066889632,
+        "timing": null,
+        "type": "policy_end"
+      }
+    ],
+    "receipt_to_command_record_ms": {
+      "max": 5.695469,
+      "mean": 3.341725635451505,
+      "median": 3.229534,
+      "min": 1.75117,
+      "n": 299,
+      "p01": 2.5441481,
+      "p99": 5.151621879999998,
+      "rms": 3.388460742867945
+    },
+    "receipt_to_request_record_ms": {
+      "max": 5.795055,
+      "mean": 3.4445648729096985,
+      "median": 3.336032,
+      "min": 1.801699,
+      "n": 299,
+      "p01": 2.62414944,
+      "p99": 5.344998019999999,
+      "rms": 3.493582455506128
+    },
+    "request_board_interval_ms": {
+      "max": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "min": 10.0,
+      "n": 298,
+      "p01": 10.0,
+      "p99": 10.0,
+      "rms": 10.0
+    },
+    "request_host_interval_ms": {
+      "max": 12.663923025131226,
+      "mean": 10.006634701418397,
+      "median": 9.956094026565552,
+      "min": 7.457455039024353,
+      "n": 298,
+      "p01": 7.86902899980545,
+      "p99": 12.226434086561197,
+      "rms": 10.048270909740806
+    },
+    "semantics": "Host command record follows transport.write; these intervals are host proxies, not wire/executor latency. First telemetry last_seq observation is an upper bound on acceptance time. Unseen sequence does not prove rejection. dropped_serial_frames can count overwritten telemetry, not lost policy commands.",
+    "ttl_ms": [
+      20.0
+    ]
+  }
+}

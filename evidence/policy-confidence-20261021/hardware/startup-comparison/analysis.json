@@ -1,0 +1,279 @@
+{
+  "schema": "cartpole-observed-startup-comparison-v1",
+  "source_sha256": "b56e0d26da83aa01e9d1ab74d4095300db9837b7ee402a1a0aa64588575294c6",
+  "cases": [
+    {
+      "name": "balance47-run10-camera04",
+      "input_sha256": {
+        "balance47-run10-camera04/analysis.json": "a20897155f4914303799ae118a0e15744ee1f3e1cf628f677fa6674e20cb3167",
+        "balance47-run10-camera04/telemetry.csv": "40609f4f256371c07476b3e77eb078355c7682c67bfb4452999ed110c62cf39f",
+        "balance47-run10-camera04/actions.csv": "0d8e7accbe6f330e3dbf456c1125b5c1f5f41a43e1d5fe1bcee6f9196689ec14",
+        "balance47-run10-camera04/camera-alignment.csv": "ba7eb7613de3aa074bb457957195098b3ce2bfb97d752ba6301c6779d8f76d72"
+      },
+      "reference": [
+        537
+      ],
+      "first_samples": [
+        {
+          "board_t_s": "0.0",
+          "theta_encoder_deg": "0.17578127430651508",
+          "observer_rate_rad_s": "-0.001689136",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.0",
+          "governed_acceleration_m_s2": "0.0"
+        },
+        {
+          "board_t_s": "0.009999999999763531",
+          "theta_encoder_deg": "0.43945312847050816",
+          "observer_rate_rad_s": "-0.01665736",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.1209403",
+          "governed_acceleration_m_s2": "0.1209403"
+        },
+        {
+          "board_t_s": "0.01999999999998181",
+          "theta_encoder_deg": "0.0",
+          "observer_rate_rad_s": "-0.00905955",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.2858744",
+          "governed_acceleration_m_s2": "0.2858744"
+        },
+        {
+          "board_t_s": "0.02999999999974534",
+          "theta_encoder_deg": "0.35156249131725065",
+          "observer_rate_rad_s": "-0.004968567",
+          "x_step_estimate_m": "3.75e-05",
+          "accepted_demand_m_s2": "0.006716118",
+          "governed_acceleration_m_s2": "0.006716118"
+        }
+      ],
+      "first_second_quarters": [
+        {
+          "interval_s": [
+            0,
+            0.25
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 0.43945312847050816,
+          "demand_rms_m_s2": 0.19947562503818564
+        },
+        {
+          "interval_s": [
+            0.25,
+            0.5
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 0.35156249131725065,
+          "demand_rms_m_s2": 0.16794767018415496
+        },
+        {
+          "interval_s": [
+            0.5,
+            0.75
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 0.08789063715325754,
+          "demand_rms_m_s2": 0.08812161167932815
+        },
+        {
+          "interval_s": [
+            0.75,
+            1.0
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 0.2636718541639931,
+          "demand_rms_m_s2": 0.21033480293538734
+        }
+      ],
+      "first_measured_over_5deg_s": null,
+      "first_rail_braking_s": null,
+      "active_span_s": 7.2199999999998,
+      "requests": 722
+    },
+    {
+      "name": "centered-run25-camera05",
+      "input_sha256": {
+        "centered-run25-camera05/analysis.json": "786cd795ee7e77a92368bcd1a0f0325c6df8bedc67d722cbf04b1ac9d204178a",
+        "centered-run25-camera05/telemetry.csv": "111eb9074142823972b5712e52983e83d3a89876b2ed6fbc88f7cd08b41dc085",
+        "centered-run25-camera05/actions.csv": "425986d8a525e76ad489bdca03099b3717ec9fe4fd55dde4fd648eda9bb8ee31",
+        "centered-run25-camera05/camera-alignment.csv": "e62918cf683b133dc84d9c8b78ef01ef1d19a45147475bae81b63e91cfb4ce5c"
+      },
+      "reference": [
+        537
+      ],
+      "first_samples": [
+        {
+          "board_t_s": "0.0",
+          "theta_encoder_deg": "0.7910157916750973",
+          "observer_rate_rad_s": "0.0002370236",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.0",
+          "governed_acceleration_m_s2": "0.0"
+        },
+        {
+          "board_t_s": "0.010000000000218279",
+          "theta_encoder_deg": "1.0546875312475315",
+          "observer_rate_rad_s": "-0.01001978",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.843204",
+          "governed_acceleration_m_s2": "0.843204"
+        },
+        {
+          "board_t_s": "0.01999999999998181",
+          "theta_encoder_deg": "0.7910157916750973",
+          "observer_rate_rad_s": "-0.02643209",
+          "x_step_estimate_m": "7.5e-05",
+          "accepted_demand_m_s2": "1.106661",
+          "governed_acceleration_m_s2": "1.106661"
+        },
+        {
+          "board_t_s": "0.03000000000020009",
+          "theta_encoder_deg": "0.7031252118176193",
+          "observer_rate_rad_s": "-0.01467325",
+          "x_step_estimate_m": "0.0002625",
+          "accepted_demand_m_s2": "0.8461734",
+          "governed_acceleration_m_s2": "0.8461734"
+        }
+      ],
+      "first_second_quarters": [
+        {
+          "interval_s": [
+            0,
+            0.25
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 1.0546875312475315,
+          "demand_rms_m_s2": 1.1741915200407869
+        },
+        {
+          "interval_s": [
+            0.25,
+            0.5
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 2.1972656423525407,
+          "demand_rms_m_s2": 2.521114186779558
+        },
+        {
+          "interval_s": [
+            0.5,
+            0.75
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 9.31640834038621,
+          "demand_rms_m_s2": 6.44496392300026
+        },
+        {
+          "interval_s": [
+            0.75,
+            1.0
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 19.335939027801068,
+          "demand_rms_m_s2": 11.113129763064768
+        }
+      ],
+      "first_measured_over_5deg_s": 0.6700000000000728,
+      "first_rail_braking_s": 1.3600000000001273,
+      "active_span_s": 15.91000000000031,
+      "requests": 1592
+    },
+    {
+      "name": "balance47-run25-camera06",
+      "input_sha256": {
+        "balance47-run25-camera06/analysis.json": "53e2dc20ff4d19d83382d244be6d30942add96d45e2f4bc02ae71d2a071b9582",
+        "balance47-run25-camera06/telemetry.csv": "beae94e01ed1741d5cd8f9b0076feaa74ae6d13edb76579d198766577d192ae1",
+        "balance47-run25-camera06/actions.csv": "66ce6317a3d90af051297f86efe09ddaa26f28036860e5f4cab6c79f995e0710",
+        "balance47-run25-camera06/camera-alignment.csv": "635586901a681862e466cbe06c25ffd4a0da1fc0a873ee037a781acac1bb37b5"
+      },
+      "reference": [
+        553
+      ],
+      "first_samples": [
+        {
+          "board_t_s": "0.0",
+          "theta_encoder_deg": "-0.08789063715325754",
+          "observer_rate_rad_s": "-0.00356998",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "0.0",
+          "governed_acceleration_m_s2": "0.0"
+        },
+        {
+          "board_t_s": "0.009999999999763531",
+          "theta_encoder_deg": "-1.4941404305349215",
+          "observer_rate_rad_s": "-0.6952778",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "-0.06978747",
+          "governed_acceleration_m_s2": "-0.06978747"
+        },
+        {
+          "board_t_s": "0.01999999999998181",
+          "theta_encoder_deg": "-1.0546875312475315",
+          "observer_rate_rad_s": "-0.4781396",
+          "x_step_estimate_m": "0.0",
+          "accepted_demand_m_s2": "-2.531905",
+          "governed_acceleration_m_s2": "-1.269787"
+        },
+        {
+          "board_t_s": "0.02999999999974534",
+          "theta_encoder_deg": "-3.2519531736000724",
+          "observer_rate_rad_s": "-0.9737194",
+          "x_step_estimate_m": "-0.00015",
+          "accepted_demand_m_s2": "-1.845185",
+          "governed_acceleration_m_s2": "-1.845185"
+        }
+      ],
+      "first_second_quarters": [
+        {
+          "interval_s": [
+            0,
+            0.25
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 22.060548149298477,
+          "demand_rms_m_s2": 9.671636469227275
+        },
+        {
+          "interval_s": [
+            0.25,
+            0.5
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 18.80859440274061,
+          "demand_rms_m_s2": 7.662107854732426
+        },
+        {
+          "interval_s": [
+            0.5,
+            0.75
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 13.359376159745791,
+          "demand_rms_m_s2": 8.164038221429585
+        },
+        {
+          "interval_s": [
+            0.75,
+            1.0
+          ],
+          "samples": 25,
+          "max_abs_encoder_deg": 19.423830753574133,
+          "demand_rms_m_s2": 8.520870692037708
+        }
+      ],
+      "first_measured_over_5deg_s": 0.04999999999972715,
+      "first_rail_braking_s": 1.069999999999709,
+      "active_span_s": 24.980000000000018,
+      "requests": 2499
+    }
+  ],
+  "limits": [
+    "Post-hoc descriptive comparison, not a randomized causal experiment.",
+    "Reference, pose and scheduler differ between trials; no single cause is isolated.",
+    "Cart coordinates count steps and speed is commanded, not independent physical truth.",
+    "Camera is image angle with exposure/processing lag and unvalidated vertical/cart calibration.",
+    "The first measured >5 degree event is not proof of equal true physical angle.",
+    "No physical fitting, training, parameter update or hardware access."
+  ],
+  "plot_sha256": "e8f3646de02e0978863e505a3bd34dcb80156bd73e671e329d82c424674a428c"
+}

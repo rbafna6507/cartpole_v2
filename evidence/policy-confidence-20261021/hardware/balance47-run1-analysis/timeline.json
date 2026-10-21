@@ -1,0 +1,211 @@
+{
+  "actor": {
+    "backend": {
+      "actor_content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a"
+    },
+    "content_sha256": "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79",
+    "file_sha256": "9685d1fbbce230ac8ce838a92818b09c139535b6733a4628310c368c256b8898",
+    "path": "/Users/rbafna/projects/cartpole_v2/training/candidates/balance-20261021-confidence/actor.json",
+    "semantics": "Offline encoded reconstruction; current deployment loader is not invoked and this grants no runtime/hardware admission.",
+    "status": "trace-bound",
+    "trace_expected_content_sha256": [
+      "14ff6cbb10484eaf7c627052ed72a647ce77411f7a277bea022b8c1d62927e79"
+    ]
+  },
+  "analysis_sha256": "434a63956dfc5044a57f876554549820285f9341b38a6fe26a8674150bd1d990",
+  "fault_board_elapsed_s": 0.51,
+  "first_fault_state": {
+    "acceleration": 0.0,
+    "angle_hat": -0.1223188,
+    "brake_direction": 0,
+    "demand": 0.0,
+    "dropped": 66683755,
+    "fault": 1,
+    "flags": 205,
+    "last_seq": 0,
+    "misses": 1,
+    "mode": 4,
+    "omega": 2.402141,
+    "received_ns": 710362677145581,
+    "sid": 1814684874,
+    "theta": -0.1181165,
+    "tick": 517218435,
+    "unwrapped_tick": 517218435,
+    "unwrapped_us": 1826892531,
+    "us": 1826892531,
+    "velocity": 0.0,
+    "x": 0.0799125
+  },
+  "governor_reversal_examples": [
+    {
+      "accepted_demand_m_s2": 0.578184,
+      "board_t_s": 0.10000000000013642,
+      "commanded_velocity_m_s": -0.3227182,
+      "counterfactual_auto_linear_raw_angle_m_s2": 2.7126016227983065,
+      "governed_acceleration_m_s2": -2.227743,
+      "observer_rate_rad_s": 1.580723,
+      "replayed_mlp_m_s2": 2.6547849964085373,
+      "theta_encoder_deg": 0.0,
+      "x_step_estimate_m": -0.0115875
+    },
+    {
+      "accepted_demand_m_s2": 14.5945,
+      "board_t_s": 0.15000000000009095,
+      "commanded_velocity_m_s": -0.2428553,
+      "counterfactual_auto_linear_raw_angle_m_s2": 16.445129121018752,
+      "governed_acceleration_m_s2": 5.272259,
+      "observer_rate_rad_s": 4.766777,
+      "replayed_mlp_m_s2": 15.727933955630025,
+      "theta_encoder_deg": 15.380862934214555,
+      "x_step_estimate_m": -0.0273
+    },
+    {
+      "accepted_demand_m_s2": -6.359805,
+      "board_t_s": 0.2999999999999545,
+      "commanded_velocity_m_s": 0.8872237,
+      "counterfactual_auto_linear_raw_angle_m_s2": -9.987005162285875,
+      "governed_acceleration_m_s2": 0.239242,
+      "observer_rate_rad_s": -5.02489,
+      "replayed_mlp_m_s2": -9.943682933592463,
+      "theta_encoder_deg": -2.373046802067497,
+      "x_step_estimate_m": 0.0338625
+    },
+    {
+      "accepted_demand_m_s2": -12.75243,
+      "board_t_s": 0.31999999999993634,
+      "commanded_velocity_m_s": 0.8605084,
+      "counterfactual_auto_linear_raw_angle_m_s2": -11.078292936652183,
+      "governed_acceleration_m_s2": -2.760758,
+      "observer_rate_rad_s": -4.820832,
+      "replayed_mlp_m_s2": -12.20064987865334,
+      "theta_encoder_deg": -6.416015767342666,
+      "x_step_estimate_m": 0.05145
+    }
+  ],
+  "initial_nonzero_angle": {
+    "accepted_demand_m_s2": -0.000892624,
+    "board_t_s": 0.009999999999990905,
+    "commanded_velocity_m_s": -7.140993e-06,
+    "counterfactual_auto_linear_raw_angle_m_s2": -2.4709251475753895,
+    "governed_acceleration_m_s2": -0.000892624,
+    "observer_rate_rad_s": -0.6659104,
+    "replayed_mlp_m_s2": -3.024112384055291,
+    "theta_encoder_deg": -2.285156222210019,
+    "x_step_estimate_m": 0.0
+  },
+  "interpretation": [
+    "All51 requests reproduce against the bound actor (max absolute2.6645352591e-15m/s2);50 accepted sequences are observed before the fault.",
+    "First -2.285deg encoder change occurs by10ms with zero step displacement and only -0.000893m/s2 demand: this initial input disturbance precedes substantial policy actuation. Release disturbance, encoder behavior and physical zero cannot be separated without independent observations.",
+    "At150ms demand+14.5945 but governor+5.2723m/s2; at300ms demand-6.3598 but governor+0.2392m/s2. Recorded jerk150 produces visible actuation-state phase lag during reversals before the expiry.",
+    "Angular-rate descriptive lag fit26ms versus centered raw-angle derivative; angle-filter fit2ms. These are diagnostic phase proxies, not identified causal delays or retuning recommendations.",
+    "Saved reference537 and I2C error count12 are unchanged. This rules out a recorded reference rewrite or new counted I2C error, not physical calibration bias or all sensor defects.",
+    "The final post-inference8.038ms gap is not decomposed into scheduling, request construction, validation, write-lock, transport, or recording. Command timestamps follow write; no wire-time assertion is made.",
+    "Position, velocity and acceleration are commanded/step-count states. Physical actuator tracking remains unmeasured until valid independent cart measurements are available.",
+    "No production edits, hardware action, training, reserved-pose evaluation or hardware admission."
+  ],
+  "largest_negative_angle": {
+    "accepted_demand_m_s2": -9.780045,
+    "board_t_s": 0.40000000000009095,
+    "commanded_velocity_m_s": 0.2427622,
+    "counterfactual_auto_linear_raw_angle_m_s2": -11.34090922021737,
+    "governed_acceleration_m_s2": -9.780045,
+    "observer_rate_rad_s": -2.297586,
+    "replayed_mlp_m_s2": -9.691994529620422,
+    "theta_encoder_deg": -18.105466326134014,
+    "x_step_estimate_m": 0.09971251
+  },
+  "largest_positive_angle": {
+    "accepted_demand_m_s2": 9.64684,
+    "board_t_s": 0.21000000000003638,
+    "commanded_velocity_m_s": 0.3073792,
+    "counterfactual_auto_linear_raw_angle_m_s2": 10.248925575758394,
+    "governed_acceleration_m_s2": 9.64684,
+    "observer_rate_rad_s": 1.004767,
+    "replayed_mlp_m_s2": 11.17230445347315,
+    "theta_encoder_deg": 18.105466326134014,
+    "x_step_estimate_m": -0.0272625
+  },
+  "largest_positive_step_position": {
+    "accepted_demand_m_s2": -7.763483,
+    "board_t_s": 0.43000000000006366,
+    "commanded_velocity_m_s": -0.02499082,
+    "counterfactual_auto_linear_raw_angle_m_s2": -6.156843266365788,
+    "governed_acceleration_m_s2": -7.763483,
+    "observer_rate_rad_s": -0.08844875,
+    "replayed_mlp_m_s2": -7.450968519497414,
+    "theta_encoder_deg": -16.171877007016267,
+    "x_step_estimate_m": 0.1028625
+  },
+  "last_command": {
+    "host_monotonic_ns": 710362678280311,
+    "payload": "V2 A 1814684874 51 517218425 20 -2.706946418",
+    "type": "command"
+  },
+  "last_command_record_after_fault_receipt_ms": 1.13473,
+  "last_enabled_state": {
+    "accepted_demand_m_s2": -3.841173,
+    "board_t_s": 0.5,
+    "commanded_velocity_m_s": -0.4627242,
+    "counterfactual_auto_linear_raw_angle_m_s2": 0.2798959621160262,
+    "governed_acceleration_m_s2": -4.052503,
+    "observer_rate_rad_s": 2.039645,
+    "replayed_mlp_m_s2": -2.706946418460123,
+    "theta_encoder_deg": -8.87695544109882,
+    "x_step_estimate_m": 0.0846
+  },
+  "last_inference_end_to_command_record_ms": 8.037731,
+  "last_policy_compute_ms": 2.129585,
+  "last_request": {
+    "host_monotonic_ns": 710362678404984,
+    "request": {
+      "acceleration_m_s2": -2.706946418460123,
+      "clock_id": "teensy:1814684874",
+      "expires_at_ns": 1826902531000,
+      "issued_at_ns": 1826882531000,
+      "observation_sequence": 517218425,
+      "sequence": 51,
+      "session_id": "1814684874"
+    },
+    "type": "action_request"
+  },
+  "last_request_expiry_tick": 517218445,
+  "mlp_minus_native_auto_counterfactual_rms_m_s2": 1.4429430574651623,
+  "policy_failure": {
+    "act_finished_host_ns": 710362670242580,
+    "act_started_host_ns": 710362668112995,
+    "failed_observation_board_ns": 1826882531000,
+    "failed_observation_sequence": 517218425,
+    "fetch_finished_host_ns": 710362667698239,
+    "fetch_started_host_ns": 710362667376253,
+    "host_monotonic_ns": 710362678474200,
+    "previous_sent_observation_board_ns": 1826872531000,
+    "previous_sent_observation_sequence": 517218415,
+    "reason": "latched rig error: executor fault 1",
+    "stage": "step",
+    "timing": null,
+    "type": "policy_failure"
+  },
+  "predecessor_expiry_tick": 517218435,
+  "predecessor_request": {
+    "host_monotonic_ns": 710362660763494,
+    "request": {
+      "acceleration_m_s2": -3.8411727969647793,
+      "clock_id": "teensy:1814684874",
+      "expires_at_ns": 1826892531000,
+      "issued_at_ns": 1826872531000,
+      "observation_sequence": 517218415,
+      "sequence": 50,
+      "session_id": "1814684874"
+    },
+    "type": "action_request"
+  },
+  "schema": "cartpole-run1-causal-timeline-v1",
+  "source_sha256": "c69c60c358b40a18858c11369d1a35c6fa7d4dc477ac1205bf443c08c39f641f",
+  "trace_sha256": "151782f2242f95502bf09b8e787652744bae0f091e76c0efd181ddac7745abef",
+  "verdict": "The action replacement deadline explains the abrupt disabled stop at0.510s. It cannot explain the preceding large oscillation. Recovery without the fault is unobserved; inevitable fall or asymptotic instability cannot be claimed."
+}
