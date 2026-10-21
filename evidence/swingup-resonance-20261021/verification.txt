@@ -1,0 +1,6 @@
+Native capture forecast: rebuilt against current firmware headers and reproduced every recorded output line byte-for-byte.
+Focused verification: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/test_capture_forecast.py tests/test_tunable_motion.py
+54 passed, 19 subtests passed in 2.30s. These are software checks, not hardware acceptance.
+Long-collector guard: duration 0, 60.001, nan, inf rejected with exit 2 before creating an output or importing hardware.
+All original per-trial archive members matched the consolidated raw archive byte-for-byte before redundant evidence copies were removed.
+Stopped readback: driver disabled, fault4 latched, reference533 saved, I2C12. All40 settings match existing candidate-20261016-bw10 profile.

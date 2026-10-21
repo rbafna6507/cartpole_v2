@@ -1,0 +1,3005 @@
+{
+  "frozen_lag_s": -0.017,
+  "hardware_or_calibration_accepted": false,
+  "trials": [
+    {
+      "trial": "bw8-auto25-01",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": 3.717,
+      "longest_BAL_s": 21.276,
+      "total_BAL_s": 21.276,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 7726,
+        "2": 930,
+        "3": 5320,
+        "14": 685
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": -0.00677446811376,
+        "rms": 0.06387046326598296,
+        "minimum": -0.1414125,
+        "maximum": 0.1657875
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": -0.0057392699041504,
+        "rms": 1.661043781225496,
+        "minimum": -13.319,
+        "maximum": 8.802729
+      },
+      "settled_longest_hold": {
+        "angle_deg": {
+          "n": 4820,
+          "mean": 0.12561797974567399,
+          "rms": 1.3792713015195897,
+          "minimum": -2.1972656423525407,
+          "maximum": 3.0761720138851163
+        },
+        "omega_rad_s": {
+          "n": 4820,
+          "mean": -1.5530488199170074e-05,
+          "rms": 0.0837902203302994,
+          "minimum": -0.3238502,
+          "maximum": 0.3633515
+        },
+        "cart_m": {
+          "n": 4820,
+          "mean": -0.015533659408921163,
+          "rms": 0.0594833165531418,
+          "minimum": -0.1084875,
+          "maximum": 0.0747375
+        },
+        "commanded_velocity_m_s": {
+          "n": 4820,
+          "mean": 0.0009017776389937761,
+          "rms": 0.11096245948549158,
+          "minimum": -0.1783936,
+          "maximum": 0.1928195
+        },
+        "acceleration_m_s2": {
+          "n": 4820,
+          "mean": -0.0016181729263360998,
+          "rms": 0.31962358682052383,
+          "minimum": -1.158139,
+          "maximum": 1.417186
+        }
+      },
+      "balance_transitions": [
+        {
+          "t_s": 3.717,
+          "duration_s": 21.276,
+          "entry": {
+            "theta": -0.2009515,
+            "omega": 2.194433,
+            "x": 0.04425,
+            "velocity": 0.02696466,
+            "acceleration": -0.3283078
+          },
+          "exit": {
+            "theta": 0.02761165,
+            "omega": 0.0467858,
+            "x": -0.0399375,
+            "velocity": -0.141425,
+            "acceleration": 0.1465987
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309037507,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1758866920,
+        "tick": 508303814,
+        "us": 1502190746,
+        "mode": 0,
+        "flags": 205,
+        "theta": 3.043418,
+        "angle_hat": 3.043006,
+        "omega": 0.004740162,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 64626359,
+        "brake_direction": 0,
+        "received_ns": 701448077463079,
+        "unwrapped_tick": 508303814,
+        "unwrapped_us": 1502190746
+      },
+      "info_after": {
+        "sid": 1758866920,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 701448078850687,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2517,
+        "encoder_raw_age_us": 5861,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 1069,
+        "image_vertical_angle_rms_deg": 1.6576599729432269,
+        "camera_minus_encoder_rms_deg": 0.864406553594147,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 252,
+            "median": 562.9148936170213,
+            "p05": 562.6089834515367,
+            "p95": 562.9782608695652,
+            "min": 562.4489795918367,
+            "max": 563.0,
+            "rms": 562.8504564212066
+          },
+          "camera_pivot_y_px": {
+            "n": 252,
+            "median": 202.93137254901958,
+            "p05": 202.82608695652172,
+            "p95": 203.13572303921566,
+            "min": 202.81250000000003,
+            "max": 203.29591836734693,
+            "rms": 202.95739730692432
+          },
+          "camera_image_upright_rad": {
+            "n": 252,
+            "median": 3.1313797206217426,
+            "p95_minus_p05": 0.0032289242867950653,
+            "span": 0.005045177770529818,
+            "std": 0.00099427099690131,
+            "p95_abs_about_median": 0.0020028628178278204
+          },
+          "camera_coverage_qualified": true
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 258,
+            "median": 561.9285714285714,
+            "p05": 561.8,
+            "p95": 562.115340909091,
+            "min": 561.8,
+            "max": 562.295918367347,
+            "rms": 561.9350520650124
+          },
+          "camera_pivot_y_px": {
+            "n": 258,
+            "median": 202.94791666666669,
+            "p05": 202.75049019607846,
+            "p95": 203.2159090909091,
+            "min": 202.64285714285717,
+            "max": 203.44117647058823,
+            "rms": 202.95043725413046
+          },
+          "camera_image_upright_rad": {
+            "n": 258,
+            "median": -3.115973710529655,
+            "p95_minus_p05": 0.059140547548931464,
+            "span": 0.07297065616578946,
+            "std": 0.016342347496735278,
+            "p95_abs_about_median": 0.05715263749010794
+          },
+          "camera_coverage_qualified": true
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 3300,
+        "accepted_frames": 3042,
+        "rejected": {
+          "missing_or_invalid_track": 258
+        },
+        "median_length_px": 155.94083842812995,
+        "clock_anchors": [
+          {
+            "local_before_ns": 701389787637430,
+            "local_after_ns": 701389797351132,
+            "server_monotonic_s": 701389.795330042,
+            "offset_ns": -2835761,
+            "uncertainty_ns": 4856851
+          },
+          {
+            "local_before_ns": 701448190366769,
+            "local_after_ns": 701448196708925,
+            "server_monotonic_s": 701448.194289044,
+            "offset_ns": -751197,
+            "uncertainty_ns": 3171078
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": true
+    },
+    {
+      "trial": "bw8-auto25-02",
+      "collector_complete": true,
+      "collector_success": false,
+      "collector_error": "RigError('latched rig error: executor fault 4')",
+      "first_capture_s": 1.356,
+      "longest_BAL_s": 0.604,
+      "total_BAL_s": 0.604,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 3596,
+        "2": 2786,
+        "3": 152,
+        "4": 45,
+        "5": 71
+      },
+      "active_cart_m": {
+        "n": 3009,
+        "mean": -0.013714244762379528,
+        "rms": 0.1442026446656903,
+        "minimum": -0.2854125,
+        "maximum": 0.2223375
+      },
+      "active_acceleration_m_s2": {
+        "n": 3009,
+        "mean": -0.10949489948820205,
+        "rms": 6.289695623055628,
+        "minimum": -16.86327,
+        "maximum": 17.86698
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [
+        {
+          "t_s": 1.356,
+          "duration_s": 0.604,
+          "entry": {
+            "theta": -0.07823303,
+            "omega": 2.713674,
+            "x": 0.0205125,
+            "velocity": -0.2723346,
+            "acceleration": 5.621243
+          },
+          "exit": {
+            "theta": -0.4985438,
+            "omega": -3.061545,
+            "x": -0.1194,
+            "velocity": -0.054781,
+            "acceleration": -16.86327
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309037507,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1084564982,
+        "tick": 508407739,
+        "us": 1606115746,
+        "mode": 4,
+        "flags": 201,
+        "theta": 2.554078,
+        "angle_hat": 2.558987,
+        "omega": -15.00808,
+        "x": -0.098325,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 4,
+        "misses": 0,
+        "dropped": 64645764,
+        "brake_direction": 0,
+        "received_ns": 701552003082974,
+        "unwrapped_tick": 508407739,
+        "unwrapped_us": 1606115746
+      },
+      "info_after": {
+        "sid": 1084564982,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 7,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 701552004051566,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2191,
+        "encoder_raw_age_us": 754,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 283,
+            "median": 561.8979591836735,
+            "p05": 561.8,
+            "p95": 562.1568627450981,
+            "min": 561.7708333333334,
+            "max": 562.4528301886793,
+            "rms": 561.9380974139804
+          },
+          "camera_pivot_y_px": {
+            "n": 283,
+            "median": 202.81372549019608,
+            "p05": 202.66037735849056,
+            "p95": 203.03130861040069,
+            "min": 202.54901960784312,
+            "max": 203.17777777777778,
+            "rms": 202.83318901471281
+          },
+          "camera_image_upright_rad": {
+            "n": 283,
+            "median": -3.1216992855950796,
+            "p95_minus_p05": 0.0032177611683335437,
+            "span": 0.006319731127804928,
+            "std": 0.0010214963701154134,
+            "p95_abs_about_median": 0.0020248502332954384
+          },
+          "camera_coverage_qualified": true
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": null,
+          "camera_pivot_y_px": null,
+          "camera_image_upright_rad": null,
+          "camera_coverage_qualified": null
+        }
+      },
+      "sensor_errors_delta": 1,
+      "camera_filters": {
+        "raw_records": 1506,
+        "accepted_frames": 1269,
+        "rejected": {
+          "missing_or_invalid_track": 230,
+          "length_outside_20pct_median": 7
+        },
+        "median_length_px": 157.52215074862352,
+        "clock_anchors": [
+          {
+            "local_before_ns": 701525744421081,
+            "local_after_ns": 701525754704169,
+            "server_monotonic_s": 701525.752566276,
+            "offset_ns": -3003651,
+            "uncertainty_ns": 5141544
+          },
+          {
+            "local_before_ns": 701552107789178,
+            "local_after_ns": 701552113543868,
+            "server_monotonic_s": 701552.111396567,
+            "offset_ns": -730044,
+            "uncertainty_ns": 2877345
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "bw8-auto25-03",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": 3.596,
+      "longest_BAL_s": 0.768,
+      "total_BAL_s": 0.768,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 6727,
+        "2": 5976,
+        "3": 193,
+        "5": 66,
+        "6": 15,
+        "14": 1212
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": -0.00512994602096,
+        "rms": 0.14061577977568576,
+        "minimum": -0.291225,
+        "maximum": 0.2251875
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": 0.03051937301488,
+        "rms": 6.06874418766469,
+        "minimum": -14.25025,
+        "maximum": 14.33021
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [
+        {
+          "t_s": 3.596,
+          "duration_s": 0.768,
+          "entry": {
+            "theta": -0.1457282,
+            "omega": 2.680004,
+            "x": -0.04365,
+            "velocity": -0.2592292,
+            "acceleration": 4.209959
+          },
+          "exit": {
+            "theta": -0.3466797,
+            "omega": -2.401681,
+            "x": -0.131175,
+            "velocity": -0.2881155,
+            "acceleration": -14.25025
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309037507,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 2474722109,
+        "tick": 508647833,
+        "us": 1846209746,
+        "mode": 0,
+        "flags": 205,
+        "theta": 2.978991,
+        "angle_hat": 2.978195,
+        "omega": 0.001741183,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 64681444,
+        "brake_direction": 0,
+        "received_ns": 701792098929959,
+        "unwrapped_tick": 508647833,
+        "unwrapped_us": 1846209746
+      },
+      "info_after": {
+        "sid": 2474722109,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 7,
+        "home_epoch": 28,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 701792099916856,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2474,
+        "encoder_raw_age_us": 443,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 163,
+            "median": 549.4431818181819,
+            "p05": 549.3777777777777,
+            "p95": 549.5851063829788,
+            "min": 549.2209302325582,
+            "max": 549.6250000000001,
+            "rms": 549.4639140549145
+          },
+          "camera_pivot_y_px": {
+            "n": 163,
+            "median": 202.8372093023256,
+            "p05": 202.65555555555557,
+            "p95": 203.08510638297875,
+            "min": 202.65555555555557,
+            "max": 203.13953488372093,
+            "rms": 202.87053018110254
+          },
+          "camera_image_upright_rad": {
+            "n": 163,
+            "median": -3.1285215622133453,
+            "p95_minus_p05": 0.014396684786433633,
+            "span": 0.0351673418133398,
+            "std": 0.004506716380445958,
+            "p95_abs_about_median": 0.009278140043289928
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 265,
+            "median": 549.202380952381,
+            "p05": 549.109756097561,
+            "p95": 549.3804347826087,
+            "min": 549.0,
+            "max": 549.5444444444445,
+            "rms": 549.2187330614405
+          },
+          "camera_pivot_y_px": {
+            "n": 265,
+            "median": 203.5,
+            "p05": 203.2926829268293,
+            "p95": 203.6304347826087,
+            "min": 203.1282051282051,
+            "max": 203.7717391304348,
+            "rms": 203.48128830095132
+          },
+          "camera_image_upright_rad": {
+            "n": 265,
+            "median": -3.127818777423796,
+            "p95_minus_p05": 0.04389729490424034,
+            "span": 0.07640729580332373,
+            "std": 0.01301236113516627,
+            "p95_abs_about_median": 0.026981107692113385
+          },
+          "camera_coverage_qualified": true
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 3192,
+        "accepted_frames": 2374,
+        "rejected": {
+          "missing_or_invalid_track": 793,
+          "confidence_below_0.8": 1,
+          "length_outside_20pct_median": 24
+        },
+        "median_length_px": 157.46703607901821,
+        "clock_anchors": [
+          {
+            "local_before_ns": 701735704495362,
+            "local_after_ns": 701735714129734,
+            "server_monotonic_s": 701735.712278502,
+            "offset_ns": -2965954,
+            "uncertainty_ns": 4817186
+          },
+          {
+            "local_before_ns": 701792205525057,
+            "local_after_ns": 701792211445478,
+            "server_monotonic_s": 701792.209780042,
+            "offset_ns": -1294775,
+            "uncertainty_ns": 2960211
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "ke5-auto25-01",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": 3.708,
+      "longest_BAL_s": 18.424,
+      "total_BAL_s": 19.248,
+      "BAL_entries": 2,
+      "mode_counts": {
+        "0": 7613,
+        "2": 1436,
+        "3": 4814,
+        "14": 803
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": 0.00318692999648,
+        "rms": 0.07176483022643161,
+        "minimum": -0.1825125,
+        "maximum": 0.2339625
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": -0.0025848298743104004,
+        "rms": 2.5727013254156357,
+        "minimum": -17.91151,
+        "maximum": 17.63317
+      },
+      "settled_longest_hold": {
+        "angle_deg": {
+          "n": 4107,
+          "mean": -0.008196235979627665,
+          "rms": 1.3856492077510452,
+          "minimum": -2.4609373819249747,
+          "maximum": 3.5156249131725064
+        },
+        "omega_rad_s": {
+          "n": 4107,
+          "mean": -0.0033173591947601657,
+          "rms": 0.10243184230896407,
+          "minimum": -0.4573047,
+          "maximum": 0.6159052
+        },
+        "cart_m": {
+          "n": 4107,
+          "mean": -0.0035910336476747016,
+          "rms": 0.061295210392847924,
+          "minimum": -0.102675,
+          "maximum": 0.09225
+        },
+        "commanded_velocity_m_s": {
+          "n": 4107,
+          "mean": 0.008437187489047968,
+          "rms": 0.10709953100712971,
+          "minimum": -0.1700523,
+          "maximum": 0.2082667
+        },
+        "acceleration_m_s2": {
+          "n": 4107,
+          "mean": 0.0036378715506841974,
+          "rms": 0.37165207476551676,
+          "minimum": -1.404178,
+          "maximum": 2.428705
+        }
+      },
+      "balance_transitions": [
+        {
+          "t_s": 3.708,
+          "duration_s": 0.824,
+          "entry": {
+            "theta": -0.1902136,
+            "omega": 2.551757,
+            "x": -0.025275,
+            "velocity": -0.2605968,
+            "acceleration": -0.8081369
+          },
+          "exit": {
+            "theta": -0.7823302,
+            "omega": -6.148166,
+            "x": 0.171375,
+            "velocity": 0.8674365,
+            "acceleration": -13.56679
+          }
+        },
+        {
+          "t_s": 6.572,
+          "duration_s": 18.424,
+          "entry": {
+            "theta": -0.2239612,
+            "omega": 1.892005,
+            "x": 0.01875,
+            "velocity": 0.180886,
+            "acceleration": -0.3057038
+          },
+          "exit": {
+            "theta": -0.02607767,
+            "omega": 0.003060615,
+            "x": 0.084525,
+            "velocity": -0.06419396,
+            "acceleration": -0.4400805
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 5.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309037507,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1542831256,
+        "tick": 509030764,
+        "us": 2229140746,
+        "mode": 0,
+        "flags": 205,
+        "theta": 3.018874,
+        "angle_hat": 3.017955,
+        "omega": 0.006555232,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 0,
+        "dropped": 64762546,
+        "brake_direction": 0,
+        "received_ns": 702175030614999,
+        "unwrapped_tick": 509030764,
+        "unwrapped_us": 2229140746
+      },
+      "info_after": {
+        "sid": 1542831256,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 7,
+        "home_epoch": 28,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 702175033489512,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2500,
+        "encoder_raw_age_us": 2153,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 923,
+        "image_vertical_angle_rms_deg": 1.6756040929666873,
+        "camera_minus_encoder_rms_deg": 0.8038129489627782,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 266,
+            "median": 549.2500000000001,
+            "p05": 549.0909090909091,
+            "p95": 549.3804347826087,
+            "min": 548.9285714285714,
+            "max": 549.4444444444445,
+            "rms": 549.2537813492966
+          },
+          "camera_pivot_y_px": {
+            "n": 266,
+            "median": 203.76136363636365,
+            "p05": 203.57142857142858,
+            "p95": 203.93750000000003,
+            "min": 203.5,
+            "max": 204.0,
+            "rms": 203.7367359630493
+          },
+          "camera_image_upright_rad": {
+            "n": 266,
+            "median": -3.116266566485021,
+            "p95_minus_p05": 0.03320005526324543,
+            "span": 0.07013767593334208,
+            "std": 0.010561585661140422,
+            "p95_abs_about_median": 0.020053066202820435
+          },
+          "camera_coverage_qualified": true
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 98,
+            "median": 549.3020833333334,
+            "p05": 549.1521739130435,
+            "p95": 549.3804347826087,
+            "min": 549.0909090909091,
+            "max": 549.4130434782609,
+            "rms": 549.308717426939
+          },
+          "camera_pivot_y_px": {
+            "n": 98,
+            "median": 203.93750000000003,
+            "p05": 203.76136363636365,
+            "p95": 203.93750000000003,
+            "min": 203.5909090909091,
+            "max": 203.93750000000003,
+            "rms": 203.85827820101534
+          },
+          "camera_image_upright_rad": {
+            "n": 98,
+            "median": -3.1258718034977075,
+            "p95_minus_p05": 0.016968102715207187,
+            "span": 0.024302510339610173,
+            "std": 0.005003115294803678,
+            "p95_abs_about_median": 0.01288532933093165
+          },
+          "camera_coverage_qualified": false
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 3303,
+        "accepted_frames": 2855,
+        "rejected": {
+          "missing_or_invalid_track": 447,
+          "confidence_below_0.8": 1
+        },
+        "median_length_px": 155.21791333134473,
+        "clock_anchors": [
+          {
+            "local_before_ns": 702116709752495,
+            "local_after_ns": 702116719082574,
+            "server_monotonic_s": 702116.717138893,
+            "offset_ns": -2721359,
+            "uncertainty_ns": 4665040
+          },
+          {
+            "local_before_ns": 702175130593310,
+            "local_after_ns": 702175136641573,
+            "server_monotonic_s": 702175.134921512,
+            "offset_ns": -1304071,
+            "uncertainty_ns": 3024132
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": true
+    },
+    {
+      "trial": "ke5-auto25-02",
+      "collector_complete": true,
+      "collector_success": false,
+      "collector_error": "RigError('latched rig error: executor fault 4')",
+      "first_capture_s": null,
+      "longest_BAL_s": 0.0,
+      "total_BAL_s": 0,
+      "BAL_entries": 0,
+      "mode_counts": {
+        "0": 3597,
+        "2": 1198,
+        "4": 46
+      },
+      "active_cart_m": {
+        "n": 1198,
+        "mean": 0.01742191146160267,
+        "rms": 0.131685223248987,
+        "minimum": -0.2327625,
+        "maximum": 0.2524875
+      },
+      "active_acceleration_m_s2": {
+        "n": 1198,
+        "mean": -0.29061550425709515,
+        "rms": 5.859983713073891,
+        "minimum": -16.81718,
+        "maximum": 9.822976
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 5.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309037507,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 605841589,
+        "tick": 509063693,
+        "us": 2262085123,
+        "mode": 4,
+        "flags": 200,
+        "theta": 1.728796,
+        "angle_hat": 1.758075,
+        "omega": -13.84273,
+        "x": -0.0209625,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 4,
+        "misses": 1,
+        "dropped": 64766019,
+        "brake_direction": 0,
+        "received_ns": 702207977563392,
+        "unwrapped_tick": 509063693,
+        "unwrapped_us": 2262085123
+      },
+      "info_after": {
+        "sid": 605841589,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 9,
+        "home_epoch": 28,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 702207979536866,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 1618,
+        "encoder_raw_age_us": 282,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 83,
+            "median": 549.3020833333334,
+            "p05": 549.3020833333334,
+            "p95": 549.3020833333334,
+            "min": 549.1521739130435,
+            "max": 549.3804347826087,
+            "rms": 549.302482143828
+          },
+          "camera_pivot_y_px": {
+            "n": 83,
+            "median": 203.93750000000003,
+            "p05": 203.93505434782608,
+            "p95": 203.93750000000003,
+            "min": 203.7717391304348,
+            "max": 203.93750000000003,
+            "rms": 203.92948187382518
+          },
+          "camera_image_upright_rad": {
+            "n": 83,
+            "median": -3.1260699993876653,
+            "p95_minus_p05": 0.013686613661352393,
+            "span": 0.021192604667458426,
+            "std": 0.004521857852869182,
+            "p95_abs_about_median": 0.010884541687094624
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": null,
+          "camera_pivot_y_px": null,
+          "camera_image_upright_rad": null,
+          "camera_coverage_qualified": null
+        }
+      },
+      "sensor_errors_delta": 2,
+      "camera_filters": {
+        "raw_records": 1097,
+        "accepted_frames": 453,
+        "rejected": {
+          "missing_or_invalid_track": 640,
+          "length_outside_20pct_median": 4
+        },
+        "median_length_px": 158.81872423369333,
+        "clock_anchors": [
+          {
+            "local_before_ns": 702188965941277,
+            "local_after_ns": 702188975888038,
+            "server_monotonic_s": 702188.973587327,
+            "offset_ns": -2672670,
+            "uncertainty_ns": 4973381
+          },
+          {
+            "local_before_ns": 702208065453305,
+            "local_after_ns": 702208071097017,
+            "server_monotonic_s": 702208.06945651,
+            "offset_ns": -1181349,
+            "uncertainty_ns": 2821856
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "ke5-auto25-03",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": null,
+      "longest_BAL_s": 0.0,
+      "total_BAL_s": 0,
+      "BAL_entries": 0,
+      "mode_counts": {
+        "0": 5978,
+        "2": 6250,
+        "14": 1032
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": 0.00349258201456,
+        "rms": 0.15349726869680838,
+        "minimum": -0.2493375,
+        "maximum": 0.26685
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": -0.052734372772319994,
+        "rms": 6.700815388340528,
+        "minimum": -17.30457,
+        "maximum": 10.94562
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 5.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309074998,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1215574072,
+        "tick": 509218283,
+        "us": 2416675123,
+        "mode": 0,
+        "flags": 205,
+        "theta": 3.035748,
+        "angle_hat": 3.035762,
+        "omega": 0.002132586,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 1,
+        "dropped": 64778756,
+        "brake_direction": 0,
+        "received_ns": 702362566493476,
+        "unwrapped_tick": 509218283,
+        "unwrapped_us": 2416675123
+      },
+      "info_after": {
+        "sid": 1215574072,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 9,
+        "home_epoch": 29,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 702362567813338,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2512,
+        "encoder_raw_age_us": 34976,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 132,
+            "median": 549.3020833333334,
+            "p05": 549.3020833333334,
+            "p95": 549.3977272727273,
+            "min": 549.3020833333334,
+            "max": 549.4130434782609,
+            "rms": 549.3168010480242
+          },
+          "camera_pivot_y_px": {
+            "n": 132,
+            "median": 203.93750000000003,
+            "p05": 203.87758152173916,
+            "p95": 204.17653162055336,
+            "min": 203.7717391304348,
+            "max": 204.27272727272728,
+            "rms": 203.9569652245883
+          },
+          "camera_image_upright_rad": {
+            "n": 132,
+            "median": -3.132002852045754,
+            "p95_minus_p05": 0.017607968234746432,
+            "span": 0.0505446900094344,
+            "std": 0.006460119978396776,
+            "p95_abs_about_median": 0.011250961619143955
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 212,
+            "median": 549.3020833333334,
+            "p05": 549.0,
+            "p95": 549.3020833333334,
+            "min": 549.0,
+            "max": 549.3977272727273,
+            "rms": 549.2357281488615
+          },
+          "camera_pivot_y_px": {
+            "n": 212,
+            "median": 203.93750000000003,
+            "p05": 203.93478260869566,
+            "p95": 204.0,
+            "min": 203.93478260869566,
+            "max": 204.27272727272728,
+            "rms": 203.96219686574065
+          },
+          "camera_image_upright_rad": {
+            "n": 212,
+            "median": -3.1147937651317648,
+            "p95_minus_p05": 0.012302580225429401,
+            "span": 0.02140767737863225,
+            "std": 0.003703861197482843,
+            "p95_abs_about_median": 0.008484867709037645
+          },
+          "camera_coverage_qualified": false
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 2918,
+        "accepted_frames": 1828,
+        "rejected": {
+          "missing_or_invalid_track": 1062,
+          "length_outside_20pct_median": 28
+        },
+        "median_length_px": 158.74791250936929,
+        "clock_anchors": [
+          {
+            "local_before_ns": 702309856740468,
+            "local_after_ns": 702309866503546,
+            "server_monotonic_s": 702309.864567289,
+            "offset_ns": -2945282,
+            "uncertainty_ns": 4881539
+          },
+          {
+            "local_before_ns": 702362638733170,
+            "local_after_ns": 702362644927259,
+            "server_monotonic_s": 702362.64253605,
+            "offset_ns": -705836,
+            "uncertainty_ns": 3097045
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "ke5-kdx15-auto25-01",
+      "collector_complete": true,
+      "collector_success": false,
+      "collector_error": "RigError('latched rig error: executor fault 4')",
+      "first_capture_s": null,
+      "longest_BAL_s": 0.0,
+      "total_BAL_s": 0,
+      "BAL_entries": 0,
+      "mode_counts": {
+        "0": 3597,
+        "2": 2357,
+        "4": 48
+      },
+      "active_cart_m": {
+        "n": 2357,
+        "mean": 0.008249013616461603,
+        "rms": 0.12491918691331742,
+        "minimum": -0.2436,
+        "maximum": 0.2630625
+      },
+      "active_acceleration_m_s2": {
+        "n": 2357,
+        "mean": -0.1485540579838778,
+        "rms": 5.381637045255281,
+        "minimum": -13.23881,
+        "maximum": 12.47411
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 5.0,
+        "kpx": 40.0,
+        "kdx": 1.5,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309074998,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 2168121704,
+        "tick": 509336972,
+        "us": 2535364123,
+        "mode": 4,
+        "flags": 201,
+        "theta": -2.992797,
+        "angle_hat": -2.956882,
+        "omega": -12.08315,
+        "x": -0.1060125,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 4,
+        "misses": 1,
+        "dropped": 64802477,
+        "brake_direction": 0,
+        "received_ns": 702481255426068,
+        "unwrapped_tick": 509336972,
+        "unwrapped_us": 2535364123
+      },
+      "info_after": {
+        "sid": 2168121704,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 10,
+        "home_epoch": 29,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 702481256492231,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2666,
+        "encoder_raw_age_us": 275,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 157,
+            "median": 549.2500000000001,
+            "p05": 549.0909090909091,
+            "p95": 549.3452380952382,
+            "min": 548.9285714285714,
+            "max": 549.3977272727273,
+            "rms": 549.2100519679431
+          },
+          "camera_pivot_y_px": {
+            "n": 157,
+            "median": 204.17045454545456,
+            "p05": 203.93750000000003,
+            "p95": 204.45238095238093,
+            "min": 203.93750000000003,
+            "max": 204.57894736842107,
+            "rms": 204.16106608895686
+          },
+          "camera_image_upright_rad": {
+            "n": 157,
+            "median": -3.114385706418542,
+            "p95_minus_p05": 0.01238970575376381,
+            "span": 0.020951591397337932,
+            "std": 0.0038181607488728354,
+            "p95_abs_about_median": 0.007372993521747424
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": null,
+          "camera_pivot_y_px": null,
+          "camera_image_upright_rad": null,
+          "camera_coverage_qualified": null
+        }
+      },
+      "sensor_errors_delta": 1,
+      "camera_filters": {
+        "raw_records": 1380,
+        "accepted_frames": 909,
+        "rejected": {
+          "missing_or_invalid_track": 466,
+          "confidence_below_0.8": 2,
+          "length_outside_20pct_median": 3
+        },
+        "median_length_px": 158.97265753824445,
+        "clock_anchors": [
+          {
+            "local_before_ns": 702457604879529,
+            "local_after_ns": 702457615345755,
+            "server_monotonic_s": 702457.613365946,
+            "offset_ns": -3253304,
+            "uncertainty_ns": 5233113
+          },
+          {
+            "local_before_ns": 702481358675634,
+            "local_after_ns": 702481364737818,
+            "server_monotonic_s": 702481.362246927,
+            "offset_ns": -540201,
+            "uncertainty_ns": 3031092
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "catchv02-auto25-01",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": null,
+      "longest_BAL_s": 0.0,
+      "total_BAL_s": 0,
+      "BAL_entries": 0,
+      "mode_counts": {
+        "0": 6681,
+        "2": 6250,
+        "14": 1217
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": 0.00154285201776,
+        "rms": 0.1354625946052315,
+        "minimum": -0.228225,
+        "maximum": 0.222225
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": 0.013283197561200005,
+        "rms": 5.940441847095612,
+        "minimum": -10.91406,
+        "maximum": 10.86531
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.200000003,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309112519,
+        "bw": 8.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 2212202631,
+        "tick": 509567698,
+        "us": 2766090123,
+        "mode": 0,
+        "flags": 205,
+        "theta": 2.974389,
+        "angle_hat": 2.974386,
+        "omega": -0.0001449917,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 1,
+        "dropped": 64833977,
+        "brake_direction": 0,
+        "received_ns": 702711982423303,
+        "unwrapped_tick": 509567698,
+        "unwrapped_us": 2766090123
+      },
+      "info_after": {
+        "sid": 2212202631,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 10,
+        "home_epoch": 30,
+        "measured_span_steps": 16512,
+        "rail_half_m": 0.3091125,
+        "received_ns": 702711983516697,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2472,
+        "encoder_raw_age_us": 89263,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 64,
+            "median": 549.5697674418606,
+            "p05": 549.5,
+            "p95": 549.5697674418606,
+            "min": 549.4146341463414,
+            "max": 549.7073170731708,
+            "rms": 549.5591957398361
+          },
+          "camera_pivot_y_px": {
+            "n": 64,
+            "median": 204.56976744186048,
+            "p05": 204.53119682359616,
+            "p95": 204.64772727272728,
+            "min": 204.45121951219514,
+            "max": 204.64772727272728,
+            "rms": 204.57188060833346
+          },
+          "camera_image_upright_rad": {
+            "n": 64,
+            "median": -3.126109186391611,
+            "p95_minus_p05": 0.020435345106163134,
+            "span": 0.05856546880203917,
+            "std": 0.00807679003050563,
+            "p95_abs_about_median": 0.012280671362397874
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 137,
+            "median": 549.1750000000001,
+            "p05": 549.1153846153846,
+            "p95": 549.3452380952382,
+            "min": 549.109756097561,
+            "max": 549.4146341463414,
+            "rms": 549.1913834872912
+          },
+          "camera_pivot_y_px": {
+            "n": 137,
+            "median": 204.7125,
+            "p05": 204.6282051282051,
+            "p95": 205.0,
+            "min": 204.50000000000003,
+            "max": 205.10714285714286,
+            "rms": 204.75843918802542
+          },
+          "camera_image_upright_rad": {
+            "n": 137,
+            "median": -3.1173964612294185,
+            "p95_minus_p05": 0.041199180977066055,
+            "span": 0.0704082348784949,
+            "std": 0.012861561801708324,
+            "p95_abs_about_median": 0.026453017319576045
+          },
+          "camera_coverage_qualified": false
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 3176,
+        "accepted_frames": 1781,
+        "rejected": {
+          "missing_or_invalid_track": 1372,
+          "confidence_below_0.8": 6,
+          "length_outside_20pct_median": 17
+        },
+        "median_length_px": 157.2446371081599,
+        "clock_anchors": [
+          {
+            "local_before_ns": 702655726978044,
+            "local_after_ns": 702655737061832,
+            "server_monotonic_s": 702655.735016517,
+            "offset_ns": -2996579,
+            "uncertainty_ns": 5041894
+          },
+          {
+            "local_before_ns": 702712089597735,
+            "local_after_ns": 702712095602669,
+            "server_monotonic_s": 702712.093813263,
+            "offset_ns": -1213061,
+            "uncertainty_ns": 3002467
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "bw10-auto25-01",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": 3.104,
+      "longest_BAL_s": 21.892,
+      "total_BAL_s": 21.892,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 7889,
+        "2": 776,
+        "3": 5474,
+        "14": 504
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": -0.00133357205472,
+        "rms": 0.06102863434881094,
+        "minimum": -0.1498125,
+        "maximum": 0.1707
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": -0.0060339580272432015,
+        "rms": 2.0917284697271943,
+        "minimum": -13.91115,
+        "maximum": 11.8241
+      },
+      "settled_longest_hold": {
+        "angle_deg": {
+          "n": 4974,
+          "mean": -0.0054423127630492995,
+          "rms": 1.346858170517678,
+          "minimum": -2.8125002743126823,
+          "maximum": 3.164062593742594
+        },
+        "omega_rad_s": {
+          "n": 4974,
+          "mean": 0.0025138266730229193,
+          "rms": 0.13425576059537375,
+          "minimum": -0.7529169,
+          "maximum": 0.6400243
+        },
+        "cart_m": {
+          "n": 4974,
+          "mean": -0.0021727307505026135,
+          "rms": 0.055248420844931465,
+          "minimum": -0.096675,
+          "maximum": 0.08895
+        },
+        "commanded_velocity_m_s": {
+          "n": 4974,
+          "mean": -0.0025751457384861278,
+          "rms": 0.10691645472608911,
+          "minimum": -0.1646479,
+          "maximum": 0.1998725
+        },
+        "acceleration_m_s2": {
+          "n": 4974,
+          "mean": -0.011284613789539606,
+          "rms": 0.44889000081534836,
+          "minimum": -1.903218,
+          "maximum": 1.792168
+        }
+      },
+      "balance_transitions": [
+        {
+          "t_s": 3.104,
+          "duration_s": 21.892,
+          "entry": {
+            "theta": 0.1702719,
+            "omega": -2.857706,
+            "x": 0.0327,
+            "velocity": -0.2987958,
+            "acceleration": 0.4970621
+          },
+          "exit": {
+            "theta": 0.01994175,
+            "omega": 0.04944016,
+            "x": -0.0014625,
+            "velocity": -0.152804,
+            "acceleration": 0.05901336
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309112519,
+        "bw": 10.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 3303878513,
+        "tick": 510151602,
+        "us": 3349994123,
+        "mode": 0,
+        "flags": 205,
+        "theta": 3.018874,
+        "angle_hat": 3.019488,
+        "omega": 0.009317148,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 1,
+        "dropped": 64965348,
+        "brake_direction": 0,
+        "received_ns": 703295889675775,
+        "unwrapped_tick": 510151602,
+        "unwrapped_us": 3349994123
+      },
+      "info_after": {
+        "sid": 3303878513,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 10,
+        "home_epoch": 30,
+        "measured_span_steps": 16512,
+        "rail_half_m": 0.3091125,
+        "received_ns": 703295892247659,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2501,
+        "encoder_raw_age_us": 2438,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 985,
+        "image_vertical_angle_rms_deg": 8.035936601842234,
+        "camera_minus_encoder_rms_deg": 7.719315613607042,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 247,
+            "median": 212.30851063829786,
+            "p05": 212.09183673469389,
+            "p95": 212.58163265306123,
+            "min": 211.85526315789474,
+            "max": 212.89534883720933,
+            "rms": 212.32407550578213
+          },
+          "camera_pivot_y_px": {
+            "n": 247,
+            "median": 386.9673913043478,
+            "p05": 386.79,
+            "p95": 387.18706395348835,
+            "min": 386.734693877551,
+            "max": 387.42857142857144,
+            "rms": 386.98390316413935
+          },
+          "camera_image_upright_rad": {
+            "n": 247,
+            "median": -3.049442233516725,
+            "p95_minus_p05": 0.004104399359492071,
+            "span": 0.008830622406778676,
+            "std": 0.001281402659161775,
+            "p95_abs_about_median": 0.002502835623126608
+          },
+          "camera_coverage_qualified": true
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 239,
+            "median": 212.3137254901961,
+            "p05": 212.2830188679245,
+            "p95": 212.47169811320757,
+            "min": 212.16666666666669,
+            "max": 212.62727272727273,
+            "rms": 212.337050168376
+          },
+          "camera_pivot_y_px": {
+            "n": 239,
+            "median": 387.04901960784315,
+            "p05": 386.99056603773585,
+            "p95": 387.2358490566038,
+            "min": 386.87254901960785,
+            "max": 387.53125000000006,
+            "rms": 387.080254121569
+          },
+          "camera_image_upright_rad": {
+            "n": 239,
+            "median": -3.0174895992633903,
+            "p95_minus_p05": 0.003085032147495914,
+            "span": 0.005388697590089642,
+            "std": 0.0009089403204693072,
+            "p95_abs_about_median": 0.0018278533065612997
+          },
+          "camera_coverage_qualified": true
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 2960,
+        "accepted_frames": 2823,
+        "rejected": {
+          "missing_or_invalid_track": 129,
+          "length_outside_20pct_median": 8
+        },
+        "median_length_px": 169.74060213306123,
+        "clock_anchors": [
+          {
+            "local_before_ns": 703237661422631,
+            "local_after_ns": 703237671003594,
+            "server_monotonic_s": 703237.6692371,
+            "offset_ns": -3023988,
+            "uncertainty_ns": 4790482
+          },
+          {
+            "local_before_ns": 703295989267838,
+            "local_after_ns": 703295995262468,
+            "server_monotonic_s": 703295.993378148,
+            "offset_ns": -1112995,
+            "uncertainty_ns": 2997315
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": true
+    },
+    {
+      "trial": "bw10-auto25-02",
+      "collector_complete": true,
+      "collector_success": true,
+      "collector_error": null,
+      "first_capture_s": 1.276,
+      "longest_BAL_s": 19.428,
+      "total_BAL_s": 20.384,
+      "BAL_entries": 2,
+      "mode_counts": {
+        "0": 7751,
+        "2": 1152,
+        "3": 5098,
+        "14": 643
+      },
+      "active_cart_m": {
+        "n": 6250,
+        "mean": 0.0039465959955199996,
+        "rms": 0.07925390772528046,
+        "minimum": -0.2619375,
+        "maximum": 0.245925
+      },
+      "active_acceleration_m_s2": {
+        "n": 6250,
+        "mean": -0.007104171502145602,
+        "rms": 3.017786143700889,
+        "minimum": -17.94666,
+        "maximum": 15.05331
+      },
+      "settled_longest_hold": {
+        "angle_deg": {
+          "n": 4358,
+          "mean": -0.07292620538225274,
+          "rms": 1.4033731757328611,
+          "minimum": -5.0097659166652235,
+          "maximum": 3.0761720138851163
+        },
+        "omega_rad_s": {
+          "n": 4358,
+          "mean": -0.0020417053395709035,
+          "rms": 0.24207266011977535,
+          "minimum": -1.639822,
+          "maximum": 1.615796
+        },
+        "cart_m": {
+          "n": 4358,
+          "mean": 0.0007841096652134006,
+          "rms": 0.054584712736159065,
+          "minimum": -0.0930375,
+          "maximum": 0.09
+        },
+        "commanded_velocity_m_s": {
+          "n": 4358,
+          "mean": 0.006929685055821478,
+          "rms": 0.11058833107588965,
+          "minimum": -0.1735644,
+          "maximum": 0.2237471
+        },
+        "acceleration_m_s2": {
+          "n": 4358,
+          "mean": -0.01866319687847866,
+          "rms": 0.7232905957279879,
+          "minimum": -4.93066,
+          "maximum": 4.686199
+        }
+      },
+      "balance_transitions": [
+        {
+          "t_s": 1.276,
+          "duration_s": 0.956,
+          "entry": {
+            "theta": -0.2316311,
+            "omega": 2.573661,
+            "x": 0.111525,
+            "velocity": -0.05266143,
+            "acceleration": 4.40173
+          },
+          "exit": {
+            "theta": -0.799204,
+            "omega": -1.363361,
+            "x": -0.10485,
+            "velocity": -1.499809,
+            "acceleration": 0.0
+          }
+        },
+        {
+          "t_s": 5.568,
+          "duration_s": 19.428,
+          "entry": {
+            "theta": 0.2316311,
+            "omega": -2.076733,
+            "x": 0.0109875,
+            "velocity": -0.2115109,
+            "acceleration": 1.796738
+          },
+          "exit": {
+            "theta": -0.001533981,
+            "omega": 0.02638451,
+            "x": 0.0377625,
+            "velocity": -0.1735644,
+            "acceleration": -0.5925646
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309112519,
+        "bw": 10.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1124022983,
+        "tick": 510228015,
+        "us": 3426407123,
+        "mode": 0,
+        "flags": 205,
+        "theta": 3.020408,
+        "angle_hat": 3.020279,
+        "omega": -0.001014904,
+        "x": 0.0,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 0,
+        "misses": 1,
+        "dropped": 64969883,
+        "brake_direction": 0,
+        "received_ns": 703372302759800,
+        "unwrapped_tick": 510228015,
+        "unwrapped_us": 3426407123
+      },
+      "info_after": {
+        "sid": 1124022983,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 10,
+        "home_epoch": 30,
+        "measured_span_steps": 16512,
+        "rail_half_m": 0.3091125,
+        "received_ns": 703372304914588,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2502,
+        "encoder_raw_age_us": 4506,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 850,
+        "image_vertical_angle_rms_deg": 7.961466704935591,
+        "camera_minus_encoder_rms_deg": 7.706122312918227,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 253,
+            "median": 212.4423076923077,
+            "p05": 212.14893617021278,
+            "p95": 212.74470588235295,
+            "min": 211.03333333333336,
+            "max": 212.84375000000003,
+            "rms": 212.4347094752443
+          },
+          "camera_pivot_y_px": {
+            "n": 253,
+            "median": 388.0568181818182,
+            "p05": 387.77687074829936,
+            "p95": 388.5298418972332,
+            "min": 387.6530612244898,
+            "max": 390.33333333333337,
+            "rms": 388.10855158707534
+          },
+          "camera_image_upright_rad": {
+            "n": 253,
+            "median": -3.0150511580833843,
+            "p95_minus_p05": 0.0036078435199939016,
+            "span": 0.009615730162168656,
+            "std": 0.0011682724063772864,
+            "p95_abs_about_median": 0.002135978101379974
+          },
+          "camera_coverage_qualified": true
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 162,
+            "median": 212.39211886304912,
+            "p05": 212.1382411067194,
+            "p95": 212.67391304347828,
+            "min": 210.72727272727275,
+            "max": 212.89795918367346,
+            "rms": 212.39185844254885
+          },
+          "camera_pivot_y_px": {
+            "n": 162,
+            "median": 388.587922705314,
+            "p05": 388.4039368650218,
+            "p95": 388.8780487804878,
+            "min": 388.30392156862746,
+            "max": 390.90909090909093,
+            "rms": 388.63806359232024
+          },
+          "camera_image_upright_rad": {
+            "n": 162,
+            "median": -3.016834163583921,
+            "p95_minus_p05": 0.004626359855479699,
+            "span": 0.012265401123363162,
+            "std": 0.001560680534175688,
+            "p95_abs_about_median": 0.0030401207508877065
+          },
+          "camera_coverage_qualified": false
+        }
+      },
+      "sensor_errors_delta": 0,
+      "camera_filters": {
+        "raw_records": 2984,
+        "accepted_frames": 2708,
+        "rejected": {
+          "missing_or_invalid_track": 264,
+          "confidence_below_0.8": 1,
+          "length_outside_20pct_median": 11
+        },
+        "median_length_px": 170.09111656610784,
+        "clock_anchors": [
+          {
+            "local_before_ns": 703314078877627,
+            "local_after_ns": 703314089814677,
+            "server_monotonic_s": 703314.087745202,
+            "offset_ns": -3399050,
+            "uncertainty_ns": 5468525
+          },
+          {
+            "local_before_ns": 703372409178187,
+            "local_after_ns": 703372414118559,
+            "server_monotonic_s": 703372.412517316,
+            "offset_ns": -868943,
+            "uncertainty_ns": 2470186
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": true
+    },
+    {
+      "trial": "bw10-auto25-03",
+      "collector_complete": true,
+      "collector_success": false,
+      "collector_error": "RigError('latched rig error: executor fault 4')",
+      "first_capture_s": 2.76,
+      "longest_BAL_s": 0.124,
+      "total_BAL_s": 0.124,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 3595,
+        "2": 782,
+        "3": 32,
+        "4": 50,
+        "5": 74,
+        "6": 1
+      },
+      "active_cart_m": {
+        "n": 889,
+        "mean": 0.04613398481552306,
+        "rms": 0.12170591917475221,
+        "minimum": -0.1625625,
+        "maximum": 0.28725
+      },
+      "active_acceleration_m_s2": {
+        "n": 889,
+        "mean": -0.37181938195955005,
+        "rms": 4.984654757520954,
+        "minimum": -14.19462,
+        "maximum": 15.2011
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [
+        {
+          "t_s": 2.76,
+          "duration_s": 0.124,
+          "entry": {
+            "theta": 0.1718059,
+            "omega": -2.766663,
+            "x": 0.0478875,
+            "velocity": -0.1765399,
+            "acceleration": -3.62819
+          },
+          "exit": {
+            "theta": 0.5292234,
+            "omega": 1.624816,
+            "x": 0.04545,
+            "velocity": 0.5272977,
+            "acceleration": 14.9011
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309112519,
+        "bw": 10.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 1159681317,
+        "tick": 510281939,
+        "us": 3480331123,
+        "mode": 4,
+        "flags": 201,
+        "theta": -1.877593,
+        "angle_hat": -1.846506,
+        "omega": 13.10949,
+        "x": -0.046875,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 4,
+        "misses": 1,
+        "dropped": 64978912,
+        "brake_direction": 0,
+        "received_ns": 703426227728960,
+        "unwrapped_tick": 510281939,
+        "unwrapped_us": 3480331123
+      },
+      "info_after": {
+        "sid": 1159681317,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 11,
+        "home_epoch": 30,
+        "measured_span_steps": 16512,
+        "rail_half_m": 0.3091125,
+        "received_ns": 703426230070024,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 3422,
+        "encoder_raw_age_us": 241,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 151,
+            "median": 212.35416666666669,
+            "p05": 211.46666666666667,
+            "p95": 212.72116209262435,
+            "min": 210.41666666666666,
+            "max": 212.97,
+            "rms": 212.32587263929275
+          },
+          "camera_pivot_y_px": {
+            "n": 151,
+            "median": 388.5851063829787,
+            "p05": 388.3966325660699,
+            "p95": 390.05,
+            "min": 388.0892857142857,
+            "max": 391.42857142857144,
+            "rms": 388.7578750113264
+          },
+          "camera_image_upright_rad": {
+            "n": 151,
+            "median": -3.016750487917517,
+            "p95_minus_p05": 0.008002024746721625,
+            "span": 0.01222694001206781,
+            "std": 0.002153237606275204,
+            "p95_abs_about_median": 0.0053794423539972325
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": null,
+          "camera_pivot_y_px": null,
+          "camera_image_upright_rad": null,
+          "camera_coverage_qualified": null
+        }
+      },
+      "sensor_errors_delta": 1,
+      "camera_filters": {
+        "raw_records": 985,
+        "accepted_frames": 580,
+        "rejected": {
+          "missing_or_invalid_track": 376,
+          "confidence_below_0.8": 1,
+          "length_outside_20pct_median": 28
+        },
+        "median_length_px": 173.58843182481007,
+        "clock_anchors": [
+          {
+            "local_before_ns": 703408459921583,
+            "local_after_ns": 703408469916153,
+            "server_monotonic_s": 703408.467987704,
+            "offset_ns": -3068836,
+            "uncertainty_ns": 4997285
+          },
+          {
+            "local_before_ns": 703426349839806,
+            "local_after_ns": 703426355680193,
+            "server_monotonic_s": 703426.353642431,
+            "offset_ns": -882432,
+            "uncertainty_ns": 2920194
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    },
+    {
+      "trial": "bw10-auto60-01",
+      "collector_complete": true,
+      "collector_success": false,
+      "collector_error": "RigError('latched rig error: executor fault 4')",
+      "first_capture_s": 1.388,
+      "longest_BAL_s": 0.12,
+      "total_BAL_s": 0.12,
+      "BAL_entries": 1,
+      "mode_counts": {
+        "0": 3595,
+        "2": 1548,
+        "3": 31,
+        "4": 46,
+        "5": 78,
+        "6": 20
+      },
+      "active_cart_m": {
+        "n": 1677,
+        "mean": 0.031857848874180084,
+        "rms": 0.12513993330322465,
+        "minimum": -0.1884375,
+        "maximum": 0.2935875
+      },
+      "active_acceleration_m_s2": {
+        "n": 1677,
+        "mean": -0.2182569388157424,
+        "rms": 4.756258048780408,
+        "minimum": -11.87015,
+        "maximum": 10.18847
+      },
+      "settled_longest_hold": {
+        "angle_deg": null,
+        "omega_rad_s": null,
+        "cart_m": null,
+        "commanded_velocity_m_s": null,
+        "acceleration_m_s2": null
+      },
+      "balance_transitions": [
+        {
+          "t_s": 1.388,
+          "duration_s": 0.12,
+          "entry": {
+            "theta": -0.0644272,
+            "omega": 2.036508,
+            "x": 0.1161375,
+            "velocity": 0.17916,
+            "acceleration": 3.027339
+          },
+          "exit": {
+            "theta": 0.1948156,
+            "omega": 4.123013,
+            "x": 0.1524,
+            "velocity": 0.6010888,
+            "acceleration": 10.18847
+          }
+        }
+      ],
+      "test_parameters": {
+        "leff": 0.123999998,
+        "pw": 3.0,
+        "pz": 0.850000024,
+        "bal_pw": 4.5,
+        "pc1": -5.0,
+        "pc2": -6.0,
+        "vmax": 1.5,
+        "vmax_s": 1.5,
+        "vmax_b": 1.5,
+        "approach_v": 0.200000003,
+        "catch_v": 0.300000012,
+        "approach_angle": 0.800000012,
+        "catch_da": 4.0,
+        "amax_s": 25.0,
+        "amax_b": 25.0,
+        "jmax": 150.0,
+        "amax_m": 0.5,
+        "jmax_m": 10.0,
+        "ke": 4.0,
+        "kpx": 40.0,
+        "kdx": 2.0,
+        "phase_soft": 2.0,
+        "catch_a": 0.25,
+        "catch_r": 3.0,
+        "giveup": 0.800000012,
+        "spin_trip_rad_s": 150.0,
+        "spin_resume_rad_s": 10.0,
+        "rail": 0.309074998,
+        "bw": 10.0,
+        "vman": 0.0500000007,
+        "manual_speed_max": 0.150000006,
+        "rail_fraction": 0.949999988,
+        "rail_margin": 0.0149999997,
+        "rail_fault_margin": 0.00999999978,
+        "rail_hysteresis": 0.00499999989,
+        "rail_recover_v": 0.150000006,
+        "rail_recover_a": 1.5,
+        "rail_recover_s": 8.0,
+        "rehome_v": 0.0799999982,
+        "rehome_a": 0.5,
+        "rehome_j": 10.0
+      },
+      "after": {
+        "sid": 2647066502,
+        "tick": 510428459,
+        "us": 3626851123,
+        "mode": 4,
+        "flags": 201,
+        "theta": 2.583224,
+        "angle_hat": 2.618394,
+        "omega": -16.92096,
+        "x": -0.032775,
+        "velocity": 0.0,
+        "acceleration": 0.0,
+        "demand": 0.0,
+        "last_seq": 0,
+        "fault": 4,
+        "misses": 1,
+        "dropped": 64997839,
+        "brake_direction": 0,
+        "received_ns": 703572747928718,
+        "unwrapped_tick": 510428459,
+        "unwrapped_us": 3626851123
+      },
+      "info_after": {
+        "sid": 2647066502,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 12,
+        "home_epoch": 31,
+        "measured_span_steps": 16511,
+        "rail_half_m": 0.309075,
+        "received_ns": 703572750478362,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2197,
+        "encoder_raw_age_us": 259,
+        "encoder_recoveries": 0
+      },
+      "interpretation": "Mode3 interval duration; gaps>30ms break intervals. Settled metrics use longest interval after2s. Cart position is step-counted and velocity commanded, not physical metrology.",
+      "settled_independent_camera": {
+        "samples": 0,
+        "image_vertical_angle_rms_deg": null,
+        "camera_minus_encoder_rms_deg": null,
+        "limitation": "Frozen timing proxy; raw image vertical is not certified gravity vertical. No new calibration or fusion."
+      },
+      "camera_rest_geometry": {
+        "before_auto_rest": {
+          "camera_pivot_x_px": {
+            "n": 86,
+            "median": 212.38636363636365,
+            "p05": 212.21016823354776,
+            "p95": 212.65154359616187,
+            "min": 211.98913043478262,
+            "max": 212.7717391304348,
+            "rms": 212.39203072545484
+          },
+          "camera_pivot_y_px": {
+            "n": 86,
+            "median": 388.75000000000006,
+            "p05": 388.6335403726708,
+            "p95": 388.9222222222222,
+            "min": 388.5851063829787,
+            "max": 389.0263157894737,
+            "rms": 388.76440913315014
+          },
+          "camera_image_upright_rad": {
+            "n": 86,
+            "median": -3.024788705433065,
+            "p95_minus_p05": 0.004755432177334429,
+            "span": 0.006888870254800672,
+            "std": 0.0014018957126037959,
+            "p95_abs_about_median": 0.00271033791266706
+          },
+          "camera_coverage_qualified": false
+        },
+        "after_auto_rest": {
+          "camera_pivot_x_px": null,
+          "camera_pivot_y_px": null,
+          "camera_image_upright_rad": null,
+          "camera_coverage_qualified": null
+        }
+      },
+      "sensor_errors_delta": 1,
+      "camera_filters": {
+        "raw_records": 1178,
+        "accepted_frames": 472,
+        "rejected": {
+          "missing_or_invalid_track": 672,
+          "confidence_below_0.8": 1,
+          "length_outside_20pct_median": 33
+        },
+        "median_length_px": 173.0385475395866,
+        "clock_anchors": [
+          {
+            "local_before_ns": 703551831287440,
+            "local_after_ns": 703551841415133,
+            "server_monotonic_s": 703551.839307193,
+            "offset_ns": -2955907,
+            "uncertainty_ns": 5063847
+          },
+          {
+            "local_before_ns": 703572852347167,
+            "local_after_ns": 703572857256531,
+            "server_monotonic_s": 703572.855329426,
+            "offset_ns": -527577,
+            "uncertainty_ns": 2454682
+          }
+        ],
+        "clock_assumption": null
+      },
+      "completed_balanced": false
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "/tmp/analyze_tuning_campaign.py",
+      "sha256": "ba8d8b393a57ca9e284a1fd094e94ee3aeba5443765efbb5283a41d969de0b6e"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze.py",
+      "sha256": "d3489d8e635e7807b95d75de07b64605fe74e658b3021af40ee3b53c93568889"
+    },
+    {
+      "path": "/tmp/score_native_trial.py",
+      "sha256": "77b181d53cb6215e95e90fb7064efc0529bf4091311724695f5dc99992372c93"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-01/rig-1792606094024802070-1758866920.jsonl",
+      "sha256": "74c4d89b2548069e9871a4bc53becab2a6f4697fbfb14d710229b4b5556959b6"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-01/report.json",
+      "sha256": "dcd82cad538269d275ba3a538a6cf613e671cdef02be68d40b0cbbb754db39ba"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-01/vision.ndjson",
+      "sha256": "79b3e0ac1b80bac8a1ced5b922ebdfdd8185be0d591164e509bae179ec629ee9"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-01/vision-report.json",
+      "sha256": "07196e18dcc413f1f15f48853c5667c1feb46ac4f82bfe5ebd3d7ce1d4650204"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-02/rig-1792606229983987393-1084564982.jsonl",
+      "sha256": "57bfbbc514fb7a9f2f99b5a86d3c05e21c0222aec33ded68354b162eeb7f0156"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-02/report.json",
+      "sha256": "c8e0987fbafde94e5b34e6b4a9ea77d5d4cb9c76cbc9783b098d61c3d569e1a1"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-02/vision.ndjson",
+      "sha256": "0fbf725d060c443889c025f74d651144ffac10682466c0d8df15ff06c5844bbe"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-02/vision-report.json",
+      "sha256": "ad254893071d3023088dfa10cc78cf9dbc7a1eed3ad20b5cbe5cc2f68862b581"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-03/rig-1792606439943942055-2474722109.jsonl",
+      "sha256": "fd00b8d6bedc492b3820e91fd773de8856c52549e4586cd0a4ab74f2af6407a4"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-03/report.json",
+      "sha256": "7a1bae39cfbffc9208d50f89ad5cf0290f2af882aa66be6ee0c9cb06a5e6a164"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-03/vision.ndjson",
+      "sha256": "0daed01c29278592c98509452337af583b5b4adcbf99d7e2d4757b40456df57e"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw8-auto25-03/vision-report.json",
+      "sha256": "826971857ef0c98ff6b9bcaf841d8e2fa2cd5d126e72c074290f295935baf03b"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-01/rig-1792606820950068707-1542831256.jsonl",
+      "sha256": "9c89eee18e81178c9c55e779ffb1de56b5ccf2cc58a6ac84d15ce3ff37311b85"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-01/report.json",
+      "sha256": "e6d919d03c6c0a9a49dc7b6ddc88c3ec63412ec8907352cbad8f41bb3a8e5b15"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-01/vision.ndjson",
+      "sha256": "f9f538c40ea3c710e9c1e8640da679b54d0fb1ea866446b64550a9968e98060d"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-01/vision-report.json",
+      "sha256": "437974307168d2aefdbddda6ede6f5b700bab30ec654ef496d8a5c0156cbde7a"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-02/rig-1792606893199138039-605841589.jsonl",
+      "sha256": "60d78584b918633b8d1e924a416a344d2cfe975a7ac35b149b501ce98fd9a12f"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-02/report.json",
+      "sha256": "3b3337c7062d214a1ca95a85ac5d7671044628a231aa2257734565acffd801c8"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-02/vision.ndjson",
+      "sha256": "8e77694ca33b4eb55566e8fd0d5f41792a664ddc9c54972d681799041e4aaca0"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-02/vision-report.json",
+      "sha256": "c2806b2b0a4891917d3eff4b76ff46c470f33cba66f65430f3a09bca6e369a61"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-03/rig-1792607014096350555-1215574072.jsonl",
+      "sha256": "cc51e6de7f5686162a507eebb8e6f78f75d2f755f5a363a82d4c8db50f43d20a"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-03/report.json",
+      "sha256": "fd181a2e8e6534abe486b36687da84c4a2448837a477e8dc31683283ae1ba676"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-03/vision.ndjson",
+      "sha256": "1bfd2861df9cdae6b3f059f62829b7d1ebf5c3c716258ec51db9362ef4b88976"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-auto25-03/vision-report.json",
+      "sha256": "949bd09d409ba98ddcbe78b4a316cdd3a8676bc6b5d29c4dbd3b2748074b387b"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-kdx15-auto25-01/rig-1792607161836954224-2168121704.jsonl",
+      "sha256": "fb86adb7f8c52b712aa527a1e601fb7fae9e9479deb8d4512607d47ee81e635e"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-kdx15-auto25-01/report.json",
+      "sha256": "e40b63ceea52bf88a5cc0a949e19f6e694c1c3e1ac86aa2c8c981f836fdf1217"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-kdx15-auto25-01/vision.ndjson",
+      "sha256": "9778c898a21054dc5a2320fa2d02f65b109adca7fc8effacaee3ae0725840c3f"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/ke5-kdx15-auto25-01/vision-report.json",
+      "sha256": "a88ce39228801c10ba9e067b80375858e3eab9352f2c1404f4673152bb9dd7ee"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/catchv02-auto25-01/rig-1792607359962806723-2212202631.jsonl",
+      "sha256": "ec080753fdfe94c176554ea8f96197c2fcbe0a65b49bdd71d3fa2cfc509da5b3"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/catchv02-auto25-01/report.json",
+      "sha256": "9f37dff9697e1d1dabfeb2c9c0816056b3dbf0986acd758497c792623a52732d"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/catchv02-auto25-01/vision.ndjson",
+      "sha256": "d7563a65fb22ee75e9b267e8b97aacec1dd8bc173afbafee906bf1d4a57338d3"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/catchv02-auto25-01/vision-report.json",
+      "sha256": "5179a084d989621c3dada71e5f1adfe65e11f4752e40e29c4c16a68670c5dc0c"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-01/rig-1792607941894256250-3303878513.jsonl",
+      "sha256": "3b9b05ef25a5e45c8e42c07936b0740c8e760496861ff58b25e8cce1edf3735d"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-01/report.json",
+      "sha256": "d1bf747cec1e2d2cf4d608b14f2226c9afbf5db21736d4d84f469818fac2add1"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-01/vision.ndjson",
+      "sha256": "e33cfc8bf9df99ccee082b13c0bec68cdb53c4fbe4b28663ff2882a01e3c35d4"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-01/vision-report.json",
+      "sha256": "0281f2fc04706998db22ae97b46a8a27b1d48f4153175afdd8ed32bb28f3a6ca"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-02/rig-1792608018316972039-1124022983.jsonl",
+      "sha256": "e6d462eb01cf11dc74fbb728f9c420103b768802b94964985aa255b0c584d987"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-02/report.json",
+      "sha256": "5e81bf785b90e4f29b3539dc2e4ca58bacdabf1c504f2759277f0c20726a7f15"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-02/vision.ndjson",
+      "sha256": "a9de6f2d849b030738edf78229781b31e4394e0854c92e6b9866be4cd659f38b"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-02/vision-report.json",
+      "sha256": "46f3bed69dee6ca3c282097b9f6489d6a555603d2087e47e70b2ebcdac1a0941"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-03/rig-1792608112695057385-1159681317.jsonl",
+      "sha256": "230880e3fc935cfd9b7e3830dccdcaeef63d4f7d2458123d7867aa931ba83025"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-03/report.json",
+      "sha256": "865a0fea272401a8abe32cb466ab0e3b57c64702207ebe8d7730c765ceba4d26"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-03/vision.ndjson",
+      "sha256": "968d51adc9b02d094206bf3a4e5ec8c70fb57946ba5992073a9068e0accdd3fe"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto25-03/vision-report.json",
+      "sha256": "eceeca21e2ef10cbeb2e0997c488a5beadccee629a9b497bbd9aa7c19d5ad44f"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto60-01/rig-1792608256064150852-2647066502.jsonl",
+      "sha256": "33b5a616cf57c5909874c909f2ca3f7c87abc736ae521b1674ad61485a700851"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto60-01/report.json",
+      "sha256": "399546605ca5d53ebcbe31d9b2c408f15c4a61823b35a151e6282cbede139e04"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto60-01/vision.ndjson",
+      "sha256": "da17928e8e97d7431291b956b5749fedf4b17c1908cd30eaa64e6b39d550e904"
+    },
+    {
+      "path": "/tmp/cartpole-tuning-resume/data/runs/encoder-tuning-resume-20261021/bw10-auto60-01/vision-report.json",
+      "sha256": "b9f0a0636caa9a39c3f66e2a1a3e71458416e4055f155ffece212d1cc897a1a0"
+    }
+  ]
+}
