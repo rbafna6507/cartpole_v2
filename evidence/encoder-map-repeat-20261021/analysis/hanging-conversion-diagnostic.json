@@ -1,0 +1,72 @@
+{
+  "kind": "exploratory_hanging_reference_conversion",
+  "calibration_accepted": false,
+  "hardware_accepted": false,
+  "formula": "upright_raw = (hanging_raw + 2048 + offset_counts) % 4096",
+  "training_recording": "upright04",
+  "validation_recording": "freefall06",
+  "diagnostic_offset_counts": 106.00000000000045,
+  "validation_prediction_counts": 541.0,
+  "validation_observed_upright_counts": 539.0000000000001,
+  "pairs": [
+    {
+      "recording": "upright04",
+      "upright": {
+        "start_s": 71.57732069841586,
+        "duration_s": 4.1200184596236795,
+        "qualified": true,
+        "native_count_median": 548.0,
+        "encoder_deg": 1.3183593750000113,
+        "image_deg": 0.16852600932944545,
+        "frozen_map_error_deg": 4.55170790549153
+      },
+      "hanging": {
+        "start_s": 0.0,
+        "duration_s": 64.59728942485526,
+        "qualified": false,
+        "native_count_median": 2489.9999999999995,
+        "encoder_deg": 172.00195312499991,
+        "image_deg": -179.57292156188757,
+        "frozen_map_error_deg": 1.8798891300404426
+      },
+      "observed_offset_counts": 106.00000000000045,
+      "observed_offset_deg": 9.316406250000039,
+      "camera_pose_separation_error_deg": 0.25855242878299123,
+      "camera_adjusted_excess_counts": 108.94175207859804
+    },
+    {
+      "recording": "freefall06",
+      "upright": {
+        "start_s": 0.0,
+        "duration_s": 37.843177888542414,
+        "qualified": true,
+        "native_count_median": 539.0000000000001,
+        "encoder_deg": 0.5273437500000046,
+        "image_deg": -0.6330637605169699,
+        "frozen_map_error_deg": 4.277998225029954
+      },
+      "hanging": {
+        "start_s": 99.63946837303229,
+        "duration_s": 41.39619459025562,
+        "qualified": true,
+        "native_count_median": 2482.9999999999995,
+        "encoder_deg": 171.38671874999997,
+        "image_deg": 179.36483337618932,
+        "frozen_map_error_deg": 1.432018517215749
+      },
+      "observed_offset_counts": 104.00000000000045,
+      "observed_offset_deg": 9.140625000000039,
+      "camera_pose_separation_error_deg": -0.002102863293714563,
+      "camera_adjusted_excess_counts": 103.97607408874752
+    }
+  ],
+  "limitations": [
+    "Only two pairs; not enough independent session/direction coverage.",
+    "Training hanging camera window fails strict camera stationarity.",
+    "Natural resting poses, not certified physical vertical.",
+    "No SDK calibration approval or export; this document is diagnostic evidence only.",
+    "Count-only transfer error assumes a half-turn; camera-adjusted difference is not certified physical accuracy because the04 hanging camera window is unstable."
+  ],
+  "count_only_validation_error_deg": 0.17578125,
+  "camera_adjusted_excess_difference_deg": 0.4364365420767058
+}

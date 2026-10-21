@@ -1,0 +1,792 @@
+{
+  "schema": "cartpole-encoder-repeat-validation-v1",
+  "reference_counts": 533,
+  "candidate": {
+    "order": 4,
+    "coefficients": [
+      0.04596834699603304,
+      -0.08659977297966294,
+      -0.13807218502453142,
+      -0.08044831916414436,
+      -0.05354502155688431,
+      -0.028121189292685235,
+      0.03453387530892986,
+      0.0008225215621261323,
+      0.01923210674538964
+    ],
+    "coefficient_units": "radians",
+    "training_cross_validation": [
+      {
+        "order": 0,
+        "n": 1597,
+        "rms_deg": 8.00724190902939,
+        "median_deg": 4.3663331932207194,
+        "p95_abs_deg": 16.489681749636553,
+        "max_abs_deg": 18.73860454328381
+      },
+      {
+        "order": 1,
+        "n": 1597,
+        "rms_deg": 4.356974845830552,
+        "median_deg": -0.1480114719512258,
+        "p95_abs_deg": 8.430441209731304,
+        "max_abs_deg": 9.389796938050313
+      },
+      {
+        "order": 2,
+        "n": 1597,
+        "rms_deg": 2.0095206132373993,
+        "median_deg": -0.021153668095844114,
+        "p95_abs_deg": 3.4333955823814284,
+        "max_abs_deg": 4.33863683396987
+      },
+      {
+        "order": 3,
+        "n": 1597,
+        "rms_deg": 0.9983192347488148,
+        "median_deg": 0.10574540109877163,
+        "p95_abs_deg": 1.7665936179901915,
+        "max_abs_deg": 3.622197947983395
+      },
+      {
+        "order": 4,
+        "n": 1597,
+        "rms_deg": 0.5489588877904933,
+        "median_deg": 0.059390688431723904,
+        "p95_abs_deg": 1.1800468118794474,
+        "max_abs_deg": 2.6829895687632237
+      },
+      {
+        "order": 5,
+        "n": 1597,
+        "rms_deg": 0.5587425123716868,
+        "median_deg": 0.03167773239313361,
+        "p95_abs_deg": 1.1723953449900144,
+        "max_abs_deg": 2.67520117232303
+      },
+      {
+        "order": 6,
+        "n": 1597,
+        "rms_deg": 0.5669299531916178,
+        "median_deg": 0.011667205506299782,
+        "p95_abs_deg": 1.1988862834711018,
+        "max_abs_deg": 2.6988205742364264
+      }
+    ],
+    "training": {
+      "n": 1597,
+      "rms_deg": 0.5084763024452154,
+      "median_deg": 0.05541512142155156,
+      "p95_abs_deg": 1.0686606146008628,
+      "max_abs_deg": 2.613218292996379
+    },
+    "opposite_direction": {
+      "n": 1334,
+      "rms_deg": 0.8168944494561231,
+      "median_deg": 0.332004342835745,
+      "p95_abs_deg": 1.4667344933981414,
+      "max_abs_deg": 3.5388788225863226
+    },
+    "minimum_sampled_derivative": 0.6511224435266656,
+    "maximum_sampled_derivative": 1.5050252775665196,
+    "sampled_monotonic": true,
+    "camera_angle_at_saved_reference_deg": -5.264501092047354,
+    "selection": "First rotation direction only; six folds of interleaved 5-degree bins; bin-weighted fitting, frame-weighted held-fold CV; orders0..6. Opposite direction remains held out.",
+    "formula": "camera_image_angle = wrap(q + beta0 + sum(beta[2*k-1]*sin(k*q) + beta[2*k]*cos(k*q))); q = wrap((raw-reference_counts)*2*pi/4096)"
+  },
+  "stationary_checks": [
+    {
+      "recording": "upright04",
+      "n": 7,
+      "rms_deg": 4.542251733663804,
+      "median_deg": 4.548608208067245,
+      "p95_abs_deg": 4.5589508237110605,
+      "max_abs_deg": 4.562054931519431,
+      "qualified_holds": 7,
+      "passed": false,
+      "max_abs_error_deg": 4.562054931519431,
+      "limit_deg": 0.5,
+      "interpretation": "Independent quiet-pose camera/encoder agreement; passing alone is not hardware acceptance."
+    },
+    {
+      "recording": "contact05",
+      "n": 10,
+      "rms_deg": 4.417832992736018,
+      "median_deg": 4.3596703915875405,
+      "p95_abs_deg": 4.587733181018503,
+      "max_abs_deg": 4.608742657881381,
+      "qualified_holds": 10,
+      "passed": false,
+      "max_abs_error_deg": 4.608742657881381,
+      "limit_deg": 0.5,
+      "interpretation": "Independent quiet-pose camera/encoder agreement; passing alone is not hardware acceptance."
+    },
+    {
+      "recording": "freefall06",
+      "n": 6,
+      "rms_deg": 3.690939611713625,
+      "median_deg": 4.306251025795669,
+      "p95_abs_deg": 4.633527081997588,
+      "max_abs_deg": 4.730232176607512,
+      "qualified_holds": 6,
+      "passed": false,
+      "max_abs_error_deg": 4.730232176607512,
+      "limit_deg": 0.5,
+      "interpretation": "Independent quiet-pose camera/encoder agreement; passing alone is not hardware acceptance."
+    }
+  ],
+  "calibration_accepted": false,
+  "hardware_accepted": false,
+  "disposition": "rejected_stationary_validation",
+  "frozen_lag_s": -0.017,
+  "recordings": {
+    "rotation03": {
+      "name": "manual-map-after-tightening-03",
+      "entirely_disabled_healthy": true,
+      "reference_counts": 533,
+      "duration_s": 132.6775802244665,
+      "state_samples": 33171,
+      "info_samples": 527,
+      "camera_filters": {
+        "raw_records": 7211,
+        "accepted_frames": 7114,
+        "rejected": {
+          "missing_or_invalid_track": 81,
+          "collector_source_age_invalid": 15,
+          "source_not_fresh": 1
+        },
+        "median_length_px": 158.15664681655318,
+        "clock_anchors": [
+          {
+            "local_before_ns": 699186878738171,
+            "local_after_ns": 699186888555775,
+            "server_monotonic_s": 699186.886741633,
+            "offset_ns": -3094660,
+            "uncertainty_ns": 4908802
+          },
+          {
+            "local_before_ns": 699319642670077,
+            "local_after_ns": 699319648390237,
+            "server_monotonic_s": 699319.646572799,
+            "offset_ns": -1042642,
+            "uncertainty_ns": 2860080
+          }
+        ],
+        "clock_assumption": null
+      },
+      "holds": [
+        {
+          "start_s": 0.0,
+          "duration_s": 32.45114191505127,
+          "qualified": false,
+          "native_count_median": 2498.9999999999995,
+          "encoder_deg": 172.79296874999994,
+          "image_deg": -179.79662064869686,
+          "frozen_map_error_deg": 0.8650665903913315
+        },
+        {
+          "start_s": 63.39927725715097,
+          "duration_s": 3.940017230459489,
+          "qualified": true,
+          "native_count_median": 2506.9999999999995,
+          "encoder_deg": 173.49609374999991,
+          "image_deg": -179.68342831094196,
+          "frozen_map_error_deg": 0.2739344944706757
+        },
+        {
+          "start_s": 92.97540659923106,
+          "duration_s": 1.8520080992020667,
+          "qualified": false,
+          "native_count_median": 2495.0,
+          "encoder_deg": 172.44140625000003,
+          "image_deg": 179.4484112361397,
+          "frozen_map_error_deg": 0.4618742997980179
+        },
+        {
+          "start_s": 95.7674188092351,
+          "duration_s": 36.910161415231414,
+          "qualified": false,
+          "native_count_median": 2489.9999999999995,
+          "encoder_deg": 172.00195312499991,
+          "image_deg": -179.6048647415286,
+          "frozen_map_error_deg": 1.8479459503994353
+        }
+      ],
+      "collector_error": null,
+      "collector_source_sha256": "d8d29c1c4f3bb677798e224bbef84883ba32e3eac823764c5fefc179afa62dfe",
+      "before": {
+        "sid": 2032425551,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699186926032018,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2499,
+        "encoder_raw_age_us": 26355,
+        "encoder_recoveries": 0
+      },
+      "after": {
+        "sid": 2032425551,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699319597686251,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2490,
+        "encoder_raw_age_us": 273726,
+        "encoder_recoveries": 0
+      }
+    },
+    "upright04": {
+      "name": "manual-map-upright-verification-04",
+      "entirely_disabled_healthy": true,
+      "reference_counts": 533,
+      "duration_s": 123.70355424738955,
+      "state_samples": 30928,
+      "info_samples": 491,
+      "camera_filters": {
+        "raw_records": 6558,
+        "accepted_frames": 6076,
+        "rejected": {
+          "missing_or_invalid_track": 436,
+          "confidence_below_0.8": 6,
+          "length_outside_20pct_median": 40
+        },
+        "median_length_px": 155.50388852341703,
+        "clock_anchors": [
+          {
+            "local_before_ns": 699535102594298,
+            "local_after_ns": 699535114062428,
+            "server_monotonic_s": 699535.111380655,
+            "offset_ns": -3052292,
+            "uncertainty_ns": 5734065
+          },
+          {
+            "local_before_ns": 699658916505904,
+            "local_after_ns": 699658921278528,
+            "server_monotonic_s": 699658.918941433,
+            "offset_ns": -49217,
+            "uncertainty_ns": 2386312
+          }
+        ],
+        "clock_assumption": null
+      },
+      "holds": [
+        {
+          "start_s": 0.0,
+          "duration_s": 64.59728942485526,
+          "qualified": false,
+          "native_count_median": 2489.9999999999995,
+          "encoder_deg": 172.00195312499991,
+          "image_deg": -179.57292156188757,
+          "frozen_map_error_deg": 1.8798891300404426
+        },
+        {
+          "start_s": 71.57732069841586,
+          "duration_s": 4.1200184596236795,
+          "qualified": true,
+          "native_count_median": 548.0,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.16852600932944545,
+          "frozen_map_error_deg": 4.55170790549153
+        },
+        {
+          "start_s": 75.70533919380978,
+          "duration_s": 3.6160162014421076,
+          "qualified": true,
+          "native_count_median": 548.0000000000001,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.16542631190516074,
+          "frozen_map_error_deg": 4.548608208067245
+        },
+        {
+          "start_s": 80.26135960686952,
+          "duration_s": 21.020094179431908,
+          "qualified": true,
+          "native_count_median": 548.0000000000001,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.1788730353573467,
+          "frozen_map_error_deg": 4.562054931519431
+        },
+        {
+          "start_s": 101.60145522002131,
+          "duration_s": 2.9920134055428207,
+          "qualified": true,
+          "native_count_median": 547.9999999999999,
+          "encoder_deg": 1.318359374999986,
+          "image_deg": 0.16455903038775901,
+          "frozen_map_error_deg": 4.547740926549869
+        },
+        {
+          "start_s": 105.32147188740782,
+          "duration_s": 0.8440037814434618,
+          "qualified": true,
+          "native_count_median": 548.0,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.1529002699954622,
+          "frozen_map_error_deg": 4.536082166157547
+        },
+        {
+          "start_s": 106.17747572262306,
+          "duration_s": 14.100063174613751,
+          "qualified": true,
+          "native_count_median": 548.0000000000001,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.16824080995285656,
+          "frozen_map_error_deg": 4.551422706114941
+        },
+        {
+          "start_s": 120.98154205153696,
+          "duration_s": 1.5040067385416478,
+          "qualified": true,
+          "native_count_median": 549.0,
+          "encoder_deg": 1.4062499999999951,
+          "image_deg": 0.173165196777621,
+          "frozen_map_error_deg": 4.497854087818258
+        }
+      ],
+      "collector_error": null,
+      "collector_source_sha256": "3692c9fb4a4277a642e71981174fe940364976cdba2d8ddd9f517b8ef8b1c0be",
+      "before": {
+        "sid": 2486726847,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699535158360550,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2490,
+        "encoder_raw_age_us": 475227,
+        "encoder_recoveries": 0
+      },
+      "after": {
+        "sid": 2486726847,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699658854111698,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 548,
+        "encoder_raw_age_us": 13641,
+        "encoder_recoveries": 0
+      }
+    },
+    "contact05": {
+      "name": "manual-map-upright-contact-05",
+      "entirely_disabled_healthy": true,
+      "reference_counts": 533,
+      "duration_s": 154.51269457198214,
+      "state_samples": 38630,
+      "info_samples": 613,
+      "camera_filters": {
+        "raw_records": 8196,
+        "accepted_frames": 8157,
+        "rejected": {
+          "missing_or_invalid_track": 23,
+          "collector_source_age_invalid": 15,
+          "source_not_fresh": 1
+        },
+        "median_length_px": 155.06721254753904,
+        "clock_anchors": [
+          {
+            "local_before_ns": 699805768868974,
+            "local_after_ns": 699805783466245,
+            "server_monotonic_s": 699805.781113053,
+            "offset_ns": -4945444,
+            "uncertainty_ns": 7298636
+          },
+          {
+            "local_before_ns": 699960451764025,
+            "local_after_ns": 699960459518908,
+            "server_monotonic_s": 699960.455112049,
+            "offset_ns": 529417,
+            "uncertainty_ns": 3877442
+          }
+        ],
+        "clock_assumption": null
+      },
+      "holds": [
+        {
+          "start_s": 0.0,
+          "duration_s": 59.3902669736417,
+          "qualified": true,
+          "native_count_median": 548.0000000000002,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.16495502811204762,
+          "frozen_map_error_deg": 4.548136924274132
+        },
+        {
+          "start_s": 59.40226702752989,
+          "duration_s": 0.8000035962322727,
+          "qualified": true,
+          "native_count_median": 548.0,
+          "encoder_deg": 1.3183593750000113,
+          "image_deg": 0.1788730353573467,
+          "frozen_map_error_deg": 4.562054931519431
+        },
+        {
+          "start_s": 64.89829173346516,
+          "duration_s": 14.696066062431782,
+          "qualified": true,
+          "native_count_median": 535.0,
+          "encoder_deg": 0.17578124999999303,
+          "image_deg": -0.7648548498562828,
+          "frozen_map_error_deg": 4.381692818451608
+        },
+        {
+          "start_s": 82.64237149746623,
+          "duration_s": 1.288005789858289,
+          "qualified": true,
+          "native_count_median": 530.0,
+          "encoder_deg": -0.2636718750000023,
+          "image_deg": -0.8896396442361778,
+          "frozen_map_error_deg": 4.552061557203821
+        },
+        {
+          "start_s": 87.85039490880445,
+          "duration_s": 13.856062286300585,
+          "qualified": true,
+          "native_count_median": 549.0000000000001,
+          "encoder_deg": 1.4062500000000207,
+          "image_deg": 0.2840537668407446,
+          "frozen_map_error_deg": 4.608742657881381
+        },
+        {
+          "start_s": 112.3305049528135,
+          "duration_s": 7.500033714459278,
+          "qualified": true,
+          "native_count_median": 539.0,
+          "encoder_deg": 0.5273437500000046,
+          "image_deg": -0.5734140208234512,
+          "frozen_map_error_deg": 4.337647964723473
+        },
+        {
+          "start_s": 121.34254546405282,
+          "duration_s": 0.6000026972033083,
+          "qualified": true,
+          "native_count_median": 539.0,
+          "encoder_deg": 0.5273437500000046,
+          "image_deg": -0.6174926856581959,
+          "frozen_map_error_deg": 4.293569299888728
+        },
+        {
+          "start_s": 121.95454821514431,
+          "duration_s": 8.752039342536591,
+          "qualified": true,
+          "native_count_median": 539.0,
+          "encoder_deg": 0.5273437500000046,
+          "image_deg": -0.5954766778861103,
+          "frozen_map_error_deg": 4.315585307660814
+        },
+        {
+          "start_s": 131.7905924306251,
+          "duration_s": 1.4040063113206998,
+          "qualified": true,
+          "native_count_median": 539.0,
+          "encoder_deg": 0.5273437500000046,
+          "image_deg": -0.6366497194914595,
+          "frozen_map_error_deg": 4.274412266055465
+        },
+        {
+          "start_s": 134.10260282363743,
+          "duration_s": 20.410091748344712,
+          "qualified": true,
+          "native_count_median": 538.9999999999999,
+          "encoder_deg": 0.5273437499999791,
+          "image_deg": -0.6251805583742982,
+          "frozen_map_error_deg": 4.285881427172652
+        }
+      ],
+      "collector_error": null,
+      "collector_source_sha256": "59235498754bb91e526fd32364736199130180ff36230720d9a1278b8db49219",
+      "before": {
+        "sid": 759641163,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699805831481393,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 549,
+        "encoder_raw_age_us": 9152,
+        "encoder_recoveries": 0
+      },
+      "after": {
+        "sid": 759641163,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 699960333262018,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 539,
+        "encoder_raw_age_us": 75673,
+        "encoder_recoveries": 0
+      }
+    },
+    "freefall06": {
+      "name": "manual-map-freefall-06",
+      "entirely_disabled_healthy": true,
+      "reference_counts": 533,
+      "duration_s": 141.0356629632879,
+      "state_samples": 35260,
+      "info_samples": 560,
+      "camera_filters": {
+        "raw_records": 7520,
+        "accepted_frames": 7025,
+        "rejected": {
+          "missing_or_invalid_track": 470,
+          "confidence_below_0.8": 5,
+          "source_not_fresh": 3,
+          "collector_source_age_invalid": 14,
+          "length_outside_20pct_median": 3
+        },
+        "median_length_px": 155.6553063337482,
+        "clock_anchors": [
+          {
+            "local_before_ns": 700487069719917,
+            "local_after_ns": 700487081367315,
+            "server_monotonic_s": 700487.07861578,
+            "offset_ns": -3072164,
+            "uncertainty_ns": 5823699
+          },
+          {
+            "local_before_ns": 700628178305118,
+            "local_after_ns": 700628183897501,
+            "server_monotonic_s": 700628.182136319,
+            "offset_ns": -1035010,
+            "uncertainty_ns": 2796192
+          }
+        ],
+        "clock_assumption": null
+      },
+      "holds": [
+        {
+          "start_s": 0.0,
+          "duration_s": 37.843177888542414,
+          "qualified": true,
+          "native_count_median": 539.0000000000001,
+          "encoder_deg": 0.5273437500000046,
+          "image_deg": -0.6330637605169699,
+          "frozen_map_error_deg": 4.277998225029954
+        },
+        {
+          "start_s": 39.35918501485139,
+          "duration_s": 2.8120132184121758,
+          "qualified": true,
+          "native_count_median": 538.0,
+          "encoder_deg": 0.43945312499999534,
+          "image_deg": -0.626469722642551,
+          "frozen_map_error_deg": 4.343411798167817
+        },
+        {
+          "start_s": 42.527199906646274,
+          "duration_s": 1.2360058100894094,
+          "qualified": true,
+          "native_count_median": 538.5,
+          "encoder_deg": 0.48339843749999994,
+          "image_deg": -0.605963647599155,
+          "frozen_map_error_deg": 4.334503826561384
+        },
+        {
+          "start_s": 54.84725781925954,
+          "duration_s": 1.2800060169538483,
+          "qualified": true,
+          "native_count_median": 537.5,
+          "encoder_deg": 0.39550781249999073,
+          "image_deg": -0.2690719874261002,
+          "frozen_map_error_deg": 4.730232176607512
+        },
+        {
+          "start_s": 75.227353619528,
+          "duration_s": 1.9000089314067736,
+          "qualified": true,
+          "native_count_median": 2495.0,
+          "encoder_deg": 172.44140625000003,
+          "image_deg": -179.84812210868404,
+          "frozen_map_error_deg": 1.1653409549742904
+        },
+        {
+          "start_s": 99.63946837303229,
+          "duration_s": 41.39619459025562,
+          "qualified": true,
+          "native_count_median": 2482.9999999999995,
+          "encoder_deg": 171.38671874999997,
+          "image_deg": 179.36483337618932,
+          "frozen_map_error_deg": 1.432018517215749
+        }
+      ],
+      "collector_error": null,
+      "collector_source_sha256": "f0861914c6151396acd278523e6fbbd697823021132690962583e176af8ecdb8",
+      "before": {
+        "sid": 1865180564,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 700487127334143,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 539,
+        "encoder_raw_age_us": 435,
+        "encoder_recoveries": 0
+      },
+      "after": {
+        "sid": 1865180564,
+        "firmware": "executor-v6-measuredrail",
+        "encoder_upright_raw": 533,
+        "reference_saved": true,
+        "mag_status": 103,
+        "i2c_errors": 6,
+        "home_epoch": 27,
+        "measured_span_steps": 16509,
+        "rail_half_m": 0.3090375,
+        "received_ns": 700628150947182,
+        "encoder_boot_conf": 768,
+        "encoder_conf": 768,
+        "encoder_conf_valid": true,
+        "encoder_raw": 2483,
+        "encoder_raw_age_us": 2407,
+        "encoder_recoveries": 0
+      }
+    }
+  },
+  "limitations": [
+    "Camera raw atan2 geometry is an image-vertical proxy, not certified physical vertical.",
+    "Multiple quiet windows in one pose are correlated, not independent replications.",
+    "No hand-contact event timestamps were recorded; associations cannot establish a mechanism.",
+    "The first freefall was accidental according to the user. Raising/holding and releases are retained and not mixed into training.",
+    "The frozen -17 ms timing proxy is not a measured exposure delay; fast freefall residuals do not isolate angle error.",
+    "No calibration, firmware, gains, simulator, or learned policy were changed."
+  ],
+  "source_hashes": [
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-map-repeat-20261021/analyze_repeat.py",
+      "sha256": "0dc8b7031336314443569686582ad6ecf1b657d8e7823240c5f79b6d3b5aff79"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-map-repeat-20261021/fit_candidate.py",
+      "sha256": "4a98b444d73b0aaf92f9ca53d2d3f12810e5c5ae3178e637d4fa302e1563f2d4"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze_manual_map.py",
+      "sha256": "b88fae6e0b1e75093f0d3f992e59f9492ae737490853e37592247ad692d3fc0f"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analyze.py",
+      "sha256": "d3489d8e635e7807b95d75de07b64605fe74e658b3021af40ee3b53c93568889"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/evidence/encoder-tightening-20261021/analysis-reference520/report.json",
+      "sha256": "5a57e454e47d1002a78c1aaacd7bbe75e69a1eeed6fe0957ed67ad216998d34e"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-after-tightening-03/rig-1792603891109909801-2032425551.jsonl",
+      "sha256": "f6514e74c7d6942cc76100602a63094655f0ea8b2faca8a5f2ffc9c5c2bed59d"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-after-tightening-03/report.json",
+      "sha256": "92124d81fb4306d56d5f75c4cd67c492450cd727c379ab3ae3c1ca1424a6f81c"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-after-tightening-03/vision.ndjson",
+      "sha256": "2a9f92a7631bd3412f28dffa5958a662bef2eaed64daa25fa5e272832845a21c"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-after-tightening-03/vision-report.json",
+      "sha256": "fbf2a4cbb659ca8a2d4d6ae9bed78f7cf0e853b9bd3c10ac8705919095d20c22"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-verification-04/rig-1792604239342721636-2486726847.jsonl",
+      "sha256": "e93a368a0bf477c786f837c20e5ed0861a39f94ae658347b7169b70ea5e11f97"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-verification-04/report.json",
+      "sha256": "f3c8c08a98e3fb594a28f18844db2d08a011ecbffee688e841e4e8718a01f922"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-verification-04/vision.ndjson",
+      "sha256": "435c916b1f6a34d4c81fcff2afb938a9e9d3f48e4b7fc5d4e47c0db7964d5f12"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-verification-04/vision-report.json",
+      "sha256": "cc8ad3f1d34fcc0793602a0a01c154dc3fca8e2d1bf0331046a7dd26fcf1e9b7"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-contact-05/rig-1792604510012519893-759641163.jsonl",
+      "sha256": "9a96bcea43a76cd7fea95ca374d986b4f3a47e51b0af572181c508a4b7cf7289"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-contact-05/report.json",
+      "sha256": "428dc9425ed9cfd3ef1193dd5cbbe364041ea760a277e65a58b1014cc082df14"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-contact-05/vision.ndjson",
+      "sha256": "49b4fa0cb594a53391dc8d9e8833442b1a9ac131dc1bc30e59fae6255c3f0d21"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-upright-contact-05/vision-report.json",
+      "sha256": "440bd3831a908e0279943c59ad515aaba02d9cde5bc72f7cc4c88c82d060e3ad"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-freefall-06/rig-1792605191311303827-1865180564.jsonl",
+      "sha256": "1731a5bd117a6d7a8c4a72e5d8374d240bb1cbad8849a3232f51dedafb6b73c0"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-freefall-06/report.json",
+      "sha256": "f3db6120a64ecd4f9923b35bfdec570e7cbd0e91ff626a3ed6bab29702374ad9"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-freefall-06/vision.ndjson",
+      "sha256": "9a87a01a6509e91209df67df98ede5625b60350e7ce12a0fdb635d542cb37539"
+    },
+    {
+      "path": "/Users/rbafna/projects/cartpole_v2/runs/encoder-tightening-20261021/manual-map-freefall-06/vision-report.json",
+      "sha256": "6ffb286fe6bcf416b2bede0dba45fc0eb9d20ade5a4390d017515191f396b318"
+    }
+  ]
+}
