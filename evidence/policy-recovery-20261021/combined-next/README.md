@@ -54,7 +54,7 @@ Superseded preparation attempts and the failed first evaluator-metadata smoke re
 
 ## Headless Colab commands — long session launched
 
-The active session is `filtered-bal-joint-long-20261021`, currently training the first projected-PPO seed-11 run. The backup watcher polls every 60 seconds for up to 12 hours into `colab-long-backups-01`; it requires the local Mac to stay awake with network access. The first checkpoint snapshot has downloaded and passed outer ZIP and inner checkpoint CRC/hash checks. `cloud-training-update.json` records the operator-reported status and the independently checked snapshot identity.
+The active session is `filtered-bal-joint-long-20261021`, currently training the first projected-PPO seed-11 run. The original full-snapshot watcher exited on a kernel websocket connection loss after preserving its first snapshot. Its `colab-long-backups-01` archive remains intact. The separate HTTP-only checkpoint watcher below is now running as local PID 34652, launched by the campaign operator. The first checkpoint snapshot has downloaded and passed outer ZIP and inner checkpoint CRC/hash checks. `cloud-training-update.json` records the operator-reported status and the independently checked snapshot identity.
 
 Run from `/Users/rbafna/projects/cartpole_v2`. **The long session has already been launched; do not repeat `start`.** The start command below is retained as a reproducibility record. The existing launcher refuses duplicate session names and does not retry ambiguous allocation outcomes. If a launch is uncertain, inspect status instead of repeating start.
 
@@ -73,3 +73,23 @@ For a six-trial cloud **pilot**, substitute `colab-pilot-final`, `filtered-bal-j
 For a chosen completed run, the adapter supports `evaluate --run RUN --step STEP --output NEW`. Default is 25-second development evaluation; `--stress` adds the pinned upstream bias/timing scenarios. `--numeric` runs the exported NumPy backend under `TrainingEnv` guards. The separate `final-emission-parity` path exercises normal SDK `NeuralPolicy.reset/act`.
 
 Only after freezing a candidate, `--confirmation` uses reserved 60-second starts. Every evaluation records protocol hash, checkpoint hash, in-memory weight hash, experiment hash, adapter hash and trace hashes. New PPO checkpoints still require task evaluation and hardware qualification; none is automatic.
+
+## HTTP-only checkpoint backups
+
+The evidence-local `http_checkpoint_watch.py` replaces the failed websocket-dependent polling path for checkpoint preservation. It invokes only the pinned `google-colab-cli==0.7.4` **download** command through normal OAuth; each subprocess has a deadline of at most 45 seconds. It makes no kernel execution, allocation, start, restart or stop calls. The original full snapshot is preserved separately.
+
+The operator has already launched PID 34652 with the 24-hour limit. Do not launch a duplicate. Commands below are for an explicit restart after the current watcher has exited:
+
+```sh
+.venv/bin/python evidence/policy-recovery-20261021/combined-next/http_checkpoint_watch.py --once --max-seconds 180
+
+.venv/bin/python evidence/policy-recovery-20261021/combined-next/http_checkpoint_watch.py --poll-seconds 60 --max-seconds 86400
+```
+
+The default backup directory is `runs/colab-filtered-joint-long-20261021-checkpoints`, outside this evidence tree. The script supports resuming the same directory with matching session/protocol/CLI bindings and uses an exclusive local lock. It never replaces an existing checkpoint. The default duration is 12 hours; the explicit command above allows 24 hours for six serial long trials. Keep the local machine awake with network access.
+
+Every complete poll verifies the frozen remote protocol, the atomic job-status snapshot, and the current plus completed whitelisted trial reports. It checks run identity, protocol identity and completed-report hashes, then retrieves every missing report-listed checkpoint and validates SHA-256 plus inner ZIP CRC before publishing it. `last-complete.json` records a successful full poll; `watch-status.json` and `events.jsonl` distinguish current health from an older successful backup. Per-checkpoint receipts and immutable metadata snapshots preserve provenance. Previously backed-up files are revalidated locally, not downloaded again.
+
+Transport failures retry after 15 and 30 seconds, then stop on the third consecutive failed poll. A complete poll resets the count. A transient not-yet-written report is a transport failure; malformed reports, protocol mismatches, SHA/CRC mismatches and local conflicts are identified separately. Neither category can mark a new poll complete. Arbitrary exception text and CLI output are suppressed to keep credentials out of logs. The watcher stops after backing up a terminal job state, or at its configured duration; it does not control the remote job.
+
+This backs up reports and resumable checkpoint ZIPs, not every evaluation trace or the complete remote filesystem. The earlier full snapshot remains the full-tree recovery artifact. Sixteen watcher tests plus nine adjacent driver tests pass, including a real hung-child timeout, checkpoint corruption, rollover and six-trial completion. Independent review found no Important/Critical issue. The campaign operator launched it; the implementation author made no remote calls. The first automatic poll succeeded with zero consecutive failures and verified checkpoints at steps 0 and 51,200. Its log is `runs/colab-filtered-joint-long-20261021-http-watch.log`; `http-watch-launch.json` records the launch.

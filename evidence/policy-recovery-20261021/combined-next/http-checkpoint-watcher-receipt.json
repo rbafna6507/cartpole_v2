@@ -1,0 +1,48 @@
+{
+  "status": "RUNNING_FIRST_AUTOMATIC_BACKUP_VERIFIED",
+  "created_utc": "2026-10-21T22:45:19.492934+00:00",
+  "tests": "16 watcher + 9 adjacent tests passed in 3.26 seconds",
+  "review": "Independent GO; no Important/Critical issue. Final added tests caused no script changes.",
+  "no_remote_calls_made": true,
+  "original_snapshot_preserved": true,
+  "frozen_protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "frozen_bindings_verified": 145,
+  "cli_source_files_verified": 25,
+  "files": {
+    "http_checkpoint_watch.py": "d7bab28278c500f87296eaf7919bc6dd65a595ebad8252961ec5ca4951403632",
+    "test_http_checkpoint_watch.py": "50af451c54dc6516e4b7445db5c47fb27f49d324eefe7ea86c21c0de4a812abd",
+    "http-checkpoint-cli-pins.json": "0c16327a94ccd80c37ff212735b31330d5035a3a2633dea5b3cf963c3a6722b7",
+    "README.md": "04c580efe03bd961d2fce34cd2ecc98b63f9d666878fecb0ddcf27419a9356d8"
+  },
+  "launch_command": ".venv/bin/python evidence/policy-recovery-20261021/combined-next/http_checkpoint_watch.py --poll-seconds 60 --max-seconds 86400",
+  "output_directory": "runs/colab-filtered-joint-long-20261021-checkpoints",
+  "local_health_files": [
+    "watch-status.json",
+    "events.jsonl",
+    "last-complete.json"
+  ],
+  "limitations": [
+    "Downloaded checkpoint ZIPs contain optimizer/model state, but driver resume is not bitwise environment continuation.",
+    "This is checkpoint/report backup, not a new full-tree snapshot.",
+    "Local machine must remain awake with network access; three consecutive failed polls stop the watcher."
+  ],
+  "watcher_pid": 34652,
+  "max_seconds": 86400,
+  "watch_log": "runs/colab-filtered-joint-long-20261021-http-watch.log",
+  "launched_by": "parent/root",
+  "launch_receipt_sha256": "b1c22ba286fc3bc98242922accf7b2f337d36aba5e72846d1be460572ff30312",
+  "parent_manual_checkpoint_verification": {
+    "path": "runs/colab-filtered-joint-long-20261021-initial-verification/verification.json",
+    "sha256": "fa4fd224fe4350090c783ed459ba05133816b06d79dc704296855d2a79fe1af8"
+  },
+  "automatic_poll": {
+    "checkpoint_steps": [
+      0,
+      51200
+    ],
+    "last_complete_poll": 1792622707.951159,
+    "checkpoint_count": 2,
+    "consecutive_failures": 0,
+    "last_complete_receipt_sha256": "d72c0ef2747a22575b671ab61031a8b0e7aa1734c59ad77481dc227c9862656d"
+  }
+}
