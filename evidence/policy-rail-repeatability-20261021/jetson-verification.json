@@ -1,0 +1,74 @@
+{
+  "release": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-rail1mm",
+  "import_path": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-rail1mm/src/cartpole_sdk/rig/neural_runner.py",
+  "actors": [
+    {
+      "path": "training/candidates/balance-recovery-20261021-rail1mm/actor.json",
+      "sha256": "a8910fd30d1cbd3cffc887410415cd26a138b115880c5d50b940a5eb50c1b97b",
+      "compatibility": {
+        "trained_rail_m": 0.309074998,
+        "live_rail_m": 0.308962494,
+        "delta_m": -0.0001125037670135498,
+        "max_delta_m": 0.0010000596046447754,
+        "counted_step_m": 3.750000091552737e-05,
+        "home_epoch": 1,
+        "measured_span_steps": 16504,
+        "info_rail_m": 0.3089625,
+        "live_rail_cap_m": 0.30896249413490295,
+        "basis": "1 mm half-length compatibility allowance plus two binary32 ULPs; live measured cap remains strict"
+      },
+      "limits": {
+        "position_m": 0.2989625036716461,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      }
+    },
+    {
+      "path": "training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json",
+      "sha256": "0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16",
+      "compatibility": {
+        "trained_rail_m": 0.309074998,
+        "live_rail_m": 0.308962494,
+        "delta_m": -0.0001125037670135498,
+        "max_delta_m": 0.0010000596046447754,
+        "counted_step_m": 3.750000091552737e-05,
+        "home_epoch": 1,
+        "measured_span_steps": 16504,
+        "info_rail_m": 0.3089625,
+        "live_rail_cap_m": 0.30896249413490295,
+        "basis": "1 mm half-length compatibility allowance plus two binary32 ULPs; live measured cap remains strict"
+      },
+      "limits": {
+        "position_m": 0.2989625036716461,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      }
+    },
+    {
+      "path": "training/candidates/combined-recovery-20261021-step000460800-rail1mm/actor.json",
+      "sha256": "f1673cd25546368fa1e18853ac6c671bcd8cc610fdb3335446214fa99b470b4b",
+      "compatibility": {
+        "trained_rail_m": 0.309074998,
+        "live_rail_m": 0.308962494,
+        "delta_m": -0.0001125037670135498,
+        "max_delta_m": 0.0010000596046447754,
+        "counted_step_m": 3.750000091552737e-05,
+        "home_epoch": 1,
+        "measured_span_steps": 16504,
+        "info_rail_m": 0.3089625,
+        "live_rail_cap_m": 0.30896249413490295,
+        "basis": "1 mm half-length compatibility allowance plus two binary32 ULPs; live measured cap remains strict"
+      },
+      "limits": {
+        "position_m": 0.2989625036716461,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      }
+    }
+  ],
+  "checks_passed": true,
+  "scope": "offline reproduction of supplied telemetry values, no live rig access"
+}

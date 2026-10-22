@@ -1,0 +1,35 @@
+{
+  "source_actor": "training/candidates/balance-recovery-20261021/actor.json",
+  "source_file_sha256": "9e498faf5783e278b44cad6d75e720d38a9ef0800b99d0676256c6445373a850",
+  "source_content_sha256": "81118e9231b857aa27e99049a6745647e40a587c5643716c754b96e090c1ef34",
+  "actor_path": "training/candidates/balance-recovery-20261021-rail1mm/actor.json",
+  "actor_file_sha256": "a8910fd30d1cbd3cffc887410415cd26a138b115880c5d50b940a5eb50c1b97b",
+  "actor_content_sha256": "985a5bdf3492bbf0cb8e84bf2d950fedce40185012c69578078b4b2725dc6e86",
+  "checkpoint_sha256": "a39ea65480c9a48b94d9c7f415f757ea003a92a697636e8119916e1d671b485b",
+  "unchanged_actor_fields": [
+    "action_scale_m_s2",
+    "angle_source",
+    "checkpoint_sha256",
+    "executor_parameters",
+    "experiment_sha256",
+    "feature_order",
+    "hardware_accepted",
+    "layers",
+    "model_content_sha256",
+    "observation_contract",
+    "observation_schema",
+    "rate_hz",
+    "schema",
+    "status"
+  ],
+  "runtime_changes": {
+    "rig/neural_runner.py": {
+      "before": "db3a34a82a66c271b6a312b94543c234c77bda63d0051cbd41487000d02ce1fe",
+      "after": "3b765b931af3c9c744bf0722ed1d6cb9fe5ffaf1914992e5b0dd0fd7b8c35e87"
+    }
+  },
+  "reason": "Admit up to 1 mm HOME half-length variation while retaining strict current cap and trained/live envelope intersection.",
+  "hardware_accepted": false,
+  "predictions_compared": 4096,
+  "max_abs_prediction_difference_m_s2": 0.0
+}

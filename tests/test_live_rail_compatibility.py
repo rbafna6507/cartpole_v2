@@ -33,7 +33,7 @@ def live_rail(rig, rail, *, span=17000):
     (.309037507, 16508), (.309074998, 16510),
 ])
 def test_counted_home_repeatability_preserves_actual_readback_and_frozen_actor(rail, span):
-    # Up to two 37.5 µm steps in either direction, plus binary32 rounding.
+    # Measured HOME values remain unchanged within the 1 mm compatibility allowance.
     actor = actor_with_rail(.309)
     frozen_actor = deepcopy(actor)
     policy = NeuralPolicy(actor, channels=rig_channels())
@@ -48,7 +48,7 @@ def test_counted_home_repeatability_preserves_actual_readback_and_frozen_actor(r
         diagnostics = next(r for r in rig.records if r['type'] == 'neural_preflight')['rail_compatibility']
         assert diagnostics['trained_rail_m'] == .309
         assert diagnostics['live_rail_m'] == rail
-        assert diagnostics['max_delta_m'] == pytest.approx(.000075, abs=6e-8)
+        assert diagnostics['max_delta_m'] == pytest.approx(.001, abs=6e-8)
         assert diagnostics['measured_span_steps'] == span
         assert diagnostics['live_rail_cap_m'] == pytest.approx(rail, abs=1e-9)
         assert not rig.commands
@@ -62,7 +62,7 @@ def test_repeatability_allowance_cannot_expand_the_current_measured_cap():
         assert not rig.commands
 
 
-@pytest.mark.parametrize('rail', [.3088875, .3091125, .308, .310])
+@pytest.mark.parametrize('rail', [.3079875, .3100125, .307, .311])
 def test_material_rail_change_is_refused(rail):
     with rehearsal() as rig:
         live_rail(rig, rail)
@@ -153,3 +153,28 @@ def test_larger_live_rail_never_expands_trained_boundary(tmp_path):
         with pytest.raises(ValidationError, match='balance-only envelope'):
             run(rig, actor, execute=True, guard_profile='rig')
         assert len([r for r in rig.records if r['type'] == 'action_request']) == 1
+
+
+def test_operator_reported_three_step_homing_difference_is_accepted_without_writing():
+    actor = actor_with_rail(.309074998)
+    policy = BalanceOnlyPolicy(actor, channels=rig_channels(), guard_profile='rig')
+    with rehearsal() as rig:
+        live_rail(rig, .308962494, span=16504)
+        actual = validate_live_executor(rig, policy)
+        assert actual['rail'] == .308962494
+        assert policy.executor_parameters['rail'] == .309074998
+        assert policy.position_limit == pytest.approx(.2989625036716461, abs=1e-9)
+        diagnostics = next(r for r in rig.records if r['type'] == 'neural_preflight')['rail_compatibility']
+        assert abs(diagnostics['delta_m']) == pytest.approx(.000112503767, abs=1e-10)
+        assert diagnostics['max_delta_m'] == pytest.approx(.001, abs=6e-8)
+        assert not rig.commands
+
+
+@pytest.mark.parametrize('delta', [-.000975, .000975])
+def test_variation_just_inside_one_mm_intersects_limits(delta):
+    policy = BalanceOnlyPolicy(actor_with_rail(.309), channels=rig_channels(), guard_profile='rig')
+    with rehearsal() as rig:
+        live_rail(rig, .309+delta, span=17000)
+        validate_live_executor(rig, policy)
+        assert policy.position_limit == pytest.approx(min(.309, .309+delta)-.01, abs=6e-8)
+        assert not rig.commands

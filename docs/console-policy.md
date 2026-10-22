@@ -171,3 +171,23 @@ do not establish long-term reliability, hardware qualification, or swing-up.
 contains exact intervals, angle/position ranges, camera coverage, archive hashes,
 and the reproducible offline analyzer. Later offline combined-policy work is a
 separate candidate and does not change this preserved working actor.
+
+## HOME repeatability update, October 21
+
+The policy preflight now accepts up to **1 mm of rail half-length difference**
+between the trained snapshot and the current measured HOME, plus float32 rounding.
+This is a compatibility allowance chosen for development, not a measurement of
+switch accuracy and not additional allowed travel. The previous two-microstep
+allowance (about 0.075 mm) rejected a measured 0.113 mm difference.
+
+The current physical homing cap stays strict. Before ARM, the host intersects
+the trained and live hard rail boundaries. The original actor parameters, gains,
+speed/acceleration/jerk limits, switches, reference, freshness and command leases
+remain unchanged. Differences beyond 1 mm still require investigation.
+
+The Jetson release `id-20261021-policy-rail1mm` contains the matching runtime and
+three explicitly rebound `*-rail1mm` policy copies. Use its own environment and
+restart the console; an already-running console retains its loaded old code.
+The old release and actor files remain available unchanged. No firmware reflash
+is involved. See `evidence/policy-rail-repeatability-20261021/README.md` for the
+exact new launch and policy commands.

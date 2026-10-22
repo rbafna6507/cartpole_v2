@@ -184,6 +184,9 @@ class CameraObservationProvider:
         return self.assembler.compose(board)
 
 
+HOME_RAIL_REPEATABILITY_M = .001
+
+
 def _live_rail_compatibility(rig, values, expected, info):
     """Bound HOME repeatability without modifying either parameter snapshot."""
     if (type(info.home_epoch) is not int or info.home_epoch <= 0 or
@@ -205,11 +208,13 @@ def _live_rail_compatibility(rig, values, expected, info):
     if live > cap:
         raise ValidationError(f'live rail exceeds current measured homing cap ({cap:.9g} m)')
     # 200 motor steps * 16 microsteps / 0.120 m = 26666.6666667 steps/m.
-    # cart_homing.h floors the reference rail to whole counted steps. Allow at
-    # most two steps of repeatability, plus two binary32 ULPs for independently
-    # rounded trained decimal geometry and firmware step/division arithmetic.
+    # Allow 1 mm of rail half-length variation between physical HOME runs.
+    # This engineering allowance concerns snapshot compatibility only, not a
+    # measured switch accuracy claim or extra travel. The actual measured cap
+    # above and the trained/live host-limit intersection remain authoritative.
+    # Two binary32 ULPs cover independently rounded geometry/arithmetic.
     step_m = 1./float32(26666.6666667)
-    max_delta = 2*step_m+2*binary32_ulp
+    max_delta = HOME_RAIL_REPEATABILITY_M+2*binary32_ulp
     delta = live-trained
     if ((info.firmware != TUNABLE_FIRMWARE and live != trained) or abs(delta) > max_delta):
         raise ValidationError('live executor differs from actor snapshot: rail '
@@ -219,7 +224,7 @@ def _live_rail_compatibility(rig, values, expected, info):
         delta_m=delta, max_delta_m=max_delta, counted_step_m=step_m,
         home_epoch=info.home_epoch, measured_span_steps=info.measured_span_steps,
         info_rail_m=info.rail_half_m, live_rail_cap_m=cap,
-        basis='at most two counted steps plus two binary32 ULPs; live measured cap remains strict')
+        basis='1 mm half-length compatibility allowance plus two binary32 ULPs; live measured cap remains strict')
 
 
 def validate_live_executor(rig, policy, *, require_rate=True):

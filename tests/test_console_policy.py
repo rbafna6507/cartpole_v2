@@ -275,3 +275,21 @@ def test_one_shot_rejects_runtime_mismatch_before_opening_serial(tmp_path):
     assert main(['--port', 'unopened', '--command', 'policy-run', '--actor', str(path),
                  '--development-only'], rig_factory=forbidden, output=output) == 1
     assert 'provenance' in output.getvalue()
+
+
+def test_reported_homing_variation_passes_console_check_and_run_without_rewriting_params(tmp_path):
+    from test_live_rail_compatibility import live_rail
+    path = saved_actor(tmp_path, demand=.1, action_scale=25., executor_parameters={'rail': .309074998})
+    with rehearsal(rig_type=RateAwareRig) as rig:
+        live_rail(rig, .308962494, span=16504)
+        rig.rate_hz = 250
+        select(rig, path)
+        assert json.loads(command(rig, 'policy check'))['ready']
+        command(rig, 'policy run .04')
+        record = [r for r in rig.records if r['type'] == 'neural_preflight'][-1]
+        assert record['host_run_limits']['position_m'] == pytest.approx(.2989625036716461, abs=1e-9)
+        assert rig.parameters.rail == .308962494
+        assert not any(c[1] in ('PARAM', 'HOME', 'CAL', 'CLEAR') for c in rig.commands)
+        assert any(c[1] == 'ARM' for c in rig.commands)
+        assert rig.commands[-1][1] == 'RATE' and rig.rate_hz == 250
+        assert not rig.state.enabled
