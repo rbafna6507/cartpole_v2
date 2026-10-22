@@ -15,7 +15,7 @@ from .policy import ZeroAccelerationPolicy, run_policy, run_host_controller
 HELP = ('auto [seconds], bal [seconds], python-auto [seconds], python-bal [seconds], manual [seconds], velocity m/s [ttl_ms], '
         'stop, center, home, rehome, upright, hanging MODEL IDENTITY | hanging ideal, switches on|off, status, info, clear, rate hz, '
         'params, get key, set key value, save path, load path, '
-        'policy load PATH|status|check|shadow [seconds]|run [seconds]|unload, quit')
+        'policy load PATH|status|check [swingup]|shadow [swingup] [seconds]|run [seconds]|swingup [seconds]|unload, quit')
 
 def _status(rig, output):
     state=rig.state
@@ -280,7 +280,7 @@ def main(argv=None, *, rig_factory=None, input_fn=None, output=None):
                         if not execute_command(rig,line,output=output):break
                         startup.after_command(rig,line,output)
                     except KeyboardInterrupt:
-                        if shlex.split(line)[:2] not in (['policy','run'],['policy','shadow']):
+                        if shlex.split(line)[:2] not in (['policy','run'],['policy','shadow'],['policy','swingup']):
                             raise
                         rig.stop()
                         print('policy interrupted; stopped and disabled; console remains connected',file=output)

@@ -1,10 +1,12 @@
-# Learned balance through the operator console
+# Learned swing-up and balance through the operator console
 
-The console can retain a selected numeric actor and run it through its existing
-Rig connection. This is a development-only, **balance-only** path: prepare a
-centered, nearly stationary upright pole before checking or starting it. It does
-not swing the pole up. The ordinary `auto` and `bal` commands still select the
-board's native controller.
+The console retains a selected numeric actor and runs it through its existing Rig
+connection. `policy run` requires a centered, nearly stationary upright pole.
+`policy swingup` explicitly starts from hanging and uses the selected actor for
+both swing-up and balance, with no native controller handoff. Use a combined
+actor trained for that task; this command does not add swing-up ability to a
+balance-only network. Both paths remain development-only. The ordinary `auto`
+and `bal` commands select the board's native controller.
 
 Start an interactive session using the current verified executor parameters:
 
@@ -31,26 +33,36 @@ policy unload
 | `policy check` | Checks the selected actor/reference, current live executor compatibility, homing/switch/magnet health and upright starting state, without arming or changing telemetry. At a different rate, reports that run/shadow will temporarily use 100 Hz. |
 | `policy shadow [seconds]` | Evaluates the same balance-only actor on current telemetry while remaining disabled. Defaults to five seconds. |
 | `policy run [seconds]` | Explicitly executes the selected actor for up to five seconds by default, through the existing 20 ms action leases. Accepts 0.001–60 seconds. |
+| `policy check swingup` | Checks hanging admission, current home/reference and executor compatibility without moving or changing telemetry. |
+| `policy shadow swingup [seconds]` | Evaluates hanging-start inference with the motor disabled. Defaults to 25 seconds; does not predict the resulting trajectory. |
+| `policy swingup [seconds]` | Explicitly executes the selected actor from hanging for 25 seconds by default. Accepts 0.001–60 seconds and continues using that actor after capture. |
 | `policy unload` | Clears the console selection. |
 
 A filtered actor receives the MCU filtered angle (`magnetic_filtered`) and
 magnetic observer rate. Raw encoder angle remains a separate required guard:
-start admission checks the larger absolute raw/filtered angle, and raw plus
+upright admission checks the larger absolute raw/filtered angle; hanging
+admission checks each angle's circular distance from down. Raw plus
 selected state channels must remain fresh within 20 ms and mutually aligned
 within one 10 ms control period. Selecting filtered input does not relax leases
 or substitute a camera measurement.
 
-Only `policy run` grants motion. It uses the actor's complete declared action
-scale, at most 25 m/s², and the `rig` guard profile. Initial admission still
+`policy run` and `policy swingup` grant motion. Each uses the actor's complete declared action
+scale, at most 25 m/s², and the `rig` guard profile. Upright admission
 requires `|x| <= 0.015 m`, `|commanded velocity| <= 0.025 m/s`,
 `|angle| <= 0.07 rad`, `|angular rate| <= 0.15 rad/s` and no rail braking.
+Hanging admission keeps those position, speed, rate and brake checks but allows
+up to 0.35 rad (20°) from down for both raw and filtered angles, including across
+the ±π wrap. That angle window accommodates the observed hanging/upright offset;
+it is an admission allowance, not a calibration correction or robustness claim.
+`policy check swingup` does not change the meaning of a later `policy run`: each
+command selects its own start mode. Neither calibrates the encoder.
 After admission, the rig profile enforces the conservative trained/live rail
 boundary and native speed bounds; it has no host angle or angular-rate cutoff.
 The firmware's braking and hard protections remain active. These are observed
 encoder and commanded step-state limits, not independently measured cart truth
 or a guarantee of physical stopping distance.
 
-Run and shadow temporarily request 100 Hz while stopped and report the change.
+Run, swingup and shadow temporarily request 100 Hz while stopped and report the change.
 They STOP on completion, failure or Ctrl-C, then restore the original telemetry
 rate. If a transport or latched fault prevents restoration, the console reports
 that failure and the host's current rate; it does not clear the fault. Ctrl-C
@@ -191,3 +203,39 @@ restart the console; an already-running console retains its loaded old code.
 The old release and actor files remain available unchanged. No firmware reflash
 is involved. See `evidence/policy-rail-repeatability-20261021/README.md` for the
 exact new launch and policy commands.
+
+## Hanging-start combined policy trial
+
+The staged release `~/cartpole-v2-live/releases/id-20261021-policy-swingup`
+includes both recovered combined actors and the preserved balance actor. Use the
+same real-time/CPU-partitioned console launch above, from this new release directory.
+No Teensy flash is needed. Stop and quit any old console first.
+
+With an existing valid upright reference, use `home` if no counted home exists;
+otherwise `rehome` returns to the saved center. Wait for completion, leave the
+pole hanging freely, let it settle, and keep hands clear. Then:
+
+```text
+policy load training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json
+policy check swingup
+policy swingup 25
+```
+
+The 102,400-step candidate previously captured and held all four hanging starts
+in the inspected nominal 25-second NumPy evaluations (mean capture 5.46 s). Those
+simulations used rail braking and reached about 0.294 m from center. They are not
+a demonstration of hardware swing-up. The new entry path leaves the network,
+action scale, current firmware tuning and runtime bindings unchanged.
+
+At expiry or Ctrl-C, the motor is stopped and disabled. It does not automatically
+rehome: issue `rehome`, wait and settle before repeating. An upright start still
+uses `policy check` followed by `policy run 25`. Do **not** use `hanging ideal` to
+prepare this trial: that is a separate calibration command which can overwrite
+a valid saved upright reference.
+
+SDK logs in `runs/rig/` include `swingup_balance_boundary`, `neural_preflight`,
+observations, requested actions and stop/fault records. The boundary records the
+start mode, down-relative tolerance and exact boundary source hash. No loading or
+successful run marks an actor hardware-accepted. The standalone script also
+accepts `--start-mode hanging --guard-profile rig`; its acceleration ceiling
+remains explicit (`--max-acceleration 25` for these recovered actors).

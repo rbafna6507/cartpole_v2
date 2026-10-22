@@ -1,0 +1,20 @@
+{
+  "base_commit": "dda181c",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 2068,
+    "skipped": 8,
+    "subtests_passed": 460
+  },
+  "red_phase": "20 new behavior tests failed before implementation; interactive swingup Ctrl-C reproduced return code 130 before fix.",
+  "independent_review": "swingup_review approved after Ctrl-C fix; console HELP updated.",
+  "actors_unchanged": true,
+  "source_and_actor_hashes_match_jetson": true,
+  "replay_actions": 20000,
+  "max_replay_difference_m_s2": 7.105427357601002e-15,
+  "jetson_release": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-swingup",
+  "no_serial_access": true,
+  "hardware_accepted": false,
+  "deployment_sha256": "2a677cc280eead478f2377cded4c5c7d02cacc6a88578af521ce2fa012eb671b",
+  "scope": "Source/test change and additive offline-verified Jetson release. No live motor, reference, firmware, service or parameter changes. Existing Colab training not modified."
+}

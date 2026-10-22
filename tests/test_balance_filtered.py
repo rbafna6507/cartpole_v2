@@ -62,11 +62,13 @@ def test_filtered_commissioning_run_still_checks_raw_angle(tmp_path):
         assert not rig.state.enabled
 
 
+@pytest.mark.parametrize('start_mode', ['upright', 'hanging'])
 @pytest.mark.parametrize('problem',['missing','stale','skew'])
-def test_filtered_guard_requires_fresh_synchronous_raw_sample(tmp_path,problem):
+def test_filtered_guard_requires_fresh_synchronous_raw_sample(tmp_path,problem,start_mode):
     path=saved_actor(tmp_path,mode='filtered')
-    policy=_load_policy(path)
-    with rehearsal() as rig:
+    policy=_load_policy(path, guard_profile='rig', start_mode=start_mode)
+    angle = math.pi if start_mode == 'hanging' else .02
+    with rehearsal(state=dict(theta=angle, angle_hat=angle)) as rig:
         policy.reset(rig.session)
         obs=rig.control_observation()
         obs=replace(obs,available_ns=obs.available_ns+100_000_000,samples=tuple(

@@ -3,6 +3,7 @@ from dataclasses import replace
 import gc
 import io
 import json
+import math
 import shlex
 
 import pytest
@@ -218,7 +219,8 @@ def test_failed_run_stops_and_restores_rate(tmp_path, failure):
         assert rig.commands[-2][1] == 'STOP'
 
 
-def test_interactive_interrupt_stops_and_returns_to_same_prompt(tmp_path):
+@pytest.mark.parametrize('operation', ['run', 'swingup'])
+def test_interactive_interrupt_stops_and_returns_to_same_prompt(tmp_path, operation):
     class InterruptedRig(RateAwareRig):
         def wait_state(self, **kwargs):
             if self.state.enabled:
@@ -226,9 +228,10 @@ def test_interactive_interrupt_stops_and_returns_to_same_prompt(tmp_path):
                 raise KeyboardInterrupt
             return super().wait_state(**kwargs)
     path = saved_actor(tmp_path)
-    with rehearsal(rig_type=InterruptedRig) as rig:
+    state = dict(theta=math.pi, angle_hat=math.pi, omega=0.) if operation == 'swingup' else None
+    with rehearsal(rig_type=InterruptedRig, state=state) as rig:
         rig.rate_hz = 250
-        lines = iter(['policy load '+shlex.quote(str(path)), 'policy run', 'policy status', 'quit'])
+        lines = iter(['policy load '+shlex.quote(str(path)), 'policy '+operation, 'policy status', 'quit'])
         calls, prompted = [], []
         def factory(*args, **kwargs):
             calls.append(args)
@@ -243,7 +246,7 @@ def test_interactive_interrupt_stops_and_returns_to_same_prompt(tmp_path):
         assert code == 0 and len(calls) == 1
         assert len(prompted) == 4 and all(item == (False, 250) for item in prompted)
         assert 'interrupted' in output.getvalue()
-        assert 'balance-only' in output.getvalue()
+        assert ('swingup-balance' if operation == 'swingup' else 'balance-only') in output.getvalue()
         assert not rig.state.enabled and gc.isenabled() == before_gc
 
 

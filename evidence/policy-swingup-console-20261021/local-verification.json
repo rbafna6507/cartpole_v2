@@ -1,0 +1,103 @@
+{
+  "scope": "Offline synthetic boundary verification and optional saved simulation observation replay; raw guard angle synthesized from filtered angle; no hardware or closed-loop qualification.",
+  "source_file_sha256": "c1e8e95a56cd241fa116d408e2adef1f5e4465752227ac12ba0e49427dc41247",
+  "root": "/Users/rbafna/projects/cartpole_v2",
+  "checks_passed": true,
+  "actors": [
+    {
+      "actor": "training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json",
+      "actor_file_sha256": "0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16",
+      "actor_content_sha256": "3296899395ccb9d09d0ac524d166cc19604e23f027d543fb5e7a4d1e1961a3a6",
+      "task": "swingup-balance",
+      "hanging_admission_pass": true,
+      "upright_mode_rejects_hanging": true,
+      "continuation_through_horizontal_upright_and_braking_pass": true,
+      "start_limits": {
+        "position_m": 0.015,
+        "velocity_m_s": 0.025,
+        "angle_rad": 0.35,
+        "angular_rate_rad_s": 0.15
+      },
+      "run_limits": {
+        "position_m": 0.29907500743865967,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      },
+      "replay": [
+        {
+          "trace": "nominal-hanging-98400.jsonl",
+          "sha256": "29211d2225ba6000f0966c5f3f521716d538c99378df755fd226f628368de3a5",
+          "actions": 2500,
+          "max_difference_m_s2": 3.552713678800501e-15
+        },
+        {
+          "trace": "nominal-hanging-98401.jsonl",
+          "sha256": "40ff39e67aba0d08119c9ec51b6cf7da1527d031d59466b40a5e9d19ddcd2f16",
+          "actions": 2500,
+          "max_difference_m_s2": 7.105427357601002e-15
+        },
+        {
+          "trace": "nominal-hanging-98402.jsonl",
+          "sha256": "f25298f0fe682d38abd23b03563ab59d9dec262e9c425ea34350c81f10b3bb83",
+          "actions": 2500,
+          "max_difference_m_s2": 1.7763568394002505e-15
+        },
+        {
+          "trace": "nominal-hanging-98403.jsonl",
+          "sha256": "052e23e962e3716e2dde23dc79007e5272caaf861ca810b7e25224f7b8afd31f",
+          "actions": 2500,
+          "max_difference_m_s2": 3.552713678800501e-15
+        }
+      ]
+    },
+    {
+      "actor": "training/candidates/combined-recovery-20261021-step000460800-rail1mm/actor.json",
+      "actor_file_sha256": "f1673cd25546368fa1e18853ac6c671bcd8cc610fdb3335446214fa99b470b4b",
+      "actor_content_sha256": "024517862ffa08f068ec5fd6ee8ca899e6183682355a9e802a8076ba5d1f67f9",
+      "task": "swingup-balance",
+      "hanging_admission_pass": true,
+      "upright_mode_rejects_hanging": true,
+      "continuation_through_horizontal_upright_and_braking_pass": true,
+      "start_limits": {
+        "position_m": 0.015,
+        "velocity_m_s": 0.025,
+        "angle_rad": 0.35,
+        "angular_rate_rad_s": 0.15
+      },
+      "run_limits": {
+        "position_m": 0.29907500743865967,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      },
+      "replay": [
+        {
+          "trace": "nominal-hanging-98400.jsonl",
+          "sha256": "754953cad8c85127db297a15bd694e4ea523b5a24ecb15d228f6e1a2e30661e4",
+          "actions": 2500,
+          "max_difference_m_s2": 3.552713678800501e-15
+        },
+        {
+          "trace": "nominal-hanging-98401.jsonl",
+          "sha256": "cb48597b860a77a5289b7099f1eff0b2758517e7939003be9c49981a3b1a8ef1",
+          "actions": 2500,
+          "max_difference_m_s2": 3.552713678800501e-15
+        },
+        {
+          "trace": "nominal-hanging-98402.jsonl",
+          "sha256": "49c79bec8b00bdb1d4030d0cb37d8b6e1dc7c3729f511ddedfa1c1e8acb16751",
+          "actions": 2500,
+          "max_difference_m_s2": 4.440892098500626e-15
+        },
+        {
+          "trace": "nominal-hanging-98403.jsonl",
+          "sha256": "caba24da0164fc3f078c16a998a6046470d54666fcfb196c236ad25b81042364",
+          "actions": 2500,
+          "max_difference_m_s2": 7.105427357601002e-15
+        }
+      ]
+    }
+  ],
+  "hardware_accepted": false
+}

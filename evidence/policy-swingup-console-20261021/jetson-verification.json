@@ -1,0 +1,53 @@
+{
+  "scope": "Offline synthetic boundary verification and optional saved simulation observation replay; raw guard angle synthesized from filtered angle; no hardware or closed-loop qualification.",
+  "source_file_sha256": "c1e8e95a56cd241fa116d408e2adef1f5e4465752227ac12ba0e49427dc41247",
+  "root": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-swingup",
+  "checks_passed": true,
+  "actors": [
+    {
+      "actor": "training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json",
+      "actor_file_sha256": "0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16",
+      "actor_content_sha256": "3296899395ccb9d09d0ac524d166cc19604e23f027d543fb5e7a4d1e1961a3a6",
+      "task": "swingup-balance",
+      "hanging_admission_pass": true,
+      "upright_mode_rejects_hanging": true,
+      "continuation_through_horizontal_upright_and_braking_pass": true,
+      "start_limits": {
+        "position_m": 0.015,
+        "velocity_m_s": 0.025,
+        "angle_rad": 0.35,
+        "angular_rate_rad_s": 0.15
+      },
+      "run_limits": {
+        "position_m": 0.29907500743865967,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      },
+      "replay": []
+    },
+    {
+      "actor": "training/candidates/combined-recovery-20261021-step000460800-rail1mm/actor.json",
+      "actor_file_sha256": "f1673cd25546368fa1e18853ac6c671bcd8cc610fdb3335446214fa99b470b4b",
+      "actor_content_sha256": "024517862ffa08f068ec5fd6ee8ca899e6183682355a9e802a8076ba5d1f67f9",
+      "task": "swingup-balance",
+      "hanging_admission_pass": true,
+      "upright_mode_rejects_hanging": true,
+      "continuation_through_horizontal_upright_and_braking_pass": true,
+      "start_limits": {
+        "position_m": 0.015,
+        "velocity_m_s": 0.025,
+        "angle_rad": 0.35,
+        "angular_rate_rad_s": 0.15
+      },
+      "run_limits": {
+        "position_m": 0.29907500743865967,
+        "velocity_m_s": 1.5,
+        "angle_rad": null,
+        "angular_rate_rad_s": null
+      },
+      "replay": []
+    }
+  ],
+  "hardware_accepted": false
+}
