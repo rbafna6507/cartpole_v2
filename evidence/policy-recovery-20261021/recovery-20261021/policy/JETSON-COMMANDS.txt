@@ -1,0 +1,48 @@
+Selected partial-trained combined actor, staged on Jetson:
+/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-console/training/candidates/combined-recovery-20261021-step000102400/actor.json
+SHA256: 37c84e14081ad590ce2d2be9d88b41ffc7f6f676be50098d0030fac2dd504f21
+
+If the existing policy console is already connected, use these commands there.
+Prepare the existing centered, nearly stationary UPRIGHT start first.
+
+policy load training/candidates/combined-recovery-20261021-step000102400/actor.json
+policy status
+policy check
+policy run 5
+
+After a satisfactory operator-inspected short trial, the same existing command accepts:
+policy run 25
+
+This console requires upright admission. It has no hanging-start policy option.
+After admission, its rig profile has no host angle/rate cutoff, so a fall alone
+will not stop this combined actor. Existing rail/speed, sensor, lease and firmware
+protections remain active. Simulation success does not guarantee physical recovery.
+The displayed task label remains balance-only because it describes the existing
+console wrapper. --hanging-model/hanging are calibration features, not start options.
+
+To compare the latest backup (460800 steps), also staged separately:
+policy load training/candidates/combined-recovery-20261021-step000460800/actor.json
+policy check
+policy run 5
+
+To select the preserved working BAL actor again:
+policy load training/candidates/balance-recovery-20261021/actor.json
+
+For a new console session, the previously documented launch is:
+
+cd ~/cartpole-v2-live/releases/id-20261021-policy-console
+sudo prlimit --pid $$ --rtprio=10:10
+.venv/bin/python scripts/jetson-control \
+  --camera-service cartpole-vision.service \
+  --camera-cpus 0-3 --control-cpus 4-5 -- \
+  chrt --rr 10 .venv/bin/python -m cartpole_sdk.rig.policy_console \
+  --port /dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00 \
+  --rate 250 --keep-board-params
+
+Run from a normal SCHED_OTHER terminal. Do not start a second serial console
+while an existing one owns the port. The launcher temporarily partitions camera
+and control CPUs; only the control child receives SCHED_RR priority 10. Existing
+console run/shadow requests 100 Hz temporarily and restores 250 Hz afterward.
+
+We staged files and checked loaders only. No serial, motion, homing, calibration,
+firmware, live parameter, existing-file or service/process changes were performed.

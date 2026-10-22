@@ -1,0 +1,30 @@
+{
+  "reviewed_at_utc": "2026-10-22T00:23:34.607514+00:00",
+  "conclusion": "No important or blocking correctness findings observed.",
+  "files_sha256": {
+    "resume.py": "f72ef6e442b1c43b5c148ebd4d9f9bd08662df9bcad4666e1bf0070d481520e4",
+    "package_recovery.py": "462d7d1863b8a7e1118b08b70ca78f02cc3f27440bb843cee2016b3064fe960e",
+    "watch.py": "ac723c9368ebd6e1b3200c1d0dec4d98867b8a4cfc836740dca0e5ec21fdaa8d",
+    "test_resume.py": "b5825b3b9677fc3239f12fc42c004145632f641580166aea79c1d10a897cbc43",
+    "test_package.py": "144baf70013f4726241f60d09b446ef2baae0c4e9355f3076767eb3e5ac5f460",
+    "manifest.json": "16eed0e15c539a990683e4e3eb83ea77e183e4da074a9391d6324f0857cbd52c",
+    "colab-bundle/remote.py": "eae7a438ae0071c7601fb74804930367f956d24fc01fbdc47aa3a095e361ade2",
+    "colab-bundle/bundle.json": "3cd5c0ff4e9335f8b41956fbba40497da248605b17f8103921330ff372ede947"
+  },
+  "independent_checks": [
+    "Generated bundle hash 3cd5c0ff4e9335f8b41956fbba40497da248605b17f8103921330ff372ede947 matched.",
+    "All 14 recovery manifest file bindings matched source.zip members; archive had no duplicate names.",
+    "Bundle, recipe, source/input archives, embedded recipe and manifest hash agreed.",
+    "Actual generated main invoked CARTPOLE_ACTION=run under stubbed process creation, called wait, then emitted success nonce.",
+    "Repeated actual main invocation rejected before creating a duplicate child.",
+    "PPO continuation next absolute checkpoint 512000 and remaining campaign steps 5683200 are consistent.",
+    "Only seed 11 PPO resumes; five other trials use frozen original commands.",
+    "HTTP watcher wrapper binds the new recovery session and separate backup directory."
+  ],
+  "limits": [
+    "Cloud launch/execution was not performed by this reviewer.",
+    "The full multi-hour training campaign was not executed by this reviewer.",
+    "Root reported independent full optimizer restore plus 1024 real update, extracted bundle checks, and passing focused/adjacent tests; these were reviewed but not redundantly rerun."
+  ],
+  "findings": []
+}

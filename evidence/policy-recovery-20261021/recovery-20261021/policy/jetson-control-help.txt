@@ -1,0 +1,19 @@
+usage: cpu_affinity.py [-h] (--camera-service CAMERA_SERVICE | --no-camera)
+                       [--camera-cpus CAMERA_CPUS] --control-cpus CONTROL_CPUS
+                       ...
+
+Reversible Linux camera/control CPU partitioning; standard library only.
+
+positional arguments:
+  command               -- COMMAND [ARG ...]
+
+options:
+  -h, --help            show this help message and exit
+  --camera-service CAMERA_SERVICE
+                        current user systemd camera service to temporarily
+                        restrict
+  --no-camera           explicit control-only operation
+  --camera-cpus CAMERA_CPUS
+                        camera CPUs, e.g. 0-3; required with --camera-service
+  --control-cpus CONTROL_CPUS
+                        disjoint control CPUs, e.g. 4-5

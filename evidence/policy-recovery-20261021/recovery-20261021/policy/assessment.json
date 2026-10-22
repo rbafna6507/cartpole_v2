@@ -1,0 +1,226 @@
+{
+  "candidates": [
+    {
+      "actor_file_sha256": "37c84e14081ad590ce2d2be9d88b41ffc7f6f676be50098d0030fac2dd504f21",
+      "candidate_path": "training/candidates/combined-recovery-20261021-step000102400",
+      "checkpoint_sha256": "47300b2e1440295b255d4366d88a0c10dd0525e3ea2e6c66cd031bc95001ac0a",
+      "nominal_summaries": [
+        {
+          "numeric": false,
+          "summary": [
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 4,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 5.4975,
+              "min_final_dwell_s": 19.71000000000028,
+              "scenario": "nominal",
+              "start": "hanging",
+              "worst_max_x_m": 0.29407524046708156
+            },
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 0,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 1.0,
+              "min_final_dwell_s": 25.00000000000111,
+              "scenario": "nominal",
+              "start": "upright",
+              "worst_max_x_m": 0.09779428361458535
+            }
+          ]
+        },
+        {
+          "numeric": true,
+          "summary": [
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 4,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 5.4625,
+              "min_final_dwell_s": 19.850000000000303,
+              "scenario": "nominal",
+              "start": "hanging",
+              "worst_max_x_m": 0.2940752004260718
+            },
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 0,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 1.0,
+              "min_final_dwell_s": 25.00000000000111,
+              "scenario": "nominal",
+              "start": "upright",
+              "worst_max_x_m": 0.0977934436138286
+            }
+          ]
+        }
+      ],
+      "sdk_action_comparisons": 2000,
+      "sdk_max_abs_action_error_m_s2": 3.4397363606331055e-06,
+      "step": 102400
+    },
+    {
+      "actor_file_sha256": "dff5494b5057677696ffc3218c7c956c5a93ec3b5feb06cd846bd9404a6e8ca2",
+      "candidate_path": "training/candidates/combined-recovery-20261021-step000460800",
+      "checkpoint_sha256": "6f666f303a5e34eea1c09302a33823a4496f895ac0f180c20bcda93def2f10ad",
+      "nominal_summaries": [
+        {
+          "numeric": false,
+          "summary": [
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 4,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 8.6125,
+              "min_final_dwell_s": 16.24999999999974,
+              "scenario": "nominal",
+              "start": "hanging",
+              "worst_max_x_m": 0.2940783402237846
+            },
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 0,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 1.0,
+              "min_final_dwell_s": 25.00000000000111,
+              "scenario": "nominal",
+              "start": "upright",
+              "worst_max_x_m": 0.10254202449741587
+            }
+          ]
+        },
+        {
+          "numeric": true,
+          "summary": [
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 4,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 8.015,
+              "min_final_dwell_s": 16.389999999999763,
+              "scenario": "nominal",
+              "start": "hanging",
+              "worst_max_x_m": 0.2940750142186003
+            },
+            {
+              "captures": 4,
+              "episodes": 4,
+              "episodes_with_rail_braking": 0,
+              "faults": 0,
+              "holds": 4,
+              "mean_capture_s": 1.0,
+              "min_final_dwell_s": 25.00000000000111,
+              "scenario": "nominal",
+              "start": "upright",
+              "worst_max_x_m": 0.10254208566923587
+            }
+          ]
+        }
+      ],
+      "sdk_action_comparisons": 2000,
+      "sdk_max_abs_action_error_m_s2": 3.2131566136683887e-06,
+      "step": 460800
+    }
+  ],
+  "console": {
+    "admission": "centered, nearly stationary upright start only",
+    "after_admission": "Rig profile retains rail/speed bounds and freshness/lease guards; no host angle/rate cutoff. A fall does not by itself stop actor evaluation.",
+    "hanging_start_supported": false,
+    "source_or_behavior_modified": false,
+    "start_limits": {
+      "angle_rad": 0.07,
+      "angular_rate_rad_s": 0.15,
+      "position_m": 0.015,
+      "velocity_m_s": 0.025
+    },
+    "warning": "The --hanging-model option and hanging console command concern calibration; they are not a hanging-start policy option."
+  },
+  "fixed_contract": {
+    "angle_source": "filtered",
+    "lease_ms": 20,
+    "max_acceleration_m_s2": 25.0,
+    "rate_hz": 100
+  },
+  "frozen_protocol_valid_after": true,
+  "hardware_accepted": false,
+  "jetson": {
+    "actor_content_sha256": "27eaae3884816d0a106b38b4b87c92f02a775b32f7aa56b1aa86e036425fd1ad",
+    "actor_file_sha256": "37c84e14081ad590ce2d2be9d88b41ffc7f6f676be50098d0030fac2dd504f21",
+    "candidate_path": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-console/training/candidates/combined-recovery-20261021-step000102400",
+    "console_admission": "Existing upright-start admission remains required.",
+    "hardware_accepted": false,
+    "no_existing_files_changed": true,
+    "no_hardware_commands": true,
+    "no_serial_access": true,
+    "numpy_backend": {
+      "actor_content_sha256": "27eaae3884816d0a106b38b4b87c92f02a775b32f7aa56b1aa86e036425fd1ad",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+      "warmup_predictions": 64
+    },
+    "numpy_runtime_load_pass": true,
+    "preserved_balance_actor_unchanged": true,
+    "release": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-console",
+    "runtime_load_pass": true,
+    "source_files_matched": 23
+  },
+  "latest_comparison_jetson": {
+    "actor_content_sha256": "c8263df9523f53e7fcb722021bde073b4d69e94426387163811e620951821d9d",
+    "actor_file_sha256": "dff5494b5057677696ffc3218c7c956c5a93ec3b5feb06cd846bd9404a6e8ca2",
+    "candidate_path": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-console/training/candidates/combined-recovery-20261021-step000460800",
+    "console_admission": "Existing upright-start admission remains required.",
+    "hardware_accepted": false,
+    "no_existing_files_changed": true,
+    "no_hardware_commands": true,
+    "no_serial_access": true,
+    "numpy_backend": {
+      "actor_content_sha256": "c8263df9523f53e7fcb722021bde073b4d69e94426387163811e620951821d9d",
+      "backend": "numpy-einsum",
+      "contraction": "einsum-optimize-false",
+      "dtype": "float64",
+      "numpy_version": "2.4.6",
+      "source_sha256": "7c5a1cc994d25e9ddb80043f8998cf5f3d5df5d3425ff5ebd6ba3dd55111805a",
+      "warmup_predictions": 64
+    },
+    "numpy_runtime_load_pass": true,
+    "preserved_balance_actor_unchanged": true,
+    "release": "/home/rbafna/cartpole-v2-live/releases/id-20261021-policy-console",
+    "runtime_load_pass": true,
+    "source_files_matched": 23
+  },
+  "limitations": [
+    "Four repeatedly inspected development seeds; no stress or held-out confirmation in this recovery.",
+    "All hanging simulations engage native rail braking and approach |x|=0.29408m. No physical swing-up trial or hardware qualification.",
+    "NumPy and SB3 have small one-step numeric discrepancies and accumulated trajectory differences; parity is not identical trajectory evidence.",
+    "Jetson evidence covers source identity, actor loader and NumPy warm-up only; no live readiness, deadline or motion checks.",
+    "Step102400 is10% and step460800 is45% of the planned1024000 training steps; later is not automatically better."
+  ],
+  "preserved_balance_actor_unchanged": true,
+  "script_sha256": {
+    "check_console_admission.py": "de343a398638b9889f51e79593a2f4c5ed0e005f31604ec44eed9cb02c27cc74",
+    "recover_candidates.py": "f20f97177582c38cd20b45db841e11b9b84b150beaa2ff70695343edf54da5ca",
+    "stage_candidate.py": "bd9c64b4783592b7f1ac3e2f4e29d09359d70f63c8ea6df1fabab36cb45655c7"
+  },
+  "selected_step": 102400,
+  "selection_reason": "Both candidates hold all eight nominal development starts without faults. Step102400 has faster hanging capture and slightly lower upright excursion than step460800 under both SB3 and exported NumPy. Both are separately staged for existing-console development trials; recommend102400, retain latest460800 for direct comparison and training recovery.",
+  "status": "DEVELOPMENT_ONLY",
+  "trace_hashes_verified": 40
+}

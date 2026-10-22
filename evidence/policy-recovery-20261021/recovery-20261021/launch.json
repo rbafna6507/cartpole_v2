@@ -1,0 +1,28 @@
+{
+  "session": "filtered-bal-joint-recovery-20261021",
+  "bundle_sha256": "3cd5c0ff4e9335f8b41956fbba40497da248605b17f8103921330ff372ede947",
+  "stage": "training_verified",
+  "started_unix": 1792628619.1554759,
+  "setup_nonce": "3b4aca1c4b3b46df8def0438440a5a8b",
+  "setup_verified_unix": 1792628738.958292,
+  "client_pid": 70062,
+  "foreground_nonce": "03a6273780f44339a08098dfde68fbf0",
+  "foreground_started_unix": 1792628793.46205,
+  "client_runner": "runs/colab-filtered-joint-recovery-20261021/foreground_runner.py",
+  "local_runner_sha256": "1eca9df7ccc851ae948182ea9413c1b94a111e8e9defecd63b2ed8bf1463173d",
+  "local_runner_source": "import json,pathlib,subprocess,time\nroot=pathlib.Path(__file__).resolve().parent\nsettings=json.loads((root/'foreground-command.json').read_text())\nstate=dict(started_unix=time.time(),status='executing_real_training_cell')\n(root/'foreground-state.json').write_text(json.dumps(state))\ntry:\n with (root/'foreground.log').open('xb') as log:\n  result=subprocess.run(settings['command'],stdout=log,stderr=subprocess.STDOUT,timeout=86490,stdin=subprocess.DEVNULL)\n text=(root/'foreground.log').read_text()\n expected='CARTPOLE_REMOTE_OK '+json.dumps(dict(action='run',nonce=settings['nonce']))\n state.update(status='completed' if result.returncode==0 and expected in text.splitlines() else 'client_ended_without_completion_receipt',exit_code=result.returncode)\nexcept subprocess.TimeoutExpired:state['status']='client_deadline_reached'\nfinally:\n state['finished_unix']=time.time();(root/'foreground-state.json').write_text(json.dumps(state,indent=2))\n",
+  "local_command": [
+    "/Users/rbafna/projects/cartpole_v2/runs/colab-cli-venv/bin/colab",
+    "exec",
+    "-s",
+    "filtered-bal-joint-recovery-20261021",
+    "--timeout",
+    "86400",
+    "-f",
+    "/Users/rbafna/projects/cartpole_v2/evidence/policy-recovery-20261021/recovery-20261021/colab-bundle/remote.py",
+    "--env",
+    "CARTPOLE_ACTION=run",
+    "--env",
+    "CARTPOLE_NONCE=03a6273780f44339a08098dfde68fbf0"
+  ]
+}

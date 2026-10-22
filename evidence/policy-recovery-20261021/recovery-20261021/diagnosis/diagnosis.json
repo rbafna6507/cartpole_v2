@@ -1,0 +1,184 @@
+{
+  "session": "filtered-bal-joint-long-20261021",
+  "created_at_utc": "2026-10-22T00:21:37.930179+00:00",
+  "scope": "Read-only local/provider diagnosis; no session allocation, cloud execution, shutdown, CLI update, hardware access, or production edit.",
+  "conclusion": "Runtime assignment lost; provider deletion cause unknown. Detached trainer with no ongoing notebook execution creates a documented idle-deletion exposure.",
+  "confirmed": {
+    "cli_version": "google-colab-cli 0.7.4",
+    "allocation": "CPU DEFAULT STANDARD at 2026-10-21T18:29:37.907816-04:00",
+    "launch_cell_completed": "2026-10-21T18:31:18.813986-04:00",
+    "launch_implementation": "Popen(..., start_new_session=True), returning immediately; job executes outside notebook cell.",
+    "last_completed_kernel_execution_in_local_history": "2026-10-21T19:00:47.001340-04:00 (status)",
+    "last_complete_backup_et": "2026-10-21T20:02:16.517083-04:00",
+    "last_complete_backup_semantics": "Contents reachable and preserved files verified; not a process-alive check. job-status training state was written at launch.",
+    "latest_preserved_checkpoint": {
+      "step": 460800,
+      "path": "runs/colab-filtered-joint-long-20261021-checkpoints/runs/combined-long/ppo-seed11/checkpoints/step-000460800.zip",
+      "sha256": "6f666f303a5e34eea1c09302a33823a4496f895ac0f180c20bcda93def2f10ad",
+      "sha256_reverified": true,
+      "zip_crc_reverified": true,
+      "local_file_mtime_et": "2026-10-21T19:56:40.931686-04:00"
+    },
+    "checkpoint_count": 10,
+    "completed_trials": 0,
+    "contents_http_404_local_log_times_et": [
+      "2026-10-21T20:03:19.948-04:00",
+      "2026-10-21T20:03:36.703-04:00",
+      "2026-10-21T20:04:08.442-04:00"
+    ],
+    "watcher_stopped": "2026-10-21T20:04:08.610146-04:00 after three transport failures",
+    "local_history_pruned": "2026-10-21T20:09:54.794971-04:00; a local cleanup event, not a provider reason",
+    "current_usage_read": {
+      "compute_units": 0.0,
+      "usage_per_hour": 0.0,
+      "active_assignments": 0,
+      "historical_balance_unknown": true
+    },
+    "report_warning": "Incomplete trial report actual_steps=1024000 is the configured total/budget; do not treat it as reached progress."
+  },
+  "cause_assessment": {
+    "idle_deletion": "Plausible and supported by launch architecture plus provider documentation; provider event not available, so unconfirmed.",
+    "resource_reclamation_or_usage_limit": "Possible. Current balance is zero, but historical depletion not established. 12/24 hours are upper bounds, not promised lifetimes.",
+    "oom_or_unhealthy_runtime": "Possible; no terminal memory, exit-code or host-health evidence survived to confirm or exclude.",
+    "ordinary_training_exception": "No preserved terminal exception or failed status. An ordinary child exception would normally be caught and recorded by job(), rather than remove VM assignment.",
+    "cli_or_token_only_failure": "Earlier websocket trouble occurred while downloads continued. Final contents 404 plus subsequent zero server assignments establishes broader loss than only a detached local client; raw prune event alone would not."
+  },
+  "recommended_pattern": "Run actual supervisor/training work synchronously inside one notebook/kernel execution via blocking subprocess.run or job(), with an adequate client timeout and HTTP checkpoint backup separately. No artificial activity/keepalive or idle-policy evasion. Treat free runtime lifetime as interruptible.",
+  "improvement_candidates": [
+    "Keep immutable source/protocol/checkpoint bindings and explicit continuation provenance.",
+    "Back up checkpoint, incremental training log, job exit status, and bounded memory telemetry while VM exists.",
+    "Record raw safe HTTP status and server assignment state separately from generic transport failure.",
+    "Treat last-success time as data availability; add real progress timestamps rather than trusting the launch-time training status.",
+    "If dependable multi-hour execution is required, use suitable paid/dedicated compute; no purchase was made."
+  ],
+  "sources": [
+    {
+      "url": "https://research.google.com/colaboratory/faq.html#resource-limits",
+      "claim": "Resources and idle/max lifetimes vary; free notebooks at most 12h; Pro+ continuous code up to 24h with sufficient units; these are not guarantees."
+    },
+    {
+      "url": "https://github.com/googlecolab/colabtools/issues/5950",
+      "claim": "Colab team explains active/unacknowledged execution requirement and distinction between idle deletion and unhealthy-runtime deletion."
+    },
+    {
+      "url": "https://github.com/googlecolab/google-colab-cli/blob/main/docs/01_session_management.md",
+      "claim": "CLI uses active kernel work/interactions for liveness, no keepalive daemon; status BUSY/IDLE is CLI bookkeeping; runtime tokens refresh separately."
+    }
+  ],
+  "evidence_sha256": {
+    "evidence/policy-recovery-20261021/combined-next/colab-long-final/remote.py": "4d761da3efd9d05ca0c058457b6e04d987ca9cf2178c2721e9fb7a8c67baedcd",
+    "evidence/policy-recovery-20261021/combined-next/http_checkpoint_watch.py": "d7bab28278c500f87296eaf7919bc6dd65a595ebad8252961ec5ca4951403632",
+    "evidence/policy-recovery-20261021/combined-next/cloud-launch-update.json": "5cf2011bd868527715e923422ed9fdac838824fd9fe5ace0600aa43635c03db4",
+    "runs/colab-filtered-joint-long-20261021-checkpoints/last-complete.json": "8e997e44631177c5bde7c03ba108bf09692802f9cad8bf0fcc6b6e43b53ac301",
+    "runs/colab-filtered-joint-long-20261021-checkpoints/watch-status.json": "7ca96c96ce8c2ee80ba7b93f6089957b3116410ac3ed42f7062875bc22e28d24",
+    "runs/colab-filtered-joint-long-20261021-checkpoints/events.jsonl": "0addf73610ff3d879d9e076f5205f99780f00cc133d343a45f526140b82dab1b",
+    "runs/colab-cli-venv/lib/python3.12/site-packages/colab_cli/commands/execution.py": "ad82ab0798ca28b598c807d0490043d80751a25a61f0260ee5291575f2fee759",
+    "runs/colab-cli-venv/lib/python3.12/site-packages/colab_cli/runtime.py": "e95adf8dc98c9a08dce1fff035839863cbe80c9571d36634c3bc3d0cfcf06bcb",
+    "runs/colab-cli-venv/lib/python3.12/site-packages/colab_cli/common.py": "56cc48f56a8dbe223b04728d075b8c8382c801925ad6a508e8eaa2870b887276"
+  },
+  "sanitized_cli_history": [
+    {
+      "timestamp": "2026-10-21T22:29:37.907816+00:00",
+      "event_type": "session_created",
+      "variant": "DEFAULT",
+      "accelerator": "NONE",
+      "machine_shape": "STANDARD"
+    },
+    {
+      "timestamp": "2026-10-21T22:31:15.142175+00:00",
+      "event_type": "execution",
+      "actions": [
+        "setup"
+      ],
+      "output_types": {
+        "stream": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:31:18.813986+00:00",
+      "event_type": "execution",
+      "actions": [
+        "start"
+      ],
+      "output_types": {
+        "stream": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:32:26.337004+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:33:23.678364+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:33:28.328659+00:00",
+      "event_type": "execution",
+      "actions": [
+        "package"
+      ],
+      "output_types": {
+        "stream": 1
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:34:35.672712+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:38:48.058567+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-21T22:51:39.184904+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-21T23:00:47.001340+00:00",
+      "event_type": "execution",
+      "actions": [
+        "status"
+      ],
+      "output_types": {
+        "stream": 2
+      }
+    },
+    {
+      "timestamp": "2026-10-22T00:09:54.794971+00:00",
+      "event_type": "session_terminated",
+      "reason": "pruned"
+    }
+  ],
+  "secrets_policy": "No auth/session tokens, endpoint URLs, credentials, arbitrary command output, or raw sensitive history copied."
+}
