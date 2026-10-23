@@ -932,3 +932,9 @@ The original training protocol retains its historical hashes. `training/protocol
 The additive release tool packages committed source plus required protocol/model inputs, validates member hashes before extraction, installs locked operator dependencies into a new directory, validates both actors offline, and then atomically selects `active`. Existing releases and the old `current` directory remain intact. Activation does not restart a console or take hardware ownership. See the cheat sheet for build, install and rollback commands.
 
 The public submission portal remains the next design task. Existing queue/isolation code is a starting point; arbitrary public code execution, remote delivery architecture and video transport are not deployed by this operator release.
+
+## 25. Developer streams and portal preview follow-up
+
+The source now includes a selectable read-only stream catalog and bounded NDJSON export, documented in [DEVELOPER_STREAMS.md](docs/DEVELOPER_STREAMS.md). The collector supports the existing live service explicitly through `--legacy-sensing`; deploying the new camera endpoints remains separate. No firmware, camera service, gains or calibration were changed. The local portal preview persists its queue and private credentials and provides source review plus operator approval; it does not start a worker. The worker exposes all available control-observation channels without changing source provenance or freshness guards.
+
+Python AUTO remains an experimental sampled controller; no gains, calibration, firmware or safety gates were changed by this follow-up. Run-specific diagnostics are retained privately outside Git.

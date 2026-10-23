@@ -175,12 +175,12 @@ Use the dated protocol for this source release; the historical protocol delibera
 ```bash
 # Short wiring/smoke run:
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py train \
-  --protocol training/protocols/combined-operator-20261023.json \
+  --protocol training/protocols/combined-developer-streams-20261023.json \
   --arm ppo --seed 11 --budget pilot --smoke --output runs/combined-smoke-new
 
 # Full projected-PPO run:
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py train \
-  --protocol training/protocols/combined-operator-20261023.json \
+  --protocol training/protocols/combined-developer-streams-20261023.json \
   --arm ppo --seed 11 --budget long --output runs/combined-ppo-seed11-new
 
 # Actor-retention variant: use --arm retained and a distinct output directory.
@@ -199,7 +199,7 @@ Evaluate a checkpoint from a completed run made with the same protocol:
 
 ```bash
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py evaluate \
-  --protocol training/protocols/combined-operator-20261023.json \
+  --protocol training/protocols/combined-developer-streams-20261023.json \
   --run runs/combined-ppo-seed11-new --step 1024000 \
   --output runs/combined-ppo-seed11-eval --numeric
 ```
@@ -272,3 +272,29 @@ curl --no-buffer 'http://127.0.0.1:3090/api/sensing-stream?max_hz=100'
 ```
 
 This display stream is bounded and best-effort; submitted controllers receive SDK observations directly from the trusted worker. The local portal UI accepts an operator credential to approve each waiting physical job. Approval never prepares or arms hardware by itself.
+
+## Portal preview and dataset export
+
+```bash
+uv run --locked cartpole-portal-dev --root runs/portal-dev --port 8765
+# In a separate terminal, if the camera tunnel is not already running:
+./scripts/vision-tunnel.sh rbafna@jetson 3090
+# Existing Jetson service, unchanged raw/processed vision + encoder envelopes:
+uv run --locked cartpole-collect --legacy-sensing --duration 30 --output runs/my-capture.jsonl
+# Pipe output instead of saving:
+uv run --locked cartpole-collect --legacy-sensing --duration 30 | jq -c '.encoder.packets[]'
+```
+
+The output file must be new. For the new service's selectable catalog, all stream
+IDs, cursors, bounds, image resources and CLI arguments, see
+[DEVELOPER_STREAMS.md](docs/DEVELOPER_STREAMS.md) and the argument reference.
+The Jetson's current camera service has not been restarted or upgraded; use
+`--legacy-sensing` until the new endpoints are deployed. A short collection can
+expire before the initial history envelope arrives; zero records is an error.
+
+Realtime scheduling is already automatic in `cartpole-console`: priority 10,
+with a scoped `sudo prlimit` request only when the launching process needs the
+allowance. `sudo prlimit --pid $$ --rtprio=10:10` sets the current shell's soft and
+hard realtime-priority allowance, inherited by children. It does not itself
+change scheduling; `chrt --rr 10` does that. No global login/root policy change is
+needed. `--rt-priority 0` explicitly disables realtime.

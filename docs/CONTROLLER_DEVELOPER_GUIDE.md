@@ -64,7 +64,7 @@ from cartpole_sdk import Channel, select_channels
 # theta.value is the unfiltered, upright-referenced radian angle.
 ```
 
-The current portal hardware bridge passes four channels: magnetic angle/rate and step position/velocity. The simulation bridge passes the corresponding four with `source='simulation'` and frame `sim:upright+x`. This source distinction is deliberate: simulated ground truth is not magnetic sensing. A portable policy must explicitly support both contracts or use a documented adapter; it must not silently relabel source data.
+The portal hardware bridge now passes all seven available control channels: unfiltered and filtered magnetic angle, magnetic rate, step position/velocity, commanded acceleration and braking direction. The simulation bridge adds its two available governor channels to the ordinary four, with `source='simulation'` and frame `sim:upright+x`. This source distinction is deliberate: simulated ground truth is not magnetic sensing. A portable policy must explicitly support both contracts or use a documented adapter; it must not silently relabel source data.
 
 Our trained recovery actor uses a richer filtered observation and executor feedback contract. The generic portal bridge is **not yet a drop-in runner for that actor**. Completing that parity is a prerequisite for accepting trained policies through the portal. The existing trusted console remains the supported execution path for `policies/working.json` and `policies/1m.json`.
 
@@ -96,3 +96,5 @@ Start the local portal using [portal setup](portal.md). Invited users receive a 
 The agreed hosted design uses Vercel UI, private artifact storage and a durable cloud queue, with outbound Jetson polling. Planned intake limits are 10 MiB uploaded, 50 MiB expanded and 256 files, fixed dependencies and validated numeric policy files. These planned limits are **not** implemented in the current source-only API. ZIP extraction, numeric-policy isolation, account invitation, cloud queue deployment, authenticated read-only telemetry/video and detailed downloadable results remain subsequent portal work.
 
 Video should use a replaceable source adapter separate from policy sensing. Replacing a camera must not silently change the controller's observation contract, calibration or clock alignment.
+
+The selectable stream catalog and export commands are described in [DEVELOPER_STREAMS.md](DEVELOPER_STREAMS.md). The currently running Jetson service supports explicit `--legacy-sensing` collection; new catalog endpoints require the updated camera-service version.

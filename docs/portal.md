@@ -276,3 +276,29 @@ EPERM rather than relying on timeout; isolation tests use a test-only 250ms acti
 deadline to avoid conflating cold imports with denial. Production stays at 10ms.
 The preserved log is [evidence/phase6/portal-linux-tests.log](../evidence/phase6/portal-linux-tests.log).
 No physical portal policy run was performed in that historical validation. Switches were subsequently commissioned; this does not by itself qualify physical portal execution.
+
+## Local development preview
+
+```sh
+uv run --locked cartpole-portal-dev --root runs/portal-dev --port 8765
+```
+
+Open http://127.0.0.1:8765 and select `runs/portal-dev/credentials.json` using
+**Load local credentials file**. Choose Submitter or Operator to exercise both
+roles. The file persists across restarts, is mode 0600 and contains separate
+random credentials; it stays outside Git. This local-only launcher creates no
+worker credential and starts no execution worker. Do not host this development
+credential workflow on Vercel. The production authenticated API still requires
+explicit credentials and does not expose the local-preview metadata endpoint.
+
+`--root` defaults to `runs/portal-dev`; `--port` defaults to 8765. Binding is always
+127.0.0.1. Keep the process running; Ctrl-C stops it without deleting the queue.
+The existing camera service can be viewed through `scripts/vision-tunnel.sh` at
+http://127.0.0.1:3090. This SSH tunnel is independent of the local portal.
+
+Submitted policies now receive all available control-observation samples, while
+the worker still validates its required channels. Hardware provides unfiltered
+and filtered angle plus governor feedback; simulation retains simulation
+provenance and its available governor feedback. This does not yet make the generic
+simulator the fitted learned-policy Gym environment, or authorize vision/fused
+physical control.

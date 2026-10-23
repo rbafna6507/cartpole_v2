@@ -2571,3 +2571,42 @@ options:
                         Additional sustained-balance metric; original one-
                         second benchmark is retained.
 ```
+
+## cartpole-portal-dev
+
+```text
+usage: cartpole-portal-dev [-h] [--root ROOT] [--port PORT]
+
+Persistent, loopback-only source-policy preview. Never starts a worker.
+
+options:
+  -h, --help   show this help message and exit
+  --root ROOT
+  --port PORT
+```
+
+## cartpole-collect
+
+```text
+usage: cartpole-collect [-h] [--url URL] [--streams STREAMS]
+                        [--duration DURATION] [--max-hz MAX_HZ]
+                        [--limit LIMIT] [--max-records MAX_RECORDS]
+                        [--max-bytes MAX_BYTES] [--cursors CURSORS]
+                        [--output OUTPUT] [--legacy-sensing]
+
+Bounded read-only NDJSON collection; no hardware commands or clock rewriting.
+
+options:
+  -h, --help            show this help message and exit
+  --url URL
+  --streams STREAMS     comma-separated catalog channel ids
+  --duration DURATION
+  --max-hz MAX_HZ
+  --limit LIMIT
+  --max-records MAX_RECORDS
+  --max-bytes MAX_BYTES
+  --cursors CURSORS     JSON cursor map copied from a previous envelope
+  --output OUTPUT       - for stdout; otherwise creates a NEW JSONL file
+  --legacy-sensing      export unchanged v1 vision+encoder envelopes from an
+                        existing service; SDK shadow is not included
+```

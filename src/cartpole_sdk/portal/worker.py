@@ -102,7 +102,8 @@ class SimulationBridge:
         from cartpole_sdk.sim import SimulationConfig
         from cartpole_sdk.sim.executor import ExecutorSimulation
         self.backend=ExecutorSimulation(SimulationConfig(control_steps=10,max_steps=math.ceil(duration*100)+1))
-        self.current=self.backend.reset(session_id=identifier)
+        self.backend.reset(session_id=identifier)
+        self.current=self.backend.control_observation()
         self.session=self.backend.session
         self.channels=tuple(Channel(entity,quantity,'simulation','sim:upright+x') for entity,quantity in (
             ('cart','position'),('cart','velocity'),('pole','angle'),('pole','angular_velocity')))
@@ -110,14 +111,17 @@ class SimulationBridge:
         self.config=asdict(self.backend.config)
         return self.selected()
     def selected(self):
-        samples=select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
-        return replace(self.current,samples=samples)
+        # Validate required control channels while preserving every available
+        # raw/processed channel and its original provenance for policy authors.
+        select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
+        return self.current
     def arm(self,duration):pass  # simulation has no devices or physical arming
     def advance(self,value,sequence):
         observation=self.current
         request=None if value is None else ActionRequest(observation.session_id,observation.clock_id,sequence,
             observation.sequence,observation.available_ns,observation.available_ns+20_000_000,value)
-        self.current=self.backend.step(request)
+        self.backend.step(request)
+        self.current=self.backend.control_observation()
         if self.backend.terminated:raise WorkerError('simulation executor fault')
         return self.selected()
     def complete(self):return self.current.available_ns>=self.duration_ns
@@ -146,14 +150,16 @@ class HardwareBridge:
         self.channels=tuple(Channel(entity,quantity,source,frame) for entity,quantity,source,frame in (
             ('cart','position','step','cart-step-home'),('cart','velocity','step','cart-step-home'),
             ('pole','angle','magnetic','encoder-zero'),('pole','angular_velocity','magnetic','encoder-zero')))
-        self.current=self.rig.observation()
+        self.current=self.rig.control_observation()
         return self.selected()
     def selected(self):
-        samples=select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
-        return replace(self.current,samples=samples)
+        # Validate required control channels while preserving every available
+        # raw/processed channel and its original provenance for policy authors.
+        select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
+        return self.current
     def arm(self,duration):
         self.rig.arm(duration)
-        self.current=self.rig.observation()
+        self.current=self.rig.control_observation()
         self.end=self.rig._deadline_ns/1e9-min(.01,duration*.25)
     def advance(self,value,sequence):
         observation=self.current
@@ -165,7 +171,7 @@ class HardwareBridge:
             try:self.rig.wait_state(after_tick=observation.sequence,timeout=min(.02,remaining))
             except TimeoutError:
                 if time.monotonic()<self.end:raise
-        self.current=self.rig.observation()
+        self.current=self.rig.control_observation()
         return self.selected()
     def complete(self):return time.monotonic()>=self.end
     def stop(self):

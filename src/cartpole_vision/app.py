@@ -234,6 +234,9 @@ def create_app(engine, read_only=False):
         response.call_on_close(release)
         return response
 
+    from .developer_streams import install as install_developer_streams
+    install_developer_streams(app, engine)
+
     @app.get('/api/sdk-state')
     def sdk_state():
         from .sdk_feed import empty_snapshot
