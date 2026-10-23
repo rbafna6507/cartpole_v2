@@ -6,7 +6,9 @@ import resource
 import sys
 
 # Names resolved by libseccomp on the actual architecture; no syscall numbers.
-SYSCALLS=('read','write','readv','writev','close','lseek','fstat','newfstatat','stat','lstat','statx','getdents64',
+# pread64 is the positioned equivalent of read/lseek, needed by the ELF loader
+# for explicitly mounted numeric libraries; it grants no additional path access.
+SYSCALLS=('read','pread64','write','readv','writev','close','lseek','fstat','newfstatat','stat','lstat','statx','getdents64',
           'access','faccessat','faccessat2','open','openat','readlink','readlinkat','mmap','mmap2','mprotect',
           'munmap','mremap','brk','madvise','rt_sigaction','rt_sigprocmask','rt_sigreturn','sigaltstack',
           'futex','futex_time64','sched_yield','clock_gettime','clock_gettime64','gettimeofday','time',

@@ -1,0 +1,24 @@
+[Unit]
+Description=Cartpole hardware submission worker
+After=network-online.target
+
+[Service]
+Type=simple
+User=rbafna
+Group=rbafna
+WorkingDirectory=/home/rbafna/.local/state/cartpole-portal
+ExecStart=/home/rbafna/cartpole-portal/source/.venv/bin/python -m cartpole_sdk.portal.worker --portal http://127.0.0.1:8780 --token-file /home/rbafna/.config/cartpole-portal/worker-token --worker jetson-worker --rig-id cartpole --backend hardware --port /dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00 --rate 100 --max-acceleration 25 --numpy-root /home/rbafna/cartpole-portal/sandbox-packages --sandbox-cpu 5 --recording-root /home/rbafna/.local/state/cartpole-portal/hardware-recordings --spool-root /home/rbafna/.local/state/cartpole-portal/hardware-spool --log-dir /home/rbafna/.local/state/cartpole-portal/hardware-logs
+LimitRTPRIO=10
+CPUSchedulingPolicy=rr
+CPUSchedulingPriority=10
+CPUAffinity=4
+UMask=0077
+NoNewPrivileges=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+KillMode=control-group
+TimeoutStopSec=5
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

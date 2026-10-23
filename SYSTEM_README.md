@@ -828,7 +828,7 @@ Examples and research scripts cover deterministic replay, host-controller simula
 
 ## 19. Submission portal and sandbox
 
-The portal is loopback-first, not a deployed public site. It accepts one immutable UTF-8 Python source file (1–65,536 bytes), assigns a SHA-addressed artifact, and stores owner-bound jobs in SQLite. The intended submitted interface is `create_policy()`, returning an object with `reset/act`. The worker pulls outbound and owns simulation or hardware. It does not give submitted code a serial device, `Rig`, credentials, operator APIs or deserializer.
+The portal API binds loopback and is exposed through authenticated Funnel HTTPS. It accepts immutable Python files (1–65,536 bytes), bounded ZIP projects and numeric actor JSON, assigns a SHA-addressed artifact, and stores owner-bound jobs in SQLite. The intended submitted interface is `create_policy()`, returning an object with `reset/act`. The worker pulls outbound and owns simulation or hardware. It does not give submitted code a serial device, `Rig`, credentials, operator APIs or deserializer.
 
 Bearer roles separate submitter, worker and operator. Tokens stay out of URLs. Source names/results are rendered as text. Remote workers require HTTPS and reject redirects. Queue transactions enforce ownership/idempotency, per-owner capacity, one active job per rig and secret worker leases. Cancellation requests a trusted stop. A crashed/expired running job blocks the rig as uncertain until the old worker is contained and an operator verifies stop; merely aging a lease does not fence a paused process that could resume.
 
@@ -954,3 +954,7 @@ These are source and local-preview capabilities until explicitly deployed to the
 Jetson. Python AUTO repeatability is still under investigation; no change in this
 portal feature set should be interpreted as a validated swing-up repair. Existing
 native AUTO and the user's working learned actor remain distinct control paths.
+
+## 27. Deployed submission execution
+
+The independent portal runtime and pull workers use a persistent Jetson SQLite queue. The UI can be hosted by the same API or the separate Vercel frontend without changing worker/storage topology. See [deployment guide](docs/PORTAL_DEPLOYMENT.md) for paths, installer flags, upload limits, isolation, physical approval and recovery. Earlier sections describing source-only/local preview capture earlier stages. Expanded submissions retain exact artifact identity, sandbox-only execution, timed leases, action bounds and automatic recording. Public simulation execution is verified for all three formats; the physical worker remains stopped while intermittent action-deadline faults are investigated.

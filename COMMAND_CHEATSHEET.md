@@ -305,7 +305,7 @@ needed. `--rt-priority 0` explicitly disables realtime.
 # Development UI: reservations enabled, no worker launched.
 uv run --locked cartpole-portal-dev --root runs/portal-dev --port 8765
 ./scripts/vision-tunnel.sh rbafna@jetson 3090
-# Choose Live view in the portal, then Start preview.
+# Open Live view after connecting; preview starts automatically.
 
 # Configured service (credentials file supplied separately, not committed):
 uv run --locked python examples/portal.py --root runs/portal \
@@ -346,3 +346,14 @@ uv run --locked python -m cartpole_sdk.control.feedback_diagnostics simulate \
 Use `simulate --help` for observer, plant and launch parameters. The diagnostic
 can compare `--controller native_reference` and `--reset-observer`. It does not
 change deployed gains or establish that Python AUTO is fixed.
+
+## Hosted submission workers
+
+See [deployment guide](docs/PORTAL_DEPLOYMENT.md) for all installer flags, upload formats, tokens and Vercel setup. Hardware timing acceptance is still pending; its worker is stopped. The hardware commands below apply only after commissioning and installing the selected user service. Never run it concurrently with the system worker or console. On Jetson:
+
+```bash
+systemctl --user status cartpole-portal.service cartpole-worker-simulation.service cartpole-worker-hardware.service
+systemctl --user stop cartpole-worker-hardware.service  # reserve serial for console development
+systemctl --user start cartpole-worker-hardware.service # after console exit and rig preparation
+tailscale funnel status
+```

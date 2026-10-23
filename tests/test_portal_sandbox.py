@@ -41,6 +41,16 @@ class IPCTests(unittest.TestCase):
             channel.reset(Session('s','clock'))
             with self.assertRaises(SandboxError):channel.act(OBS)
 
+    def test_reply_parsing_cannot_extend_total_action_deadline(self):
+        from unittest.mock import patch
+        from cartpole_sdk.portal import sandbox
+        original=sandbox.strict_json_loads
+        def delayed_decode(value):
+            decoded=original(value);time.sleep(.05);return decoded
+        with self.child('print(json.dumps({"type":"action","sequence":r["sequence"],"acceleration":0}),flush=True)') as channel:
+            channel.reset(Session('s','clock'))
+            with patch.object(sandbox,'strict_json_loads',delayed_decode):
+                with self.assertRaises(SandboxError):channel.act(OBS)
     def test_timeout_and_cleanup_terminate_real_process(self):
         with self.child('time.sleep(10)') as channel:
             channel.reset(Session('s','clock'));process=channel.process
@@ -86,6 +96,9 @@ class LinuxSandboxTests(unittest.TestCase):
             with Sandbox(source,action_timeout=.25,sdk_root=sdk_root).launch() as channel:
                 channel.reset(Session('s','clock'));return channel.act(OBS)
     def test_valid_policy_runs_inside_actual_sandbox(self):self.assertEqual(self.run_policy('return Acceleration(0.1)'),.1)
+    def test_positioned_read_of_readonly_sdk_mount_is_allowed(self):
+        body='import os\nfd=os.open("/sdk/cartpole_sdk/portal/harness.py",os.O_RDONLY)\ntry:\n prefix=os.pread(fd,8,0)\nfinally:\n os.close(fd)\nreturn Acceleration(0.1 if prefix==b\'"""Bwrap\' else 0)'
+        self.assertEqual(self.run_policy(body),.1)
     def test_file_hosthome_serial_network_fork_exec_are_denied(self):
         attempts=[('open("/tmp/write","w")',(13,30)),('open("/dev/shm/write","w")',(2,)),('open("/home/private-secret","rb")',(2,)),('open("/usr/host-write","w")',(13,30)),('open("/dev/ttyACM0","rb")',(2,)),('socket.socket()',(1,)),('__import__("os").fork()',(1,)),('__import__("os").execl("/usr/bin/true","true")',(1,))]
         for attempt,expected_errno in attempts:

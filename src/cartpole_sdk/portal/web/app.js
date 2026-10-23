@@ -1,14 +1,19 @@
 'use strict';
 const $ = id => document.getElementById(id);
+const deployment = window.CARTPOLE_CONFIG || {};
+const apiOrigin = deployment.apiOrigin || '';
+const apiURL = path => apiOrigin + path;
 let token = sessionStorage.getItem('cartpole-token') || '';
 let localCredentials = null, approvalJob = null, identity = null;
 let jobs = [], reservations = [], config = {}, activeView = 'experiments';
 let videoPlayer = null;
+let cameraBlob = null, cameraAbort = null;
 let cameraRunning = false, cameraTimer = null, cameraWatchdog = null, cameraGeneration = 0;
 $('token').value = token;
 
 async function request(path, body) {
-  const response = await fetch(path, {
+  const response = await fetch(apiURL(path), {
+    redirect: 'error',
     method: body === undefined ? 'GET' : 'POST',
     headers: { Authorization: 'Bearer ' + token, ...(body === undefined ? {} : {'Content-Type': 'application/json'}) },
     body: body === undefined ? undefined : JSON.stringify(body),
@@ -38,6 +43,7 @@ function showView(view) {
     if (selected) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current');
   }
   if (view !== 'live') pauseCamera();
+  else autoStartCamera();
   if (view === 'reservations' && token) refreshReservations();
 }
 for (const button of document.querySelectorAll('[data-view]')) button.onclick = () => { location.hash = button.dataset.view; };
@@ -45,6 +51,37 @@ window.addEventListener('hashchange', () => showView(location.hash.slice(1)));
 showView(location.hash.slice(1));
 $('access-toggle').onclick = () => { $('access-panel').open = true; $('access-panel').scrollIntoView({block: 'center'}); $('token').focus(); };
 
+function artifactFormat(filename) {
+  const extension = filename.toLowerCase().split('.').pop();
+  return ({py: 'Python controller', zip: 'Python project', json: 'Trained actor'})[extension] || null;
+}
+async function submissionArtifact(file) {
+  if (!file || !artifactFormat(file.name)) throw new Error('Choose a Python file, ZIP project, or exported actor JSON.');
+  const python = file.name.toLowerCase().endsWith('.py');
+  const actor = file.name.toLowerCase().endsWith('.json');
+  const limit = python ? 65536 : actor ? 1000000 : 8 * 1024 * 1024;
+  if (file.size < 1 || file.size > limit) throw new Error(python ? 'Python files must be nonempty and at most 64 KiB.' : actor ? 'Actor JSON must be nonempty and at most 1,000,000 bytes (1 MB).' : 'ZIP projects must be nonempty and at most 8 MiB.');
+  if (python) return {source: await file.text()};
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  let binary = '';
+  for (let offset = 0; offset < bytes.length; offset += 16384) binary += String.fromCharCode(...bytes.subarray(offset, offset + 16384));
+  return {artifact_base64: btoa(binary)};
+}
+function artifactInspection(job, artifact, bytes) {
+  const heading = `${artifactFormat(job.filename) || 'Artifact'}: ${job.filename}\nSHA-256: ${artifact.sha256}\nSize: ${bytes.length.toLocaleString()} bytes`;
+  if (job.filename.toLowerCase().endsWith('.py')) return heading + '\n\n' + new TextDecoder('utf-8', {fatal:true}).decode(bytes);
+  const metadata = artifact.inspection || artifact.metadata;
+  return heading + (metadata ? '\n\n' + JSON.stringify(metadata, null, 2) : '\n\nDownload the submitted artifact to inspect its contents.');
+}
+function offerArtifactDownload(job, bytes) {
+  const button = $('artifact-download'); button.hidden = false;
+  button.onclick = () => {
+    const url = URL.createObjectURL(new Blob([bytes], {type:'application/octet-stream'}));
+    const link = document.createElement('a'); link.href = url; link.download = job.filename;
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  };
+}
 function runRow(job) {
   const row = document.createElement('article'); row.className = 'run';
   const title = document.createElement('div'); title.className = 'run-title';
@@ -80,7 +117,7 @@ function renderJobs() {
   $('data-empty').hidden = jobs.length > 0;
   for (const job of jobs) {
     const row = runRow(job), actions = document.createElement('div'); actions.className = 'run-actions';
-    actions.append(action('View details', () => { $('result-body').textContent = JSON.stringify(job, null, 2); $('result').open = true; $('result').scrollIntoView({block: 'nearest'}); }));
+    actions.append(action('View details', () => { $('artifact-download').hidden = true; $('artifact-download').onclick = null; $('result-body').textContent = JSON.stringify(job, null, 2); $('result').open = true; $('result').scrollIntoView({block: 'nearest'}); }));
     if (hasRecording(job)) actions.append(downloadButton(job));
     if (identity?.role === 'submit' && ['awaiting_approval', 'pending', 'claimed', 'running'].includes(job.status)) {
       const cancel = action(job.cancel_requested ? 'Stop requested' : 'Cancel run', async () => {
@@ -90,12 +127,13 @@ function renderJobs() {
       }); cancel.disabled = job.cancel_requested; actions.append(cancel);
     }
     if (identity?.role === 'operator' && job.status === 'awaiting_approval') {
-      actions.append(action('Inspect source', async () => {
+      actions.append(action('Inspect artifact', async () => {
         try {
           const artifact = await api('/api/jobs/' + job.id + '/artifact');
           if (artifact.sha256 !== job.artifact) throw new Error('Artifact identity changed');
-          const bytes = Uint8Array.from(atob(artifact.source_base64), c => c.charCodeAt(0));
-          $('result-body').textContent = 'SHA-256: ' + artifact.sha256 + '\n\n' + new TextDecoder('utf-8', {fatal: true}).decode(bytes);
+          const bytes = Uint8Array.from(atob(artifact.artifact_base64 || artifact.source_base64), c => c.charCodeAt(0));
+          $('result-body').textContent = artifactInspection(job, artifact, bytes);
+          offerArtifactDownload(job, bytes);
           $('result').open = true; $('result').scrollIntoView({block: 'nearest'});
         } catch (error) { message(error.message); }
       }), action('Approve physical run', () => openApproval(job), false));
@@ -119,8 +157,10 @@ async function refresh() {
     renderJobs(); message('');
     try {
       config = await api('/api/config');
-      $('camera-source').textContent = config.camera_url || 'No camera source configured.';
-      $('camera-start').disabled = !config.camera_url;
+      $('camera-source').textContent = config.camera_available === false ? 'No camera source configured.' : (apiOrigin || location.origin) + ' · authenticated camera';
+      $('camera-start').disabled = config.camera_available === false || !config.camera_url;
+      autoStartCamera();
+      await refreshCameraMode();
       await refreshReservations();
     } catch (error) {
       config = {}; $('camera-source').textContent = 'Camera configuration is unavailable. Restart the updated portal server.';
@@ -136,21 +176,26 @@ $('forget').onclick = () => {
   $('credential-file').value = ''; $('dev-role').disabled = true; token = ''; $('token').value = '';
   sessionStorage.removeItem('cartpole-token'); renderJobs(); $('reservations').replaceChildren();
   $('connection').textContent = 'Not connected'; document.body.classList.remove('connected');
+  $('artifact-download').hidden = true; $('artifact-download').onclick = null;
   $('result-body').textContent = 'Select a run to inspect its result.'; $('result').open = false;
   $('reservation-form').hidden = true; $('reservation-status').textContent = 'Connect to check reservation availability.';
   $('reservation-assignment').hidden = true; $('camera-source').textContent = 'Connect to load the camera configuration.';
-  $('camera-start').disabled = true; $('submission').hidden = false; $('operator-upload-note').hidden = true;
+  $('camera-start').disabled = true; $('camera-mode').disabled = true; $('submission').hidden = false; $('operator-upload-note').hidden = true;
   message(''); $('access-panel').open = true;
 };
 $('refresh').onclick = refresh; $('refresh-data').onclick = refresh;
-$('file').onchange = () => { $('file-label').textContent = $('file').files[0]?.name || 'Choose a Python file'; };
+$('file').onchange = () => {
+  const file = $('file').files[0];
+  $('file-label').textContent = file?.name || 'Choose a controller or policy';
+  $('file-kind').textContent = file ? artifactFormat(file.name) || 'Unsupported file' : '.py / .zip / .json';
+};
 $('source').onchange = updateReservationAssignment;
 $('submission').onsubmit = async event => {
   event.preventDefault(); const file = $('file').files[0];
-  if (!file || file.size > 65536 || !file.name.endsWith('.py')) { message('Choose one Python file up to 64 KiB.'); return; }
   $('upload').disabled = true;
   try {
-    const body = {source: await file.text(), filename: file.name, sensor_source: $('source').value, duration: Number($('duration').value), idempotency_key: crypto.randomUUID()};
+    const artifact = await submissionArtifact(file);
+    const body = {...artifact, filename: file.name, sensor_source: $('source').value, duration: Number($('duration').value), idempotency_key: crypto.randomUUID()};
     if (body.sensor_source !== 'simulation' && $('run-reservation').value) body.reservation_id = $('run-reservation').value;
     await api('/api/jobs', body); await refresh(); message('Experiment queued.');
   } catch (error) { message(error.message); }
@@ -185,17 +230,21 @@ $('credential-file').onchange = async () => {
 };
 
 function pauseCamera() {
-  videoPlayer?.stop(); $('camera-video').hidden = true;
+  videoPlayer?.stop(); cameraAbort?.abort(); cameraAbort = null;
+  if (cameraBlob) URL.revokeObjectURL(cameraBlob); cameraBlob = null;
+  $('camera-video').hidden = true;
   cameraRunning = false; cameraGeneration++; clearTimeout(cameraTimer); clearTimeout(cameraWatchdog);
   $('camera-preview').onload = null; $('camera-preview').onerror = null;
   $('camera-preview').removeAttribute('src'); $('camera-preview').hidden = true;
   $('camera-placeholder').hidden = false; $('camera-status').textContent = 'Camera paused';
 }
-function cameraFrame(generation) {
+async function cameraFrame(generation) {
   if (!cameraRunning || generation !== cameraGeneration || activeView !== 'live' || document.hidden) return;
   const image = $('camera-preview');
+  let frameFailed = false;
   const failed = () => {
-    if (generation !== cameraGeneration) return;
+    if (generation !== cameraGeneration || frameFailed) return;
+    frameFailed = true;
     clearTimeout(cameraWatchdog); image.hidden = true; $('camera-placeholder').hidden = false;
     $('camera-status').textContent = 'Camera unavailable';
     $('camera-error').textContent = 'Cannot reach the camera preview. Check the camera service, tunnel, and configured source.';
@@ -208,23 +257,38 @@ function cameraFrame(generation) {
     cameraTimer = setTimeout(() => cameraFrame(generation), 250);
   };
   image.onerror = failed;
-  const url = new URL(config.camera_url); url.pathname = url.pathname.replace(/\/$/, '') + '/preview.jpg'; url.search = '?t=' + Date.now(); url.hash = '';
-  cameraWatchdog = setTimeout(failed, 5000); image.src = url.href;
+  cameraAbort = new AbortController();
+  cameraWatchdog = setTimeout(() => { cameraAbort?.abort(); failed(); }, 5000);
+  try {
+    const response = await fetch(apiURL('/api/camera/preview?mode=' + encodeURIComponent($('camera-mode').value)), {
+      headers: {Authorization: 'Bearer ' + token}, cache: 'no-store',
+      redirect: 'error', signal: cameraAbort.signal,
+    });
+    if (!response.ok) throw new Error('Camera preview unavailable');
+    const blob = await response.blob();
+    if (generation !== cameraGeneration) return;
+    if (cameraBlob) URL.revokeObjectURL(cameraBlob);
+    cameraBlob = URL.createObjectURL(blob); image.src = cameraBlob;
+  } catch (error) { if (generation === cameraGeneration) failed(); }
+
 }
-$('camera-start').onclick = () => {
+function autoStartCamera() {
+  if (activeView === 'live' && !document.hidden && identity && token && config.camera_url && config.camera_available !== false && !cameraRunning) startCamera();
+}
+function startCamera() {
   pauseCamera();
   try {
-    const url = new URL(config.camera_url);
-    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('A valid camera service URL must be configured by the operator.');
+    if (!config.camera_url || config.camera_available === false) throw new Error('The operator must configure a camera source.');
     cameraRunning = true; $('camera-error').textContent = '';
     if (!videoPlayer) videoPlayer = new PortalVideo($('camera-video'), {
       status: status => { $('camera-status').textContent = status; $('camera-video').hidden = true; $('camera-placeholder').hidden = false; },
       frame: () => { $('camera-video').hidden = false; $('camera-preview').hidden = true; $('camera-placeholder').hidden = true; $('camera-status').textContent = 'Live video'; $('camera-error').textContent = ''; },
-      fallback: reason => { if (!cameraRunning) return; $('camera-video').hidden = true; $('camera-error').textContent = reason; if (location.protocol === 'https:' && new URL(config.camera_url).protocol !== 'https:') { $('camera-error').textContent += ' JPEG fallback requires an HTTPS camera source.'; return; } cameraFrame(cameraGeneration); },
+      fallback: reason => { if (!cameraRunning) return; $('camera-video').hidden = true; $('camera-error').textContent = reason; cameraFrame(cameraGeneration); },
     });
-    videoPlayer.start(token);
+    videoPlayer.start(token, apiURL('/api/video'));
   } catch (error) { $('camera-error').textContent = error.message; }
 };
+$('camera-start').onclick = startCamera;
 $('camera-stop').onclick = pauseCamera;
 document.addEventListener('visibilitychange', () => { if (document.hidden) pauseCamera(); });
 
@@ -269,10 +333,30 @@ $('reservation-form').onsubmit = async event => {
   } catch (error) { $('reservation-message').textContent = error.message; }
   finally { button.disabled = false; }
 };
-fetch('/api/dev-info').then(response => response.ok ? response.json() : null).then(info => {
-  if (info?.local_preview === true && ['127.0.0.1', 'localhost'].includes(location.hostname)) {
+if (!deployment.hosted) fetch(apiURL('/api/dev-info'), {redirect: 'error'}).then(response => response.ok ? response.json() : null).then(info => {
+  if (!deployment.hosted && info?.local_preview === true && ['127.0.0.1', 'localhost'].includes(location.hostname)) {
     $('dev-preview').hidden = false; $('dev-access').hidden = false; $('environment').textContent = 'Local development';
   }
 }).catch(() => {});
 $('camera-start').disabled = true;
 if (token) refresh();
+
+async function refreshCameraMode() {
+  const select = $('camera-mode'); select.disabled = true;
+  try {
+    const state = await api('/api/camera');
+    for (const option of select.options) option.disabled = !state.modes.includes(option.value);
+    select.value = state.mode; select.disabled = false;
+    $('camera-mode-note').textContent = 'Presentation is shared with other viewers. This changes the video view only.';
+  } catch (error) {
+    $('camera-mode-note').textContent = 'Camera presentation controls are unavailable: ' + error.message;
+  }
+}
+$('camera-mode').onchange = async () => {
+  const select = $('camera-mode'); select.disabled = true;
+  try {
+    await api('/api/camera/mode', {mode: select.value});
+    if (cameraRunning) $('camera-start').click();
+  } catch (error) { $('camera-error').textContent = error.message; }
+  finally { await refreshCameraMode(); }
+};

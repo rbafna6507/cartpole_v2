@@ -46,3 +46,12 @@ test('late network response after stop cannot decode or request reconnect', asyn
   let cancelled = false; resolve({ok:true,body:{async cancel(){cancelled=true;},getReader(){throw Error('stale reader must not be used');}}});
   await connected; assert.equal(cancelled,true); assert.equal(h.decoded.length,0); assert.equal(h.fallbacks.length,0); assert.equal(h.timers.length,0);
 });
+test('hosted video uses configured endpoint with authorization and disallows redirects', async () => {
+  let call;
+  const h = setup(async (url, options) => { call = {url, options}; return response([]); });
+  h.player.token = 'test-token'; h.player.url = 'https://rig.example.test/api/video';
+  await h.player.connect(h.player.generation);
+  assert.equal(call.url, 'https://rig.example.test/api/video');
+  assert.equal(call.options.headers.Authorization, 'Bearer test-token');
+  assert.equal(call.options.redirect, 'error');
+});

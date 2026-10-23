@@ -123,6 +123,10 @@ class PolicyChannel:
         self._sequence+=1;began=time.monotonic()
         self._send({'type':'act','sequence':self._sequence,'observation':asdict(observation)},self.action_timeout)
         reply=self._receive(max(.000001,self.action_timeout-(time.monotonic()-began)))
+        # A queued reply can arrive before the deadline while scheduling or JSON
+        # decoding resumes after it. Never accept that late action.
+        if time.monotonic()-began>self.action_timeout:
+            self._fail('policy total action deadline exceeded');raise self._error
         if set(reply)!={'type','sequence','acceleration'} or reply['type']!='action' or type(reply['sequence']) is not int or reply['sequence']!=self._sequence:
             self._fail('invalid policy action envelope');raise self._error
         value=reply['acceleration']
@@ -140,9 +144,13 @@ class PolicyChannel:
 
 class Sandbox:
     """Linux only. Missing namespaces/seccomp/runtime never falls back to host Python."""
-    def __init__(self,source,*,sdk_root=None,usr_root='/usr',wall_seconds=60,action_timeout=.01,memory_bytes=512*1024*1024,python_path='/usr/bin/python3',numpy_root=None,max_acceleration=.25):
+    def __init__(self,source,*,sdk_root=None,usr_root='/usr',wall_seconds=60,action_timeout=.01,memory_bytes=512*1024*1024,python_path='/usr/bin/python3',numpy_root=None,max_acceleration=.25,artifact_kind='python',sensor_source='simulation',cpu_affinity=None):
         self.max_acceleration=validate_acceleration_ceiling(max_acceleration)
         self.source=Path(source)
+        self.artifact_kind=artifact_kind;self.sensor_source=sensor_source
+        if cpu_affinity is not None and (type(cpu_affinity) is not int or not 0<=cpu_affinity<(os.cpu_count() or 1)):
+            raise SandboxError('sandbox CPU must be an available nonnegative processor index')
+        self.cpu_affinity=cpu_affinity
         self.sdk_root=Path(sdk_root) if sdk_root else Path(__file__).resolve().parents[2]
         self.usr_root=Path(usr_root);self.wall_seconds=wall_seconds;self.action_timeout=action_timeout
         self.memory_bytes=memory_bytes;self.python_path=python_path;self.numpy_root=None if numpy_root is None else Path(numpy_root)
@@ -150,19 +158,34 @@ class Sandbox:
         if sys.platform!='linux' or not shutil.which('bwrap'):raise SandboxError('Linux bwrap sandbox unavailable')
         try:ctypes.CDLL('libseccomp.so.2')
         except OSError as exc:raise SandboxError('libseccomp unavailable') from exc
-        if self.source.is_symlink() or not self.source.is_file() or self.source.stat().st_size>65536:raise SandboxError('invalid policy artifact')
+        from .artifacts import MAX_EXPANDED_BYTES, MAX_ENTRIES
+        if self.artifact_kind not in ('python','python-zip','actor-json') or self.sensor_source not in ('simulation','magnetic-step'):raise SandboxError('invalid artifact runtime')
+        if self.source.is_symlink():raise SandboxError('invalid policy artifact')
+        if self.source.is_dir():
+            entries=list(self.source.rglob('*'))
+            files=[path for path in entries if path.is_file()]
+            if (len(entries)>MAX_ENTRIES*16 or len(files)>MAX_ENTRIES or
+                    any(path.is_symlink() or not (path.is_file() or path.is_dir()) for path in entries) or
+                    sum(path.stat().st_size for path in files)>MAX_EXPANDED_BYTES or
+                    not (self.source/('actor.json' if self.artifact_kind=='actor-json' else 'policy.py')).is_file()):
+                raise SandboxError('invalid prepared policy directory')
+        elif not self.source.is_file() or self.source.stat().st_size>65536 or self.artifact_kind!='python':raise SandboxError('invalid policy artifact')
         if not self.usr_root.is_dir() or not (self.sdk_root/'cartpole_sdk'/'portal'/'harness.py').is_file():raise SandboxError('readonly runtime/SDK missing')
         if not self.python_path.startswith('/usr/') or '..' in Path(self.python_path).parts or not (self.usr_root/Path(self.python_path).relative_to('/usr')).is_file():raise SandboxError('runtime Python missing')
         if type(self.wall_seconds) not in (int,float) or not math.isfinite(self.wall_seconds) or not .05<=self.wall_seconds<=120:raise SandboxError('invalid sandbox wall limit')
         if type(self.memory_bytes) is not int or not 64*1024*1024<=self.memory_bytes<=1024*1024*1024:raise SandboxError('invalid sandbox memory bound')
     def launch(self):
         self.preflight()
-        args=[shutil.which('bwrap'),'--unshare-all','--unshare-user','--unshare-pid','--unshare-net','--new-session','--die-with-parent','--cap-drop','ALL',
+        # Never inherit the trusted worker's optional realtime scheduling.
+        # chrt executes before namespaces and before any submitted code imports.
+        scheduler_reset=shutil.which('chrt')
+        if scheduler_reset is None:raise SandboxError('sandbox scheduler reset unavailable')
+        args=[scheduler_reset,'--other','0',shutil.which('bwrap'),'--unshare-all','--unshare-user','--unshare-pid','--unshare-net','--new-session','--die-with-parent','--cap-drop','ALL',
               '--ro-bind',str(self.usr_root),'/usr','--symlink','usr/lib','/lib','--symlink','usr/bin','/bin',
               '--proc','/proc','--remount-ro','/proc','--dir','/dev',
               '--ro-bind','/dev/null','/dev/null','--ro-bind','/dev/urandom','/dev/urandom',
               '--dir','/tmp','--dir','/policy',
-              '--ro-bind',str(self.source.resolve()),'/policy/source.py','--dir','/sdk',
+              '--ro-bind',str(self.source.resolve()),'/policy' if self.source.is_dir() else '/policy/policy.py','--dir','/sdk',
               '--ro-bind',str((self.sdk_root/'cartpole_sdk').resolve()),'/sdk/cartpole_sdk',
               '--clearenv','--setenv','PATH','/usr/bin:/bin','--setenv','OPENBLAS_NUM_THREADS','1',
               '--setenv','OMP_NUM_THREADS','1','--setenv','PYTHONDONTWRITEBYTECODE','1',
@@ -171,7 +194,11 @@ class Sandbox:
         if self.numpy_root is not None:
             if not (self.numpy_root/'numpy').is_dir() or not (self.numpy_root/'numpy.libs').is_dir():raise SandboxError('explicit readonly numpy runtime missing')
             args+=['--dir','/packages','--ro-bind',str(self.numpy_root/'numpy'),'/packages/numpy','--ro-bind',str(self.numpy_root/'numpy.libs'),'/packages/numpy.libs']
-        args +=['--remount-ro','/',self.python_path,'-I','-S','/sdk/cartpole_sdk/portal/harness.py','--wall',str(self.wall_seconds),'--memory',str(self.memory_bytes)]
+        args +=['--remount-ro','/',self.python_path,'-I','-S','/sdk/cartpole_sdk/portal/harness.py','--wall',str(self.wall_seconds),'--memory',str(self.memory_bytes),'--kind',self.artifact_kind,'--sensor-source',self.sensor_source]
+        if self.cpu_affinity is not None:
+            affinity_tool=shutil.which('taskset')
+            if affinity_tool is None:raise SandboxError('sandbox CPU affinity tool unavailable')
+            args=[affinity_tool,'-c',str(self.cpu_affinity)]+args
         try:process=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,close_fds=True,start_new_session=True,env={})
         except OSError as exc:raise SandboxError('sandbox launch failed') from exc
         return PolicyChannel(process,action_timeout=self.action_timeout,wall_seconds=self.wall_seconds,max_acceleration=self.max_acceleration)

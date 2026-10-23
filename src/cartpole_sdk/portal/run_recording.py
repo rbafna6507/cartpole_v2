@@ -162,7 +162,7 @@ class RunRecorder:
                 'user_stdout_stderr':'not_recorded; sandbox protocol errors are represented by outcome',
                 'calibration_and_gains':'only metadata supplied by session/backend; no separate full snapshot'},
             'software':{'sdk_version':importlib.metadata.version('cartpole-sdk'),'python_version':sys.version.split()[0],
-                'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('worker.py','run_recording.py','sandbox.py')}},
+                'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('worker.py','run_recording.py','sandbox.py','harness.py','artifacts.py','../policies/numeric_backend.py')}},
             'clock_notes':'recorded_monotonic_ns is worker-host time, including the separate sensing process on the same host. Sensing records are appended after scalar records; sort by timestamp if needed. Observation clocks and sample times retain original semantics'}
         manifest_bytes=canonical_json(manifest).encode()
         if len(manifest_bytes)>1024*1024:raise ValueError('manifest too large')

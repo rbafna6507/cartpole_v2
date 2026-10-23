@@ -1,14 +1,13 @@
 # Policy submission portal and isolated pull worker
 
-The portal accepts one immutable Python source file, queues an owner-bound run,
+The portal accepts immutable Python files, bounded ZIP projects and numeric actor JSON, queues an owner-bound run,
 and publishes its bounded result. The trusted worker pulls jobs outbound and
 alone owns simulation or a live Rig. Uploaded Python is imported only inside the
 Linux Bubblewrap child after filesystem, resource and seccomp restrictions are
 installed. There is no unsandboxed execution fallback.
 
-The implementation is loopback-first and is not a deployed public service.
-Public hosting still needs reverse-proxy TLS, account/key provisioning, operational
-monitoring, disk retention/backups, and target isolation acceptance. Physical
+The API is deployed behind authenticated HTTPS through Funnel. See
+[deployment and Vercel migration](PORTAL_DEPLOYMENT.md) for services, supported formats and operational limits. Physical
 queue runs additionally need commissioned switches and an operator-prepared
 homed, healthy, stopped rig. Simulation results never mark a policy physically
 accepted. The simulation bridge uses the separate raw-demand ExecutorSimulation
@@ -51,7 +50,7 @@ estimated cart steps** source selections, a 0.05..60s duration, file upload, a r
 ledger, cancellation requests and result inspection. It does not contain operator
 home/center/switch/fault-clear controls.
 
-A source is one UTF-8 `.py` file, 1..65536 bytes. Archive, pickle, path traversal,
+A Python source is one UTF-8 `.py` file, 1..65536 bytes. Bounded ZIP projects and numeric actor JSON follow the limits in the deployment guide. Pickle, path traversal,
 symlink artifact redirection, NUL, nonfinite JSON and unexpected fields are rejected.
 The artifact is SHA256-addressed, created with exclusive/no-follow file operations,
 read-only on disk, and verified again before execution. Owner queue capacity is
@@ -404,6 +403,4 @@ All routes below require bearer authentication; mutation Origin checks still app
 | `POST /api/jobs/{id}/recording` | Assigned worker; raw ZIP, `X-Worker-Lease`, maximum 16 MiB; bounded 30-second body read |
 | `GET /api/jobs/{id}/recording` | Owner/operator; ZIP attachment |
 
-The standalone Python HTTP server remains a development/service backend. Vercel
-identity integration, durable hosted storage, authenticated public video delivery,
-ZIP/numeric-policy submissions and synchronized recorded video remain separate work.
+The standalone API and SQLite store remain on Jetson when the static frontend moves to Vercel. Authenticated public video delivery and ZIP/numeric-policy submissions are deployed. Self-service identity integration, remote durable storage and synchronized recorded video remain separate work. Physical worker timing acceptance is still pending; see the deployment guide for current readiness.

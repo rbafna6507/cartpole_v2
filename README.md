@@ -222,4 +222,4 @@ No Jetson access, camera capture, firmware upload, or physical motion was perfor
 during Phase 0. New control and vision work uses directories outside the preserved archived
 baselines; later physical work is recorded under `evidence/phase3` and `phase4`.
 
-Controller authors: [SDK data and development guide](docs/CONTROLLER_DEVELOPER_GUIDE.md). The portal now requires operator approval for each physical job; hosted deployment and expanded uploads remain under development.
+Controller authors: [SDK data and development guide](docs/CONTROLLER_DEVELOPER_GUIDE.md). The portal now requires operator approval for each physical job; the deployed worker, expanded upload formats and Vercel migration are documented in [Portal deployment](docs/PORTAL_DEPLOYMENT.md).

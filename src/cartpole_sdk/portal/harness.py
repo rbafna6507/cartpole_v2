@@ -30,16 +30,41 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--wall',type=float,required=True)
     parser.add_argument('--memory',type=int,required=True)
+    parser.add_argument('--kind',choices=('python','python-zip','actor-json'),default='python')
+    parser.add_argument('--sensor-source',choices=('simulation','magnetic-step'),default='simulation')
     args=parser.parse_args()
+    # Realtime scheduling belongs only to the trusted broker. Verify the
+    # launcher reset before installing seccomp (which denies scheduler changes).
+    if os.sched_getscheduler(0)!=os.SCHED_OTHER:raise RuntimeError('sandbox requires ordinary scheduling')
     # Entire restriction setup must succeed before uploaded Python is loaded.
     install_limits(args.wall,args.memory)
     reset=read_message()
     if set(reset)!= {'type','session','nonce'} or reset['type']!='reset':raise ValueError('reset first')
     session=_session(reset['session'])
-    spec=importlib.util.spec_from_file_location('submitted_policy','/policy/source.py')
-    module=importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    policy=module.create_policy()
+    if args.kind=='actor-json':
+        from pathlib import Path
+        from cartpole_sdk.policies.neural import load_neural_policy, MAX_BYTES
+        from cartpole_sdk.policies.rig_observation import rig_channels, simulation_channels
+        with Path('/policy/actor.json').open('rb') as stream:raw=stream.read(MAX_BYTES+1)
+        if len(raw)>MAX_BYTES:raise ValueError('actor too large')
+        actor=strict_json_loads(raw.decode())
+        if actor.get('angle_source') not in ('raw','filtered'):raise ValueError('unsupported portal actor source')
+        channels=(simulation_channels if args.sensor_source=='simulation' else rig_channels)(angle_source=actor['angle_source'])
+        # Provenance hashes and numeric contract are checked inside isolation.
+        policy=load_neural_policy('/policy/actor.json',channels=channels)
+        if os.path.isdir('/packages/numpy'):
+            from cartpole_sdk.policies.numeric_backend import NumpyActorBackend
+            backend=NumpyActorBackend(policy.actor)
+            # Import, pack arrays, and warm contraction before the reset ACK.
+            # Only inference is delegated; all NeuralPolicy guards remain active.
+            backend.predict_encoded({'age_s':[0.]*7,'state':[0.]*7,'valid':[1.]*7})
+            policy.predict_encoded=backend.predict_encoded
+    else:
+        sys.path.append('/policy')
+        spec=importlib.util.spec_from_file_location('submitted_policy','/policy/policy.py')
+        module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        policy=module.create_policy()
     policy.reset(session)
     emit({'type':'reset_ack','nonce':reset['nonce']})
     previous=0

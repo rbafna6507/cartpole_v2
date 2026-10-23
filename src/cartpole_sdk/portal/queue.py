@@ -6,11 +6,14 @@ import os
 from pathlib import Path
 import re
 import secrets
+import shutil
+import stat
 import sqlite3
 import time
 import uuid
 from cartpole_sdk.recording import canonical_json, strict_json_loads
 from .budget import execution_wall_seconds
+from .artifacts import inspect_artifact, ArtifactError, MAX_UPLOAD_BYTES
 from .reservations import ReservationStoreMixin
 from .run_recording import RecordingStoreMixin
 
@@ -18,6 +21,11 @@ class QueueError(ValueError):
     pass
 
 _TERMINAL=('succeeded','failed','cancelled')
+MAX_OWNER_ARTIFACT_BYTES=256*1024*1024
+MAX_OWNER_JOBS=512
+MAX_STORE_ARTIFACT_BYTES=2*1024*1024*1024
+MAX_STORE_ARTIFACTS=8192
+MIN_FREE_DISK_BYTES=256*1024*1024
 
 def name(value, label='identifier'):
     if not isinstance(value,str) or not re.fullmatch(r'[A-Za-z0-9_.-]{1,80}',value):
@@ -49,8 +57,15 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         # Serialize additive migration across concurrently starting workers.
         with self._tx() as db:
             columns={row['name'] for row in db.execute('PRAGMA table_info(jobs)')}
-            for column,kind in (('approved_by','TEXT'),('approved_at','REAL'),('reservation_id','TEXT')):
+            for column,kind in (('approved_by','TEXT'),('approved_at','REAL'),('reservation_id','TEXT'),('artifact_bytes','INTEGER NOT NULL DEFAULT 0')):
                 if column not in columns:db.execute(f'ALTER TABLE jobs ADD COLUMN {column} {kind}')
+            for row in db.execute('SELECT DISTINCT artifact FROM jobs WHERE artifact_bytes=0').fetchall():
+                blob=self.blobs/(row['artifact']+'.py')
+                try:
+                    metadata=blob.lstat()
+                    if not stat.S_ISREG(metadata.st_mode):raise QueueError('unsafe existing artifact')
+                except OSError as exc:raise QueueError('existing artifact unavailable during quota migration') from exc
+                db.execute('UPDATE jobs SET artifact_bytes=? WHERE artifact=?',(metadata.st_size,row['artifact']))
             db.execute("UPDATE jobs SET status='awaiting_approval' WHERE source='magnetic-step' AND status='pending' AND approved_by IS NULL")
         os.chmod(self.database,0o600)
         self._init_reservations()
@@ -82,6 +97,17 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         directory=os.open(self.blobs,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
         fd=None
         try:
+            try:os.stat(f'{sha}.py',dir_fd=directory,follow_symlinks=False)
+            except FileNotFoundError:
+                total=count=0
+                with os.scandir(self.blobs) as entries:
+                    for entry in entries:
+                        metadata=entry.stat(follow_symlinks=False)
+                        if not stat.S_ISREG(metadata.st_mode):raise QueueError('unsafe artifact storage entry')
+                        count+=1;total+=metadata.st_size
+                        if count>=MAX_STORE_ARTIFACTS or total+len(source)>MAX_STORE_ARTIFACT_BYTES:raise QueueError('artifact storage quota exceeded')
+                if len(source)>MAX_STORE_ARTIFACT_BYTES:raise QueueError('artifact storage quota exceeded')
+                if shutil.disk_usage(self.root).free-len(source)<MIN_FREE_DISK_BYTES:raise QueueError('insufficient free disk reserve')
             try:
                 fd=os.open(f'{sha}.py',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400,dir_fd=directory)
                 with os.fdopen(fd,'wb') as stream:
@@ -90,7 +116,7 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
                 try:
                     existing=os.open(f'{sha}.py',os.O_RDONLY|os.O_NOFOLLOW,dir_fd=directory)
                     with os.fdopen(existing,'rb') as stream:
-                        if stream.read(65537)!=source:raise QueueError('artifact integrity failure')
+                        if stream.read(MAX_UPLOAD_BYTES+1)!=source:raise QueueError('artifact integrity failure')
                 except OSError as exc:raise QueueError('unsafe artifact path') from exc
             os.fsync(directory)
         except OSError as exc:raise QueueError('artifact storage failed') from exc
@@ -103,18 +129,15 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         directory=os.open(self.blobs,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
         try:
             fd=os.open(f'{sha}.py',os.O_RDONLY|os.O_NOFOLLOW,dir_fd=directory)
-            with os.fdopen(fd,'rb') as stream:source=stream.read(65537)
+            with os.fdopen(fd,'rb') as stream:source=stream.read(MAX_UPLOAD_BYTES+1)
         except OSError as exc:raise QueueError('artifact unavailable') from exc
         finally:os.close(directory)
-        if len(source)>65536 or hashlib.sha256(source).hexdigest()!=sha:raise QueueError('artifact integrity failure')
+        if len(source)>MAX_UPLOAD_BYTES or hashlib.sha256(source).hexdigest()!=sha:raise QueueError('artifact integrity failure')
         return source
     def submit(self,owner,key,source,filename,sensor_source,duration,*,now=None,reservation_id=None):
         name(owner,'owner');name(key,'idempotency key')
-        if not isinstance(filename,str) or not re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]{0,75}\.py',filename):raise QueueError('filename must be a plain .py name')
-        if type(source) is not bytes or not 1<=len(source)<=65536:raise QueueError('source must be 1..65536 bytes')
-        try:source.decode('utf-8')
-        except UnicodeDecodeError as exc:raise QueueError('source must be UTF-8') from exc
-        if b'\x00' in source:raise QueueError('source cannot contain NUL')
+        try:inspect_artifact(source,filename)
+        except ArtifactError as exc:raise QueueError(str(exc)) from exc
         if sensor_source not in ('magnetic-step','simulation'):raise QueueError('unsupported explicit source selection')
         if type(duration) not in (int,float) or not .05<=duration<=60:raise QueueError('duration must be 0.05..60 seconds')
         now=time.time() if now is None else now
@@ -125,11 +148,15 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
                 if (prior['artifact'],prior['filename'],prior['source'],prior['duration'],prior['reservation_id'])!=(sha,filename,sensor_source,duration,reservation_id):raise QueueError('idempotency key already binds a different submission')
                 return self._public(prior)
             if db.execute("SELECT count(*) FROM jobs WHERE owner=? AND status IN ('awaiting_approval','pending','claimed','running')",(owner,)).fetchone()[0]>=32:raise QueueError('owner queue limit reached')
+            if db.execute('SELECT count(*) FROM jobs WHERE owner=?',(owner,)).fetchone()[0]>=MAX_OWNER_JOBS:raise QueueError('owner lifetime job quota exceeded')
+            owned=db.execute('SELECT artifact,MAX(artifact_bytes) AS size FROM jobs WHERE owner=? GROUP BY artifact',(owner,)).fetchall()
+            if sha not in {row['artifact'] for row in owned} and sum(row['size'] for row in owned)+len(source)>MAX_OWNER_ARTIFACT_BYTES:
+                raise QueueError('owner artifact quota exceeded')
             self._validate_reservation(db,reservation_id,owner,sensor_source,now)
             self._write_blob(source)
             identifier=uuid.uuid4().hex
-            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated,reservation_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now,reservation_id))
+            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated,reservation_id,artifact_bytes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now,reservation_id,len(source)))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
     def approve(self,identifier,operator,*,artifact,sensor_source,duration):
         """Trusted operator decision bound to the exact immutable job reviewed.
@@ -192,7 +219,7 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
             row=next((candidate for candidate in candidates if self._reservation_allows(db,candidate,rig,now)),None)
             if row is None:return None
             token=secrets.token_hex(32)
-            db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+2,now+5,now,row['id']))
+            db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+2,now+35,now,row['id']))
             db.execute('UPDATE rigs SET job=? WHERE id=?',(row['id'],rig))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(row['id'],)).fetchone(),worker=True)
     def _lease(self,db,identifier,worker,token,now):

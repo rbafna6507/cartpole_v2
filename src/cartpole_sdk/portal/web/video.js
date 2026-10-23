@@ -22,8 +22,8 @@
       if (this.latest) { this.latest.close(); this.latest = null; }
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    start(token) {
-      this.stop(); this.token = token; this.frames = 0;
+    start(token, url = '/api/video') {
+      this.stop(); this.token = token; this.url = url; this.frames = 0;
       if (!('VideoDecoder' in window) || !('EncodedVideoChunk' in window)) {
         this.callbacks.fallback?.('This browser does not support H.264 WebCodecs. Showing sampled JPEG preview.'); return;
       }
@@ -59,7 +59,7 @@
           if (performance.now() - lastFrame > 7000) { failure = Error('No video frames received'); controller.abort(); }
         }, 1000);
         this.watchdog = watchdog;
-        const response = await fetch('/api/video', {headers: {Authorization: 'Bearer ' + this.token}, cache: 'no-store', signal: controller.signal});
+        const response = await fetch(this.url || '/api/video', {redirect: 'error', headers: {Authorization: 'Bearer ' + this.token}, cache: 'no-store', signal: controller.signal});
         if (generation !== this.generation || controller.signal.aborted) { await response.body?.cancel().catch(() => {}); return; }
         if (!response.ok || !response.body) throw Error('Video stream unavailable (' + response.status + ')');
         reader = response.body.getReader(); let pending = new Uint8Array(0), waitKey = true;
