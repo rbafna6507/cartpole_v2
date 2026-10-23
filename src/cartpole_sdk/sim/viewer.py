@@ -19,7 +19,7 @@ class ViewerSession:
     """Headless, fixed-cadence loop; all commands are applied on its owner thread."""
 
     def __init__(self, backend: MujocoBackend, *, start_mode: str = 'auto', seed: int = 0,
-                 state: tuple[float, float, float, float] | None = None):
+                 state: tuple[float, float, float, float] | None = None, parameters=None):
         if backend.config.physics_dt_ns * backend.config.control_steps != ReferencePolicy.period_ns:
             raise ValidationError('reference viewer requires a 1 ms control interval')
         if backend.config.max_action_ttl_ns < ReferencePolicy.period_ns:
@@ -28,7 +28,7 @@ class ViewerSession:
         self.policy = ReferencePolicy(
             Channel('pole', 'angle', 'simulation', backend.sensors.frame_id),
             Channel('cart', 'position', 'simulation', backend.sensors.frame_id),
-            start_mode=start_mode)
+            start_mode=start_mode, parameters=parameters)
         self.seed = seed
         self.initial_state = state if state is not None else (
             (0., 0., math.pi, 0.) if start_mode == 'auto' else (0., 0., .04, 0.))
