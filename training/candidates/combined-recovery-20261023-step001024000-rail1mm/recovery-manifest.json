@@ -1,0 +1,77 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "hardware_accepted": false,
+  "step": 1024000,
+  "arm": "ppo",
+  "optimizer_seed": 11,
+  "checkpoint_path": "runs/colab-filtered-joint-recovery-20261021-checkpoints/runs/combined-long/ppo-seed11/checkpoints/step-001024000.zip",
+  "checkpoint_sha256": "b4f1fc7b61e5de97ad872f97f7fe2fcd7964567cb111e9c833a807c3591a2f2d",
+  "protocol_sha256": "5a2dab893e6982a405bbfc41f6a713c4ff2fd37cda4d0e853289743ef7017ff7",
+  "original_training_protocol_sha256": "9c1d048ceb19b8e1b3f59a05c3540cf80096401be8660b556f1c981c0b593e68",
+  "source_report_sha256": "e5615f9af89dbf3f69fd3d791007e18b3cd638f45785ea9330c63eb114dcfb8b",
+  "model_weights_sha256": "880fb7541c692f31ff7c3155b582561a2e7bef4703bdb802302442efebb1115d",
+  "actor_weights_sha256": "61a3b4efd28ad45e008538f45875f6766b9c198532e5b23ee605779292de8388",
+  "actor_file_sha256": "0c4207fa9bce067b8822a1f58de0d4853a899a9924923a4d6f247338f001c11a",
+  "sdk_parity_pass": true,
+  "sdk_parity_report": "evidence/operator-release-20261023/million-policy/sdk-parity/report.json",
+  "nominal_evaluation_summaries": [
+    [
+      {
+        "scenario": "nominal",
+        "start": "hanging",
+        "episodes": 4,
+        "holds": 4,
+        "faults": 0,
+        "captures": 4,
+        "mean_capture_s": 9.6975,
+        "min_final_dwell_s": 12.079999999999787,
+        "worst_max_x_m": 0.29407553363568484,
+        "episodes_with_rail_braking": 4
+      },
+      {
+        "scenario": "nominal",
+        "start": "upright",
+        "episodes": 4,
+        "holds": 4,
+        "faults": 0,
+        "captures": 4,
+        "mean_capture_s": 1.0,
+        "min_final_dwell_s": 25.00000000000111,
+        "worst_max_x_m": 0.11744938074772561,
+        "episodes_with_rail_braking": 0
+      }
+    ],
+    [
+      {
+        "scenario": "nominal",
+        "start": "hanging",
+        "episodes": 4,
+        "holds": 4,
+        "faults": 0,
+        "captures": 4,
+        "mean_capture_s": 10.0775,
+        "min_final_dwell_s": 11.89999999999979,
+        "worst_max_x_m": 0.29407740539612415,
+        "episodes_with_rail_braking": 4
+      },
+      {
+        "scenario": "nominal",
+        "start": "upright",
+        "episodes": 4,
+        "holds": 4,
+        "faults": 0,
+        "captures": 4,
+        "mean_capture_s": 1.0,
+        "min_final_dwell_s": 25.00000000000111,
+        "worst_max_x_m": 0.11744944347361037,
+        "episodes_with_rail_braking": 0
+      }
+    ]
+  ],
+  "local_console_upright_and_hanging_load_pass": true,
+  "limitations": [
+    "Nominal development seeds only; not hardware-tested.",
+    "The user-tested 102400-step policy remains the working alias."
+  ],
+  "export_protocol_path": "evidence/operator-release-20261023/million-policy/export-protocol.json"
+}

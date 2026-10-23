@@ -1,6 +1,12 @@
 # Cartpole v2
 
-Latest live measurements, model limitations, training results and bounded balance commands: [2026-10-20 checkpoint](docs/checkpoint-20261020.md).
+Start here: [complete system README](SYSTEM_README.md), [command cheat sheet](COMMAND_CHEATSHEET.md), [all CLI arguments](COMMAND_REFERENCE.md), [source/evidence index](SYSTEM_REFERENCE.md), and [preservation audit](PRESERVATION_AUDIT_20261023.md).
+
+October 23 operator release: on the Jetson, `cd ~/cartpole-v2-live/active && uv run cartpole`, or use `cartpole-console` from PATH. In the console, load `policies/working.json` (user-tested 102,400 steps) or `policies/1m.json` (1,024,000-step candidate), then use `policy check swingup` and explicit `policy swingup 25` from a settled, homed hanging start. Deployment itself performs no motion.
+
+Locally, `uv run --locked --extra sim cartpole-view-policy` opens the learned Gym viewer; add `--controller reference` for the saved traditional gains on the fitted plant, or `--actor policies/1m.json` for the new candidate. See the cheat sheet for all training, evaluation, console and deployment options.
+
+The sections below retain earlier subsystem introductions. Dated historical measurements: [2026-10-20 checkpoint](docs/checkpoint-20261020.md).
 
 The SDK now connects to a new Teensy safety executor, runs the preserved controller
 on hardware, and supports Python policies, MuJoCo simulation, policy training,

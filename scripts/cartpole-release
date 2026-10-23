@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+"""Dependency-free release builder/installer for this checkout."""
+from pathlib import Path
+import runpy
+runpy.run_path(str(Path(__file__).resolve().parents[1]/'src/cartpole_sdk/release.py'),run_name='__main__')

@@ -1,0 +1,24 @@
+{
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider",
+    "passed": 2090,
+    "skipped": 8,
+    "subtests_passed": 460,
+    "seconds": 178.87
+  },
+  "gui": {
+    "platform": "macOS",
+    "learned_render_reset_pause": true,
+    "reference_render_reset_pause": true
+  },
+  "training_smoke": {
+    "ppo_steps": 128,
+    "retained_steps": 128,
+    "checkpoint_roundtrip": true,
+    "sdk_emission_parity": true
+  },
+  "protocol_bindings_verified": 146,
+  "policy_alias_bytes_verified": true,
+  "hardware_access": false,
+  "camera_service_changed": false
+}
