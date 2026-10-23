@@ -335,8 +335,16 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
                         if not run_lease.check():status='cancelled';break
                         action_began=time.monotonic()
                         recorder.emit('policy_call',observation_sequence=current.sequence)
-                        value=child.act(current)
-                        latencies.append(time.monotonic()-action_began)
+                        try:
+                            value=child.act(current)
+                        except BaseException:
+                            elapsed=time.monotonic()-action_began
+                            latencies.append(elapsed)
+                            recorder.emit('policy_failure',observation_sequence=current.sequence,
+                                          inference_s=elapsed)
+                            raise
+                        else:
+                            latencies.append(time.monotonic()-action_began)
                         if value is not None:
                             if type(value) not in (int,float) or abs(value)>approved_ceiling or not math.isfinite(value):raise SandboxError('policy acceleration exceeds trusted worker ceiling')
                             peak_demand=max(peak_demand,abs(value))

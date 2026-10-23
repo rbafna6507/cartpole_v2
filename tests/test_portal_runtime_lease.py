@@ -113,3 +113,26 @@ def test_fault_reported_after_stop_cannot_be_success(tmp_path):
     assert result['status']=='failed'
     assert result['result']['error']=='hardware_executor_fault'
     assert result['result']['board_state']['fault']==3
+
+def test_failed_policy_attempt_timing_is_preserved_in_bundle(tmp_path):
+    import io,json,zipfile
+    from cartpole_sdk.portal.sandbox import SandboxError
+    queue=Store(tmp_path)
+    job=queue.submit('alice','timed-failure',b'x','policy.py','simulation',.1)
+    class Failing(TrustedPipeFixture):
+        def launch(self):
+            channel=super().launch()
+            def act(observation):
+                time.sleep(.015)
+                raise SandboxError('private untrusted detail')
+            channel.act=act
+            return channel
+    result=run_once(queue,'w','sim',sandbox_factory=Failing)
+    assert result['status']=='failed' and result['result']['stopped']
+    assert result['result']['actions']==0
+    assert result['result']['max_inference_s']>=.015
+    with zipfile.ZipFile(io.BytesIO(queue.recording(job['id'],'alice'))) as archive:
+        records=[json.loads(line) for line in archive.read('telemetry.jsonl').splitlines()]
+    failures=[row for row in records if row['type']=='policy_failure']
+    assert len(failures)==1 and failures[0]['inference_s']>=.015
+    assert 'private untrusted detail' not in json.dumps(failures)
