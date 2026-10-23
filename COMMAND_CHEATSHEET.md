@@ -175,12 +175,12 @@ Use the dated protocol for this source release; the historical protocol delibera
 ```bash
 # Short wiring/smoke run:
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py train \
-  --protocol training/protocols/combined-developer-streams-20261023.json \
+  --protocol training/protocols/combined-run-workspace-20261023.json \
   --arm ppo --seed 11 --budget pilot --smoke --output runs/combined-smoke-new
 
 # Full projected-PPO run:
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py train \
-  --protocol training/protocols/combined-developer-streams-20261023.json \
+  --protocol training/protocols/combined-run-workspace-20261023.json \
   --arm ppo --seed 11 --budget long --output runs/combined-ppo-seed11-new
 
 # Actor-retention variant: use --arm retained and a distinct output directory.
@@ -199,7 +199,7 @@ Evaluate a checkpoint from a completed run made with the same protocol:
 
 ```bash
 uv run --locked --extra rl python evidence/policy-recovery-20261021/combined-next/run.py evaluate \
-  --protocol training/protocols/combined-developer-streams-20261023.json \
+  --protocol training/protocols/combined-run-workspace-20261023.json \
   --run runs/combined-ppo-seed11-new --step 1024000 \
   --output runs/combined-ppo-seed11-eval --numeric
 ```
@@ -298,3 +298,51 @@ allowance. `sudo prlimit --pid $$ --rtprio=10:10` sets the current shell's soft 
 hard realtime-priority allowance, inherited by children. It does not itself
 change scheduling; `chrt --rr 10` does that. No global login/root policy change is
 needed. `--rt-priority 0` explicitly disables realtime.
+
+## Portal recordings, live view and reserved sessions
+
+```bash
+# Development UI: reservations enabled, no worker launched.
+uv run --locked cartpole-portal-dev --root runs/portal-dev --port 8765
+./scripts/vision-tunnel.sh rbafna@jetson 3090
+# Choose Live view in the portal, then Start preview.
+
+# Configured service (credentials file supplied separately, not committed):
+uv run --locked python examples/portal.py --root runs/portal \
+  --credentials /path/to/private-credentials.json --port 8765 \
+  --enable-reservations --rig-id cartpole \
+  --camera-url http://127.0.0.1:3090
+
+# Linux isolated simulation worker; records every attempted run automatically:
+uv run --locked --extra sim python examples/portal_worker.py \
+  --local-root runs/portal --worker simulation-worker --rig-id simulation-1 \
+  --backend simulation --recording-root runs/portal-recordings --once
+```
+
+Reservations are optional and do not bypass approval or hardware run limits. When
+using a local physical worker with reservations, add `--enable-reservations` and
+match the server's `--rig-id`. Do not start it beside a console owning the serial
+port. Existing hardware preparation and worker prerequisites remain in
+[docs/portal.md](docs/portal.md).
+
+The **Run data** tab downloads owner-scoped ZIP bundles. Optional worker
+`--sensing-url http://127.0.0.1:3090` adds independent scalar developer-stream
+recording after deploying the new stream service. It does not record video.
+`--recording-root` defaults to the local store's `recording-spool`, or
+`runs/portal-recordings` for remote workers. Keep that spool to recover files after
+an upload failure. Full arguments are in the command reference.
+
+## Python AUTO offline diagnosis
+
+```bash
+# Exact replay of a bounded existing console-log window, no rig connection:
+uv run --locked python -m cartpole_sdk.control.feedback_diagnostics replay bounded-window.jsonl
+# Declared surrogate comparison, not hardware acceptance:
+uv run --locked python -m cartpole_sdk.control.feedback_diagnostics simulate \
+  --parameters parameters.json --controller python --rate-hz 250 \
+  --duration-s 8 --theta 3.046486
+```
+
+Use `simulate --help` for observer, plant and launch parameters. The diagnostic
+can compare `--controller native_reference` and `--reset-observer`. It does not
+change deployed gains or establish that Python AUTO is fixed.

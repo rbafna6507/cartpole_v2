@@ -62,5 +62,5 @@ class HTTPTests(unittest.TestCase):
 
     def test_ui_is_public_but_does_not_embed_credentials(self):
         with urllib.request.urlopen(self.origin+'/',timeout=2) as response:
-            html=response.read().decode();self.assertIn('Upload policy',html);self.assertNotIn('alice-secret-long',html)
+            html=response.read().decode();self.assertIn('New experiment',html);self.assertNotIn('alice-secret-long',html)
             self.assertIn("default-src 'self'",response.headers['Content-Security-Policy'])

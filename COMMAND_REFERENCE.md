@@ -2610,3 +2610,125 @@ options:
   --legacy-sensing      export unchanged v1 vision+encoder envelopes from an
                         existing service; SDK shadow is not included
 ```
+
+## Portal workspace follow-up arguments
+
+Captured from current source; these supersede earlier portal/worker help blocks.
+
+### Portal API
+
+```text
+usage: portal.py [-h] --root ROOT --credentials CREDENTIALS [--host HOST]
+                 [--port PORT] [--origin ORIGIN] [--camera-url CAMERA_URL]
+                 [--enable-reservations] [--rig-id RIG_ID]
+
+Bounded loopback-first HTTP API; browser credentials never appear in URLs.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --credentials CREDENTIALS
+  --host HOST
+  --port PORT
+  --origin ORIGIN
+  --camera-url CAMERA_URL
+                        read-only camera origin for browser preview
+  --enable-reservations
+  --rig-id RIG_ID
+```
+
+### Portal worker
+
+```text
+usage: portal_worker.py [-h] (--local-root LOCAL_ROOT | --portal PORTAL)
+                        [--token-file TOKEN_FILE] [--worker WORKER] --rig-id
+                        RIG_ID [--backend {simulation,hardware}] [--port PORT]
+                        [--rate {100,250,500,1000}] [--log-dir LOG_DIR]
+                        [--once] [--spool-root SPOOL_ROOT]
+                        [--enable-reservations] [--sensing-url SENSING_URL]
+                        [--recording-root RECORDING_ROOT]
+                        [--max-acceleration MAX_ACCELERATION]
+
+Trusted outbound pull worker. Uploaded modules are never imported here.
+
+options:
+  -h, --help            show this help message and exit
+  --local-root LOCAL_ROOT
+  --portal PORTAL
+  --token-file TOKEN_FILE
+  --worker WORKER
+  --rig-id RIG_ID
+  --backend {simulation,hardware}
+  --port PORT
+  --rate {100,250,500,1000}
+  --log-dir LOG_DIR
+  --once
+  --spool-root SPOOL_ROOT
+  --enable-reservations
+                        enable reservation gating for a local queue
+  --sensing-url SENSING_URL
+                        optional trusted developer-stream service origin to
+                        record independently
+  --recording-root RECORDING_ROOT
+                        persistent run spool; defaults local queue recording-
+                        spool or runs/portal-recordings
+  --max-acceleration MAX_ACCELERATION
+                        trusted ceiling (0,25] m/s²; defaults simulation25,
+                        hardware0.25
+```
+
+### Local preview
+
+```text
+usage: dev.py [-h] [--root ROOT] [--port PORT]
+
+Persistent, loopback-only source-policy preview. Never starts a worker.
+
+options:
+  -h, --help   show this help message and exit
+  --root ROOT
+  --port PORT
+```
+
+### AUTO diagnostic replay
+
+```text
+usage: feedback_diagnostics.py replay [-h] [--tolerance TOLERANCE] jsonl
+
+positional arguments:
+  jsonl
+
+options:
+  -h, --help            show this help message and exit
+  --tolerance TOLERANCE
+```
+
+### AUTO diagnostic surrogate
+
+```text
+usage: feedback_diagnostics.py simulate [-h] --parameters PARAMETERS
+                                        [--controller {python,native_reference}]
+                                        [--rate-hz {100,250}]
+                                        [--duration-s DURATION_S]
+                                        [--theta THETA] [--omega OMEGA]
+                                        [--x X]
+                                        [--angular-damping-per-s ANGULAR_DAMPING_PER_S]
+                                        [--observer-angle OBSERVER_ANGLE]
+                                        [--observer-rate OBSERVER_RATE]
+                                        [--reset-observer]
+
+options:
+  -h, --help            show this help message and exit
+  --parameters PARAMETERS
+                        JSON object of ControllerParameters values
+  --controller {python,native_reference}
+  --rate-hz {100,250}
+  --duration-s DURATION_S
+  --theta THETA
+  --omega OMEGA
+  --x X
+  --angular-damping-per-s ANGULAR_DAMPING_PER_S
+  --observer-angle OBSERVER_ANGLE
+  --observer-rate OBSERVER_RATE
+  --reset-observer
+```

@@ -938,3 +938,19 @@ The public submission portal remains the next design task. Existing queue/isolat
 The source now includes a selectable read-only stream catalog and bounded NDJSON export, documented in [DEVELOPER_STREAMS.md](docs/DEVELOPER_STREAMS.md). The collector supports the existing live service explicitly through `--legacy-sensing`; deploying the new camera endpoints remains separate. No firmware, camera service, gains or calibration were changed. The local portal preview persists its queue and private credentials and provides source review plus operator approval; it does not start a worker. The worker exposes all available control-observation channels without changing source provenance or freshness guards.
 
 Python AUTO remains an experimental sampled controller; no gains, calibration, firmware or safety gates were changed by this follow-up. Run-specific diagnostics are retained privately outside Git.
+
+## 26. Experiment workspace and automatic recording follow-up
+
+The portal now separates Experiments, Live view, Run data and Reservations. Its
+trusted worker records attempted executions outside the sandbox and provides
+owner-scoped downloadable scalar telemetry ZIPs, including failed-run outcome and
+coverage metadata. Optional 30-minute browser reservations permit multiple bounded
+runs within an exclusive session, retaining approval, watchdog and stop semantics.
+The live camera tab displays configured read-only H.264 video with a JPEG fallback; it does not expose
+camera operator controls. See [portal details](docs/portal.md#experiment-workspace-recordings-and-reservations-october-23-follow-up)
+for exact limits, API authorization, deployment flags and remaining hosted/video work.
+
+These are source and local-preview capabilities until explicitly deployed to the
+Jetson. Python AUTO repeatability is still under investigation; no change in this
+portal feature set should be interpreted as a validated swing-up repair. Existing
+native AUTO and the user's working learned actor remain distinct control paths.

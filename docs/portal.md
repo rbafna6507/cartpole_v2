@@ -302,3 +302,108 @@ and filtered angle plus governor feedback; simulation retains simulation
 provenance and its available governor feedback. This does not yet make the generic
 simulator the fitted learned-policy Gym environment, or authorize vision/fused
 physical control.
+
+## Experiment workspace, recordings and reservations (October 23 follow-up)
+
+The browser has four views: **Experiments**, **Live view**, **Run data**, and
+**Reservations**. The local preview enables reservations and configures the camera
+origin at `http://127.0.0.1:3090`. It still starts no worker and cannot execute a
+submission by itself. Only `.py` submissions are currently accepted; ZIP packages
+and numeric policy upload are not implemented.
+
+### Automatic run bundles
+
+See [the recording schema and recovery guide](RUN_RECORDING.md) for detailed record types and spool handling.
+
+Each claimed run attempts to create a trusted recorder before preparing the
+backend. Recorder initialization failure prevents execution. The sandbox never
+receives recorder file handles. A bounded queue sends records to a separate disk
+writer; overflow or byte-budget exhaustion increments reported drop counts rather
+than blocking control. This records control-cadence observations, requested actions,
+policy-call timing, session metadata, available initial/final diagnostics, software
+source identities and outcome. A requested action is not proof of motor application:
+use the available governor/board feedback with its own timestamps.
+
+The worker stops the backend and finishes the job before packaging or uploading.
+A persistent local spool survives upload failure. Downloadable ZIPs contain only
+`manifest.json` and `telemetry.jsonl`; the server never extracts uploads. Telemetry
+is bounded to 12 MiB, ZIPs to 16 MiB, and the manifest describes limits, missing
+sources, drops and errors. Owner and operator credentials can download a run;
+other submitters and workers cannot download its recording through this API.
+Worker upload is bound to the exact retained job/worker/lease and policy hash and
+cannot approve, restart, or extend execution. Identical upload retries are allowed;
+a different replacement is rejected.
+
+A failed run can still have a useful recording. A process kill may leave only the
+local partial spool; automatic crash recovery and remote re-upload scheduling are
+not implemented. A queued job cancelled before it is claimed has no sensor run to
+record. Video is not saved in these bundles yet. Native raw encoder counts, every
+internal 1 kHz firmware sample, and serial bytes are not invented when unavailable.
+
+Optional `--sensing-url` records original developer-stream envelopes on a separate
+background connection. It requires the new `/api/streams/ndjson` service version;
+the currently running Jetson service must be upgraded before using this option.
+It shares the bounded telemetry budget and reports connection errors/drop counts.
+Vision data does not feed policy control merely because it is recorded. Live video
+preview and optional scalar sensing collection are independent features.
+
+### Optional reservations
+
+The API server enables reservations only with `--enable-reservations`. Local
+workers opening the SQLite store directly must also pass `--enable-reservations`;
+outbound workers rely on the server's setting. The browser exposes availability,
+booking, owner cancellation, and a reservation selector for physical submissions.
+The development launcher enables the option to make it testable.
+
+A reservation is an exclusive window of 1–30 minutes, at most seven days ahead.
+The browser currently offers 30-minute sessions. Up to eight future/active windows
+per owner are permitted. Overlapping bookings on the same rig are rejected in a
+SQLite transaction. The server's `--rig-id` is the reservable rig; use the same ID
+on its hardware worker. Simulation does not require a reservation.
+
+Physical jobs can optionally bind to an owned reservation. Claims must match its
+rig, owner, active window and remaining duration, with setup/stop margin. Start
+rechecks eligibility. An unreserved physical job cannot cross into any reserved
+window. Existing reservations remain exclusionary if the server is restarted with
+the feature disabled; bound jobs do not execute while disabled. A reservation
+cannot be cancelled while one of its jobs is claimed/running, and a new booking
+cannot displace an active experiment. Cancellation does not silently unbind queued
+jobs: cancel those jobs and resubmit explicitly if needed.
+
+A reservation never grants shell/device access, extends the maximum 60-second run,
+bypasses physical approval, or keeps the motor enabled between runs.
+
+### Camera presentation
+
+`--camera-url` configures a camera service origin independently of the controller.
+The Live view uses the existing H.264 WebCodecs format through the authenticated
+`/api/video` relay, with a sampled `/preview.jpg` fallback. It pauses when leaving
+the view and never embeds camera calibration or operator controls. The relay
+requests only the fixed `/video.h264` resource, never forwards portal credentials,
+limits viewers to four, and ends connections after 60 seconds or 64 MiB; the player
+reconnects. It does not follow upstream redirects. The page's content policy allows images/media only from that
+configured origin and itself. Video viewing does not create a saved recording. The backend must reach the
+configured camera origin for H.264; the JPEG fallback additionally requires browser
+reachability and HTTPS when the portal is HTTPS. The development server relay is
+not a Vercel edge video distribution service; production deployment needs an
+authenticated long-lived video service or equivalent. The existing SSH tunnel is
+suitable for local development only.
+
+### Additional API routes
+
+All routes below require bearer authentication; mutation Origin checks still apply.
+
+| Route | Authorization and payload |
+|---|---|
+| `GET /api/video` | Submitter/operator; bounded H.264 stream from the configured camera |
+| `GET /api/config` | Authenticated; camera origin, reservation flag, reservable rig ID |
+| `GET /api/reservations` | Submitter's own reservations or operator overview |
+| `POST /api/reservations` | Submitter; `{rig, starts_at, duration_minutes}` (Unix seconds) |
+| `POST /api/reservations/{id}/cancel` | Owning submitter; `{}` |
+| `POST /api/jobs` | Existing fields plus optional `reservation_id` for physical jobs |
+| `POST /api/jobs/{id}/recording` | Assigned worker; raw ZIP, `X-Worker-Lease`, maximum 16 MiB; bounded 30-second body read |
+| `GET /api/jobs/{id}/recording` | Owner/operator; ZIP attachment |
+
+The standalone Python HTTP server remains a development/service backend. Vercel
+identity integration, durable hosted storage, authenticated public video delivery,
+ZIP/numeric-policy submissions and synchronized recorded video remain separate work.

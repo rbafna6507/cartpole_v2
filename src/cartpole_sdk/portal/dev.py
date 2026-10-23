@@ -50,7 +50,7 @@ def prepare_credentials(root):
 
 def create_preview(root, *, port=8765):
     path, credentials = prepare_credentials(root)
-    server = make_server(Store(Path(root) / 'store'), credentials, host='127.0.0.1', port=port)
+    server = make_server(Store(Path(root) / 'store', reservations_enabled=True), credentials, host='127.0.0.1', port=port, camera_url='http://127.0.0.1:3090')
     server.RequestHandlerClass = PreviewHandler
     return server, path
 

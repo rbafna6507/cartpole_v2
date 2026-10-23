@@ -47,7 +47,7 @@ class WorkerTests(unittest.TestCase):
         try:
             self.submit()
             remote=RemoteQueue(f'http://127.0.0.1:{server.server_port}','test-worker-token-secret')
-            result=run_once(remote,'w','simulation',bridge_factory=SimulationBridge,sandbox_factory=TrustedPipeFixture,sensor_source='simulation')
+            result=run_once(remote,'w','simulation',bridge_factory=SimulationBridge,sandbox_factory=TrustedPipeFixture,sensor_source='simulation',recording_root=Path(self.tmp.name)/'spool')
             self.assertEqual(result['status'],'succeeded')
             self.assertTrue(result['result']['stopped'])
         finally:server.shutdown();server.server_close();thread.join()

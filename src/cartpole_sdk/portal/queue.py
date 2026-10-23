@@ -11,6 +11,8 @@ import time
 import uuid
 from cartpole_sdk.recording import canonical_json, strict_json_loads
 from .budget import execution_wall_seconds
+from .reservations import ReservationStoreMixin
+from .run_recording import RecordingStoreMixin
 
 class QueueError(ValueError):
     pass
@@ -22,8 +24,9 @@ def name(value, label='identifier'):
         raise QueueError(f'invalid {label}')
     return value
 
-class Store:
-    def __init__(self, root):
+class Store(ReservationStoreMixin, RecordingStoreMixin):
+    def __init__(self, root, *, reservations_enabled=False):
+        self.reservations_enabled=bool(reservations_enabled)
         self.root=Path(root).resolve();self.root.mkdir(parents=True,exist_ok=True)
         self.blobs=self.root/'artifacts'
         if self.blobs.is_symlink():raise QueueError('artifact directory cannot be a symlink')
@@ -46,10 +49,11 @@ class Store:
         # Serialize additive migration across concurrently starting workers.
         with self._tx() as db:
             columns={row['name'] for row in db.execute('PRAGMA table_info(jobs)')}
-            for column,kind in (('approved_by','TEXT'),('approved_at','REAL')):
+            for column,kind in (('approved_by','TEXT'),('approved_at','REAL'),('reservation_id','TEXT')):
                 if column not in columns:db.execute(f'ALTER TABLE jobs ADD COLUMN {column} {kind}')
             db.execute("UPDATE jobs SET status='awaiting_approval' WHERE source='magnetic-step' AND status='pending' AND approved_by IS NULL")
         os.chmod(self.database,0o600)
+        self._init_reservations()
     def _connect(self):
         db=sqlite3.connect(self.database,timeout=3)
         db.row_factory=sqlite3.Row
@@ -104,7 +108,7 @@ class Store:
         finally:os.close(directory)
         if len(source)>65536 or hashlib.sha256(source).hexdigest()!=sha:raise QueueError('artifact integrity failure')
         return source
-    def submit(self,owner,key,source,filename,sensor_source,duration,*,now=None):
+    def submit(self,owner,key,source,filename,sensor_source,duration,*,now=None,reservation_id=None):
         name(owner,'owner');name(key,'idempotency key')
         if not isinstance(filename,str) or not re.fullmatch(r'[A-Za-z0-9_-][A-Za-z0-9_.-]{0,75}\.py',filename):raise QueueError('filename must be a plain .py name')
         if type(source) is not bytes or not 1<=len(source)<=65536:raise QueueError('source must be 1..65536 bytes')
@@ -118,13 +122,14 @@ class Store:
         with self._tx() as db:
             prior=db.execute('SELECT * FROM jobs WHERE owner=? AND key=?',(owner,key)).fetchone()
             if prior is not None:
-                if (prior['artifact'],prior['filename'],prior['source'],prior['duration'])!=(sha,filename,sensor_source,duration):raise QueueError('idempotency key already binds a different submission')
+                if (prior['artifact'],prior['filename'],prior['source'],prior['duration'],prior['reservation_id'])!=(sha,filename,sensor_source,duration,reservation_id):raise QueueError('idempotency key already binds a different submission')
                 return self._public(prior)
             if db.execute("SELECT count(*) FROM jobs WHERE owner=? AND status IN ('awaiting_approval','pending','claimed','running')",(owner,)).fetchone()[0]>=32:raise QueueError('owner queue limit reached')
+            self._validate_reservation(db,reservation_id,owner,sensor_source,now)
             self._write_blob(source)
             identifier=uuid.uuid4().hex
-            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now))
+            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated,reservation_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now,reservation_id))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
     def approve(self,identifier,operator,*,artifact,sensor_source,duration):
         """Trusted operator decision bound to the exact immutable job reviewed.
@@ -183,7 +188,8 @@ class Store:
             status=db.execute('SELECT * FROM rigs WHERE id=?',(rig,)).fetchone()
             if status['blocked']:raise QueueError('rig blocked pending operator recovery')
             if status['job'] is not None:return None
-            row=db.execute("SELECT * FROM jobs WHERE status='pending' AND (source='simulation' OR approved_by IS NOT NULL)"+(" AND source=?" if sensor_source is not None else "")+" ORDER BY created,id LIMIT 1",(sensor_source,) if sensor_source is not None else ()).fetchone()
+            candidates=db.execute("SELECT * FROM jobs WHERE status='pending' AND (source='simulation' OR approved_by IS NOT NULL)"+(" AND source=?" if sensor_source is not None else "")+" ORDER BY created,id",(sensor_source,) if sensor_source is not None else ())
+            row=next((candidate for candidate in candidates if self._reservation_allows(db,candidate,rig,now)),None)
             if row is None:return None
             token=secrets.token_hex(32)
             db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+2,now+5,now,row['id']))
@@ -199,6 +205,7 @@ class Store:
         with self._tx() as db:
             row=self._lease(db,identifier,worker,token,now)
             if row['status']!='claimed' or row['cancel_requested']:raise QueueError('job cannot start')
+            if not self._reservation_allows(db,row,row['rig'],now,starting=True):raise QueueError('outside reservation window')
             deadline=now+execution_wall_seconds(row['source'],row['duration'])+1
             db.execute("UPDATE jobs SET status='running',deadline=?,lease_until=?,updated=? WHERE id=?",(deadline,min(now+2,deadline),now,identifier))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone(),worker=True)
