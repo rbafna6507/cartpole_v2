@@ -14,7 +14,7 @@ For Vercel, import that repository with root `.`, build `node build.mjs`, no ins
 
 All three upload formats pass public HTTPS simulation execution and ZIP download checks. Network access and infinite-loop submissions fail closed and return diagnostic recordings. The portal regression suite passes 211 tests locally (15 platform/explicit realtime-supervisor skips), with actual Linux sandbox checks performed separately.
 
-Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. With default garbage collection and `NoNewPrivileges` enabled, recorded-observation replay passed 5,000 zero-controller cycles (maximum 5.84 ms) and 2,000 numeric-actor cycles (maximum 7.42 ms), at 100 Hz. These offline results do not establish physical reliability. Physical one-second Python and ZIP smoke tests each completed 90 actions, confirmed STOP with no board fault, and returned verified bundles. The numeric actor first failed inside isolation before arming; its diagnostic retry was rejected even earlier because the encoder-health flag was off. Jetson SSH/Funnel connectivity was then lost during the stopped health follow-up. Full actor acceptance and persistent service installation remain pending; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
+Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. With default garbage collection and `NoNewPrivileges` enabled, recorded-observation replay passed 5,000 zero-controller cycles (maximum 5.84 ms) and 2,000 numeric-actor cycles (maximum 7.42 ms), at 100 Hz. These offline results do not establish physical reliability. Physical one-second Python and ZIP smoke tests each completed 90 actions, confirmed STOP with no board fault, and returned verified bundles. The numeric actor first failed inside isolation before arming; its diagnostic retry was rejected even earlier because the encoder-health flag was off. The Jetson subsequently rebooted. API, simulation and camera services returned automatically, but the Teensy USB device was absent after reboot. Full actor acceptance and persistent service installation remain pending; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
 
 ## Installed paths and services
 
@@ -29,10 +29,15 @@ Physical execution is still under commissioning. Ordinary-priority child schedul
 uv sync --locked --no-default-groups --extra sim --extra hardware --extra inference
 .venv/bin/python deploy/portal/install-user-service.py --python "$PWD/.venv/bin/python"
 .venv/bin/python deploy/portal/install-worker-service.py --python "$PWD/.venv/bin/python" --backend simulation --enable --start
-.venv/bin/python deploy/portal/install-worker-service.py --python "$PWD/.venv/bin/python" --backend hardware --port /dev/serial/by-id/usb-Teensyduino_USB_Serial_20242870-if00
-# Prepare the stopped/homed rig with commissioned switches before starting hardware:
-systemctl --user start cartpole-worker-hardware.service
-systemctl --user status cartpole-portal.service cartpole-worker-simulation.service cartpole-worker-hardware.service
+# Use the commissioned system unit for the realtime hardware worker.
+# Disable any previous user worker; never run both against the serial device.
+systemctl --user disable --now cartpole-worker-hardware.service
+sudo install -m 644 deploy/portal/cartpole-worker-hardware.service /etc/systemd/system/cartpole-worker-hardware.service
+sudo systemctl daemon-reload
+# Prepare the stopped/homed rig with commissioned switches before approving jobs.
+sudo systemctl enable --now cartpole-worker-hardware.service
+systemctl --user status cartpole-portal.service cartpole-worker-simulation.service
+systemctl status cartpole-worker-hardware.service
 sudo tailscale funnel --bg 8780
 tailscale funnel status
 ```
@@ -62,10 +67,11 @@ Every attempted worker run creates a bounded recording, including failed runs wh
 Reservations gate eligible physical jobs to their owner's time window; they do not grant SSH or bypass isolation/operator approval. For direct console experiments, stop the hardware worker first, and close the console before starting it again:
 
 ```bash
-systemctl --user stop cartpole-worker-hardware.service
+sudo systemctl stop cartpole-worker-hardware.service
+# From the operator release directory:
 uv run cartpole
 # Exit console, leave rig healthy/homed/stopped, then:
-systemctl --user start cartpole-worker-hardware.service
+sudo systemctl start cartpole-worker-hardware.service
 ```
 
 An expired lease or unconfirmed STOP blocks the rig queue. Inspect the physical rig before operator recovery; restarting the service alone does not clear a blocked queue. Preserve private recording spools for diagnostics. Back up SQLite with its transactional backup mechanism plus artifacts/bundles; do not copy only a live database while ignoring WAL state. Configure retention before broad public enrollment: the current deployment uses invite tokens, bounded jobs/artifacts and local storage, not self-service accounts or unlimited archival storage.

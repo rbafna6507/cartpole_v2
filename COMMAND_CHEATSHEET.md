@@ -349,11 +349,12 @@ change deployed gains or establish that Python AUTO is fixed.
 
 ## Hosted submission workers
 
-See [deployment guide](docs/PORTAL_DEPLOYMENT.md) for all installer flags, upload formats, tokens and Vercel setup. Hardware timing acceptance is still pending; its worker is stopped. The hardware commands below apply only after commissioning and installing the selected user service. Never run it concurrently with the system worker or console. On Jetson:
+See [deployment guide](docs/PORTAL_DEPLOYMENT.md) for all installer flags, upload formats, tokens and Vercel setup. Hardware timing acceptance is still pending; its worker is stopped. The hardware commands below apply after commissioning and installing the realtime system unit. Never run it concurrently with a user hardware worker or console. On Jetson:
 
 ```bash
-systemctl --user status cartpole-portal.service cartpole-worker-simulation.service cartpole-worker-hardware.service
-systemctl --user stop cartpole-worker-hardware.service  # reserve serial for console development
-systemctl --user start cartpole-worker-hardware.service # after console exit and rig preparation
+systemctl --user status cartpole-portal.service cartpole-worker-simulation.service
+systemctl status cartpole-worker-hardware.service
+sudo systemctl stop cartpole-worker-hardware.service  # reserve serial for console development
+sudo systemctl start cartpole-worker-hardware.service # after console exit and rig preparation
 tailscale funnel status
 ```
