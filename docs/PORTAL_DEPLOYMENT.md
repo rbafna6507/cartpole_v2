@@ -14,7 +14,7 @@ For Vercel, import that repository with root `.`, build `node build.mjs`, no ins
 
 All three upload formats pass public HTTPS simulation execution and ZIP download checks. Network access and infinite-loop submissions fail closed and return diagnostic recordings. The portal regression suite passes 211 tests locally (15 platform/explicit realtime-supervisor skips), with actual Linux sandbox checks performed separately.
 
-Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. Physical acceptance of that configuration is pending, so the hardware worker remains stopped; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
+Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. With default garbage collection and `NoNewPrivileges` enabled, recorded-observation replay passed 5,000 zero-controller cycles (maximum 5.84 ms) and 2,000 numeric-actor cycles (maximum 7.42 ms), at 100 Hz. These offline results do not establish physical reliability. Physical acceptance of that configuration is pending, so the hardware worker remains stopped; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
 
 ## Installed paths and services
 
