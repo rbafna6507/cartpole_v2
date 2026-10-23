@@ -121,6 +121,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._respond(403,{'error':'origin denied'});return
             body=self._body() if mutating else None
             store=self.server.store
+            if path=='/api/me' and not mutating:
+                self._respond(200,{'principal':owner,'role':role});return
             if path=='/api/jobs':
                 if not mutating:
                     if role not in ('submit','operator'):self._respond(403,{'error':'role denied'});return
@@ -134,18 +136,24 @@ class Handler(BaseHTTPRequestHandler):
                 if role!='worker':self._respond(403,{'error':'role denied'});return
                 if set(body) not in ({'rig'},{'rig','sensor_source'}):raise QueueError('request fields mismatch')
                 self._respond(200,{'job':store.claim(owner,body['rig'],sensor_source=body.get('sensor_source'))});return
-            match=re.fullmatch(r'/api/jobs/([a-f0-9]{32})(?:/(cancel|artifact|start|heartbeat|finish))?',path)
+            match=re.fullmatch(r'/api/jobs/([a-f0-9]{32})(?:/(cancel|approve|artifact|start|heartbeat|finish))?',path)
             if match:
                 identifier,operation=match.groups()
                 if operation is None and not mutating:
                     if role not in ('submit','operator'):self._respond(403,{'error':'role denied'});return
                     self._respond(200,store.get(identifier,owner if role=='submit' else None));return
+                if operation=='approve' and mutating:
+                    if role!='operator':self._respond(403,{'error':'role denied'});return
+                    self._fields(body,('artifact','sensor_source','duration'))
+                    self._respond(200,store.approve(identifier,owner,**body));return
                 if operation=='cancel' and mutating:
                     if role!='submit':self._respond(403,{'error':'role denied'});return
                     self._fields(body,());self._respond(200,store.cancel(identifier,owner));return
                 if operation=='artifact' and not mutating:
-                    if role!='worker':self._respond(403,{'error':'role denied'});return
-                    with closing(store._connect()) as db:row=db.execute("SELECT artifact FROM jobs WHERE id=? AND worker=? AND status IN ('claimed','running')",(identifier,owner)).fetchone()
+                    if role not in ('worker','operator'):self._respond(403,{'error':'role denied'});return
+                    with closing(store._connect()) as db:
+                        if role=='operator':row=db.execute('SELECT artifact FROM jobs WHERE id=?',(identifier,)).fetchone()
+                        else:row=db.execute("SELECT artifact FROM jobs WHERE id=? AND worker=? AND status IN ('claimed','running')",(identifier,owner)).fetchone()
                     if row is None:raise QueueError('job unavailable')
                     source=store.artifact(row['artifact'])
                     self._respond(200,{'sha256':row['artifact'],'source_base64':base64.b64encode(source).decode()});return

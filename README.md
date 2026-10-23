@@ -221,3 +221,5 @@ is not a standalone wheel distribution. Do not copy `.venv` between computers.
 No Jetson access, camera capture, firmware upload, or physical motion was performed
 during Phase 0. New control and vision work uses directories outside the preserved archived
 baselines; later physical work is recorded under `evidence/phase3` and `phase4`.
+
+Controller authors: [SDK data and development guide](docs/CONTROLLER_DEVELOPER_GUIDE.md). The portal now requires operator approval for each physical job; hosted deployment and expanded uploads remain under development.

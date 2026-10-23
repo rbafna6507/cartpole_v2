@@ -10,7 +10,8 @@ class QueueTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory(); self.store=Store(self.tmp.name)
     def tearDown(self):self.tmp.cleanup()
     def submit(self, owner='alice', key='one', **kw):
-        return self.store.submit(owner,key,b'def create_policy():\n    return None\n','policy.py','magnetic-step',.1,**kw)
+        job=self.store.submit(owner,key,b'def create_policy():\n    return None\n','policy.py','magnetic-step',.1,**kw)
+        return self.store.approve(job['id'],'operator',artifact=job['artifact'],sensor_source=job['source'],duration=job['duration'])
     def test_idempotency_returns_same_job_and_binds_request(self):
         first=self.submit();self.assertEqual(self.submit()['id'],first['id'])
         with self.assertRaises(QueueError):self.store.submit('alice','one',b'changed','x.py','magnetic-step',.1)
@@ -63,6 +64,7 @@ class QueueTests(unittest.TestCase):
         for sensor_source,expected_deadline in (('simulation',122.),('magnetic-step',112.)):
             with self.subTest(source=sensor_source):
                 job=self.store.submit('alice',sensor_source,b'x','x.py',sensor_source,10.)
+                if sensor_source=='magnetic-step':self.store.approve(job['id'],'operator',artifact=job['artifact'],sensor_source=job['source'],duration=job['duration'])
                 claim=self.store.claim('w',sensor_source,now=100,sensor_source=sensor_source)
                 started=self.store.start(job['id'],'w',claim['lease'],now=101)
                 self.assertEqual(started['deadline'],expected_deadline)

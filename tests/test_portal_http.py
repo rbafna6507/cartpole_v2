@@ -44,6 +44,7 @@ class HTTPTests(unittest.TestCase):
         self.assertEqual(self.request('/api/jobs/../../etc')[0],404)
     def test_worker_claim_fetch_and_reset_before_start_contract(self):
         job=self.request('/api/jobs',self.payload())[1]
+        self.request('/api/jobs/'+job['id']+'/approve',dict(artifact=job['artifact'],sensor_source=job['source'],duration=job['duration']),token='operator-secret-long')
         claim=self.request('/api/claim',{'rig':'r'},token='worker-secret-long')[1]['job']
         self.assertEqual(claim['id'],job['id']);self.assertIn('lease',claim)
         self.assertNotIn('lease',self.request('/api/jobs/'+job['id'])[1])

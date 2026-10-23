@@ -29,7 +29,9 @@ class WorkerTests(unittest.TestCase):
     def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.store=Store(self.tmp.name)
     def tearDown(self):self.tmp.cleanup()
     def submit(self,source='simulation'):
-        return self.store.submit('alice','one',b'never imported in broker','policy.py',source,.1)
+        job=self.store.submit('alice','one',b'never imported in broker','policy.py',source,.1)
+        if source=='magnetic-step':self.store.approve(job['id'],'operator',artifact=job['artifact'],sensor_source=source,duration=job['duration'])
+        return job
     def test_simulation_job_uses_selected_samples_and_records_bounded_result(self):
         job=self.submit()
         result=run_once(self.store,'w','sim',bridge_factory=SimulationBridge,sandbox_factory=TrustedPipeFixture,sensor_source='simulation')

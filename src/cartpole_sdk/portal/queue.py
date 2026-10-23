@@ -43,6 +43,12 @@ class Store:
             CREATE TABLE IF NOT EXISTS rigs (
               id TEXT PRIMARY KEY, job TEXT, blocked INTEGER NOT NULL DEFAULT 0, reason TEXT);
             ''')
+        # Serialize additive migration across concurrently starting workers.
+        with self._tx() as db:
+            columns={row['name'] for row in db.execute('PRAGMA table_info(jobs)')}
+            for column,kind in (('approved_by','TEXT'),('approved_at','REAL')):
+                if column not in columns:db.execute(f'ALTER TABLE jobs ADD COLUMN {column} {kind}')
+            db.execute("UPDATE jobs SET status='awaiting_approval' WHERE source='magnetic-step' AND status='pending' AND approved_by IS NULL")
         os.chmod(self.database,0o600)
     def _connect(self):
         db=sqlite3.connect(self.database,timeout=3)
@@ -114,12 +120,32 @@ class Store:
             if prior is not None:
                 if (prior['artifact'],prior['filename'],prior['source'],prior['duration'])!=(sha,filename,sensor_source,duration):raise QueueError('idempotency key already binds a different submission')
                 return self._public(prior)
-            if db.execute("SELECT count(*) FROM jobs WHERE owner=? AND status IN ('pending','claimed','running')",(owner,)).fetchone()[0]>=32:raise QueueError('owner queue limit reached')
+            if db.execute("SELECT count(*) FROM jobs WHERE owner=? AND status IN ('awaiting_approval','pending','claimed','running')",(owner,)).fetchone()[0]>=32:raise QueueError('owner queue limit reached')
             self._write_blob(source)
             identifier=uuid.uuid4().hex
-            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated) VALUES (?,?,?,?,?,?,?,\'pending\',?,?)',
-                       (identifier,owner,key,sha,filename,sensor_source,duration,now,now))
+            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
+    def approve(self,identifier,operator,*,artifact,sensor_source,duration):
+        """Trusted operator decision bound to the exact immutable job reviewed.
+
+        HTTP role enforcement belongs to the authenticated server; direct Store
+        access is trusted local administration, like rig recovery.
+        """
+        name(identifier);name(operator,'operator')
+        if type(duration) not in (int,float):raise QueueError('invalid review duration')
+        with self._tx() as db:
+            row=db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone()
+            if row is None:raise QueueError('job unavailable')
+            if (artifact,sensor_source,duration)!=(row['artifact'],row['source'],row['duration']):
+                raise QueueError('review does not match immutable job')
+            if row['source']!='magnetic-step' or row['status'] not in ('awaiting_approval','pending'):
+                raise QueueError('job is not awaiting physical execution')
+            if row['approved_by'] is None:
+                now=time.time()
+                db.execute("UPDATE jobs SET status='pending',approved_by=?,approved_at=?,updated=? WHERE id=?",(operator,now,now,identifier))
+            return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
+
     def get(self,identifier,owner=None):
         name(identifier)
         with closing(self._connect()) as db:
@@ -134,7 +160,7 @@ class Store:
         with self._tx() as db:
             row=db.execute('SELECT * FROM jobs WHERE id=? AND owner=?',(identifier,owner)).fetchone()
             if row is None:raise QueueError('job unavailable')
-            if row['status']=='pending':db.execute("UPDATE jobs SET status='cancelled',updated=? WHERE id=?",(time.time(),identifier))
+            if row['status'] in ('awaiting_approval','pending'):db.execute("UPDATE jobs SET status='cancelled',updated=? WHERE id=?",(time.time(),identifier))
             elif row['status'] in ('claimed','running'):db.execute('UPDATE jobs SET cancel_requested=1,updated=? WHERE id=?',(time.time(),identifier))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
     def _recover(self,db,now):
@@ -157,7 +183,7 @@ class Store:
             status=db.execute('SELECT * FROM rigs WHERE id=?',(rig,)).fetchone()
             if status['blocked']:raise QueueError('rig blocked pending operator recovery')
             if status['job'] is not None:return None
-            row=db.execute("SELECT * FROM jobs WHERE status='pending'"+(" AND source=?" if sensor_source is not None else "")+" ORDER BY created,id LIMIT 1",(sensor_source,) if sensor_source is not None else ()).fetchone()
+            row=db.execute("SELECT * FROM jobs WHERE status='pending' AND (source='simulation' OR approved_by IS NOT NULL)"+(" AND source=?" if sensor_source is not None else "")+" ORDER BY created,id LIMIT 1",(sensor_source,) if sensor_source is not None else ()).fetchone()
             if row is None:return None
             token=secrets.token_hex(32)
             db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+2,now+5,now,row['id']))

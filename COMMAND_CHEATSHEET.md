@@ -262,3 +262,13 @@ uv run --locked --extra sim cartpole-view-policy --headless --seconds 2
 ```
 
 For development, `uv run` may synchronize away extras not requested on that invocation. Use `uv sync --locked --all-extras` before the full suite or `.venv/bin/python` to use an already prepared environment without re-sync. The default `operator` dependency group supplies NumPy/pyserial for plain `uv run cartpole`; simulation and RL remain explicit extras.
+
+## Controller development and read-only sensor viewing
+
+See [the developer guide](docs/CONTROLLER_DEVELOPER_GUIDE.md) for sensor units, raw versus filtered values, timing, SDK examples and current portal limitations. On the Jetson, with the camera service and console encoder mirror running:
+
+```bash
+curl --no-buffer 'http://127.0.0.1:3090/api/sensing-stream?max_hz=100'
+```
+
+This display stream is bounded and best-effort; submitted controllers receive SDK observations directly from the trusted worker. The local portal UI accepts an operator credential to approve each waiting physical job. Approval never prepares or arms hardware by itself.

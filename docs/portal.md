@@ -57,6 +57,22 @@ The artifact is SHA256-addressed, created with exclusive/no-follow file operatio
 read-only on disk, and verified again before execution. Owner queue capacity is
 32 active/pending jobs; refused uploads do not create extra artifact blobs.
 
+## Physical run approval
+
+Each physical submission starts in `awaiting_approval`. An authenticated operator
+can use the same UI with an operator token to inspect the immutable job, read its source with **Inspect source**, and click
+**Approve physical run**. The request includes its exact `artifact` SHA-256,
+`sensor_source` and `duration`. A changed or mismatched review is rejected. The
+queue records `approved_by` and `approved_at`, then permits the worker to claim
+it. Repeating approval before claim is idempotent and preserves the first receipt.
+Submission and worker credentials cannot approve. Pending physical jobs from older
+databases are migrated to awaiting approval; existing claimed/running leases are
+not rewritten. Waiting jobs count toward the owner quota and can be cancelled.
+Approval is a scheduling decision, not physical homing/arming or acceptance.
+
+See the [controller developer guide](CONTROLLER_DEVELOPER_GUIDE.md) for raw versus
+filtered data, clock semantics and current training/portal parity limitations.
+
 ## Policy contract
 
 ```python
@@ -221,12 +237,14 @@ Every `/api` endpoint requires `Authorization: Bearer <token>`.
 
 | Endpoint | Role | Action |
 | --- | --- | --- |
+| `GET /api/me` | authenticated | own principal and role |
+| `POST /api/jobs/<id>/approve` | operator | exact artifact, sensor_source, duration approval |
 | `POST /api/jobs` | submit | source, filename, sensor_source, duration, idempotency_key |
 | `GET /api/jobs` | submit/operator | own jobs / all jobs |
 | `GET /api/jobs/<id>` | submit/operator | own result / operator inspection |
 | `POST /api/jobs/<id>/cancel` | submit | request cancellation of own job |
 | `POST /api/claim` | worker | rig and optional sensor_source capability |
-| `GET /api/jobs/<id>/artifact` | assigned worker | verified source as bounded base64 |
+| `GET /api/jobs/<id>/artifact` | operator or assigned worker | verified source as bounded base64; operator may inspect before approval |
 | `POST /api/jobs/<id>/start` | worker | lease token after child reset ACK |
 | `POST /api/jobs/<id>/heartbeat` | worker | lease token, fixed deadline retained |
 | `POST /api/jobs/<id>/finish` | worker | lease, terminal status, bounded result |
@@ -257,5 +275,4 @@ case skipped because the runtime is present. Network/fork/exec cases assert actu
 EPERM rather than relying on timeout; isolation tests use a test-only 250ms action
 deadline to avoid conflating cold imports with denial. Production stays at 10ms.
 The preserved log is [evidence/phase6/portal-linux-tests.log](../evidence/phase6/portal-linux-tests.log).
-No physical portal policy run has been performed; no switches are installed, and
-the default hardware bridge correctly requires that prerequisite.
+No physical portal policy run was performed in that historical validation. Switches were subsequently commissioned; this does not by itself qualify physical portal execution.
