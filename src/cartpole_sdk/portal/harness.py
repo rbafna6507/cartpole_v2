@@ -28,14 +28,20 @@ def emit(value):
 
 def main():
     parser=argparse.ArgumentParser()
+    parser.add_argument('--realtime',action='store_true')
     parser.add_argument('--wall',type=float,required=True)
     parser.add_argument('--memory',type=int,required=True)
     parser.add_argument('--kind',choices=('python','python-zip','actor-json'),default='python')
     parser.add_argument('--sensor-source',choices=('simulation','magnetic-step'),default='simulation')
     args=parser.parse_args()
-    # Realtime scheduling belongs only to the trusted broker. Verify the
-    # launcher reset before installing seccomp (which denies scheduler changes).
-    if os.sched_getscheduler(0)!=os.SCHED_OTHER:raise RuntimeError('sandbox requires ordinary scheduling')
+    # Verify the trusted launcher's scheduling and external hard limits before
+    # loading submitted code. Post-import Python checks are not a security boundary.
+    if args.realtime:
+        import resource
+        if os.sched_getscheduler(0)!=os.SCHED_RR or os.sched_getparam(0).sched_priority!=1:raise RuntimeError('sandbox requires RR1')
+        if resource.getrlimit(resource.RLIMIT_RTTIME)!=(500000,500000):raise RuntimeError('sandbox startup realtime limit missing')
+        if resource.getrlimit(resource.RLIMIT_RTPRIO)!=(1,1):raise RuntimeError('sandbox realtime priority ceiling missing')
+    elif os.sched_getscheduler(0)!=os.SCHED_OTHER:raise RuntimeError('sandbox requires ordinary scheduling')
     # Entire restriction setup must succeed before uploaded Python is loaded.
     install_limits(args.wall,args.memory)
     reset=read_message()

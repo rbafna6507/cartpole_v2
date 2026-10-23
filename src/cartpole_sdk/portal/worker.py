@@ -271,7 +271,7 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     if job is None:return None
     lease=job['lease'];identifier=job['id'];bridge=None
     status='failed';error=None;stopped=True;latencies=[];actions=0;observations=0;diagnostics={};peak_demand=0.;wall_budget=None
-    began=time.monotonic();interrupted=False;recorder=None;run_lease=None;numeric_backend=None;setup_lease=_SetupLease(queue,identifier,worker,lease)
+    began=time.monotonic();interrupted=False;recorder=None;run_lease=None;numeric_backend=None;scheduling=None;setup_lease=_SetupLease(queue,identifier,worker,lease)
     recording_root=recording_root or (queue.root/'recording-spool' if isinstance(queue,Store) else 'runs/portal-recordings')
     try:
         recorder=RunRecorder(recording_root,job)
@@ -302,6 +302,11 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
                     observation_contract=actor.get('observation_contract') or observation_contract(angle_source=actor['angle_source'])))
             isolator=sandbox_factory(Path(spool),artifact_kind=inspection['kind'],sensor_source=sensor_source,
                     wall_seconds=wall_budget,max_acceleration=approved_ceiling)
+            realtime=getattr(isolator,'realtime',False)
+            scheduling={'policy':'RR' if realtime else 'OTHER','priority':1 if realtime else 0,
+                        'cpu':getattr(isolator,'cpu_affinity',None),'hard_rttime_us':500000 if realtime else None,
+                        'hard_rtprio':1 if realtime else None,'action_wall_timeout_s':getattr(isolator,'action_timeout',None)}
+            recorder.emit('sandbox_runtime',scheduling=scheduling)
             if inspection['kind']=='actor-json':
                 numeric_backend='numpy-einsum' if getattr(isolator,'numpy_root',None) is not None else 'python'
                 recorder.emit('numeric_runtime',configured_backend=numeric_backend)
@@ -393,7 +398,7 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
         try:run_lease.close()  # physical STOP precedes any network-thread join
         except RunAuthorityError:error=error or 'runtime_authority_failure';status='failed'
     if error is not None and status!='cancelled':status='failed'
-    result={'backend':sensor_source,'numeric_inference_backend':numeric_backend,'execution_wall_budget_s':wall_budget,'max_acceleration_m_s2':approved_ceiling,'max_abs_requested_acceleration_m_s2':peak_demand,'stopped':stopped,'error':error,'actions':actions,'observations':observations,
+    result={'backend':sensor_source,'sandbox_scheduling':scheduling,'numeric_inference_backend':numeric_backend,'execution_wall_budget_s':wall_budget,'max_acceleration_m_s2':approved_ceiling,'max_abs_requested_acceleration_m_s2':peak_demand,'stopped':stopped,'error':error,'actions':actions,'observations':observations,
             'elapsed_wall_s':time.monotonic()-began,'max_inference_s':max(latencies,default=0),**diagnostics}
     # An expired/uncertain lease is not retried or cleared. Queue recovery blocks
     # an active rig; only an authenticated operator can confirm physical recovery.
@@ -428,7 +433,8 @@ def main(argv=None):
     parser.add_argument('--port');parser.add_argument('--rate',type=int,default=100,choices=(100,250,500,1000))
     parser.add_argument('--log-dir',default='runs/portal-hardware');parser.add_argument('--once',action='store_true')
     parser.add_argument('--spool-root')
-    parser.add_argument('--sandbox-cpu',type=int,help='trusted dedicated CPU index for the ordinary-priority isolated policy child')
+    parser.add_argument('--sandbox-realtime',action='store_true',help='trusted RR1 child, requires RR10 broker on separate single CPU; hard uninterrupted realtime CPU limit 500ms; independent 10ms action wall deadline')
+    parser.add_argument('--sandbox-cpu',type=int,help='trusted dedicated CPU index for the isolated policy child')
     parser.add_argument('--numpy-root',help='trusted readonly NumPy package root compatible with sandbox Python; enables prewarmed numeric inference')
     parser.add_argument('--enable-reservations',action='store_true',help='enable reservation gating for a local queue')
     parser.add_argument('--sensing-url',help='optional trusted developer-stream service origin to record independently')
@@ -439,6 +445,7 @@ def main(argv=None):
         try:validate_acceleration_ceiling(args.max_acceleration)
         except SandboxError as exc:parser.error(str(exc))
     if args.sandbox_cpu is not None and not 0<=args.sandbox_cpu<(os.cpu_count() or 1):parser.error('--sandbox-cpu must name an available processor')
+    if args.sandbox_realtime and args.sandbox_cpu is None:parser.error('--sandbox-realtime requires --sandbox-cpu')
     if args.numpy_root:
         args.numpy_root=str(Path(args.numpy_root).resolve())
         if not all((Path(args.numpy_root)/name).is_dir() for name in ('numpy','numpy.libs')):parser.error('--numpy-root requires numpy and numpy.libs directories')
@@ -455,14 +462,21 @@ def main(argv=None):
     try:
         while True:
             try:
-                result=run_once(queue,args.worker,args.rig_id,sandbox_factory=partial(Sandbox,numpy_root=args.numpy_root,cpu_affinity=args.sandbox_cpu),bridge_factory=bridge,sensor_source=sensor_source,spool_root=args.spool_root,max_acceleration=args.max_acceleration,recording_root=args.recording_root,sensing_url=args.sensing_url)
+                result=run_once(queue,args.worker,args.rig_id,sandbox_factory=partial(Sandbox,numpy_root=args.numpy_root,cpu_affinity=args.sandbox_cpu,realtime=args.sandbox_realtime),bridge_factory=bridge,sensor_source=sensor_source,spool_root=args.spool_root,max_acceleration=args.max_acceleration,recording_root=args.recording_root,sensing_url=args.sensing_url)
             except ClaimUnavailable:
                 print('portal claim unavailable; retrying without clearing leases; check connectivity or operator recovery',file=__import__('sys').stderr,flush=True)
                 if args.once:return 1
                 time.sleep(claim_backoff);claim_backoff=min(5.,claim_backoff*2)
                 continue
             claim_backoff=1.
-            if result is not None:print(canonical_json(result),flush=True)
+            if result is not None:
+                print(canonical_json(result),flush=True)
+                outcome=result.get('result') or {}
+                if args.backend=='hardware' and (outcome.get('stopped') is not True or
+                        outcome.get('error') in ('hardware_executor_fault','stop_unconfirmed') or
+                        (outcome.get('board_state') or {}).get('fault',0)):
+                    print('hardware worker stopped: rig fault or STOP not confirmed; operator recovery required',file=__import__('sys').stderr,flush=True)
+                    return 1
             if args.once:return 0 if result is None or result['status']=='succeeded' else 1
             if result is None:time.sleep(.5)
     except KeyboardInterrupt:return 130

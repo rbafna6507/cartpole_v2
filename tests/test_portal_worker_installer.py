@@ -130,3 +130,12 @@ def test_trusted_acceleration_ceiling_is_explicit_and_bounded(installer):
             module.unit_text('/usr/bin/python3', '/home/test', 'hardware', '/dev/ttyACM0', max_acceleration=value)
     text = module.unit_text('/usr/bin/python3', '/home/test', 'hardware', '/dev/ttyACM0', max_acceleration=25)
     assert '"--max-acceleration" "25.0"' in text
+
+
+def test_realtime_unit_requires_explicit_child_cpu(installer):
+    with pytest.raises(ValueError,match='CPU'):
+        installer.unit_text('/usr/bin/python3','/home/test','simulation',sandbox_realtime=True)
+    text=installer.unit_text('/usr/bin/python3','/home/test','simulation',sandbox_realtime=True,sandbox_cpu=5)
+    assert '"--sandbox-realtime"' in text
+    assert '"--sandbox-cpu" "5"' in text
+    assert '--sandbox-realtime' not in installer.unit_text('/usr/bin/python3','/home/test','simulation')

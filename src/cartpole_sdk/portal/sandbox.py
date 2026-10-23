@@ -144,12 +144,14 @@ class PolicyChannel:
 
 class Sandbox:
     """Linux only. Missing namespaces/seccomp/runtime never falls back to host Python."""
-    def __init__(self,source,*,sdk_root=None,usr_root='/usr',wall_seconds=60,action_timeout=.01,memory_bytes=512*1024*1024,python_path='/usr/bin/python3',numpy_root=None,max_acceleration=.25,artifact_kind='python',sensor_source='simulation',cpu_affinity=None):
+    def __init__(self,source,*,sdk_root=None,usr_root='/usr',wall_seconds=60,action_timeout=.01,memory_bytes=512*1024*1024,python_path='/usr/bin/python3',numpy_root=None,max_acceleration=.25,artifact_kind='python',sensor_source='simulation',cpu_affinity=None,realtime=False):
         self.max_acceleration=validate_acceleration_ceiling(max_acceleration)
         self.source=Path(source)
         self.artifact_kind=artifact_kind;self.sensor_source=sensor_source
         if cpu_affinity is not None and (type(cpu_affinity) is not int or not 0<=cpu_affinity<(os.cpu_count() or 1)):
             raise SandboxError('sandbox CPU must be an available nonnegative processor index')
+        if type(realtime) is not bool:raise SandboxError('invalid realtime option')
+        self.realtime=realtime
         self.cpu_affinity=cpu_affinity
         self.sdk_root=Path(sdk_root) if sdk_root else Path(__file__).resolve().parents[2]
         self.usr_root=Path(usr_root);self.wall_seconds=wall_seconds;self.action_timeout=action_timeout
@@ -176,11 +178,18 @@ class Sandbox:
         if type(self.memory_bytes) is not int or not 64*1024*1024<=self.memory_bytes<=1024*1024*1024:raise SandboxError('invalid sandbox memory bound')
     def launch(self):
         self.preflight()
-        # Never inherit the trusted worker's optional realtime scheduling.
+        if self.realtime:
+            try:
+                affinity=os.sched_getaffinity(0)
+                valid=(self.cpu_affinity is not None and len(affinity)==1 and self.cpu_affinity not in affinity
+                       and os.sched_getscheduler(0)==os.SCHED_RR and os.sched_getparam(0).sched_priority==10)
+            except (AttributeError,OSError):valid=False
+            if not valid:raise SandboxError('realtime sandbox requires RR10 broker on one separate CPU')
+        # Ordinary scheduling remains the default; realtime is a trusted opt-in.
         # chrt executes before namespaces and before any submitted code imports.
         scheduler_reset=shutil.which('chrt')
         if scheduler_reset is None:raise SandboxError('sandbox scheduler reset unavailable')
-        args=[scheduler_reset,'--other','0',shutil.which('bwrap'),'--unshare-all','--unshare-user','--unshare-pid','--unshare-net','--new-session','--die-with-parent','--cap-drop','ALL',
+        args=[scheduler_reset,'--rr' if self.realtime else '--other','1' if self.realtime else '0',shutil.which('bwrap'),'--unshare-all','--unshare-user','--unshare-pid','--unshare-net','--new-session','--die-with-parent','--cap-drop','ALL',
               '--ro-bind',str(self.usr_root),'/usr','--symlink','usr/lib','/lib','--symlink','usr/bin','/bin',
               '--proc','/proc','--remount-ro','/proc','--dir','/dev',
               '--ro-bind','/dev/null','/dev/null','--ro-bind','/dev/urandom','/dev/urandom',
@@ -195,10 +204,15 @@ class Sandbox:
             if not (self.numpy_root/'numpy').is_dir() or not (self.numpy_root/'numpy.libs').is_dir():raise SandboxError('explicit readonly numpy runtime missing')
             args+=['--dir','/packages','--ro-bind',str(self.numpy_root/'numpy'),'/packages/numpy','--ro-bind',str(self.numpy_root/'numpy.libs'),'/packages/numpy.libs']
         args +=['--remount-ro','/',self.python_path,'-I','-S','/sdk/cartpole_sdk/portal/harness.py','--wall',str(self.wall_seconds),'--memory',str(self.memory_bytes),'--kind',self.artifact_kind,'--sensor-source',self.sensor_source]
+        if self.realtime:args+=['--realtime']
         if self.cpu_affinity is not None:
             affinity_tool=shutil.which('taskset')
             if affinity_tool is None:raise SandboxError('sandbox CPU affinity tool unavailable')
             args=[affinity_tool,'-c',str(self.cpu_affinity)]+args
+        if self.realtime:
+            limiter=shutil.which('prlimit')
+            if limiter is None:raise SandboxError('realtime sandbox resource limiter unavailable')
+            args=[limiter,'--rttime=500000:500000','--rtprio=1:1','--']+args
         try:process=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,close_fds=True,start_new_session=True,env={})
         except OSError as exc:raise SandboxError('sandbox launch failed') from exc
         return PolicyChannel(process,action_timeout=self.action_timeout,wall_seconds=self.wall_seconds,max_acceleration=self.max_acceleration)

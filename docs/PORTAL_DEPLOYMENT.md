@@ -12,9 +12,9 @@ For Vercel, import that repository with root `.`, build `node build.mjs`, no ins
 
 ## Current validation status
 
-All three upload formats pass public HTTPS simulation execution and ZIP download checks. Network access and infinite-loop submissions fail closed and return diagnostic recordings. The portal regression suite passes 196 tests locally (10 platform-dependent skips), with actual Linux sandbox checks performed separately.
+All three upload formats pass public HTTPS simulation execution and ZIP download checks. Network access and infinite-loop submissions fail closed and return diagnostic recordings. The portal regression suite passes 211 tests locally (15 platform/explicit realtime-supervisor skips), with actual Linux sandbox checks performed separately.
 
-Physical execution is still under commissioning: short runs can succeed, but intermittent IPC/control timing spikes trigger the firmware action-expiry guard even for zero-output scripts. The hardware worker is stopped pending diagnosis; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
+Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. Physical acceptance of that configuration is pending, so the hardware worker remains stopped; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
 
 ## Installed paths and services
 
@@ -37,7 +37,7 @@ sudo tailscale funnel --bg 8780
 tailscale funnel status
 ```
 
-The worker installer accepts `--python`, `--backend simulation|hardware`, hardware `--port`, `--start`, `--enable`, trusted `--max-acceleration`, `--numpy-root` and `--sandbox-cpu`. Start and boot enablement are separate. Worker `Restart=no` deliberately avoids an automatic retry after uncertain lease/rig state. The installer defaults to a conservative 0.25 m/s² demand ceiling; this is suitable for acceptance/data collection, not swing-up. The deployed worker is explicitly configured with `--max-acceleration 25` to support the existing learned actors, matching the existing firmware demand limit. Operators can set a validated ceiling up to 25 m/s² in trusted service configuration; submissions cannot override it. Firmware safety remains enforced.
+The worker installer accepts `--python`, `--backend simulation|hardware`, hardware `--port`, `--start`, `--enable`, trusted `--max-acceleration`, `--numpy-root`, `--sandbox-cpu` and `--sandbox-realtime`. Start and boot enablement are separate. Worker `Restart=no` deliberately avoids an automatic retry after uncertain lease/rig state. The installer defaults to a conservative 0.25 m/s² demand ceiling; this is suitable for acceptance/data collection, not swing-up. The deployed worker is explicitly configured with `--max-acceleration 25` to support the existing learned actors, matching the existing firmware demand limit. Operators can set a validated ceiling up to 25 m/s² in trusted service configuration; submissions cannot override it. Firmware safety remains enforced.
 
 ## Submit, approve, execute and download
 
@@ -72,7 +72,9 @@ An expired lease or unconfirmed STOP blocks the rig queue. Inspect the physical 
 
 ## Realtime hardware worker
 
-The hardware worker needs predictable scheduling to keep observation-anchored 20 ms actions fresh. The target unit in `deploy/portal/cartpole-worker-hardware.service` runs the trusted worker as `rbafna` with SCHED_RR priority 10 on CPU 4. Submitted processes are explicitly demoted to SCHED_OTHER before isolation and the harness verifies that state before importing code; seccomp does not allow changing scheduling. The isolated child is assigned CPU 5 with `--sandbox-cpu 5`, separating it from the realtime broker. The camera and API are assigned CPUs 0–3. Simulation does not require realtime scheduling.
+The hardware worker needs predictable scheduling to keep observation-anchored 20 ms actions fresh. The target unit in `deploy/portal/cartpole-worker-hardware.service` runs the trusted worker as `rbafna` with SCHED_RR priority 10 on CPU 4. Submitted processes default to SCHED_OTHER. The explicit trusted `--sandbox-realtime` option instead requires a broker running exactly at RR10 on one CPU and a distinct dedicated child CPU; the launcher assigns the child RR1 and a hard priority ceiling of 1. The child remains unable to change scheduling or CPU affinity through the seccomp filter. The isolated child is assigned CPU 5 with `--sandbox-cpu 5`, separating it from the realtime broker. The camera and API are assigned CPUs 0–3. Simulation does not require realtime scheduling.
+
+Realtime children receive a hard 500 ms `RLIMIT_RTTIME` limit from the external launcher before Python starts. This limits uninterrupted realtime CPU use; blocking can reset that kernel accounting, so it is not a per-call wall limit. The trusted broker independently enforces the unchanged 10 ms policy-response deadline, startup deadline, total execution budget and process cleanup. Uploaded code cannot raise the externally installed hard limits. Firmware observation-anchored 20 ms expiry remains unchanged.
 
 The child uses system Python; its NumPy wheel must match that interpreter, independently of the API virtualenv. On this Jetson:
 
