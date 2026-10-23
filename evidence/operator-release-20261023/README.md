@@ -11,3 +11,7 @@ The user's follow-up requested completion of the GUI, a complete command cheat s
 - No serial, firmware, physical motion, calibration, camera restart or new cloud training was performed.
 
 The complete source/doc changes are on `codex/live-rig-platform`. `COMMAND_CHEATSHEET.md` gives launch, training, viewer and deployment commands. `COMMAND_REFERENCE.md` captures 105 real help outputs. The release manifest and Jetson installation verification record identify the installed bytes separately from subsequent documentation-only commits.
+
+Final regression: **2,090 passed, 8 skipped, 460 subtests passed**. The Jetson selected release is `/home/rbafna/cartpole-v2-live/releases/operator-20261023`, built from `8ed717c13936b0bcfa29e783051a6a6a3b97f044`. See `jetson-deployment.json` for its complete manifest, offline verification and bundle hash. The login-shell `cartpole-console` wrapper and selected-directory `uv run --locked cartpole` both passed dry-run checks.
+
+The identical installable bundle and manifest are retained in the [draft operator release](https://github.com/rbafna6507/cartpole_v2/releases/tag/untagged-f117815f59a616ba46e7). GitHub returned the expected SHA-256 digest for both uploaded assets.

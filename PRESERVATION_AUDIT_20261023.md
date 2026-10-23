@@ -116,3 +116,23 @@ Compare the assembled SHA with the table below before extracting. The deployment
 - Reference viewer: same start/seed, two simulated seconds, 2,000 decisions, horizon reached, no fault.
 - No GUI rendering acceptance, full historical test-suite rerun, serial/hardware acceptance, firmware flash, cloud job inspection/restart, or new training was performed.
 - Archive member reads and SHA-256 checks are recorded below. Source-byte preservation and pushed branch identity are checked after documentation installation.
+
+## Verified recovery assets
+
+All seven archives below were read and verified locally, and their uploaded assets were checked against GitHub SHA-256 digests. They are retained in the [draft preservation release](https://github.com/rbafna6507/cartpole_v2/releases/tag/untagged-3912b9bae148f286f11f). Draft assets require repository access; the release was not published. Full local archive copies and verification manifests are retained at `/Users/rbafna/projects/cartpole_v2/runs/preservation-20261023`.
+
+| Archive | Compressed bytes | SHA-256 of assembled archive |
+|---|---:|---|
+| `jetson-releases-20261023.tar.gz` | 26085751 | `914ec04bfdfa5e432a11598ef7dc13f3d1e1e27853d5823634ba685b5a9d9074` |
+| `jetson-vision-runtime-20261023.tar.gz` | 655155 | `79f1fb55c24a5982b81c2d685e2d9936feb3a5f1610c24b98faaddbc9c911ca2` |
+| `local-ignored-progress-20261023.tar.gz` | 2524637490 | `bc3147fb15c185075c1698a6a5ce559265b7cd7ad886a538dcc0b916fcc0692f` |
+| `local-untracked-evidence-20261023.tar.gz` | 2891244 | `0c6e424855b7336104536131c398cb7df605d3b23b35cd1e816aa44f27275573` |
+| `jetson-vision-state-prefix-20261023.tar.gz` | 23976333 | `7eba451c6b76f450466d3507488bfd0e38988da57ea21cc6b4fd51491cfe513c` |
+| `local-training-log-supplement-20261023.tar.gz` | 30910 | `06d187ef372bbba8f47895fdd8ae489fada7ffaa4cb5172ed816a14b2480ee6c` |
+| `jetson-live-full-20261023.tar.gz` | 3573098291 | `c0d70575e74950b5879d281d68ca0c2ee938f213f521a239a0ea6eac7033b684` |
+
+The full Jetson archive contains 5,194 inventoried entries (5,193 regular files and one symlink), totaling 19,654,703,784 regular-file bytes. Every entry matched the recorded path/size or symlink inventory, and all 3,203 source-file hashes matched the independent Jetson source inventory. The remaining run-data hashes were computed from the fully decoded archive; file sizes were checked against the remote inventory. This is not an independent second remote hash pass over every large log.
+
+`restore-manifest.json` lists archive and upload-part hashes; `SHA256SUMS.txt` checks reconstructed archives. The full Jetson archive uses the same numbered-part reconstruction procedure as the local archive. Camera-state archive counts include the embedded manifest; its uncompressed-byte count reports the original captured files.
+
+All 478 audited source files were byte-for-byte unchanged at the end of the initial read-only audit. The user then separately authorized operator/viewer/release implementation; those changes are documented in SYSTEM_README.md section 24. Source and documentation are pushed to `codex/live-rig-platform`; historical raw untracked evidence remains outside Git and is preserved in the release assets. Source and deployment differences are explicitly retained as described above.

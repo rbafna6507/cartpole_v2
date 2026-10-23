@@ -12,8 +12,8 @@
 - [x] Finish viewer packaging: installed `cartpole-view-policy` entry point, verify learned/reference headless and GUI behavior, document controls and all flags.
 - [x] Test then implement operator launcher: default device, 250 Hz, preserve board tuning, 1 ms GIL wrapper, CPU camera 0-3/control 4-5, realtime child priority 10. Only raise the launching process's realtime limit using sudo prlimit when required; never execute the console as root. Help and dry-run perform no sudo, serial, or affinity mutation. Explicit overrides remain available.
 - [x] Verify original checkpoint receipt/ZIP, export 1,024,000-step PPO actor, evaluate SDK/SB3/numeric parity and nominal rollouts, save provenance and stage as unaccepted candidate. Preserve working 102,400-step actor bytes and identity.
-- [ ] Add repeatable immutable release packaging/install/selection and stable PATH launcher; fail safely on existing target or invalid bundle. Verify offline on Jetson; retain old release and explicit rollback.
-- [ ] Add comprehensive command cheat sheet, update README with commands and dated user-reported hardware success; commit and push. Finish the independently running preservation archive.
+- [x] Add repeatable immutable release packaging/install/selection and stable PATH launcher; fail safely on existing target or invalid bundle. Verify offline on Jetson; retain old release and explicit rollback.
+- [x] Add comprehensive command cheat sheet, update README with commands and dated user-reported hardware success; commit and push. Finish the independently running preservation archive.
 
 ## Review focus
 - Help/dry-run must work with no serial device and never request privilege.
