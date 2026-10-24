@@ -17,6 +17,6 @@ exec sudo systemd-run --wait --pipe --collect --uid=rbafna \
     exec .venv/bin/python deploy/portal/check-actor-startup.py \
       --cpu 5 \
       --numpy-root /home/rbafna/cartpole-portal/sandbox-packages \
-      --artifact /home/rbafna/.local/state/cartpole-portal/store/artifacts/0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16.py \
+      --artifact /home/rbafna/cartpole-portal/source/policies/working.json \
       --telemetry /home/rbafna/.local/state/cartpole-portal/hardware-recordings/6b248056287743209fce0a5b3a98fe7f-044bd9ac4b7548448411fb7c474e24d2/telemetry.jsonl
   '

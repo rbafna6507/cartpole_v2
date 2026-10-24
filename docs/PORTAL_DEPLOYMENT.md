@@ -107,3 +107,5 @@ The wrapper requests administrator authentication only to create a bounded realt
 Require all five isolation/abuse tests and all three actor reset checks to pass before a physical actor acceptance run. The saved actor's provenance is checked by the existing isolated loader. Installation commands above remain separate from validation; starting/enabling the hardware service requires closing the console and ensuring the stopped rig is healthy and homed.
 
 The offline helper uses `LimitRTPRIO=10` plus `chrt --rr 10`, rather than transient `CPUSchedulingPolicy`/`CPUSchedulingPriority` properties: systemd 249 on this Jetson rejects the latter combination before execution. The trusted supervisor still runs as `rbafna` at RR10; child isolation and budgets are unchanged.
+
+After the v7 SDK update, the offline helper uses the current `policies/working.json` deployment copy with the recorded session. The archived actor remains unchanged; its old runtime pins intentionally reject the updated SDK.
