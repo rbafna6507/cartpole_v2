@@ -9,9 +9,9 @@ import threading
 import time
 
 HELP = """Commands (nothing moves automatically):
-  probe left +             0.5 mm raw DIR-HIGH probe, then stops holding
-  probe left -             0.5 mm raw DIR-LOW probe
-  probe right +            likewise for the other end (keep tilt tiny)
+  probe left + [mm]        raw DIR-HIGH probe, then stops holding
+  probe left - [mm]        raw DIR-LOW probe; optional distance >0..20 mm
+  probe right + [mm]       likewise for other end; default 0.5 mm; max 2 mm/s
   direction left +         confirm + probe moved UP; use - if - moved UP
   direction right +        independently confirm this motor's UP polarity
   home                     explicit prompt, then 40 mm/s DOWN for 5 seconds
@@ -32,6 +32,10 @@ def motion_command(text):
     if words[0] in ('status','stop','clear') and len(words)==1:return words[0]
     if words[0] in ('probe','direction') and len(words)==3 and words[1] in ('left','right') and words[2] in ('+','-'):
         return ' '.join(words)
+    if words[0]=='probe' and len(words)==4 and words[1] in ('left','right') and words[2] in ('+','-'):
+        distance=float(words[3])
+        if not math.isfinite(distance) or not 0<distance<=20:raise ValueError('Probe distance must be >0 and <=20 mm')
+        return ' '.join(words[:3])+f' {distance:.9g}'
     if words[0]=='sine':
         if len(words)==1:words=['sine','20','1','25','10']
         if len(words)!=5:raise ValueError('Use sine AMPLITUDE_MM HZ CENTER_MM SECONDS')

@@ -58,8 +58,10 @@ def test_host_command_boundary():
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     assert module.motion_command('sine')=='sine 20 1 25 10'
     assert module.motion_command('probe right -')=='probe right -'
+    assert module.motion_command('probe left + 5')=='probe left + 5'
+    assert module.motion_command('probe right - 20')=='probe right - 20'
     assert module.motion_command('direction left +')=='direction left +'
-    for bad in ('home','bottom 40 5 CONTACT_OK','disable SUPPORTED','reference CONFIRM','sine nan 1 25 10','sine 20 inf 25 10','probe both +','stop extra'):
+    for bad in ('home','bottom 40 5 CONTACT_OK','disable SUPPORTED','reference CONFIRM','sine nan 1 25 10','sine 20 inf 25 10','probe both +','probe left + 0','probe left + 21','probe right - nan','probe right + -5','direction left + 5','stop extra'):
         with pytest.raises(ValueError):module.motion_command(bad)
 
 
@@ -141,6 +143,15 @@ int main(){
  advance(10000,true,false);assert(fault==2 && !running);
  advance(1000);assert(!referenced);
  cmd("disable SUPPORTED");assert(pins[8]==HIGH && !energized);
+ cmd("clear");cmd("ping");
+ int32_t old=position[0];cmd("probe left + 5");advance(4800000);
+ assert(!fault && mode==IDLE && position[0]==old+3200);
+ old=position[1];cmd("probe right - 20");advance(18900000);
+ assert(!fault && mode==IDLE && position[1]==old-12800);
+ cmd("probe left + 21");assert(!running);
+ cmd("probe left + nan");assert(!running);
+ cmd("probe left + -1");assert(!running);
+ cmd("probe left + 0");assert(!running);
 }
 ''')
     binary=tmp_path/'sketch'

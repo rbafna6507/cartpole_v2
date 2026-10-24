@@ -375,3 +375,8 @@ with `direction left +|-` / `direction right +|-`, then `reference` at the inspe
 bottom pose (or `home` then `reference`). `sine` requests ±20 mm at 1 Hz centered
 25 mm above bottom for 10 s. `stop` retains holding torque; `disable` explicitly
 releases all drivers. No motion or flashing was performed during software preparation.
+
+Variable probes: `probe left + 5` or `probe right - 20` (millimeters; default 0.5,
+maximum 20 per command, peak 2 mm/s). Signs are raw DIR polarity; single-end
+moves tilt the rail and do not enforce absolute travel limits. Updated firmware
+and host are both required.

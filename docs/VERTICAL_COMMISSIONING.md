@@ -137,6 +137,14 @@ status
 ```
 
 Use `probe left -` / `probe right -` for the reverse check and return movement.
+For a variable distance, append millimeters: `probe left + 5`, `probe right - 10`,
+or `probe left - 20`. The default remains 0.5 mm; allowed distances are >0 to
+20 mm per command, with a quintic ramp and peak speed at most 2 mm/s. A 5 mm
+probe takes about 4.69 s; 20 mm takes 18.75 s. These are raw directions, not
+semantic UP/DOWN. They do not require a reference and cannot enforce absolute
+travel bounds. Verify available clearance and permissible rail tilt before
+larger single-end moves. Repeated probes can exceed the rail stroke; the limit
+is per command, not an absolute position limit.
 Every new probe invalidates that axis's direction confirmation, so issue
 `direction ...` again afterward. Do not repeatedly probe one side into a large
 tilt: there is no measured skew detection. Direction confirmations and settings
@@ -201,7 +209,7 @@ No firmware watchdog proves physical halt or detects missed motor steps.
 
 | Host command | Meaning |
 |---|---|
-| `probe left|right +|-` | Raw 0.5 mm direction probe |
+| `probe left/right +/- [mm]` | Raw direction probe, default 0.5 mm, >0–20 mm, peak ≤2 mm/s |
 | `direction left|right +|-` | Confirm which raw polarity raises that end |
 | `home` | Prompt, then timed 40 mm/s × 5 s DOWN |
 | `reference` | Prompt, then declare both current positions bottom/zero |

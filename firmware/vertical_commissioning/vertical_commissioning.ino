@@ -155,13 +155,18 @@ void command(char*line) {
         Serial.printf("OK configured %.3f pulses/mm; open-loop, no contact sensors\n",s.stepsPerMm());return;
     }
     if(!configured || uint32_t(micros()-lastPing)>HEARTBEAT_US){Serial.println("ERR configuration or heartbeat required");return;}
-    if(!strcmp(argv[0],"probe") && argc==3) {
+    if(!strcmp(argv[0],"probe") && (argc==3 || argc==4)) {
         int axis=!strcmp(argv[1],"left")?0:(!strcmp(argv[1],"right")?1:-1);
         int sign=!strcmp(argv[2],"+")?1:(!strcmp(argv[2],"-")?-1:0);
         if(axis<0 || !sign){Serial.println("ERR probe left|right +|-");return;}
+        double distance=.5;
+        if((argc==4 && !number(argv[3],distance)) || distance<=0 || distance>20){Serial.println("ERR probe distance must be >0 and <=20 mm");return;}
         referenced=false;confirmed[axis]=false;probeAxis=axis;
         for(int i=0;i<2;i++)startMm[i]=endMm[i]=position[i]/settings.stepsPerMm();
-        endMm[axis]+=.5*sign;start(PROBE,.5);Serial.println("RUN raw 0.5 mm direction probe");return;
+        endMm[axis]+=distance*sign;
+        // Quintic peak derivative 1.875: keep peak speed <=2 mm/s.
+        start(PROBE,std::max(.5,1.875*distance/2.));
+        Serial.printf("RUN raw %.4f mm direction probe; max 2 mm/s\n",distance);return;
     }
     if(!strcmp(argv[0],"direction") && argc==3) {
         int axis=!strcmp(argv[1],"left")?0:(!strcmp(argv[1],"right")?1:-1);
