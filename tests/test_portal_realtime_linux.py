@@ -22,7 +22,7 @@ def runtime(tmp_path,reset='pass',act='return Acceleration(0)',timeout=.01):
 def test_realtime_child_limits_cannot_be_raised_or_scheduling_changed(tmp_path):
     check="assert resource.getrlimit(resource.RLIMIT_RTTIME)==(500000,500000)\nassert resource.getrlimit(resource.RLIMIT_RTPRIO)==(1,1)\nfor attempt in (lambda:resource.setrlimit(resource.RLIMIT_RTTIME,(1000000,1000000)),lambda:os.sched_setscheduler(0,os.SCHED_RR,os.sched_param(2)),lambda:os.sched_setaffinity(0,{0})):\n try:attempt()\n except (PermissionError,ValueError):pass\n else:raise RuntimeError('restriction escaped')\nreturn Acceleration(0)"
     with runtime(tmp_path,act=check).launch() as child:
-        child.reset(Session('rt-test','clock'))
+        child.reset(Session('rt-test','clock'));child.begin_run()
         assert child.act(OBS)==0
 
 
@@ -36,20 +36,20 @@ def test_realtime_reset_cpu_burner_is_bounded_while_unarmed(tmp_path):
 def test_realtime_action_cpu_burner_hits_hard_cpu_budget(tmp_path):
     # Wider *test-only* IPC deadline proves the independent kernel CPU limit.
     with runtime(tmp_path,act='while True:pass',timeout=1.).launch() as child:
-        child.reset(Session('rt-test','clock'));began=time.monotonic()
+        child.reset(Session('rt-test','clock'));child.begin_run();began=time.monotonic()
         with pytest.raises(SandboxError):child.act(OBS)
         assert time.monotonic()-began<.9
 
 
 def test_realtime_sleeping_policy_cannot_evade_wall_deadline(tmp_path):
     with runtime(tmp_path,act='while True:time.sleep(.001)').launch() as child:
-        child.reset(Session('rt-test','clock'));began=time.monotonic()
+        child.reset(Session('rt-test','clock'));child.begin_run();began=time.monotonic()
         with pytest.raises(SandboxError):child.act(OBS)
         assert time.monotonic()-began<.2
 
 
 def test_realtime_busy_policy_still_has_ten_ms_broker_deadline(tmp_path):
     with runtime(tmp_path,act='while True:pass').launch() as child:
-        child.reset(Session('rt-test','clock'));began=time.monotonic()
+        child.reset(Session('rt-test','clock'));child.begin_run();began=time.monotonic()
         with pytest.raises(SandboxError):child.act(OBS)
         assert time.monotonic()-began<.2

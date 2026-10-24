@@ -43,12 +43,12 @@ class RemoteQueue:
         data=binary if binary is not None else (None if body is None else canonical_json(body).encode())
         artifact_response=re.fullmatch(r'/api/jobs/[a-f0-9]{32}/artifact',path) is not None and data is None
         response_limit=MAX_ENVELOPE_BYTES if artifact_response else 100000
-        request_timeout=30 if binary is not None or artifact_response else self.timeout
+        request_timeout=30 if binary is not None or artifact_response or path.endswith('/start') else self.timeout
         if not self._slots.acquire(blocking=False):raise WorkerError('portal request already pending')
         deadline=time.monotonic()+request_timeout
         replies=thread_queue.Queue(maxsize=1);cancel=threading.Event();state={}
         def request():
-            connection=None
+            connection=None;phase='connect'
             try:
                 kind=http.client.HTTPSConnection if self.parts.scheme=='https' else http.client.HTTPConnection
                 connection=kind(self.parts.hostname,self.parts.port,timeout=request_timeout)
@@ -56,8 +56,10 @@ class RemoteQueue:
                 connection.connect()
                 state['socket']=connection.sock
                 if cancel.is_set():raise WorkerError('portal deadline exceeded')
+                phase='request'
                 connection.request('GET' if data is None else 'POST',path,body=data,
                     headers={'Authorization':'Bearer '+self.token,**({'Content-Type':'application/zip','X-Worker-Lease':lease} if binary is not None else ({'Content-Type':'application/json'} if data is not None else {}))})
+                phase='response_headers'
                 response=connection.getresponse()
                 if not 200<=response.status<300:raise WorkerError('portal status rejected')
                 # Fixed API endpoints never need redirects. HTTPConnection does not
@@ -65,6 +67,7 @@ class RemoteQueue:
                 length=response.getheader('Content-Length')
                 if response.getheader('Transfer-Encoding') is not None or length is None or not length.isdecimal() or not 0<=int(length)<=response_limit:
                     raise WorkerError('invalid portal response framing')
+                phase='response_body'
                 raw=bytearray()
                 while len(raw)<int(length):
                     remaining=deadline-time.monotonic()
@@ -75,8 +78,10 @@ class RemoteQueue:
                     raw.extend(chunk)
                 value=strict_json_loads(raw.decode())
                 if not cancel.is_set():replies.put_nowait((value,None))
-            except Exception:
-                if not cancel.is_set():replies.put_nowait((None,WorkerError('portal request failed')))
+            except Exception as exc:
+                failure=WorkerError('portal request failed')
+                failure.diagnostic={'phase':phase,'exception_type':type(exc).__name__}
+                if not cancel.is_set():replies.put_nowait((None,failure))
             finally:
                 if connection is not None:connection.close()
                 self._slots.release()
@@ -208,8 +213,10 @@ class HardwareBridge:
 
 class _SetupLease:
     """Renew only the short claimed lease while bounded unarmed setup runs."""
-    def __init__(self,queue,identifier,worker,lease):
+    def __init__(self,queue,identifier,worker,lease,*,renew_required=True):
+        self.thread=None
         self.stop_event=threading.Event();self.error=None
+        if not renew_required:return
         def renew():
             while not self.stop_event.wait(.4):
                 try:
@@ -220,7 +227,9 @@ class _SetupLease:
         self.thread=threading.Thread(target=renew,daemon=True)
         self.thread.start()
     def stop(self):
-        self.stop_event.set();self.thread.join(1.5)
+        self.stop_event.set()
+        if self.thread is None:return
+        self.thread.join(1.5)
         if self.thread.is_alive():raise WorkerError('setup heartbeat did not finish')
         if self.error is not None:raise WorkerError('setup authority revoked') from self.error
 
@@ -231,9 +240,10 @@ class _RunLease:
     def __init__(self,queue,identifier,worker,lease,rig,*,confirmed_at,interval=.25,max_age=1.):
         self.stop_event=threading.Event();self.error=None;self.cancelled=False
         self.confirmed_at=confirmed_at;self.max_age=max_age
+        self.renew_started_at=None;self.renew_finished_at=None;self.renew_count=0
         def renew():
             while not self.stop_event.wait(interval):
-                began=time.monotonic()
+                began=time.monotonic();self.renew_started_at=began
                 try:
                     job=queue.heartbeat(identifier,worker,lease)
                     if (job['id']!=identifier or job['worker']!=worker or job['lease']!=lease or
@@ -243,6 +253,7 @@ class _RunLease:
                     # Age from request start, so delayed replies cannot refresh
                     # authority using their later arrival time.
                     self.confirmed_at=began
+                    self.renew_finished_at=time.monotonic();self.renew_count+=1
                     if self.cancelled:return
                 except Exception as exc:
                     self.error=exc;return
@@ -250,7 +261,21 @@ class _RunLease:
         self.thread.start()
     def check(self):
         if self.error is not None:raise RunAuthorityError('runtime heartbeat failed') from self.error
-        if time.monotonic()-self.confirmed_at>self.max_age:raise RunAuthorityError('runtime authority stale')
+        if time.monotonic()-self.confirmed_at>self.max_age:
+            # In-memory code locations only: no locals, source reads, or I/O on
+            # the stop path. This distinguishes a blocked socket from scheduling.
+            import sys
+            failure=RunAuthorityError('runtime authority stale')
+            failure.thread_locations=[]
+            for thread,frame in list(sys._current_frames().items())[:16]:
+                functions=[];locations=[]
+                for _ in range(10):
+                    if frame is None:break
+                    functions.append(frame.f_code.co_name)
+                    locations.append([frame.f_code.co_filename.rsplit('/',1)[-1],frame.f_lineno])
+                    frame=frame.f_back
+                failure.thread_locations.append({'thread':thread,'functions':functions,'locations':locations})
+            raise failure
         return not self.cancelled
     def close(self):
         self.stop_event.set();self.thread.join(1.5)
@@ -270,13 +295,15 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     job=queue.claim(worker,rig_id,sensor_source=sensor_source)
     if job is None:return None
     lease=job['lease'];identifier=job['id'];bridge=None
-    status='failed';error=None;stopped=True;latencies=[];actions=0;observations=0;diagnostics={};peak_demand=0.;wall_budget=None
-    began=time.monotonic();interrupted=False;recorder=None;run_lease=None;numeric_backend=None;scheduling=None;setup_lease=_SetupLease(queue,identifier,worker,lease)
+    status='failed';error=None;authority_failure=None;stopped=True;latencies=[];actions=0;observations=0;diagnostics={};peak_demand=0.;wall_budget=None
+    began=time.monotonic();interrupted=False;recorder=None;run_lease=None;numeric_backend=None;scheduling=None;setup_lease=_SetupLease(queue,identifier,worker,lease,renew_required=job.get('setup_heartbeat_required',True))
     recording_root=recording_root or (queue.root/'recording-spool' if isinstance(queue,Store) else 'runs/portal-recordings')
     try:
         recorder=RunRecorder(recording_root,job)
         recorder.emit('attempt',backend=sensor_source,max_acceleration_m_s2=approved_ceiling)
-        if sensing_url is not None:recorder.start_sensing(sensing_url,job['duration']+5)
+        if sensing_url is not None:recorder.start_sensing(sensing_url,job['duration']+35)
+        source=queue.artifact(job['artifact']) if isinstance(queue,Store) else queue.fetch(job,worker)
+        if len(source)>MAX_UPLOAD_BYTES or hashlib.sha256(source).hexdigest()!=job['artifact']:raise WorkerError('artifact digest mismatch')
         stopped=False  # backend factory may acquire hardware even if it raises
         bridge=bridge_factory()
         if bridge.kind!=job['source'] or bridge.kind!=sensor_source:
@@ -286,8 +313,6 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
         recorder.emit('session',session=asdict(bridge.session))
         recorder.observation(current)
         recorder.emit('backend_start',diagnostics=bridge.diagnostics())
-        source=queue.artifact(job['artifact']) if isinstance(queue,Store) else queue.fetch(job,worker)
-        if len(source)>MAX_UPLOAD_BYTES or hashlib.sha256(source).hexdigest()!=job['artifact']:raise WorkerError('artifact digest mismatch')
         with tempfile.TemporaryDirectory(prefix='cartpole-policy-',dir=spool_root) as spool:
             inspection=prepare_artifact(source,job['filename'],spool)
             recorder.emit('artifact',sha256=job['artifact'],inspection=inspection)
@@ -314,11 +339,9 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
             with isolator.launch() as child:
                 child.reset(bridge.session)  # no physical arm before strict reset ACK
                 setup_lease.stop()
-                start_began=time.monotonic()
+                recorder.emit('execution_ready',preparation_wall_s=time.monotonic()-began,requested_duration_s=job['duration'])
                 original_duration=job['duration']
                 job=queue.start(identifier,worker,lease)
-                if time.monotonic()-start_began>.25:
-                    raise WorkerError('start authority response too old')
                 # A successful but delayed start response is not current authority.
                 # Revalidate the actual lease after setup, immediately before ARM.
                 authority_began=time.monotonic()
@@ -328,13 +351,16 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
                 if job['id']!=identifier or job['worker']!=worker or job['rig']!=rig_id or job['lease']!=lease or job['status']!='running':
                     raise WorkerError('worker lease identity mismatch')
                 if job['cancel_requested']:raise WorkerError('job cancelled')
-                remaining_duration=original_duration-(time.monotonic()-start_began)
-                if remaining_duration<.001:raise WorkerError('start reply exhausted motion budget')
+                if 'runtime_remaining_s' in job and job['runtime_remaining_s']-(time.monotonic()-authority_began)<wall_budget+.1:
+                    raise WorkerError('insufficient authority for full requested run')
+                remaining_duration=original_duration
                 run_lease=_RunLease(queue,identifier,worker,lease,rig_id,confirmed_at=authority_began)
                 try:
+                    child.begin_run()
+                    motion_began=time.monotonic()
                     bridge.arm(remaining_duration)
                     if isinstance(bridge,HardwareBridge):current=bridge.selected()
-                    wall_end=start_began+wall_budget+min(.5,job['duration'])
+                    wall_end=motion_began+wall_budget+min(.5,job['duration'])
                     sequence=0
                     while not bridge.complete():
                         if time.monotonic()>=wall_end:raise WorkerError('run wall deadline exceeded')
@@ -377,7 +403,15 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
         interrupted=True;status='cancelled';error='worker_interrupted'
     except SandboxError:error='isolated_policy_failure'
     except QueueError:error='queue_lease_failure'
-    except RunAuthorityError:error='runtime_authority_failure'
+    except RunAuthorityError as exc:
+        error='runtime_authority_failure'
+        cause=exc.__cause__
+        authority_failure={'thread_locations':getattr(exc,'thread_locations',None),'reason':str(exc),'cause_type':type(cause).__name__ if cause else None,
+            'heartbeat_age_s':None if run_lease is None else time.monotonic()-run_lease.confirmed_at,
+            'transport':getattr(cause,'diagnostic',None),
+            'renew_started_at':run_lease.renew_started_at if run_lease else None,
+            'renew_finished_at':run_lease.renew_finished_at if run_lease else None,
+            'renew_count':run_lease.renew_count if run_lease else None}
     except WorkerError:error='worker_guard_failure'
     except Exception:error='backend_failure'
     finally:
@@ -404,6 +438,7 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     # An expired/uncertain lease is not retried or cleared. Queue recovery blocks
     # an active rig; only an authenticated operator can confirm physical recovery.
     result['recording']={'status':'local_pending_upload' if recorder is not None else 'unavailable'}
+    if authority_failure is not None:result['authority_failure']=authority_failure
     finish_error=None
     try:
         if run_lease is not None and run_lease.thread.is_alive():raise RunAuthorityError('cannot finish while renewal is pending')
@@ -426,6 +461,17 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     return finished
 
 def main(argv=None):
+    # Match the operator console: keep the serial I/O and heartbeat threads from
+    # waiting a default 5ms GIL timeslice inside the 20ms action lifetime.
+    import sys
+    previous=sys.getswitchinterval()
+    try:
+        sys.setswitchinterval(.001)
+        return _main(argv)
+    finally:sys.setswitchinterval(previous)
+
+
+def _main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     source=parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--local-root');source.add_argument('--portal')

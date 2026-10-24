@@ -224,8 +224,18 @@ $('credential-file').onchange = async () => {
   try {
     if (file.size > 16384) throw new Error('Credential file is too large.');
     const data = JSON.parse(await file.text());
-    if (!data || Array.isArray(data) || typeof data !== 'object' || Object.entries(data).length !== 2 || !['submit', 'operator'].every(role => Object.entries(data).some(([key, value]) => /^[0-9a-f]{64}$/.test(key) && Array.isArray(value) && value.length === 2 && value[1] === role))) throw new Error('Choose the local preview credentials.json file.');
-    localCredentials = data; $('dev-role').disabled = false; connectLocalRole();
+    const entries = data && !Array.isArray(data) && typeof data === 'object' ? Object.entries(data) : [];
+    if (!entries.length || entries.length > 2 || !entries.every(([key, value]) =>
+      /^[0-9a-f]{64}$/.test(key) && Array.isArray(value) && value.length === 2 &&
+      typeof value[0] === 'string' && value[0].length > 0 && ['submit','operator'].includes(value[1])) ||
+      new Set(entries.map(([,value]) => value[1])).size !== entries.length)
+      throw new Error('Choose a portal sign-in file containing a submitter or operator credential.');
+    pauseCamera();
+    localCredentials = data;
+    for (const option of $('dev-role').options) option.disabled = !entries.some(([,value]) => value[1] === option.value);
+    $('dev-role').value = entries.some(([,value]) => value[1] === 'submit') ? 'submit' : 'operator';
+    $('dev-role').disabled = entries.length === 1;
+    connectLocalRole();
   } catch (error) { message(error.message); }
 };
 
@@ -258,7 +268,7 @@ async function cameraFrame(generation) {
   };
   image.onerror = failed;
   cameraAbort = new AbortController();
-  cameraWatchdog = setTimeout(() => { cameraAbort?.abort(); failed(); }, 5000);
+  cameraWatchdog = setTimeout(() => { cameraAbort?.abort(); failed(); }, 15000);
   try {
     const response = await fetch(apiURL('/api/camera/preview?mode=' + encodeURIComponent($('camera-mode').value)), {
       headers: {Authorization: 'Bearer ' + token}, cache: 'no-store',

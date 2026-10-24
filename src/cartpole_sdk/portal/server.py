@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import re
 import socket
+import sqlite3
 import threading
 import time
 from urllib.parse import urlsplit, parse_qs
@@ -59,6 +60,13 @@ class PortalServer(ThreadingHTTPServer):
         self.slots=threading.BoundedSemaphore(16)
         self.video_slots=threading.BoundedSemaphore(4)
         super().__init__(*args,**kwargs)
+    def server_close(self):
+        try:super().server_close()
+        finally:
+            anchor=getattr(self,'_database_anchor',None)
+            if anchor is not None:
+                self._database_anchor=None
+                anchor.close()
     def process_request(self,request,address):
         if not self.slots.acquire(blocking=False):
             self.shutdown_request(request);return
@@ -295,6 +303,15 @@ def make_server(store,credentials,*,host='127.0.0.1',port=8765,origins=(),camera
             raise QueueError('camera URL must be a plain HTTP(S) origin')
         camera_url=camera_url.rstrip('/')
     server=PortalServer((host,port),Handler)
+    try:
+        # Keep WAL open between short request transactions. Otherwise the final
+        # connection close checkpoints on every heartbeat, adding storage stalls
+        # to the control lease path. This connection never holds a transaction;
+        # Configured synchronous writes and normal size-based checkpoints stay enabled.
+        server._database_anchor=sqlite3.connect(store.database,check_same_thread=False)
+        server._database_anchor.execute('SELECT name FROM sqlite_master LIMIT 1').fetchall()
+    except BaseException:
+        server.server_close();raise
     server.camera_url=camera_url;server.rig_id=rig_id
     server.store=store;server.credentials=credentials.copy()
     server.origins=set(origins)|{f'http://{host}:{server.server_port}'}

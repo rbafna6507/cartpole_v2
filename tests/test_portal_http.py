@@ -64,3 +64,23 @@ class HTTPTests(unittest.TestCase):
         with urllib.request.urlopen(self.origin+'/',timeout=2) as response:
             html=response.read().decode();self.assertIn('New experiment',html);self.assertNotIn('alice-secret-long',html)
             self.assertIn("default-src 'self'",response.headers['Content-Security-Policy'])
+
+
+def test_server_keeps_wal_open_between_requests_and_releases_on_close(tmp_path):
+    from pathlib import Path
+    store=Store(tmp_path)
+    from contextlib import closing
+    with closing(store._connect()) as baseline:
+        synchronous=baseline.execute('PRAGMA synchronous').fetchone()[0]
+    server=make_server(store,{'submit-secret-long':('owner','submit')},port=0)
+    wal=Path(str(store.database)+'-wal')
+    try:
+        store.submit('owner','one',b'x','policy.py','simulation',1)
+        assert wal.exists(), 'closing each request must not trigger a last-connection checkpoint'
+        assert wal.stat().st_size>0
+        with store._connect() as db:
+            assert db.execute('PRAGMA synchronous').fetchone()[0]==synchronous
+    finally:server.server_close()
+    # The test connection must also close before checking final WAL cleanup.
+    db.close()
+    assert not wal.exists() or wal.stat().st_size==0

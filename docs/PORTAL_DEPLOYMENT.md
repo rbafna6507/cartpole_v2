@@ -72,7 +72,7 @@ Storage admission also limits each owner to 512 lifetime jobs and 256 MiB of dis
 
 ZIPs cannot contain links, special files, duplicate paths, traversal, encrypted entries or unsupported compression. Dependencies are the supplied Python standard library, SDK and explicitly mounted NumPy runtime; no `pip install`, shell commands or network dependency resolution occurs. PyTorch pickle/checkpoint and arbitrary model formats are not accepted. Numeric model shape/content validation is data-only; execution occurs inside the isolated process. Artifact inspection displays the file manifest or actor metadata, and operators can download exact submitted bytes for review.
 
-Every attempted worker run creates a bounded recording, including failed runs when recording initialization succeeds. Download bundle contains `manifest.json` and `telemetry.jsonl`: original observation channels/timestamps, requested actions, inference durations (including failed policy attempts), backend diagnostics, outcome, software hashes and explicit coverage/drop information. Telemetry is capped at 12 MiB and ZIP at 16 MiB. Camera-derived measurements require a configured compatible developer-stream service; full video, serial bytes and firmware-internal samples are not included. A local spool survives upload/network failures; a missing remote bundle is not silently presented as complete.
+Every attempted worker run creates a bounded recording, including failed runs when recording initialization succeeds. Download bundle contains `manifest.json` and `telemetry.jsonl`: original observation channels/timestamps, requested actions, inference durations (including failed policy attempts), backend diagnostics, outcome, software hashes and explicit coverage/drop information. Telemetry is capped at 32 MiB and ZIP at 40 MiB. The bounded writer queue holds up to 2,048 records so short storage stalls do not immediately discard control samples. Dropped records remain explicit in the manifest; a larger cap is not a guarantee of lossless capture. Camera-derived measurements require a configured compatible developer-stream service; full video, serial bytes and firmware-internal samples are not included. A local spool survives upload/network failures; a missing remote bundle is not silently presented as complete.
 
 ## Reserved development and recovery
 
@@ -121,3 +121,73 @@ Require all five isolation/abuse tests and all three actor reset checks to pass 
 The offline helper uses `LimitRTPRIO=10` plus `chrt --rr 10`, rather than transient `CPUSchedulingPolicy`/`CPUSchedulingPriority` properties: systemd 249 on this Jetson rejects the latter combination before execution. The trusted supervisor still runs as `rbafna` at RR10; child isolation and budgets are unchanged.
 
 After the v7 SDK update, the offline helper uses the current `policies/working.json` deployment copy with the recorded session. The archived actor remains unchanged; its old runtime pins intentionally reject the updated SDK.
+
+
+## Preparation and execution authority (2026-10-24)
+
+The hosted API uses one `RuntimeStore` owner per queue directory, enforced by an
+exclusive process lock. SQLite remains the durable job, approval and result store.
+It is not accessed by active-run heartbeat renewal.
+
+1. Claim reserves the job and exclusive rig access for at most 35 seconds of
+   **unarmed preparation**. This is a preparation reservation, not permission to
+   move. It does not require the short execution heartbeat. The worker downloads
+   and hashes the artifact before opening the rig, checks the stopped hardware,
+   prepares the upload, launches the isolated child, and obtains its reset ACK.
+2. Only after readiness does `start` durably mark the run. Once that commit
+   completes, the API publishes a fresh in-memory execution authority. A final
+   heartbeat must return promptly and leave enough time for the entire requested
+   run before the worker can ARM. Slow setup never subtracts from requested motion
+   duration. The unarmed start request has a bounded 30-second network budget.
+3. The sandbox has a separate 35-second preparation watchdog. Its execution timer
+   starts through the trusted broker's one-shot `begin_run()` immediately before
+   ARM. Reset and action IPC deadlines, resource limits, filesystem/network
+   isolation, and the firmware action lifetime remain enforced.
+4. During execution, heartbeats run every 250 ms. The worker stops after one second
+   without confirmed fresh authority; server authority expires after two seconds.
+   Monotonic clocks enforce renewal and the fixed run deadline. Heartbeats do not
+   wait for SQLite writes, artifact synchronization, or recording uploads.
+5. Cancellation becomes sticky in memory before its durable write. API shutdown
+   revokes its authorities and drains open database connections before releasing
+   ownership. Restart cannot reconstruct execution permission from a database row:
+   prior running jobs fail closed and require physical STOP confirmation/recovery.
+
+The legacy direct `Store` remains available for offline queue tests and local
+simulation; the deployed `cartpole_sdk.portal.host` selects `RuntimeStore`.
+Do not run multiple APIs or directly mutate an active hosted queue through a
+second `Store` process. Use the authenticated API.
+
+### Diagnostic evidence and remaining acceptance
+
+On 2026-10-24 an unchanged working actor balanced for approximately 32.74 seconds
+within a 35.9-second worker run before runtime authority expired. A subsequent
+55-second zero-command test completed 5,497 actions with STOP confirmed and no
+firmware fault. Its repeat expired before any action while an API thread spent
+several seconds in `wait_on_page_bit_common` and `jbd2_log_wait_commit`. Separate
+stack captures located durable SQLite commits and artifact synchronization in
+these storage waits. This motivated separating runtime authority from storage;
+changing controller gains or policy weights was not indicated by this evidence.
+
+These observations do **not** establish physical acceptance of the new runtime
+path. A complete 55-second policy run and its downloadable recording must be
+verified after deployment. The 55-second diagnostic under the previous recording
+cap omitted 1,410 records; its original manifest preserves that limitation.
+
+Verification before hardware restart: 209 portal tests passed locally (15
+platform-dependent skips), followed by 28 focused runtime/reservation tests after
+adding the slow-commit reservation guard. On the Jetson, 59 targeted tests passed,
+including actual bwrap isolation (two skips). The historical
+`evidence/phase5/learned-policy-simulation.py` integration fixture was excluded:
+its frozen SDK hashes differ in four files predating this change; it was not
+rewritten to conceal that mismatch. In a separate Jetson HTTP diagnostic, all 30
+heartbeats succeeded while the SQLite writer lock was held for 3.212 seconds;
+maximum heartbeat latency was 14.43 ms. No hardware was opened by that diagnostic.
+
+After staging an update, run the privileged offline checks and start the worker:
+
+```bash
+bash ~/cartpole-portal/source/deploy/portal/check-worker-realtime.sh && sudo systemctl restart cartpole-worker-hardware.service
+```
+
+The offline script does not open the rig. Physical acceptance remains a separate
+portal submission after this command succeeds.

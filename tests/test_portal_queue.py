@@ -87,3 +87,30 @@ class QueueTests(unittest.TestCase):
         self.assertIsNone(self.store.claim('w2','r',now=101))
         self.store.finish(job['id'],'w',claim['lease'],'cancelled',{'stopped':True},now=101.05)
         self.submit(key='next');self.assertIsNotNone(self.store.claim('w2','r',now=101.06))
+
+
+def test_only_heartbeat_uses_nonblocking_durability_policy(tmp_path):
+    from contextlib import contextmanager
+    class Observed(Store):
+        sync=[]
+        checkpoints=[]
+        @contextmanager
+        def _tx(self,**kwargs):
+            with super()._tx(**kwargs) as db:
+                self.sync.append(db.execute('PRAGMA synchronous').fetchone()[0])
+                self.checkpoints.append(db.execute('PRAGMA wal_autocheckpoint').fetchone()[0])
+                yield db
+    queue=Observed(tmp_path)
+    queue.sync.clear()
+    job=queue.submit('owner','one',b'x','policy.py','simulation',5,now=100)
+    claim=queue.claim('worker','sim',now=100)
+    queue.start(job['id'],'worker',claim['lease'],now=100)
+    assert queue.sync and all(value==2 for value in queue.sync)
+    queue.sync.clear()
+    queue.heartbeat(job['id'],'worker',claim['lease'],now=100.5)
+    assert queue.sync==[1]
+    assert queue.checkpoints[-1]==0
+    queue.sync.clear()
+    queue.finish(job['id'],'worker',claim['lease'],'succeeded',{'stopped':True},now=101)
+    assert queue.sync==[2]
+    assert queue.checkpoints[-1]==1000

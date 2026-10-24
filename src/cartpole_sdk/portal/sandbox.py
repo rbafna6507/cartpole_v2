@@ -24,14 +24,19 @@ def validate_acceleration_ceiling(value):
 
 class PolicyChannel:
     """Trusted process pipe adapter. Untrusted launches must use Sandbox.launch."""
-    def __init__(self,process,*,action_timeout=.01,startup_timeout=1.5,stdout_limit=1024*1024,stderr_limit=16384,max_acceleration=.25,wall_seconds=60):
+    def __init__(self,process,*,action_timeout=.01,startup_timeout=1.5,stdout_limit=1024*1024,stderr_limit=16384,max_acceleration=.25,wall_seconds=60,preparation_timeout=None):
         self.process=process
         self.action_timeout=action_timeout;self.startup_timeout=startup_timeout
         self.max_acceleration=validate_acceleration_ceiling(max_acceleration)
         self.stdout_limit=stdout_limit;self.stderr_limit=stderr_limit
         self._messages=queue.Queue(maxsize=8);self._error=None;self._error_lock=threading.Lock()
         self._sequence=0;self._reset=False;self._closed=False;self._partial=0
-        self._wall_end=time.monotonic()+startup_timeout+wall_seconds
+        if preparation_timeout is not None and (not isinstance(preparation_timeout,(int,float)) or not math.isfinite(preparation_timeout) or not 0<preparation_timeout<=35):
+            raise SandboxError('invalid preparation timeout')
+        self._deadline_lock=threading.Lock();self._wall_changed=threading.Event()
+        self._separate_preparation=preparation_timeout is not None;self._run_started=False
+        self._run_wall_seconds=wall_seconds+min(.5,wall_seconds)
+        self._wall_end=time.monotonic()+(preparation_timeout if preparation_timeout is not None else startup_timeout+wall_seconds)
         self._closed_event=threading.Event()
         self._counts={'stdout':0,'stderr':0}
         self._stderr_tail=b''
@@ -43,8 +48,23 @@ class PolicyChannel:
         self._watcher=threading.Thread(target=self._watch_wall,daemon=True)
         self._watcher.start()
     def _watch_wall(self):
-        if not self._closed_event.wait(max(0,self._wall_end-time.monotonic())):
-            self._fail('policy wall deadline exceeded')
+        while not self._closed_event.is_set():
+            with self._deadline_lock:
+                remaining=self._wall_end-time.monotonic()
+                self._wall_changed.clear()
+            if remaining<=0:
+                self._fail('policy wall deadline exceeded');return
+            self._wall_changed.wait(remaining)
+
+    def begin_run(self):
+        with self._deadline_lock:
+            if not self._reset or self._run_started or self._closed or self._error is not None:
+                raise SandboxError('policy is not ready to begin')
+            if time.monotonic()>=self._wall_end:raise SandboxError('policy preparation expired')
+            self._run_started=True
+            if self._separate_preparation:
+                self._wall_end=time.monotonic()+self._run_wall_seconds
+                self._wall_changed.set()
     def __enter__(self):return self
     def __exit__(self,*args):self.close()
     @property
@@ -120,6 +140,7 @@ class PolicyChannel:
         self._reset=True
     def act(self,observation):
         if not self._reset:raise SandboxError('policy reset acknowledgement required')
+        if self._separate_preparation and not self._run_started:raise SandboxError('policy execution not started')
         self._sequence+=1;began=time.monotonic()
         self._send({'type':'act','sequence':self._sequence,'observation':asdict(observation)},self.action_timeout)
         reply=self._receive(max(.000001,self.action_timeout-(time.monotonic()-began)))
@@ -135,7 +156,7 @@ class PolicyChannel:
         return value
     def close(self):
         if self._closed:return
-        self._closed=True;self._closed_event.set();self._kill()
+        self._closed=True;self._closed_event.set();self._wall_changed.set();self._kill()
         try:self.process.wait(timeout=.5)
         except subprocess.TimeoutExpired:
             self.process.kill();self.process.wait(timeout=.5)
@@ -218,4 +239,4 @@ class Sandbox:
             args=[limiter,f'--rttime={startup_rttime}:{startup_rttime}','--rtprio=1:1','--']+args
         try:process=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,close_fds=True,start_new_session=True,env={})
         except OSError as exc:raise SandboxError('sandbox launch failed') from exc
-        return PolicyChannel(process,action_timeout=self.action_timeout,wall_seconds=self.wall_seconds,max_acceleration=self.max_acceleration)
+        return PolicyChannel(process,action_timeout=self.action_timeout,wall_seconds=self.wall_seconds,max_acceleration=self.max_acceleration,preparation_timeout=35)

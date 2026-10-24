@@ -95,3 +95,37 @@ test('ZIP inspection displays manifest without decoding binary archive contents'
   assert.match(text, /SHA-256: abc/);
   assert.doesNotMatch(text, /�/);
 });
+
+
+test('hosted sign-in file accepts one submitter credential and rejects worker access', async () => {
+  const calls=[];
+  const h=setup(async (url, options) => { calls.push({url,options}); return {ok:false,json:async()=>({error:'test boundary'})}; });
+  const key='a'.repeat(64);
+  h.element('dev-role').value='operator';
+  h.element('credential-file').files=[{size:100,text:async()=>JSON.stringify({[key]:['owner','submit']})}];
+  await h.element('credential-file').onchange();
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(calls[0]?.options.headers.Authorization,'Bearer '+key);
+  assert.equal(h.element('dev-role').value,'submit');
+  calls.length=0;
+  h.element('credential-file').files=[{size:100,text:async()=>JSON.stringify({[key]:['worker','worker']})}];
+  await h.element('credential-file').onchange();
+  assert.equal(calls.length,0);
+  assert.match(h.element('message').textContent,/sign-in file/i);
+});
+
+test('hosted page exposes sign-in file outside local development preview', () => {
+  const html=fs.readFileSync(path.join(__dirname,'../../src/cartpole_sdk/portal/web/index.html'),'utf8');
+  assert.match(html,/Sign in with file/);
+  assert.doesNotMatch(html,/id="dev-access"[^>]*hidden/);
+});
+
+
+test('JPEG fallback gives a slow public relay a bounded 15 second transfer window', async () => {
+  const h=setup(async()=>new Promise(()=>{}));
+  const delays=[];
+  h.context.setTimeout=(fn,delay)=>{delays.push(delay);return 1;};
+  h.element('camera-start').onclick();
+  assert.ok(delays.includes(15000));
+  h.context.pauseCamera();
+});

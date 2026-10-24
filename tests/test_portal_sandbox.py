@@ -94,7 +94,7 @@ class LinuxSandboxTests(unittest.TestCase):
             source=Path(root)/'source.py'
             source.write_text('import socket\nfrom cartpole_sdk.contracts import Acceleration\nclass Policy:\n def reset(self,session): pass\n def act(self,observation):\n'+''.join('  '+line+'\n' for line in body.splitlines())+'\ndef create_policy(): return Policy()\n')
             with Sandbox(source,action_timeout=.25,sdk_root=sdk_root).launch() as channel:
-                channel.reset(Session('s','clock'));return channel.act(OBS)
+                channel.reset(Session('s','clock'));channel.begin_run();return channel.act(OBS)
     def test_valid_policy_runs_inside_actual_sandbox(self):self.assertEqual(self.run_policy('return Acceleration(0.1)'),.1)
     def test_positioned_read_of_readonly_sdk_mount_is_allowed(self):
         body='import os\nfd=os.open("/sdk/cartpole_sdk/portal/harness.py",os.O_RDONLY)\ntry:\n prefix=os.pread(fd,8,0)\nfinally:\n os.close(fd)\nreturn Acceleration(0.1 if prefix==b\'"""Bwrap\' else 0)'
@@ -116,3 +116,29 @@ class LinuxSandboxTests(unittest.TestCase):
     def test_cpu_memory_and_output_abuse_fail_bounded(self):
         for body in ('while True: pass','x=bytearray(2**31)\nreturn Acceleration(0)','print("x"*100000)\nreturn Acceleration(0)'):
             with self.subTest(body=body),self.assertRaises(SandboxError):self.run_policy(body)
+
+def test_preparation_and_execution_wall_timers_are_separate():
+    code='import sys,json\nfor line in sys.stdin:\n r=json.loads(line)\n if r["type"]=="reset": print(json.dumps({"type":"reset_ack","nonce":r["nonce"]}),flush=True)\n'
+    process=subprocess.Popen([sys.executable,'-I','-c',code],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+    try:
+        with PolicyChannel(process,wall_seconds=.05,startup_timeout=.1,preparation_timeout=.5) as channel:
+            channel.reset(Session('s','clock'))
+            time.sleep(.2)
+            assert process.poll() is None
+            channel.begin_run()
+            with __import__('pytest').raises(SandboxError):channel.begin_run()
+            deadline=time.monotonic()+1
+            while process.poll() is None and time.monotonic()<deadline:time.sleep(.005)
+            assert process.poll() is not None
+    finally:
+        if process.poll() is None:process.kill();process.wait()
+
+def test_unstarted_preparation_has_independent_hard_timeout():
+    process=subprocess.Popen([sys.executable,'-I','-c','import time; time.sleep(10)'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+    try:
+        with PolicyChannel(process,wall_seconds=60,preparation_timeout=.05) as channel:
+            deadline=time.monotonic()+.5
+            while process.poll() is None and time.monotonic()<deadline:time.sleep(.005)
+            assert process.poll() is not None
+    finally:
+        if process.poll() is None:process.kill();process.wait()

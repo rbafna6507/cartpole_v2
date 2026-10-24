@@ -33,6 +33,7 @@ def name(value, label='identifier'):
     return value
 
 class Store(ReservationStoreMixin, RecordingStoreMixin):
+    claim_lease_seconds=2
     def __init__(self, root, *, reservations_enabled=False):
         self.reservations_enabled=bool(reservations_enabled)
         self.root=Path(root).resolve();self.root.mkdir(parents=True,exist_ok=True)
@@ -74,9 +75,11 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         db.row_factory=sqlite3.Row
         return db
     @contextmanager
-    def _tx(self):
+    def _tx(self,*,durable=True):
         db=self._connect()
         try:
+            db.execute('PRAGMA synchronous='+('FULL' if durable else 'NORMAL'))
+            if not durable:db.execute('PRAGMA wal_autocheckpoint=0')
             db.execute('BEGIN IMMEDIATE')
             yield db
             db.commit()
@@ -196,13 +199,17 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
             elif row['status'] in ('claimed','running'):db.execute('UPDATE jobs SET cancel_requested=1,updated=? WHERE id=?',(time.time(),identifier))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
     def _recover(self,db,now):
-        rows=db.execute("SELECT * FROM jobs WHERE status IN ('claimed','running') AND (lease_until<=? OR deadline<=?)",(now,now)).fetchall()
+        rows=db.execute("SELECT * FROM jobs WHERE status='running' OR (status='claimed' AND (lease_until<=? OR deadline<=?))",(now,now)).fetchall()
+        recovered=0
         for row in rows:
+            row=self._effective_lease_row(row,now)
+            if now<row["lease_until"] and now<row["deadline"]:continue
+            recovered+=1
             uncertain=row['status']=='running'
             result=canonical_json({'error':'worker lease expired','stopped':False if uncertain else True})
             db.execute("UPDATE jobs SET status='failed',result=?,updated=? WHERE id=?",(result,now,row['id']))
             db.execute('UPDATE rigs SET job=NULL,blocked=?,reason=? WHERE id=?',(int(uncertain),'expired active lease; physical stop must be confirmed' if uncertain else None,row['rig']))
-        return len(rows)
+        return recovered
     def recover(self,*,now=None):
         with self._tx() as db:return self._recover(db,time.time() if now is None else now)
     def claim(self,worker,rig,*,now=None,sensor_source=None):
@@ -219,11 +226,14 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
             row=next((candidate for candidate in candidates if self._reservation_allows(db,candidate,rig,now)),None)
             if row is None:return None
             token=secrets.token_hex(32)
-            db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+2,now+35,now,row['id']))
+            db.execute("UPDATE jobs SET status='claimed',worker=?,rig=?,lease=?,lease_until=?,deadline=?,updated=? WHERE id=?",(worker,rig,token,now+self.claim_lease_seconds,now+35,now,row['id']))
             db.execute('UPDATE rigs SET job=? WHERE id=?',(row['id'],rig))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(row['id'],)).fetchone(),worker=True)
+    def _effective_lease_row(self,row,now):
+        return row
     def _lease(self,db,identifier,worker,token,now):
         row=db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone()
+        row=self._effective_lease_row(row,now)
         if row is None or row['status'] not in ('claimed','running') or row['worker']!=worker or not isinstance(token,str) or not hmac.compare_digest(row['lease'],token) or now>=row['lease_until'] or now>=row['deadline']:
             raise QueueError('inactive or invalid worker lease')
         return row
@@ -238,7 +248,11 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone(),worker=True)
     def heartbeat(self,identifier,worker,token,*,now=None):
         now=time.time() if now is None else now
-        with self._tx() as db:
+        # Renewal only extends an existing authority. A power-loss rollback of
+        # this update expires it earlier; start/approval/finish stay FULL durable.
+        # Avoid making every 250ms renewal wait for flash synchronization.
+        # Size-based checkpoint work stays on durable authority transitions.
+        with self._tx(durable=False) as db:
             row=self._lease(db,identifier,worker,token,now)
             db.execute('UPDATE jobs SET lease_until=?,updated=? WHERE id=?',(min(now+2,row['deadline']),now,identifier))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone(),worker=True)

@@ -2,7 +2,7 @@
 import argparse
 import json
 from pathlib import Path
-from .queue import Store
+from .runtime_store import RuntimeStore
 from .server import make_server
 
 
@@ -14,13 +14,17 @@ def main(argv=None):
     allowed={'root','credentials','origins','camera_url','rig_id','port','reservations_enabled'}
     if set(config)-allowed:raise ValueError('unknown portal service setting')
     credentials=json.loads(Path(config['credentials']).read_text())
-    server=make_server(Store(config['root'],reservations_enabled=config.get('reservations_enabled',False)),
+    store=RuntimeStore(config['root'],reservations_enabled=config.get('reservations_enabled',False))
+    store.recover()  # a prior API process cannot retain live runtime authority
+    server=make_server(store,
         credentials,host='127.0.0.1',port=config.get('port',8780),
         origins=config.get('origins',[]),camera_url=config.get('camera_url'),rig_id=config.get('rig_id','cartpole'))
     print(f'Authenticated portal API on loopback:{server.server_port}; no execution worker started',flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
-    finally:server.server_close()
+    finally:
+        server.server_close()
+        store.close()
     return 0
 
 

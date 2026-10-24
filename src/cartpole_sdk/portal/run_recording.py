@@ -19,8 +19,8 @@ import uuid
 import zipfile
 from cartpole_sdk.recording import canonical_json, strict_json_loads
 
-MAX_BUNDLE_BYTES=16*1024*1024
-MAX_TELEMETRY_BYTES=12*1024*1024
+MAX_BUNDLE_BYTES=40*1024*1024
+MAX_TELEMETRY_BYTES=32*1024*1024
 
 
 MAX_SENSING_BYTES=3*1024*1024
@@ -71,7 +71,7 @@ class RunRecorder:
         self.drop_lock=threading.Lock()
         self.emit_lock=threading.Lock();self.closed=False;self.pending_bytes=0;self.sensing_bytes=0
         self.sensing_process=None;self.sensing_stop=None;self.sensing_status=None
-        self.pending=queue.Queue(maxsize=256)
+        self.pending=queue.Queue(maxsize=2048)
         self.started_ns=time.monotonic_ns();self.started_unix_ns=time.time_ns()
         self.thread=threading.Thread(target=self._write,daemon=True);self.thread.start()
     def _drop(self):

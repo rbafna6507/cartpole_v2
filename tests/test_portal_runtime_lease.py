@@ -52,7 +52,9 @@ def test_stale_runtime_lease_fails_closed_without_waiting_for_network():
         assert entered.wait(.2)
         time.sleep(.04)
         began=time.monotonic()
-        with pytest.raises(RunAuthorityError,match='stale'):lease.check()
+        with pytest.raises(RunAuthorityError,match='stale') as failure:lease.check()
+        assert failure.value.thread_locations
+        assert any('heartbeat' in row['functions'] for row in failure.value.thread_locations)
         assert time.monotonic()-began<.02
     finally:release.set();lease.close()
 
@@ -70,6 +72,9 @@ def test_failed_runtime_heartbeat_stops_run_and_records(tmp_path):
     result=run_once(queue,'w','sim',bridge_factory=Paced,sandbox_factory=TrustedPipeFixture)
     assert result['status']=='failed' and result['result']['stopped']
     assert result['result']['error']=='runtime_authority_failure'
+    assert result['result']['authority_failure']['reason']=='runtime heartbeat failed'
+    assert result['result']['authority_failure']['cause_type']=='OSError'
+    assert 'simulated transport failure' not in str(result['result']['authority_failure'])
     assert result['result']['actions']<90
     assert queue.recording(job['id'],'alice')
 
@@ -136,3 +141,18 @@ def test_failed_policy_attempt_timing_is_preserved_in_bundle(tmp_path):
     failures=[row for row in records if row['type']=='policy_failure']
     assert len(failures)==1 and failures[0]['inference_s']>=.015
     assert 'private untrusted detail' not in json.dumps(failures)
+
+@pytest.mark.parametrize('fails',[False,True])
+def test_worker_scopes_console_matching_gil_interval(monkeypatch,fails):
+    import sys
+    import cartpole_sdk.portal.worker as worker
+    before=sys.getswitchinterval()
+    def execute(argv):
+        assert sys.getswitchinterval()==.001
+        if fails:raise RuntimeError('test exit')
+        return 7
+    monkeypatch.setattr(worker,'_main',execute,raising=False)
+    if fails:
+        with pytest.raises(RuntimeError,match='test exit'):worker.main([])
+    else:assert worker.main([])==7
+    assert sys.getswitchinterval()==before
