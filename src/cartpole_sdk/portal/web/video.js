@@ -56,7 +56,11 @@
         });
         this.decoder = decoder; decoder.configure({codec: 'avc1.42E028', optimizeForLatency: true});
         watchdog = setInterval(() => {
-          if (performance.now() - lastFrame > 7000) { failure = Error('No video frames received'); controller.abort(); }
+          if (generation === this.generation && performance.now() - lastFrame > 7000) {
+            failure = Error('No video frames received');
+            this.stop();
+            this.callbacks.fallback?.(failure.message + '. Showing sampled JPEG preview.');
+          }
         }, 1000);
         this.watchdog = watchdog;
         const response = await fetch(this.url || '/api/video', {redirect: 'error', headers: {Authorization: 'Bearer ' + this.token}, cache: 'no-store', signal: controller.signal});
@@ -92,7 +96,9 @@
       finally {
         clearInterval(watchdog);
         if (generation === this.generation) cancelAnimationFrame(this.paintRequest);
-        if (reader) await reader.cancel().catch(() => {});
+        controller.abort();
+        // Network cancellation must not hold decoder cleanup or preview fallback.
+        if (reader) void reader.cancel().catch(() => {});
         if (decoder && decoder.state !== 'closed') decoder.close();
         if (generation === this.generation && this.latest) { this.latest.close(); this.latest = null; }
         if (generation === this.generation) {

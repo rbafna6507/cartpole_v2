@@ -4,8 +4,8 @@ const vm = require('node:vm');
 const fs = require('node:fs');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../../src/cartpole_sdk/portal/web/video.js'), 'utf8');
-function setup(fetch) {
-  const decoded = [], fallbacks = [], timers = [], closed = [];
+function setup(fetch, clock = performance) {
+  const decoded = [], fallbacks = [], timers = [], closed = [], intervals = [];
   let number = 0;
   class Decoder {
     constructor(callbacks) { this.callbacks = callbacks; this.state = 'configured'; this.decodeQueueSize = 0; }
@@ -14,14 +14,14 @@ function setup(fetch) {
     close() { this.state = 'closed'; }
   }
   const sandbox = {window: {}, VideoDecoder: Decoder, EncodedVideoChunk: class {constructor(data) {Object.assign(this,data);}},
-    AbortController, performance, Uint8Array, DataView, fetch,
-    setTimeout(fn, delay) {timers.push({fn, delay}); return ++number;}, clearTimeout() {}, setInterval() {return ++number;}, clearInterval() {},
+    AbortController, performance: clock, Uint8Array, DataView, fetch,
+    setTimeout(fn, delay) {timers.push({fn, delay}); return ++number;}, clearTimeout() {}, setInterval(fn) {intervals.push(fn); return ++number;}, clearInterval() {},
     requestAnimationFrame() {return ++number;}, cancelAnimationFrame() {},};
   sandbox.window.VideoDecoder = Decoder; sandbox.window.EncodedVideoChunk = sandbox.EncodedVideoChunk;
   vm.runInNewContext(source, sandbox);
   const canvas = {getContext() {return {clearRect() {}, drawImage() {}};}};
   const player = new sandbox.window.PortalVideo(canvas, {fallback: value => fallbacks.push(value)});
-  return {player, decoded, fallbacks, timers, closed};
+  return {player, decoded, fallbacks, timers, closed, intervals};
 }
 function packet(key, timestamp, data = [1,2,3]) {
   const bytes = new Uint8Array(13 + data.length), header = new DataView(bytes.buffer);
@@ -54,4 +54,27 @@ test('hosted video uses configured endpoint with authorization and disallows red
   assert.equal(call.url, 'https://rig.example.test/api/video');
   assert.equal(call.options.headers.Authorization, 'Bearer test-token');
   assert.equal(call.options.redirect, 'error');
+});
+test('stalled stream cancellation cannot block JPEG fallback', async () => {
+  const h = setup(async () => ({ok:true,body:{getReader(){return {
+    async read(){throw Error('network stalled');},
+    cancel(){return new Promise(() => {});}
+  };}}}));
+  const connected = h.player.connect(h.player.generation);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.fallbacks.length,1);
+  assert.match(h.fallbacks[0],/network stalled/);
+  await connected;
+});
+
+test('watchdog falls back even when a browser read ignores abort', async () => {
+  let now = 0;
+  const h = setup(async () => ({ok:true,body:{getReader(){return {
+    read(){return new Promise(() => {});}, cancel(){return new Promise(() => {});}
+  };}}}), {now:()=>now});
+  void h.player.connect(h.player.generation);
+  await new Promise(resolve => setImmediate(resolve));
+  now=8001; h.intervals[0]();
+  assert.equal(h.fallbacks.length,1);
+  assert.match(h.fallbacks[0],/No video frames/);
 });

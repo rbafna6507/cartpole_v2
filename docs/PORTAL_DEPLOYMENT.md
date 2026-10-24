@@ -191,3 +191,7 @@ bash ~/cartpole-portal/source/deploy/portal/check-worker-realtime.sh && sudo sys
 
 The offline script does not open the rig. Physical acceptance remains a separate
 portal submission after this command succeeds.
+
+### Public camera playback recovery (2026-10-24)
+
+The viewer falls back to authenticated JPEG previews after seven seconds without decoded video, without waiting for network read/cancellation promises to settle. JPEG transfers have a 15-second timeout. The deployed Jetson presentation settings are `VISION_VIDEO_FPS=20` and `VISION_VIDEO_BITRATE=600` in `~/.config/cartpole-vision/runtime.env`; capture remains configured at 80 Hz. The previous environment is saved as `runtime.env.before-public-video-20261024`. Restart `cartpole-vision.service` with `systemctl --user restart cartpole-vision.service` after changing these settings. No SSH forwarding is needed for the public Funnel page. Vercel needs a new deployment to receive frontend fixes.
