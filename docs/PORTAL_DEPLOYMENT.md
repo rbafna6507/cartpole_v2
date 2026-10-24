@@ -105,3 +105,5 @@ bash /home/rbafna/cartpole-portal/source/deploy/portal/check-worker-realtime.sh
 The wrapper requests administrator authentication only to create a bounded realtime supervisor running as `rbafna` on CPU 4; its isolated children use CPU 5. It stops on a failed check and never installs or starts the physical worker. Because noninteractive sudo is unavailable, the operator must run this command interactively on Jetson.
 
 Require all five isolation/abuse tests and all three actor reset checks to pass before a physical actor acceptance run. The saved actor's provenance is checked by the existing isolated loader. Installation commands above remain separate from validation; starting/enabling the hardware service requires closing the console and ensuring the stopped rig is healthy and homed.
+
+The offline helper uses `LimitRTPRIO=10` plus `chrt --rr 10`, rather than transient `CPUSchedulingPolicy`/`CPUSchedulingPriority` properties: systemd 249 on this Jetson rejects the latter combination before execution. The trusted supervisor still runs as `rbafna` at RR10; child isolation and budgets are unchanged.

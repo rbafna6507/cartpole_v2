@@ -3,15 +3,16 @@
 # Run on Jetson with physical console experiments idle; sudo may ask for a password.
 set -euo pipefail
 
+# systemd 249 rejects RR/priority transient properties on this host.
+# Grant only the allowance here; chrt selects RR10 after switching to rbafna.
 exec sudo systemd-run --wait --pipe --collect --uid=rbafna \
   --property=WorkingDirectory=/home/rbafna/cartpole-portal/source \
-  --property=LimitRTPRIO=10 --property=CPUSchedulingPolicy=rr \
-  --property=CPUSchedulingPriority=10 --property=CPUAffinity=4 \
+  --property=LimitRTPRIO=10 --property=CPUAffinity=4 \
   --property=NoNewPrivileges=yes --property=RuntimeMaxSec=45 \
   --setenv=CARTPOLE_TEST_REALTIME_CPU=5 \
   --setenv=PYTHONPATH=/home/rbafna/cartpole-portal/source/src \
   --setenv=PYTHONDONTWRITEBYTECODE=1 \
-  /bin/sh -ec '
+  /usr/bin/chrt --rr 10 /bin/sh -ec '
     /home/rbafna/cartpole_v2/.venv/bin/python -m pytest -p no:cacheprovider -q tests/test_portal_realtime_linux.py
     exec .venv/bin/python deploy/portal/check-actor-startup.py \
       --cpu 5 \
