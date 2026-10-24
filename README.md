@@ -223,3 +223,11 @@ during Phase 0. New control and vision work uses directories outside the preserv
 baselines; later physical work is recorded under `evidence/phase3` and `phase4`.
 
 Controller authors: [SDK data and development guide](docs/CONTROLLER_DEVELOPER_GUIDE.md). The portal now requires operator approval for each physical job; the deployed worker, expanded upload formats and Vercel migration are documented in [Portal deployment](docs/PORTAL_DEPLOYMENT.md).
+
+### Vertical screw commissioning
+
+The separate [vertical actuator test](docs/VERTICAL_COMMISSIONING.md) documents
+D4/D5 and D6/D7 wiring, independent direction checks, operator-declared bottom
+reference, timed bottoming and bounded paired sine motion. It requires a temporary
+standalone Teensy firmware and cannot run concurrently with pendulum controllers.
+It is prepared for physical verification, not yet integrated into `cartpole-console`.

@@ -358,3 +358,20 @@ sudo systemctl stop cartpole-worker-hardware.service  # reserve serial for conso
 sudo systemctl start cartpole-worker-hardware.service # after console exit and rig preparation
 tailscale funnel status
 ```
+
+## Standalone vertical screw test
+
+See [vertical commissioning](docs/VERTICAL_COMMISSIONING.md) for the pin mapping,
+flash handoff, all commands, limits and restore considerations. This requires a
+separate uncommissioned Teensy sketch; it does not run alongside cart balancing.
+
+```bash
+uv run python scripts/vertical_commission.py --port YOUR_SERIAL_DEVICE \
+  --travel-mm 200 --lead-mm 5 --motor-steps 200 --microsteps 16 --bottom-stops-rated
+```
+
+At `vertical>`: `probe left +`, `probe right +`, confirm each observed UP polarity
+with `direction left +|-` / `direction right +|-`, then `reference` at the inspected
+bottom pose (or `home` then `reference`). `sine` requests ±20 mm at 1 Hz centered
+25 mm above bottom for 10 s. `stop` retains holding torque; `disable` explicitly
+releases all drivers. No motion or flashing was performed during software preparation.
