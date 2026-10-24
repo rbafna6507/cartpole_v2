@@ -26,7 +26,7 @@ from .rig_gym_env import RigCartpoleEnv
 from .viewer import ViewerSession, copy_display_state, _draw_rail, _positive_duration
 
 ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_ACTOR = ROOT/'training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json'
+DEFAULT_ACTOR = ROOT/'policies/working.json'
 DEFAULT_EXPERIMENT = ROOT/'evidence/policy-recovery-20261021/combined-next/protocol.json'
 
 

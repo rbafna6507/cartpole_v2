@@ -18,6 +18,8 @@ from cartpole_sdk.control.parameters import PULSE_SPEED_MAX, validate_coupled
 PARAMETER_NAMES = tuple(field.name for field in fields(ControllerParameters))
 LEGACY_PARAMETER_NAMES = PARAMETER_NAMES[:30]
 TUNABLE_FIRMWARE = 'executor-v6-measuredrail'
+VERTICAL_FIRMWARE = 'executor-v7-vertical'
+TUNABLE_FIRMWARES = (TUNABLE_FIRMWARE, VERTICAL_FIRMWARE)
 GEOMETRY_PARAMETERS = frozenset(('rail','rail_fraction','rail_margin','rail_fault_margin','rail_hysteresis'))
 COUPLED_PARAMETERS = GEOMETRY_PARAMETERS | {'vman','manual_speed_max','spin_trip_rad_s','spin_resume_rad_s'}
 # Lower bound, upper bound, whether the lower bound is inclusive.

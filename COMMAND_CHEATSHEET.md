@@ -380,3 +380,29 @@ Variable probes: `probe left + 5` or `probe right - 20` (millimeters; default 0.
 maximum 20 per command, peak 2 mm/s). Signs are raw DIR polarity; single-end
 moves tilt the rail and do not enforce absolute travel limits. Updated firmware
 and host are both required.
+
+## Integrated vertical axes (executor-v7-vertical)
+
+See [integrated vertical control](docs/VERTICAL_CONTROL.md). Physical UP is fixed
+to left DIR LOW / right DIR HIGH following the observed direction tests.
+
+```text
+z status
+z reference both
+z home both
+z reference both
+z move left up 5
+z move right down 10
+z move both up 20
+z move both down 5 2
+z sine 20 1 25 10
+z stop
+stop
+```
+
+Reference only at inspected physical bottom; `home` is timed bottoming and needs
+completion/inspection before reference. Optional move speed is mm/s (default 2,
+maximum 40); distance is at most 20 mm per command within counted 0..200 mm,
+and each move profile must finish within 60 seconds.
+`z stop` stops Z; `stop` stops/disables all axes. This requires the matching
+integrated firmware and SDK, not the earlier standalone commissioning firmware.

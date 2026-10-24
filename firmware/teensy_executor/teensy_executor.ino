@@ -130,7 +130,14 @@ volatile int8_t ax_dir[N_AX]={1,1,1};
 static uint32_t ax_acc[N_AX]={0,0,0};
 static const uint8_t DIR_PIN[N_AX]={PIN_CART_DIR,PIN_Z1_DIR,PIN_Z2_DIR};
 static bool direction_initialized[N_AX]={false,false,false};
-IntervalTimer step_timer;
+IntervalTimer step_timer,z_timer;
+static bool z_timer_ready=false;
+volatile int32_t z_count[2]={0,0},z_target[2]={0,0};
+volatile uint8_t z_active=0;
+volatile uint32_t z_increment[2]={0,0};
+static uint32_t z_accumulator[2]={0,0};
+static bool z_high[2]={false,false};
+static int8_t z_direction[2]={0,0};
 static bool step_timer_ready=false;
 volatile uint32_t control_heartbeat_us=0;
 volatile bool timing_fault_pending=false;
@@ -145,7 +152,7 @@ void clearStepPins(){
   digitalWriteFast(PIN_Z2_STEP,LOW);
 }
 void onStepTimer(){
-  clearStepPins();
+  digitalWriteFast(PIN_CART_STEP,LOW);
   if(!g_energized)return;
   // Independent pulse-side timeout: a stalled I2C/foreground cannot keep moving.
   if(uint32_t(micros()-control_heartbeat_us)>CONTROL_STALL_US){
@@ -180,6 +187,29 @@ void onStepTimer(){
     }
   }
 }
+// Independent 4 us Z interrupt: physical coordinates are positive UP.
+// Each rising edge is followed by a full LOW tick; DIR changes get one tick setup.
+void onZTimer(){
+ const uint8_t pins[2]={PIN_Z1_STEP,PIN_Z2_STEP},dirs[2]={PIN_Z1_DIR,PIN_Z2_DIR};
+ if(g_energized&&z_active&&(uint32_t(micros()-control_heartbeat_us)>CONTROL_STALL_US ||
+    (executor_state.switches&&executor::requiredLimits(rawLimits())))){
+  if(uint32_t(micros()-control_heartbeat_us)>CONTROL_STALL_US)timing_fault_pending=true;
+  else limit_fault_pending=true;
+  digitalWriteFast(PIN_EN_ALL,HIGH);g_energized=false;
+ }
+ for(int i=0;i<2;++i){
+  digitalWriteFast(pins[i],LOW);
+  const bool previous=z_high[i];z_high[i]=false;
+  if(!g_energized||!(z_active&(1<<i)))continue;
+  const int32_t delta=z_target[i]-z_count[i];if(!delta)continue;
+  const int8_t direction=delta>0?1:-1;
+  if(direction!=z_direction[i]){if(previous)continue;z_accumulator[i]=0;digitalWriteFast(dirs[i],((direction>0)==(i==1))?HIGH:LOW);z_direction[i]=direction;continue;}
+  const uint32_t old=z_accumulator[i];z_accumulator[i]+=z_increment[i];
+  if(z_accumulator[i]>=old)continue;
+  if(previous){digitalWriteFast(PIN_EN_ALL,HIGH);g_energized=false;timing_fault_pending=true;continue;}
+  z_count[i]+=direction;digitalWriteFast(pins[i],HIGH);z_high[i]=true;
+ }
+}
 void axSetRate(int i,float steps_per_sec,bool invert){
   if(i!=AX_CART || !g_energized){ax_inc[i]=0;return;}
   const int8_t d=steps_per_sec>=0?1:-1;
@@ -203,16 +233,17 @@ void steppersInit(){
   for(uint8_t p:outs){pinMode(p,OUTPUT);digitalWrite(p,LOW);}
   static_assert(CART_MICROSTEPS==16 && Z_MICROSTEPS==16,"Mechanics require BED default 1/16 microsteps");
   step_timer_ready=step_timer.begin(onStepTimer,cart_hardware::step_timer_period_us);
+  z_timer_ready=z_timer.begin(onZTimer,4);z_timer.priority(48);
   step_timer.priority(32); // higher priority than normal USB/I2C interrupts
   if(!step_timer_ready)checkedPrintln("! step timer allocation failed; motion locked out");
 }
 void energize(bool on){
   const uint32_t irq=interruptMask();__disable_irq();
-  on=on && step_timer_ready && !timing_fault_pending;
+  on=on && step_timer_ready && z_timer_ready && !timing_fault_pending;
   if(on && !g_energized)control_heartbeat_us=micros();
   digitalWriteFast(PIN_EN_ALL,on?LOW:HIGH);
   g_energized=on;
-  if(!on){for(int i=0;i<N_AX;++i)ax_inc[i]=0;clearStepPins();}
+  if(!on){z_active=0;for(int i=0;i<N_AX;++i)ax_inc[i]=0;clearStepPins();}
   if(!irq)__enable_irq();
 }
 
@@ -394,9 +425,9 @@ void encPrintMagnet() {
 }
 
 // ========================== CONTROLLER ======================================
-enum Mode { M_IDLE=0, M_MANUAL, M_SWINGUP, M_BALANCE, M_FAULT, M_RAIL_BRAKE, M_RAIL_RETURN, M_SPIN_BRAKE, M_SPIN_CENTER, M_SPIN_WAIT, M_BAL_BRAKE, M_BAL_CENTER, M_EXTERNAL, M_HOMING, M_REHOME };
+enum Mode { M_IDLE=0, M_MANUAL, M_SWINGUP, M_BALANCE, M_FAULT, M_RAIL_BRAKE, M_RAIL_RETURN, M_SPIN_BRAKE, M_SPIN_CENTER, M_SPIN_WAIT, M_BAL_BRAKE, M_BAL_CENTER, M_EXTERNAL, M_HOMING, M_REHOME, M_VERTICAL };
 volatile Mode mode = M_IDLE;
-const char *MODE_NAME[] = {"IDLE","MANUAL","SWINGUP","BALANCE","FAULT","RAIL_BRAKE","RAIL_RETURN","SPIN_BRAKE","SPIN_CENTER","SPIN_WAIT","BAL_BRAKE","BAL_CENTER","EXTERNAL","HOMING","REHOME"};
+const char *MODE_NAME[] = {"IDLE","MANUAL","SWINGUP","BALANCE","FAULT","RAIL_BRAKE","RAIL_RETURN","SPIN_BRAKE","SPIN_CENTER","SPIN_WAIT","BAL_BRAKE","BAL_CENTER","EXTERNAL","HOMING","REHOME","VERTICAL"};
 
 volatile float th=0, thd=0, xc=0, vc=0, acc_cmd=0, energy_n=-1;
 volatile float z_mm=0;
@@ -542,15 +573,45 @@ void eStop() {
   clearStepPins();
 }
 
+void cancelVertical(){
+ const uint32_t irq=interruptMask();__disable_irq();z_active=0;executor_state.z.cancel();
+ digitalWriteFast(PIN_Z1_STEP,LOW);digitalWriteFast(PIN_Z2_STEP,LOW);
+ if(!irq)__enable_irq();
+}
+void serviceVertical(){
+ auto &z=executor_state.z;
+ if(!z.phase)return;
+ if(!executor_state.enabled || !g_energized || (mode!=M_VERTICAL&&mode!=M_MANUAL&&mode!=M_SWINGUP&&mode!=M_BALANCE&&mode!=M_EXTERNAL)){cancelVertical();return;}
+ const uint32_t irq=interruptMask();__disable_irq();
+ for(int i=0;i<2;++i)z.count[i]=z_count[i];
+ if(!irq)__enable_irq();
+ int32_t targets[2];uint32_t increments[2];bool lag=false,arrived=true;
+ for(int i=0;i<2;++i){
+  targets[i]=(z.selected&(1<<i))?int32_t(lround(z.position(i,executor_state.tick)*vertical::STEPS_MM)):z.count[i];
+  const int32_t delta=targets[i]-z.count[i];if(abs(delta)>200)lag=true;if(delta)arrived=false;
+  increments[i]=uint32_t(std::min(vertical::MAX_RATE,fabs(double(delta))*1100.)*4294967296./250000.);
+ }
+ if(lag){executor_state.trip(executor::DEADLINE);eStop();mode=M_FAULT;return;}
+ const bool elapsed=uint32_t(executor_state.tick-z.started)>=uint32_t(ceil(z.duration*1000));
+ if(elapsed&&(arrived||z.phase==2)){
+  if(z.phase==3){z.phase=4;z.started=executor_state.tick;z.duration=z.seconds;}
+  else{if(z.phase==2)z.bottom|=z.selected;z.phase=0;z.selected=0;}
+ }
+ __disable_irq();
+ for(int i=0;i<2;++i){z_target[i]=targets[i];z_increment[i]=increments[i];}
+ if(!z.phase)z_active=0;
+ if(!irq)__enable_irq();
+ if(!z.phase&&mode==M_VERTICAL)eStop();
+}
 void beginSavedReturn(){
-  saved_return.begin();mode=M_REHOME;
+  cancelVertical();saved_return.begin();mode=M_REHOME;
   req_balance=false;upright_only=false;upright_return.reset();
   rail_recovery_state.reset();recovery_was_manual=false;spin_recovery_state.reset();
   response_watch.armed=false;pump.reset();v_manual=0;zv_target=0;
 }
 
 void beginUprightReturn(const char *reason) {
-  upright_return.begin(micros());
+  cancelVertical();upright_return.begin(micros());
   rail_recovery_state.reset(); spin_recovery_state.reset();
   response_watch.armed=false; pump.reset(); v_manual=0; zv_target=0;
   mode=M_BAL_BRAKE;
@@ -560,7 +621,7 @@ void beginUprightReturn(const char *reason) {
 void beginRailRecovery() {
   if(upright_only){beginUprightReturn("# upright trial rail protection -> BAL_BRAKE; return to center and stop");return;}
   if (mode==M_RAIL_BRAKE || mode==M_RAIL_RETURN) return;
-  recovery_was_manual = mode==M_MANUAL;
+  cancelVertical();recovery_was_manual = mode==M_MANUAL;
   rail_recovery_state.begin(xc,p_rail,cart_brake_direction,controller.rail_margin,controller.rail_hysteresis);
   // Keep the startup response watch active through recovery.
   mode=M_RAIL_BRAKE;
@@ -568,7 +629,7 @@ void beginRailRecovery() {
 }
 
 void beginSpinRecovery() {
-  spin_recovery_state.begin(micros());
+  cancelVertical();spin_recovery_state.begin(micros());
   rail_recovery_state.reset(); recovery_was_manual=false;
   response_watch.armed=false; pump.reset();
   v_manual=0; zv_target=0;
@@ -588,6 +649,8 @@ void controlTick() {
     if(executor_state.tick%10==5)encConfigRead();
     executor_state.sample(encoderHealthy(),rawLimits());
     if(!executor_state.enabled && g_energized){eStop();mode=M_FAULT;}
+
+    serviceVertical();
 
     if(req_encoder){
       req_encoder=false;encDiagRead();
@@ -631,6 +694,9 @@ void controlTick() {
     estimate(encTheta());
     xc = (ax_pos[AX_CART] - home_steps) / CART_STEPS_PER_M;
     z_mm = (ax_pos[AX_Z1] - zhome_steps) / Z_STEPS_PER_MM;
+
+    // Z-only authority still publishes fresh measured cart/pendulum state.
+    if(mode==M_VERTICAL){ax_inc[AX_CART]=0;loop_us=micros()-t_start;return;}
 
     float rail_hard = p_rail - controller.rail_fault_margin;
     if (mode != M_IDLE && mode != M_FAULT && mode != M_HOMING && fabsf(xc) > rail_hard) {
@@ -932,13 +998,28 @@ void serviceSerialTx(){
 }
 void handleV2(const char* line){
   const uint8_t previous_mode=executor_state.mode;
+  const uint32_t z_irq=interruptMask();__disable_irq();
+  for(int i=0;i<2;++i)executor_state.z.count[i]=z_count[i];
+  if(!z_irq)__enable_irq();
   executor::Reply reply=executor_state.command(line);
+  __disable_irq();
+  if(reply.kind==executor::OK&&!strcmp(reply.text,"ZREF"))for(int i=0;i<2;++i)z_count[i]=z_target[i]=executor_state.z.count[i];
+  if(!executor_state.z.phase)z_active=0;
+  if(!z_irq)__enable_irq();
   // Strict upright-only start gate is evaluated before drivers can be enabled.
   if(reply.kind==executor::OK && executor_state.enabled && executor_state.mode==M_BALANCE && previous_mode==M_IDLE &&
      !upright_session::canStart(th,th_hat,thd,xc,vc,acc_cmd,enc_ok && enc_consec_err==0)){
     executor_state.stop();reply={executor::ERROR,"upright"};
   }
   if(reply.kind==executor::OK){
+    if(!strcmp(reply.text,"ZHOME")||!strcmp(reply.text,"ZMOVE")||!strcmp(reply.text,"ZSINE")){
+      if(executor_state.mode==M_VERTICAL)mode=M_VERTICAL;
+      const uint32_t irq=interruptMask();__disable_irq();
+      for(int i=0;i<2;++i){z_target[i]=z_count[i];z_increment[i]=0;z_accumulator[i]=0;}
+      energize(true);z_active=g_energized?executor_state.z.selected:0;
+      if(!irq)__enable_irq();
+    }
+    if(!strcmp(reply.text,"ZSTOP")){cancelVertical();if(previous_mode==M_VERTICAL)eStop();}
     if(!strcmp(reply.text,"CALIBRATE")){
       calibration_sid=executor_state.sid;
       requested_hanging_offset=executor_state.calibration_offset;
@@ -966,6 +1047,11 @@ void handleV2(const char* line){
   }
   if(reply.kind==executor::HELLO){resetTx();status_requested=false;eStop();mode=executor_state.fault==executor::NONE?M_IDLE:M_FAULT;}
   if(executor_state.enabled&&!g_energized){executor_state.trip(executor::DEADLINE);eStop();mode=M_FAULT;reply={executor::ERROR,"timer"};}
+  if(reply.kind==executor::ZSTATE){
+    char payload[160];snprintf(payload,sizeof payload,"V2 Z %lu %u %u %.6f %.6f %u",(unsigned long)executor_state.sid,
+      executor_state.z.phase,executor_state.z.refs,z_count[0]/vertical::STEPS_MM,z_count[1]/vertical::STEPS_MM,executor_state.z.bottom);
+    queueReply(payload);return;
+  }
   if(reply.kind==executor::PARAM){
     const auto* field=controller_parameters::find(executor_state.parameter_name);
     if(!field)reply={executor::ERROR,"parameter"};
@@ -1003,7 +1089,7 @@ void handleV2(const char* line){
     encConfigRead(); // INFO is stopped-only; return an actual register readback.
     executor_state.sample(encoderHealthy(),rawLimits());
     char payload[224];
-    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v6-measuredrail %ld %u %u %lu %lu %ld %.7g %ld %ld %u %ld %lu %lu",
+    snprintf(payload,sizeof payload,"V2 INFO %lu executor-v7-vertical %ld %u %u %lu %lu %ld %.7g %ld %ld %u %ld %lu %lu",
       (unsigned long)executor_state.sid,(long)enc_upright_raw,(unsigned)reference_saved,(unsigned)enc_status,
       (unsigned long)enc_errors,(unsigned long)home_epoch,(long)measured_home_span_steps,(double)p_rail,
       (long)enc_boot_conf,(long)enc_conf,(unsigned)enc_conf_valid,(long)enc_last_raw,

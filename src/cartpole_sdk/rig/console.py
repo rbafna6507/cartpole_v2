@@ -14,6 +14,7 @@ from .policy import ZeroAccelerationPolicy, run_policy, run_host_controller
 
 HELP = ('auto [seconds], bal [seconds], python-auto [seconds], python-bal [seconds], manual [seconds], velocity m/s [ttl_ms], '
         'stop, center, home, rehome, upright, hanging MODEL IDENTITY | hanging ideal, switches on|off, status, info, clear, rate hz, '
+        'z status|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC], '
         'params, get key, set key value, save path, load path, '
         'policy load PATH|status|check [swingup]|shadow [swingup] [seconds]|run [seconds]|swingup [seconds]|unload, quit')
 
@@ -45,7 +46,29 @@ def execute_command(rig, line, *, output=None):
         rig.stop(); return False
     if command in ('help','?'):
         print(HELP,file=output);return True
-    if command=='policy':
+    if command=='z':
+        if args == ['status']:
+            print(canonical_json(asdict(rig.z_status())), file=output)
+        elif args == ['stop']:
+            rig.z_stop()
+            print('vertical motion stopped', file=output)
+        elif len(args) == 2 and args[0] in ('reference', 'home'):
+            getattr(rig, 'z_'+args[0])(args[1])
+            print('operator confirmed physical bottom; counted reference established' if args[0] == 'reference'
+                  else 'timed downward home started: 40mm/s for 5s; confirm bottom before referencing', file=output)
+        elif len(args) in (4, 5) and args[0] == 'move' and args[2] in ('up', 'down'):
+            distance = float(args[3])
+            if not math.isfinite(distance) or distance <= 0:
+                raise ValidationError('move distance must be finite and positive; choose up or down')
+            rig.z_move(args[1], distance if args[2] == 'up' else -distance,
+                       2. if len(args) == 4 else float(args[4]))
+            print('vertical move started', file=output)
+        elif args and args[0] == 'sine' and len(args) in (1, 5):
+            rig.z_sine(*map(float, args[1:]))
+            print('finite paired vertical sine started', file=output)
+        else:
+            raise ValidationError('use z status|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC]')
+    elif command=='policy':
         from .console_policy import execute_policy_command
         execute_policy_command(rig,args,output)
     elif command in ('auto','bal','balance','manual'):

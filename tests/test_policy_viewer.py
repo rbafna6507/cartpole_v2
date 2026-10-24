@@ -10,7 +10,7 @@ import pytest
 
 pytestmark = pytest.mark.skipif(find_spec('mujoco') is None, reason='simulation extra required')
 ROOT = Path(__file__).resolve().parents[1]
-ACTOR = ROOT/'training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json'
+ACTOR = ROOT/'policies/working.json'
 PROFILE = ROOT/'evidence/policy-recovery-20261021/combined-next/protocol.json'
 
 

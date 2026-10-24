@@ -106,3 +106,6 @@ for name in ('hanging_offset_capture','hanging_offset_cancel','hanging_model_qua
 
 for name in ('tunable_motion','tunable_geometry','tunable_recovery','tunable_auto_return','preserved_defaults'):
     setattr(SketchTests,'test_'+name,lambda self,name=name:self.run_case(name))
+
+for name in ("vertical_guards","vertical_pulses","vertical_safety","vertical_sine","vertical_faults","vertical_measurements"):
+    setattr(SketchTests,"test_"+name,lambda self,name=name:self.run_case(name))

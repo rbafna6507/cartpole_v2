@@ -3,7 +3,7 @@ from contextlib import ExitStack
 from importlib.resources import as_file, files
 from pathlib import Path
 import shlex
-from .parameters import read_profile, TUNABLE_FIRMWARE
+from .parameters import read_profile, TUNABLE_FIRMWARE, TUNABLE_FIRMWARES
 from cartpole_sdk.contracts import ValidationError
 
 DEFAULT_PROFILE_NAME = 'tuned-20261016-bw10'
@@ -42,7 +42,7 @@ class StartupParameters:
         if defer_unhealthy and (rig.error is not None or state.fault or not state.healthy):
             print(f'startup profile {self.label} pending: clear the stopped fault first; motion requires a verified profile load', file=output)
             return
-        if self.custom is None and rig.get_info().firmware != TUNABLE_FIRMWARE:
+        if self.custom is None and rig.get_info().firmware not in TUNABLE_FIRMWARES:
             raise ValidationError(f'default tuned profile requires {TUNABLE_FIRMWARE}; use --keep-board-params for other firmware')
         values = rig.load_parameters(self.path)
         self.pending = False

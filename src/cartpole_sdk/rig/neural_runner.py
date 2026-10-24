@@ -18,7 +18,7 @@ from ..sensing.frames import AngularAlignment
 from ..sensing.policy_observation import PolicyObservationAssembler
 from ..sensing.stream import SensingStreamClient, StreamDeadline
 from ..sensing.vision import ClockMapping, VisionProvider, calibration_fingerprint
-from .parameters import TUNABLE_FIRMWARE, float32
+from .parameters import TUNABLE_FIRMWARE, TUNABLE_FIRMWARES, float32
 from .policy import run_policy
 
 
@@ -216,7 +216,7 @@ def _live_rail_compatibility(rig, values, expected, info):
     step_m = 1./float32(26666.6666667)
     max_delta = HOME_RAIL_REPEATABILITY_M+2*binary32_ulp
     delta = live-trained
-    if ((info.firmware != TUNABLE_FIRMWARE and live != trained) or abs(delta) > max_delta):
+    if ((info.firmware not in TUNABLE_FIRMWARES and live != trained) or abs(delta) > max_delta):
         raise ValidationError('live executor differs from actor snapshot: rail '
             f'(trained {expected["rail"]:.9g} m, live {values["rail"]:.9g} m, '
             f'delta {delta:.9g} m exceeds allowed {max_delta:.9g} m)')

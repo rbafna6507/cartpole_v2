@@ -75,7 +75,7 @@ class ReturnTests(unittest.TestCase):
         state=parse_state('V2 S 7 1 1000 14 7 0 0 0 .1 0 0 0 0 0 0 0 0',received_ns=1)
         self.assertEqual(state.mode,14)
         with self.assertRaises(ProtocolError):
-            parse_state('V2 S 7 1 1000 15 7 0 0 0 .1 0 0 0 0 0 0 0 0',received_ns=1)
+            parse_state('V2 S 7 1 1000 16 7 0 0 0 .1 0 0 0 0 0 0 0 0',received_ns=1)
     def test_explicit_rehome_preserves_reference_and_finishes_disabled(self):
         with self.rig() as rig:
             rig.rehome()

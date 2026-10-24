@@ -17,11 +17,11 @@ from cartpole_sdk.contracts import (ActionLimits, ActionRequest, Observation, Sa
                                     Session, ValidationError, validate_action)
 from cartpole_sdk.recording import canonical_json
 from .protocol import (LineBuffer, ProtocolError, State, UINT32, decode, encode,
-                       parse_state, parse_info, parse_parameter, uint32, unwrap32)
+                       parse_state, parse_info, parse_parameter, parse_z_status, uint32, unwrap32)
 from .transport import SerialTransport
 from .parameters import (PARAMETER_NAMES, parameter_name, parameter_value, parameter_map,
                          validate_parameters, read_profile, write_profile, float32,
-                         LEGACY_PARAMETER_NAMES, TUNABLE_FIRMWARE, GEOMETRY_PARAMETERS, COUPLED_PARAMETERS)
+                         LEGACY_PARAMETER_NAMES, TUNABLE_FIRMWARE, TUNABLE_FIRMWARES, VERTICAL_FIRMWARE, GEOMETRY_PARAMETERS, COUPLED_PARAMETERS)
 
 class RigError(RuntimeError):
     """Stopped or latched live rig failure; recovery is always explicit."""
@@ -86,6 +86,10 @@ class Rig:
         self._handshake = False
         self._state = None
         self._info = None
+        self._z_status = None
+        self._z_active = False
+        self._z_starting = False
+        self._z_deadline_ns = None
         self._state_version = 0
         self._replies = deque(maxlen=32)
         self._history = OrderedDict()
@@ -196,7 +200,7 @@ class Rig:
                             if command == 'STOP':
                                 continue
                             raise RigError(f'executor rejected {command}: {response[3]}')
-                        if response[1] == reply and (reply in ('HELLO', 'INFO') or response[3] == (command if reply_key is None else reply_key)):
+                        if response[1] == reply and (reply in ('HELLO', 'INFO', 'Z') or response[3] == (command if reply_key is None else reply_key)):
                             return response
                     if self.error is not None and not allow_error:
                         raise RigError(f'latched rig error: {self.error}')
@@ -238,6 +242,8 @@ class Rig:
         self._logger.start()
 
     def _emergency_stop(self):
+        self._z_active = False
+        self._z_deadline_ns = None
         self._return_expected = False
         if self._transport is None:
             return
@@ -282,6 +288,10 @@ class Rig:
                     incomplete_return=self._return_expected and not (state.homed and state.healthy and state.x==0)
                     self._active=False
                     self._deadline_ns=None
+                if (self._z_active and not self._z_starting and previous is not None and
+                    previous.mode == 15 and state.mode == 0 and not state.enabled):
+                    self._z_active = False
+                    self._z_deadline_ns = None
                 self._state = state
                 self._state_version += 1
                 self._history[state.unwrapped_tick] = state
@@ -296,6 +306,16 @@ class Rig:
                 self._latch(RigError(f'executor fault {state.fault}'))
             elif incomplete_return:
                 self._latch(RigError('return interrupted before counted home completion'))
+        elif parts[1] == 'Z':
+            status = parse_z_status(payload, received_ns=received_ns)
+            with self._condition:
+                self._z_status = status
+                if status.phase == 0 and not self._z_starting:
+                    self._z_active = False
+                    self._z_deadline_ns = None
+                self._replies.append(parts)
+                self._condition.notify_all()
+            self._record('z_status', status=asdict(status))
         elif parts[1] == 'INFO':
             info = parse_info(payload, received_ns=received_ns)
             with self._condition:
@@ -333,6 +353,7 @@ class Rig:
     def _io(self):
         buffer = LineBuffer()
         next_ping = time.monotonic()+self._heartbeat_interval
+        next_z_status = time.monotonic()
         while not self._end.is_set():
             try:
                 data = self._transport.read(512)
@@ -349,10 +370,15 @@ class Rig:
                 if self._handshake and not self._closing and self.error is None and now >= next_ping:
                     self._send(f'V2 PING {self._sid}')
                     next_ping = now+self._heartbeat_interval
-                if self._active and self.error is None:
+                if self._z_active and not self._z_starting and self.error is None and now >= next_z_status:
+                    self._send(f'V2 ZSTATUS {self._sid}')
+                    next_z_status = now + .05
+                if (self._active or self._z_active) and self.error is None:
                     state = self._state
                     if state is not None and time.monotonic_ns()-state.received_ns > self._max_host_age_ns:
                         self._latch(RigError('stale host telemetry'))
+                    elif self._z_active and self._z_deadline_ns is not None and time.monotonic_ns() >= self._z_deadline_ns:
+                        self._latch(RigError('vertical completion deadline exceeded'))
                     elif self._deadline_ns is not None and time.monotonic_ns() >= self._deadline_ns:
                         if self._return_expected:
                             self._latch(RigError('return completion deadline exceeded'))
@@ -534,9 +560,9 @@ class Rig:
                 raise ValidationError(str(exc)) from exc
         self._stopped_healthy()
         firmware = self.get_info().firmware
-        if firmware not in ('executor-v2-cart2', 'executor-v3-encguard', 'executor-v4-rehome', 'executor-v5-calmodel','executor-v6-measuredrail'):
+        if firmware not in ('executor-v2-cart2', 'executor-v3-encguard', 'executor-v4-rehome', 'executor-v5-calmodel','executor-v6-measuredrail','executor-v7-vertical'):
             raise RigError('update firmware to executor-v2-cart2 or newer before encoder calibration')
-        if offset is not None and firmware not in ('executor-v5-calmodel','executor-v6-measuredrail'):
+        if offset is not None and firmware not in ('executor-v5-calmodel','executor-v6-measuredrail','executor-v7-vertical'):
             raise RigError('model-corrected hanging requires executor-v5-calmodel or later supported firmware')
         with self._condition:
             self._stopped_healthy()
@@ -606,7 +632,7 @@ class Rig:
         state=self._stopped_healthy()
         if not state.homed:
             raise RigError('REHOME requires an established home; use HOME first')
-        if (self._info or self.get_info()).firmware not in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail'):
+        if (self._info or self.get_info()).firmware not in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail','executor-v7-vertical'):
             raise RigError('REHOME requires executor-v4-rehome or later supported firmware')
         self._active=True
         self._return_expected=True
@@ -676,14 +702,18 @@ class Rig:
         if self.rate_hz==0:
             raise RigError('motion requires streaming telemetry; set a positive rate')
         return_to_center=False
+        if mode=='bal':
+            self._stopped_healthy()
+            if self._info is None:
+                self.get_info()
         if mode=='auto':
             self._stopped_healthy()
-            return_to_center=(self._info or self.get_info()).firmware in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail')
+            return_to_center=(self._info or self.get_info()).firmware in ('executor-v4-rehome','executor-v5-calmodel','executor-v6-measuredrail','executor-v7-vertical')
         if mode=='manual':
             self._stopped_healthy()
             info = self._info or self.get_info()
             self._manual_speed_max = (self.get_parameter('manual_speed_max')
-                                      if info.firmware==TUNABLE_FIRMWARE else .15)
+                                      if info.firmware in TUNABLE_FIRMWARES else .15)
         self._start('MODE',(mode,),duration_s,
                     lambda s:(s.enabled and s.mode!=12) or
                     (return_to_center and s.mode==0 and s.homed and s.healthy and s.x==0),
@@ -694,7 +724,7 @@ class Rig:
         self._stopped_healthy()
         info = self._info or self.get_info()
         self._direct_acceleration_max = (max(self.get_parameter('amax_s'),self.get_parameter('amax_b'))
-                                         if info.firmware==TUNABLE_FIRMWARE else 25.)
+                                         if info.firmware in TUNABLE_FIRMWARES else 25.)
         self._start('ARM',(),duration_s,lambda s:s.enabled and s.mode==12)
 
     def _intent(self, command, value, ttl_ms, mode, bound):
@@ -758,7 +788,124 @@ class Rig:
         self._record('action_request', request=asdict(request))
         return self.observation()
 
+    def _vertical_capability(self, *, allow_error=False):
+        self._require(allow_error=allow_error)
+        if (self._info or self.get_info()).firmware != VERTICAL_FIRMWARE:
+            raise RigError('vertical commands require executor-v7-vertical')
+
+    @staticmethod
+    def _z_axis(axis):
+        if axis not in ('left', 'right', 'both'):
+            raise ValidationError('vertical axis must be left, right or both')
+        return {'left': 1, 'right': 2, 'both': 3}[axis]
+
+    @staticmethod
+    def _z_number(value, name):
+        if type(value) not in (int, float) or not math.isfinite(value):
+            raise ValidationError(f'{name} must be finite')
+        return float(value)
+
+    def z_status(self):
+        """Read counted Z metadata without changing cart authority."""
+        self._vertical_capability(allow_error=True)
+        response = self._command('ZSTATUS', reply='Z', allow_error=True)
+        return parse_z_status(' '.join(response), received_ns=self._z_status.received_ns)
+
+    def z_reference(self, axis='both'):
+        """Operator explicitly asserts selected axes are at the physical bottom."""
+        self._z_axis(axis)
+        self._vertical_capability()
+        self._stopped_healthy()
+        self._command('ZREF', axis)
+        return self.z_status()
+
+    def _z_ready(self, *, stopped=False):
+        self._vertical_capability()
+        if not self.rate_hz:
+            raise RigError('vertical motion requires streaming telemetry')
+        state = self._stopped_healthy() if stopped else self._snapshot()
+        self._fresh(state)
+        if not state.healthy or self._calibrating or state.flags & 256 or state.mode not in (0, 1, 2, 3, 12):
+            raise RigError('vertical motion requires healthy idle or active cart control')
+        status = self.z_status()
+        if status.phase:
+            raise RigError('vertical axes are already moving; stop first')
+        return status
+
+    def _z_start(self, command, args, duration_s):
+        # Independent monitoring never overwrites cart duration or automatic return.
+        self._z_starting = True
+        self._z_active = True
+        self._z_deadline_ns = time.monotonic_ns() + int((duration_s + .5)*1e9)
+        try:
+            self._command(command, *args)
+            self._snapshot()
+        except BaseException:
+            self._emergency_stop()
+            raise
+        finally:
+            self._z_starting = False
+        return self.z_status()
+
+    def z_home(self, axis='both'):
+        """Start a timed 40 mm/s downward seek for 5s; no contact sensing.
+
+        Completion does not establish a reference. Confirm bottom explicitly
+        with z_reference before counted motion.
+        """
+        self._z_axis(axis)
+        self._z_ready(stopped=True)
+        return self._z_start('ZHOME', (axis,), 5.)
+
+    def z_move(self, axis, signed_mm, speed_mm_s=2.):
+        """Start a bounded counted move; physical positive is UP on both axes."""
+        mask = self._z_axis(axis)
+        distance = self._z_number(signed_mm, 'distance')
+        speed = self._z_number(speed_mm_s, 'speed')
+        if not 0 < abs(distance) <= 20 or not 0 < speed <= 40:
+            raise ValidationError('move requires nonzero distance <=20mm and speed >0..40mm/s')
+        duration = max(.5, 1.875 * abs(distance) / speed)
+        if duration > 60:
+            raise ValidationError('vertical move duration must not exceed 60s')
+        status = self._z_ready()
+        if status.refs & mask != mask:
+            raise RigError('selected vertical axes require an explicit bottom reference')
+        for bit, position in ((1, status.left_mm), (2, status.right_mm)):
+            if mask & bit and not 0 <= position + distance <= 200:
+                raise ValidationError('vertical endpoint must be within 0..200mm')
+        return self._z_start('ZMOVE', (axis, f'{distance:.9g}', f'{speed:.9g}'), duration)
+
+    def z_sine(self, amplitude_mm=20., hz=1., center_mm=25., seconds=10.):
+        """Start a finite paired sine after a bounded transfer to its center."""
+        amplitude, frequency, center, duration = (self._z_number(v, n) for v, n in
+            ((amplitude_mm, 'amplitude'), (hz, 'frequency'), (center_mm, 'center'), (seconds, 'duration')))
+        if not (amplitude > 0 and 0 < frequency <= 5 and 4 <= duration <= 60 and
+                center-amplitude >= 2 and center+amplitude <= 198 and
+                amplitude*(2*math.pi*frequency+math.pi/4)*640 <= 100000):
+            raise ValidationError('sine exceeds travel, duration, frequency or pulse bounds')
+        status = self._z_ready()
+        if status.refs != 3:
+            raise RigError('paired sine requires both bottom references')
+        if abs(status.left_mm-status.right_mm) > .25:
+            raise RigError('paired sine requires starting positions within 0.25mm')
+        transfer = max(.5, 1.875*max(abs(center-status.left_mm), abs(center-status.right_mm))/10)
+        return self._z_start('ZSINE', tuple(f'{v:.9g}' for v in (amplitude, frequency, center, duration)), transfer+duration)
+
+    def z_stop(self):
+        """Cancel Z only; preserve an active cart's authority and deadline."""
+        self._vertical_capability(allow_error=True)
+        self._command('ZSTOP', allow_error=True)
+        status = self.z_status()
+        if status.phase:
+            self._latch(RigError('vertical stop did not complete'))
+            raise RigError('vertical stop did not complete')
+        self._z_active = False
+        self._z_deadline_ns = None
+        return status
+
     def stop(self):
+        self._z_active = False
+        self._z_deadline_ns = None
         self._require(allow_error=True)
         self._return_expected=False
         with self._condition:
@@ -808,7 +955,7 @@ class Rig:
 
     def _parameter_catalog(self):
         info = self._info or self.get_info()
-        return PARAMETER_NAMES if info.firmware==TUNABLE_FIRMWARE else LEGACY_PARAMETER_NAMES
+        return PARAMETER_NAMES if info.firmware in TUNABLE_FIRMWARES else LEGACY_PARAMETER_NAMES
 
     def get_parameter(self, name):
         """Read one actual board parameter while stopped, including fault diagnosis."""
@@ -829,7 +976,7 @@ class Rig:
     def _rail_cap(self, values, info):
         cap = float32(.26)
         if self.state.homed and info.measured_span_steps:
-            if info.firmware == TUNABLE_FIRMWARE:
+            if info.firmware in TUNABLE_FIRMWARES:
                 if not 10667 <= info.measured_span_steps <= 20000:
                     raise ValidationError('invalid measured homing span')
                 half = info.measured_span_steps//2
@@ -847,21 +994,21 @@ class Rig:
         info = info or self.get_info()
         if values is None:
             values = ({name:self.get_parameter(name) for name in ('rail_fraction','rail_margin')}
-                      if info.firmware==TUNABLE_FIRMWARE else {})
+                      if info.firmware in TUNABLE_FIRMWARES else {})
         cap = self._rail_cap(values,info)
         if value > cap:
             raise ValidationError(f'rail exceeds current homing clearance ({cap:g} m)')
         return cap
 
     def _validate_parameter_position(self, values, info):
-        if info.firmware==TUNABLE_FIRMWARE and self.state.homed:
+        if info.firmware in TUNABLE_FIRMWARES and self.state.homed:
             boundary=float32(float32(values['rail'])-float32(values['rail_fault_margin']))
             if abs(float32(self.state.x))>boundary:
                 raise ValidationError('new hard rail boundary excludes current position; rehome before shrinking it')
 
     def _parameter_candidate(self, before, name, value, info):
         candidate = dict(before,**{name:value})
-        if info.firmware==TUNABLE_FIRMWARE and name in ('rail_fraction','rail_margin'):
+        if info.firmware in TUNABLE_FIRMWARES and name in ('rail_fraction','rail_margin'):
             # The stored rail preference is not reported by the protocol. The
             # current effective rail is a conservative lower bound on it; actual
             # derived readback is fetched after every geometry write.
@@ -910,7 +1057,7 @@ class Rig:
         info=self.get_info()
         if 'rail' in requested:
             self._validate_live_rail(candidate['rail'],candidate,info)
-        elif info.firmware==TUNABLE_FIRMWARE and {'rail_fraction','rail_margin'} & requested.keys():
+        elif info.firmware in TUNABLE_FIRMWARES and {'rail_fraction','rail_margin'} & requested.keys():
             candidate['rail']=min(before['rail'],self._rail_cap(candidate,info))
         validate_parameters(candidate)
         if GEOMETRY_PARAMETERS & requested.keys():self._validate_parameter_position(candidate,info)

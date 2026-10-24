@@ -97,7 +97,7 @@ def parse_state(payload: str, *, received_ns: int) -> State:
         raise ProtocolError('invalid state field count')
     tokens = parts[2:]
     integers = [uint32(t) for t in tokens[:5]]
-    if integers[0] == 0 or integers[3] > 14:
+    if integers[0] == 0 or integers[3] > 15:
         raise ProtocolError('invalid session or mode')
     if not all(re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?',t) for t in tokens[5:12]):
         raise ProtocolError('invalid real grammar')
@@ -135,7 +135,7 @@ class ExecutorInfo:
 
 def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
     parts = payload.split(' ')
-    field_counts = {'executor-v1': 11, 'executor-v2-cart2': 11, 'executor-v3-encguard': 17, 'executor-v4-rehome': 17, 'executor-v5-calmodel': 17, 'executor-v6-measuredrail': 17}
+    field_counts = {'executor-v1': 11, 'executor-v2-cart2': 11, 'executor-v3-encguard': 17, 'executor-v4-rehome': 17, 'executor-v5-calmodel': 17, 'executor-v6-measuredrail': 17, 'executor-v7-vertical': 17}
     if len(parts) < 4 or parts[:2] != ['V2', 'INFO'] or len(parts) != field_counts.get(parts[3]):
         raise ProtocolError('invalid diagnostic identity or field count')
     sid = uint32(parts[2])
@@ -145,7 +145,7 @@ def parse_info(payload: str, *, received_ns: int) -> ExecutorInfo:
     if not re.fullmatch(r'[+]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', parts[10]):
         raise ProtocolError('invalid diagnostic rail value')
     rail = float(parts[10])
-    if not math.isfinite(rail) or not 0 < rail <= (.375 if parts[3] == 'executor-v6-measuredrail' else .26):
+    if not math.isfinite(rail) or not 0 < rail <= (.375 if parts[3] in ('executor-v6-measuredrail', 'executor-v7-vertical') else .26):
         raise ProtocolError('invalid diagnostic rail bound')
     base = (sid, parts[3], reference, bool(saved), status, errors, epoch, span, rail, received_ns)
     if len(parts) == 11:
@@ -200,3 +200,35 @@ class LineBuffer:
         if overflow and raise_overflow:
             raise ProtocolError('oversize line discarded')
         return lines
+
+
+@dataclass(frozen=True, slots=True)
+class ZStatus:
+    """Counted vertical positions; refs and bottom_mask are axis bitmasks.
+
+    A bottom bit describes timed homing completion, not a contact sensor.
+    Positions without a corresponding reference bit are not physical coordinates.
+    """
+    sid: int
+    phase: int
+    refs: int
+    left_mm: float
+    right_mm: float
+    bottom_mask: int
+    received_ns: int
+
+
+def parse_z_status(payload: str, *, received_ns: int) -> ZStatus:
+    parts = payload.split(' ')
+    if len(parts) != 8 or parts[:2] != ['V2', 'Z']:
+        raise ProtocolError('invalid vertical status field count')
+    sid, phase, refs = map(uint32, parts[2:5])
+    bottom = uint32(parts[7])
+    if not sid or phase > 4 or refs > 3 or bottom > 3:
+        raise ProtocolError('invalid vertical status range')
+    if not all(re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', t) for t in parts[5:7]):
+        raise ProtocolError('invalid vertical position grammar')
+    left, right = map(float, parts[5:7])
+    if not all(math.isfinite(v) for v in (left, right)):
+        raise ProtocolError('nonfinite vertical position')
+    return ZStatus(sid, phase, refs, left, right, bottom, received_ns)

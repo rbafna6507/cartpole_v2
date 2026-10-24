@@ -4,6 +4,8 @@ Start here: [complete system README](SYSTEM_README.md), [command cheat sheet](CO
 
 October 23 operator release: on the Jetson, `cd ~/cartpole-v2-live/active && uv run cartpole`, or use `cartpole-console` from PATH. In the console, load `policies/working.json` (user-tested 102,400 steps) or `policies/1m.json` (1,024,000-step candidate), then use `policy check swingup` and explicit `policy swingup 25` from a settled, homed hanging start. Deployment itself performs no motion.
 
+For the vertical-enabled runtime, use the deployment copies `policies/working.json` and `policies/1m.json`. Their weights, experiment identities, and observation/action contracts are unchanged; only the reviewed runtime pins and enclosing content digest were migrated. [Migration evidence](policies/vertical-runtime-migration.json) records the original and deployed hashes plus exact numeric inference parity. Original `training/candidates/.../actor.json` files remain immutable and pinned to their archived runtime; the strict loader intentionally refuses them under changed runtime sources. This migration does not confer hardware acceptance.
+
 Locally, `uv run --locked --extra sim cartpole-view-policy` opens the learned Gym viewer; add `--controller reference` for the saved traditional gains on the fitted plant, or `--actor policies/1m.json` for the new candidate. See the cheat sheet for all training, evaluation, console and deployment options.
 
 The sections below retain earlier subsystem introductions. Dated historical measurements: [2026-10-20 checkpoint](docs/checkpoint-20261020.md).
@@ -230,4 +232,14 @@ The separate [vertical actuator test](docs/VERTICAL_COMMISSIONING.md) documents
 D4/D5 and D6/D7 wiring, independent direction checks, operator-declared bottom
 reference, timed bottoming and bounded paired sine motion. It requires a temporary
 standalone Teensy firmware and cannot run concurrently with pendulum controllers.
-It is prepared for physical verification, not yet integrated into `cartpole-console`.
+This earlier standalone commissioning path remains available for isolated checks.
+The integrated `cartpole-console` implementation is described below.
+
+### Integrated vertical controls
+
+The [integrated vertical guide](docs/VERTICAL_CONTROL.md) covers the
+`executor-v7-vertical` firmware and `z` commands in the normal console: independent
+or paired physical up/down moves, timed bottoming, explicit bottom reference,
+vertical STOP and finite paired disturbances. Left UP is DIR LOW; right UP is
+DIR HIGH. Hardware commissioning status and staged-release instructions are in
+the guide; the standalone test remains available separately.

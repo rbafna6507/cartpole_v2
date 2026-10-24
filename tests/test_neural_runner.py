@@ -59,13 +59,15 @@ def test_shadow_timeout_before_deadline_still_raises_and_stops():
             assert rig.commands[-1][1] == 'STOP' and not rig.state.enabled
 
 
-def test_live_neural_runner_defaults_to_shadow_and_executes_only_with_explicit_flag():
+@pytest.mark.parametrize('firmware', ['executor-v6-measuredrail', 'executor-v7-vertical'])
+def test_live_neural_runner_defaults_to_shadow_and_executes_only_with_explicit_flag(firmware):
     from cartpole_sdk.rig.neural_runner import run_neural_policy
     for execute in (False, True):
         clock = ScriptedClock()
         with patch('cartpole_sdk.rig.neural_runner.time', clock), \
              patch('cartpole_sdk.rig.policy.time', clock), patch('cartpole_sdk.rig.client.time', clock):
             with prepared_rig(clock) as rig:
+                rig._info.firmware = firmware
                 policy = NeuralPolicy(numeric_actor('raw'), channels=rig_channels())
                 result = run_neural_policy(rig, policy, development_only=True, execute=execute, duration_s=.04)
                 assert result['mode'] == ('execute' if execute else 'shadow')
