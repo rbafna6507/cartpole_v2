@@ -2,6 +2,7 @@
 from collections import deque
 import json
 import math
+import shutil
 from pathlib import Path
 import sys
 import threading
@@ -107,13 +108,23 @@ class RawRecorder:
 AVI is constant-rate for convenience. raw_times.jsonl preserves actual times
 and camera sequence numbers and must be passed to replay for velocity analysis.
 """
-    def __init__(self, directory, fps):
+    def __init__(self, directory, fps, max_bytes=512 * 1024 * 1024, min_free_bytes=256 * 1024 * 1024):
+        self.max_bytes=max_bytes;self.min_free_bytes=min_free_bytes
         self.directory=Path(directory);self.directory.mkdir(parents=True,exist_ok=True)
         self.fps=fps;self.writer=None
         self.timestamps=(self.directory/'raw_times.jsonl').open('w')
         self.shape=None;self.count=0
 
     def write(self,frame,seq,t):
+        # Reserve a conservative uncompressed frame plus container overhead;
+        # stop explicit captures at a budget rather than filling unattended disks.
+        allowance=frame.nbytes+65536
+        video=self.directory/'raw.avi'
+        size=(video.stat().st_size if video.exists() else 0)+self.timestamps.tell()
+        if size+allowance>self.max_bytes:
+            raise OSError('Raw recording size limit reached')
+        if shutil.disk_usage(self.directory).free<self.min_free_bytes+allowance:
+            raise OSError('Raw recording paused: free space below reserve')
         if self.writer is None:
             self.shape=frame.shape
             h,w=frame.shape[:2]
@@ -135,8 +146,11 @@ class BufferedRecorder:
     def __init__(self,directory,fps,capacity=32):
         import queue
         self.queue=queue.Queue(maxsize=capacity)
-        self.recorder=RawRecorder(directory,fps)
+        self.recorder=None;self.thread=None
         self.dropped=0;self.error=None;self.closed=False
+        try:self.recorder=RawRecorder(directory,fps)
+        except (OSError,RuntimeError) as error:
+            self.error=str(error);return
         self.thread=threading.Thread(target=self._run,name='video-recorder',daemon=True)
         self.thread.start()
 
@@ -148,12 +162,14 @@ class BufferedRecorder:
                 self.recorder.write(*item)
         except Exception as error:
             self.error=str(error)
-        finally:self.recorder.close()
+        finally:
+            try:self.recorder.close()
+            except (OSError,RuntimeError) as error:self.error=self.error or str(error)
 
     def write(self,frame,seq,t):
         import queue
         if self.closed:raise RuntimeError('Recorder is closed')
-        if self.error:raise RuntimeError(f'Recording failed: {self.error}')
+        if self.error:self.dropped+=1;return
         try:self.queue.put_nowait((frame,seq,t))
         except queue.Full:self.dropped+=1
 
@@ -162,6 +178,7 @@ class BufferedRecorder:
         self.closed=True
         # Never block forever if the writer failed while the queue was full.
         import queue
+        if self.thread is None:return
         while self.thread.is_alive():
             try:self.queue.put(None,timeout=.2);break
             except queue.Full:continue

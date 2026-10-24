@@ -87,3 +87,40 @@ def test_realtime_missing_prlimit_fails_closed(tmp_path,monkeypatch):
     monkeypatch.setattr(sandbox.shutil,'which',lambda name:None if name=='prlimit' else '/usr/bin/'+name)
     monkeypatch.setattr(sandbox.subprocess,'Popen',lambda *a,**kw:pytest.fail('must not launch unbounded realtime child'))
     with pytest.raises(sandbox.SandboxError,match='limit'):instance.launch()
+
+
+def test_numeric_actor_has_separate_bounded_startup_budget(tmp_path,monkeypatch):
+    realtime_host(monkeypatch)
+    instance=sandbox.Sandbox(tmp_path/'actor',cpu_affinity=1,realtime=True,artifact_kind='actor-json')
+    monkeypatch.setattr(instance,'preflight',lambda:None)
+    monkeypatch.setattr(sandbox.shutil,'which',lambda name:'/usr/bin/'+name)
+    captured=[]
+    monkeypatch.setattr(sandbox.subprocess,'Popen',lambda args,**kwargs:captured.extend(args) or object())
+    monkeypatch.setattr(sandbox,'PolicyChannel',lambda process,**kwargs:process)
+    instance.launch()
+    assert captured[1]=='--rttime=1250000:1250000'
+
+
+def test_actor_startup_blocks_then_permanently_lowers_ceiling(monkeypatch):
+    import resource
+    import time
+    from cartpole_sdk.portal.harness import finish_actor_startup
+    events=[]
+    monkeypatch.setattr(resource,'RLIMIT_RTTIME',15,raising=False)
+    monkeypatch.setattr(resource,'setrlimit',lambda kind,value:events.append(('limit',kind,value)))
+    monkeypatch.setattr(resource,'getrlimit',lambda kind:(500000,500000))
+    monkeypatch.setattr(time,'sleep',lambda seconds:events.append(('block',seconds)))
+    finish_actor_startup()
+    assert events==[('block',.001),('limit',15,(500000,500000))]
+
+
+def test_actor_startup_rejects_missing_lower_ceiling(monkeypatch):
+    import resource
+    import time
+    from cartpole_sdk.portal.harness import finish_actor_startup
+    monkeypatch.setattr(resource,'RLIMIT_RTTIME',15,raising=False)
+    monkeypatch.setattr(resource,'setrlimit',lambda kind,value:None)
+    monkeypatch.setattr(resource,'getrlimit',lambda kind:(1250000,1250000))
+    monkeypatch.setattr(time,'sleep',lambda seconds:None)
+    with pytest.raises(RuntimeError,match='inference realtime limit missing'):
+        finish_actor_startup()

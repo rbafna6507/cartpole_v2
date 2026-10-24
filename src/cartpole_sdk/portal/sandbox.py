@@ -212,7 +212,10 @@ class Sandbox:
         if self.realtime:
             limiter=shutil.which('prlimit')
             if limiter is None:raise SandboxError('realtime sandbox resource limiter unavailable')
-            args=[limiter,'--rttime=500000:500000','--rtprio=1:1','--']+args
+            # Only the data-only actor loader receives a larger startup allowance.
+            # Arbitrary Python/ZIP imports retain the original hard ceiling.
+            startup_rttime=1250000 if self.artifact_kind=='actor-json' else 500000
+            args=[limiter,f'--rttime={startup_rttime}:{startup_rttime}','--rtprio=1:1','--']+args
         try:process=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,close_fds=True,start_new_session=True,env={})
         except OSError as exc:raise SandboxError('sandbox launch failed') from exc
         return PolicyChannel(process,action_timeout=self.action_timeout,wall_seconds=self.wall_seconds,max_acceleration=self.max_acceleration)

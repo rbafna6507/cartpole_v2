@@ -26,6 +26,18 @@ def read_message():
 def emit(value):
     sys.stdout.write(canonical_json(value)+'\n');sys.stdout.flush()
 
+def finish_actor_startup():
+    import resource
+    # Actor loading is data-only: no uploaded Python can replace this call.
+    # Permanently lower both limits before reset/ACK and every action.
+    # Blocking resets the kernel's uninterrupted realtime CPU accounting
+    # before applying a ceiling smaller than startup CPU already consumed.
+    import time
+    time.sleep(.001)
+    resource.setrlimit(resource.RLIMIT_RTTIME,(500000,500000))
+    if resource.getrlimit(resource.RLIMIT_RTTIME)!=(500000,500000):
+        raise RuntimeError('sandbox inference realtime limit missing')
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--realtime',action='store_true')
@@ -39,7 +51,8 @@ def main():
     if args.realtime:
         import resource
         if os.sched_getscheduler(0)!=os.SCHED_RR or os.sched_getparam(0).sched_priority!=1:raise RuntimeError('sandbox requires RR1')
-        if resource.getrlimit(resource.RLIMIT_RTTIME)!=(500000,500000):raise RuntimeError('sandbox startup realtime limit missing')
+        startup_rttime=1250000 if args.kind=='actor-json' else 500000
+        if resource.getrlimit(resource.RLIMIT_RTTIME)!=(startup_rttime,startup_rttime):raise RuntimeError('sandbox startup realtime limit missing')
         if resource.getrlimit(resource.RLIMIT_RTPRIO)!=(1,1):raise RuntimeError('sandbox realtime priority ceiling missing')
     elif os.sched_getscheduler(0)!=os.SCHED_OTHER:raise RuntimeError('sandbox requires ordinary scheduling')
     # Entire restriction setup must succeed before uploaded Python is loaded.
@@ -71,6 +84,8 @@ def main():
         module=importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         policy=module.create_policy()
+    if args.realtime and args.kind=='actor-json':
+        finish_actor_startup()
     policy.reset(session)
     emit({'type':'reset_ack','nonce':reset['nonce']})
     previous=0

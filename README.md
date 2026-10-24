@@ -243,3 +243,16 @@ or paired physical up/down moves, timed bottoming, explicit bottom reference,
 vertical STOP and finite paired disturbances. Left UP is DIR LOW; right UP is
 DIR HIGH. Hardware commissioning status and staged-release instructions are in
 the guide; the standalone test remains available separately.
+
+### Policy requirements and camera recording
+
+Learned policies own their action decisions; native swing-up/balance gains no
+longer need to match their archived training snapshot. Observation filtering and
+shared hardware motion/safety requirements still apply. See
+[policy executor requirements](docs/policy-executor-requirements.md).
+
+Camera recording is bounded and storage failures are reported without stopping
+tracking or video. See [camera recording](docs/camera-recording.md). Portal jobs
+use the same Jetson API, SQLite queue, and filesystem artifacts whether the
+frontend is served through Funnel or Vercel; see
+[portal deployment](docs/PORTAL_DEPLOYMENT.md).

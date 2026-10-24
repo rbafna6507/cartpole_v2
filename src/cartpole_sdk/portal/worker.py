@@ -305,6 +305,7 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
             realtime=getattr(isolator,'realtime',False)
             scheduling={'policy':'RR' if realtime else 'OTHER','priority':1 if realtime else 0,
                         'cpu':getattr(isolator,'cpu_affinity',None),'hard_rttime_us':500000 if realtime else None,
+                        'startup_hard_rttime_us':(1250000 if inspection['kind']=='actor-json' else 500000) if realtime else None,
                         'hard_rtprio':1 if realtime else None,'action_wall_timeout_s':getattr(isolator,'action_timeout',None)}
             recorder.emit('sandbox_runtime',scheduling=scheduling)
             if inspection['kind']=='actor-json':

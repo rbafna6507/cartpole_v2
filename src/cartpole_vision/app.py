@@ -29,7 +29,7 @@ class Engine:
         self.jpg=None;self.mask_jpg=None;self.last_seq=None;self.skipped=0;self.processed=0
         self.calibration_path=None;self.calibration_geometry=None
         self.camera=None;self.error=None;self.directory=Path(directory) if directory else None
-        self.sdk=None;self.preview_seq=None;self.recorder=None;self.video=None;self.video_frame=None
+        self.sdk=None;self.preview_seq=None;self.recorder=None;self.telemetry_log=None;self.recording_setup_error=None;self.video=None;self.video_frame=None
 
     def process(self,frame,t,seq):
         tick=time.perf_counter()
@@ -90,9 +90,11 @@ class Engine:
         state['comparison']=self.comparison.snapshot(after=comparison_after,epoch=comparison_epoch,include_history=include_history)
         if self.camera is not None:state['camera']=self.camera.report()
         if self.video is not None:state['video']=self.video.report()
+        if self.telemetry_log is not None:state['telemetry_recording']=self.telemetry_log.report()
+        if self.recording_setup_error:state['recording_setup_error']=self.recording_setup_error
         if self.recorder is not None:
             state['recording']=dict(dropped_frames=self.recorder.dropped,error=self.recorder.error,
-                                    written_frames=self.recorder.recorder.count,queued_frames=self.recorder.queue.qsize())
+                                    written_frames=self.recorder.recorder.count if self.recorder.recorder else 0,queued_frames=self.recorder.queue.qsize())
         return state
 
     def fresh(self):

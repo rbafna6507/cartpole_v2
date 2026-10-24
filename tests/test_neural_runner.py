@@ -262,3 +262,57 @@ def test_background_camera_queue_overflow_fails_instead_of_discarding_old_frames
     subscriber._read()
     with pytest.raises(ValidationError, match='stream unavailable'):
         subscriber.drain()
+
+
+NATIVE_LAW_CHANGES = dict(leff=.15, pw=5., pz=.9, bal_pw=5., pc1=-2., pc2=-3.,
+    ke=3., kpx=30., kdx=3., phase_soft=3., approach_v=.2, catch_v=.2,
+    approach_angle=.7, catch_da=3., catch_a=.5, catch_r=2., giveup=.9)
+
+
+@pytest.mark.parametrize('name,value', NATIVE_LAW_CHANGES.items())
+def test_external_policy_accepts_native_law_changes_without_writing(name, value):
+    from cartpole_sdk.rig.neural_runner import validate_live_executor
+    clock = ScriptedClock()
+    with patch('cartpole_sdk.rig.client.time', clock):
+        with prepared_rig(clock) as rig:
+            rig.parameters = replace(rig.parameters, **{name: value})
+            before = rig.parameters
+            policy = NeuralPolicy(numeric_actor('filtered'), channels=rig_channels(angle_source='filtered'))
+            assert validate_live_executor(rig, policy) == asdict(before)
+            assert rig.parameters == before
+            assert not rig.commands
+            record = next(r for r in rig.records if r['type'] == 'neural_preflight')
+            assert name in record['ignored_native_controller_parameters']
+            assert 'bw' in record['required_executor_parameters']
+
+
+@pytest.mark.parametrize('source', ['raw', 'filtered', 'vision', 'fused'])
+def test_estimator_requirement_follows_selected_rate_and_angle_sources(source):
+    from cartpole_sdk.rig.neural_runner import validate_live_executor
+    clock = ScriptedClock()
+    with patch('cartpole_sdk.rig.client.time', clock):
+        with prepared_rig(clock) as rig:
+            rig.parameters = replace(rig.parameters, bw=6.)
+            frame = 'upright' if source in ('vision', 'fused') else 'encoder-zero'
+            policy = NeuralPolicy(numeric_actor(source), channels=rig_channels(angle_source=source, angle_frame_id=frame))
+            if source == 'vision':
+                validate_live_executor(rig, policy)
+            else:
+                with pytest.raises(ValidationError, match='bw'):
+                    validate_live_executor(rig, policy)
+            assert not rig.commands
+
+
+@pytest.mark.parametrize('name,value', dict(vmax=1., vmax_s=1., vmax_b=1.,
+    amax_s=20., amax_b=20., jmax=100., rail_margin=.02, rail_fault_margin=.005,
+    rail_fraction=.9, rehome_v=.06).items())
+def test_external_policy_still_rejects_shared_envelope_changes(name, value):
+    from cartpole_sdk.rig.neural_runner import validate_live_executor
+    clock = ScriptedClock()
+    with patch('cartpole_sdk.rig.client.time', clock):
+        with prepared_rig(clock) as rig:
+            rig.parameters = replace(rig.parameters, **{name: value})
+            policy = NeuralPolicy(numeric_actor('raw'), channels=rig_channels())
+            with pytest.raises(ValidationError, match=name):
+                validate_live_executor(rig, policy)
+            assert not rig.commands

@@ -70,20 +70,27 @@ def arguments(argv=None):
 def main(argv=None):
     a=arguments(argv)
     cv2.setNumThreads(a.opencv_threads)
+    setup_error=None
     if a.log_file:
-        a.log_file.parent.mkdir(parents=True,exist_ok=True)
-        handler=RotatingFileHandler(a.log_file,maxBytes=2*1024*1024,backupCount=3)
-        handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
-        logging.getLogger().addHandler(handler)
-        logging.getLogger().setLevel(logging.INFO)
+        try:
+            a.log_file.parent.mkdir(parents=True,exist_ok=True)
+            handler=RotatingFileHandler(a.log_file,maxBytes=2*1024*1024,backupCount=3)
+            handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
+            logging.getLogger().addHandler(handler)
+            logging.getLogger().setLevel(logging.INFO)
+        except OSError as error:setup_error=str(error)
     logging.getLogger('werkzeug').setLevel(logging.ERROR)
-    a.out.mkdir(parents=True,exist_ok=True)
     directory=a.out/(time.strftime('%Y%m%d_%H%M%S')+f'_{time.time_ns()%1000000:06d}')
-    directory.mkdir(exist_ok=False)
-    # Explicit recordings are preserved; only bounded unattended sessions expire.
-    if not a.record:(directory/'.cartpole-vision-session').touch()
-    prune_sessions(a.out,a.keep_sessions)
-    (directory/'session.json').write_text(json.dumps({k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},indent=2))
+    try:
+        a.out.mkdir(parents=True,exist_ok=True)
+        # Reclaim expired sessions before allocating another one on a full disk.
+        prune_sessions(a.out,max(0,a.keep_sessions-1))
+        directory.mkdir(exist_ok=False)
+        if not a.record:(directory/'.cartpole-vision-session').touch()
+        (directory/'session.json').write_text(json.dumps({k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},indent=2))
+    except OSError as error:
+        setup_error=str(error)
+        logging.warning('Recording setup unavailable; continuing camera: %s',error)
     stop=threading.Event()
     old_handlers={sig:signal.getsignal(sig) for sig in (signal.SIGINT,signal.SIGTERM)}
     for sig in old_handlers:signal.signal(sig,lambda *_:stop.set())
@@ -94,6 +101,7 @@ def main(argv=None):
         cam=Camera(a.camera,a.width,a.height,a.fps,a.rotate,a.exposure_raw,a.auto_exposure_raw,a.gain_raw)
         engine=Engine(a.fps,directory,a.detector_width,a.encoder_sign,a.vision_delay_ms,comparison)
         engine.camera=cam
+        engine.recording_setup_error=setup_error
         from .sdk_feed import SDKFeed
         sdk=SDKFeed(a.sdk_port) if a.sdk_port else None
         engine.sdk=sdk
@@ -104,6 +112,7 @@ def main(argv=None):
             last=0;flushed=time.monotonic()
             try:
                 with JsonlLog(directory/'states.jsonl') as log:
+                    engine.telemetry_log=log
                     while not stop.is_set():
                         item=cam.get()
                         if item is None or item[0]==last:stop.wait(.001);continue
@@ -148,7 +157,8 @@ def main(argv=None):
         if engine and engine.video:engine.video.close()
         report=engine.snapshot() if engine else {}
         report['runtime_error']=failure
-        (directory/'final_report.json').write_text(json.dumps(report,indent=2,allow_nan=False))
+        try:(directory/'final_report.json').write_text(json.dumps(report,indent=2,allow_nan=False))
+        except OSError as error:logging.warning('Final recording report unavailable: %s',error)
         if sdk:sdk.close()
         if comparison:comparison.close()
         if cam:cam.close()

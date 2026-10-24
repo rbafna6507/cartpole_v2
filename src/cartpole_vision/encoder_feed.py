@@ -136,6 +136,7 @@ class Comparison:
                           receiver_error=self.receiver_error,encoder_health=health,
                           timing_note='Estimated measurement times: board clock mapped from serial receipt; camera host-read minus configured delay. Absolute sensor/serial delay is uncalibrated.',
                           bias_note='Relative encoder minus vision offset; neither sensor establishes physical truth.')
+            if self.log is not None:status['recording']=self.log.report()
             reset=epoch!=self.epoch or after is None or after>self.seq
             if self.rows and after is not None and after<self.rows[0]['seq']-1:reset=True
             rows=[r for r in self.rows if now-r['t']<=15 and (reset or r['seq']>after)] if include_history else []

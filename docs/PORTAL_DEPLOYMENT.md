@@ -80,7 +80,7 @@ An expired lease or unconfirmed STOP blocks the rig queue. Inspect the physical 
 
 The hardware worker needs predictable scheduling to keep observation-anchored 20 ms actions fresh. The target unit in `deploy/portal/cartpole-worker-hardware.service` runs the trusted worker as `rbafna` with SCHED_RR priority 10 on CPU 4. Submitted processes default to SCHED_OTHER. The explicit trusted `--sandbox-realtime` option instead requires a broker running exactly at RR10 on one CPU and a distinct dedicated child CPU; the launcher assigns the child RR1 and a hard priority ceiling of 1. The child remains unable to change scheduling or CPU affinity through the seccomp filter. The isolated child is assigned CPU 5 with `--sandbox-cpu 5`, separating it from the realtime broker. The camera and API are assigned CPUs 0–3. Simulation does not require realtime scheduling.
 
-Realtime children receive a hard 500 ms `RLIMIT_RTTIME` limit from the external launcher before Python starts. This limits uninterrupted realtime CPU use; blocking can reset that kernel accounting, so it is not a per-call wall limit. The trusted broker independently enforces the unchanged 10 ms policy-response deadline, startup deadline, total execution budget and process cleanup. Uploaded code cannot raise the externally installed hard limits. Firmware observation-anchored 20 ms expiry remains unchanged.
+Realtime Python and ZIP children receive a hard 500 ms `RLIMIT_RTTIME` limit from the external launcher before Python starts. Data-only numeric actors receive a bounded 1.25 s startup ceiling; after loading and warming the actor, the trusted harness blocks for 1 ms to reset uninterrupted CPU accounting and permanently lowers both limits to 500 ms before reset acknowledgement. No uploaded Python executes under the larger allowance. The broker startup deadline remains 1.5 s. This limits uninterrupted realtime CPU use; blocking can reset that kernel accounting, so it is not a per-call wall limit. The trusted broker independently enforces the unchanged 10 ms policy-response deadline, startup deadline, total execution budget and process cleanup. Uploaded code cannot raise the externally installed hard limits. Firmware observation-anchored 20 ms expiry remains unchanged.
 
 The child uses system Python; its NumPy wheel must match that interpreter, independently of the API virtualenv. On this Jetson:
 
@@ -91,3 +91,22 @@ uv pip install --python /usr/bin/python3 --target /home/rbafna/cartpole-portal/s
 `--numpy-root /home/rbafna/cartpole-portal/sandbox-packages` mounts only NumPy and its bundled libraries read-only. Numeric actors retain the ordinary loader's provenance checks and use the existing prepacked float64 NumPy backend. No Torch or pickle is loaded.
 
 For persistent realtime scheduling, install the staged system unit with administrator permission, after stopping any user/test hardware worker. Never run two hardware workers against the same device. The system unit is a target-specific template; review account, paths, port and CPU numbers before using it on another machine.
+
+## Actor startup investigation (2026-10-24)
+
+Saved physical actor attempt `6b248056287743209fce0a5b3a98fe7f` failed before ARM with zero actions after 0.700 s. Replaying its exact artifact and recorded session without hardware under ordinary scheduling succeeded twice; the Python child consumed 1.016 s and 0.922 s CPU during startup. This supports, but does not yet prove, the 500 ms realtime startup ceiling as the cause. The actor-only two-phase ceiling requires an actual realtime replay before deployment acceptance. SSH sessions currently have `RLIMIT_RTPRIO=0`, noninteractive sudo is unavailable, and the system hardware unit is not installed; existing realtime console processes must not be reused or interrupted. Python/ZIP smoke results do not establish actor acceptance.
+
+After staging the updated portal files on Jetson, run this offline validation with administrator authentication. It opens no serial device and does not start the hardware worker. Keep physical console tests idle during the realtime CPU checks.
+
+```bash
+sudo systemd-run --wait --pipe --collect --uid=rbafna \
+  --property=WorkingDirectory=/home/rbafna/cartpole-portal/source \
+  --property=LimitRTPRIO=10 --property=CPUSchedulingPolicy=rr \
+  --property=CPUSchedulingPriority=10 --property=CPUAffinity=4 \
+  --property=NoNewPrivileges=yes --property=RuntimeMaxSec=45 \
+  --setenv=CARTPOLE_TEST_REALTIME_CPU=5 \
+  --setenv=PYTHONPATH=/home/rbafna/cartpole-portal/source/src \
+  /bin/sh -ec '/home/rbafna/cartpole_v2/.venv/bin/python -m pytest -p no:cacheprovider -q tests/test_portal_realtime_linux.py; exec .venv/bin/python deploy/portal/check-actor-startup.py --cpu 5 --numpy-root /home/rbafna/cartpole-portal/sandbox-packages --artifact /home/rbafna/.local/state/cartpole-portal/store/artifacts/0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16.py --telemetry /home/rbafna/.local/state/cartpole-portal/hardware-recordings/6b248056287743209fce0a5b3a98fe7f-044bd9ac4b7548448411fb7c474e24d2/telemetry.jsonl'
+```
+
+Require all five isolation/abuse tests and all three actor reset checks to pass before a physical actor acceptance run. The saved actor's provenance is checked by the existing isolated loader. Installation commands above remain separate from validation; starting/enabling the hardware service requires closing the console and ensuring the stopped rig is healthy and homed.

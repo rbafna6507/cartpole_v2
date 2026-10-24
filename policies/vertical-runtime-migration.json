@@ -1,8 +1,8 @@
 {
   "actors": {
     "1m.json": {
-      "deployed_content_sha256": "361b4e4e28688acf3f9e66373f0643bafbc4cb35e6b6cfc5d3d449bf1dc80c0c",
-      "deployed_file_sha256": "6bd7fa98d6acdd126b27560a9247d4e42b3a474fa2d50c4816164b93a773d1e3",
+      "deployed_content_sha256": "7d84af6dd1c796c33aaf5ff4a36c5a2b0490ddcffee10f40451a2cb86ac9a987",
+      "deployed_file_sha256": "82da3a8a3231279c56f8ef4b9daaa489163ad91d78098699181232a7426ffa51",
       "inference_parity": {
         "max_abs_difference": 0.0,
         "samples": 256,
@@ -19,7 +19,7 @@
         "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
         "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
         "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
-        "rig/neural_runner.py": "077c09f35de4755370c7c19697c4c462759c9ae7626fb99e75d34e8f324d2ff5",
+        "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
         "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
         "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
         "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
@@ -71,8 +71,8 @@
       "source_file_sha256": "0c4207fa9bce067b8822a1f58de0d4853a899a9924923a4d6f247338f001c11a"
     },
     "working.json": {
-      "deployed_content_sha256": "247c9b6726d5b8c322c73a8637cfc800cb71eb44e47734806ccc8f3ee2ee5ec2",
-      "deployed_file_sha256": "510251a7702a218e524ee51d7777bb45b1105e2f97547b027f7fc9a0dbf783be",
+      "deployed_content_sha256": "e37c7c2996ee167a7adaa70235d010cab0694733674e0295227c2dfab752d841",
+      "deployed_file_sha256": "137efce5b618d62823e55b554f5a96be86c1f7fb0afe266ca2a2882f80b862f0",
       "inference_parity": {
         "max_abs_difference": 0.0,
         "samples": 256,
@@ -89,7 +89,7 @@
         "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
         "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
         "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
-        "rig/neural_runner.py": "077c09f35de4755370c7c19697c4c462759c9ae7626fb99e75d34e8f324d2ff5",
+        "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
         "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
         "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
         "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
@@ -143,16 +143,17 @@
   },
   "date": "2026-10-23",
   "hardware_accepted": false,
-  "reason": "Integrate executor-v7-vertical while retaining the existing cart controller and numeric actor semantics.",
+  "reason": "Integrate executor-v7-vertical and separate external learned-policy admission from native controller gains while preserving actor weights, shared motion safety, and source-specific observation semantics.",
   "reviewed_runtime_changes": {
     "rig/__init__.py": "Export ZStatus metadata type; importing still has no hardware effects.",
     "rig/client.py": "Add independently monitored vertical operations and explicit v7 cart compatibility; cart action math unchanged.",
-    "rig/neural_runner.py": "Accept v7 in the existing v6 measured-rail calibration tolerance check; no actor inference or observation change.",
+    "rig/neural_runner.py": "Accept v7 measured-rail compatibility; exclude reviewed native swing/balance/capture law settings from external actor admission; bind bw only for magnetic-dependent observation contracts; retain all shared safety checks and read-only preflight.",
     "rig/parameters.py": "Keep v6 identity constant; add v7 identity and supported tuple; parameter values and ranges unchanged.",
     "rig/protocol.py": "Accept v7 diagnostics and standalone mode15; add strict separate Z metadata; existing S fields unchanged."
   },
   "schema": "cartpole-reviewed-runtime-migration-v1",
   "validation": {
+    "policy_parameter_separation": "202 neural runner, balance hardware, live rail compatibility and console policy tests passed; immutable-source and exact inference parity verified by test_vertical_actor_migration.",
     "result": "359 passed and 265 subtests passed before deployment migration; vertical duration guard 11 passed and 14 subtests passed",
     "suite": "SDK/protocol/console/neural policy regression tests"
   }

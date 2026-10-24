@@ -184,6 +184,14 @@ class CameraObservationProvider:
         return self.assembler.compose(board)
 
 
+# M_EXTERNAL bypasses swingAccel/balanceAccel and capture/approach logic.
+# Keep every other field pinned unless explicitly reviewed here; in particular
+# vmax_s/vmax_b still feed recoverySpeedLimit for external actions.
+NATIVE_CONTROLLER_PARAMETERS = frozenset({
+    'leff', 'pw', 'pz', 'bal_pw', 'pc1', 'pc2', 'ke', 'kpx', 'kdx',
+    'phase_soft', 'approach_v', 'catch_v', 'approach_angle', 'catch_da',
+    'catch_a', 'catch_r', 'giveup',
+})
 HOME_RAIL_REPEATABILITY_M = .001
 
 
@@ -240,7 +248,13 @@ def validate_live_executor(rig, policy, *, require_rate=True):
     expected = policy.executor_parameters
     if set(values) != set(expected):
         raise ValidationError('live executor parameter catalog differs from trained actor')
-    mismatches = [name for name in expected if name != 'rail' and not math.isclose(float32(values[name]), float32(expected[name]),
+    ignored = set(NATIVE_CONTROLLER_PARAMETERS)
+    # Raw angle still consumes the filtered magnetic angular rate. Fused uses
+    # that same aligned rate. Only the vision contract selects camera rate too.
+    if policy.observation_contract['angle_source'] == 'vision':
+        ignored.add('bw')
+    required = set(expected) - ignored
+    mismatches = [name for name in expected if name in required and name != 'rail' and not math.isclose(float32(values[name]), float32(expected[name]),
                                                                rel_tol=1e-6, abs_tol=1e-8)]
     if mismatches:
         raise ValidationError('live executor differs from actor snapshot: '+', '.join(mismatches))
@@ -258,6 +272,9 @@ def validate_live_executor(rig, policy, *, require_rate=True):
     bind = getattr(policy, 'bind_live_executor', None)
     host_limits = bind(values) if bind is not None else None
     rig._record('neural_preflight', executor_parameters=values,
+        required_executor_parameters=sorted(required),
+        ignored_native_controller_parameters=sorted(NATIVE_CONTROLLER_PARAMETERS & set(expected)),
+        ignored_observation_parameters=sorted((ignored - NATIVE_CONTROLLER_PARAMETERS) & set(expected)),
         rail_compatibility=rail_compatibility, host_run_limits=host_limits,
         telemetry_rate_hz=rig.rate_hz, required_telemetry_rate_hz=100,
         encoder_reference=dict(upright_raw=info.encoder_upright_raw, firmware=info.firmware),
