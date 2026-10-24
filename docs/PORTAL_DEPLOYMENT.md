@@ -14,7 +14,19 @@ For Vercel, import that repository with root `.`, build `node build.mjs`, no ins
 
 All three upload formats pass public HTTPS simulation execution and ZIP download checks. Network access and infinite-loop submissions fail closed and return diagnostic recordings. The portal regression suite passes 211 tests locally (15 platform/explicit realtime-supervisor skips), with actual Linux sandbox checks performed separately.
 
-Physical execution is still under commissioning. Ordinary-priority child scheduling caused missed control deadlines even for zero-output scripts; a bounded realtime opt-in now passes five actual Jetson isolation/abuse tests. With default garbage collection and `NoNewPrivileges` enabled, recorded-observation replay passed 5,000 zero-controller cycles (maximum 5.84 ms) and 2,000 numeric-actor cycles (maximum 7.42 ms), at 100 Hz. These offline results do not establish physical reliability. Physical one-second Python and ZIP smoke tests each completed 90 actions, confirmed STOP with no board fault, and returned verified bundles. The numeric actor first failed inside isolation before arming; its diagnostic retry was rejected even earlier because the encoder-health flag was off. The Jetson subsequently rebooted. API, simulation and camera services returned automatically, but the Teensy USB device was absent after reboot. Full actor acceptance and persistent service installation remain pending; do not treat this as unattended hardware service readiness. Its system unit is staged, not installed/enabled. No firmware deadline was relaxed.
+On 2026-10-24 the persistent system hardware worker was installed and started, with boot-time enablement deliberately still off. The operator's realtime test completed five isolation/abuse checks and three numeric-actor reset checks; each reset verified the inference hard/soft RTTIME limits were 500 ms. The worker SDK now matches executor-v7-vertical and the current deployment actor runtime pins.
+
+Physical one-second smoke tests passed for all upload types:
+
+| Upload | Job | Actions | Maximum inference | Result bundle SHA-256 |
+| --- | --- | ---: | ---: | --- |
+| Python zero-controller | `64a0f738afc04ec8a2788a86d7ac898e` | 96 | 2.40 ms | `796eb8f9519b78920065e2ededd0761e0653c662d6cd7178680e02499c36e54d` |
+| ZIP zero-controller | `255dbad31e1142319cfd4212af2c0d8a` | 96 | 2.42 ms | `ceb047f8eb750c2320865ab9728332ccaa3eac75f791b1ae4738d00fe519daa1` |
+| Current working numeric actor | `1a82c666f67a4b42a721b5bd2469529a` | 91 | 3.28 ms | `a15d9091657a6545a793f38e7909d7db9ffce772c827ce00f5865b3ca717693b` |
+
+Every run confirmed STOP, ended without a board fault, and uploaded a downloadable ZIP with zero dropped records. ZIP and actor submissions/downloads traversed public HTTPS with the Vercel origin. The hardware queue returned idle and unblocked. These establish bounded end-to-end execution, not long-duration balancing performance or general acceptance of arbitrary controllers. Result metadata intentionally retains `physical_acceptance: false`; no firmware deadline was relaxed. The numeric test stopped the cart at approximately +0.193 m rather than automatically returning it to center.
+
+The exact Vercel deployment origin is allowlisted; authenticated API and camera-preview requests from that origin pass. The deployment currently redirects anonymous visitors to Vercel sign-in. Browser UI execution behind that protection has not been independently verified. API authentication remains required regardless of frontend hosting.
 
 ## Installed paths and services
 
