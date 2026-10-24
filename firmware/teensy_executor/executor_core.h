@@ -85,6 +85,13 @@ struct Core {
   if(!strcmp(cmd,"HELLO")){if(count!=3)return {ERROR,"args"};if(enabled)return {ERROR,"enabled"};sid=session;stop();z.refs=z.bottom=0;return {HELLO,"HELLO"};}
   if(session!=sid)return {ERROR,"session"};
   if(!strcmp(cmd,"ZSTATUS")){if(count!=3)return {ERROR,"args"};return {ZSTATE,"ZSTATUS"};}
+  if(!strcmp(cmd,"ZLIMIT")){
+   float value=0;
+   if(count!=4||!realValue(tokens[3],value)||value<10||value>200)return {ERROR,"value"};
+   if(enabled||mode!=0||z.phase||calibration||fault!=NONE||!healthy)return {ERROR,"enabled"};
+   for(int i=0;i<2;++i)if((z.refs&(1<<i))&&z.count[i]/vertical::STEPS_MM>value)return {ERROR,"travel"};
+   z.max_mm=value;return {OK,"ZLIMIT"};
+  }
   if(!strcmp(cmd,"ZSTOP")){if(count!=3)return {ERROR,"args"};z.cancel();if(mode==15)stop();return {OK,"ZSTOP"};}
   if(!strcmp(cmd,"ZREF")||!strcmp(cmd,"ZHOME")||!strcmp(cmd,"ZMOVE")||!strcmp(cmd,"ZSINE")){
    const bool ref=!strcmp(cmd,"ZREF"),home=!strcmp(cmd,"ZHOME"),move=!strcmp(cmd,"ZMOVE");
@@ -100,9 +107,9 @@ struct Core {
    float a=0,b=0,c=0,d=0;
    if(move){
     if(!realValue(tokens[4],a)||!realValue(tokens[5],b)||a==0||fabsf(a)>20||b<=0||b>40||1.875*fabs(double(a))/b>60)return {ERROR,"value"};
-    for(int i=0;i<2;++i)if(mask&(1<<i)){double endpoint=z.count[i]/vertical::STEPS_MM+a;if(endpoint<0||endpoint>200)return {ERROR,"travel"};}
+    for(int i=0;i<2;++i)if(mask&(1<<i)){double endpoint=z.count[i]/vertical::STEPS_MM+a;if(endpoint<0||endpoint>z.max_mm)return {ERROR,"travel"};}
    }else if(!home){
-    vertical::Settings settings;settings.travel=200;
+    vertical::Settings settings;settings.travel=z.max_mm;
     if(!realValue(tokens[3],a)||!realValue(tokens[4],b)||!realValue(tokens[5],c)||!realValue(tokens[6],d)||!vertical::validSine(settings,a,b,c,d)||fabs(z.count[0]-z.count[1])/vertical::STEPS_MM>.25)return {ERROR,"value"};
    }
    z.begin(mask,home?2:move?1:3,tick);

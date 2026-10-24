@@ -388,6 +388,8 @@ to left DIR LOW / right DIR HIGH following the observed direction tests.
 
 ```text
 z status
+z limit                 # firmware maximum height; default 120 mm
+z limit 100             # set both screws to 100 mm while stopped (10..200)
 z reference both
 z home both
 z reference both
@@ -406,3 +408,7 @@ maximum 40); distance is at most 20 mm per command within counted 0..200 mm,
 and each move profile must finish within 60 seconds.
 `z stop` stops Z; `stop` stops/disables all axes. This requires the matching
 integrated firmware and SDK, not the earlier standalone commissioning firmware.
+
+Vertical height limits are independent of gain profiles and reset to 120 mm on
+firmware reboot. Sines stay 2 mm below the ceiling. Custom changes require the
+staged `operator-20261024-zlimits` firmware; see [flash instructions](docs/VERTICAL_CONTROL.md#configurable-height-ceiling--operator-20261024-zlimits).

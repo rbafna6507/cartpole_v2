@@ -240,7 +240,9 @@ The integrated `cartpole-console` implementation is described below.
 The [integrated vertical guide](docs/VERTICAL_CONTROL.md) covers the
 `executor-v7-vertical` firmware and `z` commands in the normal console: independent
 or paired physical up/down moves, timed bottoming, explicit bottom reference,
-vertical STOP and finite paired disturbances. Left UP is DIR LOW; right UP is
+vertical STOP and finite paired disturbances. The staged height-limit build defaults
+to a firmware-enforced 120 mm ceiling; `z limit [MM]` reads/sets it (10..200 mm)
+while stopped. Reflash instructions are in the integrated guide. Left UP is DIR LOW; right UP is
 DIR HIGH. Hardware commissioning status and staged-release instructions are in
 the guide; the standalone test remains available separately.
 

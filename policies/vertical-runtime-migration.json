@@ -1,8 +1,34 @@
 {
   "actors": {
     "1m.json": {
-      "deployed_content_sha256": "7d84af6dd1c796c33aaf5ff4a36c5a2b0490ddcffee10f40451a2cb86ac9a987",
-      "deployed_file_sha256": "82da3a8a3231279c56f8ef4b9daaa489163ad91d78098699181232a7426ffa51",
+      "deployed_content_sha256": "67e00289ef7c4d2b4724af1b1f712e6a8a423837ad0a68b9552663dd8ba5f655",
+      "deployed_file_sha256": "7aa7831aacb222db7103454f41b39cf56e4f642540d76f550bbb0ab869b30a8b",
+      "deployment_history": [
+        {
+          "file_sha256": "82da3a8a3231279c56f8ef4b9daaa489163ad91d78098699181232a7426ffa51",
+          "runtime_sha256": {
+            "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+            "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+            "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+            "policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+            "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
+            "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+            "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
+            "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
+            "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
+            "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
+            "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+            "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
+            "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+            "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+            "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+            "sensing/policy_observation.py": "6fdb448c03e6b524cc2ffaa0a6dd1bf1a59200c90b9b2a695dd144149befacb1",
+            "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+            "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2"
+          },
+          "superseded_by": "2026-10-24 vertical limit SDK/protocol extension; no actor weight or control changes"
+        }
+      ],
       "inference_parity": {
         "max_abs_difference": 0.0,
         "samples": 256,
@@ -18,11 +44,11 @@
         "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
         "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
         "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
-        "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
+        "rig/client.py": "83f6332a27a01daf8aafd966d840cab626a24e782576413b5041364cfc2ffe48",
         "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
         "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
         "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
-        "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
+        "rig/protocol.py": "75331809abca6d1ca13878a01ec6aa976721d9bb5c12a33b62cd42ffb065b050",
         "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
         "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
         "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
@@ -71,8 +97,34 @@
       "source_file_sha256": "0c4207fa9bce067b8822a1f58de0d4853a899a9924923a4d6f247338f001c11a"
     },
     "working.json": {
-      "deployed_content_sha256": "e37c7c2996ee167a7adaa70235d010cab0694733674e0295227c2dfab752d841",
-      "deployed_file_sha256": "137efce5b618d62823e55b554f5a96be86c1f7fb0afe266ca2a2882f80b862f0",
+      "deployed_content_sha256": "634b5ab54d740673723c873dce48973746978688fa888eb59a4597ee1739ea8a",
+      "deployed_file_sha256": "c1e39d79ba5bfac858a54c4d4db08dead8be21470db772d645bc102a861a0dee",
+      "deployment_history": [
+        {
+          "file_sha256": "137efce5b618d62823e55b554f5a96be86c1f7fb0afe266ca2a2882f80b862f0",
+          "runtime_sha256": {
+            "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+            "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+            "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+            "policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+            "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
+            "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+            "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
+            "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
+            "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
+            "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
+            "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+            "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
+            "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+            "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+            "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+            "sensing/policy_observation.py": "6fdb448c03e6b524cc2ffaa0a6dd1bf1a59200c90b9b2a695dd144149befacb1",
+            "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+            "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2"
+          },
+          "superseded_by": "2026-10-24 vertical limit SDK/protocol extension; no actor weight or control changes"
+        }
+      ],
       "inference_parity": {
         "max_abs_difference": 0.0,
         "samples": 256,
@@ -88,11 +140,11 @@
         "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
         "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
         "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
-        "rig/client.py": "b7ea2d32ee9790eb629d8c208962eb2660dead41c3bbcd33d00334f33be7e2a8",
+        "rig/client.py": "83f6332a27a01daf8aafd966d840cab626a24e782576413b5041364cfc2ffe48",
         "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
         "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
         "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
-        "rig/protocol.py": "ab8a9d05df7e0b8b03d2ff88ad4939c91dacbddca253ce19a0b6da577190b639",
+        "rig/protocol.py": "75331809abca6d1ca13878a01ec6aa976721d9bb5c12a33b62cd42ffb065b050",
         "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
         "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
         "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
@@ -155,6 +207,7 @@
   "validation": {
     "policy_parameter_separation": "202 neural runner, balance hardware, live rail compatibility and console policy tests passed; immutable-source and exact inference parity verified by test_vertical_actor_migration.",
     "result": "359 passed and 265 subtests passed before deployment migration; vertical duration guard 11 passed and 14 subtests passed",
-    "suite": "SDK/protocol/console/neural policy regression tests"
+    "suite": "SDK/protocol/console/neural policy regression tests",
+    "vertical_limits": "167 console/SDK/native firmware tests passed, including exact 120mm pulse boundary. Deployment actors repinned only for additive vertical SDK/protocol changes; inference parity checked against immutable training originals."
   }
 }

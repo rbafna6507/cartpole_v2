@@ -1,4 +1,23 @@
 static void vertical_guards(){
+ init();assert(executor_state.z.max_mm==120);
+ for(const char* s:{"V2 ZLIMIT 7 nan","V2 ZLIMIT 7 inf","V2 ZLIMIT 7 9","V2 ZLIMIT 7 201","V2 ZLIMIT 8 80","V2 ZLIMIT 7 80 extra"}){cmd(s);assert(executor_state.z.max_mm==120);}
+ cmd("V2 ZREF 7 both");z_count[0]=40*640;cmd("V2 ZLIMIT 7 30");assert(executor_state.z.max_mm==120);
+ cmd("V2 ZLIMIT 7 40");assert(executor_state.z.max_mm==40);
+ cmd("V2 ZMOVE 7 left -1 2");assert(g_energized);
+ cmd("V2 ZLIMIT 7 150");assert(executor_state.z.max_mm==40);cmd("V2 STOP 7");
+ init();cmd("V2 ZREF 7 both");z_count[0]=z_count[1]=100*640;
+ cmd("V2 ZMOVE 7 both 20 40");assert(g_energized);
+ for(int ms=0;ms<1100&&executor_state.enabled;++ms){if(ms%50==0)cmd("V2 PING 7");oracle_now_us+=1000;serviceControl();for(int t=0;t<250;++t)onZTimer();assert(z_count[0]<=120*640&&z_count[1]<=120*640);}
+ assert(!g_energized&&z_count[0]==120*640&&executor_state.fault==executor::NONE);
+
+ init();cmd("V2 ZREF 7 both");z_count[0]=z_count[1]=120*640;
+ cmd("V2 ZMOVE 7 both 1 2");assert(!g_energized);
+ cmd("V2 ZLIMIT 7 130");cmd("V2 ZMOVE 7 both 1 2");assert(g_energized);
+ cmd("V2 ZSTOP 7");
+ init();cmd("V2 ZREF 7 both");cmd("V2 ZLIMIT 7 50");
+ cmd("V2 ZSINE 7 20 1 31 10");assert(!g_energized);
+ cmd("V2 ZSINE 7 20 1 28 10");assert(g_energized);
+
  init();cmd("V2 ZMOVE 7 both 2 2");assert(!g_energized);
  cmd("V2 ZREF 7 both");assert(executor_state.z.refs==3);
  for(const char* s:{"V2 ZMOVE 7 both nan 2","V2 ZMOVE 7 both 21 2","V2 ZMOVE 7 both -1 2","V2 ZMOVE 7 both 1 41","V2 ZMOVE 7 both 1 1e-30","V2 ZSINE 7 20 1 25 3"}){cmd(s);assert(!g_energized);}
@@ -35,7 +54,7 @@ static void vertical_sine(){
  assert(z_count[0]==16000&&z_count[1]==16000&&maximum>28000&&minimum<4000);
  cmd("V2 STOP 7");assert(executor_state.z.refs==3);
  resetTx();Serial.output.clear();cmd("V2 ZSTATUS 7");for(int i=0;i<20;++i)serviceSerialTx();
- assert(Serial.output.find("@V2 Z 7 0 3 25.000000 25.000000 0*")!=std::string::npos);
+ assert(Serial.output.find("@V2 Z 7 0 3 25.000000 25.000000 0 120.000000*")!=std::string::npos);
 }
 static void vertical_faults(){
  for(int reason=0;reason<3;++reason){

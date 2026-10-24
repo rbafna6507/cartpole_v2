@@ -4,6 +4,7 @@
 namespace vertical {
 constexpr double STEPS_MM=640.;
 struct Motion {
+ double max_mm=120;
  uint8_t phase=0,refs=0,bottom=0,selected=0;
  uint32_t started=0;double duration=0,amplitude=0,hz=0,center=0,seconds=0;
  double from[2]={0,0},to[2]={0,0};int32_t count[2]={0,0};

@@ -14,7 +14,7 @@ from .policy import ZeroAccelerationPolicy, run_policy, run_host_controller
 
 HELP = ('auto [seconds], bal [seconds], python-auto [seconds], python-bal [seconds], manual [seconds], velocity m/s [ttl_ms], '
         'stop, center, home, rehome, upright, hanging MODEL IDENTITY | hanging ideal, switches on|off, status, info, clear, rate hz, '
-        'z status|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC], '
+        'z status|limit [MM]|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC], '
         'params, get key, set key value, save path, load path, '
         'policy load PATH|status|check [swingup]|shadow [swingup] [seconds]|run [seconds]|swingup [seconds]|unload, quit')
 
@@ -49,6 +49,8 @@ def execute_command(rig, line, *, output=None):
     if command=='z':
         if args == ['status']:
             print(canonical_json(asdict(rig.z_status())), file=output)
+        elif args and args[0] == 'limit' and len(args) in (1, 2):
+            print(canonical_json(asdict(rig.z_limit(None if len(args) == 1 else float(args[1])))), file=output)
         elif args == ['stop']:
             rig.z_stop()
             print('vertical motion stopped', file=output)
@@ -67,7 +69,7 @@ def execute_command(rig, line, *, output=None):
             rig.z_sine(*map(float, args[1:]))
             print('finite paired vertical sine started', file=output)
         else:
-            raise ValidationError('use z status|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC]')
+            raise ValidationError('use z status|limit [MM]|reference AXIS|home AXIS|move AXIS up|down MM [SPEED]|stop|sine [A HZ CENTER SEC]')
     elif command=='policy':
         from .console_policy import execute_policy_command
         execute_policy_command(rig,args,output)

@@ -41,12 +41,13 @@ z stop
 `z reference both` is an **operator assertion** that both ends are physically at
 the bottom. Use it only there. It does not move anything or sense the bottom.
 You can reference `left` or `right` separately. Moves require the selected axes
-referenced and must stay between counted 0 and 200 mm. Independent movement tilts
+referenced and must stay between counted 0 and the configured ceiling (120 mm by default, maximum 200 mm). Independent movement tilts
 the rail; software limits cannot establish mechanically permissible tilt.
 
 | Command | Arguments / meaning |
 |---|---|
-| `z status` | Phase, reference masks, counted positions, completed bottoming mask |
+| `z status` | Phase, reference masks, counted positions, completed bottoming mask, firmware ceiling `max_mm` |
+| `z limit [MM]` | Read ceiling, or set a shared ceiling for both axes (10..200 mm, default 120); stopped and healthy only |
 | `z reference left/right/both` | Declare the selected current positions bottom/zero while stopped |
 | `z home left/right/both` | Timed selected-axis DOWN at 40 mm/s for 5 s; stopped-only |
 | `z move left/right/both up/down MM [SPEED]` | Relative physical motion, distance >0..20 mm, speed default 2 mm/s, max 40 mm/s; profile duration ≤60 s |
@@ -169,3 +170,56 @@ the previous active deployment. Check `info` reports `executor-v7-vertical`, the
 `z status`. At the physically verified bottom, run `z reference both` and try
 `z move both up 5`; wait until idle before the next command. Use `z home both`
 only for the approved timed bottoming routine, then inspect and reference.
+
+## Configurable height ceiling — operator-20261024-zlimits
+
+Both screws default to a **120 mm maximum height above the explicitly referenced
+bottom**. `z limit` reads the firmware ceiling; `z limit 100` sets both screws to
+100 mm. Relative move endpoints cannot exceed it. Sine extrema retain 2 mm
+clearance from bottom and ceiling, so a 120 mm ceiling permits a maximum sine
+height of 118 mm. The firmware also checks each generated non-homing target before
+handing it to the pulse timer. The physical stroke ceiling remains 200 mm.
+
+Changes require the entire rig stopped, healthy, no calibration, and no Z motion.
+A new limit below either referenced current position is rejected: move down first.
+The setting survives a console reconnect but is RAM-only and resets to 120 mm on
+firmware reboot. It is independent of controller gains and learned-policy settings;
+`save`/`load` controller profiles do not change it. Timed downward homing remains
+40 mm/s for 5 seconds; it is explicitly exempt from counted travel limits because
+it seeks the bottom without a valid position reference.
+
+The firmware identity remains `executor-v7-vertical`; the appended `max_mm` field
+in `V2 Z` reports this capability. Use this release's matching SDK/console for Z
+commands after flashing. With older firmware the new console reports `max_mm: null`,
+uses a 120 mm host ceiling, and refuses custom changes until you flash. A host-only
+ceiling cannot constrain other software issuing raw serial commands.
+
+The staged release is `/home/rbafna/cartpole-v2-live/releases/operator-20261024-zlimits`.
+The `cartpole-console` launcher selects it through the `active` symlink. Firmware
+is **staged, not flashed**, and this deployment does not move or re-reference axes.
+Close the console and stop the hardware worker before flashing to avoid serial
+contention:
+
+```bash
+sudo systemctl stop cartpole-worker-hardware.service
+cd ~/cartpole-v2-live/releases/operator-20261024-zlimits
+sha256sum -c artifacts/SHA256SUMS
+~/cartpole-v2-live/tools/loader-2.3/teensy_loader_cli --mcu=TEENSY41 -w -v artifacts/teensy_executor.ino.hex
+# Press PROGRAM on the Teensy if requested.
+cartpole-console
+```
+
+Then inspect `z status` / `z limit` for `max_mm: 120`. Establish the physical bottom
+reference explicitly before motion; flashing invalidates counted references.
+Example commands at the console:
+
+```text
+z limit
+z limit 100
+z status
+z limit 120
+```
+
+Previous launcher target: `releases/operator-20261024`. Existing releases, policies,
+controller gains, and encoder calibration files are retained. Physical acceptance
+of the newly flashed build is still required; automated tests use simulated I/O.

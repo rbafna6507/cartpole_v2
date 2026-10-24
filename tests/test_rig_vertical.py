@@ -13,6 +13,9 @@ class VerticalFirmware(Firmware):
         self.phase=0
         self.refs=3
         self.z_end=None
+        self.height=25
+        self.maximum=120
+        self.legacy=False
         super().__init__()
     def command(self,payload):
         p=payload.split()
@@ -21,9 +24,10 @@ class VerticalFirmware(Firmware):
             self.send(f'V2 INFO {self.sid} executor-v7-vertical 270 1 32 0 1 14000 .35 768 768 1 2318 0 0')
         elif p[1]=='ZSTATUS':
             self.commands.append(p)
-            self.send(f'V2 Z {self.sid} {self.phase} {self.refs} 25 25 0')
+            self.send(f'V2 Z {self.sid} {self.phase} {self.refs} {self.height} {self.height} 0' + ('' if self.legacy else f' {self.maximum}'))
         elif p[1].startswith('Z'):
             self.commands.append(p)
+            if p[1]=='ZLIMIT':self.maximum=float(p[3])
             if p[1] in ('ZMOVE','ZHOME','ZSINE'):
                 self.phase=1; self.z_end=self.ticks()+60
                 if self.mode==0:self.mode=15;self.flags|=2
@@ -135,3 +139,42 @@ class VerticalTests(unittest.TestCase):
         with rig:
             with self.assertRaisesRegex(ValidationError,'60s'):rig.z_move('both',20,.001)
             self.assertFalse(any(p[1]=='ZMOVE' for p in fw.commands))
+
+    def test_default_ceiling_blocks_move_and_sine(self):
+        fw,rig=self.rig()
+        with rig:
+            fw.height=120
+            with self.assertRaises(ValidationError):rig.z_move('both',1)
+            with self.assertRaises(ValidationError):rig.z_sine(20,1,100,10)
+            self.assertFalse(any(p[1] in ('ZMOVE','ZSINE') for p in fw.commands))
+    def test_custom_ceiling_command_and_metadata(self):
+        fw,rig=self.rig()
+        with rig:
+            output=io.StringIO();execute_command(rig,'z limit',output=output)
+            self.assertIn('120',output.getvalue())
+            self.assertEqual(rig.z_status().max_mm,120)
+            execute_command(rig,'z limit 100',output=output)
+            self.assertTrue(any(p[1]=='ZLIMIT' and p[3]=='100' for p in fw.commands))
+            for v in (0,9,201,float('nan'),float('inf')):
+                with self.assertRaises(ValidationError):rig.z_limit(v)
+            with self.assertRaises(ValidationError):rig.z_limit(20)
+
+    def test_legacy_uses_host_ceiling_and_requires_flash_to_change(self):
+        fw,rig=self.rig();fw.legacy=True
+        with rig:
+            self.assertIsNone(rig.z_status().max_mm)
+            fw.height=120
+            with self.assertRaises(ValidationError):rig.z_move('left',1)
+            with self.assertRaisesRegex(RigError,'flash'):rig.z_limit(130)
+            self.assertFalse(any(p[1] in ('ZMOVE','ZLIMIT') for p in fw.commands))
+    def test_custom_limit_controls_later_moves(self):
+        fw,rig=self.rig()
+        with rig:
+            rig.z_limit(30)
+            with self.assertRaises(ValidationError):rig.z_move('both',6)
+            with self.assertRaises(ValidationError):rig.z_sine()
+            self.assertEqual(rig.z_limit().max_mm,30)
+    def test_limit_metadata_rejects_invalid_values(self):
+        for v in ('nan','inf','0','9','201','1_20'):
+            with self.subTest(v=v),self.assertRaises(protocol.ProtocolError):
+                protocol.parse_z_status('V2 Z 1 0 3 0 0 0 '+v,received_ns=1)

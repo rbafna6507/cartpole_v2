@@ -216,11 +216,12 @@ class ZStatus:
     right_mm: float
     bottom_mask: int
     received_ns: int
+    max_mm: float | None = None
 
 
 def parse_z_status(payload: str, *, received_ns: int) -> ZStatus:
     parts = payload.split(' ')
-    if len(parts) != 8 or parts[:2] != ['V2', 'Z']:
+    if len(parts) not in (8, 9) or parts[:2] != ['V2', 'Z']:
         raise ProtocolError('invalid vertical status field count')
     sid, phase, refs = map(uint32, parts[2:5])
     bottom = uint32(parts[7])
@@ -231,4 +232,11 @@ def parse_z_status(payload: str, *, received_ns: int) -> ZStatus:
     left, right = map(float, parts[5:7])
     if not all(math.isfinite(v) for v in (left, right)):
         raise ProtocolError('nonfinite vertical position')
-    return ZStatus(sid, phase, refs, left, right, bottom, received_ns)
+    maximum = None
+    if len(parts) == 9:
+        if not re.fullmatch(r'[0-9]+(?:\.[0-9]*)?', parts[8]):
+            raise ProtocolError('invalid vertical limit grammar')
+        maximum = float(parts[8])
+        if not math.isfinite(maximum) or not 10 <= maximum <= 200:
+            raise ProtocolError('invalid vertical limit range')
+    return ZStatus(sid, phase, refs, left, right, bottom, received_ns, maximum)

@@ -588,6 +588,9 @@ void serviceVertical(){
  int32_t targets[2];uint32_t increments[2];bool lag=false,arrived=true;
  for(int i=0;i<2;++i){
   targets[i]=(z.selected&(1<<i))?int32_t(lround(z.position(i,executor_state.tick)*vertical::STEPS_MM)):z.count[i];
+  if(z.phase!=2&&(z.selected&(1<<i))&&(targets[i]<0||targets[i]>int32_t(floor(z.max_mm*vertical::STEPS_MM)))){
+   executor_state.trip(executor::LIMIT);eStop();mode=M_FAULT;return;
+  }
   const int32_t delta=targets[i]-z.count[i];if(abs(delta)>200)lag=true;if(delta)arrived=false;
   increments[i]=uint32_t(std::min(vertical::MAX_RATE,fabs(double(delta))*1100.)*4294967296./250000.);
  }
@@ -1048,8 +1051,8 @@ void handleV2(const char* line){
   if(reply.kind==executor::HELLO){resetTx();status_requested=false;eStop();mode=executor_state.fault==executor::NONE?M_IDLE:M_FAULT;}
   if(executor_state.enabled&&!g_energized){executor_state.trip(executor::DEADLINE);eStop();mode=M_FAULT;reply={executor::ERROR,"timer"};}
   if(reply.kind==executor::ZSTATE){
-    char payload[160];snprintf(payload,sizeof payload,"V2 Z %lu %u %u %.6f %.6f %u",(unsigned long)executor_state.sid,
-      executor_state.z.phase,executor_state.z.refs,z_count[0]/vertical::STEPS_MM,z_count[1]/vertical::STEPS_MM,executor_state.z.bottom);
+    char payload[160];snprintf(payload,sizeof payload,"V2 Z %lu %u %u %.6f %.6f %u %.6f",(unsigned long)executor_state.sid,
+      executor_state.z.phase,executor_state.z.refs,z_count[0]/vertical::STEPS_MM,z_count[1]/vertical::STEPS_MM,executor_state.z.bottom,executor_state.z.max_mm);
     queueReply(payload);return;
   }
   if(reply.kind==executor::PARAM){

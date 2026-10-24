@@ -811,6 +811,22 @@ class Rig:
         response = self._command('ZSTATUS', reply='Z', allow_error=True)
         return parse_z_status(' '.join(response), received_ns=self._z_status.received_ns)
 
+    def z_limit(self, maximum_mm=None):
+        """Read/set the shared firmware ceiling; RAM-only, reboot default 120mm."""
+        if maximum_mm is None:
+            return self.z_status()
+        maximum = self._z_number(maximum_mm, 'vertical limit')
+        if not 10 <= maximum <= 200:
+            raise ValidationError('vertical limit must be within 10..200mm')
+        status = self._z_ready(stopped=True)
+        if status.max_mm is None:
+            raise RigError('flash the vertical-limit firmware before changing z limit')
+        for bit, position in ((1, status.left_mm), (2, status.right_mm)):
+            if status.refs & bit and position > maximum:
+                raise ValidationError('vertical limit is below a referenced position; move down first')
+        self._command('ZLIMIT', f'{maximum:.9g}')
+        return self.z_status()
+
     def z_reference(self, axis='both'):
         """Operator explicitly asserts selected axes are at the physical bottom."""
         self._z_axis(axis)
@@ -871,8 +887,8 @@ class Rig:
         if status.refs & mask != mask:
             raise RigError('selected vertical axes require an explicit bottom reference')
         for bit, position in ((1, status.left_mm), (2, status.right_mm)):
-            if mask & bit and not 0 <= position + distance <= 200:
-                raise ValidationError('vertical endpoint must be within 0..200mm')
+            if mask & bit and not 0 <= position + distance <= (status.max_mm if status.max_mm is not None else 120):
+                raise ValidationError(f'vertical endpoint exceeds 0..{status.max_mm if status.max_mm is not None else 120:g}mm limit')
         return self._z_start('ZMOVE', (axis, f'{distance:.9g}', f'{speed:.9g}'), duration)
 
     def z_sine(self, amplitude_mm=20., hz=1., center_mm=25., seconds=10.):
@@ -884,6 +900,9 @@ class Rig:
                 amplitude*(2*math.pi*frequency+math.pi/4)*640 <= 100000):
             raise ValidationError('sine exceeds travel, duration, frequency or pulse bounds')
         status = self._z_ready()
+        maximum = status.max_mm if status.max_mm is not None else 120
+        if center + amplitude > maximum - 2 or max(status.left_mm, status.right_mm) > maximum:
+            raise ValidationError(f'sine exceeds {maximum:g}mm vertical limit (2mm clearance)')
         if status.refs != 3:
             raise RigError('paired sine requires both bottom references')
         if abs(status.left_mm-status.right_mm) > .25:
