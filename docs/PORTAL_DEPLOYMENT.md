@@ -99,14 +99,9 @@ Saved physical actor attempt `6b248056287743209fce0a5b3a98fe7f` failed before AR
 After staging the updated portal files on Jetson, run this offline validation with administrator authentication. It opens no serial device and does not start the hardware worker. Keep physical console tests idle during the realtime CPU checks.
 
 ```bash
-sudo systemd-run --wait --pipe --collect --uid=rbafna \
-  --property=WorkingDirectory=/home/rbafna/cartpole-portal/source \
-  --property=LimitRTPRIO=10 --property=CPUSchedulingPolicy=rr \
-  --property=CPUSchedulingPriority=10 --property=CPUAffinity=4 \
-  --property=NoNewPrivileges=yes --property=RuntimeMaxSec=45 \
-  --setenv=CARTPOLE_TEST_REALTIME_CPU=5 \
-  --setenv=PYTHONPATH=/home/rbafna/cartpole-portal/source/src \
-  /bin/sh -ec '/home/rbafna/cartpole_v2/.venv/bin/python -m pytest -p no:cacheprovider -q tests/test_portal_realtime_linux.py; exec .venv/bin/python deploy/portal/check-actor-startup.py --cpu 5 --numpy-root /home/rbafna/cartpole-portal/sandbox-packages --artifact /home/rbafna/.local/state/cartpole-portal/store/artifacts/0d17c63c7b779286ab9954da8bc7cc74850f7da235fc393f35867115819dbe16.py --telemetry /home/rbafna/.local/state/cartpole-portal/hardware-recordings/6b248056287743209fce0a5b3a98fe7f-044bd9ac4b7548448411fb7c474e24d2/telemetry.jsonl'
+bash /home/rbafna/cartpole-portal/source/deploy/portal/check-worker-realtime.sh
 ```
+
+The wrapper requests administrator authentication only to create a bounded realtime supervisor running as `rbafna` on CPU 4; its isolated children use CPU 5. It stops on a failed check and never installs or starts the physical worker. Because noninteractive sudo is unavailable, the operator must run this command interactively on Jetson.
 
 Require all five isolation/abuse tests and all three actor reset checks to pass before a physical actor acceptance run. The saved actor's provenance is checked by the existing isolated loader. Installation commands above remain separate from validation; starting/enabling the hardware service requires closing the console and ensuring the stopped rig is healthy and homed.
