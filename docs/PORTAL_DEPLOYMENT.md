@@ -194,6 +194,18 @@ portal submission after this command succeeds.
 
 ### Public camera playback recovery (2026-10-24)
 
-The viewer falls back to authenticated JPEG previews after seven seconds without decoded video, without waiting for network read/cancellation promises to settle. JPEG transfers have a 15-second timeout. The deployed Jetson presentation settings are `VISION_VIDEO_FPS=15` and `VISION_VIDEO_BITRATE=80` in `~/.config/cartpole-vision/runtime.env`; capture remains configured at 80 Hz. The previous environment is saved as `runtime.env.before-public-video-20261024`. Restart `cartpole-vision.service` with `systemctl --user restart cartpole-vision.service` after changing these settings. No SSH forwarding is needed for the public Funnel page. Vercel needs a new deployment to receive frontend fixes.
+The viewer falls back to authenticated JPEG previews after seven seconds without decoded video, without waiting for network read/cancellation promises to settle. JPEG transfers have a 15-second timeout. The temporary public-path test settings were `VISION_VIDEO_FPS=15` and `VISION_VIDEO_BITRATE=80` in `~/.config/cartpole-vision/runtime.env`; capture remains configured at 80 Hz. The previous environment is saved as `runtime.env.before-public-video-20261024`. Restart `cartpole-vision.service` with `systemctl --user restart cartpole-vision.service` after changing these settings. No SSH forwarding is needed for the public Funnel page. Vercel needs a new deployment to receive frontend fixes.
 
 Public-path diagnosis: camera and portal loopback each delivered 61 frames in 3.0 seconds at 20 fps. Through Funnel at 600 kbps, frame 40 arrived 13.77 seconds after request start with only 1.956 seconds of encoded video: 7.982 seconds of accumulated delay after the first frame. The player reconnects when that delay exceeds 1.5 seconds. At 80 kbps / 15 fps, a 20-second public test received 270 frames representing 17.906 seconds, with no accumulating delay. Vercel displayed decoded H.264 Camera, Tracking, and Green mask video. This setting trades visible compression for realtime delivery over the currently constrained public path; it does not reduce camera capture or tracking resolution/rate. Authentication and CORS were successful. The specific cause of the public-path bandwidth constraint is not yet established.
+
+### Shared encoder quality restored (2026-10-25)
+
+The shared encoder was restored to `VISION_VIDEO_FPS=40` and
+`VISION_VIDEO_BITRATE=3000` after the 80 kbps Funnel workaround also degraded the
+SSH-tunneled camera dashboard. Capture remains 960×600 at a configured 80 Hz.
+All viewers currently share this encoder: changing its bitrate affects both
+`/video.h264` and the portal relay. The public Funnel path may again fall behind;
+its bandwidth limitation is not resolved by restoring local quality. Keep future
+public streaming adaptation separate from the local high-quality viewing path.
+The SSH dashboard is available through the operator's forward at
+`http://127.0.0.1:13090/`.
