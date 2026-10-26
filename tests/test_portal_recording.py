@@ -128,3 +128,93 @@ def test_recorder_initialization_failure_does_not_block_unused_rig(tmp_path):
     run_once(store,'w','sim',recording_root=invalid)
     second=store.submit('alice','two',b'x','x.py','simulation',.1)
     assert store.claim('w','sim')['id']==second['id']
+
+@pytest.mark.parametrize('mode,expected',[('standard',False),('detailed',True)])
+def test_recording_mode_preserves_default_sensing_and_requests_details(tmp_path,monkeypatch,mode,expected):
+    from cartpole_sdk.portal.run_recording import RunRecorder
+    calls=[]
+    monkeypatch.setattr(RunRecorder,'start_sensing',lambda self,url,duration,**kwargs:calls.append(kwargs.get('detailed',False)))
+    store=Store(tmp_path/'store')
+    job=store.submit('alice','one',b'x','x.py','simulation',.1,recording=mode)
+    result=run_once(store,'w','sim',sandbox_factory=TrustedPipeFixture,sensing_url='http://127.0.0.1:1')
+    assert result['status']=='succeeded'
+    assert calls==[expected]
+    assert store.recording(job['id'],'alice')
+
+
+@pytest.mark.parametrize('snapshot_matches',[False,True])
+def test_post_arm_observation_consumed_by_first_action_is_recorded(tmp_path,snapshot_matches):
+    from dataclasses import replace
+    from cartpole_sdk.portal.worker import HardwareBridge, SimulationBridge
+    class ArmChangesObservation(HardwareBridge):
+        def prepare(self,duration,identifier):
+            self.sim=SimulationBridge();self.current=self.sim.prepare(duration,identifier)
+            self.session=self.sim.session;self.done=False
+            from types import SimpleNamespace
+            self.rig=SimpleNamespace(state=self.sim.env.ground_truth)
+            return self.current
+        def arm(self,duration):self.current=replace(self.current,sequence=self.current.sequence+100000)
+        def selected(self):return self.current
+        def complete(self):return self.done
+        def advance(self,value,sequence):
+            from dataclasses import dataclass
+            @dataclass(frozen=True)
+            class CachedState:
+                unwrapped_tick:int
+                received_ns:int
+                theta:float
+            # Simulate the reader receiving a newer STATE between observation
+            # selection and recorder sampling, without touching a serial device.
+            self.rig.state=CachedState(self.current.sequence+(0 if snapshot_matches else 10),123456,.2)
+            self.done=True
+            return self.current
+        def diagnostics(self):return {}
+        def stop(self):return True
+        def close(self):self.sim.close()
+    store=Store(tmp_path/'store')
+    job=store.submit('alice','one',b'x','x.py','magnetic-step',.1,recording='detailed')
+    store.approve(job['id'],'operator',artifact=job['artifact'],sensor_source='magnetic-step',duration=.1)
+    result=run_once(store,'w','synthetic',bridge_factory=ArmChangesObservation,sandbox_factory=TrustedPipeFixture,sensor_source='magnetic-step')
+    assert result['status']=='succeeded'
+    with zipfile.ZipFile(io.BytesIO(store.recording(job['id'],'alice'))) as bundle:
+        records=[json.loads(line) for line in bundle.read('telemetry.jsonl').splitlines()]
+    first_call=next(i for i,r in enumerate(records) if r['type']=='policy_call')
+    consumed=records[first_call]['observation_sequence']
+    assert consumed>=100000
+    assert any(r['type']=='observation' and r['observation']['sequence']==consumed for r in records[:first_call])
+
+    board=next(r for r in records if r['type']=='board_state')
+    assert 'observation_sequence' not in board
+    assert board['nearest_observation_sequence']==consumed
+    assert board['snapshot_matches_observation'] is snapshot_matches
+    assert board['state']['received_ns']==123456
+    assert board['state']['unwrapped_tick']==consumed+(0 if snapshot_matches else 10)
+
+
+def test_detailed_collector_requests_bounded_history_and_reports_limits(tmp_path):
+    import threading
+    from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
+    from urllib.parse import urlsplit,parse_qs
+    from cartpole_sdk.portal.run_recording import RunRecorder
+    requests=[]
+    envelope={'schema':'cartpole-developer-stream-v1','channels':{},'cursors':{},'gaps':['retained-source-gap']}
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self,*args):pass
+        def do_GET(self):
+            requests.append(parse_qs(urlsplit(self.path).query))
+            self.send_response(200);self.end_headers();self.wfile.write((json.dumps(envelope)+'\n').encode())
+    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+    recorder=RunRecorder(tmp_path,{'id':'test','artifact':'a','recording':'detailed'})
+    try:
+        recorder.start_sensing(f'http://127.0.0.1:{server.server_port}',1,detailed=True)
+        recorder.sensing_process.join(timeout=5)
+        path=recorder.finalize('succeeded',{})
+        with zipfile.ZipFile(path) as bundle:
+            manifest=json.loads(bundle.read('manifest.json'))
+            records=[json.loads(line) for line in bundle.read('telemetry.jsonl').splitlines()]
+        assert requests[0]['limit']==['128'] and requests[0]['max_hz']==['30']
+        assert manifest['recording']['max_sensing_bytes']==8*1024*1024
+        assert manifest['coverage']['vision']['sample_limit']==128
+        assert records[0]['envelope']['gaps']==['retained-source-gap']
+    finally:server.shutdown();server.server_close();thread.join()

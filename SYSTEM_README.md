@@ -958,3 +958,12 @@ native AUTO and the user's working learned actor remain distinct control paths.
 ## 27. Deployed submission execution
 
 The independent portal runtime and pull workers use a persistent Jetson SQLite queue. The UI can be hosted by the same API or the separate Vercel frontend without changing worker/storage topology. See [deployment guide](docs/PORTAL_DEPLOYMENT.md) for paths, installer flags, upload limits, isolation, physical approval and recovery. Earlier sections describing source-only/local preview capture earlier stages. Expanded submissions retain exact artifact identity, sandbox-only execution, timed leases, action bounds and automatic recording. Public simulation execution is verified for all three formats; the physical worker remains stopped while the bounded scheduling configuration awaits physical acceptance.
+
+
+## 25. October 26 offline developer update
+
+The [developer guide](docs/CONTROLLER_DEVELOPER_GUIDE.md) now documents one unchanged controller artifact through versioned simulation, open-loop replay and submission. The default new starter/portal simulation uses `rig-calibrated-20261021-v1`, whose packaged JSON and separate content pin reproduce the preserved filtered 100 Hz experiment. Existing archived experiments are unchanged. This eliminates the new portal simulator's former generic 0.124 m plant mismatch; the fitted plant still carries DEVELOPMENT_ONLY assumptions and no hardware-transfer guarantee.
+
+The [portal API client](docs/portal.md) exposes authenticated upload/run requests, reservations, status, cancellation and integrity-verified bundle downloads. Collection waits for bundle publication after execution finishes. Mandatory scalar traces remain; detailed recording adds bounded camera history and cached decoded board samples without issuing extra serial queries. The first post-arm controller input is recorded. [Bundle export](docs/RUN_RECORDING.md) produces replay inputs, CSV samples and observation/action pairs with explicit gaps, validity, missing labels and requested-versus-applied semantics.
+
+The [AUTO audit](docs/python-auto-offline-audit-20261026.md) confirms that native AUTO and Python AUTO share hand-designed equations and live gains, but differ in cadence, observer reset, host transport and recovery handling. No controller gains were changed. USB repair, repeated physical Python AUTO tests and full-duration portal policy acceptance remain deferred. Local changes, offline validation and deployed acceptance are separate statuses.

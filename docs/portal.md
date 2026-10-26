@@ -10,9 +10,10 @@ The API is deployed behind authenticated HTTPS through Funnel. See
 [deployment and Vercel migration](PORTAL_DEPLOYMENT.md) for services, supported formats and operational limits. Physical
 queue runs additionally need commissioned switches and an operator-prepared
 homed, healthy, stopped rig. Simulation results never mark a policy physically
-accepted. The simulation bridge uses the separate raw-demand ExecutorSimulation
-wrapper, with its binary32 1kHz governor, held leases and expiry faults at a 100Hz
-policy rate; it does not silently treat raw demand as directly executed acceleration.
+accepted. The simulation bridge uses the shared versioned `rig-calibrated-20261021-v1`
+development profile and `RigCartpoleEnv`, including causal observations and the
+raw-demand executor. Profile ID and content hash appear in diagnostics. This
+profile is DEVELOPMENT_ONLY and does not establish hardware transfer acceptance.
 
 ## Portal startup
 
@@ -298,17 +299,15 @@ http://127.0.0.1:3090. This SSH tunnel is independent of the local portal.
 Submitted policies now receive all available control-observation samples, while
 the worker still validates its required channels. Hardware provides unfiltered
 and filtered angle plus governor feedback; simulation retains simulation
-provenance and its available governor feedback. This does not yet make the generic
-simulator the fitted learned-policy Gym environment, or authorize vision/fused
-physical control.
+provenance and its available governor feedback. The default simulator now uses the same versioned profile and environment as
+the local developer workflow. This does not authorize vision/fused physical control.
 
 ## Experiment workspace, recordings and reservations (October 23 follow-up)
 
 The browser has four views: **Experiments**, **Live view**, **Run data**, and
 **Reservations**. The local preview enables reservations and configures the camera
 origin at `http://127.0.0.1:3090`. It still starts no worker and cannot execute a
-submission by itself. Only `.py` submissions are currently accepted; ZIP packages
-and numeric policy upload are not implemented.
+submission by itself. Python files, bounded ZIP projects, and supported numeric actor JSON are accepted.
 
 ### Automatic run bundles
 
@@ -326,7 +325,7 @@ use the available governor/board feedback with its own timestamps.
 The worker stops the backend and finishes the job before packaging or uploading.
 A persistent local spool survives upload failure. Downloadable ZIPs contain only
 `manifest.json` and `telemetry.jsonl`; the server never extracts uploads. Telemetry
-is bounded to 12 MiB, ZIPs to 16 MiB, and the manifest describes limits, missing
+is bounded to 32 MiB, ZIPs to 40 MiB, and the manifest describes limits, missing
 sources, drops and errors. Owner and operator credentials can download a run;
 other submitters and workers cannot download its recording through this API.
 Worker upload is bound to the exact retained job/worker/lease and policy hash and
@@ -339,7 +338,7 @@ not implemented. A queued job cancelled before it is claimed has no sensor run t
 record. Video is not saved in these bundles yet. Native raw encoder counts, every
 internal 1 kHz firmware sample, and serial bytes are not invented when unavailable.
 
-Optional `--sensing-url` records original developer-stream envelopes on a separate
+A trusted worker `--sensing-url` records original developer-stream envelopes on a separate
 background connection. It requires the new `/api/streams/ndjson` service version;
 the currently running Jetson service must be upgraded before using this option.
 It shares the bounded telemetry budget and reports connection errors/drop counts.
@@ -400,7 +399,14 @@ All routes below require bearer authentication; mutation Origin checks still app
 | `POST /api/reservations` | Submitter; `{rig, starts_at, duration_minutes}` (Unix seconds) |
 | `POST /api/reservations/{id}/cancel` | Owning submitter; `{}` |
 | `POST /api/jobs` | Existing fields plus optional `reservation_id` for physical jobs |
-| `POST /api/jobs/{id}/recording` | Assigned worker; raw ZIP, `X-Worker-Lease`, maximum 16 MiB; bounded 30-second body read |
+| `POST /api/jobs/{id}/recording` | Assigned worker; raw ZIP, `X-Worker-Lease`, maximum 40 MiB; bounded 30-second body read |
 | `GET /api/jobs/{id}/recording` | Owner/operator; ZIP attachment |
 
 The standalone API and SQLite store remain on Jetson when the static frontend moves to Vercel. Authenticated public video delivery and ZIP/numeric-policy submissions are deployed. Self-service identity integration, remote durable storage and synchronized recorded video remain separate work. Physical worker timing acceptance is still pending; see the deployment guide for current readiness.
+
+## Script and agent client
+
+See [the authenticated Python workflow](PORTAL_CLIENT.md) for upload/request-run,
+reservations, status, cancellation and verified recording collection. The optional
+`recording` submission field accepts `standard` (default mandatory trace) or
+`detailed` (adds batched independent sensing history and cached board feedback). It is immutable.

@@ -157,13 +157,15 @@ async function refresh() {
     renderJobs(); message('');
     try {
       config = await api('/api/config');
+      $('recording').disabled = !config.recording_modes?.includes('detailed');
+      $('recording-status').textContent = $('recording').disabled ? 'This backend supports its default trace only; detailed recording requires an API and worker update.' : 'Detailed collection is bounded and depends on the worker’s configured sources.';
       $('camera-source').textContent = config.camera_available === false ? 'No camera source configured.' : (apiOrigin || location.origin) + ' · authenticated camera';
       $('camera-start').disabled = config.camera_available === false || !config.camera_url;
       autoStartCamera();
       await refreshCameraMode();
       await refreshReservations();
     } catch (error) {
-      config = {}; $('camera-source').textContent = 'Camera configuration is unavailable. Restart the updated portal server.';
+      config = {}; $('recording').disabled = true; $('camera-source').textContent = 'Camera configuration is unavailable. Restart the updated portal server.';
       $('camera-start').disabled = true;
       $('reservation-status').textContent = 'Reservation configuration is unavailable. Restart the updated portal server.';
       $('reservation-form').hidden = true;
@@ -196,6 +198,7 @@ $('submission').onsubmit = async event => {
   try {
     const artifact = await submissionArtifact(file);
     const body = {...artifact, filename: file.name, sensor_source: $('source').value, duration: Number($('duration').value), idempotency_key: crypto.randomUUID()};
+    if (config.recording_modes?.includes($('recording').value)) body.recording = $('recording').value;
     if (body.sensor_source !== 'simulation' && $('run-reservation').value) body.reservation_id = $('run-reservation').value;
     await api('/api/jobs', body); await refresh(); message('Experiment queued.');
   } catch (error) { message(error.message); }

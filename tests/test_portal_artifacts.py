@@ -102,3 +102,25 @@ def test_actual_sandbox_project_and_numeric_policy(tmp_path,kind):
     assert result['status']=='succeeded',result['result']
     if kind=='actor-numpy':assert result['result']['numeric_inference_backend']=='numpy-einsum'
     assert result['result']['actions']>0
+
+
+def test_numeric_actor_wrong_profile_source_rejected_before_policy_launch(tmp_path):
+    from pathlib import Path
+    from cartpole_sdk.recording import canonical_json, strict_json_loads
+    from cartpole_sdk.policies.neural import _digest
+    from cartpole_sdk.portal.queue import Store
+    from cartpole_sdk.portal.worker import run_once
+    from test_portal_worker import TrustedPipeFixture
+    actor=strict_json_loads(Path('training/candidates/combined-recovery-20261021-step000102400-rail1mm/actor.json').read_text())
+    actor['angle_source']='raw'
+    actor['observation_contract']['angle_source']='raw'
+    actor.pop('content_sha256');actor['content_sha256']=_digest(actor)
+    data=canonical_json(actor).encode()
+    store=Store(tmp_path/'queue');store.submit('alice','wrong-source',data,'actor.json','simulation',.1)
+    launches=[]
+    class Tracked(TrustedPipeFixture):
+        def launch(self):launches.append(True);return super().launch()
+    result=run_once(store,'w','sim',sandbox_factory=Tracked)
+    assert result['status']=='failed'
+    assert not launches
+    assert result['result']['error']=='simulation_profile_mismatch'

@@ -129,3 +129,17 @@ test('JPEG fallback gives a slow public relay a bounded 15 second transfer windo
   assert.ok(delays.includes(15000));
   h.context.pauseCamera();
 });
+
+test('recording negotiation omits unsupported field for legacy backend', async () => {
+  const calls=[];
+  const h=setup(async(url,options)=>{calls.push({url,options});return {ok:false,json:async()=>({error:'stop after submit'})};});
+  h.context.crypto={randomUUID:()=> 'stable-test-id'};
+  h.element('file').files=[{name:'p.py',size:3,text:async()=> 'x=1'}];
+  h.element('source').value='simulation';h.element('duration').value='1';h.element('recording').value='detailed';
+  await h.element('submission').onsubmit({preventDefault(){}});
+  assert.equal(Object.hasOwn(JSON.parse(calls[0].options.body),'recording'),false);
+  calls.length=0;
+  vm.runInContext("config.recording_modes=['standard','detailed'];",h.context);
+  await h.element('submission').onsubmit({preventDefault(){}});
+  assert.equal(JSON.parse(calls[0].options.body).recording,'detailed');
+});

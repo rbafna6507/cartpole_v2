@@ -156,3 +156,22 @@ def test_worker_scopes_console_matching_gil_interval(monkeypatch,fails):
         with pytest.raises(RuntimeError,match='test exit'):worker.main([])
     else:assert worker.main([])==7
     assert sys.getswitchinterval()==before
+
+
+def test_cancel_between_reset_and_arm_never_arms_and_reports_cancelled(tmp_path):
+    class CancelAtStart(Store):
+        def start(self,identifier,*args,**kwargs):
+            result=super().start(identifier,*args,**kwargs)
+            self.cancel(identifier,'alice')
+            return result
+    queue=CancelAtStart(tmp_path)
+    job=queue.submit('alice','one',b'x','policy.py','simulation',.1)
+    armed=[]
+    class Tracked(SimulationBridge):
+        def arm(self,duration):armed.append(duration)
+    result=run_once(queue,'w','sim',bridge_factory=Tracked,sandbox_factory=TrustedPipeFixture)
+    assert armed==[]
+    assert result['status']=='cancelled'
+    assert result['result']['stopped'] is True
+    assert result['result']['actions']==0
+    assert queue.recording(job['id'],'alice')

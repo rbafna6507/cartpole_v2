@@ -1,6 +1,6 @@
 # Building a controller for this cartpole
 
-The goal is one development path: understand the measurements, implement `reset/act`, test offline, submit an immutable artifact, inspect results, and request an approved physical trial. The SDK already implements the measurement/action contracts, replay, simulation, learned-policy export and isolated Python execution. The hosted portal and full training-to-submission path are still being built.
+The goal is one development path: understand the measurements, implement `reset/act`, test offline, submit an immutable artifact, inspect results, and request an approved physical trial. The local checkout provides a runnable starter, a shared versioned development simulation, numeric actor training/export, replay, and portal submission/collection. These starter, shared-profile worker, client and training changes have not been deployed to the rig. Hosted deployment and physical qualification remain separate operator work.
 
 ## What “raw encoder” means here
 
@@ -44,7 +44,7 @@ curl --no-buffer 'http://127.0.0.1:3090/api/sensing-stream?max_hz=100'
 
 This is suitable for visualization, acquisition inspection and datasets with explicit gaps. It is not the physical controller's feedback transport. The camera API is separate from the submission portal and is not a public authenticated telemetry endpoint. Network viewers must never determine the control-loop timing.
 
-The console writes bounded asynchronous JSONL rig records under `runs/rig` by default (`--log-dir` overrides it). These records are distinct from normalized SDK replay recordings. Check drop counters and provenance before analysis; do not claim losslessness. The future portal should publish downloadable run records containing observations, requested and applied actions, timestamps, safety events, configuration identities and loss counters.
+The console writes bounded asynchronous JSONL rig records under `runs/rig` by default (`--log-dir` overrides it). These records are distinct from normalized SDK replay recordings. Check drop counters and provenance before analysis; do not claim losslessness. The portal can publish downloadable run bundles with observations, action requests, executor diagnostics and recording loss counters; see [run recording](RUN_RECORDING.md).
 
 ## Policy interface
 
@@ -64,37 +64,80 @@ from cartpole_sdk import Channel, select_channels
 # theta.value is the unfiltered, upright-referenced radian angle.
 ```
 
-The portal hardware bridge now passes all seven available control channels: unfiltered and filtered magnetic angle, magnetic rate, step position/velocity, commanded acceleration and braking direction. The simulation bridge adds its two available governor channels to the ordinary four, with `source='simulation'` and frame `sim:upright+x`. This source distinction is deliberate: simulated ground truth is not magnetic sensing. A portable policy must explicitly support both contracts or use a documented adapter; it must not silently relabel source data.
+The portal hardware bridge passes all seven available control channels: unfiltered and filtered magnetic angle, magnetic rate, step position/velocity, commanded acceleration and braking direction. The shared `RigCartpoleEnv` simulation profile supplies six channels with the selected filtered angle, estimated rate and executor feedback, all retaining `source='simulation'`. Simulation is never relabeled as magnetic sensing.
 
-Our trained recovery actor uses a richer filtered observation and executor feedback contract. The generic portal bridge is **not yet a drop-in runner for that actor**. Completing that parity is a prerequisite for accepting trained policies through the portal. The existing trusted console remains the supported execution path for `policies/working.json` and `policies/1m.json`.
+The starter uses `cartpole_sdk.developer.ObservationAdapter` with two declared channel maps: `simulation` and `magnetic-step`, and an explicit `angle_source='filtered'`. The first usable observation selects exactly one complete map. The map is pinned until reset; ambiguous, missing, stale, invalid, wrong-session or source-changing inputs are rejected. The example also checks observation sequence and 100 Hz cadence and latches faults until reset. `None` does not renew the action lease.
+
+Numeric actors use their saved raw/filtered angle contract. The named nominal profile is filtered; a raw-angle actor needs a separately declared raw profile and is rejected by this runner. The local starter runner reads the same `actor.json` that the portal accepts; the standard numeric loader validates it and the adapter selects the appropriate source without editing weights. This supports the six-channel/21-feature actor contract, including commanded acceleration and braking direction. Local simulation does not prove that a physical execution profile, limits or inference deadline are acceptable.
 
 The worker checks finite bounded acceleration, sequence/lease freshness and inference time. Existing defaults are 10 ms per inference, 1.5 s reset, 512 MiB address space, no network/devices/subprocesses, and a read-only filesystem. Hardware worker acceleration defaults to a conservative 0.25 m/s², versus 25 m/s² in generic simulation. This conservative setting is not enough to reproduce the successful recovery actor; approved execution profiles must bind and validate limits rather than allowing submissions to choose them.
 
-## Develop and test
+## Develop, train, replay and submit the same artifact
 
-From the repository:
+Start from `examples/controller_starter/policy.py`. It implements `create_policy()`, `reset(session)` and `act(observation)` with bounded cart damping. It is a small editable integration example, not a swing-up controller. Local Python files are trusted code and execute in your process; uploaded code is isolated separately by the portal.
 
 ```bash
-# Existing editable SDK-policy example; offline MuJoCo simulation:
-uv run --locked --extra sim python examples/simulate_policy.py runs/my-controller-sim
+# Same source file, same named environment as the portal simulator:
+uv run --locked --extra sim python examples/controller_starter/run.py simulate \
+  --policy examples/controller_starter/policy.py --seconds 5 --output runs/starter-sim-001
 
-# View the actual learned-policy training environment:
-uv run --locked --extra sim cartpole-view-policy --actor policies/working.json
-
-# Inspect supported replay input/options:
-uv run --locked python examples/replay_policy.py --help
+# Replay exactly the observations that this controller received:
+uv run --locked python examples/controller_starter/run.py replay \
+  --policy examples/controller_starter/policy.py \
+  --recording runs/starter-sim-001/observations.jsonl --output runs/starter-replay-001.jsonl
 ```
 
-The illustrative simulation and replay examples use explicitly different source channels; neither is the tuned physical swing-up controller. Replay checks causal processing on recorded observations but cannot measure how a new controller would change the plant. Closed-loop simulation provides that experiment, with model and sensor limitations.
+Simulation writes `observations.jsonl`, requested-action and executor-diagnostic `trace.jsonl` and `run.json` with the profile identity, effective configuration, initial truth, controller hash, seed and termination status. Output paths must be new. Replay does not change future observations: it tests causal processing and requested actions, not the resulting motion of a different controller. The older `examples/simulate_policy.py` remains an explicitly separate generic MuJoCo demonstration.
 
-For training, checkpoint export, numeric parity and evaluation, use the [command cheat sheet](../COMMAND_CHEATSHEET.md#start-a-training-loop) and [full CLI reference](../COMMAND_REFERENCE.md). The `RigCartpoleEnv` learned-policy environment models sampled sensing, delay, actuator dynamics and the governor; the generic portal simulator is a separate executor wrapper. They must be offered as named, versioned environments, not described as interchangeable.
+The unified profile is `rig-calibrated-20261021-v1`, loaded through `cartpole_sdk.sim.profiles`. Its packaged JSON and separately pinned content digest preserve the exact nominal experiment from `evidence/policy-recovery-20261021/combined-next/protocol.json`. Local starter simulation, portal simulation and the new training example consume this profile. Only episode duration changes at run time; training randomization is a separately recorded engineering coverage configuration.
 
-## Submit and approve: current first increment
+The nominal model includes recorded rail/executor settings, passive length/friction coefficients, filtered 4096-count encoder sensing, 3 ms telemetry delay, 1 ms command delay, 100 Hz decisions, 1 kHz plant/governor integration and 20 ms leases. **“Calibrated” is a profile name, not full-system validation.** The profile retains `DEVELOPMENT_ONLY` and `hardware_accepted=false`: force authority, ideal acceleration tracking, transport assumptions, missed steps, backlash and global encoder accuracy remain limitations. No accepted global encoder correction or sim-to-real guarantee is claimed.
 
-Start the local portal using [portal setup](portal.md). Invited users receive a submission credential. Upload a UTF-8 Python file (current limit 64 KiB). Simulation jobs can be claimed immediately. Physical jobs enter `awaiting_approval`; an operator sees the job, artifact hash, duration and sensor selection and approves that exact immutable request. The UI asks for confirmation; the API independently checks the operator role and reviewed values. Approval does not move or prepare the rig. The existing trusted worker still requires a homed, healthy, stopped rig and an available lease.
+For a working training/export example:
 
-The agreed hosted design uses Vercel UI, private artifact storage and a durable cloud queue, with outbound Jetson polling. Planned intake limits are 10 MiB uploaded, 50 MiB expanded and 256 files, fixed dependencies and validated numeric policy files. These planned limits are **not** implemented in the current source-only API. ZIP extraction, numeric-policy isolation, account invitation, cloud queue deployment, authenticated read-only telemetry/video and detailed downloadable results remain subsequent portal work.
+```bash
+# Short execution check: randomized training, frozen evaluation, numeric export.
+uv run --locked --extra rl python examples/controller_starter/train.py \
+  --output runs/controlled-smoke-001 --objective controlled-swing-v3 --steps 1024 --checkpoint-every 1024 --seconds 5
+
+# Run and replay the exported numeric actor without changing its bytes:
+uv run --locked --extra sim python examples/controller_starter/run.py simulate \
+  --policy runs/controlled-smoke-001/actor.json --seconds 5 --output runs/actor-sim-001
+uv run --locked python examples/controller_starter/run.py replay \
+  --policy runs/controlled-smoke-001/actor.json \
+  --recording runs/actor-sim-001/observations.jsonl --output runs/actor-replay-001.jsonl
+```
+
+The training entry point uses the existing PPO/numeric export machinery with the controlled-swing objective, reproducible engineering randomization, immutable checkpoints and held-out evaluation. It verifies numeric export parity and keeps hardware acceptance false. A 1024-step run checks execution only; it is not evidence of a competent controller. `--init-actor policies/working.json` starts from existing actor weights with a fresh optimizer. See the training command help for budgets and seeds, and the [command reference](../COMMAND_REFERENCE.md) for the older training workflows.
+
+## Portal submission and recording
+
+Use [portal setup and the developer client](portal.md) for invitations, credentials, local services, submission, waiting and collection. Submit `examples/controller_starter/policy.py` or the exported `actor.json` unchanged, selecting `simulation`. The Python client supports `.py`, validated `.zip` projects and numeric `.json` actors, an idempotency key, and an explicit recording option. Keep credentials in environment variables and use a new output path when collecting a recording.
+
+After updating the API and worker together, submit that same starter artifact with the explicit CLI (credentials are read from the environment):
+
+```bash
+# Set CARTPOLE_PORTAL_URL and CARTPOLE_SUBMIT_TOKEN outside source control first.
+uv run --locked python examples/controller_starter/submit.py \
+  --artifact examples/controller_starter/policy.py --source simulation \
+  --seconds 5 --key starter-sim-001 --recording detailed \
+  --collect runs/starter-portal-001.zip --timeout 180
+```
+
+The command also accepts a ZIP project or numeric JSON as `--artifact`. Use the same `--key` and identical arguments after an uncertain response; it cannot create a second job. For physical requests, use `--source magnetic-step` and optionally `--reservation-id ID`; the command cannot grant operator approval.
+
+Physical jobs require an operator-approved immutable request, an appropriate reservation/execution profile, and a prepared healthy rig. Simulation success and numeric parity do not grant physical approval. The trusted worker and MCU retain action bounds, deadlines, leases and safety authority. The downloadable portal bundle includes its own manifest and telemetry format; it is distinct from normalized local SDK `observations.jsonl`. Use [run recording](RUN_RECORDING.md) for its schema and loss accounting. Convert a collected bundle into normalized SDK replay and analysis tables offline:
+
+```bash
+uv run --locked python -m cartpole_sdk.portal.dataset runs/run.zip \
+  --output runs/dataset-001 --sha256 <downloaded-bundle-sha256>
+uv run --locked python examples/controller_starter/run.py replay \
+  --policy examples/controller_starter/policy.py \
+  --recording runs/dataset-001/policy-inputs.jsonl --output runs/collected-replay-001.jsonl
+```
+
+The converter separates actual policy-call inputs (`policy-inputs.jsonl`) from all recorded states (`observations.jsonl`). It preserves the source telemetry and exports `samples.csv`, `transitions.jsonl`, and `dataset.json`. Inspect validity, gaps, drops and action-pairing flags before using records for analysis or training. It does not invent rewards, terminal labels or physical action acknowledgments; `training_ready` remains false. Identical latest-state snapshots are deduplicated only in normalized replay, while the source telemetry retains them.
 
 Video should use a replaceable source adapter separate from policy sensing. Replacing a camera must not silently change the controller's observation contract, calibration or clock alignment.
 
-The selectable stream catalog and export commands are described in [DEVELOPER_STREAMS.md](DEVELOPER_STREAMS.md). The currently running Jetson service supports explicit `--legacy-sensing` collection; new catalog endpoints require the updated camera-service version.
+The selectable stream catalog and export commands are described in [DEVELOPER_STREAMS.md](DEVELOPER_STREAMS.md). The live service audit confirmed the deployed `/api/streams` catalog. Use that catalog and `/api/streams/ndjson` for supported selections; `--legacy-sensing` is only an explicit compatibility path. This deployed camera catalog is separate from the newer local starter and portal-worker changes described above.

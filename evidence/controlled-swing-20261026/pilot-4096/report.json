@@ -1,0 +1,1327 @@
+{
+  "checkpoints": [
+    "checkpoints/step-000000000",
+    "checkpoints/step-000002048",
+    "checkpoints/step-000004096"
+  ],
+  "completed": true,
+  "evaluations": [
+    {
+      "nominal": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 3.9154563696993727,
+            "balanced_fraction": 0.8476,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 21.190000000000513,
+            "final_state": {
+              "omega": 0.1836766123732925,
+              "theta": 0.04797903141615947,
+              "time_ns": 25003000000,
+              "v": -0.2637195863200118,
+              "x": -0.01983196757633808
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 4.81,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 1,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 21.190000000000513,
+            "max_abs_speed_m_s": 1.4999011965619737,
+            "max_abs_x_m": 0.2940748758391242,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 129,
+            "rail_zone_dwell_s": 2.159999999999998,
+            "rail_zone_m": 0.22,
+            "score": 2.4043174955027005,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 1.8401727035004587
+          },
+          {
+            "angular_travel_rotations": 0.5833715015410894,
+            "balanced_fraction": 1.0,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 25.00000000000111,
+            "final_state": {
+              "omega": 0.01658318345915561,
+              "theta": -0.0725350926726376,
+              "time_ns": 25003000000,
+              "v": 0.0415728082193883,
+              "x": 0.08845289053712686
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 25.00000000000111,
+            "max_abs_speed_m_s": 0.2939571743772482,
+            "max_abs_x_m": 0.08973494215115801,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.986620734618492,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 0.023382448548639044
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 2,
+        "mean_score": 2.6954691150605963,
+        "randomization": null
+      },
+      "randomized": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 6.508889437970895,
+            "balanced_fraction": 0.7828,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0018339016258580637,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.004093957473526231,
+                "encoder_cos_error_rad": 0.004359481338725689,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.020917427135617155,
+                "telemetry_delay_steps": 1,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.1531822931038515,
+                "hinge_coulomb_friction_nm": 0.0007169585633207737,
+                "hinge_damping": 3.070265608064421e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 19.57000000000026,
+            "final_state": {
+              "omega": -0.2968660108471213,
+              "theta": 0.04683470179968972,
+              "time_ns": 25001000000,
+              "v": 0.2179071603717632,
+              "x": -0.08201881684904808
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 6.43,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 1,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 19.57000000000026,
+            "max_abs_speed_m_s": 1.4998684035616352,
+            "max_abs_x_m": 0.29407510610759996,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 226,
+            "rail_zone_dwell_s": 3.229999999999975,
+            "rail_zone_m": 0.22,
+            "score": 2.094530853441439,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 1.8636386074157285
+          },
+          {
+            "angular_travel_rotations": 0.677922452512258,
+            "balanced_fraction": 0.7328,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0006650767540074685,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.016668812932571574,
+                "encoder_cos_error_rad": -0.01507688753573279,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.021255734299374864,
+                "telemetry_delay_steps": 4,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.15671551353757363,
+                "hinge_coulomb_friction_nm": 0.000783373023558119,
+                "hinge_damping": 2.984546231059345e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 0.9200000000000006,
+            "final_state": {
+              "omega": 0.34708195012903004,
+              "theta": -0.04455588444931704,
+              "time_ns": 25004000000,
+              "v": -0.2578516053722229,
+              "x": 0.008142055241959469
+            },
+            "final_window_balanced_fraction": 0.728,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": false,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 1.390000000000001,
+            "max_abs_speed_m_s": 0.33278661544779325,
+            "max_abs_x_m": 0.15346101417051328,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.4391779085431677,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": false,
+            "unwrapped_range_rotations": 0.026657662819546384
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 1,
+        "mean_score": 2.2668543809923034,
+        "randomization": {
+          "encoder": {
+            "encoder_bias_rad": [
+              -0.017453292519943295,
+              0.017453292519943295
+            ],
+            "encoder_cos_error_rad": [
+              -0.08726646259971647,
+              0.08726646259971647
+            ],
+            "encoder_sin_error_rad": [
+              -0.06981317007977318,
+              0.06981317007977318
+            ]
+          },
+          "observation": {
+            "angle_noise_std": [
+              0.0,
+              0.003
+            ],
+            "command_delay_steps": [
+              0,
+              3
+            ],
+            "telemetry_delay_steps": [
+              0,
+              5
+            ]
+          },
+          "plant": {
+            "angular_damping_scale": [
+              0.8,
+              1.2
+            ],
+            "coulomb_friction_scale": [
+              0.8,
+              1.2
+            ],
+            "effective_length_scale": [
+              0.95,
+              1.05
+            ]
+          },
+          "rationale": "Engineering robustness assumptions, not measured uncertainties or a fitted posterior.",
+          "schema": "cartpole-training-randomization-v1"
+        }
+      },
+      "step": 0
+    },
+    {
+      "nominal": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 3.861820588464078,
+            "balanced_fraction": 0.864,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 21.320000000000533,
+            "final_state": {
+              "omega": 0.31341308983504435,
+              "theta": 0.005179241184176032,
+              "time_ns": 25003000000,
+              "v": -0.28847309982009556,
+              "x": 0.02681538640490213
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 4.68,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 1,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 21.320000000000533,
+            "max_abs_speed_m_s": 1.499810046233458,
+            "max_abs_x_m": 0.29407481024673005,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 130,
+            "rail_zone_dwell_s": 1.8300000000000014,
+            "rail_zone_m": 0.22,
+            "score": 2.4502643398751296,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 1.8152587488746186
+          },
+          {
+            "angular_travel_rotations": 0.5851547239126866,
+            "balanced_fraction": 1.0,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 25.00000000000111,
+            "final_state": {
+              "omega": 0.014880334749138498,
+              "theta": -0.07285323179507909,
+              "time_ns": 25003000000,
+              "v": 0.04180668825497105,
+              "x": 0.0890027420611291
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 25.00000000000111,
+            "max_abs_speed_m_s": 0.2943591857940949,
+            "max_abs_x_m": 0.09014157111835844,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.9865326290875562,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 0.02342273080018982
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 2,
+        "mean_score": 2.7183984844813427,
+        "randomization": null
+      },
+      "randomized": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 6.482594450960312,
+            "balanced_fraction": 0.7716,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0018339016258580637,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.004093957473526231,
+                "encoder_cos_error_rad": 0.004359481338725689,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.020917427135617155,
+                "telemetry_delay_steps": 1,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.1531822931038515,
+                "hinge_coulomb_friction_nm": 0.0007169585633207737,
+                "hinge_damping": 3.070265608064421e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 18.99000000000017,
+            "final_state": {
+              "omega": 0.33066915776300904,
+              "theta": -0.035878719339296226,
+              "time_ns": 25001000000,
+              "v": -0.25469733899809155,
+              "x": 0.04642073782190326
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 7.01,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 1,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 18.99000000000017,
+            "max_abs_speed_m_s": 1.4998653682025516,
+            "max_abs_x_m": 0.29407485835203767,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 176,
+            "rail_zone_dwell_s": 2.7999999999999843,
+            "rail_zone_m": 0.22,
+            "score": 2.1081674035955076,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 1.9136525631716972
+          },
+          {
+            "angular_travel_rotations": 0.6809691019617986,
+            "balanced_fraction": 0.7324,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0006650767540074685,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.016668812932571574,
+                "encoder_cos_error_rad": -0.01507688753573279,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.021255734299374864,
+                "telemetry_delay_steps": 4,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.15671551353757363,
+                "hinge_coulomb_friction_nm": 0.000783373023558119,
+                "hinge_damping": 2.984546231059345e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 0.9400000000000006,
+            "final_state": {
+              "omega": 0.3687297664462156,
+              "theta": -0.0384792104191234,
+              "time_ns": 25004000000,
+              "v": -0.2744813275576613,
+              "x": 0.00396963384550495
+            },
+            "final_window_balanced_fraction": 0.73,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": false,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 1.390000000000001,
+            "max_abs_speed_m_s": 0.33257209596196297,
+            "max_abs_x_m": 0.15392579374309742,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.4383318211635676,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": false,
+            "unwrapped_range_rotations": 0.026751217797037628
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 1,
+        "mean_score": 2.2732496123795376,
+        "randomization": {
+          "encoder": {
+            "encoder_bias_rad": [
+              -0.017453292519943295,
+              0.017453292519943295
+            ],
+            "encoder_cos_error_rad": [
+              -0.08726646259971647,
+              0.08726646259971647
+            ],
+            "encoder_sin_error_rad": [
+              -0.06981317007977318,
+              0.06981317007977318
+            ]
+          },
+          "observation": {
+            "angle_noise_std": [
+              0.0,
+              0.003
+            ],
+            "command_delay_steps": [
+              0,
+              3
+            ],
+            "telemetry_delay_steps": [
+              0,
+              5
+            ]
+          },
+          "plant": {
+            "angular_damping_scale": [
+              0.8,
+              1.2
+            ],
+            "coulomb_friction_scale": [
+              0.8,
+              1.2
+            ],
+            "effective_length_scale": [
+              0.95,
+              1.05
+            ]
+          },
+          "rationale": "Engineering robustness assumptions, not measured uncertainties or a fitted posterior.",
+          "schema": "cartpole-training-randomization-v1"
+        }
+      },
+      "step": 2048
+    },
+    {
+      "nominal": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 3.87033101740989,
+            "balanced_fraction": 0.8744,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 21.860000000000618,
+            "final_state": {
+              "omega": 0.27270952432152634,
+              "theta": 0.02741452737217134,
+              "time_ns": 25003000000,
+              "v": -0.29195103576012627,
+              "x": 0.006007104245804664
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 4.14,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 1,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 21.860000000000618,
+            "max_abs_speed_m_s": 1.4998843857871733,
+            "max_abs_x_m": 0.29407482175881994,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 136,
+            "rail_zone_dwell_s": 1.8900000000000015,
+            "rail_zone_m": 0.22,
+            "score": 2.4670216128796456,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 1.811350285020508
+          },
+          {
+            "angular_travel_rotations": 0.5942354514866526,
+            "balanced_fraction": 1.0,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.001,
+                "angle_source": "filtered",
+                "command_delay_steps": 1,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.0,
+                "encoder_cos_error_rad": 0.0,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": 0.0,
+                "telemetry_delay_steps": 3,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.16030387335574306,
+                "hinge_coulomb_friction_nm": 0.0007133292581428023,
+                "hinge_damping": 3.0218604984532184e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 25.00000000000111,
+            "final_state": {
+              "omega": 0.18310414752988155,
+              "theta": -0.05950576129347617,
+              "time_ns": 25003000000,
+              "v": -0.14787546575973726,
+              "x": 0.07949136037269078
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 25.00000000000111,
+            "max_abs_speed_m_s": 0.29716132078479135,
+            "max_abs_x_m": 0.09073607917552408,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.986381208681918,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 0.023649821532690123
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 2,
+        "mean_score": 2.726701410780782,
+        "randomization": null
+      },
+      "randomized": {
+        "episodes": [
+          {
+            "angular_travel_rotations": 10.691311031995852,
+            "balanced_fraction": 0.6704,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0018339016258580637,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.004093957473526231,
+                "encoder_cos_error_rad": 0.004359481338725689,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.020917427135617155,
+                "telemetry_delay_steps": 1,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 0,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.1531822931038515,
+                "hinge_coulomb_friction_nm": 0.0007169585633207737,
+                "hinge_damping": 3.070265608064421e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 16.75999999999982,
+            "final_state": {
+              "omega": -0.3066934193012949,
+              "theta": -0.024903519204721447,
+              "time_ns": 25001000000,
+              "v": 0.3082891119497328,
+              "x": -0.020472800731695138
+            },
+            "final_window_balanced_fraction": 1.0,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 9.24,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 5,
+            "hold_seconds": 5.0,
+            "hold_success": true,
+            "initial_state": [
+              -0.006694420360546537,
+              0.020726803355140894,
+              3.1609141703129073,
+              0.07959237319400138
+            ],
+            "longest_balance_dwell_s": 16.75999999999982,
+            "max_abs_speed_m_s": 1.499867146752997,
+            "max_abs_x_m": 0.2940747834952004,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 459,
+            "rail_zone_dwell_s": 5.469999999999928,
+            "rail_zone_m": 0.22,
+            "score": 1.5920470978470629,
+            "seed": 109400,
+            "start": "hanging",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 5.956525659799922
+          },
+          {
+            "angular_travel_rotations": 0.7034504560408036,
+            "balanced_fraction": 0.7356,
+            "episode_parameters": {
+              "observation_config": {
+                "angle_frame_id": "encoder-zero",
+                "angle_noise_std": 0.0006650767540074685,
+                "angle_source": "filtered",
+                "command_delay_steps": 3,
+                "dropout_probability": 0.0,
+                "encoder_bias_rad": 0.016668812932571574,
+                "encoder_cos_error_rad": -0.01507688753573279,
+                "encoder_counts": 4096,
+                "encoder_sin_error_rad": -0.021255734299374864,
+                "telemetry_delay_steps": 4,
+                "vision_angle_noise_std": 0.003,
+                "vision_angle_quantum_rad": 0.001,
+                "vision_dropout_probability": 0.0,
+                "vision_frame_period_ns": 12500000,
+                "vision_latency_ns": 20000000,
+                "vision_max_age_ns": 150000000,
+                "vision_warmup_steps": 500
+              },
+              "randomization_episode": 1,
+              "randomization_seed": 9401,
+              "simulation_config": {
+                "cart_damping": 0.05,
+                "cart_mass_kg": 0.35,
+                "control_steps": 10,
+                "effective_length_m": 0.15671551353757363,
+                "hinge_coulomb_friction_nm": 0.000783373023558119,
+                "hinge_damping": 2.984546231059345e-06,
+                "hinge_friction_velocity_scale_rad_s": 0.05,
+                "max_acceleration_m_s2": 25.0,
+                "max_action_ttl_ns": 50000000,
+                "max_force_n": 20.0,
+                "max_steps": 2500,
+                "physics_dt_ns": 1000000,
+                "pole_mass_kg": 0.02275,
+                "rail_half_m": 0.309074998
+              }
+            },
+            "fault_reason": null,
+            "final_balance_dwell_s": 1.1300000000000008,
+            "final_state": {
+              "omega": 0.31123556271166397,
+              "theta": 0.037035294875399694,
+              "time_ns": 25004000000,
+              "v": -0.32575042488585,
+              "x": -0.05979326698814935
+            },
+            "final_window_balanced_fraction": 0.768,
+            "final_window_complete": true,
+            "first_one_second_capture_s": 1.0,
+            "force_saturated_control_steps": 0,
+            "full_rotation_excursions": 0,
+            "hold_seconds": 5.0,
+            "hold_success": false,
+            "initial_state": [
+              -0.014978689556905298,
+              -0.0011992055789633916,
+              -0.006423603470969371,
+              -0.13356148410775467
+            ],
+            "longest_balance_dwell_s": 1.380000000000001,
+            "max_abs_speed_m_s": 0.33550723419497686,
+            "max_abs_x_m": 0.1531990363313561,
+            "objective_id": "controlled-swing-v1",
+            "rail_braking_control_steps": 0,
+            "rail_zone_dwell_s": 0.0,
+            "rail_zone_m": 0.22,
+            "score": 2.4449330576856783,
+            "seed": 109400,
+            "start": "upright",
+            "steps": 2500,
+            "success": true,
+            "unwrapped_range_rotations": 0.027144176610723093
+          }
+        ],
+        "faults": 0,
+        "hold_successes": 1,
+        "mean_score": 2.0184900777663706,
+        "randomization": {
+          "encoder": {
+            "encoder_bias_rad": [
+              -0.017453292519943295,
+              0.017453292519943295
+            ],
+            "encoder_cos_error_rad": [
+              -0.08726646259971647,
+              0.08726646259971647
+            ],
+            "encoder_sin_error_rad": [
+              -0.06981317007977318,
+              0.06981317007977318
+            ]
+          },
+          "observation": {
+            "angle_noise_std": [
+              0.0,
+              0.003
+            ],
+            "command_delay_steps": [
+              0,
+              3
+            ],
+            "telemetry_delay_steps": [
+              0,
+              5
+            ]
+          },
+          "plant": {
+            "angular_damping_scale": [
+              0.8,
+              1.2
+            ],
+            "coulomb_friction_scale": [
+              0.8,
+              1.2
+            ],
+            "effective_length_scale": [
+              0.95,
+              1.05
+            ]
+          },
+          "rationale": "Engineering robustness assumptions, not measured uncertainties or a fitted posterior.",
+          "schema": "cartpole-training-randomization-v1"
+        }
+      },
+      "step": 4096
+    }
+  ],
+  "hardware_accepted": false,
+  "numeric_parity": {
+    "actor_content_sha256": "765b6555851980eb120197366ae239765d0d9e4e5a530c42655226c58fac2116",
+    "actor_file_sha256": "6d91f051a6ff42cfe9713b6bdbbc2cd54551ba1dddd6aed0fb9da97f1e4f5566",
+    "actor_runtime_sha256": {
+      "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+      "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+      "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+      "policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+      "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
+      "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+      "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
+      "rig/client.py": "83f6332a27a01daf8aafd966d840cab626a24e782576413b5041364cfc2ffe48",
+      "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
+      "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
+      "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+      "rig/protocol.py": "75331809abca6d1ca13878a01ec6aa976721d9bb5c12a33b62cd42ffb065b050",
+      "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+      "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+      "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+      "sensing/policy_observation.py": "6fdb448c03e6b524cc2ffaa0a6dd1bf1a59200c90b9b2a695dd144149befacb1",
+      "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+      "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2"
+    },
+    "checkpoint_sha256": "a28234d1687999036ad23ad95fd8e0dfd06956a59b2a1b4cbbcc26bc0eee6e93",
+    "compared_actions": 40,
+    "completed": true,
+    "deployable": false,
+    "emission_parity_pass": true,
+    "episodes": [
+      {
+        "compared_actions": 20,
+        "elapsed_physical_s": 0.2,
+        "emission_parity_pass": true,
+        "final_balance_dwell_s": 0.20000000000000004,
+        "final_state": {
+          "omega": 0.07325097112495157,
+          "theta": -0.0007707795276993475,
+          "time_ns": 203000000,
+          "v": -0.06925657732943732,
+          "x": -0.022503547532234144
+        },
+        "final_window_balanced_fraction": 0.04,
+        "final_window_complete": false,
+        "first_one_second_capture_s": null,
+        "full_horizon_complete": true,
+        "hold_success": false,
+        "initial_state": [
+          -0.014978689556905298,
+          -0.0011992055789633916,
+          -0.006423603470969371,
+          -0.13356148410775467
+        ],
+        "longest_balance_dwell_s": 0.20000000000000004,
+        "max_abs_raw_discrepancy_m_s2": 1.3386352984423588e-06,
+        "max_abs_x_m": 0.022503547532234144,
+        "policy_fault_reason": null,
+        "rejected_inputs": 0,
+        "reset_warmup_ns": 3000000,
+        "seed": 109400,
+        "simulator_fault_reason": null,
+        "start": "upright",
+        "steps": 20,
+        "trace_path": "traces/upright-109400.jsonl",
+        "trace_sha256": "c4a0ececc304f12aaf4abec9e105cb7ac8e32fb6179129b0db4f4ff3ed132733"
+      },
+      {
+        "compared_actions": 20,
+        "elapsed_physical_s": 0.2,
+        "emission_parity_pass": true,
+        "final_balance_dwell_s": 0.0,
+        "final_state": {
+          "omega": -6.14458240080009,
+          "theta": 2.5512873081300023,
+          "time_ns": 203000000,
+          "v": -1.359191856629924,
+          "x": -0.11888026239528095
+        },
+        "final_window_balanced_fraction": 0.0,
+        "final_window_complete": false,
+        "first_one_second_capture_s": null,
+        "full_horizon_complete": true,
+        "hold_success": false,
+        "initial_state": [
+          -0.006694420360546537,
+          0.020726803355140894,
+          3.1609141703129073,
+          0.07959237319400138
+        ],
+        "longest_balance_dwell_s": 0.0,
+        "max_abs_raw_discrepancy_m_s2": 2.233722998568055e-06,
+        "max_abs_x_m": 0.11888026239528095,
+        "policy_fault_reason": null,
+        "rejected_inputs": 0,
+        "reset_warmup_ns": 3000000,
+        "seed": 109400,
+        "simulator_fault_reason": null,
+        "start": "hanging",
+        "steps": 20,
+        "trace_path": "traces/hanging-109400.jsonl",
+        "trace_sha256": "74c38d47f1ecc7776a57d30785543d04a631a497d1ebbbf3008c16cee8d1178c"
+      }
+    ],
+    "evaluation_source": {
+      "evaluator_sha256": "73d295e9c2b0201771939d04c3b7f16dda042687dd025694888c100d54e71059",
+      "rng_helper_sha256": "2e1a1e6ed03c1c7b5e72aaf036832c1a39efb5271accd907e9187a4f7b59e5ef",
+      "runtime": {
+        "code_sha256": {
+          "../cartpole_vision/state.py": "085faa9e7f5995b3b6c75c15f0aeb8c2addf60dfee9f8aae920d0940b85a040f",
+          "contracts.py": "dbbbfafad2622d14e6d0a377786619ed156d87a6694503c26d4db36f8be261a6",
+          "control/motion.py": "041ee5d0db35f383430812b8d559a111b7ec8b6e7d8b8aa14028cad335eb2690",
+          "control/parameters.py": "e5377f098cfa8303f84f51bd4009c49163d98fb854562bea678af5922e25d288",
+          "control/reference.py": "098f1f41065e811b0ce892f9b2ccae1796c524cf715c0d08458ac8697a14ea25",
+          "control/tuned_parameters.json": "fa164ed119b26d49d123a28804c444ce12a05fa65435d4d6945099cbd13f6c50",
+          "learning/model_experiment.py": "dd22ff077e19d60f1f7aa26f4eb665782d29526643de524b5627b62aade55661",
+          "learning/model_search.py": "82a818031084794dcf85d98bcb79fd8d3350521ae8ca63585cb4b35bd22ed9fd",
+          "learning/ppo.py": "e7f417a330219e6a34e79ae234d803b046ddea18edc6f83aa047693af6a3328f",
+          "learning/rollout.py": "c199463533aa23f42e33805636bd05fba6f41241150876dfdd4c8bcb1b16ed73",
+          "learning/search.py": "2518ae451d5e67bf2d42d3d3c9a2311f11adbd0c35f02ad8c3f80147f24a1968",
+          "learning/training_recipe.py": "344e44922ce08a10411918fa3e29affc7b394b2709bccaa7fa97227b9405a794",
+          "policies/host.py": "511e5096f7741a229fcb90983415cc8d22e563be30cf3b72d7d1dc394b98dfe1",
+          "policies/neural.py": "0685fbddd8db4ada8d9051bb956dba82ba2bc9da059cb93edf1b48dfffc4d19a",
+          "policies/rig_observation.py": "64d46fd4815da3652cb79114aeecd1fa5a2663f319014d8c43e8e19d055a7daf",
+          "recording.py": "e8749178b29677a24b883c1b51476b6b75843ab6d1e960913e935c50b420f428",
+          "rig/__init__.py": "c567f2ecb6aafc0a5a78027e62084a340742824ad6a6f55d24c93ad9e66c37ab",
+          "rig/client.py": "83f6332a27a01daf8aafd966d840cab626a24e782576413b5041364cfc2ffe48",
+          "rig/neural_runner.py": "fa920d5434f5777cb9090d6a4e8a36740ab83c80d4a8337e456ef6c5c36d7262",
+          "rig/parameters.py": "c2d7d6b321dfa7c265fc46fdd49796ac0d5059a22f0ef0a3c62e00d6db0733b5",
+          "rig/policy.py": "6577e77a54a14ed320ed0dc318a9c180787791ff9dad9324006a16f367ec933a",
+          "rig/protocol.py": "75331809abca6d1ca13878a01ec6aa976721d9bb5c12a33b62cd42ffb065b050",
+          "rig/transport.py": "35db54a2da12b97bb05032513c55e64ce4091e3e7b3d989bbb372f155f649e76",
+          "sensing/frames.py": "dba6fc2f6a1c11cec16ca6a668461ed9482971fc473293185060b76cd224d3f3",
+          "sensing/fusion.py": "dc034386e15e8953f6e151504a7cf5917901b898c94f846ec43be9b3af5b135c",
+          "sensing/policy_observation.py": "6fdb448c03e6b524cc2ffaa0a6dd1bf1a59200c90b9b2a695dd144149befacb1",
+          "sensing/stream.py": "ea97743adf26617484c19029721c61956fea66462bbcfea76d2757163012ab7a",
+          "sensing/vision.py": "df459f97722e278865594d43fa3e008aa8a893cba8f67e3780cc2ca37e974be2",
+          "sim/backend.py": "4ecb77076bd2d7f0f1a29ce66ca8d39abe02fd78bfd8796e5dff466d313abfd2",
+          "sim/config.py": "972893d8328e639e24a0d643cb81e836260475fd9e964f2f64559521ff945717",
+          "sim/executor.py": "10cfdd540c9e79f3bc0586658be8f3c75e07fe664fbc99a26c7c70fa2e62cf54",
+          "sim/model.py": "090842af8212c34579ebf9653eab34a9ded7772a21fdbead3f2f938a52898d62",
+          "sim/rig_gym_env.py": "90cba9c47505eb9b5a200a007f21294b66b95fda094745abbfd0cf4746961514"
+        },
+        "dependencies": {
+          "gymnasium": "1.4.0",
+          "mujoco": "3.15.0",
+          "numpy": "2.4.6",
+          "stable-baselines3": "2.9.0",
+          "torch": "2.14.1"
+        },
+        "python": "3.11.7"
+      }
+    },
+    "hardware_accepted": false,
+    "host_firmware_stop_replay": {
+      "reason": "No exact host/firmware STOP replay or physical transport/disabled-motion test performed.",
+      "status": "outstanding"
+    },
+    "inference_latency": {
+      "host": "macOS-26.1-arm64-arm-64bit",
+      "measured_operation": "Actual NeuralPolicy.act, including validation and encoding; first call included.",
+      "scope": "Mac only, not Jetson deadline guarantee",
+      "thread_cpu_ns": {
+        "count": 40,
+        "max": 681041,
+        "mean": 355475.05,
+        "p50": 339250.0,
+        "p95": 393985.39999999997
+      },
+      "wall_ns": {
+        "count": 40,
+        "max": 811417,
+        "mean": 363632.35,
+        "p50": 341166.5,
+        "p95": 418137.4999999999
+      }
+    },
+    "max_abs_raw_discrepancy_m_s2": 2.233722998568055e-06,
+    "model_weights_sha256_after": "f132385ab622b4c1ff4c675925652f7d0885b50d413e82147d71d959c25a10de",
+    "model_weights_sha256_before": "f132385ab622b4c1ff4c675925652f7d0885b50d413e82147d71d959c25a10de",
+    "raw_absolute_tolerance_m_s2": 1e-05,
+    "recipe_sha256": "768627a3d2fe9ca10466a39686573f9795c19d2f07a1d2cb4412f6ca1ea1d240",
+    "rejected_inputs": 0,
+    "schema": "cartpole-candidate-parity-report-v1",
+    "scope": "Emission agreement on these sampled observations only; task success is reported separately and neither grants hardware approval.",
+    "simulation_only": true,
+    "status": "DEVELOPMENT_ONLY",
+    "task_hold_successes": 0
+  },
+  "steps": 4096
+}

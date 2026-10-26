@@ -58,7 +58,7 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         # Serialize additive migration across concurrently starting workers.
         with self._tx() as db:
             columns={row['name'] for row in db.execute('PRAGMA table_info(jobs)')}
-            for column,kind in (('approved_by','TEXT'),('approved_at','REAL'),('reservation_id','TEXT'),('artifact_bytes','INTEGER NOT NULL DEFAULT 0')):
+            for column,kind in (('recording',"TEXT NOT NULL DEFAULT 'standard'"),('approved_by','TEXT'),('approved_at','REAL'),('reservation_id','TEXT'),('artifact_bytes','INTEGER NOT NULL DEFAULT 0')):
                 if column not in columns:db.execute(f'ALTER TABLE jobs ADD COLUMN {column} {kind}')
             for row in db.execute('SELECT DISTINCT artifact FROM jobs WHERE artifact_bytes=0').fetchall():
                 blob=self.blobs/(row['artifact']+'.py')
@@ -137,8 +137,9 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         finally:os.close(directory)
         if len(source)>MAX_UPLOAD_BYTES or hashlib.sha256(source).hexdigest()!=sha:raise QueueError('artifact integrity failure')
         return source
-    def submit(self,owner,key,source,filename,sensor_source,duration,*,now=None,reservation_id=None):
+    def submit(self,owner,key,source,filename,sensor_source,duration,*,now=None,reservation_id=None,recording='standard'):
         name(owner,'owner');name(key,'idempotency key')
+        if recording not in ('standard','detailed'):raise QueueError('recording must be standard or detailed')
         try:inspect_artifact(source,filename)
         except ArtifactError as exc:raise QueueError(str(exc)) from exc
         if sensor_source not in ('magnetic-step','simulation'):raise QueueError('unsupported explicit source selection')
@@ -148,7 +149,7 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
         with self._tx() as db:
             prior=db.execute('SELECT * FROM jobs WHERE owner=? AND key=?',(owner,key)).fetchone()
             if prior is not None:
-                if (prior['artifact'],prior['filename'],prior['source'],prior['duration'],prior['reservation_id'])!=(sha,filename,sensor_source,duration,reservation_id):raise QueueError('idempotency key already binds a different submission')
+                if (prior['artifact'],prior['filename'],prior['source'],prior['duration'],prior['reservation_id'],prior['recording'])!=(sha,filename,sensor_source,duration,reservation_id,recording):raise QueueError('idempotency key already binds a different submission')
                 return self._public(prior)
             if db.execute("SELECT count(*) FROM jobs WHERE owner=? AND status IN ('awaiting_approval','pending','claimed','running')",(owner,)).fetchone()[0]>=32:raise QueueError('owner queue limit reached')
             if db.execute('SELECT count(*) FROM jobs WHERE owner=?',(owner,)).fetchone()[0]>=MAX_OWNER_JOBS:raise QueueError('owner lifetime job quota exceeded')
@@ -158,8 +159,8 @@ class Store(ReservationStoreMixin, RecordingStoreMixin):
             self._validate_reservation(db,reservation_id,owner,sensor_source,now)
             self._write_blob(source)
             identifier=uuid.uuid4().hex
-            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated,reservation_id,artifact_bytes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now,reservation_id,len(source)))
+            db.execute('INSERT INTO jobs (id,owner,key,artifact,filename,source,duration,status,created,updated,reservation_id,artifact_bytes,recording) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                       (identifier,owner,key,sha,filename,sensor_source,duration,'awaiting_approval' if sensor_source=='magnetic-step' else 'pending',now,now,reservation_id,len(source),recording))
             return self._public(db.execute('SELECT * FROM jobs WHERE id=?',(identifier,)).fetchone())
     def approve(self,identifier,operator,*,artifact,sensor_source,duration):
         """Trusted operator decision bound to the exact immutable job reviewed.

@@ -28,5 +28,21 @@ def test_simulation_bridge_preserves_available_governor_samples():
         assert ('acceleration','simulation') in channels
         assert ('brake_direction','simulation') in channels
         assert all(s.source=='simulation' for s in obs.samples)
-        assert obs.sequence==bridge.backend.observation.sequence
+        assert obs.sequence==bridge.env.sdk_observation.sequence
     finally:bridge.close()
+
+
+def test_portal_uses_shared_versioned_development_profile():
+    from cartpole_sdk.sim.profiles import PROFILE_ID, PROFILE_SHA256, make_profile_env
+    bridge=SimulationBridge()
+    reference=make_profile_env(seconds=.1)
+    try:
+        actual=bridge.prepare(.1,'test-profile')
+        reference.reset(seed=0)
+        assert actual.samples==reference.sdk_observation.samples
+        assert bridge.diagnostics()['profile_id']==PROFILE_ID
+        assert bridge.diagnostics()['profile_sha256']==PROFILE_SHA256
+        actual=bridge.advance(.1,1)
+        reference.step([.1])
+        assert actual.samples==reference.sdk_observation.samples
+    finally:bridge.close();reference.close()

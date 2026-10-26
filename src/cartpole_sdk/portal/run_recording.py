@@ -24,8 +24,9 @@ MAX_TELEMETRY_BYTES=32*1024*1024
 
 
 MAX_SENSING_BYTES=3*1024*1024
+MAX_DETAILED_SENSING_BYTES=8*1024*1024
 
-def _capture_sensing(url,duration,directory,stop):
+def _capture_sensing(url,duration,directory,stop,detailed=False):
     """Spawned child: all camera network parsing/JSON work stays off control GIL."""
     from cartpole_sdk.sensing.collect import collect
     # A worker may itself use realtime scheduling; its recorder must not inherit it.
@@ -33,8 +34,10 @@ def _capture_sensing(url,duration,directory,stop):
         if hasattr(os,'sched_setscheduler'):os.sched_setscheduler(0,os.SCHED_OTHER,os.sched_param(0))
         os.nice(10)
     except OSError:pass
-    status={'status':'connecting','envelopes':0,'dropped_records':0,'bytes':0,'collector_pid':os.getpid(),
-            'source':'developer_streams_v1','sampling':'30 Hz latest/bounded history; original cursors and gaps retained'}
+    max_bytes=MAX_DETAILED_SENSING_BYTES if detailed else MAX_SENSING_BYTES
+    sample_limit=128 if detailed else 1
+    status={'max_bytes':max_bytes,'max_hz':30,'sample_limit':sample_limit,'status':'connecting','envelopes':0,'dropped_records':0,'bytes':0,'collector_pid':os.getpid(),
+            'source':'developer_streams_v1','sampling':'30 Hz bounded history; original cursors and source gap metadata retained; not full-rate capture'}
     path=Path(directory)/'sensing.jsonl'
     class CaptureEnd(Exception):pass
     try:
@@ -46,10 +49,10 @@ def _capture_sensing(url,duration,directory,stop):
                     raw=(canonical_json({'type':'sensing_envelope','recorded_monotonic_ns':time.monotonic_ns(),
                                          'envelope':strict_json_loads(line)})+'\n').encode()
                     if len(raw)>1024*1024:status['status']='record_limit';status['dropped_records']+=1;raise CaptureEnd()
-                    if status['bytes']+len(raw)>MAX_SENSING_BYTES:status['status']='byte_limit';status['dropped_records']+=1;raise CaptureEnd()
+                    if status['bytes']+len(raw)>max_bytes:status['status']='byte_limit';status['dropped_records']+=1;raise CaptureEnd()
                     stream.write(raw);status['bytes']+=len(raw);status['envelopes']+=1
                 def flush(self):pass
-            collect(url,Output(),duration=min(3600,duration),max_hz=30,limit=1,max_bytes=16*1024*1024)
+            collect(url,Output(),duration=min(3600,duration),max_hz=30,limit=sample_limit,max_bytes=max_bytes+1024*1024)
             status['status']='ended'
     except CaptureEnd:pass
     except Exception:status['status']='unavailable'
@@ -61,7 +64,7 @@ def _capture_sensing(url,duration,directory,stop):
 
 class RunRecorder:
     def __init__(self,root,job,*,max_bytes=MAX_TELEMETRY_BYTES):
-        self.job={key:job[key] for key in ('id','artifact','filename','source','duration','rig','approved_by','approved_at') if key in job}
+        self.job={key:job[key] for key in ('id','artifact','filename','source','duration','rig','approved_by','approved_at','recording') if key in job}
         root=Path(root);root.mkdir(mode=0o700,parents=True,exist_ok=True)
         self.directory=root/(job['id']+'-'+uuid.uuid4().hex)
         self.directory.mkdir(mode=0o700)
@@ -71,6 +74,7 @@ class RunRecorder:
         self.drop_lock=threading.Lock()
         self.emit_lock=threading.Lock();self.closed=False;self.pending_bytes=0;self.sensing_bytes=0
         self.sensing_process=None;self.sensing_stop=None;self.sensing_status=None
+        self.max_sensing_bytes=MAX_SENSING_BYTES
         self.pending=queue.Queue(maxsize=2048)
         self.started_ns=time.monotonic_ns();self.started_unix_ns=time.time_ns()
         self.thread=threading.Thread(target=self._write,daemon=True);self.thread.start()
@@ -101,11 +105,12 @@ class RunRecorder:
             try:self.pending.put_nowait(raw)
             except queue.Full:self._drop();return
             self.pending_bytes+=len(raw)
-    def start_sensing(self,url,duration):
+    def start_sensing(self,url,duration,*,detailed=False):
         """Spawn independent camera collection before backend setup/arming."""
+        self.max_sensing_bytes=MAX_DETAILED_SENSING_BYTES if detailed else MAX_SENSING_BYTES
         context=multiprocessing.get_context('spawn')
         self.sensing_stop=context.Event()
-        self.sensing_process=context.Process(target=_capture_sensing,args=(url,duration,str(self.directory),self.sensing_stop),daemon=True)
+        self.sensing_process=context.Process(target=_capture_sensing,args=(url,duration,str(self.directory),self.sensing_stop,detailed),daemon=True)
         self.sensing_process.start()
         self.sensing_status={'status':'collecting','collector_pid':self.sensing_process.pid}
     def _stop_sensing(self):
@@ -136,7 +141,7 @@ class RunRecorder:
                 raw=source.readline(1024*1024+1)
                 if not raw:break
                 if (len(raw)>1024*1024 or not raw.endswith(b'\n')
-                        or self.sensing_bytes+len(raw)>MAX_SENSING_BYTES
+                        or self.sensing_bytes+len(raw)>self.max_sensing_bytes
                         or self.bytes+len(raw)>self.max_bytes):
                     self._drop();self.sensing_status['partial_or_rejected_records']+=1;break
                 output.write(raw);self.bytes+=len(raw);self.sensing_bytes+=len(raw);self.count+=1
@@ -152,17 +157,19 @@ class RunRecorder:
         manifest={'schema':'cartpole-run-bundle-v1','job':self.job,'status':status,'outcome':outcome,
             'started_unix_ns':self.started_unix_ns,'started_monotonic_ns':self.started_ns,
             'recording':{'records':self.count,'telemetry_bytes':self.bytes,'dropped_records':self.dropped,'error':self.error,
-                         'max_telemetry_bytes':self.max_bytes,'max_sensing_bytes':MAX_SENSING_BYTES,'sensing_enqueued_bytes':self.sensing_bytes,'telemetry_sha256':hashlib.sha256(self.path.read_bytes()).hexdigest()},
+                         'max_telemetry_bytes':self.max_bytes,'max_sensing_bytes':self.max_sensing_bytes,'sensing_enqueued_bytes':self.sensing_bytes,'telemetry_sha256':hashlib.sha256(self.path.read_bytes()).hexdigest()},
             'coverage':{'observations':'all channels returned at control cadence, bounded by recorder limits',
                 'actions':'requested acceleration; not proof of physical application',
                 'applied_motion':'available observation feedback and backend diagnostics only',
-                'video':'not_recorded','vision':dict(self.sensing_status) if self.sensing_status else 'not connected to this worker',
-                'native_encoder_counts':'only if present in recorded channels; not continuously available',
+                'decoded_board_state':'cached state sampled per observation in detailed hardware mode; no extra serial queries or guarantee of every board sample',
+                'sensing_streams':'all streams returned by configured source; history/cursors/gaps retained within bounds; inspect vision status',
+                'video':'not_recorded','vision':dict(self.sensing_status) if self.sensing_status else ('requested but no sensing source configured' if self.job.get('recording')=='detailed' else 'no sensing source configured'),
+                'native_encoder_counts':'cached INFO encoder_raw when supplied, possibly stale; not continuously available',
                 'firmware_internal_samples':'not_recorded','serial_bytes':'not_recorded',
                 'user_stdout_stderr':'not_recorded; sandbox protocol errors are represented by outcome',
                 'calibration_and_gains':'only metadata supplied by session/backend; no separate full snapshot'},
             'software':{'sdk_version':importlib.metadata.version('cartpole-sdk'),'python_version':sys.version.split()[0],
-                'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('worker.py','run_recording.py','sandbox.py','harness.py','artifacts.py','../policies/numeric_backend.py')}},
+                'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('worker.py','run_recording.py','sandbox.py','harness.py','artifacts.py','../policies/numeric_backend.py','../sim/portal_bridge.py','../sim/profiles.py','../sim/rig_gym_env.py','../sim/executor.py')}},
             'clock_notes':'recorded_monotonic_ns is worker-host time, including the separate sensing process on the same host. Sensing records are appended after scalar records; sort by timestamp if needed. Observation clocks and sample times retain original semantics'}
         manifest_bytes=canonical_json(manifest).encode()
         if len(manifest_bytes)>1024*1024:raise ValueError('manifest too large')

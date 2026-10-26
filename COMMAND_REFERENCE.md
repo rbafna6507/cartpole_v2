@@ -2732,3 +2732,147 @@ options:
   --observer-rate OBSERVER_RATE
   --reset-observer
 ```
+
+## October 26 developer commands
+
+Generated from the implemented CLI help. These commands do not connect to the rig.
+
+### Portable controller simulation/replay
+
+```text
+usage: run.py [-h] [--policy POLICY] --output OUTPUT [--recording RECORDING]
+              [--seconds SECONDS] [--seed SEED]
+              {simulate,replay}
+
+Offline local trusted-code runner. The portal separately isolates uploaded
+code.
+
+positional arguments:
+  {simulate,replay}
+
+options:
+  -h, --help            show this help message and exit
+  --policy POLICY
+  --output OUTPUT
+  --recording RECORDING
+  --seconds SECONDS
+  --seed SEED
+```
+
+### Run bundle export
+
+```text
+usage: dataset.py [-h] --output OUTPUT [--sha256 EXPECTED_SHA256]
+                  [--expected-period-ns EXPECTED_PERIOD_NS]
+                  bundle
+
+Offline bundle export: preserve provenance; never synthesize rewards or
+motion. ZIP members are read with strict bounds, never extracted. Replay
+deduplicates identical latest-state snapshots; the original telemetry remains
+available.
+
+positional arguments:
+  bundle
+
+options:
+  -h, --help            show this help message and exit
+  --output OUTPUT
+  --sha256 EXPECTED_SHA256
+  --expected-period-ns EXPECTED_PERIOD_NS
+```
+
+### PPO training and numeric export
+
+```text
+usage: controlled_training.py [-h]
+                              [--objective {controlled-swing-v1,controlled-swing-v2,controlled-swing-v3}]
+                              --output OUTPUT [--steps STEPS]
+                              [--checkpoint-every CHECKPOINT_EVERY]
+                              [--seconds SECONDS] [--seed SEED]
+                              [--init-actor INIT_ACTOR] [--resume RESUME]
+                              [--profile PROFILE_ID]
+                              [--evaluation-seeds EVALUATION_SEEDS [EVALUATION_SEEDS ...]]
+                              [--nominal-training]
+
+Offline projected PPO experiment with immutable checkpoints and numeric
+export.
+
+options:
+  -h, --help            show this help message and exit
+  --objective {controlled-swing-v1,controlled-swing-v2,controlled-swing-v3}
+  --output OUTPUT
+  --steps STEPS
+  --checkpoint-every CHECKPOINT_EVERY
+  --seconds SECONDS
+  --seed SEED
+  --init-actor INIT_ACTOR
+  --resume RESUME       Trusted checkpoint directory; additional step budget,
+                        new output
+  --profile PROFILE_ID
+  --evaluation-seeds EVALUATION_SEEDS [EVALUATION_SEEDS ...]
+  --nominal-training
+```
+
+### Prepare a frozen Colab training bundle
+
+```text
+usage: controlled_cloud.py [-h] --output OUTPUT [--steps STEPS]
+                           [--checkpoint-every CHECKPOINT_EVERY]
+
+Prepare a controlled-swing Colab bundle offline. Never allocate a runtime.
+
+options:
+  -h, --help            show this help message and exit
+  --output OUTPUT
+  --steps STEPS
+  --checkpoint-every CHECKPOINT_EVERY
+```
+
+### HTTP-only checkpoint backups
+
+```text
+usage: controlled_watch.py [-h] --session SESSION --output OUTPUT --cli CLI
+                           --cli-pins CLI_PINS [--state-file STATE_FILE]
+                           [--max-seconds MAX_SECONDS] [--interval INTERVAL]
+                           bundle
+
+Bounded HTTP-only checkpoint backup. No kernel execution or VM lifecycle APIs.
+
+positional arguments:
+  bundle
+
+options:
+  -h, --help            show this help message and exit
+  --session SESSION
+  --output OUTPUT
+  --cli CLI
+  --cli-pins CLI_PINS
+  --state-file STATE_FILE
+  --max-seconds MAX_SECONDS
+  --interval INTERVAL
+```
+
+### Explicit starter submission
+
+```text
+usage: submit.py [-h] [--artifact ARTIFACT]
+                 [--source {simulation,magnetic-step}] [--seconds SECONDS]
+                 --key KEY [--reservation-id RESERVATION_ID]
+                 [--recording {standard,detailed}] [--collect COLLECT]
+                 [--timeout TIMEOUT]
+
+Explicit authenticated submission; physical jobs still require operator
+approval.
+
+options:
+  -h, --help            show this help message and exit
+  --artifact ARTIFACT
+  --source {simulation,magnetic-step}
+  --seconds SECONDS
+  --key KEY             Stable idempotency key for this exact request
+  --reservation-id RESERVATION_ID
+  --recording {standard,detailed}
+  --collect COLLECT     Wait for run and verified bundle; destination must be
+                        new
+  --timeout TIMEOUT
+```

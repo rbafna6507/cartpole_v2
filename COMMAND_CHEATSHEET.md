@@ -170,7 +170,7 @@ The older `cartpole-v2-view` accepts `--start auto|upright`, `--seed` (0), and o
 
 ## Start a training loop
 
-Use the dated protocol for this source release; the historical protocol deliberately refuses source-hash mismatches. Training is local simulation only. Output directories must be new. No cloud training was started by this release work.
+Use the dated protocol for this source release; the historical protocol deliberately refuses source-hash mismatches. Training is local simulation only. Output directories must be new. That October 23 release did not launch cloud training. The separate October 26 randomized campaign and its frozen launch/backup receipts are documented in [the experiment record](evidence/controlled-swing-20261026/README.md).
 
 ```bash
 # Short wiring/smoke run:
@@ -412,3 +412,25 @@ integrated firmware and SDK, not the earlier standalone commissioning firmware.
 Vertical height limits are independent of gain profiles and reset to 120 mm on
 firmware reboot. Sines stay 2 mm below the ceiling. Custom changes require the
 staged `operator-20261024-zlimits` firmware; see [flash instructions](docs/VERTICAL_CONTROL.md#configurable-height-ceiling--operator-20261024-zlimits).
+
+
+## October 26: portable developer controller and run data
+
+These commands are offline; use a fresh output directory for each run. The pinned profile is a development model, not hardware qualification.
+
+```bash
+uv run --locked --extra sim python examples/controller_starter/run.py simulate --policy examples/controller_starter/policy.py --seconds 5 --output runs/starter-sim-001
+uv run --locked python examples/controller_starter/run.py replay --policy examples/controller_starter/policy.py --recording runs/starter-sim-001/observations.jsonl --output runs/starter-replay-001.jsonl
+uv run --locked --extra rl python examples/controller_starter/train.py --output runs/controlled-smoke-001 --objective controlled-swing-v3 --steps 1024 --checkpoint-every 1024 --seconds 5
+uv run --locked python -m cartpole_sdk.portal.dataset run.zip --output runs/dataset-001
+```
+
+The training smoke verifies execution/export, not controller competence. Replace `--policy` with an exported `actor.json` to simulate/replay numeric policies. The dataset command optionally accepts `--sha256 HASH` and `--expected-period-ns 10000000`. It produces replay observations, sample CSV, requested-action transitions and explicit quality/coverage metadata. It never invents rewards, physically applied actions or missing samples.
+
+For authenticated programmatic upload, reservation, run status, cancellation and verified bundle collection, use `cartpole_sdk.portal.client.PortalClient`; see [API examples](docs/portal.md). Physical requests still require operator approval. Portal API/worker deployment must include these changes before detailed recording and the unified profile are available remotely.
+
+Submit the unchanged starter after coordinated API/worker update and credential setup:
+
+```bash
+uv run --locked python examples/controller_starter/submit.py --artifact examples/controller_starter/policy.py --source simulation --seconds 5 --key starter-sim-001 --recording detailed --collect runs/starter-portal-001.zip
+```

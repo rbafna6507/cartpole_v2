@@ -183,7 +183,7 @@ class Handler(BaseHTTPRequestHandler):
                 from .video_proxy import relay_video
                 relay_video(self);return
             if path=='/api/config' and not mutating:
-                self._respond(200,{'camera_url':'/api/video' if self.server.camera_url else None,'camera_available':bool(self.server.camera_url),'reservations_enabled':store.reservations_enabled,'rig_id':self.server.rig_id});return
+                self._respond(200,{'camera_url':'/api/video' if self.server.camera_url else None,'camera_available':bool(self.server.camera_url),'reservations_enabled':store.reservations_enabled,'rig_id':self.server.rig_id,'recording_modes':['standard','detailed']});return
             if path=='/api/reservations':
                 if role not in ('submit','operator'):self._respond(403,{'error':'role denied'});return
                 if not mutating:
@@ -205,7 +205,7 @@ class Handler(BaseHTTPRequestHandler):
                     self._respond(200,{'jobs':store.list(owner if role=='submit' else None)});return
                 if role!='submit':self._respond(403,{'error':'role denied'});return
                 fields={'filename','sensor_source','duration','idempotency_key'}
-                options=(fields|{encoding}|optional for encoding in ('source','artifact_base64') for optional in (set(),{'reservation_id'}))
+                options=(fields|{encoding}|optional for encoding in ('source','artifact_base64') for optional in (set(),{'reservation_id'},{'recording'},{'reservation_id','recording'}))
                 if set(body) not in options:raise QueueError('request fields mismatch')
                 if 'source' in body:
                     if not isinstance(body['source'],str) or not isinstance(body['filename'],str) or not body['filename'].endswith('.py'):raise QueueError('source must be Python text')
@@ -214,7 +214,7 @@ class Handler(BaseHTTPRequestHandler):
                     if not isinstance(body['artifact_base64'],str):raise QueueError('artifact_base64 must be text')
                     try:artifact=base64.b64decode(body['artifact_base64'],validate=True)
                     except ValueError as exc:raise QueueError('invalid artifact base64') from exc
-                job=store.submit(owner,body['idempotency_key'],artifact,body['filename'],body['sensor_source'],body['duration'],reservation_id=body.get('reservation_id'))
+                job=store.submit(owner,body['idempotency_key'],artifact,body['filename'],body['sensor_source'],body['duration'],reservation_id=body.get('reservation_id'),recording=body.get('recording','standard'))
                 self._respond(201,job);return
             if path=='/api/claim' and mutating:
                 if role!='worker':self._respond(403,{'error':'role denied'});return

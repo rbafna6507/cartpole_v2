@@ -73,7 +73,8 @@ class WorkerTests(unittest.TestCase):
         self.submit()
         result=run_once(self.store,'w','sim',sandbox_factory=NoneFixture,sensor_source='simulation')
         self.assertEqual(result['status'],'failed')
-        self.assertEqual(result['result']['simulation_fault'],'no action lease')
+        # The shared rig profile begins with the same short ARM lease as the rig.
+        self.assertEqual(result['result']['simulation_fault'],'action lease expired')
         self.assertTrue(result['result']['stopped'])
 
     def test_stale_start_response_cannot_arm_after_lease_reassigned(self):

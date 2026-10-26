@@ -37,13 +37,14 @@ class RemoteQueue:
             raise WorkerError('invalid portal timeout/origin')
         self.url=url.rstrip('/');self.parts=parts;self.token=token;self.timeout=timeout
         self._slots=threading.BoundedSemaphore(2)
-    def _request(self,path,body=None,*,binary=None,lease=None):
+    def _request(self,path,body=None,*,binary=None,lease=None,response_limit=None,raw_response=False,deadline_timeout=None):
         if not path.startswith('/api/') or '?' in path or '#' in path:
             raise WorkerError('invalid portal API path')
         data=binary if binary is not None else (None if body is None else canonical_json(body).encode())
         artifact_response=re.fullmatch(r'/api/jobs/[a-f0-9]{32}/artifact',path) is not None and data is None
-        response_limit=MAX_ENVELOPE_BYTES if artifact_response else 100000
+        response_limit=response_limit if response_limit is not None else (MAX_ENVELOPE_BYTES if artifact_response else 100000)
         request_timeout=30 if binary is not None or artifact_response or path.endswith('/start') else self.timeout
+        if deadline_timeout is not None:request_timeout=min(request_timeout,deadline_timeout)
         if not self._slots.acquire(blocking=False):raise WorkerError('portal request already pending')
         deadline=time.monotonic()+request_timeout
         replies=thread_queue.Queue(maxsize=1);cancel=threading.Event();state={}
@@ -76,7 +77,7 @@ class RemoteQueue:
                     chunk=response.read1(min(4096,int(length)-len(raw)))
                     if not chunk:raise WorkerError('incomplete portal response')
                     raw.extend(chunk)
-                value=strict_json_loads(raw.decode())
+                value=bytes(raw) if raw_response else strict_json_loads(raw.decode())
                 if not cancel.is_set():replies.put_nowait((value,None))
             except Exception as exc:
                 failure=WorkerError('portal request failed')
@@ -117,45 +118,7 @@ class RemoteQueue:
     def heartbeat(self,identifier,worker,token):return self._request('/api/jobs/'+identifier+'/heartbeat',{'lease':token})
     def finish(self,identifier,worker,token,status,result):return self._request('/api/jobs/'+identifier+'/finish',{'lease':token,'status':status,'result':result})
 
-class SimulationBridge:
-    kind='simulation'
-    def prepare(self,duration,identifier):
-        from cartpole_sdk.sim import SimulationConfig
-        from cartpole_sdk.sim.executor import ExecutorSimulation
-        self.backend=ExecutorSimulation(SimulationConfig(control_steps=10,max_steps=math.ceil(duration*100)+1))
-        self.backend.reset(session_id=identifier)
-        self.current=self.backend.control_observation()
-        self.session=self.backend.session
-        self.channels=tuple(Channel(entity,quantity,'simulation','sim:upright+x') for entity,quantity in (
-            ('cart','position'),('cart','velocity'),('pole','angle'),('pole','angular_velocity')))
-        self.duration_ns=int(duration*1e9)
-        self.config=asdict(self.backend.config)
-        return self.selected()
-    def selected(self):
-        # Validate required control channels while preserving every available
-        # raw/processed channel and its original provenance for policy authors.
-        select_channels(self.current,self.channels,now_ns=self.current.available_ns,max_age_ns=20_000_000)
-        return self.current
-    def arm(self,duration):pass  # simulation has no devices or physical arming
-    def advance(self,value,sequence):
-        observation=self.current
-        request=None if value is None else ActionRequest(observation.session_id,observation.clock_id,sequence,
-            observation.sequence,observation.available_ns,observation.available_ns+20_000_000,value)
-        self.backend.step(request)
-        self.current=self.backend.control_observation()
-        if self.backend.terminated:raise WorkerError('simulation executor fault')
-        return self.selected()
-    def complete(self):return self.current.available_ns>=self.duration_ns
-    def stop(self):
-        # No physical actuator; preserve final state until diagnostics are read.
-        return True
-    def close(self):
-        if hasattr(self,'backend'):self.backend.close()
-    def diagnostics(self):return {'sim_config':self.config,'simulation_time_ns':self.current.available_ns,
-                                 'simulation_fault':self.backend.fault_reason,
-                                 'action_semantics':self.backend.action_semantics,
-                                 'executor':asdict(self.backend.diagnostics),'ground_truth':asdict(self.backend.ground_truth),
-                                 'physical_acceptance':False}
+from cartpole_sdk.sim.portal_bridge import ProfileSimulationBridge as SimulationBridge
 
 class HardwareBridge:
     kind='magnetic-step'
@@ -301,7 +264,8 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     try:
         recorder=RunRecorder(recording_root,job)
         recorder.emit('attempt',backend=sensor_source,max_acceleration_m_s2=approved_ceiling)
-        if sensing_url is not None:recorder.start_sensing(sensing_url,job['duration']+35)
+        if sensing_url is not None:
+            recorder.start_sensing(sensing_url,job['duration']+35,detailed=job.get('recording','standard')=='detailed')
         source=queue.artifact(job['artifact']) if isinstance(queue,Store) else queue.fetch(job,worker)
         if len(source)>MAX_UPLOAD_BYTES or hashlib.sha256(source).hexdigest()!=job['artifact']:raise WorkerError('artifact digest mismatch')
         stopped=False  # backend factory may acquire hardware even if it raises
@@ -312,10 +276,15 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
         current=bridge.prepare(job['duration'],identifier)
         recorder.emit('session',session=asdict(bridge.session))
         recorder.observation(current)
+        recorded_observation=current
         recorder.emit('backend_start',diagnostics=bridge.diagnostics())
         with tempfile.TemporaryDirectory(prefix='cartpole-policy-',dir=spool_root) as spool:
             inspection=prepare_artifact(source,job['filename'],spool)
             recorder.emit('artifact',sha256=job['artifact'],inspection=inspection)
+            if (inspection['kind']=='actor-json' and isinstance(bridge,SimulationBridge)
+                    and inspection['angle_source']!=bridge.env.observation_config.angle_source):
+                error='simulation_profile_mismatch'
+                raise WorkerError('actor angle source differs from simulation profile')
             if inspection['kind']=='actor-json' and isinstance(bridge,HardwareBridge):
                 # Data-only admission; no uploaded code or neural loader executes here.
                 from types import SimpleNamespace
@@ -365,6 +334,9 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
                     while not bridge.complete():
                         if time.monotonic()>=wall_end:raise WorkerError('run wall deadline exceeded')
                         if not run_lease.check():status='cancelled';break
+                        if current!=recorded_observation:
+                            recorder.observation(current)
+                            recorded_observation=current
                         action_began=time.monotonic()
                         recorder.emit('policy_call',observation_sequence=current.sequence)
                         try:
@@ -386,6 +358,15 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
                         if not run_lease.check():status='cancelled';break
                         current=bridge.advance(value,sequence)
                         recorder.observation(current)
+                        recorded_observation=current
+                        if job.get('recording','standard')=='detailed' and isinstance(bridge,HardwareBridge):
+                            # The reader can advance between SDK selection and this
+                            # cached snapshot. Read once and preserve its own tick.
+                            state=bridge.rig.state
+                            recorder.emit('board_state',nearest_observation_sequence=current.sequence,
+                                snapshot_matches_observation=state.unwrapped_tick==current.sequence,
+                                sampling='independent latest board snapshot; join by state.unwrapped_tick and original timestamps',
+                                state=asdict(state))
                         observations+=1
                     else:status='succeeded'
                 finally:
@@ -412,7 +393,7 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
             'renew_started_at':run_lease.renew_started_at if run_lease else None,
             'renew_finished_at':run_lease.renew_finished_at if run_lease else None,
             'renew_count':run_lease.renew_count if run_lease else None}
-    except WorkerError:error='worker_guard_failure'
+    except WorkerError:error=error or 'worker_guard_failure'
     except Exception:error='backend_failure'
     finally:
         if run_lease is not None:run_lease.stop_event.set()
