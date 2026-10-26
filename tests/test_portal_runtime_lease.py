@@ -175,3 +175,39 @@ def test_cancel_between_reset_and_arm_never_arms_and_reports_cancelled(tmp_path)
     assert result['result']['stopped'] is True
     assert result['result']['actions']==0
     assert queue.recording(job['id'],'alice')
+
+
+def test_cancel_at_finish_matches_recorded_outcome(tmp_path):
+    import io,json,zipfile
+    class CancelAtFinish(Store):
+        def finish(self,identifier,*args,**kwargs):
+            self.cancel(identifier,'alice')
+            return super().finish(identifier,*args,**kwargs)
+    queue=CancelAtFinish(tmp_path)
+    job=queue.submit('alice','cancel-at-finish',b'x','policy.py','simulation',.1)
+    result=run_once(queue,'w','sim',sandbox_factory=TrustedPipeFixture)
+    assert result['status']=='cancelled'
+    with zipfile.ZipFile(io.BytesIO(queue.recording(job['id'],'alice'))) as archive:
+        manifest=json.loads(archive.read('manifest.json'))
+        records=[json.loads(line) for line in archive.read('telemetry.jsonl').splitlines()]
+    assert manifest['status']==result['status']
+    assert next(row for row in records if row['type']=='outcome')['status']==result['status']
+
+
+def test_final_stop_false_marks_local_outcome_failed(tmp_path):
+    import io,json,zipfile
+    class LostStop(SimulationBridge):
+        stops=0
+        def stop(self):
+            self.stops+=1
+            return self.stops==1
+    queue=Store(tmp_path)
+    job=queue.submit('alice','stop-false',b'x','policy.py','simulation',.1)
+    result=run_once(queue,'w','sim',bridge_factory=LostStop,sandbox_factory=TrustedPipeFixture)
+    assert result['status']=='failed'
+    assert result['result']['stopped'] is False
+    assert result['result']['error']=='stop_unconfirmed'
+    with zipfile.ZipFile(io.BytesIO(queue.recording(job['id'],'alice'))) as archive:
+        manifest=json.loads(archive.read('manifest.json'))
+    assert manifest['status']=='failed'
+    assert manifest['outcome']['error']=='stop_unconfirmed'

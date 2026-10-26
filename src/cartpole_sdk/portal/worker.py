@@ -400,7 +400,8 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
         if bridge is not None:
             # Also covers setup failures before entering the armed block.
             try:stopped=bridge.stop() is True
-            except Exception:stopped=False;error=error or 'stop_unconfirmed';status='failed'
+            except Exception:stopped=False
+            if not stopped:error=error or 'stop_unconfirmed';status='failed'
             try:diagnostics=bridge.diagnostics()
             except Exception:pass
             if diagnostics.get('board_state',{}).get('fault',0):
@@ -424,6 +425,9 @@ def run_once(queue,worker,rig_id,*,bridge_factory=SimulationBridge,sandbox_facto
     try:
         if run_lease is not None and run_lease.thread.is_alive():raise RunAuthorityError('cannot finish while renewal is pending')
         finished=queue.finish(identifier,worker,lease,status,result)
+        # Cancellation can arrive after the last action/STOP. Persist the queue's
+        # committed outcome in the bundle, including its terminal status override.
+        status=finished['status']
     except Exception as exc:finish_error=exc;finished=None
     # Hardware is stopped before any ZIP creation or network upload. The durable
     # local spool survives a portal outage or expired lease; upload is artifact-only.

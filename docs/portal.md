@@ -410,3 +410,24 @@ See [the authenticated Python workflow](PORTAL_CLIENT.md) for upload/request-run
 reservations, status, cancellation and verified recording collection. The optional
 `recording` submission field accepts `standard` (default mandatory trace) or
 `detailed` (adds batched independent sensing history and cached board feedback). It is immutable.
+
+## October 26 deployment checks
+
+The API and simulation worker were updated with a rollback source archive on the
+Jetson. Six authenticated end-to-end simulation jobs covered Python, ZIP, numeric
+actor, cancellation, excess acceleration and stalled inference. All returned
+verified bundles without reported record drops; the last two failed with zero
+actions issued. Physical worker acceptance and Python AUTO tuning remain pending
+the administrator realtime check/start and actual hardware trials.
+
+Fixes preserve the queue's committed terminal outcome in the recording manifest
+and treat a false final STOP confirmation as a failure. Hardware/client imports
+no longer require optional MuJoCo/Gymnasium dependencies. These changes do not
+relax the sandbox, actuator ceiling, action lifetime or physical approval.
+
+For controlled Python AUTO diagnostics, `examples/python_auto_portal.py` generates
+a single-file submission from a complete captured live parameter snapshot and
+reconstructs controller phases from a returned `telemetry.jsonl`. Its explicitly
+selected 100/250 Hz must match the worker. Constants belong to that controller
+artifact; arbitrary submissions do not inherit native controller gains. See
+[the current acceptance evidence](../evidence/portal-reliability-20261026/README.md).
